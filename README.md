@@ -1,13 +1,13 @@
-# SWP391_Diamond-Store-System
+# Diamond Store System
 
 ![MasterHead](https://user-images.githubusercontent.com/90236635/232446433-d5540fa2-fe28-4bb8-b929-cdb51fe61336.gif)
-<h1 align="center">Hello 👋, We're [group name]</h1>
+<h1 align="center">Hello 👋, We're K.H.A.C Team</h1>
 <h3 align="center">FPT University, VietNam</h3>
 <img align="right" alt="Coding" width="400" src="https://miro.medium.com/max/1360/0*7Q3yvSIv_t0ioJ-Z.gif">
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=cuongnp284&label=Profile%20views&color=0e75b6&style=flat" alt="cuongnp284" /> </p>
 
-- 🔭 I’m currently working on **Project Name**
+- 🔭 I’m currently working on **Diamond Store System**
 
 - 🌱 I’m currently participating in **Software Development Project [SWP391]**
 
