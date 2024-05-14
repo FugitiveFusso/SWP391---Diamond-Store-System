@@ -1,0 +1,77 @@
+Doi tuong:
+- Man hinh chinh (gioi thieu san pham)
+- Login
+- Quan li qua trinh mua hang
+- Quan li phieu bao hanh, giay chung 
+- Quan li chuong trinh khuyen mai
+- Khai bao hang gia
+- Quan li san pham
+- Dashboard
+
+
+1. User (Guest):
+ - Co the xem man hinh chinh (voi vai tro Guest)
+	- Thong tin thuong hieu
+	- Don hang
+	- San pham kim cuong
+		- Bo suu tap
+		- Bang gia
+		- Blog
+			- Huong dan chon ni
+			- Tin tuc
+	- Slides thong bao khuyen mai, bst moi,......
+	- Navbar
+	
+ - Login/ Register
+
+
+2. Customer:
+ - Co the xem man hinh chinh 
+	- Thong tin thuong hieu
+	- Don hang
+	- San pham kim cuong
+		- Bo suu tap
+		- Bang gia
+		- Blog
+			- Huong dan chon ni
+			- Tin tuc
+	- Slides thong bao khuyen mai, bst moi,......
+	- Navbar
+		- Xem don hang 
+		- CRUD don hang
+	
+ - Login/logout
+ - Xem diem tich luy
+ - Xem qua trinh mua hang (trong docs)
+
+3. Sales Staff:
+ - Quan li voucher:
+	- CRUD voucher
+ - Approved don hang
+ - Quan li san pham
+	- Gia tien
+	- San pham
+	- Hoa Don
+
+4. Delivery
+ - Update qua trinh dong goi -> giao hang
+
+
+5. Manager:
+ - Dashboard thong ke
+ - Quan li nhan vien
+	- Sales staff
+	- Delivery Staff
+
+6. Admin:
+ - Quan li voucher:
+	- CRUD voucher
+ - Approved don hang
+ - Quan li san pham
+	- Gia tien
+	- San pham
+	- Hoa Don
+
+ - Update qua trinh dong goi -> giao hang
+ - Quan li so luong san pham
+ - Dashboard thong ke
