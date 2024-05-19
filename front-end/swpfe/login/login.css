@@ -1,25 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap');
+
 .login-form {
     position: relative;
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #eeeded;
+    background-image: url(image/backgroud.jpg);
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center;
    
 }
 
 .container {
-	z-index: 1;
+    position: relative; /* Ensure the container is positioned to contain absolute children */
+    z-index: 1;
     max-width: 1000px;
     margin: 0 auto;
-	background: #cecccc;
-	border-top-right-radius: 8px;
-	border-bottom-right-radius: 8px;
-	height: 450px;
+    background: #cecccc;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    height: 450px;
+    overflow: hidden; /* Clip child elements that overflow the container */
 }
 
 .main {
     display: flex;
     width: 100%;
+    position: relative; /* Ensure it is positioned above the gradient */
+    z-index: 2; /* Higher than .white-gradient */
 }
 
 .left-side {
@@ -27,12 +38,16 @@
     max-width: 40%;
     text-align: center;
     color: black;
-	height: 430px;
-	padding-top: 20px;
+    height: 430px;
+    padding-top: 40px;
+    position: relative; /* Ensure it is positioned above the gradient */
+    z-index: 2; /* Higher than .white-gradient */
 }
 
 .left-side h2 {
-    font-size: 24px;
+    font-size: 18px;
+    font-family: Syne, 'poppin';
+    color: #151542;
 }
 
 .left-side img {
@@ -47,10 +62,13 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative; /* Ensure it is positioned above the gradient */
+    z-index: 2; /* Higher than .white-gradient */
 }
 
 .right-side h2 {
     margin-bottom: 20px;
+    color: #151542;
 }
 
 .right-side input {
@@ -64,7 +82,7 @@
 .right-side .btn {
     width: 100%;
     padding: 10px;
-    background: #4e34b6;
+    background: #151542;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -88,7 +106,7 @@
 }
 
 .right-side a {
-    color: #4e34b6;
+    color: #151542;
     text-decoration: none;
 }
 
@@ -100,31 +118,26 @@
     position: relative;
     bottom: 0;
     left: 20%;
-    max-width: 200px; 
-	transform: rotate(45deg);
+    max-width: 200px;
+    transform: rotate(45deg);
 }
 
+#img2 {
+    position: relative;
+    bottom: 2%;
+    right: 20%;
+    max-width: 200px;
+}
 
-.white-gradient{
+.white-gradient {
     position: absolute;
     width: 20rem;
     height: 20rem;
-    background: rgba(255, 255, 255, 0.522);
+    background: rgb(255, 255, 255);
     filter: blur(19px);
     border-radius: 100px;
-	top: -10%;
-	right: 65%;
-	z-index: -1;
-}
-
-.grey-gradient{
-    position: absolute;
-    width: 20rem;
-    height: 20rem;
-    background: rgba(122, 120, 120, 0.522);
-    filter: blur(19px);
-    border-radius: 100px;
-	top: 40%;
-	right: 65%;
-	z-index: -1;
+    top: -10%;
+    right: 65%;
+    z-index: 0; /* Set to a lower value to stay behind the container */
+    pointer-events: none; /* Ensure it does not interfere with any interactions */
 }
