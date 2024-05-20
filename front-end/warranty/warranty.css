@@ -1,0 +1,94 @@
+.navbar{
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  padding: 10px 0;
+  margin-bottom: 0;
+}
+
+.navbar img{
+  width: 80px;
+  height: 80px;
+}
+
+.navbar__link{
+  list-style: none;
+  padding: 0 40px;
+}
+
+.navbar__link a{
+  text-decoration: none;
+  margin: 27.5px 0 30.5px 0;
+  display: inline-block;
+  overflow-wrap: break-word;
+  font-family: 'Inter';
+  font-weight: 600;
+  font-size: 20px;
+  color: #000000;
+}
+
+  .chnh-sch-bo-hnh .fuj-distinguishes-between-fine-jewelry-and-other-fashion-accessories-recognizing-that-each-selected-piece-of-jewelry-carries-aunique-narrative-or-sentimental-value-as-asteadfast-and-dedicated-purveyor-of-love-fuj-offers-the-comprehensive-warranty-policy {
+    margin: 0 9.3px 162px 9.3px;
+    display: inline-block;
+    align-self: flex-start;
+    overflow-wrap: break-word;
+    font-family: 'Inter';
+    font-weight: 600;
+    font-size: 18px;
+    color: #000000;
+  }
+  .cases-where-warranty-applies-the-product-is-defective-by-the-manufacturer-within-7-days-from-the-date-the-customer-receives-the-product-please-notify-the-staff-immediately-for-warranty-support-1-for-1-exchange-if-the-product-turns-black-or-discolored-within-the-first-week-from-when-the-customer-receives-the-product-2-cases-where-warranty-does-not-apply-the-product-is-defective-or-damaged-due-to-improper-use-by-the-customer-the-product-has-been-edited-and-changed-from-fujs-original-shape-not-afuj-product-3-case-of-warranty-with-afees-the-product-is-damaged-dropped-severely-scratched-or-not-used-properly-the-product-is-renewed-and-re-plated-to-look-like-the-original-according-to-customer-needs-4-warranty-service-period-the-time-to-receive-aproduct-back-lasts-from-10-to-15-days-time-for-repair-or-stone-installationcharged-will-be-informed-to-the-customer-by-uhas-customer-service-staff-during-the-process-of-receiving-the-product-sub3 {
+    font-family: 'Inter';
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 1.333;
+  }
+  .chnh-sch-bo-hnh .cases-where-warranty-applies-the-product-is-defective-by-the-manufacturer-within-7-days-from-the-date-the-customer-receives-the-product-please-notify-the-staff-immediately-for-warranty-support-1-for-1-exchange-if-the-product-turns-black-or-discolored-within-the-first-week-from-when-the-customer-receives-the-product-2-cases-where-warranty-does-not-apply-the-product-is-defective-or-damaged-due-to-improper-use-by-the-customer-the-product-has-been-edited-and-changed-from-fujs-original-shape-not-afuj-product-3-case-of-warranty-with-afees-the-product-is-damaged-dropped-severely-scratched-or-not-used-properly-the-product-is-renewed-and-re-plated-to-look-like-the-original-according-to-customer-needs-4-warranty-service-period-the-time-to-receive-aproduct-back-lasts-from-10-to-15-days-time-for-repair-or-stone-installationcharged-will-be-informed-to-the-customer-by-uhas-customer-service-staff-during-the-process-of-receiving-the-product {
+    overflow-wrap: break-word;
+    font-family: 'Inter';
+    font-weight: 600;
+    font-size: 18px;
+    color: #000000;
+  }
+  .chnh-sch-bo-hnh .warranty-policy {
+    margin-bottom: 33.5px;
+    display: inline-block;
+    align-self: flex-start;
+    overflow-wrap: break-word;
+    font-family: 'Inter';
+    font-weight: 800;
+    font-size: 36px;
+    color: #000000;
+  }
+  .chnh-sch-bo-hnh .customer-service-staff-8489887651284085-xxx-xxxx-address-fpt-university-district-9-ho-chi-minh-city {
+    margin-left: 66px;
+    align-self: center;
+    text-align: center;
+    overflow-wrap: break-word;
+    font-family: 'Raleway';
+    font-weight: 700;
+    font-size: 18px;
+    color: #000000;
+  }
+  .customer-service-staff-8489887651284085-xxx-xxxx-address-fpt-university-district-9-ho-chi-minh-city-sub1 {
+    font-family: 'Raleway';
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.333;
+  }
+  .chnh-sch-bo-hnh .group-84 {
+    background: #EDEDED;
+    position: relative;
+    margin-left: 9.5px;
+    display: flex;
+    flex-direction: column;
+    padding: 36.5px 0 26.2px 56.7px;
+    width: fit-content;
+    box-sizing: border-box;
+  }
+  .chnh-sch-bo-hnh .group-841 {
+    margin: 0 8.3px 157.8px 8.3px;
+    display: flex;
+    align-self: flex-start;
+    box-sizing: border-box;
+  }
