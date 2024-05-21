@@ -22,7 +22,7 @@
     background: #cecccc;
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
-    height: 64vh; /* Set height to 100% of viewport height */
+    height: 100%; 
     overflow: hidden;
 }
 
@@ -30,8 +30,15 @@
 .main {
     display: flex;
     width: 100%;
-    position: relative; /* Ensure it is positioned above the gradient */
-    z-index: 2; /* Higher than .white-gradient */
+    position: relative;
+    z-index: 2; 
+}
+
+.logo{
+    position: absolute;
+    width: 35px;
+    top: 8px;
+    left: 30px;
 }
 
 .left-side {
@@ -41,14 +48,18 @@
     color: black;
     height: 430px;
     padding-top: 40px;
-    position: relative; /* Ensure it is positioned above the gradient */
-    z-index: 2; /* Higher than .white-gradient */
+    position: relative; 
+    z-index: 2; 
 }
 
 .left-side h2 {
+    position: absolute;
+    left: 30%;
+    top: 30px;
     font-size: 18px;
     font-family: Syne, 'poppin';
     color: #151542;
+    margin-top: 40px;
 }
 
 .left-side img {
@@ -63,8 +74,8 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    position: relative; /* Ensure it is positioned above the gradient */
-    z-index: 2; /* Higher than .white-gradient */
+    position: relative; 
+    z-index: 2; 
 }
 
 .right-side h2 {
@@ -117,9 +128,10 @@
 
 #img1 {
     position: relative;
-    bottom: 0%;
-    left: 30%;
+    top: 10%;
+    left: 2%;
     max-width: 200px;
+    scale: 70%;
     transform: rotate(45deg);
 }
 
@@ -129,6 +141,17 @@
     right: 40%;
     max-width: 200px;
     box-shadow: rgba(0, 0, 0, 10);
+    scale: 79%;
+    transform: rotate(-60deg);
+}
+
+#img3{
+    position: absolute;
+    transform: rotate(10deg);
+    left: 65%;
+    top: 20%;
+    z-index: -1;
+
 }
 
 .white-gradient {
@@ -140,8 +163,8 @@
     border-radius: 100px;
     top: -10%;
     right: 75%;
-    z-index: 0; /* Set to a lower value to stay behind the container */
-    pointer-events: none; /* Ensure it does not interfere with any interactions */
+    z-index: 0;
+    pointer-events: none; 
 }
 
 .white-gradient2 {
@@ -153,6 +176,32 @@
     border-radius: 100px;
     top: 70%;
     left: 10%;
-    z-index: 0; /* Set to a lower value to stay behind the container */
-    pointer-events: none; /* Ensure it does not interfere with any interactions */
+    z-index: 0; 
+    pointer-events: none; 
+}
+
+.gray-gradient2 {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: black;
+    filter: blur(19px);
+    border-radius: 100px;
+    top: 70%;
+    left: 10%;
+    z-index: 0; 
+    pointer-events: none; 
+}
+
+.gray-gradient {
+    position: absolute;
+    width: 150px;
+    height: 100px;
+    background: #666666;
+    filter: blur(19px);
+    border-radius: 100px;
+    top: 40%;
+    left: 2%;
+    z-index: 0; 
+    pointer-events: none; 
 }
