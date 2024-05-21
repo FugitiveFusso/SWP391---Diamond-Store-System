@@ -1,0 +1,67 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .footer {
+    background-color: black;
+    color: #fefefe;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+  }
+
+.info-img{
+    margin-left: 60px;
+}
+
+.info img{
+    width: 80px;
+    height: 80px;
+}
+
+.info-text p{
+    color: white;
+    font-size: 16px;
+    font-family: 'Raleway', sans-serif; 
+}
+
+.content{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 60px 0;
+}
+
+.customer-service{   
+    padding-left: 80px;
+}
+
+.customer-service-title{
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: white;
+}
+
+.footer .content a {
+    text-decoration: none;
+    color: #fefefe;
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    
+  }
+
+.footer .content p{
+    padding: 4px 0;
+}  
+
+.policy-title{
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: white;
+  }
+
+
+
