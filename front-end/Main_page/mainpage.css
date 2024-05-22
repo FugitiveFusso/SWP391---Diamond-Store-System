@@ -53,12 +53,14 @@
     font-family: Inika;
     /* font-weight: bold; */
     color: #151542;
+    font-size: 40px;
   }
 
   
   .hero-details h3{
     font-family: Inter;
-    
+    font-size: 16px;
+    font-weight: 500;
     color: #151542;
   }
 
@@ -165,10 +167,6 @@
 
 .info{
   padding-left: 100px;
-}
-
-info-img{
-  margin-left: 60px;
 }
 
 .info img{
