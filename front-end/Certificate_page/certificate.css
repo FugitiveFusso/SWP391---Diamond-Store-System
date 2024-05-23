@@ -113,13 +113,9 @@ h1{
   padding-right: 5%;
 }
 
-.heading_hr{
-    margin-right: 10%; 
-}
-
 .container {
   display: flex; 
-  width: 100%;
+  width: auto;
   margin: 50px 10%;
 }
 
@@ -166,6 +162,7 @@ h3{
 
 .content p{
   margin-left: 15px;
+  margin-right: 10%;
 }
 
 .content-title{
@@ -253,4 +250,17 @@ info-img{
   font-weight: 700;
   font-size: 20px;
   color: white;
+}
+
+.Next{
+  font-size: 20px;
+  font-weight: bold;
+  color: #151542;
+  margin: 40px auto;
+  cursor: pointer;
+  
+}
+
+.Next :hover{
+  text-decoration: underline;
 }
