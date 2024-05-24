@@ -42,7 +42,7 @@ public class UserLoginController extends HttpServlet {
             String password = request.getParameter("password");
             if (action == null || action.equals("login")) {
                 UserDAO dao = new UserDAO();
-                UserDTO user = dao.login(username, password, 5);
+                UserDTO user = dao.login(username, password, "Customer");
 
                 if (user != null) {
                     HttpSession session = request.getSession(true);

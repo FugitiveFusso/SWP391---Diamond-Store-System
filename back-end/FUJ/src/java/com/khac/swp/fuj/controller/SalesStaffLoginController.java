@@ -43,7 +43,7 @@ public class SalesStaffLoginController extends HttpServlet {
             String password = request.getParameter("password");
             if (action == null || action.equals("login")) {
                 UserDAO dao = new UserDAO();
-                UserDTO user = dao.login(username, password, 3);
+                UserDTO user = dao.login(username, password, "Sales Staff");
 
                 if (user != null) {
                     HttpSession session = request.getSession(true);

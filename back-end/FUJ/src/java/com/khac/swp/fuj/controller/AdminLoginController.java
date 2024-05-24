@@ -40,12 +40,12 @@ public class AdminLoginController extends HttpServlet {
             String password = request.getParameter("password");
             if (action == null || action.equals("login")) {
                 UserDAO dao = new UserDAO();
-                UserDTO user = dao.login(username, password, 1);
+                UserDTO user = dao.login(username, password, "Adminstrator");
 
                 if (user != null) {
                     HttpSession session = request.getSession(true);
                     session.setAttribute("adminsession", user);
-                    response.sendRedirect("./JelweryController");
+                    response.sendRedirect("./CustomerController");
                 } else {
                     request.setAttribute("error", "Your username or password is incorrect! Please try again");
                     RequestDispatcher rd = request.getRequestDispatcher("adminlogin.jsp");

@@ -40,7 +40,7 @@ public class ManagerLoginController extends HttpServlet {
             String password = request.getParameter("password");
             if (action == null || action.equals("login")) {
                 UserDAO dao = new UserDAO();
-                UserDTO user = dao.login(username, password, 2);
+                UserDTO user = dao.login(username, password, "Manager");
 
                 if (user != null) {
                     HttpSession session = request.getSession(true);

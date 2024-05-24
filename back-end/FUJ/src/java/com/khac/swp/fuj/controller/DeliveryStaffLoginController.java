@@ -43,7 +43,7 @@ public class DeliveryStaffLoginController extends HttpServlet {
             String password = request.getParameter("password");
             if (action == null || action.equals("login")) {
                 UserDAO dao = new UserDAO();
-                UserDTO user = dao.login(username, password, 4);
+                UserDTO user = dao.login(username, password, "Delivery Staff");
 
                 if (user != null) {
                     HttpSession session = request.getSession(true);

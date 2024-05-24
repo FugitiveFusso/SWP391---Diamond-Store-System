@@ -8,6 +8,10 @@
         <servlet-name>ManagerLoginController</servlet-name>
         <servlet-class>com.khac.swp.fuj.controller.ManagerLoginController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CustomerController</servlet-name>
+        <servlet-class>com.khac.swp.fuj.controller.CustomerController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AdminLoginController</servlet-name>
         <url-pattern>/adminlogin</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>ManagerLoginController</servlet-name>
         <url-pattern>/managerlogin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerController</servlet-name>
+        <url-pattern>/CustomerController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
