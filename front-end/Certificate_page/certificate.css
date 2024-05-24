@@ -30,7 +30,7 @@
   }
   .Main-hero img{
     max-width: 1920px;
-    width: 1920px;
+    width: 100%;
     height: 640px;
   }
 
