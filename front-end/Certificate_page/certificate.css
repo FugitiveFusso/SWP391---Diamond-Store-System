@@ -1,98 +1,101 @@
 @import url('https://fonts.googleapis.com/css2?family=Gantari:ital,wght@0,100..900;1,100..900&family=Syne:wght@400..800&display=swap');
-.navbar{
-    display: flex;
-    justify-content: space-around;
-    background-color: white;
-    padding: 10px 0;
-    margin-bottom: 0;
-    max-width: 1920px;
-  }
-  
-  .navbar img{
-    width: 80px;
-    height: 80px;
-  }
-  
-  .navbar__link{
-    list-style: none;
-    padding: 0 40px;
-  }
-  
-  .navbar__link a{
-    text-decoration: none;
-    margin: 27.5px 0 30.5px 0;
-    display: inline-block;
-    overflow-wrap: break-word;
-    font-family: 'Inter';
-    font-weight: 600;
-    font-size: 20px;
-    color: #000000;
-  }
-  .Main-hero img{
-    max-width: 1920px;
-    width: 100%;
-    height: 640px;
-  }
 
-  .hero-details{
-    position: absolute;
-    top: 30%;
-    left: 10%;
-  }
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  background-color: white;
+  padding: 10px 0;
+  margin-bottom: 0;
+  max-width: 1920px;
+}
 
-  .hero-details h2{
-    font-family: Inter;
-    font-weight: bold;
-    color: #151542;
-  }
+.navbar img {
+  width: 80px;
+  height: 80px;
+}
 
-  
-  .hero-details h1{
-    font-family: Inika;
-    /* font-weight: bold; */
-    color: #151542;
-    font-size: 40px;
-  }
+.navbar__link {
+  list-style: none;
+  padding: 0 40px;
+}
 
-  
-  .hero-details h3{
-    font-family: Inter;
-    font-size: 16px;
-    font-weight: 500;
-    color: #151542;
-  }
+.navbar__link a {
+  text-decoration: none;
+  margin: 27.5px 0 30.5px 0;
+  display: inline-block;
+  overflow-wrap: break-word;
+  font-family: 'Inter';
+  font-weight: 600;
+  font-size: 20px;
+  color: #000000;
+}
 
-  .button button{
-    background-color: #151542;
-    border-color: #151542;
-    color: #fff;
-    height: 52px;
-    transition: box-shadow .2s ease;
-    width: 200px;
-    align-items: center;
-    border-radius: 4px;
-    border-style: solid;
-    border-width: 1px;
-    font-family: Gantari, 'sans-serif';
-    font-size: 16px;
-    font-weight: 400;
-    justify-content: center;
-    line-height: 20px;
-    outline: 0;
-    text-decoration: none;
-    text-transform: uppercase;
-    cursor: pointer;
-  }
-  #button1{
-    margin-right: 10px;
-  }
+.Main-hero img {
+  max-width: 1920px;
+  width: 100%;
+  height: 640px;
+}
 
-  #learn-more{
-    text-decoration: none ;
-    color: #fff;
-  }
+.hero-details {
+  position: absolute;
+  top: 30%;
+  left: 10%;
+}
 
-.list{
+.hero-details h2 {
+  font-family: Inter;
+  font-weight: bold;
+  color: #151542;
+}
+
+
+.hero-details h1 {
+  font-family: Inika;
+  /* font-weight: bold; */
+  color: #151542;
+  font-size: 40px;
+}
+
+
+.hero-details h3 {
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 500;
+  color: #151542;
+}
+
+.button button {
+  background-color: #151542;
+  border-color: #151542;
+  color: #fff;
+  height: 52px;
+  transition: box-shadow .2s ease;
+  width: 350px;
+  align-items: center;
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 1px;
+  font-family: Gantari, 'sans-serif';
+  font-size: 16px;
+  font-weight: 400;
+  justify-content: center;
+  line-height: 20px;
+  outline: 0;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+#button1 {
+  margin-right: 10px;
+}
+
+#learn-more {
+  text-decoration: none;
+  color: #fff;
+}
+
+.list {
   display: flex;
   flex-direction: column;
   gap: 50px;
@@ -100,29 +103,29 @@
   margin-bottom: 30%;
 }
 
-h1{
+h1 {
   font-family: Inter, 'sans-serif';
   color: #151542;
   font-size: 40px;
 }
 
 .heading1 {
-  color: inherit; 
+  color: inherit;
   padding-left: 40px;
   margin-right: 50px;
   padding-right: 5%;
 }
 
 .container {
-  display: flex; 
+  display: flex;
   width: auto;
   margin: 50px 10%;
 }
 
 .side_nav {
   margin-top: 10px;
-  width: auto; 
-  padding: 20px; 
+  width: auto;
+  padding: 20px;
 }
 
 .info-list li{
@@ -139,15 +142,15 @@ h1{
 
 .certi-detail {
   flex: 1;
-  padding: 20px; 
+  padding: 20px;
 }
 
-li{
+li {
   list-style-type: none;
   font-family: Inter;
 }
 
-a{
+a {
   text-decoration: none;
   color: #151542;
 }
@@ -161,26 +164,26 @@ h3{
   font-family: Inter;
   color: #151542;
 }
-#Cert_link a{
+
+#Cert_link a {
   margin-top: 40px;
 }
 
-#Cert_link :hover{
+#Cert_link :hover {
   text-decoration: underline;
 }
 
-.content{
+.content {
   padding-right: 10%;
   padding-left: 40px
-
 }
 
-.content p{
+.content p {
   margin-left: 15px;
   margin-right: 10%;
 }
 
-.content-title{
+.content-title {
   font-family: Inter;
   color: #151542;
   font-size: 20px;
@@ -188,7 +191,7 @@ h3{
   margin: 40px auto;
 }
 
-.small-detail{
+.small-detail {
   margin: 20px auto;
   font-family: Inter;
   font-weight: 400;
@@ -204,7 +207,7 @@ h3{
   margin-top: 10px;
 }
 
-.list-learnMore li{
+.list-learnMore li {
   font-size: 15px;
   margin-left: 40px;
   list-style-type: disc;
@@ -218,37 +221,37 @@ h3{
   bottom: 0;
 }
 
-.info{
+.info {
   padding-left: 100px;
 }
 
-info-img{
+info-img {
   margin-left: 60px;
 }
 
-.info img{
+.info img {
   width: 80px;
   height: 80px;
 }
 
-.info-text p{
+.info-text p {
   color: white;
   font-size: 16px;
-  font-family: 'Raleway', sans-serif; 
+  font-family: 'Raleway', sans-serif;
 }
 
-.footer-content{
+.footer-content {
   display: flex;
   justify-content: space-evenly;
   padding: 30px 0;
 }
 
-.customer-service{   
+.customer-service {
   padding-top: 30px;
   padding-left: 400px;
 }
 
-.customer-service-title{
+.customer-service-title {
   font-family: 'Raleway', sans-serif;
   font-weight: 700;
   font-size: 20px;
@@ -259,31 +262,31 @@ info-img{
   text-decoration: none;
   color: #fefefe;
   font-family: 'Raleway', sans-serif;
-  font-size: 14px;  
+  font-size: 14px;
 }
 
-.policy{
+.policy {
   padding-top: 30px;
   padding-right: 100px;
 }
 
-.policy-title{
+.policy-title {
   font-family: 'Raleway', sans-serif;
   font-weight: 700;
   font-size: 20px;
   color: white;
 }
 
-.Next{
+.Next {
   font-size: 20px;
   font-weight: bold;
   color: #151542;
   margin: 40px auto;
   cursor: pointer;
-  
+
 }
 
-.Next :hover{
+.Next :hover {
   text-decoration: underline;
 }
 
