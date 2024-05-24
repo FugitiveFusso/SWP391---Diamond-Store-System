@@ -122,11 +122,51 @@ h1 {
   margin: 50px 10%;
 }
 
+/* .side_nav {
+  margin-top: 10px;
+  width: auto;
+  padding: 20px;
+} */
+
 .side_nav {
   margin-top: 10px;
   width: auto;
   padding: 20px;
 }
+
+.dropdown-btn {
+  cursor: pointer;
+  font-family: Inter;
+  font-size: 16px;
+  color: #151542;
+}
+
+.dropdown-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 2.5s ease;
+}
+
+.dropdown-content.show {
+  max-height: 1000px;
+}
+
+.list {
+  margin-top: 10px;
+  padding-left: 20px;
+  list-style: none;
+}
+
+.list a {
+  text-decoration: none;
+  color: #151542;
+  display: block;
+  margin-bottom: 10px;
+  font-family: Inter;
+  font-size: 16px;
+}
+
+
 
 .info-list li{
   list-style-type: disc;
@@ -159,8 +199,8 @@ b{
   color: #151542;
 }
 
-h3{
-  font-size: 25px;
+h3 {
+  font-size: 25px !important;
   font-family: Inter;
   color: #151542;
 }
@@ -290,3 +330,14 @@ info-img {
   text-decoration: underline;
 }
 
+body{
+  font-size: 15px;
+}
+
+.answer-list{
+  margin-left: 30px;
+}
+
+i{
+  margin-left: 10px;
+}
