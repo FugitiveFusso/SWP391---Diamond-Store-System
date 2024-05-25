@@ -32,7 +32,8 @@
 .main .content {
   background: #ededed;
   position: relative;
-  margin: 0 170px 100px 170px;
+  /* margin: 0 170px 100px 170px; */
+  margin: auto 20%;
   display: flex;
   flex-direction: column;
   padding: 60px 80px;
@@ -91,10 +92,11 @@
 
 .method{
   font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  font-size: 20px;
+  font-weight: 800;
+  font-size: 25px;
   color: #000000;
 }
+
 
 .cautious h3{
   font-family: 'Raleway', sans-serif;
@@ -188,4 +190,31 @@ ul li {
   font-weight: 700;
   font-size: 20px;
   color: white;
+}
+
+/* faqs */
+.images-center{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.method_title{
+  font-family: 'Inter';
+  font-size: 35px;
+  font-weight: 700;
+  
+}
+
+.details{
+  font-family: 'Inter';
+  font-size: 20px;
+  font-weight: 500;
+  margin: auto 10px;
+}
+
+.small-method{
+  font-family: 'Inter';
+  font-size: 20px;
+  font-weight: 600;
 }
