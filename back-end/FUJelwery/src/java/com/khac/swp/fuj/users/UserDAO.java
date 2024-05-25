@@ -112,7 +112,7 @@ public class UserDAO {
 
     public UserDTO load(int userID, String roleName) {
 
-        String sql = "select userID, userName, firstName, lastName, email, phoneNumber, address, point from [User] u full join [Role] r on u.roleID = r.roleID where userID = ? and roleName like ?";
+        String sql = "select userID, userName, password, firstName, lastName, email, phoneNumber, address, point from [User] u full join [Role] r on u.roleID = r.roleID where userID = ? and roleName like ?";
 
         try {
 
@@ -125,6 +125,7 @@ public class UserDAO {
             if (rs.next()) {
 
                 int customerid = rs.getInt("userID");
+                String password = rs.getString("password");
                 String customername = rs.getString("userName");
                 String firstname = rs.getString("firstName");
                 String lastname = rs.getString("lastName");
@@ -136,6 +137,7 @@ public class UserDAO {
                 UserDTO user = new UserDTO();
                 user.setUserid(customerid);
                 user.setUsername(customername);
+                user.setPassword(password);
                 user.setFirstname(firstname);
                 user.setLastname(lastname);
                 user.setEmail(email);
@@ -179,20 +181,21 @@ public class UserDAO {
     }
 
     public boolean update(UserDTO user) {
-        String sql = "UPDATE [User] SET userName = ?, firstName = ?, lastName = ?, phoneNumber = ?, email = ?, address = ?, point = ? WHERE userID = ? ";
+        String sql = "UPDATE [User] SET userName = ?, password = ?, firstName = ?, lastName = ?, phoneNumber = ?, email = ?, address = ?, point = ? WHERE userID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
 
-            ps.setInt(8, user.getUserid());
+            ps.setInt(9, user.getUserid());
             ps.setString(1, user.getUsername());
-            ps.setString(2, user.getFirstname());
-            ps.setString(3, user.getLastname());
-            ps.setString(4, user.getPhonenumber());
-            ps.setString(5, user.getEmail());
-            ps.setString(6, user.getAddress());
-            ps.setInt(7, user.getPoint());
+            ps.setString(2, user.getPassword());
+            ps.setString(3, user.getFirstname());
+            ps.setString(4, user.getLastname());
+            ps.setString(5, user.getPhonenumber());
+            ps.setString(6, user.getEmail());
+            ps.setString(7, user.getAddress());
+            ps.setInt(8, user.getPoint());
 
             ps.executeUpdate();
             conn.close();
