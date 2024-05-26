@@ -1,0 +1,81 @@
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh;  */
+    margin-top: 20vh
+}
+
+.content {
+    /* Styles for the content inside the centered container */
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Gantari:ital,wght@0,100..900;1,100..900&family=Syne:wght@400..800&display=swap');
+
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  background-color: white;
+  padding: 10px 0;
+  margin-bottom: 0;
+  max-width: 1920px;
+}
+
+.navbar img {
+  width: 80px;
+  height: 80px;
+}
+
+.navbar__link {
+  list-style: none;
+  padding: 0 40px;
+}
+
+.navbar__link a {
+  text-decoration: none;
+  margin: 27.5px 0 30.5px 0;
+  display: inline-block;
+  overflow-wrap: break-word;
+  font-family: 'Inter';
+  font-weight: 600;
+  font-size: 20px;
+  color: #000000;
+}
+
+.side_nav {
+    margin-top: 10px;
+    width: auto;
+    padding: 20px;
+  }
+  
+  .dropdown-btn {
+    cursor: pointer;
+    font-family: Inter;
+    font-size: 16px;
+    color: #151542;
+  }
+  
+  .dropdown-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 2.5s ease;
+  }
+  
+  .dropdown-content.show {
+    max-height: 1000px;
+  }
+  
+  .list {
+    margin-top: 10px;
+    padding-left: 20px;
+    list-style: none;
+  }
+  
+  .list a {
+    text-decoration: none;
+    color: #151542;
+    display: block;
+    margin-bottom: 10px;
+    font-family: Inter;
+    font-size: 16px;
+  }

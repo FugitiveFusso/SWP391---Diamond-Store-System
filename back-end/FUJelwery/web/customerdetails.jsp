@@ -47,14 +47,11 @@
             <tr><td>Email</td><td>${requestScope.customer.email}</td></tr>
             <tr><td>Address</td><td>${requestScope.customer.address}</td></tr>
             <tr><td>Point</td><td>${requestScope.customer.point}</td></tr>
-            
+
 
         </table>
-
-
         <form action="CustomerController" style="padding-top: 10px">
-            <input type=hidden name="id" value="${requestScope.customer.userid}">
-            <input type=hidden name="action" value="edit">
-            <input type=submit value="Edit" ></form>
+            <input type=hidden name="action" value="list">
+            <input type=submit value="Return" ></form>
     </body>
 </html>

@@ -45,6 +45,7 @@ CREATE TABLE [User](
 CREATE TABLE [Ring](
 	ringID int NOT NULL primary key,
 	ringName varchar NOT NULL,
+	ringImage varchar(8000) NOT NULL,
 	diamondID int NOT NULL foreign key REFERENCES [Diamond](diamondID),
 	gender varchar NOT NULL,
 	price float NOT NULL,
@@ -55,13 +56,14 @@ CREATE TABLE [Ring](
 
 CREATE TABLE [Certificate](
 	certificateID int NOT NULL primary key,
+	certificateDescription varchar(8000),
 	diamondID int NOT NULL foreign key REFERENCES [Diamond](diamondID)
 );
 
 CREATE TABLE [Voucher](
 	voucherID int NOT NULL primary key,
-	voucherImage varchar(8000) NOT NULL,
 	voucherName varchar(255) NOT NULL,
+	voucherImage varchar(8000) NOT NULL,
 	[description] varchar(max) NOT NULL,
 	coupon varchar(255) NOT NULL,
 	percentage int NOT NULL
@@ -113,8 +115,9 @@ CREATE TABLE [Bill](
 CREATE TABLE [Post](
 	postID int NOT NULL primary key,
 	postName varchar(8000) NOT NULL,
-	description varchar(max) NOT NULL,
-	postImage image NOT NULL
+	postImage varchar(8000) NOT NULL,
+	description varchar(max) NOT NULL
+	
 );
 
 

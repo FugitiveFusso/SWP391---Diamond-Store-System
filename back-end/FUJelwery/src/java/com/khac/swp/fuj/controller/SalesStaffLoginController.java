@@ -60,7 +60,7 @@ public class SalesStaffLoginController extends HttpServlet {
                     session.invalidate();
                 }
                 request.setAttribute("error", "Logout successfully");
-                RequestDispatcher rd = request.getRequestDispatcher("adminlogin.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("saleslogin.jsp");
                 rd.forward(request, response);
             }
         

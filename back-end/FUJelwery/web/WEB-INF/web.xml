@@ -12,6 +12,26 @@
         <servlet-name>CustomerController</servlet-name>
         <servlet-class>com.khac.swp.fuj.controller.CustomerController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminController</servlet-name>
+        <servlet-class>com.khac.swp.fuj.controller.AdminController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SalesController</servlet-name>
+        <servlet-class>com.khac.swp.fuj.controller.SalesController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeliveryStaffController</servlet-name>
+        <servlet-class>com.khac.swp.fuj.controller.DeliveryStaffController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManagerController</servlet-name>
+        <servlet-class>com.khac.swp.fuj.controller.ManagerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PostController</servlet-name>
+        <servlet-class>com.khac.swp.fuj.controller.PostController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AdminLoginController</servlet-name>
         <url-pattern>/adminlogin</url-pattern>
@@ -23,6 +43,26 @@
     <servlet-mapping>
         <servlet-name>CustomerController</servlet-name>
         <url-pattern>/CustomerController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminController</servlet-name>
+        <url-pattern>/AdminController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SalesController</servlet-name>
+        <url-pattern>/SalesController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeliveryStaffController</servlet-name>
+        <url-pattern>/DeliveryStaffController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerController</servlet-name>
+        <url-pattern>/ManagerController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostController</servlet-name>
+        <url-pattern>/PostController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

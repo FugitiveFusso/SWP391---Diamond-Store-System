@@ -59,7 +59,7 @@ public class UserLoginController extends HttpServlet {
                     session.invalidate();
                 }
                 request.setAttribute("error", "Logout successfully");
-                RequestDispatcher rd = request.getRequestDispatcher("adminlogin.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("userlogin.jsp");
                 rd.forward(request, response);
             }
         
