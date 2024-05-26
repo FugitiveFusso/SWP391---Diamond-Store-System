@@ -42,7 +42,7 @@
 
             <tr><td>Post ID</td><td>${requestScope.post.id}</td></tr>
             <tr><td>Post Name</td><td>${requestScope.post.name}</td></tr>
-            <tr><td>Post Image</td><td><img src=${requestScope.post.image} width="300px"></td></tr>
+            <tr><td>Post Image</td><td><img src=${requestScope.post.image} width="300px" height="300px"></td></tr>
             <tr><td>Description</td><td>${requestScope.post.description}</td></tr>
 
         </table>

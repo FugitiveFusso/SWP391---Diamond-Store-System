@@ -38,7 +38,6 @@ public class PostDAO {
             if (keyword != null && !keyword.isEmpty()) {
                 stmt.setString(1, "%" + keyword + "%");
 
-
             }
             ResultSet rs = stmt.executeQuery();
             if (rs != null) {
@@ -99,5 +98,70 @@ public class PostDAO {
         return null;
     }
 
+    public Integer insert(PostDTO post) {
+        String sql = "INSERT INTO [Post] (postID, postName, postImage, description) VALUES (?, ?, ?, ?)";
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, post.getId());
+            ps.setString(2, post.getName());
+            ps.setString(3, post.getImage());
+            ps.setString(4, post.getDescription());
+
+            ps.executeUpdate();
+            conn.close();
+            return post.getId();
+        } catch (SQLException ex) {
+            System.out.println("Insert Post error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public boolean update(PostDTO post) {
+        String sql = "UPDATE [Post] SET postName = ?, postImage = ?, description = ? WHERE postID = ? ";
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setInt(4, post.getId());
+            ps.setString(1, post.getName());
+            ps.setString(2, post.getImage());
+            ps.setString(3, post.getDescription());
+
+            ps.executeUpdate();
+            conn.close();
+        } catch (SQLException ex) {
+            System.out.println("Update Post error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    /*
+    Delete student 
+     */
+    public boolean delete(int id) {
+        String sql = "DELETE [Post] WHERE postID = ? ";
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, id);
+
+            ps.executeUpdate();
+            conn.close();
+            return true;
+        } catch (SQLException ex) {
+            System.out.println("Delete Post error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+
+        return false;
+    }
 
 }

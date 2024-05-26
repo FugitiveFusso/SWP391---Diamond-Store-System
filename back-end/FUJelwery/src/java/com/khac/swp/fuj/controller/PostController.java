@@ -9,8 +9,13 @@ import com.khac.swp.fuj.posts.PostDAO;
 import com.khac.swp.fuj.posts.PostDTO;
 import com.khac.swp.fuj.users.UserDAO;
 import com.khac.swp.fuj.users.UserDTO;
+import com.khac.swp.fuj.utils.DBUtils;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -76,7 +81,99 @@ public class PostController extends HttpServlet {
                 request.setAttribute("post", post);//object
                 RequestDispatcher rd = request.getRequestDispatcher("postdetails.jsp");
                 rd.forward(request, response);
+            } else if (action.equals("edit")) {//edit
+                Integer id = null;
+                try {
+                    id = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
 
+                PostDTO post = null;
+                if (id != null) {
+                    post = postDAO.load(id);
+                }
+
+                request.setAttribute("post", post);
+                request.setAttribute("nextaction", "update");
+                RequestDispatcher rd = request.getRequestDispatcher("postedit.jsp");
+                rd.forward(request, response);
+
+            } else if (action.equals("create")) {//create
+                PostDTO post = new PostDTO();
+                request.setAttribute("post", post);
+                request.setAttribute("nextaction", "insert");
+                RequestDispatcher rd = request.getRequestDispatcher("postedit.jsp");
+                rd.forward(request, response);
+
+            } else if (action.equals("update")) {//update
+                Integer postid = null;
+                try {
+                    postid = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+                String postname = request.getParameter("postName");
+                String postimage = request.getParameter("postImage");
+                String description = request.getParameter("description");
+
+                PostDTO post = null;
+                if (postid != null) {
+                    post = postDAO.load(postid);
+                }
+                post.setId(postid);
+                post.setName(postname);
+                post.setImage(postimage);
+                post.setDescription(description);
+                postDAO.update(post);
+
+                request.setAttribute("post", post);
+                RequestDispatcher rd = request.getRequestDispatcher("postdetails.jsp");
+                rd.forward(request, response);
+
+            } else if (action.equals("insert")) {//insert
+                try {
+                    Connection conn = DBUtils.getConnection();
+                    int postid = 0;
+                    String postname = request.getParameter("postName");
+                    String postimage = request.getParameter("postImage");
+                    String description = request.getParameter("description");
+
+                    PreparedStatement ps = conn.prepareStatement("select max(postID) from [Post]");
+                    ResultSet rs = ps.executeQuery();
+                    if (rs.next()) {
+                        postid = rs.getInt(1);
+                        postid++;
+                    }
+                    PostDTO post = new PostDTO();
+                    post.setId(postid);
+                    post.setName(postname);
+                    post.setImage(postimage);
+                    post.setDescription(description);
+                    postDAO.insert(post);
+                    request.setAttribute("post", post);
+                    RequestDispatcher rd = request.getRequestDispatcher("postdetails.jsp");
+                    rd.forward(request, response);
+                } catch (SQLException ex) {
+                    System.out.println("Insert post error!" + ex.getMessage());
+                    ex.printStackTrace();
+                }
+
+            } else if (action.equals("delete")) {//delete
+
+                Integer id = null;
+                try {
+                    id = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+
+                postDAO.delete(id);
+
+                List<PostDTO> list = postDAO.getAllPost(keyword, sortCol);
+                request.setAttribute("postlist", list);
+                RequestDispatcher rd = request.getRequestDispatcher("postlist.jsp");
+                rd.forward(request, response);
             }
 
         }
