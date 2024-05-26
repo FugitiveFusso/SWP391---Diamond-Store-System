@@ -33,16 +33,16 @@
                             <div class="login-wrap p-4 p-md-5">
                                 <div class="d-flex">
                                     <div class="w-100">
-                                        <h1 class="mb-4">Admin Login</h1>
+                                        <h2 class="mb-4">Admin Login</h2>
                                         <% String error = (String) request.getAttribute("error"); %>
                                         <% if (error != null) {%>
-                                        <h3 style="color: red"> <%= error%> </h3>
+                                        <h4 style="color: red"> <%= error%> </h3>
                                         <% }%>			      		</div>
 <!--                                    <div class="w-100">
                                         <p class="social-media d-flex justify-content-end">
                                             <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-google"></span></a>
                                         </p>
-                                    </div>-->
+                                    </div>                     -->
                                 </div>
                                 <form action="./adminlogin" name="" method="POST" class="signin-form">
                                     <div class="form-group mt-3">
@@ -69,11 +69,11 @@
                                         </select>
 
                                         <div class="w-50 text-md-right">
-                                            <a href="#">Forgot Password</a>
+                                            <a href="#" style="color: white">Forgot Password</a>
                                         </div>
                                     </div>
                                 </form>
-                                <p class="text-center">Not a member? <a data-toggle="tab" href="#signup">Sign Up</a></p>
+<!--                                <p class="text-center">Not a member? <a data-toggle="tab" href="#signup">Sign Up</a></p>-->
                             </div>
                         </div>
                     </div>

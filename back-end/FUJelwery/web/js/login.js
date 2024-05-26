@@ -12,7 +12,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     url = 'userlogin.jsp';
                     break;
                 case "2":
-                    url = 'admin.jsp';
+                    url = 'adminlogin.jsp';
+                    break;
                 case "3":
                     url = 'managerlogin.jsp';
                     break;
@@ -23,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     url = 'deliverystafflogin.jsp';
                     break;
                 default:
-                    url = 'admin.jsp'; // Default URL or handle error
+                    url = 'adminlogin.jsp'; // Default URL or handle error
             }
 
             if (url) {
