@@ -28,6 +28,10 @@
         <servlet-name>ManagerController</servlet-name>
         <servlet-class>com.khac.swp.fuj.controller.ManagerController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PostController</servlet-name>
+        <servlet-class>com.khac.swp.fuj.controller.PostController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AdminLoginController</servlet-name>
         <url-pattern>/adminlogin</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>ManagerController</servlet-name>
         <url-pattern>/ManagerController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostController</servlet-name>
+        <url-pattern>/PostController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

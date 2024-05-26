@@ -51,6 +51,10 @@
         </table>
 
         <form action="SalesController" style="padding-top: 10px">
+            <input type=hidden name="action" value="list">
+            <input type=submit value="Return" ></form>
+
+        <form action="SalesController" style="padding-top: 10px">
             <input type=hidden name="id" value="${requestScope.sales.userid}">
             <input type=hidden name="action" value="edit">
             <input type=submit value="Edit" ></form>

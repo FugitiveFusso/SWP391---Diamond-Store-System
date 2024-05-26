@@ -47,13 +47,7 @@ public class PostDTO {
         this.description = description;
     }
 
-    public PostDTO(int id, String name, String image, String description) {
-        this.id = id;
-        this.name = name;
-        this.image = image;
-        this.description = description;
-    }
-
+  
     @Override
     public String toString() {
         return "PostDTO{" + "id=" + id + ", name=" + name + ", image=" + image + ", description=" + description + '}';

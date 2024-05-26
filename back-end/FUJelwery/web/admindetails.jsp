@@ -26,7 +26,8 @@
                 font-family: Arial, Helvetica, sans-serif;
             }
             table{
-                margin-top: 10px
+                margin-top: 10px;
+                    
             }
             table, tr, td{
                 border-collapse: collapse;
@@ -50,6 +51,11 @@
             <tr><td>Point</td><td>${requestScope.admin.point}</td></tr>
         </table>
 
+        <form action="AdminController" style="padding-top: 10px">
+
+            <input type=hidden name="action" value="list">
+            <input type=submit value="Return" ></form>
+        
         <form action="AdminController" style="padding-top: 10px">
             <input type=hidden name="id" value="${requestScope.admin.userid}">
             <input type=hidden name="action" value="edit">

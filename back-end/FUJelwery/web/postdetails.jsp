@@ -1,6 +1,6 @@
 <%-- 
-    Document   : customerdetails
-    Created on : May 24, 2024, 5:36:52 PM
+    Document   : postdetails
+    Created on : May 26, 2024, 12:26:47 PM
     Author     : phucu
 --%>
 
@@ -9,12 +9,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Customer Details Page</title>
+        <title>JSP Page</title>
     </head>
     <body>
         <jsp:include page="/menu.jsp" flush="true" />
 
-        <h1>Customers Details </h1>         
+        <h1>Post Details </h1>         
         <p> Login username: ${sessionScope.adminsession.username}</p>
 
         <style>
@@ -40,18 +40,20 @@
         </style>
         <table>
 
-            <tr><td>User Name</td><td>${requestScope.customer.username}</td></tr>
-            <tr><td>First Name</td><td>${requestScope.customer.firstname}</td></tr>
-            <tr><td>Last Name</td><td>${requestScope.customer.lastname}</td></tr>
-            <tr><td>Phone Number</td><td>${requestScope.customer.phonenumber}</td></tr>
-            <tr><td>Email</td><td>${requestScope.customer.email}</td></tr>
-            <tr><td>Address</td><td>${requestScope.customer.address}</td></tr>
-            <tr><td>Point</td><td>${requestScope.customer.point}</td></tr>
-
+            <tr><td>Post ID</td><td>${requestScope.post.id}</td></tr>
+            <tr><td>Post Name</td><td>${requestScope.post.name}</td></tr>
+            <tr><td>Post Image</td><td><img src=${requestScope.post.image} width="300px"></td></tr>
+            <tr><td>Description</td><td>${requestScope.post.description}</td></tr>
 
         </table>
-        <form action="CustomerController" style="padding-top: 10px">
+            
+            <form action="PostController" style="padding-top: 10px">
             <input type=hidden name="action" value="list">
             <input type=submit value="Return" ></form>
+
+        <form action="PostController" style="padding-top: 10px">
+            <input type=hidden name="id" value="${requestScope.post.id}">
+            <input type=hidden name="action" value="edit">
+            <input type=submit value="Edit" ></form>
     </body>
 </html>

@@ -51,6 +51,10 @@
         </table>
 
         <form action="ManagerController" style="padding-top: 10px">
+            <input type=hidden name="action" value="list">
+            <input type=submit value="Return" ></form>
+
+        <form action="ManagerController" style="padding-top: 10px">
             <input type=hidden name="id" value="${requestScope.manager.userid}">
             <input type=hidden name="action" value="edit">
             <input type=submit value="Edit" ></form>

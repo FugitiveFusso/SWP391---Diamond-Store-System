@@ -28,12 +28,13 @@
                 font-family: Arial, Helvetica, sans-serif;
             }
             table{
-                margin-top: 10px
+                margin-top: 10px;
+                    width: 100%;
             }
             table, tr, td{
                 border-collapse: collapse;
-                width: 1200px;
-                border: 1px solid black;
+                
+                border: 2px solid black;
                 text-align: center;
             }
             tr,td{
