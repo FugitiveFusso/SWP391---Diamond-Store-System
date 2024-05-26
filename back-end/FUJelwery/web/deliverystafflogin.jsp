@@ -37,7 +37,7 @@
                                         </p>
                                     </div>                     -->
                                 </div>
-                                <form action="./saleslogin" name="" method="POST" class="signin-form">
+                                <form action="./deliverystafflogin" name="" method="POST" class="signin-form">
                                     <div class="form-group mt-3">
                                         <input name="user" type="text" class="form-control" required>
                                         <label class="form-control-placeholder" for="username">Username</label>
