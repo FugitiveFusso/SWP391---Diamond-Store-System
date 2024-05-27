@@ -44,12 +44,12 @@ public class DiamondDAO{
             if (rs != null) {
                 while (rs.next()) {
 
-                    int diamondID = rs.getInt("userID");
-                    String diamondName = rs.getString("userName");
-                    String diamondImage = rs.getString("firstName");
-                    String origin = rs.getString("lastName");
+                    int diamondID = rs.getInt("diamondID");
+                    String diamondName = rs.getString("diamondName");
+                    String diamondImage = rs.getString("diamondImage");
+                    String origin = rs.getString("origin");
                     int caratWeight = Integer.parseInt(rs.getString("caratWeight"));
-                    String cut = rs.getString("address");
+                    String cut = rs.getString("cut");
                     String color = rs.getString("color");
                     String clarity = rs.getString("clarity");
 
@@ -74,57 +74,118 @@ public class DiamondDAO{
         return list;
     }
     
-    public void insertDiamond (int id, String diamondName, String diamondImage, String origin, int caratWeight, String cut, String color, String clarity){
-        String query = "INSERT INTO Diamond \n" +
-                "(diamondID, diamondName, diamondImage, origin, caratWeight, cut, color, clarity) \n"+
-                "VALUES(?,?,?,?,?,?,?,?)";
+    public DiamondDTO load(int diamondID) {
+
+        String sql = "select * from Diamond where diamondID = ?";
+
         try {
-            PreparedStatement ps = conn.prepareStatement(query);
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, diamondID);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                int ID = rs.getInt("diamondID");
+                    String diamondName = rs.getString("diamondName");
+                    String diamondImage = rs.getString("diamondImage");
+                    String origin = rs.getString("origin");
+                    int caratWeight = Integer.parseInt(rs.getString("caratWeight"));
+                    String cut = rs.getString("cut");
+                    String color = rs.getString("color");
+                    String clarity = rs.getString("clarity");
+
+                    DiamondDTO diamond = new DiamondDTO();
+                    diamond.setDiamondID(ID);
+                    diamond.setDiamondName(diamondName);
+                    diamond.setDiamondImage(diamondImage);
+                    diamond.setOrigin(origin);
+                    diamond.setCaratWeight(caratWeight);
+                    diamond.setCut(cut);
+                    diamond.setColor(color);
+                    diamond.setClarity(clarity);
+                return diamond;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Query User error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public Integer insert(DiamondDTO diamond) {
+        String sql = "INSERT INTO [Diamond] (diamondID, diamondName, diamondImage, origin, caratWeight, cut, color, clarity) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, diamond.getDiamondID());
+            ps.setString(2, diamond.getDiamondName());
+            ps.setString(3, diamond.getDiamondImage());
+            ps.setString(4, diamond.getOrigin());
+            ps.setInt(5, diamond.getCaratWeight());
+            ps.setString(6, diamond.getCut());
+            ps.setString(7, diamond.getColor());
+            ps.setString(8, diamond.getClarity());
+
+            ps.executeUpdate();
+            conn.close();
+            return diamond.getDiamondID();
+        } catch (SQLException ex) {
+            System.out.println("Insert Post error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public boolean update(DiamondDTO diamond) {
+        String sql = "UPDATE [Diamond] SET diamondName = ?, diamondImage = ?, origin = ?, caratWeight = ?, cut = ?, color = ?, clarity = ? WHERE diamondID = ? ";
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            
+            ps.setString(1, diamond.getDiamondName());
+            ps.setString(2, diamond.getDiamondImage());
+            ps.setString(3, diamond.getOrigin());
+            ps.setInt(4, diamond.getCaratWeight());
+            ps.setString(5, diamond.getCut());
+            ps.setString(6, diamond.getColor());
+            ps.setString(7, diamond.getClarity());
+            ps.setInt(8, diamond.getDiamondID());
+            
+            ps.executeUpdate();
+            conn.close();
+        } catch (SQLException ex) {
+            System.out.println("Update Diamond error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    /*
+    Delete student 
+     */
+    public boolean delete(int id) {
+        String sql = "DELETE [Diamond] WHERE diamondID = ? ";
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
             ps.setInt(1, id);
-            ps.setString(2, diamondName);
-            ps.setString(3, diamondImage);
-            ps.setString(4, origin);
-            ps.setInt(5, caratWeight);
-            ps.setString(6, cut);
-            ps.setString(7, color);
-            ps.setString(8, clarity);
+
             ps.executeUpdate();
-        } catch (Exception e) {
+            conn.close();
+            return true;
+        } catch (SQLException ex) {
+            System.out.println("Delete Diamond error!" + ex.getMessage());
+            ex.printStackTrace();
         }
-    }
-    public void deleteDiamond(String id) {
-        String query = "DELETE FROM Diamond\n"
-                + "where diamondID = ?";
-        try {
-            PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, id);
-            ps.executeUpdate();
-        } catch (Exception e) {
-        }
-    }
-    
-    public void editDiamond(String diamondName, String diamondImage, String origin, int caratWeight, String cut, String color, String clarity, int id) {
-        String query = "UPDATE Diamond\n"
-                + "SET diamondName = ?,\n"
-                + "diamondImage = ?,\n"
-                + "origin = ?,\n"
-                + "caratWeight = ?,\n"
-                + "cut = ?\n"
-                + "color = ?\n"
-                + "clarity = ?\n"
-                + "where diamondID = ?";
-        try {
-            PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, diamondName);
-            ps.setString(2, diamondImage);
-            ps.setString(3, origin);
-            ps.setInt(4, caratWeight);
-            ps.setString(5, cut);
-            ps.setString(6, color);
-            ps.setString(7, clarity);
-            ps.setInt(8, id);
-            ps.executeUpdate();
-        } catch (Exception e) {
-        }
+
+        return false;
     }
 }

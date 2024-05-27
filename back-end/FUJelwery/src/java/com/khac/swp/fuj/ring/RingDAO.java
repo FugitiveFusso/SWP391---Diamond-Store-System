@@ -47,17 +47,17 @@ public class RingDAO {
                     int ringID = rs.getInt("ringID");
                     String ringName = rs.getString("ringName");
                     String ringImage = rs.getString("ringImage");
-                    int diamondID = rs.getInt("userID");
+                    int diamondID = rs.getInt("diamondID");
                     String gender = rs.getString("gender");
                     double price = rs.getDouble("price");
                     int quantity = rs.getInt("quantity");
                     int categoryID = rs.getInt("categoryID");
                     int collectionID = rs.getInt("collectionID");
-                    String diamondName = rs.getString("userName");
-                    String diamondImage = rs.getString("firstName");
-                    String origin = rs.getString("lastName");
+                    String diamondName = rs.getString("diamondName");
+                    String diamondImage = rs.getString("diamondImage");
+                    String origin = rs.getString("origin");
                     int caratWeight = Integer.parseInt(rs.getString("caratWeight"));
-                    String cut = rs.getString("address");
+                    String cut = rs.getString("cut");
                     String color = rs.getString("color");
                     String clarity = rs.getString("clarity");
 
