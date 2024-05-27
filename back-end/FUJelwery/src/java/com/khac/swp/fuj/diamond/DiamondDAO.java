@@ -155,7 +155,7 @@ public class DiamondDAO{
             ps.setString(5, diamond.getCut());
             ps.setString(6, diamond.getColor());
             ps.setString(7, diamond.getClarity());
-            ps.setInt(8, diamond.getDiamondID());
+            ps.setInt(9, diamond.getDiamondID());
             
             ps.executeUpdate();
             conn.close();

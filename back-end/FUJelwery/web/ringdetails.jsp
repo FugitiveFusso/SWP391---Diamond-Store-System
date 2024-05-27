@@ -47,6 +47,7 @@
             <tr><td>Category</td><td>${requestScope.ring.categoryID}</td></tr>
             <tr><td>Collection</td><td>${requestScope.ring.collectionID}</td></tr>
             
+        </table>    
             <form action="RingController" style="padding-top: 10px">
             <input type=hidden name="action" value="list">
             <input type=submit value="Return" ></form>
@@ -55,6 +56,6 @@
             <input type=hidden name="id" value="${requestScope.ring.ringid}">
             <input type=hidden name="action" value="edit">
             <input type=submit value="Edit" ></form>
-        </table>
+        
     </body>
 </html>

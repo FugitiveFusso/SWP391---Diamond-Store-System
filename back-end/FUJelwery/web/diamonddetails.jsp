@@ -44,6 +44,7 @@
             <tr><td>Diamond Name</td><td>${requestScope.diamond.diamondName}</td></tr>
             <tr><td>Diamond Image</td><td><img src=${requestScope.diamond.diamondImage} width="300px" height="300px"></td></tr>
             <tr><td>Carat Weight</td><td>${requestScope.diamond.caratWeight}</td></tr>
+            <tr><td>Origin</td><td>${requestscope.diamond.origin}</td></tr>
             <tr><td>Cut</td><td>${requestScope.diamond.cut}</td></tr>
             <tr><td>Color</td><td>${requestScope.diamond.color}</td></tr>
             <tr><td>Clarity</td><td>${requestScope.diamond.clarity}</td></tr>

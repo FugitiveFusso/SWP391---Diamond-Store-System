@@ -170,6 +170,7 @@ public class RingController extends HttpServlet {
                     ring.setCategoryID(categoryID);
                     ring.setCollectionID(collectionID);
                     request.setAttribute("ring", ring);
+                    ringDAO.insert(ring);
                     
                     RequestDispatcher rd = request.getRequestDispatcher("ringdetails.jsp");
                     rd.forward(request, response);

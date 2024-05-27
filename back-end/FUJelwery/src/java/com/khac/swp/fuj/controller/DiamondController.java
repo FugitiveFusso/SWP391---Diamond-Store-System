@@ -168,6 +168,8 @@ public class DiamondController extends HttpServlet {
                     diamond.setColor(color);
                     diamond.setClarity(clarity);
                     request.setAttribute("diamond", diamond);
+                    diamondDAO.insert(diamond);
+                    
                     RequestDispatcher rd = request.getRequestDispatcher("diamonddetails.jsp");
                     rd.forward(request, response);
                 } catch (SQLException ex) {

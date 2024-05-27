@@ -147,7 +147,7 @@ public class RingDAO {
     }
 
     public Integer insert(RingDTO ring) {
-        String sql = "INSERT INTO [Ring] (ringID, ringName, ringImage, gender, price, quantity, categoryID, collectionID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO [Ring] (ringID, ringName, ringImage, diamondID, gender, price, quantity, categoryID, collectionID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
 
             Connection conn = DBUtils.getConnection();
