@@ -63,7 +63,8 @@ public class RingDAO {
 
                     RingDTO ring = new RingDTO();
                     ring.setRingID(ringID);
-                    ring.setDiamondName(ringName);
+                    ring.setRingName(ringName);
+                    ring.setRingImage(ringImage);
                     ring.setDiamondID(diamondID);
                     ring.setGender(gender);
                     ring.setPrice(price);
@@ -89,60 +90,135 @@ public class RingDAO {
         return list;
     }
     
-    public void insertDiamond (int ringID, String ringName, String ringImage, int diamondID, String gender, double price, int quantity, int categoryID, int collectionID){
-        String query = "INSERT INTO Ring \n" +
-                "(ringID, ringName, ringImage, diamondID, gender, price, quantity, categoryID, collectionID) \n"+
-                "VALUES(?,?,?,?,?,?,?,?,?)";
+    public RingDTO load(int ringID) {
+
+        String sql = "SELECT * FROM [Ring] r FULL JOIN [Diamond] d ON d.diamondID = r.diamondID WHERE r.ringID = ?";
+
         try {
-            PreparedStatement ps = conn.prepareStatement(query);
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, ringID);
-            ps.setString(2, ringName);
-            ps.setString(3, ringImage);
-            ps.setInt(4, diamondID);
-            ps.setString(5, gender);
-            ps.setDouble(6, price);
-            ps.setInt(7, quantity);
-            ps.setInt(8, categoryID);
-            ps.setInt(9, collectionID);
-            ps.executeUpdate();
-        } catch (Exception e) {
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                int ID = rs.getInt("ringID");
+                    String ringName = rs.getString("ringName");
+                    String ringImage = rs.getString("ringImage");
+                    int diamondID = rs.getInt("diamondID");
+                    String gender = rs.getString("gender");
+                    double price = rs.getDouble("price");
+                    int quantity = rs.getInt("quantity");
+                    int categoryID = rs.getInt("categoryID");
+                    int collectionID = rs.getInt("collectionID");
+                    String diamondName = rs.getString("diamondName");
+                    String diamondImage = rs.getString("diamondImage");
+                    String origin = rs.getString("origin");
+                    int caratWeight = Integer.parseInt(rs.getString("caratWeight"));
+                    String cut = rs.getString("cut");
+                    String color = rs.getString("color");
+                    String clarity = rs.getString("clarity");
+
+                    RingDTO ring = new RingDTO();
+                    ring.setRingID(ID);
+                    ring.setRingName(ringName);
+                    ring.setRingImage(ringImage);
+                    ring.setDiamondID(diamondID);
+                    ring.setGender(gender);
+                    ring.setPrice(price);
+                    ring.setQuantity(quantity);
+                    ring.setCategoryID(categoryID);
+                    ring.setCollectionID(collectionID);
+                    ring.setDiamondName(diamondName);
+                    ring.setDiamondImage(diamondImage);
+                    ring.setOrigin(origin);
+                    ring.setCaratWeight(caratWeight);
+                    ring.setCut(cut);
+                    ring.setColor(color);
+                    ring.setClarity(clarity);
+                return ring;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Query User error!" + ex.getMessage());
+            ex.printStackTrace();
         }
+        return null;
     }
-    public void deleteDiamond(String ringID) {
-        String query = "DELETE FROM Ring\n"
-                + "where ringID = ?";
+
+    public Integer insert(RingDTO ring) {
+        String sql = "INSERT INTO [Ring] (ringID, ringName, ringImage, gender, price, quantity, categoryID, collectionID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
-            PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, ringID);
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, ring.getRingID());
+            ps.setString(2, ring.getRingName());
+            ps.setString(3, ring.getRingImage());
+            ps.setInt(4, ring.getDiamondID());
+            ps.setString(5, ring.getGender());
+            ps.setDouble(6, ring.getPrice());
+            ps.setInt(7, ring.getQuantity());
+            ps.setInt(8, ring.getCategoryID());
+            ps.setInt(9, ring.getCollectionID());
+
             ps.executeUpdate();
-        } catch (Exception e) {
+            conn.close();
+            return ring.getRingID();
+        } catch (SQLException ex) {
+            System.out.println("Insert Post error!" + ex.getMessage());
+            ex.printStackTrace();
         }
+        return null;
     }
-    
-    public void editDiamond(String ringName, String ringImage, int diamondID, String gender, double price, int quantity, int categoryID, int collectionID, int ringID) {
-        String query = "UPDATE Ring\n"
-                + "SET ringName = ?,\n"
-                + "ringImage = ?,\n"
-                + "diamondID = ?,\n"
-                + "gender = ?,\n"
-                + "price = ?\n"
-                + "quantity = ?\n"
-                + "categoryID = ?\n"
-                + "collectionID = ?\n"
-                + "where ringID = ?";
+
+    public boolean update(RingDTO ring) {
+        String sql = "UPDATE [Ring] SET ringName = ?, ringImage = ?, diamondID = ?, gender = ?, price = ?, quantity = ?, categoryID = ?, collectionID = ? WHERE diamondID = ? ";
         try {
-            PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, ringName);
-            ps.setString(2, ringImage);
-            ps.setInt(3, diamondID);
-            ps.setString(4, gender);
-            ps.setDouble(5, price);
-            ps.setInt(6, quantity);
-            ps.setInt(7, categoryID);
-            ps.setInt(8, collectionID);
-            ps.setInt(9, ringID);
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setString(1, ring.getRingName());
+            ps.setString(2, ring.getRingImage());
+            ps.setInt(3, ring.getDiamondID());
+            ps.setString(4, ring.getGender());
+            ps.setDouble(5, ring.getPrice());
+            ps.setInt(6, ring.getQuantity());
+            ps.setInt(7, ring.getCategoryID());
+            ps.setInt(8, ring.getCollectionID());
+            ps.setInt(9, ring.getRingID());
+            
             ps.executeUpdate();
-        } catch (Exception e) {
+            conn.close();
+        } catch (SQLException ex) {
+            System.out.println("Update Diamond error!" + ex.getMessage());
+            ex.printStackTrace();
         }
+        return false;
+    }
+
+    /*
+    Delete student 
+     */
+    public boolean delete(int id) {
+        String sql = "DELETE [Ring] WHERE ringID = ? ";
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, id);
+
+            ps.executeUpdate();
+            conn.close();
+            return true;
+        } catch (SQLException ex) {
+            System.out.println("Delete Diamond error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+
+        return false;
     }
 }

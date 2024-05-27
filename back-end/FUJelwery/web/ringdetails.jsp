@@ -39,7 +39,7 @@
         <table>
 
             <tr><td>Ring Name</td><td>${requestScope.ring.ringName}</td></tr>
-            <tr><td>Ring Image</td><td>${requestScope.ring.ringImage}</td></tr>
+            <tr><td>Ring Image</td><td><img src=${requestScope.ring.ringImage} width="300px" height="300px"></td></tr>
             <tr><td>Diamond ID</td><td>${requestScope.ring.diamondID}</td></tr>
             <tr><td>Gender</td><td>${requestScope.ring.gender}</td></tr>
             <tr><td>Price</td><td>${requestScope.ring.price}</td></tr>
@@ -48,7 +48,11 @@
             <tr><td>Collection</td><td>${requestScope.ring.collectionID}</td></tr>
             
             <form action="RingController" style="padding-top: 10px">
-            <input type=hidden name="id" value="${requestScope.ring.diamondID}">
+            <input type=hidden name="action" value="list">
+            <input type=submit value="Return" ></form>
+
+        <form action="RingController" style="padding-top: 10px">
+            <input type=hidden name="id" value="${requestScope.ring.ringid}">
             <input type=hidden name="action" value="edit">
             <input type=submit value="Edit" ></form>
         </table>

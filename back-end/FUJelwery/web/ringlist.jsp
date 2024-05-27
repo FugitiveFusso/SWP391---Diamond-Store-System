@@ -14,7 +14,7 @@
         <title>Ring Management</title>
     </head>
     <body>
-        <h1>Ring Details </h1>         
+        <h1>Ring List </h1>         
         <p> Login username: ${sessionScope.adminsession.username}</p>
         <%@ include file="/menu.jsp" %>
         <form action='' method=GET id="searchbox"> 
@@ -63,17 +63,17 @@
                 <td>
                     <a href="RingController?action=details&id=${ring.ringID}">   ${ring.ringID}</td>
                 <td>${ring.ringName}</td>
-                <td>${ring.ringImage}</td>
+                <td><img src=${requestScope.ring.ringImage} width="300px" height="300px"></td>
                 <td>${ring.diamondName}</td>
                 <td>${ring.gender}</td>
                 <td>${ring.price}</td>
-                <td>${diamond.quantity}</td>
-                <td>${diamond.categoryID}</td>
-                <td>${diamond.collectionID}</td>
+                <td>${ring.quantity}</td>
+                <td>${ring.categoryID}</td>
+                <td>${ring.collectionID}</td>
                 <td>
                     <form action="RingController" method="POST">
                         <input name="action" value="delete" type="hidden">
-                        <input name="id" value="${diamond.diamondID}" type="hidden">
+                        <input name="id" value="${ring.ringID}" type="hidden">
                         <input type="submit" value="Delete">
                     </form>
                 </td>
@@ -82,7 +82,12 @@
             <%
                 }
             %>    
-            
+            <tr><td colspan="6">
+                    <form action="RingController" method="POST">
+                        <input name="action" value="create" type="hidden">
+                        <input type="submit" value="Create">
+                    </form>
+                </td></tr>
         </table>
     </body>
 </html>

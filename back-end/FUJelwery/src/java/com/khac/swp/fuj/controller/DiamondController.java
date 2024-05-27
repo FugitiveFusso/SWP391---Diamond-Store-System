@@ -9,10 +9,15 @@ import com.khac.swp.fuj.diamond.DiamondDAO;
 import com.khac.swp.fuj.diamond.DiamondDTO;
 import com.khac.swp.fuj.users.UserDAO;
 import com.khac.swp.fuj.users.UserDTO;
+import com.khac.swp.fuj.utils.DBUtils;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -60,6 +65,131 @@ public class DiamondController extends HttpServlet {
 
                 request.getRequestDispatcher("/diamondlist.jsp").forward(request, response);
 
+            } else if (action.equals("details")) {//details
+
+                Integer id = null;
+                try {
+                    id = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+
+                DiamondDTO diamond = null;
+                if (id != null) {
+                    diamond = diamondDAO.load(id);
+                }
+
+                request.setAttribute("diamond", diamond);//object
+                RequestDispatcher rd = request.getRequestDispatcher("diamonddetails.jsp");
+                rd.forward(request, response);
+                
+            } else if (action.equals("edit")) {//edit
+                Integer id = null;
+                try {
+                    id = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+
+                DiamondDTO diamond = null;
+                if (id != null) {
+                    diamond = diamondDAO.load(id);
+                }
+
+                request.setAttribute("diamond", diamond);
+                request.setAttribute("nextaction", "update");
+                RequestDispatcher rd = request.getRequestDispatcher("diamondedit.jsp");
+                rd.forward(request, response);
+
+            } else if (action.equals("create")) {//create
+                DiamondDTO diamond = new DiamondDTO();
+                request.setAttribute("diamond", diamond);
+                request.setAttribute("nextaction", "insert");
+                RequestDispatcher rd = request.getRequestDispatcher("diamondedit.jsp");
+                rd.forward(request, response);
+
+            } else if (action.equals("update")) {//update
+                Integer diamondid = null;
+                try {
+                    diamondid = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+                String diamondName = request.getParameter("diamondName");
+                String diamondImage = request.getParameter("diamondImage");
+                String origin = request.getParameter("origin");
+                int caratWeight = Integer.parseInt(request.getParameter("caratWeight"));
+                String cut = request.getParameter("cut");
+                String color = request.getParameter("color");
+                String clarity = request.getParameter("clarity");
+
+                DiamondDTO diamond = null;
+                if (diamondid != null) {
+                    diamond = diamondDAO.load(diamondid);
+                }
+                diamond.setDiamondID(diamondid);
+                diamond.setDiamondName(diamondName);
+                diamond.setDiamondImage(diamondImage);
+                diamond.setOrigin(origin);
+                diamond.setCaratWeight(caratWeight);
+                diamond.setCut(cut);
+                diamond.setColor(color);
+                diamond.setClarity(clarity);
+
+                request.setAttribute("diamond", diamond);
+                RequestDispatcher rd = request.getRequestDispatcher("diamonddetails.jsp");
+                rd.forward(request, response);
+
+            } else if (action.equals("insert")) {//insert
+                try {
+                    Connection conn = DBUtils.getConnection();
+                    int diamondid = 0;
+                    String diamondName = request.getParameter("diamondName");
+                    String diamondImage = request.getParameter("diamondImage");
+                    String origin = request.getParameter("origin");
+                    int caratWeight = Integer.parseInt(request.getParameter("caratWeight"));
+                    String cut = request.getParameter("cut");
+                    String color = request.getParameter("color");
+                    String clarity = request.getParameter("clarity");
+
+                    PreparedStatement ps = conn.prepareStatement("select max(diamondID) from [Diamond]");
+                    ResultSet rs = ps.executeQuery();
+                    if (rs.next()) {
+                        diamondid = rs.getInt(1);
+                        diamondid++;
+                    }
+                    DiamondDTO diamond = new DiamondDTO();
+                    diamond.setDiamondID(diamondid);
+                    diamond.setDiamondName(diamondName);
+                    diamond.setDiamondImage(diamondImage);
+                    diamond.setOrigin(origin);
+                    diamond.setCaratWeight(caratWeight);
+                    diamond.setCut(cut);
+                    diamond.setColor(color);
+                    diamond.setClarity(clarity);
+                    request.setAttribute("diamond", diamond);
+                    RequestDispatcher rd = request.getRequestDispatcher("diamonddetails.jsp");
+                    rd.forward(request, response);
+                } catch (SQLException ex) {
+                    System.out.println("Insert diamond error!" + ex.getMessage());
+                    ex.printStackTrace();
+                }
+
+            } else if (action.equals("delete")) {//delete
+
+                Integer id = null;
+                try {
+                    id = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+
+                diamondDAO.delete(id);
+
+                List<DiamondDTO> list = diamondDAO.list(keyword, sortCol);
+                request.setAttribute("diamondlist", list);
+                RequestDispatcher rd = request.getRequestDispatcher("diamondlist.jsp");
+                rd.forward(request, response);
             }
             }
     }

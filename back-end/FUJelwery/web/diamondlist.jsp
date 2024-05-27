@@ -80,7 +80,12 @@
             <%
                 }
             %>    
-            
+            <tr><td colspan="6">
+                    <form action="DiamondController" method="POST">
+                        <input name="action" value="create" type="hidden">
+                        <input type="submit" value="Create">
+                    </form>
+                </td></tr>
         </table>
     </body>
 </html>
