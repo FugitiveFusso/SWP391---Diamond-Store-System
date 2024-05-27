@@ -18,10 +18,15 @@ INSERT INTO [Collection] VALUES
 (2, 'FA FOREVER')
 
 INSERT INTO [Voucher] VALUES
-(1,  'GRAND OPENING SALE', 'https://bluenile-blog.r2net.com/wp-content/uploads/Ring-Spacing-Hero.jpg','SALE MO CUA HANG FUJ, SAN SALE KHUYEN MAI 20% VAO TUAN DAU TIEN, BA CON OI MAI DO MAI DO!!!! THOI LUONG CO HAN!!!', '2BA', 20)
+(1, 'https://bluenile-blog.r2net.com/wp-content/uploads/Ring-Spacing-Hero.jpg', 'GRAND OPENING SALE', 'SALE MO CUA HANG FUJ, SAN SALE KHUYEN MAI 20% VAO TUAN DAU TIEN, BA CON OI MAI DO MAI DO!!!! THOI LUONG CO HAN!!!', '2BA', 20)
 
 INSERT INTO [Post] VALUES
-(1,'HELLO THERE!!','https://bluenile-blog.r2net.com/wp-content/uploads/Ring-Spacing-Hero.jpg', 'One of the most flexible, useful and crucial pieces of jewelry can look simple enough. A small band that’s no bigger than 2.5mm wide might not seem like an impactful piece of jewelry, but these rings are considered essential for many stacking styles.
-Thin rings, also known as ring spacers or spacer bands, are narrow and low-profile bands that are designed to fit perfectly in larger band stacks or sets. They are worn alongside at least two other rings. These thin rings can be some of the most important jewelry pieces when you’re wearing multiple rings together. ')
-INSERT INTO [Post] VALUES
-(2,'Welcome','https://img.freepik.com/free-vector/creative-welcome-team-banner-corporate-hiring_1017-43282.jpg', 'Hello! I hope this message finds you well. I am excited to connect with you and look forward to our conversation. Whether you have questions, need assistance, or just want to chat, feel free to reach out. It is always a pleasure to engage and share ideas. Wishing you a wonderful day ahead!')
+(1,'HELLO THERE!!','One of the most flexible, useful and crucial pieces of jewelry can look simple enough. A small band that’s no bigger than 2.5mm wide might not seem like an impactful piece of jewelry, but these rings are considered essential for many stacking styles.
+
+Thin rings, also known as ring spacers or spacer bands, are narrow and low-profile bands that are designed to fit perfectly in larger band stacks or sets. They are worn alongside at least two other rings. These thin rings can be some of the most important jewelry pieces when you’re wearing multiple rings together. ','https://bluenile-blog.r2net.com/wp-content/uploads/Ring-Spacing-Hero.jpg')
+
+INSERT INTO [Ring] VALUES
+(1,'18ct Rose Gold Diamond Solitaire Engagement Ring','https://www.berrysjewellers.co.uk/cdn/shop/products/1620389070-28905700.jpg?v=1684851863&width=2048',1,'M',3000,200,1,1)
+
+INSERT INTO [Diamond] VALUES
+(1,'0.36 Carat Round Cut Diamond','https://temple-and-grace.mo.cloudinary.net/mdopt/images/prod-large/diamonds/round-cut-diamond.jpg','Vietnam',36,'Round','White','S12')
