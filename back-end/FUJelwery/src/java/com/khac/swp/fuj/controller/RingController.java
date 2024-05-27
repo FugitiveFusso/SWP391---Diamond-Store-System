@@ -5,13 +5,10 @@
  */
 package com.khac.swp.fuj.controller;
 
-import com.khac.swp.fuj.diamond.DiamondDAO;
-import com.khac.swp.fuj.diamond.DiamondDTO;
-import com.khac.swp.fuj.users.UserDAO;
-import com.khac.swp.fuj.users.UserDTO;
+import com.khac.swp.fuj.ring.RingDAO;
+import com.khac.swp.fuj.ring.RingDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,8 +21,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Dell
  */
-@WebServlet(name = "DiamondController", urlPatterns = {"/DiamondController"})
-public class DiamondController extends HttpServlet {
+@WebServlet(name = "RingController", urlPatterns = {"/RingController"})
+public class RingController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -47,21 +44,21 @@ public class DiamondController extends HttpServlet {
             }
             String sortCol = request.getParameter("colSort");
 
-            DiamondDAO diamondDAO = new DiamondDAO();
+            RingDAO ringDAO = new RingDAO();
             HttpSession session = request.getSession(false);
             if (session == null || session.getAttribute("adminsession") == null) {
                 response.sendRedirect("adminlogin.jsp");
                 return;
             } else if (action == null || action.equals("list")) {//lists
 
-                DiamondDAO dao = new DiamondDAO();
-                List<DiamondDTO> list = dao.list(keyword, sortCol);
-                request.setAttribute("diamondlist", list);
+                RingDAO dao = new RingDAO();
+                List<RingDTO> list = dao.list(keyword, sortCol);
+                request.setAttribute("ringlist", list);
 
-                request.getRequestDispatcher("/diamondlist.jsp").forward(request, response);
+                request.getRequestDispatcher("/ringlist.jsp").forward(request, response);
 
             }
-            }
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

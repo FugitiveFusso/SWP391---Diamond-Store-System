@@ -21,51 +21,57 @@ public class DiamondDAO{
     Connection conn = DBUtils.getConnection();
     ResultSet rs = null;
     
-    public List<DiamondDTO> getAllDiamond () throws SQLException{
-        List<DiamondDTO> list = new ArrayList<>();
-        String query = "SELECT * FROM Diamond ";
-        try{
-            PreparedStatement ps = conn.prepareStatement(query);
-            rs = ps.executeQuery();
-            list.add(new DiamondDTO(rs.getInt("diamondID"),
-                                    rs.getString("diamondName"),
-                                    rs.getString("diamondImage"),
-                                    rs.getString("origin"),
-                                    rs.getInt("caratWeight"),
-                                    rs.getString("cut"),
-                                    rs.getString("color"),
-                                    rs.getString("clarity")));
-        } catch (Exception e) {
-            System.out.println(e);
-    }
+    public List<DiamondDTO> list(String keyword, String sortCol) {
+        List<DiamondDTO> list = new ArrayList<DiamondDTO>();
+        try {
+            Connection con = DBUtils.getConnection();
+            String sql = "SELECT * FROM [Diamond] ";
+            if (keyword != null && !keyword.isEmpty()) {
+                sql += " WHERE diamondName like ?";
+            }
+
+            if (sortCol != null && !sortCol.isEmpty()) {
+                sql += " ORDER BY " + sortCol + " ASC ";
+            }
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            if (keyword != null && !keyword.isEmpty()) {
+                stmt.setString(1, "%" + keyword + "%");
+
+            }
+            ResultSet rs = stmt.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+
+                    int diamondID = rs.getInt("userID");
+                    String diamondName = rs.getString("userName");
+                    String diamondImage = rs.getString("firstName");
+                    String origin = rs.getString("lastName");
+                    int caratWeight = Integer.parseInt(rs.getString("caratWeight"));
+                    String cut = rs.getString("address");
+                    String color = rs.getString("color");
+                    String clarity = rs.getString("clarity");
+
+                    DiamondDTO diamond = new DiamondDTO();
+                    diamond.setDiamondID(diamondID);
+                    diamond.setDiamondName(diamondName);
+                    diamond.setDiamondImage(diamondImage);
+                    diamond.setOrigin(origin);
+                    diamond.setCaratWeight(caratWeight);
+                    diamond.setCut(cut);
+                    diamond.setColor(color);
+                    diamond.setClarity(clarity);
+                    list.add(diamond);
+                }
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
         return list;
-    }
-    
-    public List<DiamondDTO> listDiamond (String diamondKeyword, String sortCol) throws SQLException{
-        List<DiamondDTO> list = new ArrayList<>();
-        String query = "SELECT * FROM Diamond WHERE ";
-        if(diamondKeyword != null && !diamondKeyword.isEmpty()){
-            query += "diamondName like ? ";
-        }
-        if (sortCol != null && !sortCol.isEmpty()) {
-            query += " ORDER BY " + sortCol + " ASC ";
-        }
-        
-        try{
-            PreparedStatement ps = conn.prepareStatement(query);
-            rs = ps.executeQuery();
-            list.add(new DiamondDTO(rs.getInt("diamondID"),
-                                    rs.getString("diamondName"),
-                                    rs.getString("diamondImage"),
-                                    rs.getString("origin"),
-                                    rs.getInt("caratWeight"),
-                                    rs.getString("cut"),
-                                    rs.getString("color"),
-                                    rs.getString("clarity")));
-        } catch (Exception e) {
-            System.out.println(e);
-    }
-        return list;  
     }
     
     public void insertDiamond (int id, String diamondName, String diamondImage, String origin, int caratWeight, String cut, String color, String clarity){

@@ -1,20 +1,20 @@
 <%-- 
-    Document   : diamondetails
-    Created on : May 25, 2024, 10:07:49 AM
+    Document   : ringlist
+    Created on : May 27, 2024, 10:27:21 AM
     Author     : Dell
 --%>
 
-<%@page import="com.khac.swp.fuj.diamond.DiamondDTO"%>
+<%@page import="com.khac.swp.fuj.ring.RingDTO"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Diamond Management Page</title>
+        <title>Ring Management</title>
     </head>
     <body>
-        <h1>Diamonds Details </h1>         
+        <h1>Ring Details </h1>         
         <p> Login username: ${sessionScope.adminsession.username}</p>
         <%@ include file="/menu.jsp" %>
         <form action='' method=GET id="searchbox"> 
@@ -44,32 +44,34 @@
         </style>
         <table>
             <tr>
-                <td>Diamond ID</td>
+                <td>Ring ID</td>
+                <td><a href=?colSort=ringName>Ring Name</td>
+                <td>Ring Image</td>
                 <td><a href=?colSort=diamondName>Diamond Name</a></td>
-                <td>Diamond Image</td>
-                <td>Origin</a></td>
-                <td><a href=?colSort=caratWeight>Carat Weight</a></td>
-                <td>Cut</td>
-                <td>Color</td>
-                <td>Clarity</td>
+                <td>Gender</td>
+                <td><a href=?colSort=price>Price</td>
+                <td><a href=?colSort=quantity>Quantity</td>
+                <td><a href=?colSort=categoryID>Category</td>
+                <td><a href=?colSort=collectionID>Collection</td>                
             </tr>
             <%
-                List<DiamondDTO> list = (List<DiamondDTO>) request.getAttribute("diamondlist");
-                for (DiamondDTO diamond : list) {
-                    pageContext.setAttribute("diamond", diamond);
+                List<RingDTO> list = (List<RingDTO>) request.getAttribute("ringlist");
+                for (RingDTO ring : list) {
+                    pageContext.setAttribute("ring", ring);
             %>
             <tr>
                 <td>
-                    <a href="DiamondController?action=details&id=${diamond.diamondID}">   ${diamond.diamondID}</td>
-                <td>${diamond.diamondName}</td>
-                <td>${diamond.diamondImage}</td>
-                <td>${diamond.origin}</td>
-                <td>${diamond.caratWeight}</td>
-                <td>${diamond.cut}</td>
-                <td>${diamond.color}</td>
-                <td>${diamond.clarity}</td>
+                    <a href="RingController?action=details&id=${ring.ringID}">   ${ring.ringID}</td>
+                <td>${ring.ringName}</td>
+                <td>${ring.ringImage}</td>
+                <td>${ring.diamondName}</td>
+                <td>${ring.gender}</td>
+                <td>${ring.price}</td>
+                <td>${diamond.quantity}</td>
+                <td>${diamond.categoryID}</td>
+                <td>${diamond.collectionID}</td>
                 <td>
-                    <form action="DiamondController" method="POST">
+                    <form action="RingController" method="POST">
                         <input name="action" value="delete" type="hidden">
                         <input name="id" value="${diamond.diamondID}" type="hidden">
                         <input type="submit" value="Delete">

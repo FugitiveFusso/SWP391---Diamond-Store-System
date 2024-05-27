@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package com.khac.swp.fuj.ring;
-
+import com.khac.swp.fuj.diamond.DiamondDTO;
 import com.khac.swp.fuj.utils.DBUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,46 +21,72 @@ public class RingDAO {
     Connection conn = DBUtils.getConnection();
     ResultSet rs = null;
     
-    public List<RingDTO> listRing (String ringKeyword, String sortCol) throws SQLException{
-        List<RingDTO> list = new ArrayList<>();
-        
-        String query = "SELECT * FROM Ring r FULL JOIN Diamond d ON r.diamondID = d.diamondID WHERE ";
-        if(ringKeyword != null && !ringKeyword.isEmpty()){
-            query += " ringName like ? ";
-        }
-        if (sortCol != null && !sortCol.isEmpty()) {
-            query += " ORDER BY " + sortCol + " ASC ";
-        }
-        
-        PreparedStatement ps = conn.prepareStatement(query);
-        
-        if (ringKeyword != null && !ringKeyword.isEmpty()) {
-                ps.setString(1, "%" + ringKeyword + "%");
+    public List<RingDTO> list(String keyword, String sortCol) {
+        List<RingDTO> list = new ArrayList<RingDTO>();
+        try {
+            Connection con = DBUtils.getConnection();
+            String sql = "SELECT * FROM [Ring] r FULL JOIN [Diamond] d ON d.diamondID = r.diamondID ";
+            if (keyword != null && !keyword.isEmpty()) {
+                sql += " WHERE ringName like ?";
             }
-        
-        try{
-            
-            rs = ps.executeQuery();
-            list.add(new RingDTO(rs.getInt("ringID"),
-                                    rs.getString("ringName"),
-                                    rs.getString("ringImage"),
-                                    rs.getInt("diamondID"),
-                                    rs.getString("gender"),
-                                    rs.getDouble("price"),
-                                    rs.getInt("quantity"),
-                                    rs.getInt("categoryID"),
-                                    rs.getInt("collectionID"),
-                                    rs.getString("diamondName"),
-                                    rs.getString("diamondImage"),
-                                    rs.getString("origin"),
-                                    rs.getInt("caratWeight"),
-                                    rs.getString("cut"),
-                                    rs.getString("color"),
-                                    rs.getString("clarity")));
-        } catch (Exception e) {
-            System.out.println(e);
-    }
-        return list;  
+
+            if (sortCol != null && !sortCol.isEmpty()) {
+                sql += " ORDER BY " + sortCol + " ASC ";
+            }
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            if (keyword != null && !keyword.isEmpty()) {
+                stmt.setString(1, "%" + keyword + "%");
+
+            }
+            ResultSet rs = stmt.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    
+                    int ringID = rs.getInt("ringID");
+                    String ringName = rs.getString("ringName");
+                    String ringImage = rs.getString("ringImage");
+                    int diamondID = rs.getInt("userID");
+                    String gender = rs.getString("gender");
+                    double price = rs.getDouble("price");
+                    int quantity = rs.getInt("quantity");
+                    int categoryID = rs.getInt("categoryID");
+                    int collectionID = rs.getInt("collectionID");
+                    String diamondName = rs.getString("userName");
+                    String diamondImage = rs.getString("firstName");
+                    String origin = rs.getString("lastName");
+                    int caratWeight = Integer.parseInt(rs.getString("caratWeight"));
+                    String cut = rs.getString("address");
+                    String color = rs.getString("color");
+                    String clarity = rs.getString("clarity");
+
+                    RingDTO ring = new RingDTO();
+                    ring.setRingID(ringID);
+                    ring.setDiamondName(ringName);
+                    ring.setDiamondID(diamondID);
+                    ring.setGender(gender);
+                    ring.setPrice(price);
+                    ring.setQuantity(quantity);
+                    ring.setCategoryID(categoryID);
+                    ring.setCollectionID(collectionID);
+                    ring.setDiamondName(diamondName);
+                    ring.setDiamondImage(diamondImage);
+                    ring.setOrigin(origin);
+                    ring.setCaratWeight(caratWeight);
+                    ring.setCut(cut);
+                    ring.setColor(color);
+                    ring.setClarity(clarity);
+                    list.add(ring);
+                }
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return list;
     }
     
     public void insertDiamond (int ringID, String ringName, String ringImage, int diamondID, String gender, double price, int quantity, int categoryID, int collectionID){
