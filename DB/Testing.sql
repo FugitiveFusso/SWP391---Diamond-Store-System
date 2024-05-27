@@ -25,8 +25,9 @@ INSERT INTO [Post] VALUES
 
 Thin rings, also known as ring spacers or spacer bands, are narrow and low-profile bands that are designed to fit perfectly in larger band stacks or sets. They are worn alongside at least two other rings. These thin rings can be some of the most important jewelry pieces when you’re wearing multiple rings together. ','https://bluenile-blog.r2net.com/wp-content/uploads/Ring-Spacing-Hero.jpg')
 
+INSERT INTO [Diamond] VALUES
+(1,'0.36 Carat Round Cut Diamond','https://temple-and-grace.mo.cloudinary.net/mdopt/images/prod-large/diamonds/round-cut-diamond.jpg','Vietnam',36,'Round','White','S12')
+
 INSERT INTO [Ring] VALUES
 (1,'18ct Rose Gold Diamond Solitaire Engagement Ring','https://www.berrysjewellers.co.uk/cdn/shop/products/1620389070-28905700.jpg?v=1684851863&width=2048',1,'M',3000,200,1,1)
 
-INSERT INTO [Diamond] VALUES
-(1,'0.36 Carat Round Cut Diamond','https://temple-and-grace.mo.cloudinary.net/mdopt/images/prod-large/diamonds/round-cut-diamond.jpg','Vietnam',36,'Round','White','S12')
