@@ -21,9 +21,8 @@ INSERT INTO [Voucher] VALUES
 (1, 'https://bluenile-blog.r2net.com/wp-content/uploads/Ring-Spacing-Hero.jpg', 'GRAND OPENING SALE', 'SALE MO CUA HANG FUJ, SAN SALE KHUYEN MAI 20% VAO TUAN DAU TIEN, BA CON OI MAI DO MAI DO!!!! THOI LUONG CO HAN!!!', '2BA', 20)
 
 INSERT INTO [Post] VALUES
-(1,'HELLO THERE!!','One of the most flexible, useful and crucial pieces of jewelry can look simple enough. A small band that’s no bigger than 2.5mm wide might not seem like an impactful piece of jewelry, but these rings are considered essential for many stacking styles.
-
-Thin rings, also known as ring spacers or spacer bands, are narrow and low-profile bands that are designed to fit perfectly in larger band stacks or sets. They are worn alongside at least two other rings. These thin rings can be some of the most important jewelry pieces when you’re wearing multiple rings together. ','https://bluenile-blog.r2net.com/wp-content/uploads/Ring-Spacing-Hero.jpg')
+(1,'HELLO THERE!!','https://bluenile-blog.r2net.com/wp-content/uploads/Ring-Spacing-Hero.jpg', 'One of the most flexible, useful and crucial pieces of jewelry can look simple enough. A small band that’s no bigger than 2.5mm wide might not seem like an impactful piece of jewelry, but these rings are considered essential for many stacking styles.
+Thin rings, also known as ring spacers or spacer bands, are narrow and low-profile bands that are designed to fit perfectly in larger band stacks or sets. They are worn alongside at least two other rings. These thin rings can be some of the most important jewelry pieces when you’re wearing multiple rings together. ')
 
 INSERT INTO [Diamond] VALUES
 (1,'0.36 Carat Round Cut Diamond','https://temple-and-grace.mo.cloudinary.net/mdopt/images/prod-large/diamonds/round-cut-diamond.jpg','Vietnam',36,'Round','White','S12')
