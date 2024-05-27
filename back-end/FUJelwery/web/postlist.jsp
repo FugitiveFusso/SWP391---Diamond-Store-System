@@ -46,7 +46,7 @@
                 <td>Post ID</td>
                 <td><a href=?colSort=postName>Post Name</a></td>
                 <td>Post Image</td>
-                <td>Descrip tion</td>
+                <td>Description</td>
                 <td>Delete</td>
             </tr>
             <%
