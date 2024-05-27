@@ -44,7 +44,7 @@ CREATE TABLE [User](
 
 CREATE TABLE [Ring](
 	ringID int NOT NULL primary key,
-	ringName varchar NOT NULL,
+	ringName varchar(255) NOT NULL,
 	ringImage varchar(8000) NOT NULL,
 	diamondID int NOT NULL foreign key REFERENCES [Diamond](diamondID),
 	gender varchar NOT NULL,
