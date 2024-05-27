@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Gantari:ital,wght@0,100..900;1,100..900&family=Syne:wght@400..800&display=swap');
+/*
+body{
+    background-color: #cccccc;
+
+}*/
+
+.list-container{
+    margin: 50px 50px;
+
+}
+
+.smaller-container{
+    background-color: #ccc;
+    width: auto;
+}
+
+.list{
+    width: auto;
+    height: auto;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-top: 20px;
+    padding: 20px 20px;
+}
+
+.list-title{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: 50px;
+    /*    font-family: 'Inter';*/
+    font-weight: bold;
+    color: #151542;
+}
+
+#searchbox{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10%;
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+
+#field{
+    width: 300px;
+}
+
+body{
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #ccc;
+    margin: 0;
+}
+
+table{
+    margin: 10px auto;
+    width: 100%;
+    justify-content: center;
+}
+table, tr{
+    border-collapse: collapse;
+    border: 1px solid black;
+    text-align: center;
+}
+tr,td,th{
+    padding: 20px 10px;
+}
+
+th{
+    background-color: #ccc;
+}
+
+.input input{
+    padding: 8px 20px;
+    background-color: #151542;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+}
+
+#searchbox input{
+    padding: 3px 0;
+    margin: auto 5px;
+}
