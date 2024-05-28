@@ -193,7 +193,7 @@ public class RingDAO {
             ps.executeUpdate();
             conn.close();
         } catch (SQLException ex) {
-            System.out.println("Update Diamond error!" + ex.getMessage());
+            System.out.println("Update Ring error!" + ex.getMessage());
             ex.printStackTrace();
         }
         return false;

@@ -83,7 +83,7 @@ public class RingController extends HttpServlet {
             } else if (action.equals("edit")) {//edit
                 Integer id = null;
                 try {
-                    id = Integer.parseInt(request.getParameter("id"));
+                    id = Integer.parseInt(request.getParameter("ID"));
                 } catch (NumberFormatException ex) {
                     log("Parameter id has wrong format.");
                 }

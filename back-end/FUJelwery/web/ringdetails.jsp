@@ -53,7 +53,7 @@
             <input type=submit value="Return" ></form>
 
         <form action="RingController" style="padding-top: 10px">
-            <input type=hidden name="id" value="${requestScope.ring.ringid}">
+            <input type=hidden name="id" value="${requestScope.ring.ringID}">
             <input type=hidden name="action" value="edit">
             <input type=submit value="Edit" ></form>
         

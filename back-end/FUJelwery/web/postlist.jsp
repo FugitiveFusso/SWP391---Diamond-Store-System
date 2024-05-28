@@ -57,7 +57,7 @@
             <tr>
                 <td><a href="PostController?action=details&id=${post.id}">${post.id}</td>
                 <td>${post.name}</td>
-                <td> <img src=${post.image} width="300px" height="300px">  </td>
+                <td> <img src=${post.image} width="300px" height="300px"></td>
                 <td>${post.description}</td>
 
                 <td>
