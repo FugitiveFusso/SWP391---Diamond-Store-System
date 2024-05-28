@@ -1,0 +1,137 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url('images/jewelry-diamond-rings-necklaces-show-600nw-753671818.webp') no-repeat;
+    background-size: 100%;
+    background-position: center;
+}
+
+.wrapper{
+    width: 420px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 2);
+    backdrop-filter: blur(100px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    border-radius: 10px;
+    color: #ffffff;
+    padding: 30px 40px;
+}
+
+.wrapper h1{
+    font-size: 36px;
+    text-align: center;
+}
+
+.wrapper .input-box{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+}
+
+.input-box input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid rgba(255, 255, 255, 2);
+    border-radius: 40px;
+    font-size: 16px;
+    color: #ffffff;
+    padding: 20px 45px 20px 20px;
+    transition: 0.5s;
+}
+
+.input-box .placeholder{
+    position: absolute;
+    left: 0;
+    padding: 16px;
+    pointer-events: none;
+    transition: 0.5s;
+}
+
+.input-box input:valid ~ .placeholder,
+.input-box input:focus ~ .placeholder{
+    color: #ffffff;
+    transform: translateX(10px) translateY(-7px);
+    font-size: 0.9em;
+    padding: 0 10px;
+    background: #946a37;
+    border: 1px solid #ffffff;
+    border-radius: 10px;
+}x
+
+.input-box input:valid,
+.input-box input:focus{
+    border: 1px solid #ffffff;
+}
+
+.input-box:nth-child(2) input:valid ~ .placeholder,
+.input-box:nth-child(2) input:focus ~ .placeholder{
+    background: #946a37;
+    border-radius: 10px;
+    border: 1px solid #ffffff;
+}
+
+.input-box i{
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+}
+
+#hide2{
+    cursor: pointer;
+}
+
+#hide1{
+    display: none;
+    cursor: pointer;
+}
+
+.wrapper .btn{
+    width: 100%;
+    height: 45px;
+    background: #151542;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+#hide1{
+    display: none;
+}
+
+.dropdown{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    width: 300px;
+    margin-left: 15px;
+}
+
+select{
+    height: 30px;
+    border-radius: 20px;  
+    background-color: #7F6647;
+    color: #ffffff;  
+    border: 2px solid #ffffff;
+    padding-left: 10px;
+}
