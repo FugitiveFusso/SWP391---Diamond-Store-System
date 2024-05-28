@@ -49,10 +49,11 @@ public class DiamondDAO {
                     String diamondName = rs.getString("diamondName");
                     String diamondImage = rs.getString("diamondImage");
                     String origin = rs.getString("origin");
-                    int caratWeight = Integer.parseInt(rs.getString("caratWeight"));
+                    double caratWeight = rs.getDouble("caratWeight");
                     String cut = rs.getString("cut");
                     String color = rs.getString("color");
                     String clarity = rs.getString("clarity");
+                    int certificateID = rs.getInt("certificateID");
 
                     DiamondDTO diamond = new DiamondDTO();
                     diamond.setDiamondID(diamondID);
@@ -63,6 +64,7 @@ public class DiamondDAO {
                     diamond.setCut(cut);
                     diamond.setColor(color);
                     diamond.setClarity(clarity);
+                    diamond.setCertificateID(certificateID);
                     list.add(diamond);
                 }
             }
@@ -77,7 +79,7 @@ public class DiamondDAO {
 
     public DiamondDTO load(int diamondID) {
 
-        String sql = "select diamondID, diamondName, diamondImage, origin, caratWeight, cut, color, clarity from Diamond where diamondID = ?";
+        String sql = "select diamondID, diamondName, diamondImage, origin, caratWeight, cut, color, clarity, certificateID from Diamond where diamondID = ?";
 
         try {
 
@@ -92,10 +94,11 @@ public class DiamondDAO {
                 String diamondName = rs.getString("diamondName");
                 String diamondImage = rs.getString("diamondImage");
                 String origin = rs.getString("origin");
-                int caratWeight = Integer.parseInt(rs.getString("caratWeight"));
+                double caratWeight = rs.getLong("caratWeight");
                 String cut = rs.getString("cut");
                 String color = rs.getString("color");
                 String clarity = rs.getString("clarity");
+                int certificateID = rs.getInt("certificateID");
 
                 DiamondDTO diamond = new DiamondDTO();
                 diamond.setDiamondID(ID);
@@ -106,6 +109,7 @@ public class DiamondDAO {
                 diamond.setCut(cut);
                 diamond.setColor(color);
                 diamond.setClarity(clarity);
+                diamond.setCertificateID(certificateID);
                 return diamond;
             }
         } catch (SQLException ex) {
@@ -116,7 +120,7 @@ public class DiamondDAO {
     }
 
     public Integer insert(DiamondDTO diamond) {
-        String sql = "INSERT INTO [Diamond] (diamondID, diamondName, diamondImage, origin, caratWeight, cut, color, clarity) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO [Diamond] (diamondID, diamondName, diamondImage, origin, caratWeight, cut, color, clarity, certificateID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -126,23 +130,24 @@ public class DiamondDAO {
             ps.setString(2, diamond.getDiamondName());
             ps.setString(3, diamond.getDiamondImage());
             ps.setString(4, diamond.getOrigin());
-            ps.setInt(5, diamond.getCaratWeight());
+            ps.setDouble(5, diamond.getCaratWeight());
             ps.setString(6, diamond.getCut());
             ps.setString(7, diamond.getColor());
             ps.setString(8, diamond.getClarity());
+            ps.setInt(9, diamond.getCertificateID());
 
             ps.executeUpdate();
             conn.close();
             return diamond.getDiamondID();
         } catch (SQLException ex) {
-            System.out.println("Insert Post error!" + ex.getMessage());
+            System.out.println("Insert Diamond error!" + ex.getMessage());
             ex.printStackTrace();
         }
         return null;
     }
 
     public boolean update(DiamondDTO diamond) {
-        String sql = "UPDATE [Diamond] SET diamondName = ?, diamondImage = ?, origin = ?, caratWeight = ?, cut = ?, color = ?, clarity = ? WHERE diamondID = ? ";
+        String sql = "UPDATE [Diamond] SET diamondName = ?, diamondImage = ?, origin = ?, caratWeight = ?, cut = ?, color = ?, clarity = ?, certificateID = ? WHERE diamondID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -151,10 +156,11 @@ public class DiamondDAO {
             ps.setString(1, diamond.getDiamondName());
             ps.setString(2, diamond.getDiamondImage());
             ps.setString(3, diamond.getOrigin());
-            ps.setInt(4, diamond.getCaratWeight());
+            ps.setDouble(4, diamond.getCaratWeight());
             ps.setString(5, diamond.getCut());
             ps.setString(6, diamond.getColor());
             ps.setString(7, diamond.getClarity());
+            ps.setInt(8, diamond.getCertificateID());
             ps.setInt(9, diamond.getDiamondID());
 
             ps.executeUpdate();
@@ -187,5 +193,12 @@ public class DiamondDAO {
         }
 
         return false;
+    }
+    public static void main(String[] args) {
+        DiamondDAO dao = new DiamondDAO();
+        List<DiamondDTO> list = dao.list("", "");
+        for (DiamondDTO diamondDTO : list) {
+            System.out.println(diamondDTO);
+        }
     }
 }

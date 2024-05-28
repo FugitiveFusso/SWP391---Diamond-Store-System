@@ -122,6 +122,7 @@ public class DiamondController extends HttpServlet {
                 String cut = request.getParameter("cut");
                 String color = request.getParameter("color");
                 String clarity = request.getParameter("clarity");
+                int certificateID = Integer.parseInt(request.getParameter("certificateID"));
 
                 DiamondDTO diamond = null;
                 if (diamondid != null) {
@@ -135,6 +136,7 @@ public class DiamondController extends HttpServlet {
                 diamond.setCut(cut);
                 diamond.setColor(color);
                 diamond.setClarity(clarity);
+                diamond.setCertificateID(certificateID);
 
                 request.setAttribute("diamond", diamond);
                 RequestDispatcher rd = request.getRequestDispatcher("diamonddetails.jsp");
@@ -151,6 +153,7 @@ public class DiamondController extends HttpServlet {
                     String cut = request.getParameter("cut");
                     String color = request.getParameter("color");
                     String clarity = request.getParameter("clarity");
+                    int certificateID = Integer.parseInt(request.getParameter("certificateID"));
 
                     PreparedStatement ps = conn.prepareStatement("select max(diamondID) from [Diamond]");
                     ResultSet rs = ps.executeQuery();
@@ -167,6 +170,7 @@ public class DiamondController extends HttpServlet {
                     diamond.setCut(cut);
                     diamond.setColor(color);
                     diamond.setClarity(clarity);
+                    diamond.setCertificateID(certificateID);
                     request.setAttribute("diamond", diamond);
                     diamondDAO.insert(diamond);
                     

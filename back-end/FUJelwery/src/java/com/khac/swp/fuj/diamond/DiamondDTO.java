@@ -14,24 +14,11 @@ public class DiamondDTO {
     private String diamondName;
     private String diamondImage;
     private String origin;
-    private int caratWeight;
+    private double caratWeight;
     private String cut;
     private String color;
     private String clarity;
-
-    public DiamondDTO() {
-    }
-
-    public DiamondDTO(int diamondID, String diamondName, String diamondImage, String origin, int caratWeight, String cut, String color, String clarity) {
-        this.diamondID = diamondID;
-        this.diamondName = diamondName;
-        this.diamondImage = diamondImage;
-        this.origin = origin;
-        this.caratWeight = caratWeight;
-        this.cut = cut;
-        this.color = color;
-        this.clarity = clarity;
-    }
+    private int certificateID;
 
     public int getDiamondID() {
         return diamondID;
@@ -65,11 +52,11 @@ public class DiamondDTO {
         this.origin = origin;
     }
 
-    public int getCaratWeight() {
+    public double getCaratWeight() {
         return caratWeight;
     }
 
-    public void setCaratWeight(int caratWeight) {
+    public void setCaratWeight(double caratWeight) {
         this.caratWeight = caratWeight;
     }
 
@@ -97,9 +84,14 @@ public class DiamondDTO {
         this.clarity = clarity;
     }
 
-    @Override
-    public String toString() {
-        return "DiamondDTO{" + "diamondID=" + diamondID + ", diamondName=" + diamondName + ", diamondImage=" + diamondImage + ", origin=" + origin + ", caratWeight=" + caratWeight + ", cut=" + cut + ", color=" + color + ", clarity=" + clarity + '}';
+    public int getCertificateID() {
+        return certificateID;
     }
+
+    public void setCertificateID(int certificateID) {
+        this.certificateID = certificateID;
+    }
+
+    
     
 }

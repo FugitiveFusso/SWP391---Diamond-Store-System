@@ -49,6 +49,7 @@
             <tr><td>Cut</td><td>${requestScope.diamond.cut}</td></tr>
             <tr><td>Color</td><td>${requestScope.diamond.color}</td></tr>
             <tr><td>Clarity</td><td>${requestScope.diamond.clarity}</td></tr>
+            <tr><td>Certificate</td><td>${requestScope.diamond.certificateID}</td></tr>
 
         </table>
             
