@@ -174,7 +174,7 @@ public class RingDAO {
     }
 
     public boolean update(RingDTO ring) {
-        String sql = "UPDATE [Ring] SET ringName = ?, ringImage = ?, diamondID = ?, gender = ?, price = ?, quantity = ?, categoryID = ?, collectionID = ? WHERE diamondID = ? ";
+        String sql = "UPDATE [Ring] SET ringName = ?, ringImage = ?, diamondID = ?, gender = ?, price = ?, quantity = ?, categoryID = ?, collectionID = ? WHERE ringID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();
