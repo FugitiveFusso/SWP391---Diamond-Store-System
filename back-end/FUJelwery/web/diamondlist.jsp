@@ -47,7 +47,7 @@
                 <td>Diamond ID</td>
                 <td><a href=?colSort=diamondName>Diamond Name</a></td>
                 <td>Diamond Image</td>
-                <td>Origin</a></td>
+                <td>Origin</td>
                 <td><a href=?colSort=caratWeight>Carat Weight</a></td>
                 <td>Cut</td>
                 <td>Color</td>
@@ -62,7 +62,7 @@
                 <td>
                     <a href="DiamondController?action=details&id=${diamond.diamondID}">   ${diamond.diamondID}</td>
                 <td>${diamond.diamondName}</td>
-                <td><img src=${diamond.diamondImage} width="300px" height="300px"> </td>
+                <td><img src=${diamond.diamondImage} width="300px" height="300px"></td>
                 <td>${diamond.origin}</td>
                 <td>${diamond.caratWeight}</td>
                 <td>${diamond.cut}</td>
