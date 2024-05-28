@@ -8,22 +8,29 @@ CREATE TABLE [Role](
 	roleName varchar(255) NOT NULL
 );
 
+CREATE TABLE [Certificate](
+	certificateID int NOT NULL primary key,
+	certificateImage varchar(8000),
+	[description] varchar(8000)
+);
+
 CREATE TABLE [Diamond](
 	diamondID int NOT NULL primary key,
 	diamondName varchar(255) NOT NULL,
 	diamondImage varchar(8000) NOT NULL,
 	origin varchar(255) NOT NULL,
-	caratWeight int NOT NULL,
+	caratWeight float NOT NULL,
 	cut varchar(255) NOT NULL,
 	color varchar(255) NOT NULL,
-	clarity varchar(255) NOT NULL
+	clarity varchar(255) NOT NULL,
+	certificateID int foreign key REFERENCES [Certificate](certificateID)
 );
 
 CREATE TABLE [Collection](
 	collectionID int NOT NULL primary key,
 	collectionName varchar(255) NOT NULL,
 	collectionImage varchar(8000) NOT NULL,
-	[description] varchar(8000) NOT NULL
+	[description] varchar(8000)
 );
 
 CREATE TABLE [Category](
@@ -51,22 +58,16 @@ CREATE TABLE [Ring](
 	diamondID int NOT NULL foreign key REFERENCES [Diamond](diamondID),
 	gender varchar NOT NULL,
 	price float NOT NULL,
-	quantity int NOT NULL,
 	collectionID int NOT NULL foreign key REFERENCES [Collection](collectionID),
 	categoryID int NOT NULL foreign key REFERENCES [Category](categoryID)
 );
 
-CREATE TABLE [Certificate](
-	certificateID int NOT NULL primary key,
-	certificateDescription varchar(8000),
-	diamondID int NOT NULL foreign key REFERENCES [Diamond](diamondID)
-);
 
 CREATE TABLE [Voucher](
 	voucherID int NOT NULL primary key,
 	voucherName varchar(255) NOT NULL,
 	voucherImage varchar(8000) NOT NULL,
-	[description] varchar(max) NOT NULL,
+	[description] varchar(8000),
 	coupon varchar(255) NOT NULL,
 	percentage int NOT NULL
 );
@@ -87,6 +88,7 @@ CREATE TABLE [Order](
 );
 
 CREATE TABLE [OrderDetails](
+	orderDetailsID int primary key NOT NULL, 
 	orderID int NOT NULL foreign key REFERENCES [Order](orderID),
 	ringID int NOT NULL foreign key REFERENCES [Ring](ringID),
 	diamondID int NOT NULL foreign key REFERENCES [Diamond](diamondID),
@@ -103,6 +105,7 @@ CREATE TABLE [ProcessOrder](
 CREATE TABLE [Warranty](
 	warrantyID int NOT NULL primary key,
 	warrantyName varchar(255),
+	warrantyImage varchar(8000),
 	warrantyMonth int NOT NULL
 );
 
