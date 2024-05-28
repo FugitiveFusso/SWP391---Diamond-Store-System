@@ -63,7 +63,7 @@
                 <td>
                     <a href="RingController?action=details&id=${ring.ringID}">   ${ring.ringID}</td>
                 <td>${ring.ringName}</td>
-                <td><img src=${requestScope.ring.ringImage} width="300px" height="300px"></td>
+                <td><img src=${ring.ringImage} width="300px" height="300px"></td>
                 <td>${ring.diamondName}</td>
                 <td>${ring.gender}</td>
                 <td>${ring.price}</td>
