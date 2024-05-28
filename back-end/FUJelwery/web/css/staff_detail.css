@@ -1,0 +1,25 @@
+/*#searchbox{
+    margin-top: 5px;
+}
+body{
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+table{
+    margin-top: 10px;
+
+}
+table, tr, td{
+    border-collapse: collapse;
+    width: 400px;
+    border: 2px solid black;
+    text-align: center;
+}
+tr,td{
+    padding: 6px 10px;
+}*/
+
+.container{
+    background: #ccc;
+    margin: 0 10%;
+}

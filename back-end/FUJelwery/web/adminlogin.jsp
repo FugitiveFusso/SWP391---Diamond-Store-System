@@ -46,7 +46,7 @@
                                 </div>
                                 <form action="./adminlogin" name="" method="POST" class="signin-form">
                                     <div class="form-group mt-3">
-                                        <input name="user" type="text" class="form-control" required>
+                                        <input name="user" type="text" class="form-control" placeholder=""required>
                                         <label class="form-control-placeholder" for="username">Username</label>
                                     </div>
                                     <div class="form-group">
