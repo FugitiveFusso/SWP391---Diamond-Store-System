@@ -80,6 +80,7 @@ public class RingController extends HttpServlet {
                 request.setAttribute("ring", ring);//object
                 RequestDispatcher rd = request.getRequestDispatcher("ringdetails.jsp");
                 rd.forward(request, response);
+                
             } else if (action.equals("edit")) {//edit
                 Integer id = null;
                 try {

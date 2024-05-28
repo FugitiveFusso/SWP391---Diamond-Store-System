@@ -27,7 +27,7 @@ public class RingDAO {
             Connection con = DBUtils.getConnection();
             String sql = "SELECT * FROM [Ring] r FULL JOIN [Diamond] d ON d.diamondID = r.diamondID ";
             if (keyword != null && !keyword.isEmpty()) {
-                sql += " WHERE ringName like ?";
+                sql += " WHERE ringName like ? ";
             }
 
             if (sortCol != null && !sortCol.isEmpty()) {
@@ -92,7 +92,7 @@ public class RingDAO {
     
     public RingDTO load(int ringID) {
 
-        String sql = "SELECT * FROM [Ring] r FULL JOIN [Diamond] d ON d.diamondID = r.diamondID WHERE r.ringID = ?";
+        String sql = "SELECT r.ringID, r.ringName, r.ringImage, r.diamondID, r.gender, r.price, r.quantity, r.categoryID, r.collectionID, d.diamondName, d.diamondImage, d.origin, d.caratWeight, d.cut, d.color, d.clarity FROM [Ring] r FULL JOIN [Diamond] d ON d.diamondID = r.diamondID WHERE r.ringID = ? ";
 
         try {
 
@@ -115,7 +115,7 @@ public class RingDAO {
                     String diamondName = rs.getString("diamondName");
                     String diamondImage = rs.getString("diamondImage");
                     String origin = rs.getString("origin");
-                    int caratWeight = Integer.parseInt(rs.getString("caratWeight"));
+                    int caratWeight = rs.getInt("caratWeight");
                     String cut = rs.getString("cut");
                     String color = rs.getString("color");
                     String clarity = rs.getString("clarity");
