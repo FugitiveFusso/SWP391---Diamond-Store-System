@@ -55,7 +55,7 @@ body{
 .input-box .placeholder{
     position: absolute;
     left: 0;
-    padding: 16px;
+    padding: 17px;
     pointer-events: none;
     transition: 0.5s;
 }
@@ -69,7 +69,7 @@ body{
     background: #946a37;
     border: 1px solid #ffffff;
     border-radius: 10px;
-}x
+}
 
 .input-box input:valid,
 .input-box input:focus{
@@ -151,3 +151,34 @@ select{
 .register-link p a:hover{
     text-decoration: underline;
 }
+
+
+.input-box .placeholder2{
+    position: absolute;
+    left: 0;
+    padding: 13px;
+    pointer-events: none;
+    transition: 0.5s;
+}
+
+.input-box input:valid ~ .placeholder2,
+.input-box input:focus ~ .placeholder2{
+    color: #ffffff;
+    transform: translateX(10px) translateY(-10px);
+    font-size: 0.9em;
+    padding: 0 10px;
+    background: #946a37;
+    border: 1px solid #ffffff;
+    border-radius: 10px;
+}
+
+/*.wrapper-signup{
+    width: 600px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 2);
+    backdrop-filter: blur(100px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    border-radius: 10px;
+    color: #ffffff;
+    padding: 30px 40px;
+}*/
