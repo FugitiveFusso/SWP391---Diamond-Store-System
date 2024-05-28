@@ -12,6 +12,7 @@
         <title>Ring Management Page</title>
     </head>
      <body>
+         <jsp:include page="/menu.jsp" flush="true" />
         <h1>Ring Details </h1>         
         <p> Login username: ${sessionScope.adminsession.username}</p>
         
