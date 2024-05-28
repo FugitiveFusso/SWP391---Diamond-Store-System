@@ -14,8 +14,8 @@ INSERT INTO [Category] VALUES
 (2, '14K Gold')
 
 INSERT INTO [Collection] VALUES 
-(1, 'EST. 2020'),
-(2, 'FA FOREVER')
+(1, 'EST. 2020','https://www.uniqlo.com/catalog-2021ss/vn/img/hero_sp.jpg','New additions'),
+(2, 'FA FOREVER','https://www.uniqlo.com/jp/ja/contents/collaboration/uniqlo-u/24ss/common/imgs/lookbookItems/lookbook-2.jpg','Another new additions')
 
 INSERT INTO [Voucher] VALUES
 (1, 'https://bluenile-blog.r2net.com/wp-content/uploads/Ring-Spacing-Hero.jpg', 'GRAND OPENING SALE', 'SALE MO CUA HANG FUJ, SAN SALE KHUYEN MAI 20% VAO TUAN DAU TIEN, BA CON OI MAI DO MAI DO!!!! THOI LUONG CO HAN!!!', '2BA', 20)
@@ -28,5 +28,5 @@ INSERT INTO [Diamond] VALUES
 (1,'0.36 Carat Round Cut Diamond','https://temple-and-grace.mo.cloudinary.net/mdopt/images/prod-large/diamonds/round-cut-diamond.jpg','Vietnam',36,'Round','White','S12')
 
 INSERT INTO [Ring] VALUES
-(1,'18ct Rose Gold Diamond Solitaire Engagement Ring','https://www.berrysjewellers.co.uk/cdn/shop/products/1620389070-28905700.jpg?v=1684851863&width=2048',1,'M',3000,200,1,1)
+(1,'18ct Rose Gold Diamond Solitaire Engagement Ring','https://www.berrysjewellers.co.uk/cdn/shop/products/1620389070-28905700.jpg',1,'M',3000,200,1,1)
 

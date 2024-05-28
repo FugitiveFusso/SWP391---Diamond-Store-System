@@ -21,7 +21,9 @@ CREATE TABLE [Diamond](
 
 CREATE TABLE [Collection](
 	collectionID int NOT NULL primary key,
-	collectionName varchar(255) NOT NULL
+	collectionName varchar(255) NOT NULL,
+	collectionImage varchar(8000) NOT NULL,
+	[description] varchar(8000) NOT NULL
 );
 
 CREATE TABLE [Category](
