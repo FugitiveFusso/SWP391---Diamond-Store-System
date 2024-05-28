@@ -2,12 +2,12 @@ INSERT INTO [Role] VALUES (1,'Adminstrator'), (2,'Manager'), (3,'Sales Staff'), 
 SELECT * FROM [Role]
 
 INSERT INTO [User] VALUES 
-(1, 'cuong', '1','Cuong','Nguyen Phu','0898876512','cuongnp123@gmail.com','Vo Van Ngan gi gi do',0,2),
-(2, 'an', '1','An','Do Dinh','0937368003','andd1282@gmail.com','Quang Truong Thong Nhat',0,1),
-(3, 'khoa', '1','Khoa','Le Anh','0563098372','khoalac12nam@gmail.com','Dau do o Sai Gon',0,3),
-(4, 'hoang', '1','Hoang','Nguyen Minh','0487354221','hoangnv0912@gmail.com','Ben Thanh',0,4),
-(5, 'kien', '1','Kien','Ngo Chi','032033471','kiennc666@yahoo.com.vn','O gan day',0,5),
-(6, 'huy', '1','Huy','Pham Phu','075776871','phuhuydaydoi@gmail.com','Gan dau do',0,5)
+('cuong', '1','Cuong','Nguyen Phu','0898876512','cuongnp123@gmail.com','Vo Van Ngan gi gi do',0,2),
+('an', '1','An','Do Dinh','0937368003','andd1282@gmail.com','Quang Truong Thong Nhat',0,1),
+('khoa', '1','Khoa','Le Anh','0563098372','khoalac12nam@gmail.com','Dau do o Sai Gon',0,3),
+('hoang', '1','Hoang','Nguyen Minh','0487354221','hoangnv0912@gmail.com','Ben Thanh',0,4),
+('kien', '1','Kien','Ngo Chi','032033471','kiennc666@yahoo.com.vn','O gan day',0,5),
+('huy', '1','Huy','Pham Phu','075776871','phuhuydaydoi@gmail.com','Gan dau do',0,5)
 
 INSERT INTO [Category] VALUES 
 (1, '12K Gold'),
