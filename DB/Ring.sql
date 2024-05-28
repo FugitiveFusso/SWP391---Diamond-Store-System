@@ -39,17 +39,19 @@ CREATE TABLE [Category](
 );
 
 CREATE TABLE [User](
-	userID int NOT NULL primary key,
-	userName varchar(255) NOT NULL,
-	[password] varchar(255) NOT NULL,
-	firstName varchar(255) NOT NULL,
-	lastName varchar(255) NOT NULL,
-	phoneNumber varchar(255) NOT NULL,
-	email varchar(255) NOT NULL,
-	[address] varchar(8000) NOT NULL,
-	point int NOT NULL,
-	roleID int NOT NULL foreign key REFERENCES [Role](roleID)
+    userID int IDENTITY(1,1) NOT NULL PRIMARY KEY,
+    userName varchar(255) NOT NULL,
+    [password] varchar(255) NOT NULL,
+    firstName varchar(255) NOT NULL,
+    lastName varchar(255) NOT NULL,
+    phoneNumber varchar(255) NOT NULL,
+    email varchar(255) NOT NULL,
+    [address] varchar(8000) NOT NULL,
+    point int NOT NULL,
+    roleID int NOT NULL,
+    FOREIGN KEY (roleID) REFERENCES [Role](roleID)
 );
+
 
 CREATE TABLE [Ring](
 	ringID int NOT NULL primary key,

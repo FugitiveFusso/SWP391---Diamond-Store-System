@@ -66,7 +66,7 @@
                                         </div>
                                     </div>
                                 </form>
-                                    <p class="text-center">Not a member? <a data-toggle="tab" href="#signup" style="text-decoration: underline">Sign Up</a></p>
+                                    <p class="text-center">Not a member? <a data-toggle="tab" href="register.jsp" style="text-decoration: underline">Sign Up</a></p>
                             </div>
                         </div>
                     </div>
