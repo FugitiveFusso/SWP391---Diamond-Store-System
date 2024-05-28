@@ -15,62 +15,6 @@
     </head>
     <body>
 
-<<<<<<< HEAD
-
-        <section class="ftco-section">
-            <div class="container">
-
-                <div class="row justify-content-center">
-                    <div class="col-md-7 col-lg-5">
-                        <div class="wrap">
-                            <div class="img" style="background-image: url(images/diamondbackground.jpg);"></div>
-                            <div class="login-wrap p-4 p-md-5">
-                                <div class="d-flex">
-                                    <div class="w-100">
-                                        <h2 class="mb-4">User Login</h2>
-                                        <% String error = (String) request.getAttribute("error"); %>
-                                        <% if (error != null) {%>
-                                        <h4 style="color: red"> <%= error%> </h3>
-                                        <% }%>			      		</div>
-                                    <div class="w-100">
-                                        <p class="social-media d-flex justify-content-end">
-                                            <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-google"></span></a>
-                                        </p>
-                                    </div>                     
-                                </div>
-                                <form action="./userlogin" name="" method="POST" class="signin-form">
-                                    <div class="form-group mt-3">
-                                        <input name="user" type="text" class="form-control" required>
-                                        <label class="form-control-placeholder" for="username">Username</label>
-                                    </div>
-                                    <div class="form-group">
-                                        <input name="password" id="password-field" type="password" class="form-control" required>
-                                        <label class="form-control-placeholder" for="password">Password</label>
-                                    </div>
-                                    <div class="form-group">
-                                        <input value="Login" type="submit" class="submit">
-                                    </div>
-                                    <div class="form-group d-md-flex">
-
-                                        <select  id="roleSelect" style="width: 200px;">
-                                            <option value="0">Select your role first</option>
-                                            <option value="1">Customer</option>
-                                            <option value="2">Administrator</option>
-                                            <option value="3">Manager</option>
-                                            <option value="4">Sales Staff</option>
-                                            <option value="5">Delivery Staff</option>
-
-                                        </select>
-
-                                        <div class="w-50 text-md-right" id="forgotpass">
-                                            <a href="#" >Forgot Password</a>
-                                        </div>
-                                    </div>
-                                </form>
-                                    <p class="text-center">Not a member? <a data-toggle="tab" href="register.jsp" style="text-decoration: underline">Sign Up</a></p>
-                            </div>
-                        </div>
-=======
         <section class="ftco-section">                       
             <div class="wrapper">
                 <form action="./userlogin" name="" method="POST" class="signin-form">
@@ -85,7 +29,6 @@
                         <input name="user" type="text" required>
                         <span class="placeholder">Username</span>
                         <i class='bx bxs-user'></i>
->>>>>>> 161afbe36095b53d6a310bdb8d581d66b1abb11f
                     </div>
                     <div class="input-box">
                         <input name="password" type="password" id="myInput" required>
@@ -111,6 +54,10 @@
                     </div>
 
                     <button type="submit" class="btn">Login</button>
+                    
+                    <div class="register-link">
+                        <p>Don't have an account? <a href="register.jsp">Register</a></p>
+                    </div>
                 </form>
             </div>
         </section>
