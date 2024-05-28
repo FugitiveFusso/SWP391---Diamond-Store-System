@@ -14,8 +14,6 @@
         <title>Diamond Management Page</title>
     </head>
     <body>
-        <h1>Diamonds Details </h1>         
-        <p> Login username: ${sessionScope.adminsession.username}</p>
         <%@ include file="/menu.jsp" %>
         <form action='' method=GET id="searchbox"> 
             <input name=keyword type=text value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
@@ -30,11 +28,11 @@
                 font-family: Arial, Helvetica, sans-serif;
             }
             table{
-                margin-top: 10px
+                margin-top: 10px;
+                    width: 100%;
             }
             table, tr, td{
                 border-collapse: collapse;
-                width: 1000px;
                 border: 1px solid black;
                 text-align: center;
             }
@@ -80,7 +78,7 @@
             <%
                 }
             %>    
-            <tr><td colspan="6">
+            <tr><td colspan="10">
                     <form action="DiamondController" method="POST">
                         <input name="action" value="create" type="hidden">
                         <input type="submit" value="Create">
