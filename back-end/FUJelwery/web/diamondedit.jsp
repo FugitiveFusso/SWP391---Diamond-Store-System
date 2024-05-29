@@ -19,7 +19,7 @@
             }
 
             function validateForm() {
-                const postImageInput = document.querySelector('input[name="collectionImage"]');
+                const postImageInput = document.querySelector('input[name="diamondImage"]');
                 const imageUrl = postImageInput.value;
 
                 if (!isValidImageUrlFormat(imageUrl)) {
@@ -34,7 +34,7 @@
         <h1>Diamond Edit </h1>
         <p> Login user: ${sessionScope.adminsession.username}</p>
 
-        <form action="./DiamondController" method="POST" onclick="return validateForm()>
+        <form action="./DiamondController" method="POST" onclick="return validateForm()">
             <table>
 
                 <tr><td></td><td><input name="id" value="${requestScope.diamond.diamondID}" required="Please enter" type="hidden"</td></tr>

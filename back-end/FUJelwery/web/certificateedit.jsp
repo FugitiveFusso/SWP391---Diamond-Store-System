@@ -12,12 +12,29 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <script>
+            function isValidImageUrlFormat(url) {
+                const regex = /^https:\/\/.*\.(jpg|jpeg|png|gif|bmp|webp)$/i;
+                return regex.test(url);
+            }
+
+            function validateForm() {
+                const postImageInput = document.querySelector('input[name="certificateImage"]');
+                const imageUrl = postImageInput.value;
+
+                if (!isValidImageUrlFormat(imageUrl)) {
+                    alert('Invalid image URL. It must start with "https://" and end with one of the following extensions: .jpg, .jpeg, .png, .gif, .bmp, .webp.');
+                    return false;
+                }
+                return true;
+            }
+        </script>
         <jsp:include page="/menu.jsp" flush="true" />
 
         <h1>Certificate Edit </h1>
         <p> Login user: ${sessionScope.adminsession.username}</p>
 
-        <form action="./CertificateController" method="POST">
+        <form action="./CertificateController" method="POST" onclick="return validateForm()">
             <table>
 
                 <tr><td></td><td><input name="id" value="${requestScope.certificate.certificateID}" required="Please enter" type="hidden"</td></tr>
