@@ -69,7 +69,7 @@
                 <td>
                     <form action="RingController" method="POST">
                         <input name="action" value="delete" type="hidden">
-                        <input name="ID" value="${ring.ringID}" type="hidden">
+                        <input name="id" value="${ring.ringID}" type="hidden">
                         <input type="submit" value="Delete">
                     </form>
                 </td>

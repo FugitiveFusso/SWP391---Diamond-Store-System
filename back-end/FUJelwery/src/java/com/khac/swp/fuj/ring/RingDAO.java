@@ -151,7 +151,7 @@ public class RingDAO {
     }
 
     public Integer insert(RingDTO ring) {
-        String sql = "INSERT INTO [Ring] (ringID, ringName, ringImage, diamondID, gender, price, collectionID, categoryID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO [Ring] (ringID, ringName, ringImage, diamondID, gender, price, collectionID, categoryID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -163,14 +163,14 @@ public class RingDAO {
             ps.setInt(4, ring.getDiamondID());
             ps.setString(5, ring.getGender());
             ps.setDouble(6, ring.getPrice());
-            ps.setInt(8, ring.getCategoryID());
             ps.setInt(7, ring.getCollectionID());
+            ps.setInt(8, ring.getCategoryID());
 
             ps.executeUpdate();
             conn.close();
             return ring.getRingID();
         } catch (SQLException ex) {
-            System.out.println("Insert Post error!" + ex.getMessage());
+            System.out.println("Insert Ring error!" + ex.getMessage());
             ex.printStackTrace();
         }
         return null;
@@ -191,7 +191,7 @@ public class RingDAO {
             ps.setInt(6, ring.getCategoryID());
             ps.setInt(7, ring.getCollectionID());
             ps.setInt(8, ring.getRingID());
-
+            
             ps.executeUpdate();
             conn.close();
         } catch (SQLException ex) {
@@ -227,10 +227,7 @@ public class RingDAO {
     public static void main(String[] args) {
         RingDAO dao = new RingDAO();
 
-        List<RingDTO> list = dao.list("", "");
-
-        for (RingDTO ringDTO : list) {
-            System.out.println(ringDTO);
-        }
+        RingDTO a = dao.load(1);
+          System.out.println(a);
     }
 }
