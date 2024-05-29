@@ -12,12 +12,29 @@
         <title>Ring Editing</title>
     </head>
     <body>
+        <script>
+            function isValidImageUrlFormat(url) {
+                const regex = /^https:\/\/.*\.(jpg|jpeg|png|gif|bmp|webp)$/i;
+                return regex.test(url);
+            }
+
+            function validateForm() {
+                const postImageInput = document.querySelector('input[name="ringImage"]');
+                const imageUrl = postImageInput.value;
+
+                if (!isValidImageUrlFormat(imageUrl)) {
+                    alert('Invalid image URL. It must start with "https://" and end with one of the following extensions: .jpg, .jpeg, .png, .gif, .bmp, .webp.');
+                    return false;
+                }
+                return true;
+            }
+        </script>
         <jsp:include page="/menu.jsp" flush="true" />
 
         <h1>Ring Edit </h1>
         <p> Login user: ${sessionScope.adminsession.username}</p>
 
-        <form action="./RingController" method="POST">
+        <form action="./RingController" method="POST" onclick="return validateForm()">
             <table>
 
                 <tr><td></td><td><input name="id" value="${requestScope.ring.ringID}" required="Please enter" type="hidden"</td></tr>

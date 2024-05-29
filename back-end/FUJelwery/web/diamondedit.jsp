@@ -12,12 +12,29 @@
         <title>Diamond Editing</title>
     </head>
     <body>
+        <script>
+            function isValidImageUrlFormat(url) {
+                const regex = /^https:\/\/.*\.(jpg|jpeg|png|gif|bmp|webp)$/i;
+                return regex.test(url);
+            }
+
+            function validateForm() {
+                const postImageInput = document.querySelector('input[name="collectionImage"]');
+                const imageUrl = postImageInput.value;
+
+                if (!isValidImageUrlFormat(imageUrl)) {
+                    alert('Invalid image URL. It must start with "https://" and end with one of the following extensions: .jpg, .jpeg, .png, .gif, .bmp, .webp.');
+                    return false;
+                }
+                return true;
+            }
+        </script>
         <jsp:include page="/menu.jsp" flush="true" />
 
         <h1>Diamond Edit </h1>
         <p> Login user: ${sessionScope.adminsession.username}</p>
 
-        <form action="./DiamondController" method="POST">
+        <form action="./DiamondController" method="POST" onclick="return validateForm()>
             <table>
 
                 <tr><td></td><td><input name="id" value="${requestScope.diamond.diamondID}" required="Please enter" type="hidden"</td></tr>
