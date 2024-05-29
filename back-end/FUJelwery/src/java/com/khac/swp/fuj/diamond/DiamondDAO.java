@@ -94,7 +94,7 @@ public class DiamondDAO {
                 String diamondName = rs.getString("diamondName");
                 String diamondImage = rs.getString("diamondImage");
                 String origin = rs.getString("origin");
-                double caratWeight = rs.getLong("caratWeight");
+                double caratWeight = rs.getDouble("caratWeight");
                 String cut = rs.getString("cut");
                 String color = rs.getString("color");
                 String clarity = rs.getString("clarity");
@@ -194,11 +194,5 @@ public class DiamondDAO {
 
         return false;
     }
-    public static void main(String[] args) {
-        DiamondDAO dao = new DiamondDAO();
-        List<DiamondDTO> list = dao.list("", "");
-        for (DiamondDTO diamondDTO : list) {
-            System.out.println(diamondDTO);
-        }
-    }
+
 }
