@@ -23,29 +23,35 @@
                 <li class="navbar__link"><a href="#">Order</a></li>
                 <li class="navbar__link">
                     <a href="#">Products</a>
-                    <ul class="dropdown">
-                        <li><a href='DiamondController'>Diamond</a></li>
-                        <li><a href='RingController'>Ring</a></li>
-                    </ul>
+                    <div class="sub-menu-1">
+                        <ul>
+                            <li><a href='DiamondController'>Diamond</a></li>
+                            <li><a href='RingController'>Ring</a></li>
+                        </ul>
+                    </div>                  
                 </li>
                 <li class="navbar__link"><a href="#">Voucher</a></li>
                 <img src="./images/Screenshot (656).png">
                 <li class="navbar__link"><a href="#">Delivery Tracking</a></li>
                 <li class="navbar__link">
                     <a href="#">Dashboard</a>
-                    <ul class="dropdown">
-                        <li><a href='CustomerController'>View Customer List</a></li>
-                        <li><a href='ManagerController'>View Manager List</a></li>
-                    </ul>
+                    <div class="sub-menu-1">
+                        <ul>
+                            <li><a href='CustomerController'>View Customer</a></li>
+                            <li><a href='ManagerController'>View Manager</a></li>
+                        </ul>
+                    </div>
                 </li>
                 <li class="navbar__link">
                     <a href="#">Account</a>
-                    <ul class="dropdown">
-                        <li><a href='adminlogin?action=logout'>Log Out</a></li>                     
-                    </ul>
+                    <div class="sub-menu-1">
+                        <ul>
+                            <li><a href='adminlogin?action=logout'>Logout</a></li>          
+                        </ul>
+                    </div>
                 </li>
             </ul>
-        </div>       
+        </div> 
 
         <div class="list-container">
             <div class="smaller-container">
