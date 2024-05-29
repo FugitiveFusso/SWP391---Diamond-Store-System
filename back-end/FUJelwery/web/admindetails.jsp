@@ -14,6 +14,12 @@
         <!--<link rel="stylesheet" href="css/staff_detail.css">-->
 
         <link rel="stylesheet" href="css/staff_details.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css" />
+        <link rel="stylesheet" href="css/staff_detail.css">
+
 
     </head>
     <body>
@@ -34,63 +40,66 @@
 
         <%--<jsp:include page="/managermenu.jsp" flush="true" />--%>
 
-        <div class="container">
-
-            <div class="account-intro">
-                ACCOUNT INFORMATION
-            </div>
-
-            <div class="account-info">
-                <div class="account-info-left">
-                    <img src="images/account-icon.png">
-
-                </div>
-                <div class="account-info-right">
-                    <div class="account-info-text">
-                        <h2>${requestScope.admin.lastname} ${requestScope.admin.firstname} </h2>
-                        <h3>Admin of FUJ</h3>
-                        <p>${requestScope.admin.username}</p>
+ <div class="container">
+        <div class="padding">
+            <div class="row d-flex justify-content-center">
+                <div class="col-xl-12 col-md-12">
+                    <div class="card user-card-full">
+                        <div class="row no-gutters">
+                            <div class="col-md-3 bg-c-lite-green user-profile">
+                                <div class="card-block text-center text-white">
+                                    <div class="m-b-25">
+                                        <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image">
+                                    </div>
+                                    <h6 class="f-w-600">${requestScope.admin.lastname} ${requestScope.admin.firstname}</h6>
+                                    <p>Admin of FUJ</p>
+                                    <p>${requestScope.admin.username}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="card-block">
+                                    <h2 class="m-b-20 p-b-5 b-b-default f-w-600">Personal Information</h2>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <p class="m-b-10 f-w-600">First Name</p>
+                                            <h6 class="text-muted f-w-400">${requestScope.admin.firstname}</h6>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p class="m-b-10 f-w-600">Last Name</p>
+                                            <h6 class="text-muted f-w-400">${requestScope.admin.lastname}</h6>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p class="m-b-10 f-w-600">Email</p>
+                                            <h6 class="text-muted f-w-400">${requestScope.admin.email}</h6>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p class="m-b-10 f-w-600">Phone Number</p>
+                                            <h6 class="text-muted f-w-400">${requestScope.admin.phonenumber}</h6>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <form action="AdminController" style="padding-top: 10px">
+                                                <input type="hidden" name="id" value="${requestScope.admin.userid}">
+                                                <input type="hidden" name="action" value="edit">
+                                                <button type="submit" class="btn btn-custom">Edit</button>
+                                            </form>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <form action="AdminController" style="padding-top: 10px">
+                                                <button type="submit" class="btn btn-custom">Return</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <ul class="social-link list-unstyled m-t-40 m-b-10"></ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-            </div>
-            <hr>
-
-            <div class="account-intro">               
-                PERSONAL INFORMATION
             </div>
 
 
-            <div class="personal-info">
-                <div class="personal-info-left">
-                    <div class="info-left">
-                        <p>Fisrt Name</p>
-                        <p>Last Name</p>
-                        <p>Your Email</p>
-                        <p>Phone Number</p>
-                    </div>
-                    <div class="info-right">
-                        <p>${requestScope.admin.firstname}</p>
-                        <p>${requestScope.admin.lastname}</p>
-                        <p>${requestScope.admin.email}</p>
-                        <p>${requestScope.admin.phonenumber}</p>
-                    </div>
-                </div>
 
-                <div class="personal-info-right">
-                    <div class="button">
-                        <form action="AdminController" style="padding-top: 10px">
-                            <input type=hidden name="id" value="${requestScope.admin.userid}">
-                            <input type=hidden name="action" value="edit">
-                            <input type=submit value="Edit" ></form>
-                        <form action="AdminController" style="padding-top: 10px">
-                            <input type=hidden name="action" value="list">
-                            <input type=submit value="Return" ></form>
-                    </div>
-                </div>
-            </div>
-        </div>
     </body>
 </html>
-
-
