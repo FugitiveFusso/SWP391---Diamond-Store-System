@@ -121,6 +121,7 @@ public class CategoryController extends HttpServlet {
                 }
                 category.setCategoryID(categoryid);
                 category.setCategoryName(categoryName);
+                categoryDAO.update(category);
 
                 request.setAttribute("category", category);
                 RequestDispatcher rd = request.getRequestDispatcher("categorydetails.jsp");
