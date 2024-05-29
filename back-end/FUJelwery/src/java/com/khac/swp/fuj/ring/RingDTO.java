@@ -16,39 +16,16 @@ public class RingDTO {
     private int diamondID;
     private String gender;
     private double price;
-    private int quantity;
     private int categoryID;
     private int collectionID;
     private String diamondName;
     private String diamondImage;
     private String origin;
-    private int caratWeight;
+    private double caratWeight;
     private String cut;
     private String color;
     private String clarity;
-    
-
-    public RingDTO() {
-    }
-
-    public RingDTO(int ringID, String ringName, String ringImage, int diamondID, String gender, double price, int quantity, int categoryID, int collectionID, String diamondName, String diamondImage, String origin, int caratWeight, String cut, String color, String clarity) {
-        this.ringID = ringID;
-        this.ringName = ringName;
-        this.ringImage = ringImage;
-        this.diamondID = diamondID;
-        this.gender = gender;
-        this.price = price;
-        this.quantity = quantity;
-        this.categoryID = categoryID;
-        this.collectionID = collectionID;
-        this.diamondName = diamondName;
-        this.diamondImage = diamondImage;
-        this.origin = origin;
-        this.caratWeight = caratWeight;
-        this.cut = cut;
-        this.color = color;
-        this.clarity = clarity;
-    }
+    private int certificateID;
 
     public int getRingID() {
         return ringID;
@@ -98,14 +75,6 @@ public class RingDTO {
         this.price = price;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     public int getCategoryID() {
         return categoryID;
     }
@@ -146,11 +115,11 @@ public class RingDTO {
         this.origin = origin;
     }
 
-    public int getCaratWeight() {
+    public double getCaratWeight() {
         return caratWeight;
     }
 
-    public void setCaratWeight(int caratWeight) {
+    public void setCaratWeight(double caratWeight) {
         this.caratWeight = caratWeight;
     }
 
@@ -178,9 +147,17 @@ public class RingDTO {
         this.clarity = clarity;
     }
 
+    public int getCertificateID() {
+        return certificateID;
+    }
+
+    public void setCertificateID(int certificateID) {
+        this.certificateID = certificateID;
+    }
+
     @Override
     public String toString() {
-        return "RingDTO{" + "ringID=" + ringID + ", ringName=" + ringName + ", ringImage=" + ringImage + ", diamondID=" + diamondID + ", gender=" + gender + ", price=" + price + ", quantity=" + quantity + ", categoryID=" + categoryID + ", collectionID=" + collectionID + ", diamondName=" + diamondName + ", diamondImage=" + diamondImage + ", origin=" + origin + ", caratWeight=" + caratWeight + ", cut=" + cut + ", color=" + color + ", clarity=" + clarity + '}';
+        return "RingDTO{" + "ringID=" + ringID + ", ringName=" + ringName + ", ringImage=" + ringImage + ", diamondID=" + diamondID + ", gender=" + gender + ", price=" + price + ", categoryID=" + categoryID + ", collectionID=" + collectionID + ", diamondName=" + diamondName + ", diamondImage=" + diamondImage + ", origin=" + origin + ", caratWeight=" + caratWeight + ", cut=" + cut + ", color=" + color + ", clarity=" + clarity + ", certificateID=" + certificateID + '}';
     }
 
     

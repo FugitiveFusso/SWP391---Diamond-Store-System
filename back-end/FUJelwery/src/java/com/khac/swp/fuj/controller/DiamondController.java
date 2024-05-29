@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -118,7 +118,7 @@ public class DiamondController extends HttpServlet {
                 String diamondName = request.getParameter("diamondName");
                 String diamondImage = request.getParameter("diamondImage");
                 String origin = request.getParameter("origin");
-                int caratWeight = Integer.parseInt(request.getParameter("caratWeight"));
+                Double caratWeight = Double.parseDouble(request.getParameter("caratWeight"));
                 String cut = request.getParameter("cut");
                 String color = request.getParameter("color");
                 String clarity = request.getParameter("clarity");
@@ -137,7 +137,7 @@ public class DiamondController extends HttpServlet {
                 diamond.setColor(color);
                 diamond.setClarity(clarity);
                 diamond.setCertificateID(certificateID);
-
+                diamondDAO.update(diamond);
                 request.setAttribute("diamond", diamond);
                 RequestDispatcher rd = request.getRequestDispatcher("diamonddetails.jsp");
                 rd.forward(request, response);
@@ -149,7 +149,7 @@ public class DiamondController extends HttpServlet {
                     String diamondName = request.getParameter("diamondName");
                     String diamondImage = request.getParameter("diamondImage");
                     String origin = request.getParameter("origin");
-                    int caratWeight = Integer.parseInt(request.getParameter("caratWeight"));
+                    double caratWeight = Double.parseDouble(request.getParameter("caratWeight"));
                     String cut = request.getParameter("cut");
                     String color = request.getParameter("color");
                     String clarity = request.getParameter("clarity");

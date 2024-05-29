@@ -48,8 +48,7 @@
                 <td><a href=?colSort=diamondName>Diamond Name</a></td>
                 <td>Gender</td>
                 <td><a href=?colSort=price>Price</td>
-                <td><a href=?colSort=quantity>Quantity</td>
-                <td><a href=?colSort=categoryID>Category</td>
+                    <td><a href=?colSort=categoryID>Category</td>
                 <td><a href=?colSort=collectionID>Collection</td>                
             </tr>
             <%
@@ -65,7 +64,6 @@
                 <td>${ring.diamondName}</td>
                 <td>${ring.gender}</td>
                 <td>${ring.price}</td>
-                <td>${ring.quantity}</td>
                 <td>${ring.categoryID}</td>
                 <td>${ring.collectionID}</td>
                 <td>

@@ -41,10 +41,9 @@
 
             <tr><td>Ring Name</td><td>${requestScope.ring.ringName}</td></tr>
             <tr><td>Ring Image</td><td><img src=${requestScope.ring.ringImage} width="300px" height="300px"></td></tr>
-            <tr><td>Diamond ID</td><td>${requestScope.ring.diamondID}</td></tr>
+            <tr><td>Diamond Name</td><td>${requestScope.ring.diamondName}</td></tr>
             <tr><td>Gender</td><td>${requestScope.ring.gender}</td></tr>
             <tr><td>Price</td><td>${requestScope.ring.price}</td></tr>
-            <tr><td>Quantity</td><td>${requestScope.ring.quantity}</td></tr>
             <tr><td>Category</td><td>${requestScope.ring.categoryID}</td></tr>
             <tr><td>Collection</td><td>${requestScope.ring.collectionID}</td></tr>
             

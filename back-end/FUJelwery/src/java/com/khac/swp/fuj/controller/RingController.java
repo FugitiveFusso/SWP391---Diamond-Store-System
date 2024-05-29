@@ -79,7 +79,6 @@ public class RingController extends HttpServlet {
 
                 request.setAttribute("ring", ring);//object
                 request.getRequestDispatcher("/ringdetails.jsp").forward(request, response);
-                
             } else if (action.equals("edit")) {//edit
                 Integer id = null;
                 try {
@@ -117,7 +116,6 @@ public class RingController extends HttpServlet {
                 int diamondID = Integer.parseInt(request.getParameter("diamondID"));
                 String gender = request.getParameter("gender");
                 double price = Double.parseDouble(request.getParameter("price"));
-                int quantity = Integer.parseInt(request.getParameter("quantity"));
                 int categoryID = Integer.parseInt(request.getParameter("categoryID"));
                 int collectionID = Integer.parseInt(request.getParameter("collectionID"));
 
@@ -131,7 +129,6 @@ public class RingController extends HttpServlet {
                     ring.setDiamondID(diamondID);
                     ring.setGender(gender);
                     ring.setPrice(price);
-                    ring.setQuantity(quantity);
                     ring.setCategoryID(categoryID);
                     ring.setCollectionID(collectionID);
 
@@ -148,7 +145,6 @@ public class RingController extends HttpServlet {
                     int diamondID = Integer.parseInt(request.getParameter("diamondID"));
                     String gender = request.getParameter("gender");
                     double price = Double.parseDouble(request.getParameter("price"));
-                    int quantity = Integer.parseInt(request.getParameter("quantity"));
                     int categoryID = Integer.parseInt(request.getParameter("categoryID"));
                     int collectionID = Integer.parseInt(request.getParameter("collectionID"));
 
@@ -166,7 +162,6 @@ public class RingController extends HttpServlet {
                     ring.setDiamondID(diamondID);
                     ring.setGender(gender);
                     ring.setPrice(price);
-                    ring.setQuantity(quantity);
                     ring.setCategoryID(categoryID);
                     ring.setCollectionID(collectionID);
                     request.setAttribute("ring", ring);
