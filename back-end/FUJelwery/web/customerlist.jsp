@@ -27,10 +27,11 @@
                         <ul>
                             <li><a href='DiamondController'>Diamond</a></li>
                             <li><a href='RingController'>Ring</a></li>
+                            <li><a href='CollectionController'>Collection</a></li>
                         </ul>
                     </div>                  
                 </li>
-                <li class="navbar__link"><a href="VoucherController">Voucher</a></li>
+                <li class="navbar__link"><a href='VoucherController'>Voucher</a></li>
                 <img src="./images/Screenshot (656).png">
                 <li class="navbar__link"><a href="#">Delivery Tracking</a></li>
                 <li class="navbar__link">
@@ -39,6 +40,8 @@
                         <ul>
                             <li><a href='CustomerController'>View Customer</a></li>
                             <li><a href='ManagerController'>View Manager</a></li>
+                            <li><a href='CertificateController'>View Certificate</a></li>
+                            <li><a href='CategoryController'>View Category</a></li>
                         </ul>
                     </div>
                 </li>
@@ -50,6 +53,7 @@
                         </ul>
                     </div>
                 </li>
+                
             </ul>
         </div>      
 

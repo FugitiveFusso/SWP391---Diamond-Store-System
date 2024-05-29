@@ -12,71 +12,104 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" href="css/navbar.css">
+        <link rel="stylesheet" href="css/staff_list.css">
     </head>
     <body>
-        <%@ include file="/menu.jsp" %>
-        <form action='' method=GET id="searchbox"> 
-            <input name=keyword type=text value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
-            <input type=submit value=Search >
-        </form>
-        <style>
-            #searchbox{
-                margin-top: 5px;
-            }
-            body{
-                font-size: 16px;
-                font-family: Arial, Helvetica, sans-serif;
-            }
-            table{
-                margin-top: 10px;
-                width: 100%;
-            }
-            table, tr, td{
-                border-collapse: collapse;
-                border: 1px solid black;
-                text-align: center;
-            }
-            tr,td{
-                padding: 6px 10px;
-            }
-        </style>
-        <table>
-            <tr>
-                <td>Voucher ID</td>
-                <td><a href=?colSort=postName>Voucher Name</a></td>
-                <td>Image</td>
-                <td>Description</td>
+        <div class="menu">
+            <!--you will code the horizontal menu here-->
+            <ul class="navbar">
+                <li class="navbar__link"><a href="#">Order</a></li>
+                <li class="navbar__link">
+                    <a href="#">Products</a>
+                    <div class="sub-menu-1">
+                        <ul>
+                            <li><a href='DiamondController'>Diamond</a></li>
+                            <li><a href='RingController'>Ring</a></li>
+                            <li><a href='CollectionController'>Collection</a></li>
+                        </ul>
+                    </div>                  
+                </li>
+                <li class="navbar__link"><a href='VoucherController'>Voucher</a></li>
+                <img src="./images/Screenshot (656).png">
+                <li class="navbar__link"><a href="#">Delivery Tracking</a></li>
+                <li class="navbar__link">
+                    <a href="#">Dashboard</a>
+                    <div class="sub-menu-1">
+                        <ul>
+                            <li><a href='CustomerController'>View Customer</a></li>
+                            <li><a href='ManagerController'>View Manager</a></li>
+                            <li><a href='CertificateController'>View Certificate</a></li>
+                            <li><a href='CategoryController'>View Category</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="navbar__link">
+                    <a href="#">Account</a>
+                    <div class="sub-menu-1">
+                        <ul>
+                            <li><a href='adminlogin?action=logout'>Logout</a></li>          
+                        </ul>
+                    </div>
+                </li>
 
-            </tr>
-            <%
-                List<VoucherDTO> list = (List<VoucherDTO>) request.getAttribute("voucherlist");
-                for (VoucherDTO voucher : list) {
-                    pageContext.setAttribute("voucher", voucher);
-            %>
-            <tr>
-                <td>
-                    <a href="VoucherController?action=details&id=${voucher.id}">   ${voucher.id}</td>
-                <td>${voucher.name}</td>    
-                <td><img src=${voucher.image} width="300px" height="300px"></td>
-                <td>${voucher.description}</td>
-                <td>
-                    <form action="VoucherController" method="POST">
-                        <input name="action" value="delete" type="hidden">
-                        <input name="id" value="${voucher.id}" type="hidden">
-                        <input type="submit" value="Delete">
-                    </form>
-                </td>
+            </ul>
+        </div>
 
-            </tr>
-            <%
-                }
-            %>    
-            <tr><td colspan="10">
-                    <form action="VoucherController" method="POST">
-                        <input name="action" value="create" type="hidden">
-                        <input type="submit" value="Create">
+        <div class="list-container">
+            <div class="smaller-container">
+                <div class="list-title">Voucher List</div>
+                <div class="list">
+                    <form action='' method=GET id="searchbox"> 
+                        <input name=keyword type=text value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
+                        <input type=submit value=Search >
                     </form>
-                </td></tr>
-        </table>
+
+                    <table>
+                        <tr>
+                            <td>Voucher ID</td>
+                            <td><a href=?colSort=postName>Voucher Name</a></td>
+                            <td>Image</td>
+                            <td>Description</td>
+
+                        </tr>
+                        <%
+                            List<VoucherDTO> list = (List<VoucherDTO>) request.getAttribute("voucherlist");
+                            for (VoucherDTO voucher : list) {
+                                pageContext.setAttribute("voucher", voucher);
+                        %>
+                        <tr>
+                            <td>
+                                <a href="VoucherController?action=details&id=${voucher.id}">   ${voucher.id}</td>
+                            <td>${voucher.name}</td>    
+                            <td><img src=${voucher.image} width="300px" height="300px"></td>
+                            <td>${voucher.description}</td>
+                            <td>
+                                <form action="VoucherController" method="POST">
+                                    <input name="action" value="delete" type="hidden">
+                                    <input name="id" value="${voucher.id}" type="hidden">
+                                    <input type="submit" value="Delete">
+                                </form>
+                            </td>
+
+                        </tr>
+                        <%
+                            }
+                        %>    
+                        <tr><td colspan="10">
+                                <form action="VoucherController" method="POST">
+                                    <input name="action" value="create" type="hidden">
+                                    <input type="submit" value="Create">
+                                </form>
+                            </td></tr>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
     </body>
 </html>
