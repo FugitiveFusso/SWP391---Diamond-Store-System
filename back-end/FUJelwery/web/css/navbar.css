@@ -1,32 +1,68 @@
 @import url('https://fonts.googleapis.com/css2?family=Gantari:ital,wght@0,100..900;1,100..900&family=Syne:wght@400..800&display=swap');
 
-.navbar {
-  display: flex;
-  justify-content: space-around;
-  background-color: white;
-  padding: 10px 0;
-  margin: 0;
-  max-width: 100%;
+.menu{
+    background: #fff;
+    text-align: center;
+    align-items: center;
 }
 
-.navbar img {
+.menu ul{
+    display: inline-flex;
+    list-style: none;
+    color: #000000;
+}
+
+.menu ul li{
+    width: 120px;
+    padding: 15px;
+    margin: 15px;
+}
+
+.menu img {
   width: 80px;
   height: 80px;
 }
 
-.navbar__link {
-  list-style: none;
-  padding: 0 40px;
+.menu ul li a{
+    text-decoration: none;
+    color: #000000;
 }
 
-.navbar__link a {
-  text-decoration: none;
-  margin: 27.5px 0 30.5px 0;
-  display: inline-block;
-  overflow-wrap: break-word;
-  font-family: 'Inter';
-  font-weight: 600;
-  font-size: 20px;
-  color: #000000;
+.menu ul li:hover{
+    background: #efefef;
+    border-radius: 3px;
 }
 
+.sub-menu-1{
+    display: none;
+}
+
+.menu ul li:hover .sub-menu-1{
+    display: block;
+    position: absolute;
+    background: #d9d9d9;
+    margin-top: 15px;
+    margin-left: -15px;
+}
+
+.menu ul li:hover .sub-menu-1 ul{
+    display: block;
+    margin: 10px;
+}
+
+.menu ul li:hover .sub-menu-1 ul li{
+    width: 150px;
+    padding: 10px;
+    border-bottom: 1px dotted #fff;
+    background: transparent;
+    border-radius: 0;
+    text-align: left;
+}
+
+.menu ul li:hover .sub-menu-1 ul li:last-child{
+    border-bottom: none; 
+}
+
+.menu ul li:hover .sub-menu-1 ul li a:hover{
+    color: #757575;
+}

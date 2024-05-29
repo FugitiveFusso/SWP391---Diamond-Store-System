@@ -1,7 +1,7 @@
 const form = document.getElementById("form");
 const username1 = document.getElementById("username1");
 const email1 = document.getElementById("email1");
-const password1 = document.getElementById("myInput");
+const password1 = document.getElementById("password1");
 const password2 = document.getElementById("repass1");
 const firstname1 = document.getElementById("firstname1");
 const lastname1 = document.getElementById("lastname1");
@@ -61,7 +61,7 @@ const validateInputs = () => {
         setError(email1, "Email is required");
         isValid = false;
     } else if (!isValidEmail(emailValue)) {
-        setError(email1, "A valid email address with @gmail.com");
+        setError(email1, "Provide a valid email address with @gmail.com");
         isValid = false;
     } else {
         setSuccess(email1);
@@ -105,7 +105,7 @@ const validateInputs = () => {
         setError(phonenumber1, "Phone Number is required");
         isValid = false;
     } else if (!/^0\d{9}$/.test(phonenumberValue)) {
-        setError(phonenumber1, "Phone number must be 10 digits, begin with 0.");
+        setError(phonenumber1, "Phone number must be exactly 10 digits and begin with 0.");
         isValid = false;
     } else {
         setSuccess(phonenumber1);

@@ -194,11 +194,5 @@ public class DiamondDAO {
 
         return false;
     }
-    public static void main(String[] args) {
-        DiamondDAO dao = new DiamondDAO();
-        List<DiamondDTO> list = dao.list("", "");
-        for (DiamondDTO diamondDTO : list) {
-            System.out.println(diamondDTO);
-        }
-    }
+
 }

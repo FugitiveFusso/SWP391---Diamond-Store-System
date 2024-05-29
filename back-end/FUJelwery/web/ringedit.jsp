@@ -26,8 +26,8 @@
                 <tr><td>Diamond ID</td><td><input name="diamondID" value="${requestScope.ring.diamondID}" required="Please enter"</td></tr>
                 <tr><td>Gender</td><td><input name="gender" value="${requestScope.ring.gender}" required="Please enter" </td></tr>
                 <tr><td>Price</td><td><input name="price" value="${requestScope.ring.price}" required="Please enter" </td></tr>
-                <tr><td>Category</td><td><input name="categoryID" value="${requestScope.ring.categoryID}" required="Please enter"</td></tr>
-                <tr><td>Collection</td><td><input name="collectionID" value="${requestScope.ring.collectionID}" required="Please enter"</td></tr>
+                <tr><td>Collection ID</td><td><input name="collectionID" value="${requestScope.ring.collectionID}" required="Please enter"</td></tr>
+                <tr><td>Category ID</td><td><input name="categoryID" value="${requestScope.ring.categoryID}" required="Please enter"</td></tr>
                 <tr><td colspan="2">
                         <input name="action" value="${requestScope.nextaction}" type="hidden">
                         <input type="submit" value="Save">

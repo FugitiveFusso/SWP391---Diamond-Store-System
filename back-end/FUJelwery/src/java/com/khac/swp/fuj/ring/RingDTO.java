@@ -25,28 +25,7 @@ public class RingDTO {
     private String cut;
     private String color;
     private String clarity;
-    
-
-    public RingDTO() {
-    }
-
-    public RingDTO(int ringID, String ringName, String ringImage, int diamondID, String gender, double price, int categoryID, int collectionID, String diamondName, String diamondImage, String origin, double caratWeight, String cut, String color, String clarity) {
-        this.ringID = ringID;
-        this.ringName = ringName;
-        this.ringImage = ringImage;
-        this.diamondID = diamondID;
-        this.gender = gender;
-        this.price = price;
-        this.categoryID = categoryID;
-        this.collectionID = collectionID;
-        this.diamondName = diamondName;
-        this.diamondImage = diamondImage;
-        this.origin = origin;
-        this.caratWeight = caratWeight;
-        this.cut = cut;
-        this.color = color;
-        this.clarity = clarity;
-    }
+    private int certificateID;
 
     public int getRingID() {
         return ringID;
@@ -168,9 +147,17 @@ public class RingDTO {
         this.clarity = clarity;
     }
 
+    public int getCertificateID() {
+        return certificateID;
+    }
+
+    public void setCertificateID(int certificateID) {
+        this.certificateID = certificateID;
+    }
+
     @Override
     public String toString() {
-        return "RingDTO{" + "ringID=" + ringID + ", ringName=" + ringName + ", ringImage=" + ringImage + ", diamondID=" + diamondID + ", gender=" + gender + ", price=" + price + ", categoryID=" + categoryID + ", collectionID=" + collectionID + ", diamondName=" + diamondName + ", diamondImage=" + diamondImage + ", origin=" + origin + ", caratWeight=" + caratWeight + ", cut=" + cut + ", color=" + color + ", clarity=" + clarity + '}';
+        return "RingDTO{" + "ringID=" + ringID + ", ringName=" + ringName + ", ringImage=" + ringImage + ", diamondID=" + diamondID + ", gender=" + gender + ", price=" + price + ", categoryID=" + categoryID + ", collectionID=" + collectionID + ", diamondName=" + diamondName + ", diamondImage=" + diamondImage + ", origin=" + origin + ", caratWeight=" + caratWeight + ", cut=" + cut + ", color=" + color + ", clarity=" + clarity + ", certificateID=" + certificateID + '}';
     }
 
     

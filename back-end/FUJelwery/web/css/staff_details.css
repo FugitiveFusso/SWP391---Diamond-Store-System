@@ -64,6 +64,8 @@
   }
 
   .button form {
+    border: 1px solid #a4a4a4;
+    border-radius: 20px; 
     padding: 11px 30px 10px 30px;
     margin-left: 10px;
     box-sizing: border-box;

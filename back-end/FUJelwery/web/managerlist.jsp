@@ -12,76 +12,93 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Manager Management Page</title>
+        <link rel="stylesheet" href="css/navbar.css">
+        <link rel="stylesheet" href="css/staff_list.css">
     </head>
     <body>
-        <%@ include file="/menu.jsp" %>
-        <form action='' method=GET id="searchbox"> 
-            <input name=keyword type=text value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
-            <input type=submit value=Search >
-        </form>
-        <style>
-            #searchbox{
-                margin-top: 5px;
-            }
-            body{
-                font-size: 16px;
-                font-family: Arial, Helvetica, sans-serif;
-            }
-            table{
-                margin-top: 10px;
-                    width: 100%;
-            }
-            table, tr, td{
-                border-collapse: collapse;
-                
-                border: 2px solid black;
-                text-align: center;
-            }
-            tr,td{
-                padding: 6px 10px;
-            }
-        </style>
-        <table>
-            <tr>
-                <td>Manager ID</td>
-                <td><a href=?colSort=username>User Name</a></td>
-                <td><a href=?colSort=firstname>First Name</a></td>
-                <td><a href=?colSort=lastname>Last Name</a></td>
-                <td><a href=?colSort=email>Email</a></td>
-                <td>Address</td>
-                <td>Delete</td>
-            </tr>
-            <%
-                List<UserDTO> list = (List<UserDTO>) request.getAttribute("managerlist");
-                for (UserDTO manager : list) {
-                    pageContext.setAttribute("manager", manager);
-            %>
-            <tr>
-                <td>
-                    <a href="ManagerController?action=details&id=${manager.userid}">   ${manager.userid}</td>
-                <td>${manager.username}</td>
-                <td>${manager.firstname}</td>
-                <td>${manager.lastname}</td>
-                <td>${manager.email}</td>
-                <td>${manager.address}</td>
-                <td>
-                    <form action="ManagerController" method="POST">
-                        <input name="action" value="delete" type="hidden">
-                        <input name="id" value="${manager.userid}" type="hidden">
-                        <input type="submit" value="Delete">
-                    </form>
-                </td>
+        <div class="menu">
+            <!--you will code the horizontal menu here-->
+            <ul class="navbar">
+                <li class="navbar__link"><a href="#">Order</a></li>
+                <li class="navbar__link">
+                    <a href="#">Products</a>
+                    <ul class="dropdown">
+                        <li><a href='DiamondController'>Diamond</a></li>
+                        <li><a href='RingController'>Ring</a></li>
+                    </ul>
+                </li>
+                <li class="navbar__link"><a href="#">Voucher</a></li>
+                <img src="./images/Screenshot (656).png">
+                <li class="navbar__link"><a href="#">Delivery Tracking</a></li>
+                <li class="navbar__link">
+                    <a href="#">Dashboard</a>
+                    <ul class="dropdown">
+                        <li><a href='CustomerController'>View Customer List</a></li>
+                        <li><a href='ManagerController'>View Manager List</a></li>
+                    </ul>
+                </li>
+                <li class="navbar__link">
+                    <a href="#">Account</a>
+                    <ul class="dropdown">
+                        <li><a href='adminlogin?action=logout'>Log Out</a></li>                     
+                    </ul>
+                </li>
+            </ul>
+        </div>
 
-            </tr>
-            <%
-                }
-            %>    
-            <tr><td colspan="6">
-                    <form action="ManagerController" method="POST">
-                        <input name="action" value="create" type="hidden">
-                        <input type="submit" value="Create">
+        <div class="list-container">
+            <div class="smaller-container">
+                <div class="list-title">Manager List</div>
+                <div class="list">
+                    <form action='' method=GET id="searchbox"> 
+                        <input name=keyword type=text value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
+                        <input type=submit value=Search >
                     </form>
-                </td></tr>
-        </table>
+
+                    <table>
+                        <tr>
+                            <th>Manager ID</th>
+                            <th><a href=?colSort=username>User Name</a></th>
+                            <th><a href=?colSort=firstname>First Name</a></th>
+                            <th><a href=?colSort=lastname>Last Name</a></th>
+                            <th><a href=?colSort=email>Email</a></th>
+                            <th>Address</th>
+                            <th>Delete</th>
+                        </tr>
+                        <%
+                            List<UserDTO> list = (List<UserDTO>) request.getAttribute("managerlist");
+                            for (UserDTO manager : list) {
+                                pageContext.setAttribute("manager", manager);
+                        %>
+                        <tr>
+                            <td>
+                                <a href="ManagerController?action=details&id=${manager.userid}">   ${manager.userid}</td>
+                            <td>${manager.username}</td>
+                            <td>${manager.firstname}</td>
+                            <td>${manager.lastname}</td>
+                            <td>${manager.email}</td>
+                            <td>${manager.address}</td>
+                            <td>
+                                <form action="ManagerController" method="POST">
+                                    <input name="action" value="delete" type="hidden">
+                                    <input name="id" value="${manager.userid}" type="hidden">
+                                    <input type="submit" value="Delete">
+                                </form>
+                            </td>
+
+                        </tr>
+                        <%
+                            }
+                        %>    
+                        <tr><td colspan="6">
+                                <form action="ManagerController" method="POST">
+                                    <input name="action" value="create" type="hidden">
+                                    <input type="submit" value="Create">
+                                </form>
+                            </td></tr>
+                    </table>    
+                </div>
+            </div>
+        </div>
     </body>
 </html>

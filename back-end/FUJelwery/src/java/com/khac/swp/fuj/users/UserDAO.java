@@ -154,22 +154,21 @@ public class UserDAO {
     }
 
     public Integer insert(UserDTO user) {
-        String sql = "INSERT INTO [User] (userID, userName, password, firstName, lastName, phoneNumber, email, address, point, roleID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO [User] (userName, password, firstName, lastName, phoneNumber, email, address, point, roleID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
 
-            ps.setInt(1, user.getUserid());
-            ps.setString(2, user.getUsername());
-            ps.setString(3, user.getPassword());
-            ps.setString(4, user.getFirstname());
-            ps.setString(5, user.getLastname());
-            ps.setString(6, user.getPhonenumber());
-            ps.setString(7, user.getEmail());
-            ps.setString(8, user.getAddress());
-            ps.setInt(9, user.getPoint());
-            ps.setInt(10, user.getRoleid());
+            ps.setString(1, user.getUsername());
+            ps.setString(2, user.getPassword());
+            ps.setString(3, user.getFirstname());
+            ps.setString(4, user.getLastname());
+            ps.setString(5, user.getPhonenumber());
+            ps.setString(6, user.getEmail());
+            ps.setString(7, user.getAddress());
+            ps.setInt(8, user.getPoint());
+            ps.setInt(9, user.getRoleid());
             ps.executeUpdate();
             conn.close();
             return user.getUserid();
@@ -227,5 +226,65 @@ public class UserDAO {
         }
 
         return false;
+    }
+
+    public void signup(String username, String password, String firstname, String lastname, String phonenumber, String email, String address, int point, int roleid) {
+        String sql = "INSERT INTO [User] (userName, password, firstName, lastName, phoneNumber, email, address, point, roleID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ps.setString(3, firstname);
+            ps.setString(4, lastname);
+            ps.setString(5, phonenumber);
+            ps.setString(6, email);
+            ps.setString(7, address);
+            ps.setInt(8, point);
+            ps.setInt(9, roleid);
+            ps.executeUpdate();
+            conn.close();
+        } catch (SQLException ex) {
+            System.out.println("Insert User error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+
+    public UserDTO checkAccountExist(String username) {
+        UserDTO user = null;
+        try {
+
+            Connection con = DBUtils.getConnection();
+            String sql = " select userName, firstName, lastName, email, phoneNumber, point, roleID from [User] u ";
+            sql += " WHERE userName = ?";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            stmt.setString(1, username);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs != null) {
+                if (rs.next()) {
+                    user = new UserDTO();
+                    user.setUsername(rs.getString("userName"));
+                    user.setFirstname(rs.getString("firstName"));
+                    user.setUserid(rs.getInt("userID"));
+                    user.setLastname(rs.getString("lastName"));
+                    user.setEmail(rs.getString("email"));
+                    user.setPhonenumber(rs.getString("phoneNumber"));
+                    user.setPoint(rs.getInt("point"));
+                    user.setRoleid(rs.getInt("roleID"));
+                }
+            }
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+
+        }
+        return user;
     }
 }

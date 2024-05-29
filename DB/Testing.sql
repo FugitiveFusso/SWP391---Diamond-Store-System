@@ -18,7 +18,7 @@ INSERT INTO [Collection] VALUES
 (2, 'FA FOREVER','https://www.uniqlo.com/jp/ja/contents/collaboration/uniqlo-u/24ss/common/imgs/lookbookItems/lookbook-2.jpg','Another new additions')
 
 INSERT INTO [Voucher] VALUES
-(1, 'https://bluenile-blog.r2net.com/wp-content/uploads/Ring-Spacing-Hero.jpg', 'GRAND OPENING SALE', 'SALE MO CUA HANG FUJ, SAN SALE KHUYEN MAI 20% VAO TUAN DAU TIEN, BA CON OI MAI DO MAI DO!!!! THOI LUONG CO HAN!!!', '2BA', 20)
+(1, 'GRAND OPENING SALE', 'https://bluenile-blog.r2net.com/wp-content/uploads/Ring-Spacing-Hero.jpg',  'SALE MO CUA HANG FUJ, SAN SALE KHUYEN MAI 20% VAO TUAN DAU TIEN, BA CON OI MAI DO MAI DO!!!! THOI LUONG CO HAN!!!', '2BA', 20)
 
 INSERT INTO [Post] VALUES
 (1,'HELLO THERE!!','https://bluenile-blog.r2net.com/wp-content/uploads/Ring-Spacing-Hero.jpg', 'One of the most flexible, useful and crucial pieces of jewelry can look simple enough. A small band that’s no bigger than 2.5mm wide might not seem like an impactful piece of jewelry, but these rings are considered essential for many stacking styles.
