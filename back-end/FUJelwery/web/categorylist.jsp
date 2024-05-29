@@ -1,17 +1,17 @@
 <%-- 
-    Document   : ringlist
-    Created on : May 27, 2024, 10:27:21 AM
+    Document   : categorylist
+    Created on : May 29, 2024, 10:49:30 AM
     Author     : Dell
 --%>
 
-<%@page import="com.khac.swp.fuj.ring.RingDTO"%>
+<%@page import="com.khac.swp.fuj.category.CategoryDTO"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Ring Management</title>
+        <title>Category List</title>
     </head>
     <body>
         <%@ include file="/menu.jsp" %>
@@ -42,34 +42,22 @@
         </style>
         <table>
             <tr>
-                <td>Ring ID</td>
-                <td><a href=?colSort=ringName>Ring Name</td>
-                <td>Ring Image</td>
-                <td><a href=?colSort=diamondName>Diamond Name</a></td>
-                <td>Gender</td>
-                <td><a href=?colSort=price>Price</td>
-                <td><a href=?colSort=categoryID>Category</td>
-                <td><a href=?colSort=collectionID>Collection</td>                
+                <td>Category ID</td>
+                <td><a href=?colSort=categoryName>Category Name</a></td>
             </tr>
             <%
-                List<RingDTO> list = (List<RingDTO>) request.getAttribute("ringlist");
-                for (RingDTO ring : list) {
-                    pageContext.setAttribute("ring", ring);
+                List<CategoryDTO> list = (List<CategoryDTO>) request.getAttribute("categorylist");
+                for (CategoryDTO category : list) {
+                    pageContext.setAttribute("category", category);
             %>
             <tr>
                 <td>
-                    <a href="RingController?action=details&id=${ring.ringID}">   ${ring.ringID}</td>
-                <td>${ring.ringName}</td>
-                <td><img src=${ring.ringImage} width="300px" height="300px"></td>
-                <td>${ring.diamondName}</td>
-                <td>${ring.gender}</td>
-                <td>${ring.price}</td>
-                <td>${ring.categoryID}</td>
-                <td>${ring.collectionID}</td>
+                    <a href="CategoryController?action=details&id=${category.categoryID}">   ${category.categoryID}</td>
+                <td>${category.categoryName}</td>
                 <td>
-                    <form action="RingController" method="POST">
+                    <form action="CategoryController" method="POST">
                         <input name="action" value="delete" type="hidden">
-                        <input name="ID" value="${ring.ringID}" type="hidden">
+                        <input name="id" value="${category.categoryID}" type="hidden">
                         <input type="submit" value="Delete">
                     </form>
                 </td>
@@ -79,7 +67,7 @@
                 }
             %>    
             <tr><td colspan="10">
-                    <form action="RingController" method="POST">
+                    <form action="CategoryController" method="POST">
                         <input name="action" value="create" type="hidden">
                         <input type="submit" value="Create">
                     </form>

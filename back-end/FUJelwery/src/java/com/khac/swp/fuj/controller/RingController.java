@@ -63,7 +63,7 @@ public class RingController extends HttpServlet {
 
                 request.getRequestDispatcher("/ringlist.jsp").forward(request, response);
 
-            } else if (action.equals("details")) {//details
+            }else if (action.equals("details")) {//details
 
                 Integer id = null;
                 try {
@@ -79,10 +79,11 @@ public class RingController extends HttpServlet {
 
                 request.setAttribute("ring", ring);//object
                 request.getRequestDispatcher("/ringdetails.jsp").forward(request, response);
+                
             } else if (action.equals("edit")) {//edit
                 Integer id = null;
                 try {
-                    id = Integer.parseInt(request.getParameter("id"));
+                    id = Integer.parseInt(request.getParameter("ID"));
                 } catch (NumberFormatException ex) {
                     log("Parameter id has wrong format.");
                 }
@@ -123,15 +124,15 @@ public class RingController extends HttpServlet {
                 if (ringid != null) {
                     ring = ringDAO.load(ringid);
                 }
-                ring.setRingID(ringid);
-                ring.setRingName(ringName);
-                ring.setRingImage(ringImage);
-                ring.setDiamondID(diamondID);
-                ring.setGender(gender);
-                ring.setPrice(price);
-                ring.setCategoryID(categoryID);
-                ring.setCollectionID(collectionID);
-                ringDAO.update(ring);
+                    ring.setRingID(ringid);
+                    ring.setRingName(ringName);
+                    ring.setRingImage(ringImage);
+                    ring.setDiamondID(diamondID);
+                    ring.setGender(gender);
+                    ring.setPrice(price);
+                    ring.setCategoryID(categoryID);
+                    ring.setCollectionID(collectionID);
+
                 request.setAttribute("ring", ring);
                 RequestDispatcher rd = request.getRequestDispatcher("ringdetails.jsp");
                 rd.forward(request, response);
@@ -144,12 +145,12 @@ public class RingController extends HttpServlet {
                     String ringImage = request.getParameter("ringImage");
                     int diamondID = Integer.parseInt(request.getParameter("diamondID"));
                     String gender = request.getParameter("gender");
-                    double price = Double.parseDouble(request.getParameter("price"));
-                    int collectionID = Integer.parseInt(request.getParameter("collectionID"));
+                    double price = Double.parseDouble(request.getParameter("price"));;
                     int categoryID = Integer.parseInt(request.getParameter("categoryID"));
+                    int collectionID = Integer.parseInt(request.getParameter("collectionID"));
 
                     PreparedStatement ps = conn.prepareStatement("select max(ringID) from [Ring]");
-
+                    
                     ResultSet rs = ps.executeQuery();
                     if (rs.next()) {
                         ringid = rs.getInt(1);
@@ -166,7 +167,7 @@ public class RingController extends HttpServlet {
                     ring.setCollectionID(collectionID);
                     request.setAttribute("ring", ring);
                     ringDAO.insert(ring);
-
+                    
                     RequestDispatcher rd = request.getRequestDispatcher("ringdetails.jsp");
                     rd.forward(request, response);
                 } catch (SQLException ex) {

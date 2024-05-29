@@ -58,7 +58,7 @@
             <input type=submit value="Return" ></form>
 
         <form action="DiamondController" style="padding-top: 10px">
-            <input type=hidden name="id" value="${requestScope.diamond.diamondID}">
+            <input type=hidden name="id" value="${requestScope.diamond.diamondid}">
             <input type=hidden name="action" value="edit">
             <input type=submit value="Edit" ></form>
     </body>

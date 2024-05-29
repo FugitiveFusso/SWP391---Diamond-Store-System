@@ -28,7 +28,7 @@
                 <tr><td>Cut</td><td><input name="cut" value="${requestScope.diamond.cut}" required="Please enter"</td></tr>
                 <tr><td>Color</td><td><input name="color" value="${requestScope.diamond.color}" required="Please enter"</td></tr>
                 <tr><td>Clarity</td><td><input name="clarity" value="${requestScope.diamond.clarity}" required="Please enter"</td></tr>
-                <tr><td>Certificate ID</td><td><input name="certificateID" value="${requestScope.diamond.certificateID}" required="Please enter"</td></tr>
+                <tr><td>Certificate</td><td><input name="clarity" value="${requestScope.diamond.certificateID}" required="Please enter"</td></tr>
                 <tr><td colspan="2">
                         <input name="action" value="${requestScope.nextaction}" type="hidden">
                         <input type="submit" value="Save">

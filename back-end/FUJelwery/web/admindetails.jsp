@@ -11,9 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Administrator Management Page</title>
         <link rel="stylesheet" href="css/navbar.css">
-        <!--<link rel="stylesheet" href="css/staff_detail.css">-->
-
-        <link rel="stylesheet" href="css/staff_details.css">
+        <link rel="stylesheet" href="css/staff_detail.css">
 
     </head>
     <body>
@@ -32,65 +30,34 @@
 
         </div>
 
-        <%--<jsp:include page="/managermenu.jsp" flush="true" />--%>
+        <jsp:include page="/managermenu.jsp" flush="true" />
 
         <div class="container">
+            <h1>Administrator Details Page</h1>         
+            <p> Login username: ${sessionScope.managersession.username}</p>
 
-            <div class="account-intro">
-                ACCOUNT INFORMATION
-            </div>
+            <table>
 
-            <div class="account-info">
-                <div class="account-info-left">
-                    <img src="images/account-icon.png">
+                <tr><td>User Name</td><td>${requestScope.admin.username}</td></tr>
+                <tr><td>Password</td><td>${requestScope.admin.password}</td></tr>
+                <tr><td>First Name</td><td>${requestScope.admin.firstname}</td></tr>
+                <tr><td>Last Name</td><td>${requestScope.admin.lastname}</td></tr>
+                <tr><td>Phone Number</td><td>${requestScope.admin.phonenumber}</td></tr>
+                <tr><td>Email</td><td>${requestScope.admin.email}</td></tr>
+                <tr><td>Address</td><td>${requestScope.admin.address}</td></tr>
+                <tr><td>Point</td><td>${requestScope.admin.point}</td></tr>
+            </table>
 
-                </div>
-                <div class="account-info-right">
-                    <div class="account-info-text">
-                        <h2>${requestScope.admin.lastname} ${requestScope.admin.firstname} </h2>
-                        <h3>Admin of FUJ</h3>
-                        <p>${requestScope.admin.username}</p>
-                    </div>
-                </div>
+            <form action="AdminController" style="padding-top: 10px">
 
-            </div>
-            <hr>
+                <input type=hidden name="action" value="list">
+                <input type=submit value="Return" ></form>
 
-            <div class="account-intro">               
-                PERSONAL INFORMATION
-            </div>
+            <form action="AdminController" style="padding-top: 10px">
+                <input type=hidden name="id" value="${requestScope.admin.userid}">
+                <input type=hidden name="action" value="edit">
+                <input type=submit value="Edit" ></form>
 
-
-            <div class="personal-info">
-                <div class="personal-info-left">
-                    <div class="info-left">
-                        <p>Fisrt Name</p>
-                        <p>Last Name</p>
-                        <p>Your Email</p>
-                        <p>Phone Number</p>
-                    </div>
-                    <div class="info-right">
-                        <p>${requestScope.admin.firstname}</p>
-                        <p>${requestScope.admin.lastname}</p>
-                        <p>${requestScope.admin.email}</p>
-                        <p>${requestScope.admin.phonenumber}</p>
-                    </div>
-                </div>
-
-                <div class="personal-info-right">
-                    <div class="button">
-                        <form action="AdminController" style="padding-top: 10px">
-                            <input type=hidden name="id" value="${requestScope.admin.userid}">
-                            <input type=hidden name="action" value="edit">
-                            <input type=submit value="Edit" ></form>
-                        <form action="AdminController" style="padding-top: 10px">
-                            <input type=hidden name="action" value="list">
-                            <input type=submit value="Return" ></form>
-                    </div>
-                </div>
-            </div>
         </div>
     </body>
 </html>
-
-

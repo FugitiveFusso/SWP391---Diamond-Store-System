@@ -5,17 +5,14 @@
  */
 package com.khac.swp.fuj.controller;
 
-import com.khac.swp.fuj.diamond.DiamondDAO;
-import com.khac.swp.fuj.diamond.DiamondDTO;
-import com.khac.swp.fuj.users.UserDAO;
-import com.khac.swp.fuj.users.UserDTO;
+import com.khac.swp.fuj.category.CategoryDAO;
+import com.khac.swp.fuj.category.CategoryDTO;
 import com.khac.swp.fuj.utils.DBUtils;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,13 +21,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.sql.SQLException;
 
 /**
  *
  * @author Dell
  */
-@WebServlet(name = "DiamondController", urlPatterns = {"/DiamondController"})
-public class DiamondController extends HttpServlet {
+@WebServlet(name = "CategoryController", urlPatterns = {"/CategoryController"})
+public class CategoryController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -52,18 +50,18 @@ public class DiamondController extends HttpServlet {
             }
             String sortCol = request.getParameter("colSort");
 
-            DiamondDAO diamondDAO = new DiamondDAO();
+            CategoryDAO categoryDAO = new CategoryDAO();
             HttpSession session = request.getSession(false);
             if (session == null || session.getAttribute("adminsession") == null) {
                 response.sendRedirect("adminlogin.jsp");
                 return;
             } else if (action == null || action.equals("list")) {//lists
 
-                DiamondDAO dao = new DiamondDAO();
-                List<DiamondDTO> list = dao.list(keyword, sortCol);
-                request.setAttribute("diamondlist", list);
+                CategoryDAO dao = new CategoryDAO();
+                List<CategoryDTO> list = dao.list(keyword, sortCol);
+                request.setAttribute("categorylist", list);
 
-                request.getRequestDispatcher("/diamondlist.jsp").forward(request, response);
+                request.getRequestDispatcher("/categorylist.jsp").forward(request, response);
 
             } else if (action.equals("details")) {//details
 
@@ -74,13 +72,13 @@ public class DiamondController extends HttpServlet {
                     log("Parameter id has wrong format.");
                 }
 
-                DiamondDTO diamond = null;
+                CategoryDTO category = null;
                 if (id != null) {
-                    diamond = diamondDAO.load(id);
+                    category = categoryDAO.load(id);
                 }
 
-                request.setAttribute("diamond", diamond);//object
-                RequestDispatcher rd = request.getRequestDispatcher("diamonddetails.jsp");
+                request.setAttribute("category", category);//object
+                RequestDispatcher rd = request.getRequestDispatcher("categorydetails.jsp");
                 rd.forward(request, response);
                 
             } else if (action.equals("edit")) {//edit
@@ -91,93 +89,65 @@ public class DiamondController extends HttpServlet {
                     log("Parameter id has wrong format.");
                 }
 
-                DiamondDTO diamond = null;
+                CategoryDTO category = null;
                 if (id != null) {
-                    diamond = diamondDAO.load(id);
+                    category = categoryDAO.load(id);
                 }
 
-                request.setAttribute("diamond", diamond);
+                request.setAttribute("category", category);
                 request.setAttribute("nextaction", "update");
-                RequestDispatcher rd = request.getRequestDispatcher("diamondedit.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("categoryedit.jsp");
                 rd.forward(request, response);
 
             } else if (action.equals("create")) {//create
-                DiamondDTO diamond = new DiamondDTO();
-                request.setAttribute("diamond", diamond);
+                CategoryDTO category = new CategoryDTO();
+                request.setAttribute("category", category);
                 request.setAttribute("nextaction", "insert");
-                RequestDispatcher rd = request.getRequestDispatcher("diamondedit.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("categoryedit.jsp");
                 rd.forward(request, response);
 
             } else if (action.equals("update")) {//update
-                Integer diamondid = null;
+                Integer categoryid = null;
                 try {
-                    diamondid = Integer.parseInt(request.getParameter("id"));
+                    categoryid = Integer.parseInt(request.getParameter("id"));
                 } catch (NumberFormatException ex) {
                     log("Parameter id has wrong format.");
                 }
-                String diamondName = request.getParameter("diamondName");
-                String diamondImage = request.getParameter("diamondImage");
-                String origin = request.getParameter("origin");
-                int caratWeight = Integer.parseInt(request.getParameter("caratWeight"));
-                String cut = request.getParameter("cut");
-                String color = request.getParameter("color");
-                String clarity = request.getParameter("clarity");
-                int certificateID = Integer.parseInt(request.getParameter("certificateID"));
+                String categoryName = request.getParameter("categoryName");
 
-                DiamondDTO diamond = null;
-                if (diamondid != null) {
-                    diamond = diamondDAO.load(diamondid);
+                CategoryDTO category = null;
+                if (categoryid != null) {
+                    category = categoryDAO.load(categoryid);
                 }
-                diamond.setDiamondID(diamondid);
-                diamond.setDiamondName(diamondName);
-                diamond.setDiamondImage(diamondImage);
-                diamond.setOrigin(origin);
-                diamond.setCaratWeight(caratWeight);
-                diamond.setCut(cut);
-                diamond.setColor(color);
-                diamond.setClarity(clarity);
-                diamond.setCertificateID(certificateID);
+                category.setCategoryID(categoryid);
+                category.setCategoryName(categoryName);
 
-                request.setAttribute("diamond", diamond);
-                RequestDispatcher rd = request.getRequestDispatcher("diamonddetails.jsp");
+                request.setAttribute("category", category);
+                RequestDispatcher rd = request.getRequestDispatcher("categorydetails.jsp");
                 rd.forward(request, response);
 
             } else if (action.equals("insert")) {//insert
                 try {
                     Connection conn = DBUtils.getConnection();
-                    int diamondid = 0;
-                    String diamondName = request.getParameter("diamondName");
-                    String diamondImage = request.getParameter("diamondImage");
-                    String origin = request.getParameter("origin");
-                    int caratWeight = Integer.parseInt(request.getParameter("caratWeight"));
-                    String cut = request.getParameter("cut");
-                    String color = request.getParameter("color");
-                    String clarity = request.getParameter("clarity");
-                    int certificateID = Integer.parseInt(request.getParameter("certificateID"));
+                    int categoryid = 0;
+                    String categoryName = request.getParameter("categoryName");
 
-                    PreparedStatement ps = conn.prepareStatement("select max(diamondID) from [Diamond]");
+                    PreparedStatement ps = conn.prepareStatement("select max(categoryID) from [Category]");
                     ResultSet rs = ps.executeQuery();
                     if (rs.next()) {
-                        diamondid = rs.getInt(1);
-                        diamondid++;
+                        categoryid = rs.getInt(1);
+                        categoryid++;
                     }
-                    DiamondDTO diamond = new DiamondDTO();
-                    diamond.setDiamondID(diamondid);
-                    diamond.setDiamondName(diamondName);
-                    diamond.setDiamondImage(diamondImage);
-                    diamond.setOrigin(origin);
-                    diamond.setCaratWeight(caratWeight);
-                    diamond.setCut(cut);
-                    diamond.setColor(color);
-                    diamond.setClarity(clarity);
-                    diamond.setCertificateID(certificateID);
-                    request.setAttribute("diamond", diamond);
-                    diamondDAO.insert(diamond);
+                    CategoryDTO category = new CategoryDTO();
+                    category.setCategoryID(categoryid);
+                    category.setCategoryName(categoryName);
+                    request.setAttribute("category", category);
+                    categoryDAO.insert(category);
                     
-                    RequestDispatcher rd = request.getRequestDispatcher("diamonddetails.jsp");
+                    RequestDispatcher rd = request.getRequestDispatcher("categorydetails.jsp");
                     rd.forward(request, response);
                 } catch (SQLException ex) {
-                    System.out.println("Insert diamond error!" + ex.getMessage());
+                    System.out.println("Insert category error!" + ex.getMessage());
                     ex.printStackTrace();
                 }
 
@@ -190,11 +160,11 @@ public class DiamondController extends HttpServlet {
                     log("Parameter id has wrong format.");
                 }
 
-                diamondDAO.delete(id);
+                categoryDAO.delete(id);
 
-                List<DiamondDTO> list = diamondDAO.list(keyword, sortCol);
-                request.setAttribute("diamondlist", list);
-                RequestDispatcher rd = request.getRequestDispatcher("diamondlist.jsp");
+                List<CategoryDTO> list = categoryDAO.list(keyword, sortCol);
+                request.setAttribute("categorylist", list);
+                RequestDispatcher rd = request.getRequestDispatcher("categorylist.jsp");
                 rd.forward(request, response);
             }
             }
