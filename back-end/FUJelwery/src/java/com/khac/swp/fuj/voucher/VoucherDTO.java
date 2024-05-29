@@ -15,7 +15,7 @@ public class VoucherDTO {
     private String image;
     private String description;
     private String coupon;
-    private int percetage;
+    private int percentage;
 
     public int getId() {
         return id;
@@ -57,12 +57,12 @@ public class VoucherDTO {
         this.coupon = coupon;
     }
 
-    public int getPercetage() {
-        return percetage;
+    public int getPercentage() {
+        return percentage;
     }
 
-    public void setPercetage(int percetage) {
-        this.percetage = percetage;
+    public void setPercentage(int percentage) {
+        this.percentage = percentage;
     }
     
     

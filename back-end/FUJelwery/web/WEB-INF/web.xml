@@ -36,6 +36,10 @@
         <servlet-name>Registration</servlet-name>
         <servlet-class>com.khac.swp.fuj.controller.Registration</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>VoucherController</servlet-name>
+        <servlet-class>com.khac.swp.fuj.controller.VoucherController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AdminLoginController</servlet-name>
         <url-pattern>/adminlogin</url-pattern>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>Registration</servlet-name>
         <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VoucherController</servlet-name>
+        <url-pattern>/VoucherController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

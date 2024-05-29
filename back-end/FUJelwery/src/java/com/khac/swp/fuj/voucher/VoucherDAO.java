@@ -56,7 +56,7 @@ public class VoucherDAO {
                     voucher.setImage(voucherimage);
                     voucher.setDescription(description);
                     voucher.setCoupon(coupon);
-                    voucher.setPercetage(percentage);
+                    voucher.setPercentage(percentage);
                     list.add(voucher);
                 }
             }
@@ -95,7 +95,7 @@ public class VoucherDAO {
                 voucher.setImage(voucherimage);
                 voucher.setDescription(description);
                 voucher.setCoupon(coupon);
-                voucher.setPercetage(percentage);
+                voucher.setPercentage(percentage);
                 return voucher;
             }
         } catch (SQLException ex) {
@@ -117,7 +117,7 @@ public class VoucherDAO {
             ps.setString(3, voucher.getImage());
             ps.setString(4, voucher.getDescription());
             ps.setString(5, voucher.getCoupon());
-            ps.setInt(6, voucher.getPercetage());
+            ps.setInt(6, voucher.getPercentage());
 
             ps.executeUpdate();
             conn.close();
@@ -141,7 +141,7 @@ public class VoucherDAO {
             ps.setString(2, voucher.getImage());
             ps.setString(3, voucher.getDescription());
             ps.setString(4, voucher.getCoupon());
-            ps.setInt(5, voucher.getPercetage());
+            ps.setInt(5, voucher.getPercentage());
 
             ps.executeUpdate();
             conn.close();
