@@ -27,7 +27,7 @@ public class RingDAO {
         List<RingDTO> list = new ArrayList<RingDTO>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = "SELECT r.ringID, r.ringName, r.ringImage, r.gender, r.price, r.collectionID, r.categoryID, r.diamondID, d.diamondName, d.diamondImage, d.origin, d.caratWeight, d.cut, d.color, d.clarity, d.certificateID"
+            String sql = "SELECT r.ringID, r.ringName, r.ringImage, r.gender, r.price, r.collectionID, r.categoryID, r.diamondID, d.diamondName, d.diamondImage, d.origin, d.caratWeight, d.cut, d.color, d.clarity, d.certificateID "
                     + " FROM [Ring] r FULL JOIN [Diamond] d ON d.diamondID = r.diamondID ";
             if (keyword != null && !keyword.isEmpty()) {
                 sql += " WHERE ringName like ? ";
@@ -191,7 +191,7 @@ public class RingDAO {
             ps.setInt(6, ring.getCategoryID());
             ps.setInt(7, ring.getCollectionID());
             ps.setInt(8, ring.getRingID());
-            
+
             ps.executeUpdate();
             conn.close();
         } catch (SQLException ex) {
@@ -226,8 +226,9 @@ public class RingDAO {
 
     public static void main(String[] args) {
         RingDAO dao = new RingDAO();
-
-        RingDTO a = dao.load(1);
-          System.out.println(a);
+        List<RingDTO> list = dao.list("", "");
+        for (RingDTO ringDTO : list) {
+            System.out.println(ringDTO.toString());
+        }
     }
 }

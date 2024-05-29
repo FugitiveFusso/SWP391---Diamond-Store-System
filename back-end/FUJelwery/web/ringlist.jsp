@@ -63,7 +63,6 @@
                             <th><a href=?colSort=diamondName>Diamond Name</a></th>
                             <th>Gender</th>
                             <th><a href=?colSort=price>Price</th>
-                            <th><a href=?colSort=quantity>Quantity</th>
                             <th><a href=?colSort=categoryID>Category</th>
                             <th><a href=?colSort=collectionID>Collection</th>
                             <th>Delete</th>
@@ -81,13 +80,13 @@
                             <td>${ring.diamondName}</td>
                             <td>${ring.gender}</td>
                             <td>${ring.price}</td>
-                            <td>${ring.quantity}</td>
+                            
                             <td>${ring.categoryID}</td>
                             <td>${ring.collectionID}</td>
                             <td>
                                 <form action="RingController" method="POST">
                                     <input name="action" value="delete" type="hidden">
-                                    <input name="ID" value="${ring.ringID}" type="hidden">
+                                    <input name="id" value="${ring.ringID}" type="hidden">
                                     <input type="submit" value="Delete">
                                 </form>
                             </td>

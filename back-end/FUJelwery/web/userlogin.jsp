@@ -22,7 +22,7 @@
                     
                     <% String error = (String) request.getAttribute("error"); %>
                     <% if (error != null) {%>
-                    <h3 style="color: red"> <%= error%> </h3>
+                    <h3 style="color: red; display: flex; justify-content: center; margin-top: 10px"> <%= error%> </h3>
                     <% }%>
                     
                     <div class="input-box">

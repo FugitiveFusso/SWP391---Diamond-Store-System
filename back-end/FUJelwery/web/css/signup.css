@@ -1,4 +1,4 @@
-body {
+/*body {
     background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
     font-family: 'Poppins', sans-serif;
 }
@@ -10,9 +10,9 @@ body {
     background-color: whitesmoke;
     border-radius: 4px;
     font-size: 12px;
-}
+}*/
 
-#form h1 {
+/*#form h1 {
     color: #0f2027;
     text-align: center;
 }
@@ -39,22 +39,24 @@ body {
     font-size: 12px;
     padding: 10px;
     width: 95%;
-}
+}*/
 
-.input-control input:focus {
+.input-box input:focus {
     outline: 0;
 }
 
-.input-control.success input {
+.input-box.success input {
     border-color: green;
 }
 
-.input-control.error input {
+.input-box.error input {
     border-color: red;
 }
 
-.input-control .error {
+.input-box .error {
+    position: relative;
     color: red;
-    font-size: 9px;
+    font-size: 14px;
     height: 13px;
+    font-weight: 700
 }

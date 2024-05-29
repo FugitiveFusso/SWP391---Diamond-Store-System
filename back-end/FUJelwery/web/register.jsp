@@ -10,7 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <!--<link rel="stylesheet" href="./css/signup.css">-->
+        <link rel="stylesheet" href="./css/signup.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
@@ -33,7 +33,7 @@
                     <h4 style="color: red; text-align: center"> <%= error1%> </h4>
                     <% }%>
 
-                    <div class="input-box"><input name="username" type="text" required>
+                    <div class="input-box"><input name="username" id="username1"type="text" required>
                         <span class="placeholder2">Username</span>
                         <div class="error"></div></div>
                     <div class="input-box">
@@ -46,7 +46,7 @@
                         <div class="error"></div>
                     </div>
                     <div class="input-box">
-                        <input name="repass" type="password"  required>
+                        <input name="repass" id="repass1" type="password"  required>
                         <span class="placeholder2">Re-password</span>
                         <!--                        <span class="eye" onclick="myFunction()">
                                                     <i id="hide1" class="fa-solid fa-eye"></i>
@@ -85,7 +85,7 @@
                 </form>
             </div>
         </section>
-        <script src="js/signup.js.js"></script>
+        <script src="js/signup.js"></script>
         <script src="js/login.js"></script>
         <script>
                             function myFunction() {
