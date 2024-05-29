@@ -224,11 +224,4 @@ public class RingDAO {
         return false;
     }
 
-    public static void main(String[] args) {
-        RingDAO dao = new RingDAO();
-        List<RingDTO> list = dao.list("", "");
-        for (RingDTO ringDTO : list) {
-            System.out.println(ringDTO.toString());
-        }
-    }
 }
