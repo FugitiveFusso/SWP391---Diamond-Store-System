@@ -5,14 +5,15 @@
  */
 package com.khac.swp.fuj.controller;
 
-import com.khac.swp.fuj.collection.CollectionDAO;
-import com.khac.swp.fuj.collection.CollectionDTO;
+import com.khac.swp.fuj.certificate.CertificateDAO;
+import com.khac.swp.fuj.certificate.CertificateDTO;
 import com.khac.swp.fuj.utils.DBUtils;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,14 +22,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.sql.SQLException;
 
 /**
  *
  * @author Dell
  */
-@WebServlet(name = "CollectionController", urlPatterns = {"/CollectionController"})
-public class CollectionController extends HttpServlet {
+@WebServlet(name = "CertificateController", urlPatterns = {"/CertificateController"})
+public class CertificateController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -50,18 +50,18 @@ public class CollectionController extends HttpServlet {
             }
             String sortCol = request.getParameter("colSort");
 
-            CollectionDAO collectionDAO = new CollectionDAO();
+            CertificateDAO certificateDAO = new CertificateDAO();
             HttpSession session = request.getSession(false);
             if (session == null || session.getAttribute("adminsession") == null) {
                 response.sendRedirect("adminlogin.jsp");
                 return;
             } else if (action == null || action.equals("list")) {//lists
 
-                CollectionDAO dao = new CollectionDAO();
-                List<CollectionDTO> list = dao.list(keyword, sortCol);
-                request.setAttribute("collectionlist", list);
+                CertificateDAO dao = new CertificateDAO();
+                List<CertificateDTO> list = dao.list(keyword, sortCol);
+                request.setAttribute("certificatelist", list);
 
-                request.getRequestDispatcher("/collectionlist.jsp").forward(request, response);
+                request.getRequestDispatcher("/certificatelist.jsp").forward(request, response);
 
             } else if (action.equals("details")) {//details
 
@@ -72,13 +72,13 @@ public class CollectionController extends HttpServlet {
                     log("Parameter id has wrong format.");
                 }
 
-                CollectionDTO collection = null;
+                CertificateDTO certificate = null;
                 if (id != null) {
-                    collection = collectionDAO.load(id);
+                    certificate = certificateDAO.load(id);
                 }
 
-                request.setAttribute("collection", collection);//object
-                RequestDispatcher rd = request.getRequestDispatcher("collectiondetails.jsp");
+                request.setAttribute("certificate", certificate);//object
+                RequestDispatcher rd = request.getRequestDispatcher("certificatedetails.jsp");
                 rd.forward(request, response);
                 
             } else if (action.equals("edit")) {//edit
@@ -89,74 +89,70 @@ public class CollectionController extends HttpServlet {
                     log("Parameter id has wrong format.");
                 }
 
-                CollectionDTO collection = null;
+                CertificateDTO certificate = null;
                 if (id != null) {
-                    collection = collectionDAO.load(id);
+                    certificate = certificateDAO.load(id);
                 }
 
-                request.setAttribute("collection", collection);
+                request.setAttribute("certificate", certificate);
                 request.setAttribute("nextaction", "update");
-                RequestDispatcher rd = request.getRequestDispatcher("collectionedit.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("certificateedit.jsp");
                 rd.forward(request, response);
 
             } else if (action.equals("create")) {//create
-                CollectionDTO collection = new CollectionDTO();
-                request.setAttribute("collection", collection);
+                CertificateDTO certificate = new CertificateDTO();
+                request.setAttribute("certificate", certificate);
                 request.setAttribute("nextaction", "insert");
-                RequestDispatcher rd = request.getRequestDispatcher("collectionedit.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("certificateedit.jsp");
                 rd.forward(request, response);
 
             } else if (action.equals("update")) {//update
-                Integer collectionid = null;
+                Integer certificateid = null;
                 try {
-                    collectionid = Integer.parseInt(request.getParameter("id"));
+                    certificateid = Integer.parseInt(request.getParameter("id"));
                 } catch (NumberFormatException ex) {
                     log("Parameter id has wrong format.");
                 }
-                String collectionName = request.getParameter("collectionName");
-                String collectionImage = request.getParameter("collectionImage");
-                String description = request.getParameter("description");
+                String certificateImage = request.getParameter("certificateImage");
+                String certificateDescription = request.getParameter("description");
 
-                CollectionDTO collection = null;
-                if (collectionid != null) {
-                    collection = collectionDAO.load(collectionid);
+                CertificateDTO certificate = null;
+                if (certificateid != null) {
+                    certificate = certificateDAO.load(certificateid);
                 }
-                collection.setCollectionID(collectionid);
-                collection.setCollectionName(collectionName);
-                collection.setCollectionImage(collectionImage);
-                collection.setCollectionDescription(description);
-                collectionDAO.update(collection);
-
-                request.setAttribute("collection", collection);
-                RequestDispatcher rd = request.getRequestDispatcher("collectiondetails.jsp");
+                certificate.setCertificateID(certificateid);
+                certificate.setCertificateImage(certificateImage);
+                certificate.setCertificateDescription(certificateDescription);
+                certificateDAO.update(certificate);
+                
+                request.setAttribute("certificate", certificate);
+                RequestDispatcher rd = request.getRequestDispatcher("certificatedetails.jsp");
                 rd.forward(request, response);
 
             } else if (action.equals("insert")) {//insert
                 try {
                     Connection conn = DBUtils.getConnection();
-                    int collectionid = 0;
-                    String collectionName = request.getParameter("collectionName");
-                    String collectionImage = request.getParameter("collectionImage");
-                    String description = request.getParameter("descritption");
+                    int certificateid = 0;
+                    String certificateImage = request.getParameter("certificateImage");
+                    String certificateDescription = request.getParameter("description");
 
-                    PreparedStatement ps = conn.prepareStatement("select max(collectionID) from [Collection]");
+                    PreparedStatement ps = conn.prepareStatement("select max(certificateID) from [Certificate]");
                     ResultSet rs = ps.executeQuery();
                     if (rs.next()) {
-                        collectionid = rs.getInt(1);
-                        collectionid++;
+                        certificateid = rs.getInt(1);
+                        certificateid++;
                     }
-                    CollectionDTO collection = new CollectionDTO();
-                    collection.setCollectionID(collectionid);
-                    collection.setCollectionName(collectionName);
-                    collection.setCollectionImage(collectionImage);
-                    collection.setCollectionDescription(description);
-                    request.setAttribute("collection", collection);
-                    collectionDAO.insert(collection);
+                    CertificateDTO certificate = new CertificateDTO();
+                    certificate.setCertificateID(certificateid);
+                    certificate.setCertificateImage(certificateImage);
+                    certificate.setCertificateDescription(certificateDescription);
+                    request.setAttribute("certificate", certificate);
+                    certificateDAO.insert(certificate);
                     
-                    RequestDispatcher rd = request.getRequestDispatcher("collectiondetails.jsp");
+                    RequestDispatcher rd = request.getRequestDispatcher("certificatedetails.jsp");
                     rd.forward(request, response);
                 } catch (SQLException ex) {
-                    System.out.println("Insert collection error!" + ex.getMessage());
+                    System.out.println("Insert certificate error!" + ex.getMessage());
                     ex.printStackTrace();
                 }
 
@@ -169,14 +165,14 @@ public class CollectionController extends HttpServlet {
                     log("Parameter id has wrong format.");
                 }
 
-                collectionDAO.delete(id);
+                certificateDAO.delete(id);
 
-                List<CollectionDTO> list = collectionDAO.list(keyword, sortCol);
-                request.setAttribute("collectionlist", list);
-                RequestDispatcher rd = request.getRequestDispatcher("collectionlist.jsp");
+                List<CertificateDTO> list = certificateDAO.list(keyword, sortCol);
+                request.setAttribute("certificatelist", list);
+                RequestDispatcher rd = request.getRequestDispatcher("certificatelist.jsp");
                 rd.forward(request, response);
             }
-            }    
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

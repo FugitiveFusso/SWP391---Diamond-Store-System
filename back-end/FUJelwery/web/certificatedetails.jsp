@@ -1,6 +1,6 @@
 <%-- 
-    Document   : categorydetails
-    Created on : May 29, 2024, 10:49:42 AM
+    Document   : certificatedetails
+    Created on : May 29, 2024, 5:45:23 PM
     Author     : Dell
 --%>
 
@@ -9,12 +9,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Category Details Page</title>
+        <title>JSP Page</title>
     </head>
     <body>
          <jsp:include page="/menu.jsp" flush="true" />
 
-        <h1>Category Details </h1>         
+        <h1>Certificate Details </h1>         
         <p> Login username: ${sessionScope.adminsession.username}</p>
 
         <style>
@@ -40,16 +40,17 @@
         </style>
         <table>
 
-            <tr><td>Category ID</td><td>${requestScope.category.categoryID}</td></tr>
-            <tr><td>Category Name</td><td>${requestScope.category.categoryName}</td></tr>
+            <tr><td>Certificate ID</td><td>${requestScope.certificate.certificateID}</td></tr>
+            <tr><td>Certificate Image</td><td><img src=${certificate.certificateImage} width="300px" height="300px"></td></tr>
+            <tr><td>Description</td><td>${requestScope.certificate.certificateDescription}</td></tr>
         </table>
             
-            <form action="CategoryController" style="padding-top: 10px">
+            <form action="CertificateController" style="padding-top: 10px">
             <input type=hidden name="action" value="list">
             <input type=submit value="Return" ></form>
 
-        <form action="CategoryController" style="padding-top: 10px">
-            <input type=hidden name="id" value="${requestScope.category.categoryID}">
+        <form action="CertificateController" style="padding-top: 10px">
+            <input type=hidden name="id" value="${requestScope.certificate.certificateID}">
             <input type=hidden name="action" value="edit">
             <input type=submit value="Edit" ></form>
     </body>
