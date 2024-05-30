@@ -18,7 +18,6 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css" />
-        <link rel="stylesheet" href="css/staff_detail.css">
 
 
     </head>
@@ -77,21 +76,20 @@
                                             <h6 class="text-muted f-w-400">${requestScope.admin.phonenumber}</h6>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="row" style="margin-top: 20px; justify-content: center">
+                                        <div class="col-sm-4">
                                             <form action="AdminController" style="padding-top: 10px">
                                                 <input type="hidden" name="id" value="${requestScope.admin.userid}">
                                                 <input type="hidden" name="action" value="edit">
                                                 <button type="submit" class="btn btn-custom">Edit</button>
                                             </form>
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-4">
                                             <form action="AdminController" style="padding-top: 10px">
                                                 <button type="submit" class="btn btn-custom">Return</button>
                                             </form>
                                         </div>
                                     </div>
-                                    <ul class="social-link list-unstyled m-t-40 m-b-10"></ul>
                                 </div>
                             </div>
                         </div>

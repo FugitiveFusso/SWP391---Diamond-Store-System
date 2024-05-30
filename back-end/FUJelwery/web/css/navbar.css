@@ -1,88 +1,95 @@
 @import url('https://fonts.googleapis.com/css2?family=Gantari:ital,wght@0,100..900;1,100..900&family=Syne:wght@400..800&display=swap');
 
-.navbar {
-  display: flex;
-  justify-content: space-around;
-  background-color: white;
-  padding: 10px 0;
-  margin: 0;
-  max-width: 100%;
-}
-
-.navbar img {
-  width: 80px;
-  height: 80px;
-}
-
-.navbar__link {
-  list-style: none;
-  padding: 0 40px;
-}
-
-.navbar__link a {
-  text-decoration: none;
-  margin: 27.5px 0 30.5px 0;
-  display: inline-block;
-  overflow-wrap: break-word;
-  font-family: 'Inter';
-  font-weight: 600;
-  font-size: 20px;
-  color: #000000;
-}
-
-.menu{
+.menu {
     background: #fff;
     text-align: center;
     align-items: center;
+    position: relative; /* Ensure .menu is positioned relatively */
 }
 
-.menu ul{
-    display: inline-flex;
+.navbar {
+    display: flex;
+    justify-content: space-around; /* Use space-around to distribute space */
+    background-color: white;
+    padding: 10px 0;
+    margin: 0;
+    max-width: 100%;
     list-style: none;
+    align-items: center; /* Center items vertically */
+    position: relative; /* Ensure .navbar is positioned relatively */
+}
+
+.navbar__link {
+    padding: 0 20px; /* Adjust padding to control spacing */
+    list-style: none;
+}
+
+.navbar__link a {
+    text-decoration: none;
+    margin: 27.5px 0 30.5px 0;
+    display: inline-block;
+    overflow-wrap: break-word;
+    font-family: 'Inter';
+    font-weight: 600;
+    font-size: 20px;
     color: #000000;
 }
 
-.menu ul li{
-    width: 120px;
-    padding: 15px;
-    margin: 0 ;
-}
-
-.menu img {
+.navbar img {
     width: 80px;
     height: 80px;
 }
 
-.menu ul li a{
+.menu ul {
+    display: flex;
+    justify-content: space-around; /* Ensure space-around on the menu */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.menu ul li {
+    padding: 0 20px; /* Adjust padding to control spacing */
+    margin: 0;
+    display: flex;
+    align-items: center;
+    position: relative; /* Ensure li is positioned relatively */
+}
+
+.menu ul li a {
     text-decoration: none;
     color: #000000;
     font-family: 'Raleway', sans-serif;
     font-weight: 600;
 }
 
-.menu ul li:hover{
+.menu ul li:hover {
     background: #efefef;
     border-radius: 3px;
 }
 
-.sub-menu-1{
+.sub-menu-1 {
     display: none;
-}
-
-.menu ul li:hover .sub-menu-1{
-    display: block;
     position: absolute;
+    top: 100%; /* Position below the li */
+    left: 0;
     background: #d9d9d9;
-    margin-top: 15px;
-    margin-left: -15px;
+    z-index: 10; /* Ensure submenu is on top */
 }
 
-.menu ul li:hover .sub-menu-1 ul{
+.menu ul li:hover .sub-menu-1 {
     display: block;
-    margin: 10px;
 }
 
-.menu ul li:hover .sub-menu-1 ul li{
+.menu ul li:hover .sub-menu-1 ul {
+    display: block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.menu ul li:hover .sub-menu-1 ul li {
     width: 150px;
     padding: 10px;
     border-bottom: 1px dotted #fff;
@@ -91,10 +98,10 @@
     text-align: left;
 }
 
-.menu ul li:hover .sub-menu-1 ul li:last-child{
+.menu ul li:hover .sub-menu-1 ul li:last-child {
     border-bottom: none; 
 }
 
-.menu ul li:hover .sub-menu-1 ul li a:hover{
+.menu ul li:hover .sub-menu-1 ul li a:hover {
     color: #757575;
 }

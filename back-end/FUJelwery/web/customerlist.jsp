@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="css/staff_list.css">
     </head>
     <body>
-        <%@ include file="/menu.jsp" %>
+        <%--<%@ include file="/menu.jsp" %>--%>
         <div class="menu">
             <!--you will code the horizontal menu here-->
             <ul class="navbar">

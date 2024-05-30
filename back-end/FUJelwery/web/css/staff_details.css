@@ -77,7 +77,7 @@ body {
 }
 
 .bg-c-lite-green {
-    background: linear-gradient(to right, #fff, #151542);
+    background: linear-gradient(to right, #0f0f2f, #27277c);
 }
 
 .user-profile {
@@ -151,3 +151,8 @@ h2{
 p{
     font-family: 'Inter';
 }
+
+.container{
+    margin-top: 40px;
+}
+
