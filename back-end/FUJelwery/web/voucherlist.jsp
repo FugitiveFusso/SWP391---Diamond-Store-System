@@ -16,12 +16,29 @@
         <link rel="stylesheet" href="css/staff_list.css">
     </head>
     <body>
+        <div class="menu">
+            <!--you will code the horizontal menu here-->
+            <ul class="navbar">      
+<!--                <li class="navbar__link"><a href='#'>Orders</a></li>-->
+                <li class="navbar__link"><a href='VoucherController'>Voucher</a></li>              
+                <img src="./images/Screenshot (656).png">               
+                <li class="navbar__link">
+                    <a href="#">Account</a>
+                    <div class="sub-menu-1">
+                        <ul>
+                            <li><a href='saleslogin?action=logout'>Logout</a></li>          
+                        </ul>
+                    </div>
+                </li>
+                
+            </ul>
+        </div>
         
         <div class="list-container">
             <div class="smaller-container">
                 <div class="list-title">Voucher List</div>
                 <div class="list">
-                    <jsp:include page="/salesmenu.jsp" flush="true" />
+                    <!-- <jsp:include page="/salesmenu.jsp" flush="true" /> -->
         
                     <form action='' method=GET id="searchbox"> 
                         <input name=keyword type=text value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">

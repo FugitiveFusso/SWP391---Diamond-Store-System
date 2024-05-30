@@ -32,7 +32,7 @@
                 </li>
                 <li class="navbar__link"><a href='VoucherController'>Voucher</a></li>
                 <img src="./images/Screenshot (656).png">
-                <li class="navbar__link"><a href="#">Delivery Tracking</a></li>
+                <li class="navbar__link"><a href="#">Delivery</a></li>
                 <li class="navbar__link">
                     <a href="#">Dashboard</a>
                     <div class="sub-menu-1">

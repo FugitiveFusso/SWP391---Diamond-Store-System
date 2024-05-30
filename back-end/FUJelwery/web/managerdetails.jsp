@@ -24,7 +24,7 @@
          <div class="menu">
             <!--you will code the horizontal menu here-->
             <ul class="navbar">
-                <li class="navbar__link"><a href="#">Order</a></li>
+                
                 <li class="navbar__link">
                     <a href="#">Products</a>
                     <div class="sub-menu-1">
@@ -37,15 +37,15 @@
                 </li>
                 <li class="navbar__link"><a href='VoucherController'>Voucher</a></li>
                 <img src="./images/Screenshot (656).png">
-                <li class="navbar__link"><a href="#">Delivery Tracking</a></li>
                 <li class="navbar__link">
                     <a href="#">Dashboard</a>
                     <div class="sub-menu-1">
                         <ul>
-                            <li><a href='CustomerController'>View Customer</a></li>
-                            <li><a href='ManagerController'>View Manager</a></li>
+                            <li><a href='AdminController'>View Admins</a></li>   
+                            <li><a href='DeliveryStaffController'>View Delivery Staffs</a></li>
+                            <li><a href='SalesController'>View Sale Staffs</a></li>
                             <li><a href='CertificateController'>View Certificate</a></li>
-                            <li><a href='CategoryController'>View Category</a></li>
+                            
                         </ul>
                     </div>
                 </li>
@@ -56,8 +56,7 @@
                             <li><a href='adminlogin?action=logout'>Logout</a></li>          
                         </ul>
                     </div>
-                </li>
-                
+                </li>               
             </ul>
         </div>
 <!--        <jsp:include page="/menu.jsp" flush="true" />
