@@ -23,10 +23,10 @@
         </script>
     </head>
     <body>
-        <jsp:include page="/menu.jsp" flush="true" />
+        <jsp:include page="/salesmenu.jsp" flush="true" />
 
         <h1>Voucher Edit </h1>
-        <p> Login user: ${sessionScope.adminsession.username}</p>
+        <p> Login user: ${sessionScope.salessession.username}</p>
 
         <form action="./VoucherController" method="POST" onsubmit="return validateForm()">
             <table>

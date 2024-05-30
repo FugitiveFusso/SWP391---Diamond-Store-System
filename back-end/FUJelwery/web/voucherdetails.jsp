@@ -12,10 +12,10 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:include page="/menu.jsp" flush="true" />
+        <jsp:include page="/salesmenu.jsp" flush="true" />
 
         <h1>Voucher Details </h1>         
-        <p> Login username: ${sessionScope.adminsession.username}</p>
+        <p> Login username: ${sessionScope.salessession.username}</p>
 
         <style>
             #searchbox{

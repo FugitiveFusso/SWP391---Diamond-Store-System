@@ -51,8 +51,8 @@ public class VoucherController extends HttpServlet {
             String sortCol = request.getParameter("colSort");
 
             HttpSession session = request.getSession(false);
-            if (session == null || session.getAttribute("adminsession") == null) {
-                response.sendRedirect("adminlogin.jsp");
+            if (session == null || session.getAttribute("salessession") == null) {
+                response.sendRedirect("saleslogin.jsp");
                 return;
             } else if (action == null || action.equals("list")) {//lists
 
