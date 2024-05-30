@@ -27,7 +27,7 @@ public class RingDAO {
         List<RingDTO> list = new ArrayList<RingDTO>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = "SELECT r.ringID, r.ringName, r.ringImage, r.gender, r.price, r.collectionID, r.categoryID, r.diamondID, d.diamondName, d.diamondImage, d.origin, d.caratWeight, d.cut, d.color, d.clarity, d.certificateID "
+            String sql = "SELECT r.ringID, r.ringName, r.ringImage, r.gender, r.price, r.collectionID, r.categoryID, r.diamondID, d.diamondName, d.diamondImage, d.origin, d.diamondPrice, d.caratWeight, d.cut, d.color, d.clarity, d.certificateID "
                     + " FROM [Ring] r FULL JOIN [Diamond] d ON d.diamondID = r.diamondID ";
             if (keyword != null && !keyword.isEmpty()) {
                 sql += " WHERE ringName like ? ";
@@ -58,6 +58,7 @@ public class RingDAO {
                     String diamondName = rs.getString("diamondName");
                     String diamondImage = rs.getString("diamondImage");
                     String origin = rs.getString("origin");
+                    double diamondPrice = rs.getDouble("diamondPrice");
                     double caratWeight = rs.getDouble("caratWeight");
                     String cut = rs.getString("cut");
                     String color = rs.getString("color");
@@ -76,6 +77,7 @@ public class RingDAO {
                     ring.setDiamondName(diamondName);
                     ring.setDiamondImage(diamondImage);
                     ring.setOrigin(origin);
+                    ring.setDiamondPrice(diamondPrice);
                     ring.setCaratWeight(caratWeight);
                     ring.setCut(cut);
                     ring.setColor(color);
@@ -95,7 +97,7 @@ public class RingDAO {
 
     public RingDTO load(int ringID) {
 
-        String sql = "SELECT r.ringID, r.ringName, r.ringImage, r.gender, r.price, r.collectionID, r.categoryID, r.diamondID, d.diamondName, d.diamondImage, d.origin, d.caratWeight, d.cut, d.color, d.clarity, d.certificateID"
+        String sql = "SELECT r.ringID, r.ringName, r.ringImage, r.gender, r.price, r.collectionID, r.categoryID, r.diamondID, d.diamondName, d.diamondImage, d.origin, d.diamondPrice, d.caratWeight, d.cut, d.color, d.clarity, d.certificateID"
                 + " FROM [Ring] r FULL JOIN [Diamond] d ON d.diamondID = r.diamondID WHERE r.ringID = ? ";
 
         try {

@@ -19,6 +19,7 @@ CREATE TABLE [Diamond](
 	diamondName varchar(255) NOT NULL,
 	diamondImage varchar(8000) NOT NULL,
 	origin varchar(255) NOT NULL,
+	diamondPrice float NOT NULL,
 	caratWeight float NOT NULL,
 	cut varchar(255) NOT NULL,
 	color varchar(255) NOT NULL,

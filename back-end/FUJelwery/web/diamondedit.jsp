@@ -41,6 +41,7 @@
                 <tr><td>Diamond Name</td><td><input name="diamondName" value="${requestScope.diamond.diamondName}" required="Please enter" </td></tr>
                 <tr><td>Diamond Image</td><td><input name="diamondImage" value="${requestScope.diamond.diamondImage}" required="Please enter"</td></tr>
                 <tr><td>Origin</td><td><input name="origin" value="${requestScope.diamond.origin}" required="Please enter"</td></tr>
+                <tr><td>Price</td><td><input name="diamondPrice" value="${requestScope.diamond.price}" required="Please enter" </td></tr>
                 <tr><td>Carat Weight</td><td><input name="caratWeight" value="${requestScope.diamond.caratWeight}" required="Please enter" </td></tr>
                 <tr><td>Cut</td><td><input name="cut" value="${requestScope.diamond.cut}" required="Please enter"</td></tr>
                 <tr><td>Color</td><td><input name="color" value="${requestScope.diamond.color}" required="Please enter"</td></tr>

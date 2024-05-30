@@ -21,6 +21,7 @@ public class RingDTO {
     private String diamondName;
     private String diamondImage;
     private String origin;
+    private double diamondPrice;
     private double caratWeight;
     private String cut;
     private String color;
@@ -113,6 +114,14 @@ public class RingDTO {
 
     public void setOrigin(String origin) {
         this.origin = origin;
+    }
+
+    public double getDiamondPrice() {
+        return diamondPrice;
+    }
+
+    public void setDiamondPrice(double diamondPrice) {
+        this.diamondPrice = diamondPrice;
     }
 
     public double getCaratWeight() {

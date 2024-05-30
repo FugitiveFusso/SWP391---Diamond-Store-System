@@ -71,6 +71,7 @@
                             <th><a href=?colSort=diamondName>Diamond Name</a></th>
                             <th>Diamond Image</th>
                             <th>Origin</th>
+                            <th><a href=?colSort=diamondPrice>Price</a></th>
                             <th><a href=?colSort=caratWeight>Carat Weight</a></th>
                             <th>Cut</th>
                             <th>Color</th>
@@ -88,6 +89,7 @@
                             <td>${diamond.diamondName}</td>
                             <td><img src=${diamond.diamondImage} width="300px" height="300px"></td>
                             <td>${diamond.origin}</td>
+                            <td>${diamond.price}</td>
                             <td>${diamond.caratWeight}</td>
                             <td>${diamond.cut}</td>
                             <td>${diamond.color}</td>

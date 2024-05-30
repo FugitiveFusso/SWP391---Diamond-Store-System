@@ -14,6 +14,7 @@ public class DiamondDTO {
     private String diamondName;
     private String diamondImage;
     private String origin;
+    private double price;
     private double caratWeight;
     private String cut;
     private String color;
@@ -50,6 +51,14 @@ public class DiamondDTO {
 
     public void setOrigin(String origin) {
         this.origin = origin;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public double getCaratWeight() {

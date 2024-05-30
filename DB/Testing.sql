@@ -30,9 +30,9 @@ INSERT INTO [Certificate] VALUES
 (3,'https://mygemma.com/cdn/shop/products/104966-stamp_1200x.jpg','0.70 ct SI1 - Round Cut Diamond')
 
 INSERT INTO [Diamond] VALUES
-(1,'0.36 Carat Round Cut Diamond','https://temple-and-grace.mo.cloudinary.net/mdopt/images/prod-large/diamonds/round-cut-diamond.jpg','Vietnam',0.36,'Round','White','S12',1),
-(2,'0.50 Carat Emerald Cut Diamond','https://temple-and-grace.mo.cloudinary.net/mdopt/images/prod-large/diamonds/emerald-cut-diamond.jpg','Finland',0.5,'Emerald','White','VS2',2),
-(3,'0.70 ct SI1 - Round Cut Diamond','https://vancouverdiamonds.ca/wp-content/uploads/2018/11/diamond-round.jpg','South Africa',0.7,'Brilliant Round','White','GH4',3)
+(1,'0.36 Carat Round Cut Diamond','https://temple-and-grace.mo.cloudinary.net/mdopt/images/prod-large/diamonds/round-cut-diamond.jpg','Vietnam',750,0.36,'Round','White','S12',1),
+(2,'0.50 Carat Emerald Cut Diamond','https://temple-and-grace.mo.cloudinary.net/mdopt/images/prod-large/diamonds/emerald-cut-diamond.jpg','Finland',800,0.5,'Emerald','White','VS2',2),
+(3,'0.70 ct SI1 - Round Cut Diamond','https://vancouverdiamonds.ca/wp-content/uploads/2018/11/diamond-round.jpg','South Africa',680,0.7,'Brilliant Round','White','GH4',3)
 
 INSERT INTO [Ring] VALUES
 (1,'18ct Rose Gold Diamond Solitaire Engagement Ring','https://www.berrysjewellers.co.uk/cdn/shop/products/1620389070-28905700.jpg',1,'M',200,1,1),

@@ -118,7 +118,8 @@ public class DiamondController extends HttpServlet {
                 String diamondName = request.getParameter("diamondName");
                 String diamondImage = request.getParameter("diamondImage");
                 String origin = request.getParameter("origin");
-                Double caratWeight = Double.parseDouble(request.getParameter("caratWeight"));
+                double price = Double.parseDouble(request.getParameter("diamondPrice"));
+                double caratWeight = Double.parseDouble(request.getParameter("caratWeight"));
                 String cut = request.getParameter("cut");
                 String color = request.getParameter("color");
                 String clarity = request.getParameter("clarity");
@@ -132,6 +133,7 @@ public class DiamondController extends HttpServlet {
                 diamond.setDiamondName(diamondName);
                 diamond.setDiamondImage(diamondImage);
                 diamond.setOrigin(origin);
+                diamond.setPrice(price);
                 diamond.setCaratWeight(caratWeight);
                 diamond.setCut(cut);
                 diamond.setColor(color);
@@ -149,6 +151,7 @@ public class DiamondController extends HttpServlet {
                     String diamondName = request.getParameter("diamondName");
                     String diamondImage = request.getParameter("diamondImage");
                     String origin = request.getParameter("origin");
+                    double price = Double.parseDouble(request.getParameter("diamondPrice"));
                     double caratWeight = Double.parseDouble(request.getParameter("caratWeight"));
                     String cut = request.getParameter("cut");
                     String color = request.getParameter("color");
@@ -166,6 +169,7 @@ public class DiamondController extends HttpServlet {
                     diamond.setDiamondName(diamondName);
                     diamond.setDiamondImage(diamondImage);
                     diamond.setOrigin(origin);
+                    diamond.setPrice(price);
                     diamond.setCaratWeight(caratWeight);
                     diamond.setCut(cut);
                     diamond.setColor(color);
