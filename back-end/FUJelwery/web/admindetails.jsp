@@ -75,9 +75,9 @@
                                     <div class="m-b-25">
                                         <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image">
                                     </div>
-                                    <h6 class="f-w-600">${requestScope.admin.lastname} ${requestScope.admin.firstname}</h6>
-                                    <p>Admin of FUJ</p>
-                                    <p>${requestScope.admin.username}</p>
+                                    <h6 class="f-w-600"style="font-size: 18px; margin: 10px 0;">${requestScope.admin.lastname} ${requestScope.admin.firstname}</h6>
+                                    <p style="color: #fff; font-family: 'Inter'; font-size: 13px;">Admin of FUJ</p>
+                                    <p style="color: #fff; font-family: 'Inter'; font-size: 13px;">${requestScope.admin.username}</p>
                                 </div>
                             </div>
                             <div class="col-md-9">
