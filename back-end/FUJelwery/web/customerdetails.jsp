@@ -80,6 +80,8 @@
                                         <h6 class="f-w-600"style="font-size: 18px; margin: 10px 0;">${requestScope.customer.lastname} ${requestScope.customer.firstname}</h6>
                                         <p style="color: #fff; font-family: 'Inter'; font-size: 13px;">Customer of FUJ</p>
                                         <p style="color: #fff; font-family: 'Inter'; font-size: 13px;">${requestScope.customer.username}</p>
+                                        <input name="roleID" value=5 required="Please enter"   type="hidden">
+
                                     </div>
                                 </div>
                                 <div class="col-md-9">
@@ -110,7 +112,6 @@
                                                 <p class="m-b-10 f-w-600">Point</p>
                                                 <h6 class="text-muted f-w-400">${requestScope.customer.point}</h6>
                                             </div>
-                                            <input name="roleID" value=5 required="Please enter"   type="hidden"
 
                                         </div>
                                         <div class="row" style="margin-top: 20px; justify-content: center">
