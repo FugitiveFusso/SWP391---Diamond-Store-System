@@ -14,18 +14,25 @@ CREATE TABLE [Certificate](
 	[description] varchar(8000)
 );
 
+CREATE TABLE [DiamondPrice](
+	dpID int primary key,
+	diamondSize float,
+	caratWeight float,
+	color varchar(255),
+	clarity varchar(255),
+	cut varchar(255),
+	price bigint
+);
+
 CREATE TABLE [Diamond](
 	diamondID int NOT NULL primary key,
 	diamondName varchar(255) NOT NULL,
 	diamondImage varchar(8000) NOT NULL,
 	origin varchar(255) NOT NULL,
-	diamondPrice float NOT NULL,
-	caratWeight float NOT NULL,
-	cut varchar(255) NOT NULL,
-	color varchar(255) NOT NULL,
-	clarity varchar(255) NOT NULL,
+	dpID int foreign key REFERENCES [DiamondPrice](dpID),
 	certificateID int foreign key REFERENCES [Certificate](certificateID)
 );
+
 
 CREATE TABLE [Collection](
 	collectionID int NOT NULL primary key,
@@ -53,18 +60,24 @@ CREATE TABLE [User](
     FOREIGN KEY (roleID) REFERENCES [Role](roleID)
 );
 
+CREATE TABLE [RingPlacementPrice](
+	rpID int primary key,
+	rName varchar(800),
+	material varchar(255),
+	color varchar(255),
+	rpPrice bigint
+);
 
 CREATE TABLE [Ring](
 	ringID int NOT NULL primary key,
+	rpID int foreign key REFERENCES [RingPlacementPrice](rpID),
 	ringName varchar(255) NOT NULL,
 	ringImage varchar(8000) NOT NULL,
 	diamondID int NOT NULL foreign key REFERENCES [Diamond](diamondID),
-	gender varchar NOT NULL,
-	price float NOT NULL,
+	price bigint NOT NULL,
 	collectionID int NOT NULL foreign key REFERENCES [Collection](collectionID),
 	categoryID int NOT NULL foreign key REFERENCES [Category](categoryID)
 );
-
 
 CREATE TABLE [Voucher](
 	voucherID int NOT NULL primary key,
@@ -96,7 +109,7 @@ CREATE TABLE [OrderDetails](
 	ringID int NOT NULL foreign key REFERENCES [Ring](ringID),
 	diamondID int NOT NULL foreign key REFERENCES [Diamond](diamondID),
 	voucherID int NOT NULL foreign key REFERENCES [Voucher](voucherID),
-	totalPrice float NOT NULL
+	totalPrice bigint NOT NULL
 );
 
 CREATE TABLE [ProcessOrder](
