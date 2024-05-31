@@ -14,10 +14,11 @@
         <title>Sales Staff Management Page</title>
         <link rel="stylesheet" href="css/navbar.css">
         <link rel="stylesheet" href="css/staff_list.css">
+        
     </head>
     <body>
-        <div class="menu">
-            <!--you will code the horizontal menu here-->
+<!--        <div class="menu">
+            you will code the horizontal menu here
             <ul class="navbar">
 
                 <li class="navbar__link">
@@ -53,7 +54,7 @@
                     </div>
                 </li>               
             </ul>
-        </div>
+        </div>-->
 
         <%@ include file="/managermenu.jsp" %>
 
@@ -90,7 +91,7 @@
                             <td>${sales.email}</td>
                             <td>${sales.address}</td>
                             <td>
-                                <form action="SalesController" method="POST">
+                                <form action="SalesController" method="POST" class="input">
                                     <input name="action" value="delete" type="hidden">
                                     <input name="id" value="${sales.userid}" type="hidden">
                                     <input type="submit" value="Delete">
@@ -102,7 +103,7 @@
                             }
                         %>    
                         <tr><td colspan="6">
-                                <form action="SalesController" method="POST">
+                                <form action="SalesController" method="POST" class="input">
                                     <input name="action" value="create" type="hidden">
                                     <input type="submit" value="Create">
                                 </form>

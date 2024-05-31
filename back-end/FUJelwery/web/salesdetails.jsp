@@ -12,7 +12,7 @@
         <title>Sale Staff Management Page</title>
         <link rel="stylesheet" href="css/navbar.css">
         <!--<link rel="stylesheet" href="css/staff_detail.css">-->
-
+        
         <link rel="stylesheet" href="css/staff_details.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
@@ -20,11 +20,11 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css" />
     </head>
     <body>
-        
-         <div class="menu">
-            <!--you will code the horizontal menu here-->
+
+<!--        <div class="menu">
+            you will code the horizontal menu here
             <ul class="navbar">
-                
+
                 <li class="navbar__link">
                     <a href="#">Products</a>
                     <div class="sub-menu-1">
@@ -45,7 +45,7 @@
                             <li><a href='DeliveryStaffController'>View Delivery Staffs</a></li>
                             <li><a href='SalesController'>View Sale Staffs</a></li>
                             <li><a href='CertificateController'>View Certificate</a></li>
-                            
+
                         </ul>
                     </div>
                 </li>
@@ -58,11 +58,11 @@
                     </div>
                 </li>               
             </ul>
-        </div>
-<!--        <jsp:include page="/menu.jsp" flush="true" />
-
-        <h1>Manager Details </h1>         
-        <p> Login username: ${sessionScope.adminsession.username}</p>-->
+        </div>-->
+               <jsp:include page="/menu.jsp" flush="true" />
+        
+              <!--   <h1>Manager Details </h1>         
+                <p> Login username: ${sessionScope.adminsession.username}</p>-->
 
         <div class="container">
             <div class="padding">
@@ -75,8 +75,8 @@
                                         <div class="m-b-25">
                                             <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image">
                                         </div>
-                                        <h6 class="f-w-600">${requestScope.sales.lastname} ${requestScope.sales.firstname}</h6>
-                                        <p>Sale Staff of FUJ</p>
+                                        <h6 class="f-w-600"style="font-size: 18px; margin: 10px 0;">${requestScope.sales.lastname} ${requestScope.sales.firstname}</h6>
+                                        <p style="color: #fff; font-family: 'Inter'; font-size: 13px;">Sale Staff of FUJ</p>
                                         <p>${requestScope.sales.username}</p>
                                     </div>
                                 </div>
@@ -108,12 +108,13 @@
                                                 <p class="m-b-10 f-w-600">Points</p>
                                                 <h6 class="text-muted f-w-400">${requestScope.sales.point}</h6>
                                             </div>
+                                            <input name="roleID" value=3 required="Please enter"   type="hidden"
 
                                         </div>
                                         <div class="row" style="margin-top: 20px; justify-content: center">
                                             <div class="col-sm-4">
                                                 <form action="SalesController" style="padding-top: 10px">
-                                                    <input type="hidden" name="id" value="${requestScope.manager.userid}">
+                                                    <input type="hidden" name="id" value="${requestScope.sales.userid}">
                                                     <input type="hidden" name="action" value="edit">
                                                     <button type="submit" class="btn btn-custom">Edit</button>
                                                 </form>

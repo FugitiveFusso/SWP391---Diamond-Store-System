@@ -16,8 +16,8 @@
         <link rel="stylesheet" href="css/staff_list.css">
     </head>
     <body>
-        <div class="menu">
-            <!--you will code the horizontal menu here-->
+<!--        <div class="menu">
+            you will code the horizontal menu here
             <ul class="navbar">
                 <li class="navbar__link"><a href="#">Order</a></li>
                 <li class="navbar__link">
@@ -54,8 +54,9 @@
                 </li>
                 
             </ul>
-        </div>
+        </div>-->
 
+         <jsp:include page="/menu.jsp" flush="true" />
         <div class="list-container">
             <div class="smaller-container">
                 <div class="list-title">Manager List</div>
@@ -89,7 +90,7 @@
                             <td>${manager.email}</td>
                             <td>${manager.address}</td>
                             <td>
-                                <form action="ManagerController" method="POST">
+                                <form action="ManagerController" method="POST" class="input">
                                     <input name="action" value="delete" type="hidden">
                                     <input name="id" value="${manager.userid}" type="hidden">
                                     <input type="submit" value="Delete">
@@ -101,7 +102,7 @@
                             }
                         %>    
                         <tr><td colspan="6">
-                                <form action="ManagerController" method="POST">
+                                <form action="ManagerController" method="POST" class="input">
                                     <input name="action" value="create" type="hidden">
                                     <input type="submit" value="Create">
                                 </form>

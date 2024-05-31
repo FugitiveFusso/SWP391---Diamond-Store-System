@@ -90,7 +90,7 @@
                             <td>${deliverystaff.email}</td>
                             <td>${deliverystaff.address}</td>
                             <td>
-                                <form action="DeliveryStaffController" method="POST">
+                                <form action="DeliveryStaffController" method="POST" class="input">
                                     <input name="action" value="delete" type="hidden">
                                     <input name="id" value="${deliverystaff.userid}" type="hidden">
                                     <input type="submit" value="Delete">

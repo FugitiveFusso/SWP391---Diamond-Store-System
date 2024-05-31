@@ -33,7 +33,8 @@
                 
             </ul>
         </div>
-        
+                <%@ include file="/menu.jsp" %>
+
         <div class="list-container">
             <div class="smaller-container">
                 <div class="list-title">Voucher List</div>

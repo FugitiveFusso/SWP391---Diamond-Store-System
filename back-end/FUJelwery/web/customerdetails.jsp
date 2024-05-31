@@ -21,8 +21,8 @@
     </head>
     <body>
 
-        <div class="menu">
-            <!--you will code the horizontal menu here-->
+<!--        <div class="menu">
+            you will code the horizontal menu here
             <ul class="navbar">
                 <li class="navbar__link"><a href="#">Order</a></li>
                 <li class="navbar__link">
@@ -59,12 +59,13 @@
                 </li>
                 
             </ul>
-        </div>
-        <!--        <jsp:include page="/menu.jsp" flush="true" />
+        </div>-->
+                <jsp:include page="/menu.jsp" flush="true" />
         
                 <h1>Manager Details </h1>         
-                <p> Login username: ${sessionScope.adminsession.username}</p>-->
-
+                <p> Login username: ${sessionScope.adminsession.username}</p>
+                <p> Address: ${sessionScope.adminsession.address}</p>
+                
         <div class="container">
             <div class="padding">
                 <div class="row d-flex justify-content-center">
@@ -76,9 +77,9 @@
                                         <div class="m-b-25">
                                             <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image">
                                         </div>
-                                        <h6 class="f-w-600">${requestScope.customer.lastname} ${requestScope.customer.firstname}</h6>
-                                        <p>Customer of FUJ</p>
-                                        <p>${requestScope.customer.username}</p>
+                                        <h6 class="f-w-600"style="font-size: 18px; margin: 10px 0;">${requestScope.customer.lastname} ${requestScope.customer.firstname}</h6>
+                                        <p style="color: #fff; font-family: 'Inter'; font-size: 13px;">Customer of FUJ</p>
+                                        <p style="color: #fff; font-family: 'Inter'; font-size: 13px;">${requestScope.customer.username}</p>
                                     </div>
                                 </div>
                                 <div class="col-md-9">
@@ -109,6 +110,7 @@
                                                 <p class="m-b-10 f-w-600">Point</p>
                                                 <h6 class="text-muted f-w-400">${requestScope.customer.point}</h6>
                                             </div>
+                                            <input name="roleID" value=5 required="Please enter"   type="hidden"
 
                                         </div>
                                         <div class="row" style="margin-top: 20px; justify-content: center">

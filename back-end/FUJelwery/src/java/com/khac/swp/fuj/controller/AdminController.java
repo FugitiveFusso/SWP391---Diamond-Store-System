@@ -150,8 +150,7 @@ public class AdminController extends HttpServlet {
                     Connection conn = DBUtils.getConnection();
                     int adminid = 0;
                     String adminname = request.getParameter("userName");
-                                    String password = request.getParameter("password");
-
+                    String password = request.getParameter("password");
                     String firstname = request.getParameter("firstName");
                     String lastname = request.getParameter("lastName");
                     String phonenumber = request.getParameter("phoneNumber");

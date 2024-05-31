@@ -20,49 +20,49 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css" />
     </head>
     <body>
-        
-         <div class="menu">
-            <!--you will code the horizontal menu here-->
-            <ul class="navbar">
-                
-                <li class="navbar__link">
-                    <a href="#">Products</a>
-                    <div class="sub-menu-1">
-                        <ul>
-                            <li><a href='DiamondController'>Diamond</a></li>
-                            <li><a href='RingController'>Ring</a></li>
-                            <li><a href='CollectionController'>Collection</a></li>
-                        </ul>
-                    </div>                  
-                </li>
-                <li class="navbar__link"><a href='VoucherController'>Voucher</a></li>
-                <img src="./images/Screenshot (656).png">
-                <li class="navbar__link">
-                    <a href="#">Dashboard</a>
-                    <div class="sub-menu-1">
-                        <ul>
-                            <li><a href='AdminController'>View Admins</a></li>   
-                            <li><a href='DeliveryStaffController'>View Delivery Staffs</a></li>
-                            <li><a href='SalesController'>View Sale Staffs</a></li>
-                            <li><a href='CertificateController'>View Certificate</a></li>
-                            
-                        </ul>
-                    </div>
-                </li>
-                <li class="navbar__link">
-                    <a href="#">Account</a>
-                    <div class="sub-menu-1">
-                        <ul>
-                            <li><a href='adminlogin?action=logout'>Logout</a></li>          
-                        </ul>
-                    </div>
-                </li>               
-            </ul>
-        </div>
-<!--        <jsp:include page="/menu.jsp" flush="true" />
 
-        <h1>Manager Details </h1>         
-        <p> Login username: ${sessionScope.adminsession.username}</p>-->
+        <!--        <div class="menu">
+                    you will code the horizontal menu here
+                    <ul class="navbar">
+        
+                        <li class="navbar__link">
+                            <a href="#">Products</a>
+                            <div class="sub-menu-1">
+                                <ul>
+                                    <li><a href='DiamondController'>Diamond</a></li>
+                                    <li><a href='RingController'>Ring</a></li>
+                                    <li><a href='CollectionController'>Collection</a></li>
+                                </ul>
+                            </div>                  
+                        </li>
+                        <li class="navbar__link"><a href='VoucherController'>Voucher</a></li>
+                        <img src="./images/Screenshot (656).png">
+                        <li class="navbar__link">
+                            <a href="#">Dashboard</a>
+                            <div class="sub-menu-1">
+                                <ul>
+                                    <li><a href='AdminController'>View Admins</a></li>   
+                                    <li><a href='DeliveryStaffController'>View Delivery Staffs</a></li>
+                                    <li><a href='SalesController'>View Sale Staffs</a></li>
+                                    <li><a href='CertificateController'>View Certificate</a></li>
+        
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="navbar__link">
+                            <a href="#">Account</a>
+                            <div class="sub-menu-1">
+                                <ul>
+                                    <li><a href='adminlogin?action=logout'>Logout</a></li>          
+                                </ul>
+                            </div>
+                        </li>               
+                    </ul>
+                </div>-->
+        <!--        <jsp:include page="/menu.jsp" flush="true" />
+        
+                <h1>Manager Details </h1>         
+                <p> Login username: ${sessionScope.adminsession.username}</p>-->
 
         <div class="container">
             <div class="padding">
@@ -75,9 +75,9 @@
                                         <div class="m-b-25">
                                             <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image">
                                         </div>
-                                        <h6 class="f-w-600">${requestScope.manager.lastname} ${requestScope.manager.firstname}</h6>
-                                        <p>Manager of FUJ</p>
-                                        <p>${requestScope.manager.username}</p>
+                                        <h6 class="f-w-600"style="font-size: 18px; margin: 10px 0;">${requestScope.manager.lastname} ${requestScope.manager.firstname}</h6>
+                                        <p style="color: #fff; font-family: 'Inter'; font-size: 13px;">Manager of FUJ</p>
+                                        <p style="color: #fff; font-family: 'Inter'; font-size: 13px;">${requestScope.manager.username}</p>
                                     </div>
                                 </div>
                                 <div class="col-md-9">
@@ -100,6 +100,15 @@
                                                 <p class="m-b-10 f-w-600">Phone Number</p>
                                                 <h6 class="text-muted f-w-400">${requestScope.manager.phonenumber}</h6>
                                             </div>
+                                            <div class="col-sm-6">
+                                                <p class="m-b-10 f-w-600">Address</p>
+                                                <h6 class="text-muted f-w-400">${requestScope.manager.address}</h6>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <p class="m-b-10 f-w-600">Point</p>
+                                                <h6 class="text-muted f-w-400">${requestScope.manager.point}</h6>
+                                            </div>
+                                            <input name="roleID" value=2 required="Please enter"   type="hidden"
 
                                         </div>
                                         <div class="row" style="margin-top: 20px; justify-content: center">

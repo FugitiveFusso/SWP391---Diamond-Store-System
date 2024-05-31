@@ -100,6 +100,18 @@
                                             <p class="m-b-10 f-w-600">Phone Number</p>
                                             <h6 class="text-muted f-w-400">${requestScope.admin.phonenumber}</h6>
                                         </div>
+                                         <div class="col-sm-6">
+                                                <p class="m-b-10 f-w-600">Address</p>
+                                                <h6 class="text-muted f-w-400">${requestScope.admin.address}</h6>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <p class="m-b-10 f-w-600">Point</p>
+                                                <h6 class="text-muted f-w-400">${requestScope.admin.point}</h6>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <p class="m-b-10 f-w-600"></p>
+                                            <input name="roleID" value=1 required="Please enter"   type="hidden"
+                                            </div>
                                     </div>
                                         <div class="row" style="margin-top: 20px; justify-content: center">
                                         <div class="col-sm-4">

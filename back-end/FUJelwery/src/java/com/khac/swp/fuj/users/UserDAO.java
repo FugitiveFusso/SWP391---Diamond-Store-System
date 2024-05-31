@@ -24,7 +24,7 @@ public class UserDAO {
         try {
 
             Connection con = DBUtils.getConnection();
-            String sql = " select userID, userName, firstName, lastName, email, phoneNumber, point, roleName from [User] u full join [Role] r on u.roleID = r.roleID ";
+            String sql = " select userID, userName, firstName, lastName, email, phoneNumber, address, point, roleName from [User] u full join [Role] r on u.roleID = r.roleID ";
             sql += " WHERE roleName = ? AND password = ? AND userName = ?";
 
             PreparedStatement stmt = con.prepareStatement(sql);
@@ -43,6 +43,7 @@ public class UserDAO {
                     user.setLastname(rs.getString("lastName"));
                     user.setEmail(rs.getString("email"));
                     user.setPhonenumber(rs.getString("phoneNumber"));
+                    user.setAddress(rs.getString("address"));
                     user.setPoint(rs.getInt("point"));
                     user.setRolename(rs.getString("roleName"));
                 }

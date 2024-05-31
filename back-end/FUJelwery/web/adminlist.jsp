@@ -17,8 +17,8 @@
 
     </head>
     <body>
-        <div class="menu">
-            <!--you will code the horizontal menu here-->
+<!--        <div class="menu">
+            you will code the horizontal menu here
             <ul class="navbar">
                 
                 <li class="navbar__link">
@@ -54,10 +54,11 @@
                     </div>
                 </li>               
             </ul>
-        </div>
+        </div>-->
         
         <%@ include file="/managermenu.jsp" %>
-
+        <p> Login username: ${sessionScope.adminsession.username}</p>
+        
         <div class="list-container">
             <div class="smaller-container">
                 <div class="list-title">Administrator List</div>
