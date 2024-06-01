@@ -10,6 +10,7 @@ package com.khac.swp.fuj.ring;
  * @author Dell
  */
 public class RingDTO {
+
     private int ringID;
     private int rpID;
     private String ringName;
@@ -32,6 +33,15 @@ public class RingDTO {
     private String color;
     private String clarity;
     private int diamondPrice;
+    private int totalPrice;
+
+    public int getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
+    }
 
     public int getRingID() {
         return ringID;
@@ -205,8 +215,12 @@ public class RingDTO {
         return diamondPrice;
     }
 
+    @Override
+    public String toString() {
+        return "RingDTO{" + "ringID=" + ringID + ", rpID=" + rpID + ", ringName=" + ringName + ", ringImage=" + ringImage + ", diamondID=" + diamondID + ", price=" + price + ", categoryID=" + categoryID + ", collectionID=" + collectionID + ", ringPlacementName=" + ringPlacementName + ", material=" + material + ", ringColor=" + ringColor + ", rpPrice=" + rpPrice + ", diamondName=" + diamondName + ", diamondImage=" + diamondImage + ", origin=" + origin + ", certificateID=" + certificateID + ", diamondSize=" + diamondSize + ", caratWeight=" + caratWeight + ", cut=" + cut + ", color=" + color + ", clarity=" + clarity + ", diamondPrice=" + diamondPrice + ", totalPrice=" + totalPrice + '}';
+    }
+
     public void setDiamondPrice(int diamondPrice) {
         this.diamondPrice = diamondPrice;
     }
 }
-

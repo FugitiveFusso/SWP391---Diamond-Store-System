@@ -55,7 +55,7 @@
             <tr><td>Clarity</td><td>${requestScope.ring.clarity}</td></tr>
             <tr><td>Cut</td><td>${requestScope.ring.cut}</td></tr>
             <tr><td>Diamond Price</td><td>${requestScope.ring.diamondPrice}</td></tr>
-            <tr><td>Total Price</td><td>${requestScope.ring.price + requestScope.ring.rpPrice + requestScope.ring.diamondPrice}</td></tr>
+            <tr><td>Total Price</td><td>${requestScope.ring.totalPrice}</td></tr>
 
         </table>    
         <form action="RingController" style="padding-top: 10px">

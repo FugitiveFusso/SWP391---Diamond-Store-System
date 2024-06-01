@@ -163,10 +163,5 @@ public class RingPlacementPriceDAO {
 
         return false;
     }
-    
-    public static void main(String[] args) {
-        RingPlacementPriceDAO dao = new RingPlacementPriceDAO();
-        RingPlacementPriceDTO list = dao.load(1);
-        System.out.println(list);
-    }
+
 }

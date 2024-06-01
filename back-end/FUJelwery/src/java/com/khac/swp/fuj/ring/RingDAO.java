@@ -27,7 +27,7 @@ public class RingDAO {
         List<RingDTO> list = new ArrayList<RingDTO>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = "SELECT r.ringID, r.rpID, r.ringName, r.ringImage, r.diamondID, r.price AS [ringPrice], r.collectionID, r.categoryID, rp.rName, rp.material, rp.color AS [ringColor], rp.rpPrice, d.diamondName, d.diamondImage, d.origin, d.certificateID, dp.diamondSize, dp.caratWeight, dp.color AS [diamondColor], dp.clarity, dp.cut, dp.price AS [diamondShapePrice]"
+            String sql = "SELECT r.ringID, r.rpID, r.ringName, r.ringImage, r.diamondID, r.price AS [ringPrice], r.price + rp.rpPrice + dp.price AS [totalPrice], r.collectionID, r.categoryID, rp.rName, rp.material, rp.color AS [ringColor], rp.rpPrice, d.diamondName, d.diamondImage, d.origin, d.certificateID, dp.diamondSize, dp.caratWeight, dp.color AS [diamondColor], dp.clarity, dp.cut, dp.price AS [diamondShapePrice]"
                     + " FROM [Ring] r FULL JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID ";
             if (keyword != null && !keyword.isEmpty()) {
                 sql += " WHERE ringName like ? ";
@@ -55,26 +55,27 @@ public class RingDAO {
                     int price = rs.getInt("ringPrice");
                     int collectionID = rs.getInt("collectionID");
                     int categoryID = rs.getInt("categoryID");
-                    
+
                     String rName = rs.getString("rName");
                     String material = rs.getString("material");
                     String ringColor = rs.getString("ringColor");
                     int rpPrice = rs.getInt("rpPrice");
-                    
+
                     String diamondName = rs.getString("diamondName");
                     String diamondImage = rs.getString("diamondImage");
                     String origin = rs.getString("origin");
                     int certificateID = rs.getInt("certificateID");
-                    
+
                     double diamondSize = rs.getDouble("diamondSize");
                     double caratWeight = rs.getDouble("caratWeight");
                     String color = rs.getString("diamondColor");
                     String clarity = rs.getString("clarity");
                     String cut = rs.getString("cut");
                     int diamondPrice = rs.getInt("diamondShapePrice");
+                    int totalPrice = rs.getInt("totalPrice");
 
                     RingDTO ring = new RingDTO();
-                    
+
                     ring.setRingID(ringID);
                     ring.setRpID(rpID);
                     ring.setRingName(ringName);
@@ -87,18 +88,20 @@ public class RingDAO {
                     ring.setMaterial(material);
                     ring.setRingColor(ringColor);
                     ring.setRpPrice(rpPrice);
-                    
+
                     ring.setDiamondName(diamondName);
                     ring.setDiamondImage(diamondImage);
                     ring.setOrigin(origin);
                     ring.setCertificateID(certificateID);
-                    
+
                     ring.setDiamondSize(diamondSize);
                     ring.setCaratWeight(caratWeight);
                     ring.setColor(color);
                     ring.setClarity(clarity);
                     ring.setCut(cut);
                     ring.setDiamondPrice(diamondPrice);
+                    ring.setTotalPrice(totalPrice);
+
                     list.add(ring);
                 }
             }
@@ -113,7 +116,7 @@ public class RingDAO {
 
     public RingDTO load(int ringID) {
 
-        String sql = "SELECT r.ringID, r.rpID, r.ringName, r.ringImage, r.diamondID, r.price AS [ringPrice], r.collectionID, r.categoryID, rp.rName, rp.material, rp.color AS [ringColor], rp.rpPrice, d.diamondName, d.diamondImage, d.origin, d.certificateID, dp.diamondSize, dp.caratWeight, dp.color AS [diamondColor], dp.clarity, dp.cut, dp.price AS [diamondShapePrice] "
+        String sql = "SELECT r.ringID, r.rpID, r.ringName, r.ringImage, r.diamondID, r.price AS [ringPrice], r.price + rp.rpPrice + dp.price AS [totalPrice], r.collectionID, r.categoryID, rp.rName, rp.material, rp.color AS [ringColor], rp.rpPrice, d.diamondName, d.diamondImage, d.origin, d.certificateID, dp.diamondSize, dp.caratWeight, dp.color AS [diamondColor], dp.clarity, dp.cut, dp.price AS [diamondShapePrice] "
                 + " FROM [Ring] r FULL JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID WHERE r.ringID = ? ";
 
         try {
@@ -126,54 +129,58 @@ public class RingDAO {
             if (rs.next()) {
 
                 int ID = rs.getInt("ringID");
-                    String ringName = rs.getString("ringName");
-                    String ringImage = rs.getString("ringImage");
-                    int diamondID = rs.getInt("diamondID");
-                    int price = rs.getInt("ringPrice");
-                    int collectionID = rs.getInt("collectionID");
-                    int categoryID = rs.getInt("categoryID");
-                    
-                    String rName = rs.getString("rName");
-                    String material = rs.getString("material");
-                    String ringColor = rs.getString("ringColor");
-                    int rpPrice = rs.getInt("rpPrice");
-                    
-                    String diamondName = rs.getString("diamondName");
-                    String diamondImage = rs.getString("diamondImage");
-                    String origin = rs.getString("origin");
-                    int certificateID = rs.getInt("certificateID");
-                    
-                    double diamondSize = rs.getDouble("diamondSize");
-                    double caratWeight = rs.getDouble("caratWeight");
-                    String color = rs.getString("diamondColor");
-                    String clarity = rs.getString("clarity");
-                    String cut = rs.getString("cut");
-                    int diamondPrice = rs.getInt("diamondShapePrice");
+                String ringName = rs.getString("ringName");
+                int rpID = rs.getInt("rpID");
+                String ringImage = rs.getString("ringImage");
+                int diamondID = rs.getInt("diamondID");
+                int price = rs.getInt("ringPrice");
+                int collectionID = rs.getInt("collectionID");
+                int categoryID = rs.getInt("categoryID");
+
+                String rName = rs.getString("rName");
+                String material = rs.getString("material");
+                String ringColor = rs.getString("ringColor");
+                int rpPrice = rs.getInt("rpPrice");
+
+                String diamondName = rs.getString("diamondName");
+                String diamondImage = rs.getString("diamondImage");
+                String origin = rs.getString("origin");
+                int certificateID = rs.getInt("certificateID");
+
+                double diamondSize = rs.getDouble("diamondSize");
+                double caratWeight = rs.getDouble("caratWeight");
+                String color = rs.getString("diamondColor");
+                String clarity = rs.getString("clarity");
+                String cut = rs.getString("cut");
+                int diamondPrice = rs.getInt("diamondShapePrice");
+                int totalPrice = rs.getInt("totalPrice");
 
                 RingDTO ring = new RingDTO();
                 ring.setRingID(ID);
-                    ring.setRingName(ringName);
-                    ring.setRingImage(ringImage);
-                    ring.setDiamondID(diamondID);
-                    ring.setPrice(price);
-                    ring.setCategoryID(categoryID);
-                    ring.setCollectionID(collectionID);
-                    ring.setRingPlacementName(rName);
-                    ring.setMaterial(material);
-                    ring.setRingColor(ringColor);
-                    ring.setRpPrice(rpPrice);
-                    
-                    ring.setDiamondName(diamondName);
-                    ring.setDiamondImage(diamondImage);
-                    ring.setOrigin(origin);
-                    ring.setCertificateID(certificateID);
-                    
-                    ring.setDiamondSize(diamondSize);
-                    ring.setCaratWeight(caratWeight);
-                    ring.setColor(color);
-                    ring.setClarity(clarity);
-                    ring.setCut(cut);
-                    ring.setDiamondPrice(diamondPrice);
+                ring.setRpID(rpID);
+                ring.setRingName(ringName);
+                ring.setRingImage(ringImage);
+                ring.setDiamondID(diamondID);
+                ring.setPrice(price);
+                ring.setCategoryID(categoryID);
+                ring.setCollectionID(collectionID);
+                ring.setRingPlacementName(rName);
+                ring.setMaterial(material);
+                ring.setRingColor(ringColor);
+                ring.setRpPrice(rpPrice);
+
+                ring.setDiamondName(diamondName);
+                ring.setDiamondImage(diamondImage);
+                ring.setOrigin(origin);
+                ring.setCertificateID(certificateID);
+
+                ring.setDiamondSize(diamondSize);
+                ring.setCaratWeight(caratWeight);
+                ring.setColor(color);
+                ring.setClarity(clarity);
+                ring.setCut(cut);
+                ring.setDiamondPrice(diamondPrice);
+                ring.setTotalPrice(totalPrice);
                 return ring;
             }
         } catch (SQLException ex) {

@@ -111,7 +111,12 @@ public class RingController extends HttpServlet {
                 } catch (NumberFormatException ex) {
                     log("Parameter id has wrong format.");
                 }
-                int rpID = Integer.parseInt(request.getParameter("rpID"));
+                Integer rpID = null;
+                try {
+                    ringid = Integer.parseInt(request.getParameter("rpID"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter rpID has wrong format.");
+                }
                 String ringName = request.getParameter("ringName");
                 String ringImage = request.getParameter("ringImage");
                 int diamondID = Integer.parseInt(request.getParameter("diamondID"));
@@ -125,13 +130,13 @@ public class RingController extends HttpServlet {
                 }
                 ring.setRingID(ringid);
                 ring.setRpID(rpID);
-                    ring.setRingName(ringName);
-                    ring.setRingImage(ringImage);
-                    ring.setDiamondID(diamondID);
-                    ring.setPrice(price);
-                    ring.setCategoryID(categoryID);
-                    ring.setCollectionID(collectionID);
-                    
+                ring.setRingName(ringName);
+                ring.setRingImage(ringImage);
+                ring.setDiamondID(diamondID);
+                ring.setPrice(price);
+                ring.setCategoryID(categoryID);
+                ring.setCollectionID(collectionID);
+
                 ringDAO.update(ring);
                 request.setAttribute("ring", ring);
                 RequestDispatcher rd = request.getRequestDispatcher("ringdetails.jsp");
@@ -141,7 +146,12 @@ public class RingController extends HttpServlet {
                 try {
                     Connection conn = DBUtils.getConnection();
                     int ringid = 0;
-                    int rpID = Integer.parseInt(request.getParameter("rpID"));
+                    Integer rpID = null;
+                    try {
+                        ringid = Integer.parseInt(request.getParameter("rpID"));
+                    } catch (NumberFormatException ex) {
+                        log("Parameter rpID has wrong format.");
+                    }
                     String ringName = request.getParameter("ringName");
                     String ringImage = request.getParameter("ringImage");
                     int diamondID = Integer.parseInt(request.getParameter("diamondID"));
