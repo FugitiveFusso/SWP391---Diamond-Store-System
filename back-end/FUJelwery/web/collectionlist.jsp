@@ -66,7 +66,7 @@
                 <div class="list1">
                     <div class="list-intro-left">
                         <div class="left-icon">
-                            <i class="fa-regular fa-newspaper"></i>
+                            <i class='bx bx-collection' ></i>
                         </div>
                         <div class="left-info">
                             <div class="list-title">Collection List</div>
