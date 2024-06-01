@@ -88,6 +88,7 @@ table{
     margin: 10px auto;
     width: 100%;
     justify-content: center;
+    overflow: hidden;
     border-radius: 20px;
     border: 1px solid black;
 }
@@ -101,10 +102,11 @@ table, tr{
 }
 tr,td,th{
     padding: 20px 10px;
+    background: #f1f1f1;
 }
 
 th{
-    background-color: #f1f1f1;    
+    background-color: #d9d9d9;    
 }
 
 th a{
