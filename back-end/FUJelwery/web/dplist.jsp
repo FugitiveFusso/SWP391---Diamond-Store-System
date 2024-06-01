@@ -30,7 +30,7 @@
                         <tr>
                             <td>Diamond Price ID</td>
                             <td><a href=?colSort=diamondSize>Diamond Size</a></td>
-                            <td><a href=?colSort=caratWeight>Diamond Weight</a></td>
+                            <td><a href=?colSort=caratWeight>Carat Weight</a></td>
                             <td><a href=?colSort=color>Color</a></td>
                             <td><a href=?colSort=clarity>Clarity</a></td>
                             <td>Cut</td>

@@ -25,7 +25,7 @@ public class DiamondPriceDAO {
             Connection con = DBUtils.getConnection();
             String sql = " select dpID, diamondSize, caratWeight, color, clarity, cut, price from DiamondPrice ";
             if (keyword != null && !keyword.isEmpty()) {
-                sql += " where diamondSize = ? or caratWeight = ? or color like ? or clarity like ? or price = ? ";
+                sql += " where diamondSize like ? or caratWeight like ? or color like ? or clarity like ? or price like ? ";
             }
 
             if (sortCol != null && !sortCol.isEmpty()) {
@@ -35,11 +35,11 @@ public class DiamondPriceDAO {
             PreparedStatement stmt = con.prepareStatement(sql);
 
             if (keyword != null && !keyword.isEmpty()) {
-                stmt.setString(1, keyword);
-                stmt.setString(2, keyword);
+                stmt.setString(1, "%" + keyword + "%");
+                stmt.setString(2, "%" + keyword + "%");
                 stmt.setString(3, "%" + keyword + "%");
                 stmt.setString(4, "%" + keyword + "%");
-                stmt.setString(5, keyword);
+                stmt.setString(5, "%" + keyword + "%");
 
             }
             ResultSet rs = stmt.executeQuery();
