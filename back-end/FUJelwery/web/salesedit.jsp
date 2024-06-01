@@ -16,33 +16,19 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css" />
         <link rel="stylesheet" href="css/navbar.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="./css/signup.css">
+        <script defer src="./js/inputFormat.js"></script>
+
     </head>
     <body>
         <jsp:include page="/managermenu.jsp" flush="true" />
 
         <h1>Sales Staff Edit </h1>
         <p> Login user: ${sessionScope.managersession.username}</p>
-
-        <!--                <form action="./SalesController" method="POST">
-                            <table>
-                
-                                <tr><td></td><td><input name="id" value="${requestScope.sales.userid}" required="Please enter" type="hidden"</td></tr>
-                                <tr><td>User Name</td><td><input name="userName" value="${requestScope.sales.username}" required="Please enter" </td></tr>
-                                <tr><td>Password</td><td><input name="password" value="${requestScope.sales.password}" required="Please enter" </td></tr>
-                                <tr><td>First Name</td><td><input name="firstName" value="${requestScope.sales.firstname}" required="Please enter"</td></tr>
-                                <tr><td>Last Name</td><td><input name="lastName" value="${requestScope.sales.lastname}" required="Please enter"</td></tr>
-                                <tr><td>Phone Number</td><td><input name="phoneNumber" value="${requestScope.sales.phonenumber}" required="Please enter" </td></tr>
-                                <tr><td>Email</td><td><input name="email" value="${requestScope.sales.email}" required="Please enter"</td></tr>
-                                <tr><td>Address</td><td><input name="address" value="${requestScope.sales.address}" required="Please enter"</td></tr>
-                                <tr><td>Point</td><td><input name="point" value="${requestScope.sales.point}" required="Please enter"</td></tr>
-                                <tr><td></td><td><input name="roleID" value=3 required="Please enter"   type="hidden"</td></tr>
-                                <tr><td colspan="2">
-                                        <input name="action" value="${requestScope.nextaction}" type="hidden">
-                                        <input type="submit" value="Save">
-                                    </td></tr>
-                            </table>
-                
-                        </form>-->
 
         <div class="container">
             <div class="padding">
@@ -57,55 +43,70 @@
                                         </div>
                                         <h6 class="f-w-600" style="font-size: 18px; margin: 10px 0;">${requestScope.sales.lastname} ${requestScope.sales.firstname}</h6>
                                         <p style="color: #fff; font-family: 'Inter'; font-size: 13px; ">Delivery Staff of FUJ</p>
-                                        <p  style="color: #fff; font-family: 'Inter'; font-size: 13px;">${requestScope.deliverystaff.username}</p>
+                                        <p style="color: #fff; font-family: 'Inter'; font-size: 13px;">${requestScope.sales.username}</p>
                                     </div>
                                 </div>
                                 <div class="col-md-9">
                                     <div class="card-block">
                                         <h2 class="m-b-20 p-b-5 b-b-default f-w-600">Personal Information</h2>
-                                        <form action="./SalesController" method="POST">                                            
+                                        <form action="./SalesController" method="POST" id="form" onsubmit="return validateForm()">                                            
                                             <div class="row">
                                                 <input name="id" value="${requestScope.sales.userid}" required="Please enter" type="hidden">
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-6 input-box">
                                                     <p class="m-b-10 f-w-600">Username</p>
-                                                    <input name="userName" value="${requestScope.sales.username}" required="Please enter">
+                                                    <input  id="username1" name="userName" value="${requestScope.sales.username}" required="Please enter">
+                                                    <div class="error"></div>
+
                                                 </div>
-                                                <div class="col-sm-6">
+                                                    
+                                                <div class="col-sm-6 input-box password-input-container">
                                                     <p class="m-b-10 f-w-600">Password</p>
-                                                    <input name="password" value="${requestScope.sales.password}" required="Please enter" >
+                                                    <input id="myInput" type="password" name="password" value="${requestScope.sales.password}" required="Please enter" >
+                                                    <span class="eye" onclick="myFunction()">
+                                                        <i id="hide1" class="fa-solid fa-eye"></i>
+                                                        <i id="hide2" class="fa-solid fa-eye-slash" id="eyeicon"></i>
+                                                    </span> 
+                                                    
+                                                    <div class="error"></div>
+
                                                 </div>
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-6 input-box">
                                                     <p class="m-b-10 f-w-600">First Name</p>
-                                                    <input name="firstName" value="${requestScope.sales.firstname}" required="Please enter">
+                                                    <input name="firstName" id="firstname1" value="${requestScope.sales.firstname}" required="Please enter">
+                                                    <div class="error"></div>
+
                                                 </div>
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-6 input-box">
                                                     <p class="m-b-10 f-w-600">Last Name</p>
-                                                    <input name="lastName" value="${requestScope.sales.lastname}" required="Please enter">
+                                                    <input name="lastName" id="lastname1" value="${requestScope.sales.lastname}" required="Please enter">
+                                                    <div class="error"></div>
+
                                                 </div>
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-6 input-box">
                                                     <p class="m-b-10 f-w-600">Email</p>
-                                                    <input name="email" value="${requestScope.sales.email}" required="Please enter">
+                                                    <input name="email" id="email1" value="${requestScope.sales.email}" required="Please enter">
+                                                    <div class="error"></div>
+
                                                 </div>
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-6 input-box">
                                                     <p class="m-b-10 f-w-600">Phone Number</p>
-                                                    <input name="phoneNumber" value="${requestScope.sales.phonenumber}" required="Please enter">
+                                                    <input name="phoneNumber" id="phonenumber1" value="${requestScope.sales.phonenumber}" required="Please enter">
+                                                    <div class="error"></div>
+
                                                 </div>
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-6 input-box">
                                                     <p class="m-b-10 f-w-600">Address</p>
-                                                    <input name="address" value="${requestScope.sales.address}" required="Please enter">
+                                                    <input name="address" id="address1" value="${requestScope.sales.address}" required="Please enter">
+                                                    <div class="error"></div>
+
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <p class="m-b-10 f-w-600">Points</p>
-                                                    <input name="point" value="${requestScope.sales.point}" required="Please enter"                                           
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <p class="m-b-10 f-w-600"></p>
-                                                    <input name="roleID" value=3 required="Please enter"   type="hidden"
+                                                    <input name="point" value="${requestScope.sales.point}" required="Please enter">                                           
                                                 </div>
 
                                             </div>
-                                    </div>
-                                    <input name="roleID" value=1 required="Please enter"   type="hidden">
+                                    <input name="roleID" value=3 required="Please enter"   type="hidden">
                                     <div class="row" style="margin-top: 20px; justify-content: center">
                                         <div class="col-sm-4">
                                             <input name="action" value="${requestScope.nextaction}" type="hidden">
@@ -113,6 +114,7 @@
                                         </div>
                                     </div>
                                     </form>
+                                       </div>
                                 </div>
                             </div>
                         </div>
@@ -120,6 +122,8 @@
                 </div>
             </div>
         </div>
-    </div>
-</body>
+            <script src="js/showPasswordFunc.js"></script>
+
+
+    </body>
 </html>

@@ -41,10 +41,6 @@
     width: 95%;
 }*/
 
-.input-box input:focus {
-    outline: 0;
-}
-
 .input-box.success input {
     border-color: green;
 }
@@ -58,5 +54,23 @@
     color: red;
     font-size: 14px;
     height: 13px;
-    font-weight: 700
+    font-weight: 700;
+}
+
+
+.password-input-container {
+    position: relative;
+}
+
+.eye {
+    position: absolute;
+    right: 94px;
+    top: 68%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+/* Additional styling for eye icon */
+.eye i {
+    /* Add your eye icon styling here */
 }
