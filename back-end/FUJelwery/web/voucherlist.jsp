@@ -16,10 +16,10 @@
         <link rel="stylesheet" href="css/staff_list.css">
     </head>
     <body>
-        <div class="menu">
-            <!--you will code the horizontal menu here-->
+<!--        <div class="menu">
+            you will code the horizontal menu here
             <ul class="navbar">      
-<!--                <li class="navbar__link"><a href='#'>Orders</a></li>-->
+                <li class="navbar__link"><a href='#'>Orders</a></li>
                 <li class="navbar__link"><a href='VoucherController'>Voucher</a></li>              
                 <img src="./images/Screenshot (656).png">               
                 <li class="navbar__link">
@@ -32,7 +32,7 @@
                 </li>
                 
             </ul>
-        </div>
+        </div>-->
                 <%@ include file="/salesmenu.jsp" %>
 
         <div class="list-container">
