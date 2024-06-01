@@ -145,13 +145,13 @@ public class DiamondPriceDAO {
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
 
-            ps.setInt(7, dp.getId());
             ps.setDouble(1, dp.getSize());
             ps.setDouble(2, dp.getCaratWeight());
             ps.setString(3, dp.getColor());
             ps.setString(4, dp.getClarity());
             ps.setString(5, dp.getCut());
             ps.setInt(6, dp.getPrice());
+            ps.setInt(7, dp.getId());
             ps.executeUpdate();
             conn.close();
         } catch (SQLException ex) {
@@ -161,9 +161,6 @@ public class DiamondPriceDAO {
         return false;
     }
 
-    /*
-    Delete student 
-     */
     public boolean delete(int id) {
         String sql = "DELETE [DiamondPrice] WHERE dpID = ? ";
         try {

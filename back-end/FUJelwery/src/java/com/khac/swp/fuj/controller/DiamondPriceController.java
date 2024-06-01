@@ -111,13 +111,27 @@ public class DiamondPriceController extends HttpServlet {
                 } catch (NumberFormatException ex) {
                     log("Parameter id has wrong format.");
                 }
-
-                double size = Double.parseDouble(request.getParameter("diamondSize"));
-                double caratWeight = Double.parseDouble(request.getParameter("caratWeight"));
+                Double size = null;
+                try {
+                    size = Double.parseDouble(request.getParameter("diamondSize"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter size has wrong format.");
+                }
+                Double caratWeight = null;
+                try {
+                    caratWeight = Double.parseDouble(request.getParameter("caratWeight"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter caratWeight has wrong format.");
+                }
                 String color = request.getParameter("color");
                 String clarity = request.getParameter("clarity");
                 String cut = request.getParameter("cut");
-                int price = Integer.parseInt("price");
+                Integer price = null;
+                try {
+                    price = Integer.parseInt(request.getParameter("price"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter price has wrong format.");
+                }
 
                 DiamondPriceDTO dp = null;
                 if (dpid != null) {
@@ -140,12 +154,27 @@ public class DiamondPriceController extends HttpServlet {
                 try {
                     Connection conn = DBUtils.getConnection();
                     int dpid = 0;
-                    double size = Double.parseDouble(request.getParameter("diamondSize"));
-                    double caratWeight = Double.parseDouble(request.getParameter("caratWeight"));
+                    Double size = null;
+                    try {
+                        size = Double.parseDouble(request.getParameter("diamondSize"));
+                    } catch (NumberFormatException ex) {
+                        log("Parameter size has wrong format.");
+                    }
+                    Double caratWeight = null;
+                    try {
+                        caratWeight = Double.parseDouble(request.getParameter("caratWeight"));
+                    } catch (NumberFormatException ex) {
+                        log("Parameter caratWeight has wrong format.");
+                    }
                     String color = request.getParameter("color");
                     String clarity = request.getParameter("clarity");
                     String cut = request.getParameter("cut");
-                    int price = Integer.parseInt("price");
+                    Integer price = null;
+                    try {
+                        price = Integer.parseInt(request.getParameter("price"));
+                    } catch (NumberFormatException ex) {
+                        log("Parameter price has wrong format.");
+                    }
 
                     PreparedStatement ps = conn.prepareStatement("select max(dpID) from [DiamondPrice]");
                     ResultSet rs = ps.executeQuery();
