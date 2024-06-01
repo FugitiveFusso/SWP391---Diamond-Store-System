@@ -12,8 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <link rel="stylesheet" href="css/navbar.css">
+        <title>Post Management List</title>
         <link rel="stylesheet" href="css/navbar.css">
         <link rel="stylesheet" href="css/customer_list.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -76,7 +75,7 @@
                         </div>
                     </div>
                     <div class="list-intro-right">
-                        <form action="ManagerController" method="POST" class="input1">
+                        <form action="PostController" method="POST">
                             <input name="action" value="create" type="hidden">
                             <button type="submit" class="styled-button1">
                                 <span>Add a Post</span>                                

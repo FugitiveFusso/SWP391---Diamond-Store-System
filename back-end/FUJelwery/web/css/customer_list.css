@@ -64,6 +64,11 @@ body{
     color: #fff;
 }
 
+.styled-button1:hover {
+    background-color: #8f8f8f;
+    color: #fff;
+}
+
 .list{
     width: auto;
     height: auto;
