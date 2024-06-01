@@ -167,9 +167,8 @@ INSERT INTO [RingPlacementPrice] VALUES
 (4,'12K White Gold','Gold, Nickle','White',20000000)
 
 INSERT INTO [Ring] VALUES
-(1,1,'0.7ct Diamond Ring','https://www.acredo-bridals.com/_nuxt/img/header-engagementRings070Carat.5f99e30.jpg',21,135000000,1,1),
-(2,2,'0.7ct Diamond Solitaire Ring','https://www.acredo-bridals.com/_nuxt/img/header-engagementRings070Carat.5f99e30.jpg',22,132000000,1,1),
-(3,3,'0.36ct Diamond Solitaire Ring','https://www.berrysjewellers.co.uk/cdn/shop/products/1620389070-28905700.jpg',1,70000000,2,2),
-(4,4,'0.36ct Diamond Solitaire Ring','https://www.berrysjewellers.co.uk/cdn/shop/products/1620389070-28905700.jpg',2,55000000,2,2)
+(1,1,'0.7ct Diamond Ring','https://www.acredo-bridals.com/_nuxt/img/header-engagementRings070Carat.5f99e30.jpg',21,15000000,1,1),
+(2,2,'0.7ct Diamond Solitaire Ring','https://www.acredo-bridals.com/_nuxt/img/header-engagementRings070Carat.5f99e30.jpg',22,12000000,1,1),
+(3,3,'0.36ct Diamond Solitaire Ring','https://www.berrysjewellers.co.uk/cdn/shop/products/1620389070-28905700.jpg',1,7000000,2,2),
+(4,4,'0.36ct Diamond Solitaire Ring','https://www.berrysjewellers.co.uk/cdn/shop/products/1620389070-28905700.jpg',2,5000000,2,2)
 
-SELECT * FROM DiamondPrice

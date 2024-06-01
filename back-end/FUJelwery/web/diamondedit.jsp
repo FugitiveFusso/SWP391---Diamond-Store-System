@@ -34,7 +34,7 @@
         <h1>Diamond Edit </h1>
         <p> Login user: ${sessionScope.salessession.username}</p>
 
-        <form action="./DiamondController" method="POST" onclick="return validateForm()">
+        <form action="./DiamondController" method="POST" onsubmit="return validateForm()">
             <table>
 
                 <tr><td></td><td><input name="id" value="${requestScope.diamond.diamondID}" required="Please enter" type="hidden"</td></tr>

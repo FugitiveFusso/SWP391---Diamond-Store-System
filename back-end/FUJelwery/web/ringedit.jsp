@@ -34,7 +34,7 @@
         <h1>Ring Edit </h1>
         <p> Login user: ${sessionScope.salessession.username}</p>
 
-        <form action="./RingController" method="POST" onclick="return validateForm()">
+        <form action="./RingController" method="POST" onsubmit="return validateForm()">
             <table>
 
                 <tr><td></td><td><input name="id" value="${requestScope.ring.ringID}" required="Please enter" type="hidden"</td></tr>
@@ -42,7 +42,7 @@
                 <tr><td>Ring Image</td><td><input name="ringImage" value="${requestScope.ring.ringImage}" required="Please enter"</td></tr>
                 <tr><td>Ring Placement ID</td><td><input name="rpID" value="${requestScope.ring.rpID}" required="Please enter"</td></tr>
                 <tr><td>Diamond ID</td><td><input name="diamondID" value="${requestScope.ring.diamondID}" required="Please enter"</td></tr>
-                <tr><td>Price</td><td><input name="price" value="${requestScope.ring.price}" required="Please enter" </td></tr>
+                <tr><td>Addition Price</td><td><input name="price" value="${requestScope.ring.price}" required="Please enter" </td></tr>
                 <tr><td>Collection ID</td><td><input name="collectionID" value="${requestScope.ring.collectionID}" required="Please enter"</td></tr>
                 <tr><td>Category ID</td><td><input name="categoryID" value="${requestScope.ring.categoryID}" required="Please enter"</td></tr>
                 <tr><td colspan="2">
