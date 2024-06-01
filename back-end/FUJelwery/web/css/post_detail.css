@@ -1,0 +1,100 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+.post-title{
+    align-items: center;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.post-title h1{
+    font-size: 50px;
+}
+
+.content1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border: 2px solid #d9d9d9;
+    border-radius: 20px;
+    margin: 50px 300px 0 300px;
+}
+
+.small-content{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.content-left .content-img img{
+    border-radius: 20px;
+}
+
+.content-right {
+    margin-left: 30px;
+}
+
+.intro-details p{
+    padding: 5px 0;
+}
+
+.intro-details .title{
+    font-size: 14px;
+    font-weight: 500;
+    color: #000000;
+}
+
+.intro-details .name{
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.description .description-title{
+    padding-top: 10px;
+    padding-bottom: 5px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #000000;
+}
+
+.buttons{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 300px;
+}
+
+.buttons form {
+    margin: 0 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.buttons form input{
+    font-size: 20px;
+    padding: 6px 30px;
+    background: #151542;
+    color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.buttons form input:hover{
+    background: #15156b;
+}
+
+
+
+
+
+
+
+
+
+
+
