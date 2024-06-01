@@ -61,7 +61,7 @@
 
         <div class="list-container">
             <div class="smaller-container">
-                <div class="list">
+                <div class="list1">
                     <div class="list-intro-left">
                         <div class="left-icon">
                             <i class='bx bx-user'></i>
