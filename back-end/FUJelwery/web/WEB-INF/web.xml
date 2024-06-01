@@ -44,6 +44,10 @@
         <servlet-name>DiamondPriceController</servlet-name>
         <servlet-class>com.khac.swp.fuj.controller.DiamondPriceController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RingPlacementPriceController</servlet-name>
+        <servlet-class>com.khac.swp.fuj.controller.RingPlacementPriceController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AdminLoginController</servlet-name>
         <url-pattern>/adminlogin</url-pattern>
@@ -87,6 +91,10 @@
     <servlet-mapping>
         <servlet-name>DiamondPriceController</servlet-name>
         <url-pattern>/DiamondPriceController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RingPlacementPriceController</servlet-name>
+        <url-pattern>/RingPlacementPriceController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
