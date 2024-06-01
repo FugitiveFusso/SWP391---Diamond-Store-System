@@ -41,7 +41,6 @@
 
             <tr><td>Ring Name</td><td>${requestScope.ring.ringName}</td></tr>
             <tr><td>Ring Image</td><td><img src=${requestScope.ring.ringImage} width="300px" height="300px"></td></tr>
-            <tr><td>Price</td><td>${requestScope.ring.price}</td></tr>
             <tr><td>Category</td><td>${requestScope.ring.categoryID}</td></tr>
             <tr><td>Collection</td><td>${requestScope.ring.collectionID}</td></tr>
             <tr><td>Ring Placement Name</td><td>${requestScope.ring.ringPlacementName}</td></tr>
@@ -55,7 +54,7 @@
             <tr><td>Clarity</td><td>${requestScope.ring.clarity}</td></tr>
             <tr><td>Cut</td><td>${requestScope.ring.cut}</td></tr>
             <tr><td>Diamond Price</td><td>${requestScope.ring.diamondPrice}</td></tr>
-            <tr><td>Total Price</td><td>${requestScope.ring.price + requestScope.ring.rpPrice + requestScope.ring.diamondPrice}</td></tr>
+            <tr><td>Total Price</td><td>${requestScope.ring.rpPrice + requestScope.ring.diamondPrice}</td></tr>
 
         </table>    
         <form action="RingController" style="padding-top: 10px">

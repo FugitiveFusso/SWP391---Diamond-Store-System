@@ -15,7 +15,6 @@
         <link rel="stylesheet" href="css/navbar.css">
         <link rel="stylesheet" href="css/staff_list.css">
         <style>
-            /* CSS styles */
             p {
                 font-family: Arial, sans-serif; /* Set font family */
                 color: #333; /* Set text color */
