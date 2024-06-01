@@ -75,7 +75,7 @@
                         <form action="CertificateController" method="POST" class="input1">
                             <input name="action" value="create" type="hidden">
                             <button type="submit" class="styled-button3">
-                                <span>Add a Certificates</span>                                           
+                                <span>Add a Certificate</span>                                           
                             </button>
                         </form>
                     </div>
