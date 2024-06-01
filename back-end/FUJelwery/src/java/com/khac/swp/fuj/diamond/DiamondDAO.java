@@ -28,7 +28,7 @@ public class DiamondDAO {
             Connection con = DBUtils.getConnection();
             String sql = "SELECT d.diamondID, d.diamondName, d.diamondImage, d.origin, d.dpID, d.certificateID, dp.diamondSize, dp.caratWeight, dp.color, dp.clarity, dp.cut, dp.price FROM Diamond d FULL JOIN DiamondPrice dp ON d.dpID = dp.dpID ";
             if (keyword != null && !keyword.isEmpty()) {
-                sql += " WHERE diamondName like ?";
+                sql += " WHERE d.diamondName like ? or dp.diamondSize like ? or dp.caratWeight like ? or dp.color like ? or dp.clarity like ? or dp.price like ?";
             }
 
             if (sortCol != null && !sortCol.isEmpty()) {
@@ -39,6 +39,11 @@ public class DiamondDAO {
 
             if (keyword != null && !keyword.isEmpty()) {
                 stmt.setString(1, "%" + keyword + "%");
+                stmt.setString(2, "%" + keyword + "%");
+                stmt.setString(3, "%" + keyword + "%");
+                stmt.setString(4, "%" + keyword + "%");
+                stmt.setString(5, "%" + keyword + "%");
+                stmt.setString(6, "%" + keyword + "%");
 
             }
             ResultSet rs = stmt.executeQuery();

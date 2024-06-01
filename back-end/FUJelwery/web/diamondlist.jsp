@@ -14,48 +14,24 @@
         <title>Diamond Management Page</title>
         <link rel="stylesheet" href="css/navbar.css">
         <link rel="stylesheet" href="css/staff_list.css">
+        <style>
+            /* CSS styles */
+            p {
+                font-family: Arial, sans-serif; /* Set font family */
+                color: #333; /* Set text color */
+                background-color: #f0f0f0; /* Set background color */
+                padding: 10px; /* Add padding */
+                margin: 0; /* Remove default margin */
+                border: 1px solid #ccc; /* Add border */
+                border-radius: 5px; /* Add border radius */
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add box shadow */
+                text-align: center
+            }
+        </style>
     </head>
     <body>
-        <div class="menu">
-            <!--you will code the horizontal menu here-->
-            <ul class="navbar">
-                <li class="navbar__link"><a href="#">Order</a></li>
-                <li class="navbar__link">
-                    <a href="#">Products</a>
-                    <div class="sub-menu-1">
-                        <ul>
-                            <li><a href='DiamondController'>Diamond</a></li>
-                            <li><a href='RingController'>Ring</a></li>
-                            <li><a href='CollectionController'>Collection</a></li>
-                        </ul>
-                    </div>                  
-                </li>
-                <li class="navbar__link"><a href='VoucherController'>Voucher</a></li>
-                <img src="./images/Screenshot (656).png">
-                <li class="navbar__link"><a href="#">Delivery Tracking</a></li>
-                <li class="navbar__link">
-                    <a href="#">Dashboard</a>
-                    <div class="sub-menu-1">
-                        <ul>
-                            <li><a href='CustomerController'>View Customer</a></li>
-                            <li><a href='ManagerController'>View Manager</a></li>
-                            <li><a href='CertificateController'>View Certificate</a></li>
-                            <li><a href='CategoryController'>View Category</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="navbar__link">
-                    <a href="#">Account</a>
-                    <div class="sub-menu-1">
-                        <ul>
-                            <li><a href='adminlogin?action=logout'>Logout</a></li>          
-                        </ul>
-                    </div>
-                </li>
-                
-            </ul>
-        </div>
-        
+
+        <%@ include file="/salesmenu.jsp" %>
         <div class="list-container">
             <div class="smaller-container">
                 <div class="list-title">Diamond List</div>
@@ -64,7 +40,7 @@
                         <input name=keyword type=text value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
                         <input type=submit value=Search >
                     </form>
-
+                    <p>You need to add Diamond Price, before you add a Diamond</p>
                     <table>
                         <tr>
                             <th>Diamond ID</td>
@@ -74,9 +50,9 @@
                             <th><a href=?colSort=diamondSize>Diamond Size</a></th>
                             <th><a href=?colSort=caratWeight>Carat Weight</a></th>
                             <th>Cut</th>
-                            <th>Color</th>
-                            <th>Clarity</th>
-                            <th><a href=?colSort=diamondPrice>Price</a></th>
+                            <th><a href=?colSort=color>Color</a></th>
+                            <th><a href=?colSort=clarity>Clarity</a></th>
+                            <th><a href=?colSort=price>Price</a></th>
                             <th>Delete</th>                            
                         </tr>
                         <%
