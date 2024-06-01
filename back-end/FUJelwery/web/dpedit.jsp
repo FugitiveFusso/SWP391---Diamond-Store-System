@@ -27,7 +27,7 @@
     <body>
         <jsp:include page="/salesmenu.jsp" flush="true" />
 
-        <h1>DiamondPrice Edit </h1>
+        <h1>Diamond Price Edit </h1>
         <p> Login user: ${sessionScope.salessession.username}</p>
 
         <form action="./DiamondPriceController" method="POST">
@@ -109,7 +109,8 @@
                         <input type="number" name="price" value="${requestScope.dp.price}" required min="0" max="1000000000">
                         <span id="priceNotification" class="notification"></span>
                     </td>
-                </tr>                <tr><td colspan="2">
+                </tr>                
+                <tr><td colspan="2">
                         <input name="action" value="${requestScope.nextaction}" type="hidden">
                         <input type="submit" value="Save">
                     </td></tr>
