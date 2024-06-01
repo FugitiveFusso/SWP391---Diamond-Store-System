@@ -52,8 +52,8 @@ public class RingController extends HttpServlet {
 
             RingDAO ringDAO = new RingDAO();
             HttpSession session = request.getSession(false);
-            if (session == null || session.getAttribute("adminsession") == null) {
-                response.sendRedirect("adminlogin.jsp");
+            if (session == null || session.getAttribute("salessession") == null) {
+                response.sendRedirect("saleslogin.jsp");
                 return;
             } else if (action == null || action.equals("list")) {//lists
 
@@ -111,11 +111,11 @@ public class RingController extends HttpServlet {
                 } catch (NumberFormatException ex) {
                     log("Parameter id has wrong format.");
                 }
+                int rpID = Integer.parseInt(request.getParameter("rpID"));
                 String ringName = request.getParameter("ringName");
                 String ringImage = request.getParameter("ringImage");
                 int diamondID = Integer.parseInt(request.getParameter("diamondID"));
-                String gender = request.getParameter("gender");
-                double price = Double.parseDouble(request.getParameter("price"));
+                int price = Integer.parseInt(request.getParameter("price"));
                 int categoryID = Integer.parseInt(request.getParameter("categoryID"));
                 int collectionID = Integer.parseInt(request.getParameter("collectionID"));
 
@@ -124,13 +124,14 @@ public class RingController extends HttpServlet {
                     ring = ringDAO.load(ringid);
                 }
                 ring.setRingID(ringid);
-                ring.setRingName(ringName);
-                ring.setRingImage(ringImage);
-                ring.setDiamondID(diamondID);
-                ring.setGender(gender);
-                ring.setPrice(price);
-                ring.setCategoryID(categoryID);
-                ring.setCollectionID(collectionID);
+                ring.setRpID(rpID);
+                    ring.setRingName(ringName);
+                    ring.setRingImage(ringImage);
+                    ring.setDiamondID(diamondID);
+                    ring.setPrice(price);
+                    ring.setCategoryID(categoryID);
+                    ring.setCollectionID(collectionID);
+                    
                 ringDAO.update(ring);
                 request.setAttribute("ring", ring);
                 RequestDispatcher rd = request.getRequestDispatcher("ringdetails.jsp");
@@ -140,11 +141,11 @@ public class RingController extends HttpServlet {
                 try {
                     Connection conn = DBUtils.getConnection();
                     int ringid = 0;
+                    int rpID = Integer.parseInt(request.getParameter("rpID"));
                     String ringName = request.getParameter("ringName");
                     String ringImage = request.getParameter("ringImage");
                     int diamondID = Integer.parseInt(request.getParameter("diamondID"));
-                    String gender = request.getParameter("gender");
-                    double price = Double.parseDouble(request.getParameter("price"));
+                    int price = Integer.parseInt(request.getParameter("price"));
                     int collectionID = Integer.parseInt(request.getParameter("collectionID"));
                     int categoryID = Integer.parseInt(request.getParameter("categoryID"));
 
@@ -157,10 +158,10 @@ public class RingController extends HttpServlet {
                     }
                     RingDTO ring = new RingDTO();
                     ring.setRingID(ringid);
+                    ring.setRpID(rpID);
                     ring.setRingName(ringName);
                     ring.setRingImage(ringImage);
                     ring.setDiamondID(diamondID);
-                    ring.setGender(gender);
                     ring.setPrice(price);
                     ring.setCategoryID(categoryID);
                     ring.setCollectionID(collectionID);

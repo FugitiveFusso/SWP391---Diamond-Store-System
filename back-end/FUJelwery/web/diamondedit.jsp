@@ -29,10 +29,10 @@
                 return true;
             }
         </script>
-        <jsp:include page="/menu.jsp" flush="true" />
+        <jsp:include page="/salesmenu.jsp" flush="true" />
 
         <h1>Diamond Edit </h1>
-        <p> Login user: ${sessionScope.adminsession.username}</p>
+        <p> Login user: ${sessionScope.salessession.username}</p>
 
         <form action="./DiamondController" method="POST" onclick="return validateForm()">
             <table>
@@ -41,11 +41,7 @@
                 <tr><td>Diamond Name</td><td><input name="diamondName" value="${requestScope.diamond.diamondName}" required="Please enter" </td></tr>
                 <tr><td>Diamond Image</td><td><input name="diamondImage" value="${requestScope.diamond.diamondImage}" required="Please enter"</td></tr>
                 <tr><td>Origin</td><td><input name="origin" value="${requestScope.diamond.origin}" required="Please enter"</td></tr>
-                <tr><td>Price</td><td><input name="diamondPrice" value="${requestScope.diamond.price}" required="Please enter" </td></tr>
-                <tr><td>Carat Weight</td><td><input name="caratWeight" value="${requestScope.diamond.caratWeight}" required="Please enter" </td></tr>
-                <tr><td>Cut</td><td><input name="cut" value="${requestScope.diamond.cut}" required="Please enter"</td></tr>
-                <tr><td>Color</td><td><input name="color" value="${requestScope.diamond.color}" required="Please enter"</td></tr>
-                <tr><td>Clarity</td><td><input name="clarity" value="${requestScope.diamond.clarity}" required="Please enter"</td></tr>
+                <tr><td>Diamond Type</td><td><input name="dpID" value="${requestScope.diamond.dpID}" required="Please enter" </td></tr>
                 <tr><td>Certificate ID</td><td><input name="certificateID" value="${requestScope.diamond.certificateID}" required="Please enter"</td></tr>
                 <tr><td colspan="2">
                         <input name="action" value="${requestScope.nextaction}" type="hidden">

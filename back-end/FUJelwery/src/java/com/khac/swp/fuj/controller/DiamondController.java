@@ -54,8 +54,8 @@ public class DiamondController extends HttpServlet {
 
             DiamondDAO diamondDAO = new DiamondDAO();
             HttpSession session = request.getSession(false);
-            if (session == null || session.getAttribute("adminsession") == null) {
-                response.sendRedirect("adminlogin.jsp");
+            if (session == null || session.getAttribute("salessession") == null) {
+                response.sendRedirect("saleslogin.jsp");
                 return;
             } else if (action == null || action.equals("list")) {//lists
 
@@ -118,11 +118,7 @@ public class DiamondController extends HttpServlet {
                 String diamondName = request.getParameter("diamondName");
                 String diamondImage = request.getParameter("diamondImage");
                 String origin = request.getParameter("origin");
-                double price = Double.parseDouble(request.getParameter("diamondPrice"));
-                double caratWeight = Double.parseDouble(request.getParameter("caratWeight"));
-                String cut = request.getParameter("cut");
-                String color = request.getParameter("color");
-                String clarity = request.getParameter("clarity");
+                int dpID = Integer.parseInt(request.getParameter("dpID"));
                 int certificateID = Integer.parseInt(request.getParameter("certificateID"));
 
                 DiamondDTO diamond = null;
@@ -130,15 +126,11 @@ public class DiamondController extends HttpServlet {
                     diamond = diamondDAO.load(diamondid);
                 }
                 diamond.setDiamondID(diamondid);
-                diamond.setDiamondName(diamondName);
-                diamond.setDiamondImage(diamondImage);
-                diamond.setOrigin(origin);
-                diamond.setPrice(price);
-                diamond.setCaratWeight(caratWeight);
-                diamond.setCut(cut);
-                diamond.setColor(color);
-                diamond.setClarity(clarity);
-                diamond.setCertificateID(certificateID);
+                    diamond.setDiamondName(diamondName);
+                    diamond.setDiamondImage(diamondImage);
+                    diamond.setOrigin(origin);
+                    diamond.setDpID(dpID);
+                    diamond.setCertificateID(certificateID);
                 diamondDAO.update(diamond);
                 request.setAttribute("diamond", diamond);
                 RequestDispatcher rd = request.getRequestDispatcher("diamonddetails.jsp");
@@ -151,12 +143,9 @@ public class DiamondController extends HttpServlet {
                     String diamondName = request.getParameter("diamondName");
                     String diamondImage = request.getParameter("diamondImage");
                     String origin = request.getParameter("origin");
-                    double price = Double.parseDouble(request.getParameter("diamondPrice"));
-                    double caratWeight = Double.parseDouble(request.getParameter("caratWeight"));
-                    String cut = request.getParameter("cut");
-                    String color = request.getParameter("color");
-                    String clarity = request.getParameter("clarity");
+                    int dpID = Integer.parseInt(request.getParameter("dpID"));
                     int certificateID = Integer.parseInt(request.getParameter("certificateID"));
+
 
                     PreparedStatement ps = conn.prepareStatement("select max(diamondID) from [Diamond]");
                     ResultSet rs = ps.executeQuery();
@@ -169,11 +158,7 @@ public class DiamondController extends HttpServlet {
                     diamond.setDiamondName(diamondName);
                     diamond.setDiamondImage(diamondImage);
                     diamond.setOrigin(origin);
-                    diamond.setPrice(price);
-                    diamond.setCaratWeight(caratWeight);
-                    diamond.setCut(cut);
-                    diamond.setColor(color);
-                    diamond.setClarity(clarity);
+                    diamond.setDpID(dpID);
                     diamond.setCertificateID(certificateID);
                     request.setAttribute("diamond", diamond);
                     diamondDAO.insert(diamond);

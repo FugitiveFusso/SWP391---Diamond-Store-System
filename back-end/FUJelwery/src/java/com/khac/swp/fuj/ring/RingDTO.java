@@ -11,22 +11,27 @@ package com.khac.swp.fuj.ring;
  */
 public class RingDTO {
     private int ringID;
+    private int rpID;
     private String ringName;
     private String ringImage;
     private int diamondID;
-    private String gender;
-    private double price;
+    private int price;
     private int categoryID;
     private int collectionID;
+    private String ringPlacementName;
+    private String material;
+    private String ringColor;
+    private int rpPrice;
     private String diamondName;
     private String diamondImage;
     private String origin;
-    private double diamondPrice;
+    private int certificateID;
+    private double diamondSize;
     private double caratWeight;
     private String cut;
     private String color;
     private String clarity;
-    private int certificateID;
+    private int diamondPrice;
 
     public int getRingID() {
         return ringID;
@@ -34,6 +39,14 @@ public class RingDTO {
 
     public void setRingID(int ringID) {
         this.ringID = ringID;
+    }
+
+    public int getRpID() {
+        return rpID;
+    }
+
+    public void setRpID(int rpID) {
+        this.rpID = rpID;
     }
 
     public String getRingName() {
@@ -60,19 +73,11 @@ public class RingDTO {
         this.diamondID = diamondID;
     }
 
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -90,6 +95,38 @@ public class RingDTO {
 
     public void setCollectionID(int collectionID) {
         this.collectionID = collectionID;
+    }
+
+    public String getRingPlacementName() {
+        return ringPlacementName;
+    }
+
+    public void setRingPlacementName(String ringPlacementName) {
+        this.ringPlacementName = ringPlacementName;
+    }
+
+    public String getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(String material) {
+        this.material = material;
+    }
+
+    public String getRingColor() {
+        return ringColor;
+    }
+
+    public void setRingColor(String ringColor) {
+        this.ringColor = ringColor;
+    }
+
+    public int getRpPrice() {
+        return rpPrice;
+    }
+
+    public void setRpPrice(int rpPrice) {
+        this.rpPrice = rpPrice;
     }
 
     public String getDiamondName() {
@@ -116,12 +153,20 @@ public class RingDTO {
         this.origin = origin;
     }
 
-    public double getDiamondPrice() {
-        return diamondPrice;
+    public int getCertificateID() {
+        return certificateID;
     }
 
-    public void setDiamondPrice(double diamondPrice) {
-        this.diamondPrice = diamondPrice;
+    public void setCertificateID(int certificateID) {
+        this.certificateID = certificateID;
+    }
+
+    public double getDiamondSize() {
+        return diamondSize;
+    }
+
+    public void setDiamondSize(double diamondSize) {
+        this.diamondSize = diamondSize;
     }
 
     public double getCaratWeight() {
@@ -156,21 +201,12 @@ public class RingDTO {
         this.clarity = clarity;
     }
 
-    public int getCertificateID() {
-        return certificateID;
+    public int getDiamondPrice() {
+        return diamondPrice;
     }
 
-    public void setCertificateID(int certificateID) {
-        this.certificateID = certificateID;
+    public void setDiamondPrice(int diamondPrice) {
+        this.diamondPrice = diamondPrice;
     }
-
-    @Override
-    public String toString() {
-        return "RingDTO{" + "ringID=" + ringID + ", ringName=" + ringName + ", ringImage=" + ringImage + ", diamondID=" + diamondID + ", gender=" + gender + ", price=" + price + ", categoryID=" + categoryID + ", collectionID=" + collectionID + ", diamondName=" + diamondName + ", diamondImage=" + diamondImage + ", origin=" + origin + ", caratWeight=" + caratWeight + ", cut=" + cut + ", color=" + color + ", clarity=" + clarity + ", certificateID=" + certificateID + '}';
-    }
-
-    
-
-    
-    
 }
+

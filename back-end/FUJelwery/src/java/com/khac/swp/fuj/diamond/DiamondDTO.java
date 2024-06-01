@@ -14,12 +14,14 @@ public class DiamondDTO {
     private String diamondName;
     private String diamondImage;
     private String origin;
-    private double price;
+    private int dpID;
+    private int certificateID;
+    private double diamondSize;
     private double caratWeight;
-    private String cut;
     private String color;
     private String clarity;
-    private int certificateID;
+    private String cut;
+    private int diamondPrice;
 
     public int getDiamondID() {
         return diamondID;
@@ -53,12 +55,28 @@ public class DiamondDTO {
         this.origin = origin;
     }
 
-    public double getPrice() {
-        return price;
+    public int getDpID() {
+        return dpID;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setDpID(int dpID) {
+        this.dpID = dpID;
+    }
+
+    public int getCertificateID() {
+        return certificateID;
+    }
+
+    public void setCertificateID(int certificateID) {
+        this.certificateID = certificateID;
+    }
+
+    public double getDiamondSize() {
+        return diamondSize;
+    }
+
+    public void setDiamondSize(double diamondSize) {
+        this.diamondSize = diamondSize;
     }
 
     public double getCaratWeight() {
@@ -67,14 +85,6 @@ public class DiamondDTO {
 
     public void setCaratWeight(double caratWeight) {
         this.caratWeight = caratWeight;
-    }
-
-    public String getCut() {
-        return cut;
-    }
-
-    public void setCut(String cut) {
-        this.cut = cut;
     }
 
     public String getColor() {
@@ -93,14 +103,21 @@ public class DiamondDTO {
         this.clarity = clarity;
     }
 
-    public int getCertificateID() {
-        return certificateID;
+    public String getCut() {
+        return cut;
     }
 
-    public void setCertificateID(int certificateID) {
-        this.certificateID = certificateID;
+    public void setCut(String cut) {
+        this.cut = cut;
     }
 
+    public int getDiamondPrice() {
+        return diamondPrice;
+    }
+
+    public void setDiamondPrice(int diamondPrice) {
+        this.diamondPrice = diamondPrice;
+    }
     
     
 }

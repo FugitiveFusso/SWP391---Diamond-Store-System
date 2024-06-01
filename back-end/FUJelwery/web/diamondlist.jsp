@@ -55,8 +55,6 @@
                 
             </ul>
         </div>
-
-        <%@ include file="/menu.jsp" %>
         
         <div class="list-container">
             <div class="smaller-container">
@@ -73,12 +71,13 @@
                             <th><a href=?colSort=diamondName>Diamond Name</a></th>
                             <th>Diamond Image</th>
                             <th>Origin</th>
-                            <th><a href=?colSort=diamondPrice>Price</a></th>
+                            <th><a href=?colSort=diamondSize>Diamond Size</a></th>
                             <th><a href=?colSort=caratWeight>Carat Weight</a></th>
                             <th>Cut</th>
                             <th>Color</th>
                             <th>Clarity</th>
-                            <th>Delete</th>
+                            <th><a href=?colSort=diamondPrice>Price</a></th>
+                            <th>Delete</th>                            
                         </tr>
                         <%
                             List<DiamondDTO> list = (List<DiamondDTO>) request.getAttribute("diamondlist");
@@ -91,11 +90,12 @@
                             <td>${diamond.diamondName}</td>
                             <td><img src=${diamond.diamondImage} width="300px" height="300px"></td>
                             <td>${diamond.origin}</td>
-                            <td>${diamond.price}</td>
+                            <td>${diamond.diamondSize}</td>
                             <td>${diamond.caratWeight}</td>
                             <td>${diamond.cut}</td>
                             <td>${diamond.color}</td>
                             <td>${diamond.clarity}</td>
+                            <td>${diamond.diamondPrice}</td>
                             <td>
                                 <form action="DiamondController" method="POST">
                                     <input name="action" value="delete" type="hidden">

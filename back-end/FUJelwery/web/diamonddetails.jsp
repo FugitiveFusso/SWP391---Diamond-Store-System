@@ -12,10 +12,10 @@
         <title>Diamond Detail Page</title>
     </head>
     <body>
-         <jsp:include page="/menu.jsp" flush="true" />
+         <jsp:include page="/salesmenu.jsp" flush="true" />
 
         <h1>Diamond Details </h1>         
-        <p> Login username: ${sessionScope.adminsession.username}</p>
+        <p> Login username: ${sessionScope.salessession.username}</p>
 
         <style>
             #searchbox{
@@ -44,13 +44,13 @@
             <tr><td>Diamond Name</td><td>${requestScope.diamond.diamondName}</td></tr>
             <tr><td>Diamond Image</td><td><img src=${requestScope.diamond.diamondImage} width="300px" height="300px"></td></tr>
             <tr><td>Origin</td><td>${requestScope.diamond.origin}</td></tr>
-            <tr><td>Price</td><td>${requestScope.diamond.price}</td></tr>
+            <tr><td>Diamond Size</td><td>${requestScope.diamond.diamondSize}</td></tr>
             <tr><td>Carat Weight</td><td>${requestScope.diamond.caratWeight}</td></tr>
-            <tr><td>Origin</td><td>${requestScope.diamond.origin}</td></tr>
             <tr><td>Cut</td><td>${requestScope.diamond.cut}</td></tr>
             <tr><td>Color</td><td>${requestScope.diamond.color}</td></tr>
             <tr><td>Clarity</td><td>${requestScope.diamond.clarity}</td></tr>
             <tr><td>Certificate</td><td>${requestScope.diamond.certificateID}</td></tr>
+            <tr><td>Price</td><td>${requestScope.diamond.diamondPrice}</td></tr>
 
         </table>
             

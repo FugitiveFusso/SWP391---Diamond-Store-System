@@ -56,7 +56,6 @@
             </ul>
         </div>
 
-                <%@ include file="/menu.jsp" %>
 
         <div class="list-container">
             <div class="smaller-container">
@@ -73,9 +72,7 @@
                             <th><a href=?colSort=ringName>Ring Name</th>
                             <th>Ring Image</th>
                             <th><a href=?colSort=diamondName>Diamond Name</a></th>
-                            <th>Gender</th>
                             <th><a href=?colSort=price>Price</th>
-                            <th>Total Price (Diamond + Ring)</th>
                             <th><a href=?colSort=categoryID>Category</th>
                             <th><a href=?colSort=collectionID>Collection</th>
                             <th>Delete</th>
@@ -91,9 +88,7 @@
                             <td>${ring.ringName}</td>
                             <td><img src=${ring.ringImage} width="300px" height="300px"></td>
                             <td>${ring.diamondName}</td>
-                            <td>${ring.gender}</td>
-                            <td>${ring.price}</td>
-                            <td>${ring.price + ring.diamondPrice}</td>
+                            <td>${ring.price + ring.diamondPrice + ring.rpPrice}</td>
                             <td>${ring.categoryID}</td>
                             <td>${ring.collectionID}</td>
                             <td>
