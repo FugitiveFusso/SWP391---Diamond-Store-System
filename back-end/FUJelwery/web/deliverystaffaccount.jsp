@@ -1,15 +1,10 @@
-<%-- 
-    Document   : admindetails
-    Created on : May 25, 2024, 10:32:20 AM
-    Author     : phucu
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Administrator Management Page</title>
+        <title>Delivery Staff Account</title>
         <link rel="stylesheet" href="css/navbar.css">
         <!--<link rel="stylesheet" href="css/staff_detail.css">-->
 
@@ -19,10 +14,8 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css" />
 
-
     </head>
     <body>
-
         
 <!--        <div class="menu">
             you will code the horizontal menu here
@@ -53,7 +46,7 @@
                     </div>
                 </li>
                 <li class="navbar__link">
-                    <a href="manageraccount.jsp">Account</a>
+                    <a href="adminaccount.jsp">Account</a>
                     <div class="sub-menu-1">
                         <ul>
                             <li><a href='adminlogin?action=logout'>Logout</a></li>          
@@ -62,11 +55,11 @@
                 </li>               
             </ul>
         </div>-->
+        
+        <%@ include file="/managermenu.jsp" %>
 
-        <jsp:include page="/managermenu.jsp" flush="true" />
-
-        Login user: ${sessionScope.managersession.username}
-        <div class="container">
+        Login user: ${sessionScope.deliverystaffsession.username}
+       <div class="container">
             <div class="padding">
                 <div class="row d-flex justify-content-center">
                     <div class="col-xl-12 col-md-12">
@@ -77,9 +70,9 @@
                                         <div class="m-b-25">
                                             <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image">
                                         </div>
-                                        <h6 class="f-w-600"style="font-size: 18px; margin: 10px 0;">${requestScope.admin.lastname} ${requestScope.admin.firstname}</h6>
-                                        <p style="color: #fff; font-family: 'Inter'; font-size: 13px;">Admin of FUJ</p>
-                                        <p style="color: #fff; font-family: 'Inter'; font-size: 13px;">${requestScope.admin.username}</p>
+                                        <h6 class="f-w-600"style="font-size: 18px; margin: 10px 0;">${sessionScope.deliverystaffsession.lastname} ${sessionScope.deliverystaffsession.firstname}</h6>
+                                        <p style="color: #fff; font-family: 'Inter'; font-size: 13px;">Delivery Staff of FUJ</p>
+                                        <p style="color: #fff; font-family: 'Inter'; font-size: 13px;">${sessionScope.deliverystaffsession.username}</p>
                                         <input name="roleID" value=1 required="Please enter"   type="hidden">
 
                                     </div>
@@ -90,39 +83,32 @@
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <p class="m-b-10 f-w-600">First Name</p>
-                                                <h6 class="text-muted f-w-400">${requestScope.admin.firstname}</h6>
+                                                <h6 class="text-muted f-w-400">${sessionScope.deliverystaffsession.firstname}</h6>
                                             </div>
                                             <div class="col-sm-6">
                                                 <p class="m-b-10 f-w-600">Last Name</p>
-                                                <h6 class="text-muted f-w-400">${requestScope.admin.lastname}</h6>
+                                                <h6 class="text-muted f-w-400">${sessionScope.deliverystaffsession.lastname}</h6>
                                             </div>
                                             <div class="col-sm-6">
                                                 <p class="m-b-10 f-w-600">Email</p>
-                                                <h6 class="text-muted f-w-400">${requestScope.admin.email}</h6>
+                                                <h6 class="text-muted f-w-400">${sessionScope.deliverystaffsession.email}</h6>
                                             </div>
                                             <div class="col-sm-6">
                                                 <p class="m-b-10 f-w-600">Phone Number</p>
-                                                <h6 class="text-muted f-w-400">${requestScope.admin.phonenumber}</h6>
+                                                <h6 class="text-muted f-w-400">${sessionScope.deliverystaffsession.phonenumber}</h6>
                                             </div>
                                             <div class="col-sm-6">
                                                 <p class="m-b-10 f-w-600">Address</p>
-                                                <h6 class="text-muted f-w-400">${requestScope.admin.address}</h6>
+                                                <h6 class="text-muted f-w-400">${sessionScope.deliverystaffsession.address}</h6>
                                             </div>
                                             <div class="col-sm-6">
                                                 <p class="m-b-10 f-w-600">Point</p>
-                                                <h6 class="text-muted f-w-400">${requestScope.admin.point}</h6>
+                                                <h6 class="text-muted f-w-400">${sessionScope.deliverystaffsession.point}</h6>
                                             </div>
                                         </div>
                                         <div class="row" style="margin-top: 20px; justify-content: center">
                                             <div class="col-sm-4">
-                                                <form action="AdminController" style="padding-top: 10px">
-                                                    <input type="hidden" name="id" value="${requestScope.admin.userid}">
-                                                    <input type="hidden" name="action" value="edit">
-                                                    <button type="submit" class="btn btn-custom">Edit</button>
-                                                </form>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <form action="AdminController" style="padding-top: 10px">
+                                                <form action="#" style="padding-top: 10px">
                                                     <button type="submit" class="btn btn-custom">Return</button>
                                                 </form>
                                             </div>
@@ -133,8 +119,7 @@
                         </div>
                     </div>
                 </div>
-
-
-
-                </body>
-                </html>
+            </div>
+       </div>
+    </body>
+</html>

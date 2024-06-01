@@ -26,13 +26,13 @@
 
     </head>
     <body>
-        <%--<jsp:include page="/managermenu.jsp" flush="true" />--%>
+        <jsp:include page="/managermenu.jsp" flush="true" />
 
         <!--        <h1>Administrator Edit </h1>
                 <p> Login user: ${sessionScope.managersession.username}</p>-->
 
-        <div class="menu">
-            <!--you will code the horizontal menu here-->
+<!--        <div class="menu">
+            you will code the horizontal menu here
             <ul class="navbar">
 
                 <li class="navbar__link">
@@ -68,7 +68,7 @@
                     </div>
                 </li>               
             </ul>
-        </div>
+        </div>-->
 
 
         <div class="container">
