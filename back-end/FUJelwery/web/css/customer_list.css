@@ -24,18 +24,6 @@ body{
     margin-top: 20px;
     padding: 15px 20px;
 }
-/*
-.list-intro-right input{
-    padding: 13px 80px;
-    background: none;
-    color: #8f8f8f;
-    border: none;
-    border-radius: 10px;
-    border: 2px solid #8f8f8f;
-    font-size: 15px;
-    font-weight: 700;
-    cursor: pointer;
-}*/
 
 .list-intro-right .styled-button{
     display: flex;
@@ -49,7 +37,25 @@ body{
     border-radius: 5px;
     transition: background-color 0.3s, transform 0.3s;
     font-size: 16px;
-    margin-left: 600px;
+    font-weight: 600;
+    margin-left: 590px;
+    margin-top: 25px;
+}
+
+.list-intro-right .styled-button1{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: none;
+    color: #8f8f8f;
+    border: 2px solid #8f8f8f;
+    padding: 15px 60px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+    font-size: 16px;
+    font-weight: 600;
+    margin-left: 680px;
     margin-top: 25px;
 }
 
@@ -89,6 +95,12 @@ body{
     font-size: 60px;
     margin-left: 10px;
     margin-top: 10px;
+}
+
+.left-icon .fa-regular{
+    font-size: 55px;
+    margin-left: 12px;
+    margin-top: 12px;
 }
 
 .list-title{
