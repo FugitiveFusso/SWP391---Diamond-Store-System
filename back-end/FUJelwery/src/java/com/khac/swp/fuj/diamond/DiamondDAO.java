@@ -26,7 +26,7 @@ public class DiamondDAO {
         List<DiamondDTO> list = new ArrayList<DiamondDTO>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = "SELECT d.diamondID, d.diamondName, d.diamondImage, d.origin, d.dpID, d.certificateID, dp.diamondSize, dp.caratWeight, dp.color, dp.clarity, dp.cut, dp.price FROM Diamond d FULL JOIN DiamondPrice dp ON d.dpID = dp.dpID ";
+            String sql = "SELECT d.diamondID, d.diamondName, d.diamondImage, d.origin, d.dpID, d.certificateID, dp.diamondSize, dp.caratWeight, dp.color, dp.clarity, dp.cut, dp.price FROM Diamond d LEFT JOIN DiamondPrice dp ON d.dpID = dp.dpID ";
             if (keyword != null && !keyword.isEmpty()) {
                 sql += " WHERE d.diamondName like ? or dp.diamondSize like ? or dp.caratWeight like ? or dp.color like ? or dp.clarity like ? or dp.price like ?";
             }
@@ -62,7 +62,7 @@ public class DiamondDAO {
                     String clarity = rs.getString("clarity");
                     String cut = rs.getString("cut");
                     int price = rs.getInt("price");
-                    
+
                     DiamondDTO diamond = new DiamondDTO();
                     diamond.setDiamondID(diamondID);
                     diamond.setDiamondName(diamondName);
@@ -90,7 +90,7 @@ public class DiamondDAO {
 
     public DiamondDTO load(int diamondID) {
 
-        String sql = "SELECT d.diamondID, d.diamondName, d.diamondImage, d.origin, d.dpID, d.certificateID, dp.diamondSize, dp.caratWeight, dp.color, dp.clarity, dp.cut, dp.price FROM Diamond d FULL JOIN DiamondPrice dp ON d.dpID = dp.dpID where diamondID = ?";
+        String sql = "SELECT d.diamondID, d.diamondName, d.diamondImage, d.origin, d.dpID, d.certificateID, dp.diamondSize, dp.caratWeight, dp.color, dp.clarity, dp.cut, dp.price FROM Diamond d LEFT JOIN DiamondPrice dp ON d.dpID = dp.dpID where diamondID = ?";
 
         try {
 
@@ -101,32 +101,32 @@ public class DiamondDAO {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
 
-                int ID = rs.getInt("diamondID");
-                    String diamondName = rs.getString("diamondName");
-                    String diamondImage = rs.getString("diamondImage");
-                    String origin = rs.getString("origin");
-                    int dpID = rs.getInt("dpID");
-                    int certificateID = rs.getInt("certificateID");
-                    double diamondSize = rs.getDouble("diamondSize");
-                    double caratWeight = rs.getDouble("caratWeight");
-                    String color = rs.getString("color");
-                    String clarity = rs.getString("clarity");
-                    String cut = rs.getString("cut");
-                    int price = rs.getInt("price");
-                    
+                int diamondid = rs.getInt("diamondID");
+                String diamondName = rs.getString("diamondName");
+                String diamondImage = rs.getString("diamondImage");
+                String origin = rs.getString("origin");
+                int dpID = rs.getInt("dpID");
+                int certificateID = rs.getInt("certificateID");
+                double diamondSize = rs.getDouble("diamondSize");
+                double caratWeight = rs.getDouble("caratWeight");
+                String color = rs.getString("color");
+                String clarity = rs.getString("clarity");
+                String cut = rs.getString("cut");
+                int price = rs.getInt("price");
+
                 DiamondDTO diamond = new DiamondDTO();
-                    diamond.setDiamondID(ID);
-                    diamond.setDiamondName(diamondName);
-                    diamond.setDiamondImage(diamondImage);
-                    diamond.setOrigin(origin);
-                    diamond.setDpID(dpID);
-                    diamond.setCertificateID(certificateID);
-                    diamond.setDiamondSize(diamondSize);
-                    diamond.setCaratWeight(caratWeight);
-                    diamond.setColor(color);
-                    diamond.setClarity(clarity);
-                    diamond.setCut(cut);
-                    diamond.setDiamondPrice(price);
+                diamond.setDiamondID(diamondid);
+                diamond.setDiamondName(diamondName);
+                diamond.setDiamondImage(diamondImage);
+                diamond.setOrigin(origin);
+                diamond.setDpID(dpID);
+                diamond.setCertificateID(certificateID);
+                diamond.setDiamondSize(diamondSize);
+                diamond.setCaratWeight(caratWeight);
+                diamond.setColor(color);
+                diamond.setClarity(clarity);
+                diamond.setCut(cut);
+                diamond.setDiamondPrice(price);
                 return diamond;
             }
         } catch (SQLException ex) {

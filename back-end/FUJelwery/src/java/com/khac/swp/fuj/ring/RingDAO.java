@@ -28,7 +28,7 @@ public class RingDAO {
         try {
             Connection con = DBUtils.getConnection();
             String sql = "SELECT r.ringID, r.rpID, r.ringName, r.ringImage, r.diamondID, r.price AS [ringPrice], r.price + rp.rpPrice + dp.price AS [totalPrice], r.collectionID, r.categoryID, rp.rName, rp.material, rp.color AS [ringColor], rp.rpPrice, d.diamondName, d.diamondImage, d.origin, d.certificateID, dp.diamondSize, dp.caratWeight, dp.color AS [diamondColor], dp.clarity, dp.cut, dp.price AS [diamondShapePrice]"
-                    + " FROM [Ring] r FULL JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID ";
+                    + " FROM [Ring] r LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID ";
             if (keyword != null && !keyword.isEmpty()) {
                 sql += " WHERE ringName like ? ";
             }
@@ -117,7 +117,7 @@ public class RingDAO {
     public RingDTO load(int ringID) {
 
         String sql = "SELECT r.ringID, r.rpID, r.ringName, r.ringImage, r.diamondID, r.price AS [ringPrice], r.price + rp.rpPrice + dp.price AS [totalPrice], r.collectionID, r.categoryID, rp.rName, rp.material, rp.color AS [ringColor], rp.rpPrice, d.diamondName, d.diamondImage, d.origin, d.certificateID, dp.diamondSize, dp.caratWeight, dp.color AS [diamondColor], dp.clarity, dp.cut, dp.price AS [diamondShapePrice] "
-                + " FROM [Ring] r FULL JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID WHERE r.ringID = ? ";
+                + " FROM [Ring] r LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID WHERE r.ringID = ? ";
 
         try {
 
