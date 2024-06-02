@@ -78,14 +78,14 @@
 .buttons form input{
     font-size: 20px;
     padding: 6px 30px;
-    background: #151542;
+    background: #15156b;
     color: #fff;
     border-radius: 10px;
     cursor: pointer;
 }
 
 .buttons form input:hover{
-    background: #15156b;
+    background: #151542;
 }
 
 
