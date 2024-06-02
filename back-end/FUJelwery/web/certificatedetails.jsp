@@ -41,11 +41,11 @@
                     </div>
                 </div>
                 <div class="buttons">
-                    <form action="PostController" style="padding-top: 10px">
+                    <form action="CertificateController" style="padding-top: 10px">
                         <input type=hidden name="action" value="list">
                         <input type=submit value="Return" ></form>
 
-                    <form action="PostController" style="padding-top: 10px">
+                    <form action="CertificateController" style="padding-top: 10px">
                         <input type=hidden name="id" value="${requestScope.certificate.certificateID}">
                         <input type=hidden name="action" value="edit">
                         <input type=submit value="Edit" ></form>     
