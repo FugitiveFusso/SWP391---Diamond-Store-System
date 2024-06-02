@@ -10,37 +10,46 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Ring Management Page</title>
+        <script>
+            window.onload = function() {
+                if (!sessionStorage.getItem('hasReloaded')) {
+                    sessionStorage.setItem('hasReloaded', 'true');
+                    location.reload();
+                } else {
+                    sessionStorage.removeItem('hasReloaded');
+                }
+            };
+        </script>
     </head>
     <body>
         <jsp:include page="/salesmenu.jsp" flush="true" />
-        <h1>Ring Details </h1>         
-        <p> Login username: ${sessionScope.salessession.username}</p>
+        <h1>Ring Details</h1>         
+        <p>Login username: ${sessionScope.salessession.username}</p>
 
         <style>
-            #searchbox{
+            #searchbox {
                 margin-top: 5px;
             }
-            body{
+            body {
                 font-size: 16px;
                 font-family: Arial, Helvetica, sans-serif;
             }
-            table{
-                margin-top: 10px
+            table {
+                margin-top: 10px;
             }
-            table, tr, td{
+            table, tr, td {
                 border-collapse: collapse;
                 width: 400px;
                 border: 2px solid black;
                 text-align: center;
             }
-            tr,td{
+            tr, td {
                 padding: 6px 10px;
             }
         </style>
         <table>
-
             <tr><td>Ring Name</td><td>${requestScope.ring.ringName}</td></tr>
-            <tr><td>Ring Image</td><td><img src=${requestScope.ring.ringImage} width="300px" height="300px"></td></tr>
+            <tr><td>Ring Image</td><td><img src="${requestScope.ring.ringImage}" width="300px" height="300px"></td></tr>
             <tr><td>Price</td><td>${requestScope.ring.price}</td></tr>
             <tr><td>Category</td><td>${requestScope.ring.categoryID}</td></tr>
             <tr><td>Collection</td><td>${requestScope.ring.collectionID}</td></tr>
@@ -56,16 +65,17 @@
             <tr><td>Cut</td><td>${requestScope.ring.cut}</td></tr>
             <tr><td>Diamond Price</td><td>${requestScope.ring.diamondPrice}</td></tr>
             <tr><td>Total Price</td><td>${requestScope.ring.totalPrice}</td></tr>
-
-        </table>    
+        </table>
+        
         <form action="RingController" style="padding-top: 10px">
-            <input type=hidden name="action" value="list">
-            <input type=submit value="Return" ></form>
+            <input type="hidden" name="action" value="list">
+            <input type="submit" value="Return">
+        </form>
 
         <form action="RingController" style="padding-top: 10px">
-            <input type=hidden name="id" value="${requestScope.ring.ringID}">
-            <input type=hidden name="action" value="edit">
-            <input type=submit value="Edit" ></form>
-
+            <input type="hidden" name="id" value="${requestScope.ring.ringID}">
+            <input type="hidden" name="action" value="edit">
+            <input type="submit" value="Edit">
+        </form>
     </body>
 </html>
