@@ -21,6 +21,28 @@
                 }
                 return true;
             }
+            document.addEventListener('DOMContentLoaded', function () {
+                const warrantyMonthInput = document.getElementById('warrantyMonth');
+                const form = warrantyMonthInput.closest('form');
+
+                warrantyMonthInput.addEventListener('input', function () {
+                    const value = parseInt(this.value, 10);
+                    if (value < 0 || isNaN(value)) {
+                        this.setCustomValidity('Please enter a valid month (0 or greater)');
+                    } else {
+                        this.setCustomValidity('');
+                    }
+                });
+
+                form.addEventListener('submit', function (event) {
+                    const value = parseInt(warrantyMonthInput.value, 10);
+                    if (value < 0 || isNaN(value)) {
+                        event.preventDefault();
+                        warrantyMonthInput.reportValidity();
+                    }
+                });
+            });
+
         </script>
     </head>
     <body>
@@ -35,8 +57,12 @@
                 <tr><td></td><td><input name="id" value="${requestScope.warranty.id}" required="Please enter" type="hidden"</td></tr>
                 <tr><td>Name</td><td><input name="warrantyName" value="${requestScope.warranty.name}" required="Please enter" </td></tr>
                 <tr><td>Image</td><td><input name="warrantyImage" value="${requestScope.warranty.image}" required="Please enter" </td></tr>
-                <tr><td>Month</td><td><input name="warrantyMonth" value="${requestScope.warranty.month}" required="Please enter"</td></tr>
-                <tr><td>Description</td><td><input name="warrantyDescription" value="${requestScope.warranty.description}" required="Please enter"</td></tr>
+                <tr>
+                    <td>Month</td>
+                    <td>
+                        <input type="number" id="warrantyMonth" name="warrantyMonth" value="${requestScope.warranty.month}" required min="0">
+                    </td>
+                </tr>                <tr><td>Description</td><td><input name="warrantyDescription" value="${requestScope.warranty.description}" required="Please enter"</td></tr>
                 <tr><td>Type</td><td><input name="warrantyType" value="${requestScope.warranty.type}" required="Please enter"</td></tr>
                 <tr>
                     <td>Start Date</td>
