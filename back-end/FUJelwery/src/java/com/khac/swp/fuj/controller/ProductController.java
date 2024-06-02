@@ -52,8 +52,8 @@ public class ProductController extends HttpServlet {
 
             RingDAO ringDAO = new RingDAO();
             HttpSession session = request.getSession(false);
-            if (session == null || session.getAttribute("customersession") == null) {
-                response.sendRedirect("customerlogin.jsp");
+            if (session == null || session.getAttribute("usersession") == null) {
+                response.sendRedirect("userlogin.jsp");
                 return;
             } else if (action == null || action.equals("list")) {//lists
 
