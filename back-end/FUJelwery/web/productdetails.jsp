@@ -12,7 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:include page="/salesmenu.jsp" flush="true" />
+        <jsp:include page="/productmenu.jsp" flush="true" />
         <h1>Ring Details </h1>         
         <p> Login username: ${sessionScope.customersession.username}</p>
 
@@ -39,23 +39,23 @@
         </style>
         <table>
 
-            <tr><td>Ring Name</td><td>${requestScope.ring.ringName}</td></tr>
-            <tr><td>Ring Image</td><td><img src=${requestScope.ring.ringImage} width="300px" height="300px"></td></tr>
-            <tr><td>Price</td><td>${requestScope.ring.price}</td></tr>
-            <tr><td>Category</td><td>${requestScope.ring.categoryID}</td></tr>
-            <tr><td>Collection</td><td>${requestScope.ring.collectionID}</td></tr>
-            <tr><td>Ring Placement Name</td><td>${requestScope.ring.ringPlacementName}</td></tr>
-            <tr><td>Material</td><td>${requestScope.ring.material}</td></tr>
-            <tr><td>Ring Placement Color</td><td>${requestScope.ring.ringColor}</td></tr>
-            <tr><td>Ring Placement Price</td><td>${requestScope.ring.rpPrice}</td></tr>
-            <tr><td>Diamond Name</td><td>${requestScope.ring.diamondName}</td></tr>
-            <tr><td>Diamond Size</td><td>${requestScope.ring.diamondSize}</td></tr>
-            <tr><td>Carat Weight</td><td>${requestScope.ring.caratWeight}</td></tr>
-            <tr><td>Color</td><td>${requestScope.ring.color}</td></tr>
-            <tr><td>Clarity</td><td>${requestScope.ring.clarity}</td></tr>
-            <tr><td>Cut</td><td>${requestScope.ring.cut}</td></tr>
-            <tr><td>Diamond Price</td><td>${requestScope.ring.diamondPrice}</td></tr>
-            <tr><td>Total Price</td><td>${requestScope.ring.totalPrice}</td></tr>
+            <tr><td>Ring Name</td><td>${requestScope.product.ringName}</td></tr>
+            <tr><td>Ring Image</td><td><img src=${requestScope.product.ringImage} width="300px" height="300px"></td></tr>
+            <tr><td>Price</td><td>${requestScope.product.price}</td></tr>
+            <tr><td>Category</td><td>${requestScope.product.categoryID}</td></tr>
+            <tr><td>Collection</td><td>${requestScope.product.collectionID}</td></tr>
+            <tr><td>Ring Placement Name</td><td>${requestScope.product.ringPlacementName}</td></tr>
+            <tr><td>Material</td><td>${requestScope.product.material}</td></tr>
+            <tr><td>Ring Placement Color</td><td>${requestScope.product.ringColor}</td></tr>
+            <tr><td>Ring Placement Price</td><td>${requestScope.product.rpPrice}</td></tr>
+            <tr><td>Diamond Name</td><td>${requestScope.product.diamondName}</td></tr>
+            <tr><td>Diamond Size</td><td>${requestScope.product.diamondSize}</td></tr>
+            <tr><td>Carat Weight</td><td>${requestScope.product.caratWeight}</td></tr>
+            <tr><td>Color</td><td>${requestScope.product.color}</td></tr>
+            <tr><td>Clarity</td><td>${requestScope.product.clarity}</td></tr>
+            <tr><td>Cut</td><td>${requestScope.product.cut}</td></tr>
+            <tr><td>Diamond Price</td><td>${requestScope.product.diamondPrice}</td></tr>
+            <tr><td>Total Price</td><td>${requestScope.product.totalPrice}</td></tr>
 
         </table>    
         <form action="ProductController" style="padding-top: 10px">

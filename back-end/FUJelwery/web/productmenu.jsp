@@ -1,0 +1,1 @@
+|<a href="ProductController">Product</a>|<a href='userlogin?action=logout'>Logout</a>|

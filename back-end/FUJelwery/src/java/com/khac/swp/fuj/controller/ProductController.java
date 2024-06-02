@@ -59,9 +59,9 @@ public class ProductController extends HttpServlet {
 
                 RingDAO dao = new RingDAO();
                 List<RingDTO> list = dao.list(keyword, sortCol);
-                request.setAttribute("ringlist", list);
+                request.setAttribute("productlist", list);
 
-                request.getRequestDispatcher("/ringlist.jsp").forward(request, response);
+                request.getRequestDispatcher("/productlist.jsp").forward(request, response);
 
             } else if (action.equals("details")) {//details
 
@@ -72,13 +72,13 @@ public class ProductController extends HttpServlet {
                     log("Parameter id has wrong format.");
                 }
 
-                RingDTO ring = null;
+                RingDTO product = null;
                 if (id != null) {
-                    ring = ringDAO.load(id);
+                    product = ringDAO.load(id);
                 }
 
-                request.setAttribute("ring", ring);//object
-                request.getRequestDispatcher("/ringdetails.jsp").forward(request, response);
+                request.setAttribute("product", product);//object
+                request.getRequestDispatcher("/productdetails.jsp").forward(request, response);
 
             }
         }
