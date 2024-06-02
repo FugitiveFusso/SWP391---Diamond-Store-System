@@ -16,6 +16,9 @@
         <link rel="stylesheet" href="css/customer_list.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <script src="js/pagination.js"></script>
+        <link rel="stylesheet" href="css/pagination.css">
+
     </head>
     <body>
         <!--        <div class="menu">
@@ -80,52 +83,61 @@
                         </form>
                     </div>
                 </div>
-                
-                
+
+
                 <div class="list">
                     <form action='' method=GET id="searchbox"> 
                         <input name=keyword type=text class="search-input" value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
                         <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
                     </form>
 
-                    <table>
-                        <tr>
-                            <th>Certificate ID</th>
-                            <th>Image</th>
-                            <th>Description</th>
-                            <th>Delete</th>
-                        </tr>
-                        <%
-                            List<CertificateDTO> list = (List<CertificateDTO>) request.getAttribute("certificatelist");
-                            for (CertificateDTO certificate : list) {
-                                pageContext.setAttribute("certificate", certificate);
-                        %>
-                        <tr>
-                            <td>
-                                <a href="CertificateController?action=details&id=${certificate.certificateID}">   ${certificate.certificateID}</td>
-                            <td><img src=${certificate.certificateImage} width="300px" height="300px"></td>
-                            <td>${certificate.certificateDescription}</td>
-                            <td>
-                                <form action="CertificateController" method="POST" class="input">
-                                    <input name="action" value="delete" type="hidden">
-                                    <input name="id" value="${certificate.certificateID}" type="hidden">
-                                    <input type="submit" value="Delete">
-                                </form>
-                            </td>
+                    <table id="pagination">
+                        <thead>
+                            <tr>
+                                <th>Certificate ID</th>
+                                <th>Image</th>
+                                <th>Description</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                        </tr>
-                        <%
-                            }
-                        %>    
-<!--                        <tr><td colspan="10">
-                                <form action="CertificateController" method="POST">
-                                    <input name="action" value="create" type="hidden">
-                                    <input type="submit" value="Create">
-                                </form>
-                            </td></tr>-->
+                            <%
+                                List<CertificateDTO> list = (List<CertificateDTO>) request.getAttribute("certificatelist");
+                                for (CertificateDTO certificate : list) {
+                                    pageContext.setAttribute("certificate", certificate);
+                            %>
+                            <tr>
+                                <td>
+                                    <a href="CertificateController?action=details&id=${certificate.certificateID}">   ${certificate.certificateID}</td>
+                                <td><img src=${certificate.certificateImage} width="300px" height="300px"></td>
+                                <td>${certificate.certificateDescription}</td>
+                                <td>
+                                    <form action="CertificateController" method="POST" class="input">
+                                        <input name="action" value="delete" type="hidden">
+                                        <input name="id" value="${certificate.certificateID}" type="hidden">
+                                        <input type="submit" value="Delete">
+                                    </form>
+                                </td>
+
+                            </tr>
+                            <%
+                                }
+                            %>    
+                        </tbody>
                     </table>
+                    <div id="paginationControls" class="pagination-controls">
+                        <button id="prevButton" class="pagination-button"><i class="fas fa-chevron-left"></i></button>
+                        <span id="pageNumbers"></span>
+                        <button id="nextButton" class="pagination-button"><i class="fas fa-chevron-right"></i></button>
+                    </div>
                 </div>
             </div>
         </div>
+
+
+
+        <script src="js/pagination.js"></script>
+
     </body>
 </html>

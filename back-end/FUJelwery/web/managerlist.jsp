@@ -16,6 +16,9 @@
         <link rel="stylesheet" href="css/customer_list.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="css/pagination.css">
+        <script src="js/pagination.js"></script>
+
     </head>
     <body>
         <!--        <div class="menu">
@@ -87,50 +90,56 @@
                         <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
                     </form>
 
-                    <table>
-                        <tr>
-                            <th>Manager ID</th>
-                            <th><a href=?colSort=username>User Name</a></th>
-                            <th><a href=?colSort=firstname>First Name</a></th>
-                            <th><a href=?colSort=lastname>Last Name</a></th>
-                            <th><a href=?colSort=email>Email</a></th>
-                            <th>Address</th>
-                            <th>Delete</th>
-                        </tr>
-                        <%
-                            List<UserDTO> list = (List<UserDTO>) request.getAttribute("managerlist");
-                            for (UserDTO manager : list) {
-                                pageContext.setAttribute("manager", manager);
-                        %>
-                        <tr>
-                            <td>
-                                <a href="ManagerController?action=details&id=${manager.userid}">   ${manager.userid}</td>
-                            <td>${manager.username}</td>
-                            <td>${manager.firstname}</td>
-                            <td>${manager.lastname}</td>
-                            <td>${manager.email}</td>
-                            <td>${manager.address}</td>
-                            <td>
-                                <form action="ManagerController" method="POST" class="input">
-                                    <input name="action" value="delete" type="hidden">
-                                    <input name="id" value="${manager.userid}" type="hidden">
-                                    <input type="submit" value="Delete">
-                                </form>
-                            </td>
+                    <table id="pagination">
+                        <thead>
+                            <tr>
+                                <th>Manager ID</th>
+                                <th><a href=?colSort=username>User Name</a></th>
+                                <th><a href=?colSort=firstname>First Name</a></th>
+                                <th><a href=?colSort=lastname>Last Name</a></th>
+                                <th><a href=?colSort=email>Email</a></th>
+                                <th>Address</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
+                                List<UserDTO> list = (List<UserDTO>) request.getAttribute("managerlist");
+                                for (UserDTO manager : list) {
+                                    pageContext.setAttribute("manager", manager);
+                            %>
+                            <tr>
+                                <td>
+                                    <a href="ManagerController?action=details&id=${manager.userid}">   ${manager.userid}</td>
+                                <td>${manager.username}</td>
+                                <td>${manager.firstname}</td>
+                                <td>${manager.lastname}</td>
+                                <td>${manager.email}</td>
+                                <td>${manager.address}</td>
+                                <td>
+                                    <form action="ManagerController" method="POST" class="input">
+                                        <input name="action" value="delete" type="hidden">
+                                        <input name="id" value="${manager.userid}" type="hidden">
+                                        <input type="submit" value="Delete">
+                                    </form>
+                                </td>
 
-                        </tr>
-                        <%
-                            }
-                        %>    
-                        <!--                        <tr><td colspan="6">
-                                                        <form action="ManagerController" method="POST" class="input">
-                                                            <input name="action" value="create" type="hidden">
-                                                            <input type="submit" value="Create">
-                                                        </form>
-                                                    </td></tr>-->
+                            </tr>
+                            <%
+                                }
+                            %>    
+                        </tbody>
                     </table>    
+                    <div id="paginationControls" class="pagination-controls">
+                        <button id="prevButton" class="pagination-button"><i class="fas fa-chevron-left"></i></button>
+                        <span id="pageNumbers"></span>
+                        <button id="nextButton" class="pagination-button"><i class="fas fa-chevron-right"></i></button>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <script src="js/pagination.js"></script>
+
     </body>
 </html>

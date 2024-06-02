@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
-            const rowsPerPage = 1;
-            const table = document.getElementById('voucherTable').getElementsByTagName('tbody')[0];
+            const rowsPerPage = 10;
+            const table = document.getElementById('pagination').getElementsByTagName('tbody')[0];
             const rows = table.getElementsByTagName('tr');
             const rowsCount = rows.length;
             const pageCount = Math.ceil(rowsCount / rowsPerPage);
