@@ -14,7 +14,7 @@
     <body>
         <jsp:include page="/salesmenu.jsp" flush="true" />
         <h1>Ring Details </h1>         
-        <p> Login username: ${sessionScope.salessession.username}</p>
+        <p> Login username: ${sessionScope.customersession.username}</p>
 
         <style>
             #searchbox{
