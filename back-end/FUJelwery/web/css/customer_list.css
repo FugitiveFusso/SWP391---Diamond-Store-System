@@ -143,6 +143,14 @@ body{
     border-radius: 40px;
 }
 
+.list-intro-left .left-icon-fa{
+    width: 80px;
+    height: 80px;
+    margin-left: 50px;
+    background: #d9d9d9;
+    border-radius: 40px;
+}
+
 .left-icon .bx{
     font-size: 60px;
     margin-left: 10px;
@@ -155,6 +163,17 @@ body{
     margin-top: 12px;
 }
 
+.left-icon .fa-solid{
+    font-size: 55px;
+    margin-left: 12px;
+    margin-top: 12px;
+}
+
+.left-icon-fa i{
+    font-size: 55px;
+    margin-left: 17px;
+    margin-top: 12px;
+}
 
 .list-title{
     display: flex;
