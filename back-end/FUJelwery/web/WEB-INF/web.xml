@@ -48,6 +48,10 @@
         <servlet-name>RingPlacementPriceController</servlet-name>
         <servlet-class>com.khac.swp.fuj.controller.RingPlacementPriceController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>WarrantyController</servlet-name>
+        <servlet-class>com.khac.swp.fuj.controller.WarrantyController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AdminLoginController</servlet-name>
         <url-pattern>/adminlogin</url-pattern>
@@ -95,6 +99,10 @@
     <servlet-mapping>
         <servlet-name>RingPlacementPriceController</servlet-name>
         <url-pattern>/RingPlacementPriceController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>WarrantyController</servlet-name>
+        <url-pattern>/WarrantyController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
