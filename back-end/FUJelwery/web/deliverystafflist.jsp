@@ -56,12 +56,14 @@
         </div>-->
 
         <%@ include file="/managermenu.jsp" %>
+        <p> Login username: ${sessionScope.managersession.username}</p>
+        
         <div class="list-container">
             <div class="smaller-container">
                 <div class="list1">
                     <div class="list-intro-left">
                         <div class="left-icon">
-                            <i class='bx bx-certification' ></i>
+                            <i class='bx bx-package'></i>
                         </div>
                         <div class="left-info">
                             <div class="list-title">Delivery Staffs List</div>
@@ -69,7 +71,7 @@
                         </div>
                     </div>
                     <div class="list-intro-right">
-                        <form action="CertificateController" method="POST" class="input1">
+                        <form action="DeliveryStaffController" method="POST" class="input1">
                             <input name="action" value="create" type="hidden">
                             <button type="submit" class="styled-button">
                                 <span>Add a Staff</span>                                           
@@ -81,14 +83,14 @@
                 <div class="list">
 
                     <form action='' method=GET id="searchbox"> 
-                        <input id="field" name=keyword type=text value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
-                        <input type=submit value=Search >
+                        <input name=keyword type=text class="search-input" value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
+                        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
                     </form>
-
+                        
                     <table id="pagination">
                         <thead>
                             <tr>
-                                <th>Administrator ID</th>
+                                <th>Delivery Staff ID</th>
                                 <th><a href=?colSort=username>User Name</a></th>
                                 <th><a href=?colSort=firstname>First Name</a></th>
                                 <th><a href=?colSort=lastname>Last Name</a></th>
@@ -124,12 +126,12 @@
                                 }
                             %>    
 
-                            <tr><td colspan="6">
+<!--                            <tr><td colspan="6">
                                     <form action="AdminController" method="POST" class="input">
                                         <input name="action" value="create" type="hidden">
                                         <input type="submit" value="Create">
                                     </form>
-                                </td></tr>
+                                </td></tr>-->
                         </tbody>
                     </table>
                     <div id="paginationControls" class="pagination-controls">
