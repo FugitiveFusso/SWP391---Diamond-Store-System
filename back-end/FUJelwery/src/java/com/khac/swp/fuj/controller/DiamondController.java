@@ -1,4 +1,4 @@
-    /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -82,7 +82,7 @@ public class DiamondController extends HttpServlet {
                 request.setAttribute("diamond", diamond);//object
                 RequestDispatcher rd = request.getRequestDispatcher("diamonddetails.jsp");
                 rd.forward(request, response);
-                
+
             } else if (action.equals("edit")) {//edit
                 Integer id = null;
                 try {
@@ -118,20 +118,32 @@ public class DiamondController extends HttpServlet {
                 String diamondName = request.getParameter("diamondName");
                 String diamondImage = request.getParameter("diamondImage");
                 String origin = request.getParameter("origin");
-                int dpID = Integer.parseInt(request.getParameter("dpID"));
-                int certificateID = Integer.parseInt(request.getParameter("certificateID"));
-
+                Integer dpID = null;
+                try {
+                    dpID = Integer.parseInt(request.getParameter("dpID"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter dpID has wrong format.");
+                }
+                Integer certificateID = null;
+                try {
+                    certificateID = Integer.parseInt(request.getParameter("certificateID"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter dpID has wrong format.");
+                }
                 DiamondDTO diamond = null;
                 if (diamondid != null) {
                     diamond = diamondDAO.load(diamondid);
                 }
-                diamond.setDiamondID(diamondid);
+                if (diamond != null) {
+                    diamond.setDiamondID(diamondid);
                     diamond.setDiamondName(diamondName);
                     diamond.setDiamondImage(diamondImage);
                     diamond.setOrigin(origin);
                     diamond.setDpID(dpID);
                     diamond.setCertificateID(certificateID);
-                diamondDAO.update(diamond);
+                    diamondDAO.update(diamond);
+                }
+
                 request.setAttribute("diamond", diamond);
                 RequestDispatcher rd = request.getRequestDispatcher("diamonddetails.jsp");
                 rd.forward(request, response);
@@ -145,7 +157,6 @@ public class DiamondController extends HttpServlet {
                     String origin = request.getParameter("origin");
                     int dpID = Integer.parseInt(request.getParameter("dpID"));
                     int certificateID = Integer.parseInt(request.getParameter("certificateID"));
-
 
                     PreparedStatement ps = conn.prepareStatement("select max(diamondID) from [Diamond]");
                     ResultSet rs = ps.executeQuery();
@@ -162,7 +173,7 @@ public class DiamondController extends HttpServlet {
                     diamond.setCertificateID(certificateID);
                     request.setAttribute("diamond", diamond);
                     diamondDAO.insert(diamond);
-                    
+
                     RequestDispatcher rd = request.getRequestDispatcher("diamonddetails.jsp");
                     rd.forward(request, response);
                 } catch (SQLException ex) {
@@ -186,7 +197,7 @@ public class DiamondController extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("diamondlist.jsp");
                 rd.forward(request, response);
             }
-            }
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Certificate Management Detail</title>
         <link rel="stylesheet" href="css/post_detail.css"/>
     </head>
     <body>
@@ -31,7 +31,7 @@
                     <div class="content-right">
                         <div class="content-intro">
                             <div class="intro-details">
-                                <p class="title">ID: ${requestScope.certificate.certificateID}</p>
+                                <p class="title">Certificate ID: ${requestScope.certificate.certificateID}</p>
                             </div>                       
                         </div>
                         <div class="description">

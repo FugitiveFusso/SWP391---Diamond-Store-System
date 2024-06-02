@@ -10,39 +10,48 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Diamond Detail Page</title>
+        <script>
+            window.onload = function() {
+                if (!sessionStorage.getItem('hasReloaded')) {
+                    sessionStorage.setItem('hasReloaded', 'true');
+                    location.reload();
+                } else {
+                    sessionStorage.removeItem('hasReloaded');
+                }
+            };
+        </script>
     </head>
     <body>
-         <jsp:include page="/salesmenu.jsp" flush="true" />
+        <jsp:include page="/salesmenu.jsp" flush="true" />
 
-        <h1>Diamond Details </h1>         
+        <h1>Diamond Details</h1>         
         <p> Login username: ${sessionScope.salessession.username}</p>
 
         <style>
-            #searchbox{
+            #searchbox {
                 margin-top: 5px;
             }
-            body{
+            body {
                 font-size: 16px;
                 font-family: Arial, Helvetica, sans-serif;
             }
-            table{
-                margin-top: 10px
+            table {
+                margin-top: 10px;
             }
-            table, tr, td{
+            table, tr, td {
                 border-collapse: collapse;
                 width: 400px;
                 border: 2px solid black;
                 text-align: center;
             }
-            tr,td{
+            tr, td {
                 padding: 6px 10px;
             }
         </style>
         <table>
-
             <tr><td>Diamond ID</td><td>${requestScope.diamond.diamondID}</td></tr>
             <tr><td>Diamond Name</td><td>${requestScope.diamond.diamondName}</td></tr>
-            <tr><td>Diamond Image</td><td><img src=${requestScope.diamond.diamondImage} width="300px" height="300px"></td></tr>
+            <tr><td>Diamond Image</td><td><img src="${requestScope.diamond.diamondImage}" width="300px" height="300px"></td></tr>
             <tr><td>Origin</td><td>${requestScope.diamond.origin}</td></tr>
             <tr><td>Diamond Size</td><td>${requestScope.diamond.diamondSize}</td></tr>
             <tr><td>Carat Weight</td><td>${requestScope.diamond.caratWeight}</td></tr>
@@ -51,16 +60,17 @@
             <tr><td>Clarity</td><td>${requestScope.diamond.clarity}</td></tr>
             <tr><td>Certificate</td><td>${requestScope.diamond.certificateID}</td></tr>
             <tr><td>Price</td><td>${requestScope.diamond.diamondPrice}</td></tr>
-
         </table>
-            
-            <form action="DiamondController" style="padding-top: 10px">
-            <input type=hidden name="action" value="list">
-            <input type=submit value="Return" ></form>
 
         <form action="DiamondController" style="padding-top: 10px">
-            <input type=hidden name="id" value="${requestScope.diamond.diamondID}">
-            <input type=hidden name="action" value="edit">
-            <input type=submit value="Edit" ></form>
+            <input type="hidden" name="action" value="list">
+            <input type="submit" value="Return">
+        </form>
+
+        <form action="DiamondController" style="padding-top: 10px">
+            <input type="hidden" name="id" value="${requestScope.diamond.diamondID}">
+            <input type="hidden" name="action" value="edit">
+            <input type="submit" value="Edit">
+        </form>
     </body>
 </html>
