@@ -1,8 +1,3 @@
-<%-- 
-    Document   : categorylist
-    Created on : May 29, 2024, 10:49:30 AM
-    Author     : Dell
---%>
 
 <%@page import="com.khac.swp.fuj.category.CategoryDTO"%>
 <%@page import="java.util.List"%>

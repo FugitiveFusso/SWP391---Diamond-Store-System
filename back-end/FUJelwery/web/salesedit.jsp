@@ -1,8 +1,4 @@
-<%-- 
-    Document   : salesedit
-    Created on : May 25, 2024, 11:36:02 AM
-    Author     : phucu
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

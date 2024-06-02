@@ -1,8 +1,3 @@
-<%-- 
-    Document   : adminlist
-    Created on : May 25, 2024, 10:27:40 AM
-    Author     : phucu
---%>
 
 <%@page import="java.util.List"%>
 <%@page import="com.khac.swp.fuj.users.UserDTO"%>

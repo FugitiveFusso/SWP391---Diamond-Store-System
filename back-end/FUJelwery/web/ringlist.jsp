@@ -1,8 +1,3 @@
-<%-- 
-    Document   : ringlist
-    Created on : May 27, 2024, 10:27:21 AM
-    Author     : Dell
---%>
 
 <%@page import="com.khac.swp.fuj.ring.RingDTO"%>
 <%@page import="java.util.List"%>

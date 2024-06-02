@@ -1,8 +1,3 @@
-<%-- 
-    Document   : voucherdetails
-    Created on : May 29, 2024, 7:01:44 PM
-    Author     : phucu
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

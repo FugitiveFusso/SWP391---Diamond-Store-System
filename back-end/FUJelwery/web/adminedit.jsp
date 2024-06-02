@@ -1,8 +1,3 @@
-<%-- 
-    Document   : adminedit
-    Created on : May 25, 2024, 10:43:22 AM
-    Author     : phucu
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

@@ -1,8 +1,4 @@
-<%-- 
-    Document   : manageraccount
-    Created on : Jun 1, 2024, 8:18:36 PM
-    Author     : Le Anh Khoa
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

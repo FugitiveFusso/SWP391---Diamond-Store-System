@@ -1,8 +1,4 @@
-<%-- 
-    Document   : deliverystaffdetails
-    Created on : May 25, 2024, 11:46:45 AM
-    Author     : phucu
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

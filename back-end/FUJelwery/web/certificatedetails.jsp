@@ -1,8 +1,3 @@
-<%-- 
-    Document   : certificatedetails
-    Created on : May 29, 2024, 5:45:23 PM
-    Author     : Dell
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

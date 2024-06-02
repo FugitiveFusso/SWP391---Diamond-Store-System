@@ -1,8 +1,3 @@
-<%-- 
-    Document   : productlist
-    Created on : Jun 2, 2024, 7:56:22 AM
-    Author     : Dell
---%>
 
 <%@page import="com.khac.swp.fuj.ring.RingDTO"%>
 <%@page import="java.util.List"%>

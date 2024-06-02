@@ -1,8 +1,3 @@
-<%-- 
-    Document   : categoryedit
-    Created on : May 29, 2024, 10:49:56 AM
-    Author     : Dell
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

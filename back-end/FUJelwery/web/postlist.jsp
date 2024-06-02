@@ -1,8 +1,3 @@
-<%-- 
-    Document   : postlist
-    Created on : May 26, 2024, 10:42:55 AM
-    Author     : phucu
---%>
 
 <%@page import="com.khac.swp.fuj.posts.PostDTO"%>
 <%@page import="java.util.List"%>

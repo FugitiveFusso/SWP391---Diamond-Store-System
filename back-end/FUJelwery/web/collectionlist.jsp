@@ -1,8 +1,4 @@
-<%-- 
-    Document   : collectionlist
-    Created on : May 29, 2024, 10:46:59 AM
-    Author     : Dell
---%>
+
 
 <%@page import="com.khac.swp.fuj.collection.CollectionDTO"%>
 <%@page import="java.util.List"%>

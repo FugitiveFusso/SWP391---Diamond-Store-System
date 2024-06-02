@@ -1,8 +1,4 @@
-<%-- 
-    Document   : managerdetails
-    Created on : May 25, 2024, 11:16:13 AM
-    Author     : phucu
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

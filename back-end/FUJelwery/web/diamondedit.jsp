@@ -1,8 +1,4 @@
-<%-- 
-    Document   : diamondedit
-    Created on : May 27, 2024, 8:24:12 AM
-    Author     : Dell
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

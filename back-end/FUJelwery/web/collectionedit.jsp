@@ -1,8 +1,3 @@
-<%-- 
-    Document   : collectionedit
-    Created on : May 29, 2024, 10:47:29 AM
-    Author     : Dell
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

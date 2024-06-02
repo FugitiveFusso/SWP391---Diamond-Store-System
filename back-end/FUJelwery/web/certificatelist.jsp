@@ -1,8 +1,3 @@
-<%-- 
-    Document   : certificatelist
-    Created on : May 29, 2024, 5:45:13 PM
-    Author     : Dell
---%>
 
 <%@page import="com.khac.swp.fuj.certificate.CertificateDTO"%>
 <%@page import="java.util.List"%>

@@ -1,8 +1,3 @@
-<%-- 
-    Document   : customeredit
-    Created on : May 24, 2024, 7:55:03 PM
-    Author     : phucu
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

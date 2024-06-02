@@ -1,8 +1,4 @@
-<%-- 
-    Document   : dpedit
-    Created on : Jun 1, 2024, 10:20:35 AM
-    Author     : phucu
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

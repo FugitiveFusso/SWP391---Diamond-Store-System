@@ -1,8 +1,3 @@
-<%-- 
-    Document   : collectiondetails
-    Created on : May 29, 2024, 10:47:12 AM
-    Author     : Dell
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

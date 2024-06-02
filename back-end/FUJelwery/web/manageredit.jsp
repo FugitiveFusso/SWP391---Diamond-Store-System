@@ -1,8 +1,3 @@
-<%-- 
-    Document   : manageredit
-    Created on : May 25, 2024, 11:18:03 AM
-    Author     : phucu
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

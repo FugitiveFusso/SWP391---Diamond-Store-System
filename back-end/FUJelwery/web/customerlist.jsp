@@ -1,8 +1,4 @@
-<%-- 
-    Document   : customerlist
-    Created on : May 24, 2024, 6:42:32 PM
-    Author     : phucu
---%>
+
 
 <%@page import="com.khac.swp.fuj.users.UserDTO"%>
 <%@page import="java.util.List"%>

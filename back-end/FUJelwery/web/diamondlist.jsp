@@ -1,8 +1,3 @@
-<%-- 
-    Document   : diamondetails
-    Created on : May 25, 2024, 10:07:49 AM
-    Author     : Dell
---%>
 
 <%@page import="com.khac.swp.fuj.diamond.DiamondDTO"%>
 <%@page import="java.util.List"%>

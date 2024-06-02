@@ -1,8 +1,4 @@
-<%-- 
-    Document   : diamonddetails
-    Created on : May 27, 2024, 10:27:36 AM
-    Author     : Dell
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

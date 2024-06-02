@@ -1,15 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.khac.swp.fuj.diamond;
 
-/**
- *
- * @author Dell
- */
 public class DiamondDTO {
+
     private int diamondID;
     private String diamondName;
     private String diamondImage;
@@ -118,6 +110,5 @@ public class DiamondDTO {
     public void setDiamondPrice(int diamondPrice) {
         this.diamondPrice = diamondPrice;
     }
-    
-    
+
 }

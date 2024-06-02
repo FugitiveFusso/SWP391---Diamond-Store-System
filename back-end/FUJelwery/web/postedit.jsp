@@ -1,8 +1,3 @@
-<%-- 
-    Document   : postedit
-    Created on : May 26, 2024, 1:09:45 PM
-    Author     : phucu
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

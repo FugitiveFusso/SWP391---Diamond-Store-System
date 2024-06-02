@@ -1,8 +1,3 @@
-<%-- 
-    Document   : register
-    Created on : May 28, 2024, 6:32:43 PM
-    Author     : phucu
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

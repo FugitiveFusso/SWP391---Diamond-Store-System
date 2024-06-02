@@ -1,8 +1,3 @@
-<%-- 
-    Document   : saleslist
-    Created on : May 25, 2024, 11:30:40 AM
-    Author     : phucu
---%>
 
 <%@page import="java.util.List"%>
 <%@page import="com.khac.swp.fuj.users.UserDTO"%>

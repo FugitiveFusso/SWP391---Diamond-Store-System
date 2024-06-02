@@ -1,8 +1,3 @@
-<%-- 
-    Document   : rpedit
-    Created on : Jun 1, 2024, 1:29:42 PM
-    Author     : phucu
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

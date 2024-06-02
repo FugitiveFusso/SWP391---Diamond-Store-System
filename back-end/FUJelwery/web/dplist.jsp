@@ -1,8 +1,4 @@
-<%-- 
-    Document   : dplist
-    Created on : Jun 1, 2024, 9:49:23 AM
-    Author     : phucu
---%>
+
 
 <%@page import="com.khac.swp.fuj.diamondprice.DiamondPriceDTO"%>
 <%@page import="java.util.List"%>
