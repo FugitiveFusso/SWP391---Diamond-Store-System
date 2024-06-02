@@ -172,7 +172,7 @@ INSERT INTO [Ring] VALUES
 (3,3,'0.36ct Diamond Solitaire Ring','https://www.berrysjewellers.co.uk/cdn/shop/products/1620389070-28905700.jpg',1,7000000,2,2),
 (4,4,'0.36ct Diamond Solitaire Ring','https://www.berrysjewellers.co.uk/cdn/shop/products/1620389070-28905700.jpg',2,5000000,2,2)
 
-INSERT INTO [Warranty] (warrantyID, warrantyImage, warrantyMonth, warrantyDescription, warrantyType, startDate, termsAndConditions)
+INSERT INTO [Warranty] (warrantyID, warrantyName,warrantyImage, warrantyMonth, warrantyDescription, warrantyType, startDate, termsAndConditions)
 VALUES
 (1, 'Standard Ring Warranty', 'https://nhomin.com.vn/wp-content/uploads/2020/07/mau-phieu-bao-hanh-4.jpg', 12, 'Covers manufacturing defects for one year.', 'Manufacturer', '2024-06-01', 'See attached warranty document for terms and conditions.'),
 (2, 'Extended Ring Warranty', 'https://thietkekhainguyen.com/wp-content/uploads/2018/03/the-bao-hanh-trang-suc.jpg', 24, 'Extends coverage to include repairs and resizing for two years.', 'Extended', '2024-06-01', 'See attached warranty document for terms and conditions.'),
