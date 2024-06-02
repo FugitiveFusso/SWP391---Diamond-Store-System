@@ -145,8 +145,3 @@ CREATE TABLE [Post](
 	description varchar(max) NOT NULL
 	
 );
-
-
-
-
-

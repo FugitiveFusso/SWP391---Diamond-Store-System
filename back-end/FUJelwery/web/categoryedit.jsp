@@ -15,7 +15,7 @@
         <form action="./CategoryController" method="POST">
             <table>
 
-                <tr><td></td><td><input name="id" value="${requestScope.category.categoryID}" required="Please enter" type="hidden"</td></tr>
+                <tr><td>ID</td><td><input name="id" value="${requestScope.category.categoryID}" required="Please enter"</td></tr>
                 <tr><td>Category Name</td><td><input name="categoryName" value="${requestScope.category.categoryName}" required="Please enter" </td></tr>
                 <tr><td colspan="2">
                         <input name="action" value="${requestScope.nextaction}" type="hidden">

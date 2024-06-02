@@ -110,17 +110,15 @@ public class CategoryController extends HttpServlet {
                 rd.forward(request, response);
 
             } else if (action.equals("insert")) {//insert
-                try {
                     Connection conn = DBUtils.getConnection();
-                    int categoryid = 0;
+                    Integer categoryid = null;
+                    try {
+                        categoryid = Integer.parseInt(request.getParameter("id"));
+                    } catch (NumberFormatException ex) {
+                        log("Parameter id has wrong format.");
+                    }
                     String categoryName = request.getParameter("categoryName");
 
-                    PreparedStatement ps = conn.prepareStatement("select max(categoryID) from [Category]");
-                    ResultSet rs = ps.executeQuery();
-                    if (rs.next()) {
-                        categoryid = rs.getInt(1);
-                        categoryid++;
-                    }
                     CategoryDTO category = new CategoryDTO();
                     category.setCategoryID(categoryid);
                     category.setCategoryName(categoryName);
@@ -129,10 +127,7 @@ public class CategoryController extends HttpServlet {
 
                     RequestDispatcher rd = request.getRequestDispatcher("categorydetails.jsp");
                     rd.forward(request, response);
-                } catch (SQLException ex) {
-                    System.out.println("Insert category error!" + ex.getMessage());
-                    ex.printStackTrace();
-                }
+               
 
             } else if (action.equals("delete")) {//delete
 
