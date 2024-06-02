@@ -79,30 +79,6 @@ public class ProductController extends HttpServlet {
 
                 request.setAttribute("ring", ring);//object
                 request.getRequestDispatcher("/ringdetails.jsp").forward(request, response);
-            } else if (action.equals("edit")) {//edit
-                Integer id = null;
-                try {
-                    id = Integer.parseInt(request.getParameter("id"));
-                } catch (NumberFormatException ex) {
-                    log("Parameter id has wrong format.");
-                }
-
-                RingDTO ring = null;
-                if (id != null) {
-                    ring = ringDAO.load(id);
-                }
-
-                request.setAttribute("ring", ring);
-                request.setAttribute("nextaction", "update");
-                RequestDispatcher rd = request.getRequestDispatcher("ringedit.jsp");
-                rd.forward(request, response);
-
-            } else if (action.equals("create")) {//create
-                RingDTO ring = new RingDTO();
-                request.setAttribute("ring", ring);
-                request.setAttribute("nextaction", "insert");
-                RequestDispatcher rd = request.getRequestDispatcher("ringedit.jsp");
-                rd.forward(request, response);
 
             }
         }
