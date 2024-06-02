@@ -63,8 +63,16 @@
         
                 <h1>Manager Details </h1>         
                 <p> Login username: ${sessionScope.adminsession.username}</p>-->
-
-        <div class="container">
+        <jsp:include page="/menu.jsp" flush="true" />
+        
+        <div class="container d-flex justify-content-center align-items-center">
+            <div class="text-center">
+                <h1 style="font-size: 50px; font-weight: 700">Manager Details</h1>
+                <p>Login username: ${sessionScope.adminsession.username}</p>
+            </div>
+        </div>
+        
+        <div class="container" >
             <div class="padding">
                 <div class="row d-flex justify-content-center">
                     <div class="col-xl-12 col-md-12">
@@ -80,7 +88,7 @@
                                         <p style="color: #fff; font-family: 'Inter'; font-size: 13px;">${requestScope.manager.username}</p>
                                         <input name="roleID" value=2 required="Please enter"   type="hidden">
 
-                                    </div>
+                                    </div> 
                                 </div>
                                 <div class="col-md-9">
                                     <div class="card-block">

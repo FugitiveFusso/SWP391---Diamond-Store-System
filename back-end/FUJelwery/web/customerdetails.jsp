@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Manager Management Page</title>
+        <title>Customer Management Page</title>
         <link rel="stylesheet" href="css/navbar.css">
         <!--<link rel="stylesheet" href="css/staff_detail.css">-->
 
@@ -21,51 +21,53 @@
     </head>
     <body>
 
-<!--        <div class="menu">
-            you will code the horizontal menu here
-            <ul class="navbar">
-                <li class="navbar__link"><a href="#">Order</a></li>
-                <li class="navbar__link">
-                    <a href="#">Products</a>
-                    <div class="sub-menu-1">
-                        <ul>
-                            <li><a href='DiamondController'>Diamond</a></li>
-                            <li><a href='RingController'>Ring</a></li>
-                            <li><a href='CollectionController'>Collection</a></li>
-                        </ul>
-                    </div>                  
-                </li>
-                <li class="navbar__link"><a href='VoucherController'>Voucher</a></li>
-                <img src="./images/Screenshot (656).png">
-                <li class="navbar__link"><a href="#">Delivery</a></li>
-                <li class="navbar__link">
-                    <a href="#">Dashboard</a>
-                    <div class="sub-menu-1">
-                        <ul>
-                            <li><a href='CustomerController'>View Customer</a></li>
-                            <li><a href='ManagerController'>View Manager</a></li>                           
-                            <li><a href='CertificateController'>View Certificate</a></li>
-                            <li><a href='CategoryController'>View Category</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="navbar__link">
-                    <a href="#">Account</a>
-                    <div class="sub-menu-1">
-                        <ul>
-                            <li><a href='adminlogin?action=logout'>Logout</a></li>          
-                        </ul>
-                    </div>
-                </li>
-                
-            </ul>
-        </div>-->
-                <jsp:include page="/menu.jsp" flush="true" />
-        
-                <h1>Manager Details </h1>         
-                <p> Login username: ${sessionScope.adminsession.username}</p>
-                <p> Address: ${sessionScope.adminsession.address}</p>
-                
+        <!--        <div class="menu">
+                    you will code the horizontal menu here
+                    <ul class="navbar">
+                        <li class="navbar__link"><a href="#">Order</a></li>
+                        <li class="navbar__link">
+                            <a href="#">Products</a>
+                            <div class="sub-menu-1">
+                                <ul>
+                                    <li><a href='DiamondController'>Diamond</a></li>
+                                    <li><a href='RingController'>Ring</a></li>
+                                    <li><a href='CollectionController'>Collection</a></li>
+                                </ul>
+                            </div>                  
+                        </li>
+                        <li class="navbar__link"><a href='VoucherController'>Voucher</a></li>
+                        <img src="./images/Screenshot (656).png">
+                        <li class="navbar__link"><a href="#">Delivery</a></li>
+                        <li class="navbar__link">
+                            <a href="#">Dashboard</a>
+                            <div class="sub-menu-1">
+                                <ul>
+                                    <li><a href='CustomerController'>View Customer</a></li>
+                                    <li><a href='ManagerController'>View Manager</a></li>                           
+                                    <li><a href='CertificateController'>View Certificate</a></li>
+                                    <li><a href='CategoryController'>View Category</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="navbar__link">
+                            <a href="#">Account</a>
+                            <div class="sub-menu-1">
+                                <ul>
+                                    <li><a href='adminlogin?action=logout'>Logout</a></li>          
+                                </ul>
+                            </div>
+                        </li>
+                        
+                    </ul>
+                </div>-->
+        <jsp:include page="/menu.jsp" flush="true" />
+        <div class="container d-flex justify-content-center align-items-center">
+            <div class="text-center">
+                <h1 style="font-size: 50px; font-weight: 700">Customer Details</h1>
+                <p>Login username: ${sessionScope.adminsession.username}</p>
+            </div>
+        </div>
+
         <div class="container">
             <div class="padding">
                 <div class="row d-flex justify-content-center">
