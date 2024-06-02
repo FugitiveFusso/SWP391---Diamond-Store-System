@@ -91,7 +91,7 @@
                     </table>
                     <div id="paginationControls" class="pagination-controls">
                         <button id="prevButton" class="pagination-button"><i class="fas fa-chevron-left"></i></button>
-                        <span id="pageNumbers"></span>
+                        <div id="pageNumbers"></div>
                         <button id="nextButton" class="pagination-button"><i class="fas fa-chevron-right"></i></button>
                     </div>
                 </div>

@@ -79,7 +79,7 @@
                         </form>
                     </div>
                 </div>
-                              
+
                 <div class="list">
                     <form action='' method=GET id="searchbox"> 
                         <input name=keyword type=text class="search-input" value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
@@ -124,17 +124,17 @@
                             <%
                                 }
                             %>    
-<!--                            <tr><td colspan="6">
-                                    <form action="SalesController" method="POST" class="input">
-                                        <input name="action" value="create" type="hidden">
-                                        <input type="submit" value="Create">
-                                    </form>
-                                </td></tr>-->
+                            <!--                            <tr><td colspan="6">
+                                                                <form action="SalesController" method="POST" class="input">
+                                                                    <input name="action" value="create" type="hidden">
+                                                                    <input type="submit" value="Create">
+                                                                </form>
+                                                            </td></tr>-->
                         </tbody>
                     </table>
                     <div id="paginationControls" class="pagination-controls">
                         <button id="prevButton" class="pagination-button"><i class="fas fa-chevron-left"></i></button>
-                        <span id="pageNumbers"></span>
+                        <div id="pageNumbers"></div>
                         <button id="nextButton" class="pagination-button"><i class="fas fa-chevron-right"></i></button>
                     </div>
                 </div>

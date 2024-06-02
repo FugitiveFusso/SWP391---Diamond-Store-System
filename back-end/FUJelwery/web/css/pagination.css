@@ -20,7 +20,25 @@
 }
 
 #pageNumbers {
+    display: flex;
     margin: 0 10px;
     font-size: 1em; /* Adjust size as needed */
     color: #333; /* Adjust text color as needed */
+}
+
+.page-number {
+    cursor: pointer;
+    margin: 0 5px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.page-number:hover {
+    background-color: #ddd; /* Adjust hover background color as needed */
+}
+
+.page-number.active {
+    background-color: #666; /* Adjust active page background color as needed */
+    color: #fff; /* Adjust active page text color as needed */
 }
