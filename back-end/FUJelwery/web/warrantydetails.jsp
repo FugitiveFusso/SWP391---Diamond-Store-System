@@ -5,7 +5,16 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Warranty Management Page</title>
-
+        <script>
+            window.onload = function () {
+                if (!sessionStorage.getItem('hasReloaded')) {
+                    sessionStorage.setItem('hasReloaded', 'true');
+                    location.reload();
+                } else {
+                    sessionStorage.removeItem('hasReloaded');
+                }
+            };
+        </script>
     </head>
     <body>
         <jsp:include page="/salesmenu.jsp" flush="true" />
