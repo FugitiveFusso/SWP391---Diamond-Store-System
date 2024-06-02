@@ -113,7 +113,7 @@ public class RingController extends HttpServlet {
                 }
                 Integer rpID = null;
                 try {
-                    ringid = Integer.parseInt(request.getParameter("rpID"));
+                    rpID = Integer.parseInt(request.getParameter("rpID"));
                 } catch (NumberFormatException ex) {
                     log("Parameter rpID has wrong format.");
                 }
