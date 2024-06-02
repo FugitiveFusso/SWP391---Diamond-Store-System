@@ -118,11 +118,16 @@ CREATE TABLE [ProcessOrder](
 	userID int NOT NULL foreign key REFERENCES [User](userID)
 );
 
-CREATE TABLE [Warranty](
-	warrantyID int NOT NULL primary key,
-	warrantyName varchar(255),
-	warrantyImage varchar(8000),
-	warrantyMonth int NOT NULL
+CREATE TABLE [Warranty] (
+    warrantyID int NOT NULL PRIMARY KEY,        
+    warrantyName varchar(255) NOT NULL,                  
+    warrantyImage varchar(8000),                              
+    warrantyMonth int NOT NULL CHECK (warrantyMonth > 0),     
+    warrantyDescription text,                                 
+    warrantyType varchar(255),                                
+    startDate date NOT NULL,                                  
+    endDate AS DATEADD(month, warrantyMonth, startDate),      
+    termsAndConditions text                      
 );
 
 CREATE TABLE [Bill](
