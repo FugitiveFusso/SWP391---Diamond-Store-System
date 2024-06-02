@@ -70,14 +70,14 @@
                             <i class='bx bx-certification' ></i>
                         </div>
                         <div class="left-info">
-                            <div class="list-title">Certificates List</div>
-                            <div class="">List of Certificates</div>
+                            <div class="list-title">Certificate List</div>
+                            <div class="">List of Certificate</div>
                         </div>
                     </div>
                     <div class="list-intro-right">
                         <form action="CertificateController" method="POST" class="input1">
                             <input name="action" value="create" type="hidden">
-                            <button type="submit" class="styled-button3">
+                            <button type="submit" class="styled-button">
                                 <span>Add a Certificate</span>                                           
                             </button>
                         </form>

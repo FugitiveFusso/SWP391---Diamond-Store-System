@@ -78,7 +78,7 @@
                     <div class="list-intro-right">
                         <form action="CollectionController" method="POST" class="input1">
                             <input name="action" value="create" type="hidden">
-                            <button type="submit" class="styled-button2">
+                            <button type="submit" class="styled-button">
                                 <span>Add a Collection</span>                                           
                             </button>
                         </form>

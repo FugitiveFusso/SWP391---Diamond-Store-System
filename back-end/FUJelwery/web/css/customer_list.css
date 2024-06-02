@@ -38,59 +38,7 @@ body{
     transition: background-color 0.3s, transform 0.3s;
     font-size: 16px;
     font-weight: 600;
-    margin-left: 590px;
-    margin-top: 25px;
-}
-
-.list-intro-right .styled-button1{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: none;
-    color: #8f8f8f;
-    border: 2px solid #8f8f8f;
-    padding: 15px 60px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s, transform 0.3s;
-    font-size: 16px;
-    font-weight: 600;
-    margin-left: 680px;
-    margin-top: 25px;
-}
-
-.list-intro-right .styled-button2{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: none;
-    color: #8f8f8f;
-    border: 2px solid #8f8f8f;
-    padding: 15px 60px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s, transform 0.3s;
-    font-size: 16px;
-    font-weight: 600;
-    margin-left: 565px;
-    margin-top: 25px;
-}
-
-.list-intro-right .styled-button3{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: none;
-    color: #8f8f8f;
-    border: 2px solid #8f8f8f;
-    padding: 15px 60px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s, transform 0.3s;
-    font-size: 16px;
-    font-weight: 600;
-    margin-left: 530px;
-    margin-top: 25px;
+    margin: 15px 20px 0 600px;
 }
 
 .styled-button:hover {

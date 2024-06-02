@@ -72,8 +72,8 @@
                             <i class='bx bx-category'></i>
                         </div>
                         <div class="left-info">
-                            <div class="list-title">Category List</div>
-                            <div class="">List of Category</div>
+                            <div class="list-title">Categories List</div>
+                            <div class="">List of Categories</div>
                         </div>
                     </div>
                     <div class="list-intro-right">
