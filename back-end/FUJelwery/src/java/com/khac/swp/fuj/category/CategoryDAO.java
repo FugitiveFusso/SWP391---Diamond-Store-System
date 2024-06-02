@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.khac.swp.fuj.category;
 
 import com.khac.swp.fuj.utils.DBUtils;
@@ -13,11 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Dell
- */
 public class CategoryDAO {
+
     public List<CategoryDTO> list(String keyword, String sortCol) {
         List<CategoryDTO> list = new ArrayList<CategoryDTO>();
         try {
@@ -43,7 +35,6 @@ public class CategoryDAO {
 
                     int categoryID = rs.getInt("categoryID");
                     String categoryName = rs.getString("categoryName");
-                    
 
                     CategoryDTO category = new CategoryDTO();
                     category.setCategoryID(categoryID);
@@ -74,11 +65,11 @@ public class CategoryDAO {
             if (rs.next()) {
 
                 int ID = rs.getInt("categoryID");
-                    String categoryName = rs.getString("categoryName");
+                String categoryName = rs.getString("categoryName");
 
                 CategoryDTO category = new CategoryDTO();
-                    category.setCategoryID(categoryID);
-                    category.setCategoryName(categoryName);;
+                category.setCategoryID(categoryID);
+                category.setCategoryName(categoryName);;
                 return category;
             }
         } catch (SQLException ex) {

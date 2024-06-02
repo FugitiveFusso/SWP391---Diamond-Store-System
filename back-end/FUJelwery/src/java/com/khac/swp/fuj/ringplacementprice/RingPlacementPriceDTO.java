@@ -1,15 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.khac.swp.fuj.ringplacementprice;
 
-/**
- *
- * @author phucu
- */
 public class RingPlacementPriceDTO {
+
     public int id;
     public String name;
     public String material;
@@ -60,7 +52,5 @@ public class RingPlacementPriceDTO {
     public String toString() {
         return "RingPlacementPriceDTO{" + "id=" + id + ", name=" + name + ", material=" + material + ", color=" + color + ", price=" + price + '}';
     }
-    
-    
-    
+
 }

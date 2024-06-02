@@ -1,15 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.khac.swp.fuj.certificate;
 
-/**
- *
- * @author Dell
- */
 public class CertificateDTO {
+
     private int certificateID;
     private String certificateImage;
     private String certificateDescription;
@@ -38,6 +30,4 @@ public class CertificateDTO {
         this.certificateDescription = certificateDescription;
     }
 
-    
-    
 }

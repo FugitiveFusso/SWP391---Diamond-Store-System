@@ -1,9 +1,3 @@
-<%-- 
-    Document   : adminaccount
-    Created on : Jun 1, 2024, 8:08:35 PM
-    Author     : Le Anh Khoa
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

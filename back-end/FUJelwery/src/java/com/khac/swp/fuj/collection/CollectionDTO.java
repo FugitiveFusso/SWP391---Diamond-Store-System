@@ -1,15 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.khac.swp.fuj.collection;
 
-/**
- *
- * @author Dell
- */
 public class CollectionDTO {
+
     private int collectionID;
     private String collectionName;
     private String collectionImage;
@@ -61,5 +53,5 @@ public class CollectionDTO {
     public String toString() {
         return "CollectionDTO{" + "collectionID=" + collectionID + ", collectionName=" + collectionName + ", collectionImage=" + collectionImage + ", collectionDescription=" + collectionDescription + '}';
     }
-    
+
 }

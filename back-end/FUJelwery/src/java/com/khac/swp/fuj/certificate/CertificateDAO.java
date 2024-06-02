@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.khac.swp.fuj.certificate;
 
 import com.khac.swp.fuj.utils.DBUtils;
@@ -13,11 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Dell
- */
 public class CertificateDAO {
+
     Connection conn = DBUtils.getConnection();
     ResultSet rs = null;
 
@@ -47,7 +39,6 @@ public class CertificateDAO {
                     int certificateID = rs.getInt("certificateID");
                     String certificateImage = rs.getString("certificateImage");
                     String certificateDescription = rs.getString("description");
-                    
 
                     CertificateDTO certificate = new CertificateDTO();
                     certificate.setCertificateID(certificateID);
@@ -79,13 +70,13 @@ public class CertificateDAO {
             if (rs.next()) {
 
                 int ID = rs.getInt("certificateID");
-                    String certificateImage = rs.getString("certificateImage");
-                    String certificateDescription = rs.getString("description");
+                String certificateImage = rs.getString("certificateImage");
+                String certificateDescription = rs.getString("description");
 
                 CertificateDTO certificate = new CertificateDTO();
-                    certificate.setCertificateID(ID);
-                    certificate.setCertificateImage(certificateImage);
-                    certificate.setCertificateDescription(certificateDescription);
+                certificate.setCertificateID(ID);
+                certificate.setCertificateImage(certificateImage);
+                certificate.setCertificateDescription(certificateDescription);
                 return certificate;
             }
         } catch (SQLException ex) {

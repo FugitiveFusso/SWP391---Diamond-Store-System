@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.khac.swp.fuj.controller;
 
 import com.khac.swp.fuj.category.CategoryDAO;
@@ -23,22 +18,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 
-/**
- *
- * @author Dell
- */
 @WebServlet(name = "CategoryController", urlPatterns = {"/CategoryController"})
 public class CategoryController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -80,7 +62,7 @@ public class CategoryController extends HttpServlet {
                 request.setAttribute("category", category);//object
                 RequestDispatcher rd = request.getRequestDispatcher("categorydetails.jsp");
                 rd.forward(request, response);
-                
+
             } else if (action.equals("edit")) {//edit
                 Integer id = null;
                 try {
@@ -144,7 +126,7 @@ public class CategoryController extends HttpServlet {
                     category.setCategoryName(categoryName);
                     request.setAttribute("category", category);
                     categoryDAO.insert(category);
-                    
+
                     RequestDispatcher rd = request.getRequestDispatcher("categorydetails.jsp");
                     rd.forward(request, response);
                 } catch (SQLException ex) {
@@ -168,7 +150,7 @@ public class CategoryController extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("categorylist.jsp");
                 rd.forward(request, response);
             }
-            }
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -1,15 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.khac.swp.fuj.posts;
 
-/**
- *
- * @author phucu
- */
 public class PostDTO {
+
     private int id;
     private String name;
     private String image;
@@ -47,7 +39,6 @@ public class PostDTO {
         this.description = description;
     }
 
-  
     @Override
     public String toString() {
         return "PostDTO{" + "id=" + id + ", name=" + name + ", image=" + image + ", description=" + description + '}';

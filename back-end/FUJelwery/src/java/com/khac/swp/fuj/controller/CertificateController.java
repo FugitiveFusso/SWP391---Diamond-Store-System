@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.khac.swp.fuj.controller;
 
 import com.khac.swp.fuj.certificate.CertificateDAO;
@@ -23,22 +18,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author Dell
- */
 @WebServlet(name = "CertificateController", urlPatterns = {"/CertificateController"})
 public class CertificateController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -80,7 +62,7 @@ public class CertificateController extends HttpServlet {
                 request.setAttribute("certificate", certificate);//object
                 RequestDispatcher rd = request.getRequestDispatcher("certificatedetails.jsp");
                 rd.forward(request, response);
-                
+
             } else if (action.equals("edit")) {//edit
                 Integer id = null;
                 try {
@@ -124,7 +106,7 @@ public class CertificateController extends HttpServlet {
                 certificate.setCertificateImage(certificateImage);
                 certificate.setCertificateDescription(certificateDescription);
                 certificateDAO.update(certificate);
-                
+
                 request.setAttribute("certificate", certificate);
                 RequestDispatcher rd = request.getRequestDispatcher("certificatedetails.jsp");
                 rd.forward(request, response);
@@ -148,7 +130,7 @@ public class CertificateController extends HttpServlet {
                     certificate.setCertificateDescription(certificateDescription);
                     request.setAttribute("certificate", certificate);
                     certificateDAO.insert(certificate);
-                    
+
                     RequestDispatcher rd = request.getRequestDispatcher("certificatedetails.jsp");
                     rd.forward(request, response);
                 } catch (SQLException ex) {

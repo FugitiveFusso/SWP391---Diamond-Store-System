@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.khac.swp.fuj.collection;
 
 import com.khac.swp.fuj.utils.DBUtils;
@@ -13,11 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Dell
- */
 public class CollectionDAO {
+
     Connection conn = DBUtils.getConnection();
     ResultSet rs = null;
 
@@ -48,7 +40,6 @@ public class CollectionDAO {
                     String collectionName = rs.getString("collectionName");
                     String collectionImage = rs.getString("collectionImage");
                     String collectionDescription = rs.getString("description");
-                    
 
                     CollectionDTO collection = new CollectionDTO();
                     collection.setCollectionID(collectionID);
@@ -81,15 +72,15 @@ public class CollectionDAO {
             if (rs.next()) {
 
                 int ID = rs.getInt("collectionID");
-                    String collectionName = rs.getString("collectionName");
-                    String collectionImage = rs.getString("collectionImage");
-                    String collectionDescription = rs.getString("description");
+                String collectionName = rs.getString("collectionName");
+                String collectionImage = rs.getString("collectionImage");
+                String collectionDescription = rs.getString("description");
 
                 CollectionDTO collection = new CollectionDTO();
-                    collection.setCollectionID(ID);
-                    collection.setCollectionName(collectionName);
-                    collection.setCollectionImage(collectionImage);
-                    collection.setCollectionDescription(collectionDescription);
+                collection.setCollectionID(ID);
+                collection.setCollectionName(collectionName);
+                collection.setCollectionImage(collectionImage);
+                collection.setCollectionDescription(collectionDescription);
                 return collection;
             }
         } catch (SQLException ex) {
