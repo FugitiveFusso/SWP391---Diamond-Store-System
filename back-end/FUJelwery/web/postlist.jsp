@@ -80,8 +80,10 @@
                     <div class="list-intro-right">
                         <form action="PostController" method="POST">
                             <input name="action" value="create" type="hidden">
-                            <button type="submit" class="styled-button1">
-                                <span>Add a Post</span>                                
+                            <button type="submit" class="styled-button">
+                                <div style="align-items: center;">
+                                    Add a Post
+                                </div>                                           
                             </button>
                         </form>
                     </div>
