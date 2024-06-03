@@ -131,22 +131,32 @@ public class DiamondController extends HttpServlet {
                 rd.forward(request, response);
 
             } else if (action.equals("insert")) {//insert
-                try {
-                    Connection conn = DBUtils.getConnection();
-                    int diamondid = 0;
-                    String diamondName = request.getParameter("diamondName");
-                    String diamondImage = request.getParameter("diamondImage");
-                    String origin = request.getParameter("origin");
-                    int dpID = Integer.parseInt(request.getParameter("dpID"));
-                    int certificateID = Integer.parseInt(request.getParameter("certificateID"));
 
-                    PreparedStatement ps = conn.prepareStatement("select max(diamondID) from [Diamond]");
-                    ResultSet rs = ps.executeQuery();
-                    if (rs.next()) {
-                        diamondid = rs.getInt(1);
-                        diamondid++;
-                    }
-                    DiamondDTO diamond = new DiamondDTO();
+                Integer diamondid = null;
+                try {
+                    diamondid = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+                String diamondName = request.getParameter("diamondName");
+                String diamondImage = request.getParameter("diamondImage");
+                String origin = request.getParameter("origin");
+                Integer dpID = null;
+                try {
+                    dpID = Integer.parseInt(request.getParameter("dpID"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter dpID has wrong format.");
+                }
+                Integer certificateID = null;
+                try {
+                    certificateID = Integer.parseInt(request.getParameter("certificateID"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter dpID has wrong format.");
+                }
+                DiamondDAO dao = new DiamondDAO();
+                DiamondDTO diamond = dao.checkDiamondExist(diamondid);
+                if (diamond == null) {
+                    diamond = new DiamondDTO();
                     diamond.setDiamondID(diamondid);
                     diamond.setDiamondName(diamondName);
                     diamond.setDiamondImage(diamondImage);
@@ -155,12 +165,13 @@ public class DiamondController extends HttpServlet {
                     diamond.setCertificateID(certificateID);
                     request.setAttribute("diamond", diamond);
                     diamondDAO.insert(diamond);
-
-                    RequestDispatcher rd = request.getRequestDispatcher("diamonddetails.jsp");
+                    request.setAttribute("success", "Added Successfully!!!");
+                    RequestDispatcher rd = request.getRequestDispatcher("diamondedit.jsp");
                     rd.forward(request, response);
-                } catch (SQLException ex) {
-                    System.out.println("Insert diamond error!" + ex.getMessage());
-                    ex.printStackTrace();
+                } else {
+                    request.setAttribute("error", "Your Diamond is not inserted!!");
+                    RequestDispatcher rd = request.getRequestDispatcher("diamondedit.jsp");
+                    rd.forward(request, response);
                 }
 
             } else if (action.equals("delete")) {//delete
