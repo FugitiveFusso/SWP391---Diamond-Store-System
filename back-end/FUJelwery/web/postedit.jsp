@@ -60,7 +60,7 @@
                 <div class="row content-info">
                     <div class="col-md-6 content-left">
                         <div class="info-input">                          
-                            <h2>ID</h2>
+                            <h2>Post ID</h2>
                             <input type="number" name="id" value="${requestScope.post.id}" min="1" required="Please enter" class="form-control">                           
                         </div>
                         <div class="info-input">
