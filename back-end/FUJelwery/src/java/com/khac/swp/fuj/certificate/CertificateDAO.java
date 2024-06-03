@@ -87,15 +87,15 @@ public class CertificateDAO {
     }
 
     public Integer insert(CertificateDTO certificate) {
-        String sql = "INSERT INTO [Certificate] (certificateID, certificateImage, description) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO [Certificate] (certificateID, certificateImage, description) VALUES (?, ?, ?)";
         try {
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
 
             ps.setInt(1, certificate.getCertificateID());
-            ps.setString(3, certificate.getCertificateImage());
-            ps.setString(4, certificate.getCertificateDescription());
+            ps.setString(2, certificate.getCertificateImage());
+            ps.setString(3, certificate.getCertificateDescription());
 
             ps.executeUpdate();
             conn.close();
@@ -148,5 +148,29 @@ public class CertificateDAO {
         }
 
         return false;
+    }
+    public CertificateDTO checkCertificateExistByID(int certificateID) {
+
+        String sql = "select certificateID, certificateImage, [description] from [Certificate] where certificateID = ?";
+
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, certificateID);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                CertificateDTO certificate = new CertificateDTO();
+                certificate.setCertificateID(rs.getInt("certificateID"));
+                certificate.setCertificateImage(rs.getString("certificateImage"));
+                certificate.setCertificateDescription(rs.getString("description"));
+                return certificate;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Query Certificate error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return null;
     }
 }

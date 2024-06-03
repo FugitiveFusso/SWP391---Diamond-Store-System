@@ -31,7 +31,7 @@
                         </div>
                     </div>
                     <div class="list-intro-right">
-                        <form action="VoucherController" method="POST" class="input1">
+                        <form action="DiamondPriceController" method="POST" class="input1">
                             <input name="action" value="create" type="hidden">
                             <button type="submit" class="styled-button3">
                                 <span>Add a Price</span>

@@ -22,7 +22,7 @@
     <body>
         <jsp:include page="/salesmenu.jsp" flush="true" />
 
-        <h1>Post Edit </h1>
+        <h1>Ring Price Edit </h1>
         <p> Login user: ${sessionScope.adminsession.username}</p>
 
         <form action="./RingPlacementPriceController" method="POST">
