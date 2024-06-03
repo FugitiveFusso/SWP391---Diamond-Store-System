@@ -128,30 +128,38 @@ public class AdminController extends HttpServlet {
                 rd.forward(request, response);
 
             } else if (action.equals("insert")) {//insert
+
+                Connection conn = DBUtils.getConnection();
+                Integer adminid = null;
                 try {
-                    Connection conn = DBUtils.getConnection();
-                    int adminid = 0;
-                    String adminname = request.getParameter("userName");
-                    String password = request.getParameter("password");
-                    String firstname = request.getParameter("firstName");
-                    String lastname = request.getParameter("lastName");
-                    String phonenumber = request.getParameter("phoneNumber");
-                    String email = request.getParameter("email");
-                    String address = request.getParameter("address");
-                    int roleid = Integer.parseInt(request.getParameter("roleID"));
-                    Integer point = null;
-                    try {
-                        point = Integer.parseInt(request.getParameter("point"));
-                    } catch (NumberFormatException ex) {
-                        log("Parameter point has wrong format.");
-                    }
-                    PreparedStatement ps = conn.prepareStatement("select max(userID) from [User]");
-                    ResultSet rs = ps.executeQuery();
-                    if (rs.next()) {
-                        adminid = rs.getInt(1);
-                        adminid++;
-                    }
-                    UserDTO admin = new UserDTO();
+                    adminid = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+                String adminname = request.getParameter("userName");
+                String password = request.getParameter("password");
+                String firstname = request.getParameter("firstName");
+                String lastname = request.getParameter("lastName");
+                String phonenumber = request.getParameter("phoneNumber");
+                String email = request.getParameter("email");
+                String address = request.getParameter("address");
+                Integer point = null;
+                try {
+                    point = Integer.parseInt(request.getParameter("point"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter point has wrong format.");
+                }
+                Integer roleid = null;
+                try {
+                    roleid = Integer.parseInt(request.getParameter("roleID"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter roleid has wrong format.");
+                }
+                UserDAO dao = new UserDAO();
+
+                UserDTO admin = dao.checkAccountExist(adminname);
+                if (admin == null) {
+                    admin = new UserDTO();
                     admin.setUserid(adminid);
                     admin.setUsername(adminname);
                     admin.setPassword(password);
@@ -164,11 +172,13 @@ public class AdminController extends HttpServlet {
                     admin.setRoleid(roleid);
                     userDAO.insert(admin);
                     request.setAttribute("admin", admin);
-                    RequestDispatcher rd = request.getRequestDispatcher("admindetails.jsp");
+                    request.setAttribute("success", "Added Successfully!!!");
+                    RequestDispatcher rd = request.getRequestDispatcher("adminedit.jsp");
                     rd.forward(request, response);
-                } catch (SQLException ex) {
-                    System.out.println("Insert admin error!" + ex.getMessage());
-                    ex.printStackTrace();
+                } else {
+                    request.setAttribute("error", " The username of the Administration is already existed!!!");
+                    RequestDispatcher rd = request.getRequestDispatcher("adminedit.jsp");
+                    rd.forward(request, response);
                 }
 
             } else if (action.equals("delete")) {//delete

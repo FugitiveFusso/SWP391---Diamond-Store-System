@@ -24,7 +24,15 @@
         <h1>Manager Edit </h1>
         <p> Login user: ${sessionScope.adminsession.username}</p>
 
+        <% String error1 = (String) request.getAttribute("error"); %>
+        <% if (error1 != null) {%>
+        <h4 style="color: red; text-align: center"> <%= error1%> </h4>
+        <% }%>
 
+        <% String success = (String) request.getAttribute("success"); %>
+        <% if (success != null) {%>
+        <h4 style="color: green; text-align: center"> <%= success%> </h4>
+        <% }%>
         <div class="container">
             <div class="padding">
                 <div class="row d-flex justify-content-center">
@@ -41,6 +49,7 @@
                                         <p style="color: #fff; font-family: 'Inter'; font-size: 13px;">${requestScope.manager.username}</p>
                                     </div>
                                 </div>
+
                                 <div class="col-md-9">
                                     <div class="card-block">
                                         <h2 class="m-b-20 p-b-5 b-b-default f-w-600">Personal Information</h2>
@@ -101,7 +110,7 @@
                                                 </div>
 
                                             </div>
-                                            <input name="roleID" value=3 required="Please enter"   type="hidden">
+                                            <input name="roleID" value=2 required="Please enter"   type="hidden">
                                             <div class="row" style="margin-top: 20px; justify-content: center">
                                                 <div class="col-sm-4">
                                                     <input name="action" value="${requestScope.nextaction}" type="hidden">

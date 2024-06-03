@@ -23,48 +23,55 @@
     <body>
         <jsp:include page="/managermenu.jsp" flush="true" />
 
-        <!--        <h1>Administrator Edit </h1>
-                <p> Login user: ${sessionScope.managersession.username}</p>-->
+        <h1>Administrator Edit </h1>
+        <p> Login user: ${sessionScope.managersession.username}</p>
+        <!--        <div class="menu">
+                    you will code the horizontal menu here
+                    <ul class="navbar">
+        
+                        <li class="navbar__link">
+                            <a href="#">Products</a>
+                            <div class="sub-menu-1">
+                                <ul>
+                                    <li><a href='DiamondController'>Diamond</a></li>
+                                    <li><a href='RingController'>Ring</a></li>
+                                    <li><a href='CollectionController'>Collection</a></li>
+                                </ul>
+                            </div>                  
+                        </li>
+                        <li class="navbar__link"><a href='VoucherController'>Voucher</a></li>
+                        <img src="./images/Screenshot (656).png">
+                        <li class="navbar__link">
+                            <a href="#">Dashboard</a>
+                            <div class="sub-menu-1">
+                                <ul>
+                                    <li><a href='AdminController'>View Admins</a></li>   
+                                    <li><a href='DeliveryStaffController'>View Delivery Staffs</a></li>
+                                    <li><a href='SalesController'>View Sale Staffs</a></li>
+                                    <li><a href='CertificateController'>View Certificate</a></li>
+        
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="navbar__link">
+                            <a href="#">Account</a>
+                            <div class="sub-menu-1">
+                                <ul>
+                                    <li><a href='adminlogin?action=logout'>Logout</a></li>          
+                                </ul>
+                            </div>
+                        </li>               
+                    </ul>
+                </div>-->
+        <% String error1 = (String) request.getAttribute("error"); %>
+        <% if (error1 != null) {%>
+        <h4 style="color: red; text-align: center"> <%= error1%> </h4>
+        <% }%>
 
-<!--        <div class="menu">
-            you will code the horizontal menu here
-            <ul class="navbar">
-
-                <li class="navbar__link">
-                    <a href="#">Products</a>
-                    <div class="sub-menu-1">
-                        <ul>
-                            <li><a href='DiamondController'>Diamond</a></li>
-                            <li><a href='RingController'>Ring</a></li>
-                            <li><a href='CollectionController'>Collection</a></li>
-                        </ul>
-                    </div>                  
-                </li>
-                <li class="navbar__link"><a href='VoucherController'>Voucher</a></li>
-                <img src="./images/Screenshot (656).png">
-                <li class="navbar__link">
-                    <a href="#">Dashboard</a>
-                    <div class="sub-menu-1">
-                        <ul>
-                            <li><a href='AdminController'>View Admins</a></li>   
-                            <li><a href='DeliveryStaffController'>View Delivery Staffs</a></li>
-                            <li><a href='SalesController'>View Sale Staffs</a></li>
-                            <li><a href='CertificateController'>View Certificate</a></li>
-
-                        </ul>
-                    </div>
-                </li>
-                <li class="navbar__link">
-                    <a href="#">Account</a>
-                    <div class="sub-menu-1">
-                        <ul>
-                            <li><a href='adminlogin?action=logout'>Logout</a></li>          
-                        </ul>
-                    </div>
-                </li>               
-            </ul>
-        </div>-->
-
+        <% String success = (String) request.getAttribute("success"); %>
+        <% if (success != null) {%>
+        <h4 style="color: green; text-align: center"> <%= success%> </h4>
+        <% }%>
 
         <div class="container">
             <div class="padding">
