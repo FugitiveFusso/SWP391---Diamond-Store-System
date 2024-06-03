@@ -78,28 +78,42 @@
                             <input type="submit" value="Save" class="btn btn-primary">
                         </div>
                     </div>
-                </div>
+
             </form>
-            <form action="CategoryController" style="padding-top: 10px">
-                <input type="hidden" name="action" value="list">
-                <input type="submit" class="btn btn-primary" value="Return">
-            </form>
+
+            <div class="col-md-4">
+                <div class="button text-center">
+                    <form action="CategoryController">
+                        <input type="hidden" name="action" value="list">
+                        <input type="submit" class="btn btn-primary" value="Return">
+                    </form>
+                </div>                
+            </div>
         </div>
 
-        <!--        <form action="./CategoryController" method="POST" onsubmit="return validateInput()">
-                    <table>
-        
-                        <tr>
-                            <td>ID</td>
-                            <td><input type="number" name="id" value="${requestScope.category.categoryID}" min="1" required></td>
-                        </tr>
-                        <tr><td>Category Name</td><td><input name="categoryName" value="${requestScope.category.categoryName}" required="Please enter" </td></tr>
-                        <tr><td colspan="2">
-                                <input name="action" value="${requestScope.nextaction}" type="hidden">
-                                <input type="submit" value="Save">
-                            </td></tr>
-                    </table>
-        
-                </form>-->
-    </body>
+        <!--            <div class="button text-center">
+                        <form action="CategoryController" style="padding-top: 10px">
+                            <input type="hidden" name="action" value="list">
+                            <input type="submit" class="btn btn-primary" value="Return">
+                        </form>
+                    </div>-->
+
+    </div>
+
+    <!--        <form action="./CategoryController" method="POST" onsubmit="return validateInput()">
+                <table>
+    
+                    <tr>
+                        <td>ID</td>
+                        <td><input type="number" name="id" value="${requestScope.category.categoryID}" min="1" required></td>
+                    </tr>
+                    <tr><td>Category Name</td><td><input name="categoryName" value="${requestScope.category.categoryName}" required="Please enter" </td></tr>
+                    <tr><td colspan="2">
+                            <input name="action" value="${requestScope.nextaction}" type="hidden">
+                            <input type="submit" value="Save">
+                        </td></tr>
+                </table>
+    
+            </form>-->
+</body>
 </html>

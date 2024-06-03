@@ -86,32 +86,41 @@
                             <input type="submit" value="Save" class="btn btn-primary">
                         </div>
                     </div>
-                </div>
+
             </form>
-            <div class="buttons">
+
+            <div class="col-md-4">
+                <div class="button text-center">
+                    <form action="CollectionController">
+                    <input type=hidden name="action" value="list">
+                    <input type=submit value="Return" class="btn btn-primary"></form>
+                </div>
+            </div>
+
+<!--            <div class="buttons">
                 <form action="CollectionController" style="padding-top: 10px">
                     <input type=hidden name="action" value="list">
                     <input type=submit value="Return" ></form>
-
-            </div>
+            </div>-->
         </div>
+    </div>
 
-        <!--        <form action="./CollectionController" method="POST" onsubmit="return validateForm()" onsubmit="return validateInput()">
-                    <table>
-                        <tr>
-                            <td>ID</td>
-                            <td><input type="number" name="id" value="${requestScope.collection.collectionID}" min="1" required></td>
-                        </tr>
-        
-                        <tr><td>Collection Name</td><td><input name="collectionName" value="${requestScope.collection.collectionName}" required="Please enter" </td></tr>
-                        <tr><td>Collection Image</td><td><input name="collectionImage" value="${requestScope.collection.collectionImage}" required="Please enter"</td></tr>
-                        <tr><td>Description</td><td><input name="description" value="${requestScope.collection.collectionDescription}" required="Please enter"</td></tr>
-                        <tr><td colspan="2">
-                                <input name="action" value="${requestScope.nextaction}" type="hidden">
-                                <input type="submit" value="Save">
-                            </td></tr>
-                    </table>
-        
-                </form>-->
-    </body>
+    <!--        <form action="./CollectionController" method="POST" onsubmit="return validateForm()" onsubmit="return validateInput()">
+                <table>
+                    <tr>
+                        <td>ID</td>
+                        <td><input type="number" name="id" value="${requestScope.collection.collectionID}" min="1" required></td>
+                    </tr>
+    
+                    <tr><td>Collection Name</td><td><input name="collectionName" value="${requestScope.collection.collectionName}" required="Please enter" </td></tr>
+                    <tr><td>Collection Image</td><td><input name="collectionImage" value="${requestScope.collection.collectionImage}" required="Please enter"</td></tr>
+                    <tr><td>Description</td><td><input name="description" value="${requestScope.collection.collectionDescription}" required="Please enter"</td></tr>
+                    <tr><td colspan="2">
+                            <input name="action" value="${requestScope.nextaction}" type="hidden">
+                            <input type="submit" value="Save">
+                        </td></tr>
+                </table>
+    
+            </form>-->
+</body>
 </html>

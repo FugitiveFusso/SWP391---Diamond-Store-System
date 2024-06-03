@@ -82,28 +82,37 @@
                             <input type="submit" value="Save" class="btn btn-primary">
                         </div>
                     </div>
-                </div>
-            </form>
-            <div class="buttons">
-                <form action="CertificateController" style="padding-top: 10px">
-                    <input type=hidden name="action" value="list">
-                    <input type=submit value="Return" ></form>
 
+            </form>
+
+            <div class="col-md-4">
+                <div class="button text-center">
+                    <form action="CertificateController">
+                        <input type=hidden name="action" value="list">
+                        <input type=submit value="Return" class="btn btn-primary"></form>
+                </div>
             </div>
         </div>
+        <!--            <div class="buttons">
+                        <form action="CertificateController" style="padding-top: 10px">
+                            <input type=hidden name="action" value="list">
+                            <input type=submit value="Return" ></form>
+        
+                    </div>-->
+    </div>
 
-        <!--        <form action="./CertificateController" method="POST" onclick="return validateForm()">
-                    <table>
-        
-                        <tr><td></td><td><input name="id" value="${requestScope.certificate.certificateID}" required="Please enter" type="hidden"</td></tr>
-                        <tr><td>Certificate Image</td><td><input name="certificateImage" value="${requestScope.certificate.certificateImage}" required="Please enter"</td></tr>
-                        <tr><td>Description</td><td><input name="description" value="${requestScope.certificate.certificateDescription}" required="Please enter"</td></tr>
-                        <tr><td colspan="2">
-                                <input name="action" value="${requestScope.nextaction}" type="hidden">
-                                <input type="submit" value="Save">
-                            </td></tr>
-                    </table>
-        
-                </form>-->
-    </body>
+    <!--        <form action="./CertificateController" method="POST" onclick="return validateForm()">
+                <table>
+    
+                    <tr><td></td><td><input name="id" value="${requestScope.certificate.certificateID}" required="Please enter" type="hidden"</td></tr>
+                    <tr><td>Certificate Image</td><td><input name="certificateImage" value="${requestScope.certificate.certificateImage}" required="Please enter"</td></tr>
+                    <tr><td>Description</td><td><input name="description" value="${requestScope.certificate.certificateDescription}" required="Please enter"</td></tr>
+                    <tr><td colspan="2">
+                            <input name="action" value="${requestScope.nextaction}" type="hidden">
+                            <input type="submit" value="Save">
+                        </td></tr>
+                </table>
+    
+            </form>-->
+</body>
 </html>
