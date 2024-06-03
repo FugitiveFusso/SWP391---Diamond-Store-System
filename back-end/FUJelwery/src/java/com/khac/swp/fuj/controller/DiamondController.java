@@ -154,20 +154,36 @@ public class DiamondController extends HttpServlet {
                     log("Parameter dpID has wrong format.");
                 }
                 DiamondDAO dao = new DiamondDAO();
-                DiamondDTO diamond = dao.checkDiamondExist(diamondid);
+                DiamondDTO diamond = dao.checkDiamondExistByID(diamondid);
                 if (diamond == null) {
-                    diamond = new DiamondDTO();
-                    diamond.setDiamondID(diamondid);
-                    diamond.setDiamondName(diamondName);
-                    diamond.setDiamondImage(diamondImage);
-                    diamond.setOrigin(origin);
-                    diamond.setDpID(dpID);
-                    diamond.setCertificateID(certificateID);
-                    request.setAttribute("diamond", diamond);
-                    diamondDAO.insert(diamond);
-                    request.setAttribute("success", "Added Successfully!!!");
-                    RequestDispatcher rd = request.getRequestDispatcher("diamondedit.jsp");
-                    rd.forward(request, response);
+                    diamond = dao.checkDiamondExistByDiamondPrice(dpID);
+                    if (diamond == null) {
+                        diamond = dao.checkDiamondExistByDiamondCertificate(certificateID);
+                        if (diamond == null) {
+                            diamond = new DiamondDTO();
+                            diamond.setDiamondID(diamondid);
+                            diamond.setDiamondName(diamondName);
+                            diamond.setDiamondImage(diamondImage);
+                            diamond.setOrigin(origin);
+                            diamond.setDpID(dpID);
+                            diamond.setCertificateID(certificateID);
+                            request.setAttribute("diamond", diamond);
+                            diamondDAO.insert(diamond);
+                            request.setAttribute("success", "Added Successfully!!!");
+                            RequestDispatcher rd = request.getRequestDispatcher("diamondedit.jsp");
+                            rd.forward(request, response);
+                        } else {
+                            request.setAttribute("error", "Your Diamond is not inserted!!");
+                            RequestDispatcher rd = request.getRequestDispatcher("diamondedit.jsp");
+                            rd.forward(request, response);
+                        }
+
+                    } else {
+                        request.setAttribute("error", "Your Diamond is not inserted!!");
+                        RequestDispatcher rd = request.getRequestDispatcher("diamondedit.jsp");
+                        rd.forward(request, response);
+                    }
+
                 } else {
                     request.setAttribute("error", "Your Diamond is not inserted!!");
                     RequestDispatcher rd = request.getRequestDispatcher("diamondedit.jsp");

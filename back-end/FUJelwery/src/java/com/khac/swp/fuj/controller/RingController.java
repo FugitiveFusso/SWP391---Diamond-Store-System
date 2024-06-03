@@ -101,10 +101,30 @@ public class RingController extends HttpServlet {
                 }
                 String ringName = request.getParameter("ringName");
                 String ringImage = request.getParameter("ringImage");
-                int diamondID = Integer.parseInt(request.getParameter("diamondID"));
-                int price = Integer.parseInt(request.getParameter("price"));
-                int categoryID = Integer.parseInt(request.getParameter("categoryID"));
-                int collectionID = Integer.parseInt(request.getParameter("collectionID"));
+                Integer diamondID = null;
+                try {
+                    diamondID = Integer.parseInt(request.getParameter("diamondID"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter diamondID has wrong format.");
+                }
+                Integer price = null;
+                try {
+                    price = Integer.parseInt(request.getParameter("price"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter price has wrong format.");
+                }
+                Integer collectionID = null;
+                try {
+                    collectionID = Integer.parseInt(request.getParameter("collectionID"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter collectionID has wrong format.");
+                }
+                Integer categoryID = null;
+                try {
+                    categoryID = Integer.parseInt(request.getParameter("categoryID"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter categoryID has wrong format.");
+                }
 
                 RingDTO ring = null;
                 if (ringid != null) {
@@ -125,46 +145,70 @@ public class RingController extends HttpServlet {
                 rd.forward(request, response);
 
             } else if (action.equals("insert")) {//insert
+
+                Connection conn = DBUtils.getConnection();
+                Integer ringid = null;
                 try {
-                    Connection conn = DBUtils.getConnection();
-                    int ringid = 0;
-                    Integer rpID = null;
-                    try {
-                        ringid = Integer.parseInt(request.getParameter("rpID"));
-                    } catch (NumberFormatException ex) {
-                        log("Parameter rpID has wrong format.");
-                    }
-                    String ringName = request.getParameter("ringName");
-                    String ringImage = request.getParameter("ringImage");
-                    int diamondID = Integer.parseInt(request.getParameter("diamondID"));
-                    int price = Integer.parseInt(request.getParameter("price"));
-                    int collectionID = Integer.parseInt(request.getParameter("collectionID"));
-                    int categoryID = Integer.parseInt(request.getParameter("categoryID"));
+                    ringid = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+                Integer rpID = null;
+                try {
+                    rpID = Integer.parseInt(request.getParameter("rpID"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter rpID has wrong format.");
+                }
+                String ringName = request.getParameter("ringName");
+                String ringImage = request.getParameter("ringImage");
+                Integer diamondID = null;
+                try {
+                    diamondID = Integer.parseInt(request.getParameter("diamondID"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter diamondID has wrong format.");
+                }
+                Integer price = null;
+                try {
+                    price = Integer.parseInt(request.getParameter("price"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter price has wrong format.");
+                }
+                Integer collectionID = null;
+                try {
+                    collectionID = Integer.parseInt(request.getParameter("collectionID"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter collectionID has wrong format.");
+                }
+                Integer categoryID = null;
+                try {
+                    categoryID = Integer.parseInt(request.getParameter("categoryID"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter categoryID has wrong format.");
+                }
 
-                    PreparedStatement ps = conn.prepareStatement("select max(ringID) from [Ring]");
+                RingDAO dao = new RingDAO();
+                RingDTO ring = dao.checkRingExistbyID(ringid);
+                        if (ring == null) {
+                            ring = new RingDTO();
+                            ring.setRingID(ringid);
+                            ring.setRpID(rpID);
+                            ring.setRingName(ringName);
+                            ring.setRingImage(ringImage);
+                            ring.setDiamondID(diamondID);
+                            ring.setPrice(price);
+                            ring.setCategoryID(categoryID);
+                            ring.setCollectionID(collectionID);
+                            request.setAttribute("ring", ring);
+                            ringDAO.insert(ring);
+                            request.setAttribute("success", "Added Successfully!!!");
+                            RequestDispatcher rd = request.getRequestDispatcher("ringedit.jsp");
+                            rd.forward(request, response);
 
-                    ResultSet rs = ps.executeQuery();
-                    if (rs.next()) {
-                        ringid = rs.getInt(1);
-                        ringid++;
-                    }
-                    RingDTO ring = new RingDTO();
-                    ring.setRingID(ringid);
-                    ring.setRpID(rpID);
-                    ring.setRingName(ringName);
-                    ring.setRingImage(ringImage);
-                    ring.setDiamondID(diamondID);
-                    ring.setPrice(price);
-                    ring.setCategoryID(categoryID);
-                    ring.setCollectionID(collectionID);
-                    request.setAttribute("ring", ring);
-                    ringDAO.insert(ring);
 
-                    RequestDispatcher rd = request.getRequestDispatcher("ringdetails.jsp");
+                } else {
+                    request.setAttribute("error", "Your Ring is not inserted by wrong ID");
+                    RequestDispatcher rd = request.getRequestDispatcher("ringedit.jsp");
                     rd.forward(request, response);
-                } catch (SQLException ex) {
-                    System.out.println("Insert ring error!" + ex.getMessage());
-                    ex.printStackTrace();
                 }
 
             } else if (action.equals("delete")) {//delete

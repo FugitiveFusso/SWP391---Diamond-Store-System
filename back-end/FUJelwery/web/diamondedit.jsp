@@ -38,7 +38,7 @@
         </script>
         <script type="text/javascript">
             function validateInput() {
-                var input = document.getElementsByName('dpID')[4];
+                var input = document.getElementsByName('dpID')[0];
                 var value = input.value;
                 if (value === "" || isNaN(value) || parseInt(value) <= 1) {
                     alert("Please enter an integer larger than one.");
@@ -49,7 +49,7 @@
         </script>
         <script type="text/javascript">
             function validateInput() {
-                var input = document.getElementsByName('certificateID')[5];
+                var input = document.getElementsByName('certificateID')[0];
                 var value = input.value;
                 if (value === "" || isNaN(value) || parseInt(value) <= 1) {
                     alert("Please enter an integer larger than one.");
