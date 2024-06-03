@@ -127,9 +127,10 @@ public class CategoryController extends HttpServlet {
                     category.setCategoryID(categoryid);
                     category.setCategoryName(categoryName);
                     request.setAttribute("category", category);
+                    
                     categoryDAO.insert(category);
-
-                    RequestDispatcher rd = request.getRequestDispatcher("categorydetails.jsp");
+                    request.setAttribute("success", "Added Successfully!!!");
+                    RequestDispatcher rd = request.getRequestDispatcher("categoryedit.jsp");
                     rd.forward(request, response);
 
                 } else {

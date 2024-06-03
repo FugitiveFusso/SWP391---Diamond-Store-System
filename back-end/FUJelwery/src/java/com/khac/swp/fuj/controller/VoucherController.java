@@ -150,8 +150,10 @@ public class VoucherController extends HttpServlet {
                     voucher.setCoupon(coupon);
                     voucher.setPercentage(percentage);
                     voucherDAO.insert(voucher);
-                    request.setAttribute("voucher", voucher);
-                    RequestDispatcher rd = request.getRequestDispatcher("voucherdetails.jsp");
+                    
+                    request.setAttribute("voucher", voucher);                       
+                    request.setAttribute("success", "Added Successfully!!!");
+                    RequestDispatcher rd = request.getRequestDispatcher("voucheredit.jsp");
                     rd.forward(request, response);
                 } else {
                     request.setAttribute("error", "Your voucher ID is already existed!!!");

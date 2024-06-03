@@ -135,9 +135,10 @@ public class CollectionController extends HttpServlet {
                     collection.setCollectionImage(collectionImage);
                     collection.setCollectionDescription(description);
                     request.setAttribute("collection", collection);
+                    
                     collectionDAO.insert(collection);
-
-                    RequestDispatcher rd = request.getRequestDispatcher("collectiondetails.jsp");
+                    request.setAttribute("success", "Added Successfully!!!");
+                    RequestDispatcher rd = request.getRequestDispatcher("collectionedit.jsp");
                     rd.forward(request, response);
                 } else {
                     request.setAttribute("error", "Your collection ID is already existed!!!");

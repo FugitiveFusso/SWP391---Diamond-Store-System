@@ -48,6 +48,11 @@
         <% if (error1 != null) {%>
         <h4 style="color: red; text-align: center"> <%= error1%> </h4>
         <% }%>
+        
+        <% String success = (String) request.getAttribute("success"); %>
+        <% if (success != null) {%>
+        <h4 style="color: green; text-align: center"> <%= success%> </h4>
+        <% }%>
 
 
         <div class="container content">

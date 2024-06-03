@@ -40,9 +40,15 @@
 
         <h1>Collection Edit </h1>
         <p> Login user: ${sessionScope.adminsession.username}</p>
+        
         <% String error1 = (String) request.getAttribute("error"); %>
         <% if (error1 != null) {%>
         <h4 style="color: red; text-align: center"> <%= error1%> </h4>
+        <% }%>
+        
+        <% String success = (String) request.getAttribute("success"); %>
+        <% if (success != null) {%>
+        <h4 style="color: green; text-align: center"> <%= success%> </h4>
         <% }%>
 
         <form action="./CollectionController" method="POST" onsubmit="return validateForm()" onsubmit="return validateInput()">

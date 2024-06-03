@@ -133,9 +133,10 @@ public class PostController extends HttpServlet {
                     post.setImage(postimage);
                     post.setDescription(description);
                     postDAO.insert(post);
+                    
                     request.setAttribute("post", post);
-
-                    RequestDispatcher rd = request.getRequestDispatcher("postdetails.jsp");
+                    request.setAttribute("success", "Added Successfully!!!");
+                    RequestDispatcher rd = request.getRequestDispatcher("postedit.jsp");
                     rd.forward(request, response);
                 } else {
                     request.setAttribute("error", "Your post ID is already existed!!!");
