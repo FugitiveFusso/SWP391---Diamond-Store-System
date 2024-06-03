@@ -8,7 +8,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link rel="stylesheet" href="css/staff_list.css">
+        <link rel="stylesheet" href="css/customer_list.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <script src="js/pagination.js"></script>
@@ -20,21 +20,41 @@
 
         <div class="list-container">
             <div class="smaller-container">
-                <div class="list-title">Ring Price List</div>
+                <div class="list1">
+                    <div class="list-intro-left">
+                        <div class="left-icon">
+                            <i class="fa-solid fa-ring"></i>
+                        </div>
+                        <div class="left-info">
+                            <div class="list-title">Ring Price List</div>
+                            <div class="">List of Ring Price</div>
+                        </div>
+                    </div>
+                    <div class="list-intro-right">
+                        <form action="VoucherController" method="POST" class="input1">
+                            <input name="action" value="create" type="hidden">
+                            <button type="submit" class="styled-button3">
+                                <span>Add a Price</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
                 <div class="list">        
-                    <form action='' method=GET id="searchbox"> 
-                        <input name=keyword type=text value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
-                        <input type=submit value=Search >
+                    <form action='' method=GET id="searchbox">
+                        <input name=keyword type=text class="search-input" value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
+                        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
                     </form>
 
                     <table id="pagination">
                         <thead>
                             <tr>
-                                <td>Ring Placement Price ID</td>
-                                <td><a href=?colSort=rName>Ring Placement Name</a></td>
-                                <td><a href=?colSort=material>Material</a></td>
-                                <td><a href=?colSort=color>Color</a></td>
-                                <td><a href=?colSort=rpPrice>Price</a></td>
+                                <th>Ring Placement Price ID</th>
+                                <th><a href=?colSort=rName>Ring Placement Name</a></th>
+                                <th><a href=?colSort=material>Material</a></th>
+                                <th><a href=?colSort=color>Color</a></th>
+                                <th><a href=?colSort=rpPrice>Price</a></th>
+                                <th>Delete</th>
 
                             </tr>
                         </thead>
@@ -53,7 +73,7 @@
                                 <td>${rp.price}</td>  
 
                                 <td>
-                                    <form action="RingPlacementPriceController" method="POST">
+                                    <form action="RingPlacementPriceController" method="POST" class="input">
                                         <input name="action" value="delete" type="hidden">
                                         <input name="id" value="${rp.id}" type="hidden">
                                         <input type="submit" value="Delete">
@@ -64,12 +84,12 @@
                             <%
                                 }
                             %>    
-                            <tr><td colspan="10">
+<!--                            <tr><td colspan="10">
                                     <form action="RingPlacementPriceController" method="POST">
                                         <input name="action" value="create" type="hidden">
                                         <input type="submit" value="Create">
                                     </form>
-                                </td></tr>
+                                </td></tr>-->
                         </tbody>
                     </table>
                     <div id="paginationControls" class="pagination-controls">

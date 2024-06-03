@@ -30,8 +30,8 @@
             function validateInput() {
                 var input = document.getElementsByName('id')[0];
                 var value = input.value;
-                if (value === "" || isNaN(value) || parseInt(value) < 0) {
-                    alert("Please enter a non-negative integer.");
+                if (value === "" || isNaN(value) || parseInt(value) <= 1) {
+                    alert("Please enter an integer larger than one.");
                     return false;
                 }
                 return true;
@@ -61,7 +61,7 @@
                     <div class="col-md-6 content-left">
                         <div class="info-input">                          
                             <h2>ID</h2>
-                            <input type="number" name="id" value="${requestScope.post.id}" min="0" required="Please enter" class="form-control">                           
+                            <input type="number" name="id" value="${requestScope.post.id}" min="1" required="Please enter" class="form-control">                           
                         </div>
                         <div class="info-input">
                             <h2>Description</h2>

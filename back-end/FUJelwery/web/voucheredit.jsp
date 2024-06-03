@@ -25,8 +25,8 @@
             function validateInput() {
                 var input = document.getElementsByName('id')[0];
                 var value = input.value;
-                if (value === "" || isNaN(value) || parseInt(value) < 0) {
-                    alert("Please enter a non-negative integer.");
+                if (value === "" || isNaN(value) || parseInt(value) <= 1) {
+                    alert("Please enter an integer larger than one.");
                     return false;
                 }
                 return true;
@@ -53,7 +53,7 @@
             <table>
                 <tr>
                     <td>ID</td>
-                    <td><input type="number" name="id" value="${requestScope.voucher.id}" min="0" required></td>
+                    <td><input type="number" name="id" value="${requestScope.voucher.id}" min="1" required></td>
                 </tr>
 <!--                <tr><td>ID</td><td><input name="id" value="${requestScope.voucher.id}" required="Please enter"</td></tr>-->
                 <tr><td>Voucher Name</td><td><input name="voucherName" value="${requestScope.voucher.name}" required="Please enter" </td></tr>

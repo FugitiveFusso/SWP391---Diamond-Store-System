@@ -29,8 +29,8 @@
             function validateInput() {
                 var input = document.getElementsByName('id')[0];
                 var value = input.value;
-                if (value === "" || isNaN(value) || parseInt(value) < 0) {
-                    alert("Please enter a non-negative integer.");
+                if (value === "" || isNaN(value) || parseInt(value) <= 1) {
+                    alert("Please enter an integer larger than one.");
                     return false;
                 }
                 return true;
@@ -55,7 +55,7 @@
             <table>
                 <tr>
                     <td>ID</td>
-                    <td><input type="number" name="id" value="${requestScope.collection.collectionID}" min="0" required></td>
+                    <td><input type="number" name="id" value="${requestScope.collection.collectionID}" min="1" required></td>
                 </tr>
 
                 <tr><td>Collection Name</td><td><input name="collectionName" value="${requestScope.collection.collectionName}" required="Please enter" </td></tr>
