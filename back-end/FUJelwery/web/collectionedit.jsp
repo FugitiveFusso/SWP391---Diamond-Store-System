@@ -24,6 +24,18 @@
                 return true;
             }
         </script>
+
+        <script type="text/javascript">
+            function validateInput() {
+                var input = document.getElementsByName('id')[0];
+                var value = input.value;
+                if (value === "" || isNaN(value) || parseInt(value) < 0) {
+                    alert("Please enter a non-negative integer.");
+                    return false;
+                }
+                return true;
+            }
+        </script>
         <jsp:include page="/menu.jsp" flush="true" />
 
         <h1>Collection Edit </h1>
@@ -34,10 +46,13 @@
         <h4 style="color: red; text-align: center"> <%= error1%> </h4>
         <% }%>
 
-        <form action="./CollectionController" method="POST" onsubmit="return validateForm()">
+        <form action="./CollectionController" method="POST" onsubmit="return validateForm()" onsubmit="return validateInput()">
             <table>
+                <tr>
+                    <td>ID</td>
+                    <td><input type="number" name="id" value="${requestScope.collection.collectionID}" min="0" required></td>
+                </tr>
 
-                <tr><td>ID</td><td><input name="id" value="${requestScope.collection.collectionID}" required="Please enter"</td></tr>
                 <tr><td>Collection Name</td><td><input name="collectionName" value="${requestScope.collection.collectionName}" required="Please enter" </td></tr>
                 <tr><td>Collection Image</td><td><input name="collectionImage" value="${requestScope.collection.collectionImage}" required="Please enter"</td></tr>
                 <tr><td>Description</td><td><input name="description" value="${requestScope.collection.collectionDescription}" required="Please enter"</td></tr>
