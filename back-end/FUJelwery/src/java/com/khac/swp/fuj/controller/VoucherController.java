@@ -139,17 +139,25 @@ public class VoucherController extends HttpServlet {
                     log("Parameter percentage has wrong format.");
                 }
 
-                VoucherDTO voucher = new VoucherDTO();
-                voucher.setId(voucherid);
-                voucher.setName(vouchername);
-                voucher.setImage(voucherimage);
-                voucher.setDescription(description);
-                voucher.setCoupon(coupon);
-                voucher.setPercentage(percentage);
-                voucherDAO.insert(voucher);
-                request.setAttribute("voucher", voucher);
-                RequestDispatcher rd = request.getRequestDispatcher("voucherdetails.jsp");
-                rd.forward(request, response);
+                VoucherDAO dao = new VoucherDAO();
+                VoucherDTO voucher = dao.checkVoucherExistByID(voucherid);
+                if (voucher == null) {
+                    voucher = new VoucherDTO();
+                    voucher.setId(voucherid);
+                    voucher.setName(vouchername);
+                    voucher.setImage(voucherimage);
+                    voucher.setDescription(description);
+                    voucher.setCoupon(coupon);
+                    voucher.setPercentage(percentage);
+                    voucherDAO.insert(voucher);
+                    request.setAttribute("voucher", voucher);
+                    RequestDispatcher rd = request.getRequestDispatcher("voucherdetails.jsp");
+                    rd.forward(request, response);
+                } else {
+                    request.setAttribute("error", "Your voucher ID is already existed!!!");
+                    RequestDispatcher rd = request.getRequestDispatcher("voucheredit.jsp");
+                    rd.forward(request, response);
+                }
 
             } else if (action.equals("delete")) {//delete
 

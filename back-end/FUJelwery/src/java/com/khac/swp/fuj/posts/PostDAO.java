@@ -154,4 +154,30 @@ public class PostDAO {
         return false;
     }
 
+    public PostDTO checkPostExistByID(int postID) {
+
+        String sql = "select postID, postName, postImage, [description] from Post where postID = ?";
+
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, postID);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                PostDTO post = new PostDTO();
+                post.setId(rs.getInt("postID"));
+                post.setName(rs.getString("postName"));
+                post.setImage(rs.getString("postImage"));
+                post.setDescription(rs.getString("description"));
+                return post;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Query User error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return null;
+    }
 }

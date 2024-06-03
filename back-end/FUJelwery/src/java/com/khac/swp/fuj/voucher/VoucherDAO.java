@@ -165,4 +165,33 @@ public class VoucherDAO {
 
         return false;
     }
+    
+    public VoucherDTO checkVoucherExistByID(int voucherID) {
+
+        String sql = "select voucherID, voucherName, voucherImage, description, coupon, percentage from Voucher where voucherID = ?";
+
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, voucherID);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                VoucherDTO voucher = new VoucherDTO();
+                voucher.setId(rs.getInt("voucherID"));
+                voucher.setName(rs.getString("voucherName"));
+                voucher.setImage(rs.getString("voucherImage"));
+                voucher.setDescription(rs.getString("description"));
+                voucher.setCoupon(rs.getString("coupon"));
+                voucher.setPercentage(rs.getInt("percentage"));
+                return voucher;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Query User error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return null;
+    }
 }

@@ -112,31 +112,35 @@ public class PostController extends HttpServlet {
                 rd.forward(request, response);
 
             } else if (action.equals("insert")) {//insert
-                try {
-                    Connection conn = DBUtils.getConnection();
-                    int postid = 0;
-                    String postname = request.getParameter("postName");
-                    String postimage = request.getParameter("postImage");
-                    String description = request.getParameter("description");
 
-                    PreparedStatement ps = conn.prepareStatement("select max(postID) from [Post]");
-                    ResultSet rs = ps.executeQuery();
-                    if (rs.next()) {
-                        postid = rs.getInt(1);
-                        postid++;
-                    }
-                    PostDTO post = new PostDTO();
+                Connection conn = DBUtils.getConnection();
+                Integer postid = null;
+                try {
+                    postid = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+                String postname = request.getParameter("postName");
+                String postimage = request.getParameter("postImage");
+                String description = request.getParameter("description");
+
+                PostDAO dao = new PostDAO();
+                PostDTO post = dao.checkPostExistByID(postid);
+                if (post == null) {
+                    post = new PostDTO();
                     post.setId(postid);
                     post.setName(postname);
                     post.setImage(postimage);
                     post.setDescription(description);
                     postDAO.insert(post);
                     request.setAttribute("post", post);
+
                     RequestDispatcher rd = request.getRequestDispatcher("postdetails.jsp");
                     rd.forward(request, response);
-                } catch (SQLException ex) {
-                    System.out.println("Insert post error!" + ex.getMessage());
-                    ex.printStackTrace();
+                } else {
+                    request.setAttribute("error", "Your post ID is already existed!!!");
+                    RequestDispatcher rd = request.getRequestDispatcher("postedit.jsp");
+                    rd.forward(request, response);
                 }
 
             } else if (action.equals("delete")) {//delete

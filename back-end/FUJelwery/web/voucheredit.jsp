@@ -21,6 +21,17 @@
                 return true;
             }
         </script>
+        <script type="text/javascript">
+            function validateInput() {
+                var input = document.getElementsByName('id')[0];
+                var value = input.value;
+                if (value === "" || isNaN(value) || parseInt(value) < 0) {
+                    alert("Please enter a non-negative integer.");
+                    return false;
+                }
+                return true;
+            }
+        </script>
     </head>
     <body>
         <jsp:include page="/salesmenu.jsp" flush="true" />
@@ -28,10 +39,18 @@
         <h1>Voucher Edit </h1>
         <p> Login user: ${sessionScope.salessession.username}</p>
 
-        <form action="./VoucherController" method="POST" onsubmit="return validateForm()">
-            <table>
+        <% String error1 = (String) request.getAttribute("error"); %>
+        <% if (error1 != null) {%>
+        <h4 style="color: red; text-align: center"> <%= error1%> </h4>
+        <% }%>
 
-                <tr><td>ID</td><td><input name="id" value="${requestScope.voucher.id}" required="Please enter"</td></tr>
+        <form action="./VoucherController" method="POST" onsubmit="return validateForm()" onsubmit="return validateInput()">
+            <table>
+                <tr>
+                    <td>ID</td>
+                    <td><input type="number" name="id" value="${requestScope.voucher.id}" min="0" required></td>
+                </tr>
+<!--                <tr><td>ID</td><td><input name="id" value="${requestScope.voucher.id}" required="Please enter"</td></tr>-->
                 <tr><td>Voucher Name</td><td><input name="voucherName" value="${requestScope.voucher.name}" required="Please enter" </td></tr>
                 <tr><td>Voucher Image</td><td><input name="voucherImage" value="${requestScope.voucher.image}" required="Please enter" </td></tr>
                 <tr><td>Description</td><td><input name="description" value="${requestScope.voucher.description}" required="Please enter"</td></tr>
