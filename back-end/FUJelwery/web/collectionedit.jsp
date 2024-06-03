@@ -29,10 +29,15 @@
         <h1>Collection Edit </h1>
         <p> Login user: ${sessionScope.adminsession.username}</p>
 
-        <form action="./CollectionController" method="POST" onclick="return validateForm()">
+        <% String error1 = (String) request.getAttribute("error"); %>
+        <% if (error1 != null) {%>
+        <h4 style="color: red; text-align: center"> <%= error1%> </h4>
+        <% }%>
+
+        <form action="./CollectionController" method="POST" onsubmit="return validateForm()">
             <table>
 
-                <tr><td></td><td><input name="id" value="${requestScope.collection.collectionID}" required="Please enter" type="hidden"</td></tr>
+                <tr><td>ID</td><td><input name="id" value="${requestScope.collection.collectionID}" required="Please enter"</td></tr>
                 <tr><td>Collection Name</td><td><input name="collectionName" value="${requestScope.collection.collectionName}" required="Please enter" </td></tr>
                 <tr><td>Collection Image</td><td><input name="collectionImage" value="${requestScope.collection.collectionImage}" required="Please enter"</td></tr>
                 <tr><td>Description</td><td><input name="description" value="${requestScope.collection.collectionDescription}" required="Please enter"</td></tr>

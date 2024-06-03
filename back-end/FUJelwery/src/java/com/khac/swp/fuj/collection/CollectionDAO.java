@@ -155,4 +155,56 @@ public class CollectionDAO {
 
         return false;
     }
+    
+    public CollectionDTO checkCollectionExistByID(int collectionID) {
+
+        String sql = "select collectionID, collectionName, collectionImage,[description] from [Collection] where collectionID = ?";
+
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, collectionID);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                CollectionDTO collection = new CollectionDTO();
+                collection.setCollectionID(rs.getInt("collectionID"));
+                collection.setCollectionName(rs.getString("collectionName"));
+                collection.setCollectionImage(rs.getString("collectionImage"));
+                collection.setCollectionDescription(rs.getString("description"));
+                return collection;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Query Collection error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    
+    public CollectionDTO checkCollectionExistByName(String name) {
+
+        String sql = "select collectionID, collectionName, collectionImage,[description] from [Collection] where collectionName like ?";
+
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, name);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                CollectionDTO collection = new CollectionDTO();
+                collection.setCollectionID(rs.getInt("collectionID"));
+                collection.setCollectionName(rs.getString("collectionName"));
+                collection.setCollectionImage(rs.getString("collectionImage"));
+                collection.setCollectionDescription(rs.getString("description"));
+                return collection;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Query Collection error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return null;
+    }
 }

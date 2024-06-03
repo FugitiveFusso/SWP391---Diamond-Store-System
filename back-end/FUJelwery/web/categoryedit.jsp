@@ -8,9 +8,15 @@
     </head>
     <body>
         <jsp:include page="/menu.jsp" flush="true" />
+        
 
         <h1>Category Edit </h1>
         <p> Login user: ${sessionScope.adminsession.username}</p>
+        
+        <% String error1 = (String) request.getAttribute("error"); %>
+        <% if (error1 != null) {%>
+        <h4 style="color: red; text-align: center"> <%= error1%> </h4>
+        <% }%>
 
         <form action="./CategoryController" method="POST">
             <table>

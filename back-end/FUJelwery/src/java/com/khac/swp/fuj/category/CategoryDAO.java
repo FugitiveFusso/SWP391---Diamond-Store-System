@@ -140,4 +140,31 @@ public class CategoryDAO {
 
         return false;
     }
+    
+    public CategoryDTO checkCategoryExistByID(int categoryID) {
+
+        String sql = "select categoryID, categoryName from Category where categoryID = ?";
+
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, categoryID);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                CategoryDTO category = new CategoryDTO();
+                category.setCategoryID(rs.getInt("categoryID"));
+                category.setCategoryName(rs.getString("categoryName"));;
+                return category;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Query Category error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    
+    
 }

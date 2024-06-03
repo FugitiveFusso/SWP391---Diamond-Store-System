@@ -110,16 +110,20 @@ public class CategoryController extends HttpServlet {
                 rd.forward(request, response);
 
             } else if (action.equals("insert")) {//insert
-                    Connection conn = DBUtils.getConnection();
-                    Integer categoryid = null;
-                    try {
-                        categoryid = Integer.parseInt(request.getParameter("id"));
-                    } catch (NumberFormatException ex) {
-                        log("Parameter id has wrong format.");
-                    }
-                    String categoryName = request.getParameter("categoryName");
+                Connection conn = DBUtils.getConnection();
+                Integer categoryid = null;
+                try {
+                    categoryid = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+                String categoryName = request.getParameter("categoryName");
 
-                    CategoryDTO category = new CategoryDTO();
+                CategoryDAO dao = new CategoryDAO();
+                CategoryDTO category = dao.checkCategoryExistByID(categoryid);
+                if (category == null) {
+
+                    category = new CategoryDTO();
                     category.setCategoryID(categoryid);
                     category.setCategoryName(categoryName);
                     request.setAttribute("category", category);
@@ -127,7 +131,12 @@ public class CategoryController extends HttpServlet {
 
                     RequestDispatcher rd = request.getRequestDispatcher("categorydetails.jsp");
                     rd.forward(request, response);
-               
+
+                } else {
+                    request.setAttribute("error", "Your category ID is already existed!!!");
+                    RequestDispatcher rd = request.getRequestDispatcher("categoryedit.jsp");
+                    rd.forward(request, response);
+                }
 
             } else if (action.equals("delete")) {//delete
 

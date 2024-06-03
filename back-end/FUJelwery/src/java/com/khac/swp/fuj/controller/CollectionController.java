@@ -114,20 +114,22 @@ public class CollectionController extends HttpServlet {
                 rd.forward(request, response);
 
             } else if (action.equals("insert")) {//insert
+                Connection conn = DBUtils.getConnection();
+                Integer collectionid = null;
                 try {
-                    Connection conn = DBUtils.getConnection();
-                    int collectionid = 0;
-                    String collectionName = request.getParameter("collectionName");
-                    String collectionImage = request.getParameter("collectionImage");
-                    String description = request.getParameter("descritption");
+                    collectionid = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+                String collectionName = request.getParameter("collectionName");
+                String collectionImage = request.getParameter("collectionImage");
+                String description = request.getParameter("description");
 
-                    PreparedStatement ps = conn.prepareStatement("select max(collectionID) from [Collection]");
-                    ResultSet rs = ps.executeQuery();
-                    if (rs.next()) {
-                        collectionid = rs.getInt(1);
-                        collectionid++;
-                    }
-                    CollectionDTO collection = new CollectionDTO();
+                CollectionDAO dao = new CollectionDAO();
+                CollectionDTO collection = dao.checkCollectionExistByID(collectionid);
+                if (collection == null) {
+
+                    collection = new CollectionDTO();
                     collection.setCollectionID(collectionid);
                     collection.setCollectionName(collectionName);
                     collection.setCollectionImage(collectionImage);
@@ -137,9 +139,10 @@ public class CollectionController extends HttpServlet {
 
                     RequestDispatcher rd = request.getRequestDispatcher("collectiondetails.jsp");
                     rd.forward(request, response);
-                } catch (SQLException ex) {
-                    System.out.println("Insert collection error!" + ex.getMessage());
-                    ex.printStackTrace();
+                } else {
+                    request.setAttribute("error", "Your collection ID is already existed!!!");
+                    RequestDispatcher rd = request.getRequestDispatcher("collectionedit.jsp");
+                    rd.forward(request, response);
                 }
 
             } else if (action.equals("delete")) {//delete
