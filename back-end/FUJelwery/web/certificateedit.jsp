@@ -43,7 +43,7 @@
             <h1>Certificate Edit</h1>
             <p> Login user: ${sessionScope.adminsession.username}</p>
         </div>
-        
+
         <% String error1 = (String) request.getAttribute("error"); %>
         <% if (error1 != null) {%>
         <h4 style="color: red; text-align: center"> <%= error1%> </h4>
@@ -53,7 +53,7 @@
         <% if (success != null) {%>
         <h4 style="color: green; text-align: center"> <%= success%> </h4>
         <% }%>
-        
+
         <div class="container content">
             <form action="./CertificateController" method="POST" onsubmit="return validateForm()" onsubmit="return validateInput()">
                 <div class="row content-info">
@@ -72,7 +72,7 @@
                             <h2>Certificate Image</h2>
                             <input name="certificateImage" value="${requestScope.certificate.certificateImage}" min="1" required="Please enter" class="form-control">                           
                         </div>
-                                              
+
                     </div>
                 </div>
                 <div class="row justify-content-center">
@@ -84,20 +84,26 @@
                     </div>
                 </div>
             </form>
+            <div class="buttons">
+                <form action="CertificateController" style="padding-top: 10px">
+                    <input type=hidden name="action" value="list">
+                    <input type=submit value="Return" ></form>
+
+            </div>
         </div>
 
-<!--        <form action="./CertificateController" method="POST" onclick="return validateForm()">
-            <table>
-
-                <tr><td></td><td><input name="id" value="${requestScope.certificate.certificateID}" required="Please enter" type="hidden"</td></tr>
-                <tr><td>Certificate Image</td><td><input name="certificateImage" value="${requestScope.certificate.certificateImage}" required="Please enter"</td></tr>
-                <tr><td>Description</td><td><input name="description" value="${requestScope.certificate.certificateDescription}" required="Please enter"</td></tr>
-                <tr><td colspan="2">
-                        <input name="action" value="${requestScope.nextaction}" type="hidden">
-                        <input type="submit" value="Save">
-                    </td></tr>
-            </table>
-
-        </form>-->
+        <!--        <form action="./CertificateController" method="POST" onclick="return validateForm()">
+                    <table>
+        
+                        <tr><td></td><td><input name="id" value="${requestScope.certificate.certificateID}" required="Please enter" type="hidden"</td></tr>
+                        <tr><td>Certificate Image</td><td><input name="certificateImage" value="${requestScope.certificate.certificateImage}" required="Please enter"</td></tr>
+                        <tr><td>Description</td><td><input name="description" value="${requestScope.certificate.certificateDescription}" required="Please enter"</td></tr>
+                        <tr><td colspan="2">
+                                <input name="action" value="${requestScope.nextaction}" type="hidden">
+                                <input type="submit" value="Save">
+                            </td></tr>
+                    </table>
+        
+                </form>-->
     </body>
 </html>

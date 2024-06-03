@@ -137,5 +137,8 @@
                 </table>
 
         </form>
+        <form action="DiamondPriceController" style="padding-top: 10px">
+            <input type=hidden name="action" value="list">
+            <input type=submit value="Return" ></form>
     </body>
 </html>

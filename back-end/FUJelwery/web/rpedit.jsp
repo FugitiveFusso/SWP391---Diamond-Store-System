@@ -109,8 +109,12 @@
                         <input name="action" value="${requestScope.nextaction}" type="hidden">
                         <input type="submit" value="Save">
                     </td></tr>
+
             </table>
 
         </form>
+        <form action="RingPlacementPriceController" style="padding-top: 10px">
+            <input type=hidden name="action" value="list">
+            <input type=submit value="Return" ></form>
     </body>
 </html>

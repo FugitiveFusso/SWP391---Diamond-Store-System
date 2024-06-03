@@ -48,7 +48,7 @@
         <% if (error1 != null) {%>
         <h4 style="color: red; text-align: center"> <%= error1%> </h4>
         <% }%>
-        
+
         <% String success = (String) request.getAttribute("success"); %>
         <% if (success != null) {%>
         <h4 style="color: green; text-align: center"> <%= success%> </h4>
@@ -88,28 +88,40 @@
                     </div>
                 </div>
             </form>
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="button text-center">
+                        <form action="PostController" style="padding-top: 10px">
+                            <input type=hidden name="action" value="list">
+                            <input type=submit value="Return" style="color: white" ></form>
+                    </div>
+                </div>
+            </div>
+
+
+            </div>
         </div>
 
 
 
 
-<!--                <form action="./PostController" method="POST" onsubmit="return validateForm()" onsubmit="return validateInput()">
-                    <table>
-                        <tr>
-                            <td>ID</td>
-                            <td><input type="number" name="id" value="${requestScope.post.id}" min="0" required></td>
-                        </tr>
-                        
-                        <tr><td>Post Name</td><td><input name="postName" value="${requestScope.post.name}" required="Please enter" </td></tr>
-                        <tr><td>Post Image</td><td><input name="postImage" value="${requestScope.post.image}" required="Please enter" </td></tr>
-                        <tr><td>Description</td><td><input name="description" value="${requestScope.post.description}" required="Please enter"</td></tr>
-        
-                        <tr><td colspan="2">
-                                <input name="action" value="${requestScope.nextaction}" type="hidden">
-                                <input type="submit" value="Save">
-                            </td></tr>
-                    </table>
-        
-                </form>-->
+        <!--                <form action="./PostController" method="POST" onsubmit="return validateForm()" onsubmit="return validateInput()">
+                            <table>
+                                <tr>
+                                    <td>ID</td>
+                                    <td><input type="number" name="id" value="${requestScope.post.id}" min="0" required></td>
+                                </tr>
+                                
+                                <tr><td>Post Name</td><td><input name="postName" value="${requestScope.post.name}" required="Please enter" </td></tr>
+                                <tr><td>Post Image</td><td><input name="postImage" value="${requestScope.post.image}" required="Please enter" </td></tr>
+                                <tr><td>Description</td><td><input name="description" value="${requestScope.post.description}" required="Please enter"</td></tr>
+                
+                                <tr><td colspan="2">
+                                        <input name="action" value="${requestScope.nextaction}" type="hidden">
+                                        <input type="submit" value="Save">
+                                    </td></tr>
+                            </table>
+                
+                        </form>-->
     </body>
 </html>

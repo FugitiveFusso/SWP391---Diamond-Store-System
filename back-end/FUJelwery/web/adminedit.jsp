@@ -155,6 +155,9 @@
                                                 </div>
                                             </div>
                                         </form>
+                                        <form action="AdminController" style="padding-top: 10px">
+                                            <button type="submit" class="btn btn-custom">Return</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

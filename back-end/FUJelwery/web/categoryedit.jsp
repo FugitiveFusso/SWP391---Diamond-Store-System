@@ -80,6 +80,10 @@
                     </div>
                 </div>
             </form>
+            <form action="CategoryController" style="padding-top: 10px">
+                <input type="hidden" name="action" value="list">
+                <input type="submit" class="btn btn-primary" value="Return">
+            </form>
         </div>
 
         <!--        <form action="./CategoryController" method="POST" onsubmit="return validateInput()">

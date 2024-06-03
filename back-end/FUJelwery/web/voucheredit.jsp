@@ -43,7 +43,7 @@
         <% if (error1 != null) {%>
         <h4 style="color: red; text-align: center"> <%= error1%> </h4>
         <% }%>
-        
+
         <% String success = (String) request.getAttribute("success"); %>
         <% if (success != null) {%>
         <h4 style="color: green; text-align: center"> <%= success%> </h4>
@@ -68,5 +68,8 @@
             </table>
 
         </form>
+        <form action="VoucherController" style="padding-top: 10px">
+            <input type=hidden name="action" value="list">
+            <input type=submit value="Return" ></form>
     </body>
 </html>

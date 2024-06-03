@@ -118,6 +118,14 @@
                                                 </div>
                                             </div>
                                         </form>
+                                        <div class="row" style="margin-top: 20px; justify-content: center">
+
+                                            <div class="col-sm-4">
+                                                <form action="ManagerController" style="padding-top: 10px">
+                                                    <button type="submit" class="btn btn-custom">Return</button>
+                                                </form>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
