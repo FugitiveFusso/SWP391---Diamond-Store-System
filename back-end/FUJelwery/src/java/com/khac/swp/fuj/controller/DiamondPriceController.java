@@ -178,7 +178,7 @@ public class DiamondPriceController extends HttpServlet {
                     RequestDispatcher rd = request.getRequestDispatcher("dpedit.jsp");
                     rd.forward(request, response);
                 } else {
-                    request.setAttribute("error", "Your Diamon Price ID is already existed!!!");
+                    request.setAttribute("error", "Your Diamond Price ID is already existed!!!");
                     RequestDispatcher rd = request.getRequestDispatcher("dpedit.jsp");
                     rd.forward(request, response);
                 }

@@ -164,4 +164,31 @@ public class RingPlacementPriceDAO {
         return false;
     }
 
+    public RingPlacementPriceDTO checkRPPByID(int rpID) {
+
+        String sql = " select rpID, rName, material, color, rpPrice from RingPlacementPrice where rpID = ?";
+
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, rpID);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                RingPlacementPriceDTO rp = new RingPlacementPriceDTO();
+                rp.setId(rs.getInt("rpID"));
+                rp.setName(rs.getString("rName"));
+                rp.setMaterial(rs.getString("material"));
+                rp.setColor(rs.getString("color"));
+                rp.setPrice(rs.getInt("rpPrice"));
+                return rp;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Query DiamonPrice error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return null;
+    }
 }
