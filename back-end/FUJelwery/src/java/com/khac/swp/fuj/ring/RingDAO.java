@@ -236,9 +236,6 @@ public class RingDAO {
         return false;
     }
 
-    /*
-    Delete student 
-     */
     public boolean delete(int id) {
         String sql = "DELETE [Ring] WHERE ringID = ? ";
         try {
