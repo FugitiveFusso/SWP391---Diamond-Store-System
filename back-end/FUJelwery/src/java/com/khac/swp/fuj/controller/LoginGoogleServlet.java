@@ -44,7 +44,7 @@ public class LoginGoogleServlet extends HttpServlet {
       if (dto != null) {
                     HttpSession session = request.getSession(true);
                     session.setAttribute("usersession", dto);
-                    response.sendRedirect("./ProductController");
+                    response.sendRedirect("./user_homepage.jsp");
                 } else {
                     request.setAttribute("error", "Your gmail is not signed in! Please try again");
                     RequestDispatcher rd = request.getRequestDispatcher("userlogin.jsp");

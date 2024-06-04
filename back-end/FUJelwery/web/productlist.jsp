@@ -35,7 +35,7 @@
                     <a href="#">Account</a>
                     <div class="sub-menu-1">
                         <ul>
-                            <li><a href='adminlogin?action=logout'>Logout</a></li>          
+                            <li><a href='userlogin?action=logout'>Logout</a></li>          
                         </ul>
                     </div>
                 </li>
