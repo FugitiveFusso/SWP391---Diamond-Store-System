@@ -17,12 +17,17 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="./css/editstaff_password.css">
         <script defer src="./js/inputFormat.js"></script>
+
     </head>
     <body>
         <jsp:include page="/menu.jsp" flush="true" />
 
-        <h1>Manager Edit </h1>
-        <p> Login user: ${sessionScope.adminsession.username}</p>
+        <div class="container d-flex justify-content-center align-items-center">
+            <div class="text-center">
+                <h1 style="font-size: 50px; font-weight: 700">Manager Edit</h1>
+                <p>Login username: ${sessionScope.adminsession.username}</p>
+            </div>
+        </div>
 
         <% String error1 = (String) request.getAttribute("error"); %>
         <% if (error1 != null) {%>
@@ -134,8 +139,25 @@
                 </div>
             </div>
         </div>
+
+
+        <!--JS-->
         <script src="js/showPasswordFunc.js"></script>
 
+<!--        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <link rel="stylesheet" href="alert/dist/sweetalert.css">
+        <script type="text/javascript">
+            window.onload = function () {
+                var success = "<%= request.getAttribute("success")%>";
+                var error = "<%= request.getAttribute("error")%>";
+
+                if (success) {
+                    swal("Congrats", success, "success");
+                } else if (error) {
+                    swal("Error", error, "error");
+                }
+            }
+        </script>-->
 
     </body>
 </html>

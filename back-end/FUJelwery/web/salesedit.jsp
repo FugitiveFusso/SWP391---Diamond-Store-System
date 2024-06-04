@@ -24,8 +24,12 @@
     <body>
         <jsp:include page="/managermenu.jsp" flush="true" />
 
-        <h1>Sales Staff Edit </h1>
-        <p> Login user: ${sessionScope.managersession.username}</p>
+        <div class="container d-flex justify-content-center align-items-center">
+            <div class="text-center">
+                <h1 style="font-size: 50px; font-weight: 700">Sales Staff Edit</h1>
+                <p>Login username: ${sessionScope.managersession.username}</p>
+            </div>
+        </div>
 
         <% String error1 = (String) request.getAttribute("error"); %>
         <% if (error1 != null) {%>
