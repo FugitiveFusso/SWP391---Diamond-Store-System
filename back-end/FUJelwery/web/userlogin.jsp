@@ -58,6 +58,8 @@
                     <div class="register-link">
                         <p>Don't have an account? <a href="register.jsp">Register</a></p>
                     </div>
+                    <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/FUJelwery/LoginGoogleServlet&response_type=code
+		   &client_id=792757160936-kke52p9ud3fl6h3qe93tl4i6lug4sotd.apps.googleusercontent.com&approval_prompt=force">Login with Google</a>
                 </form>
             </div>
         </section>

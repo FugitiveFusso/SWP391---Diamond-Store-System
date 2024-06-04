@@ -288,4 +288,39 @@ public class UserDAO {
         }
         return user;
     }
+    public UserDTO checkAccountExistByGoogle(String email) {
+        UserDTO user = null;
+        try {
+
+            Connection con = DBUtils.getConnection();
+            String sql = " select userName, firstName, lastName, email, phoneNumber, point, roleID from [User] u ";
+            sql += " WHERE email = ?";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            stmt.setString(1, email);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs != null) {
+                if (rs.next()) {
+                    user = new UserDTO();
+                    user.setUsername(rs.getString("userName"));
+                    user.setFirstname(rs.getString("firstName"));
+                    user.setUserid(rs.getInt("userID"));
+                    user.setLastname(rs.getString("lastName"));
+                    user.setEmail(rs.getString("email"));
+                    user.setPhonenumber(rs.getString("phoneNumber"));
+                    user.setPoint(rs.getInt("point"));
+                    user.setRoleid(rs.getInt("roleID"));
+                }
+            }
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+
+        }
+        return user;
+    }
 }
