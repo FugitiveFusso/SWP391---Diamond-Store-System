@@ -44,13 +44,12 @@
         <h4 style="color: red; text-align: center"> <%= error1%> </h4>
         <% }%>
 
-<<<<<<< HEAD
-                <tr><td></td><td><input name="id" value="${requestScope.voucher.id}" required="Please enter"</td></tr>
-=======
         <% String success = (String) request.getAttribute("success"); %>
         <% if (success != null) {%>
         <h4 style="color: green; text-align: center"> <%= success%> </h4>
         <% }%>
+
+
 
         <form action="./VoucherController" method="POST" onsubmit="return validateForm()" onsubmit="return validateInput()">
             <table>
@@ -58,8 +57,6 @@
                     <td>ID</td>
                     <td><input type="number" name="id" value="${requestScope.voucher.id}" min="1" required></td>
                 </tr>
-<!--                <tr><td>ID</td><td><input name="id" value="${requestScope.voucher.id}" required="Please enter"</td></tr>-->
->>>>>>> origin/main
                 <tr><td>Voucher Name</td><td><input name="voucherName" value="${requestScope.voucher.name}" required="Please enter" </td></tr>
                 <tr><td>Voucher Image</td><td><input name="voucherImage" value="${requestScope.voucher.image}" required="Please enter" </td></tr>
                 <tr><td>Description</td><td><input name="description" value="${requestScope.voucher.description}" required="Please enter"</td></tr>
