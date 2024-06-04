@@ -29,7 +29,7 @@ public class UserLoginController extends HttpServlet {
                 if (user != null) {
                     HttpSession session = request.getSession(true);
                     session.setAttribute("usersession", user);
-                    response.sendRedirect("./ProductController");
+                    response.sendRedirect("./user_homepage.jsp");
                 } else {
                     request.setAttribute("error", "Your username or password is incorrect! Please try again");
                     RequestDispatcher rd = request.getRequestDispatcher("userlogin.jsp");

@@ -18,7 +18,7 @@
     </head>
     <body>
         <%@ include file="/menu.jsp" %>
-        <!--        <div class="menu">
+<!--                <div class="menu">
                     you will code the horizontal menu here
                     <ul class="navbar">
                         <li class="navbar__link"><a href="#">Order</a></li>

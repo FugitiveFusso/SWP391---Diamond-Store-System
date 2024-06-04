@@ -7,10 +7,41 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" href="css/navbar.css">
+
     </head>
     <body>
-        <%@ include file="/productmenu.jsp" %>
+        <%--<%@ include file="/productmenu.jsp" %>--%>
 
+        <div class="menu">
+            <ul class="navbar">
+                <li class="navbar__link">
+                    <a href="#">Jewelry</a>
+                    <div class="sub-menu-1">
+                        <ul>
+                            <li><a href='./ProductController'>Diamond</a></li>
+                            <li><a href='./RingController'>Ring</a></li>
+                            <li><a href='CollectionController'>Collection</a></li>
+                        </ul>
+                    </div>                  
+                </li>
+                <li class="navbar__link"><a href='./VoucherController'>Voucher</a></li>
+                <li class="navbar__link"><a href="#">Blog</a></li>
+                <a href="user_homepage.jsp"><img src="./images/Screenshot (656).png"></a>
+                <li class="navbar__link"><a href="#">About Us</a></li>
+                <li class="navbar__link"><a href="#">Order</a></li>
+
+                <li class="navbar__link">
+                    <a href="#">Account</a>
+                    <div class="sub-menu-1">
+                        <ul>
+                            <li><a href='adminlogin?action=logout'>Logout</a></li>          
+                        </ul>
+                    </div>
+                </li>
+
+            </ul>
+        </div> 
 
         <div class="list-container">
             <div class="smaller-container">
