@@ -40,8 +40,15 @@ public class Registration extends HttpServlet {
                 UserDAO dao = new UserDAO();
                 UserDTO user = dao.checkAccountExist(username);
                 if (user == null) {
-                    dao.signup(username, password, firstname, lastname, phonenumber, email, address, 0, 5);
-                    response.sendRedirect("userlogin.jsp");
+                    user = dao.checkAccountExistByGoogle(email);
+                    if (user == null) {
+                        dao.signup(username, password, firstname, lastname, phonenumber, email, address, 0, 5);
+                        response.sendRedirect("userlogin.jsp");
+                    } else {
+                        request.setAttribute("error1", "Your Gmail/Email is already exist!!!");
+                        RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
+                        rd.forward(request, response);
+                    }
                 } else {
                     request.setAttribute("error1", "Your username is already exist!!!");
                     RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
