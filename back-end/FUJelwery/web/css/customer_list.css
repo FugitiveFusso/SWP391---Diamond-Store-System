@@ -20,7 +20,7 @@ body{
     display: flex;
     width: auto;
     height: auto;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     background-color: #fff;
     border-radius: 40px;
@@ -82,7 +82,7 @@ body{
 .list-intro-right .styled-button3{
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     background: none;
     color: #8f8f8f;
     border: 2px solid #8f8f8f;
@@ -92,8 +92,8 @@ body{
     transition: background-color 0.3s, transform 0.3s;
     font-size: 16px;
     font-weight: 600;
-    margin-left: 530px;
-    margin-top: 25px;
+/*    margin-left: 530px;
+    margin-top: 25px;*/
 }
 
 .styled-button:hover {

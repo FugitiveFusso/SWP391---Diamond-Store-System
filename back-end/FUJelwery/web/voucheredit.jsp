@@ -31,7 +31,7 @@
         <form action="./VoucherController" method="POST" onsubmit="return validateForm()">
             <table>
 
-                <tr><td></td><td><input name="id" value="${requestScope.voucher.id}" required="Please enter" type="hidden"</td></tr>
+                <tr><td></td><td><input name="id" value="${requestScope.voucher.id}" required="Please enter"</td></tr>
                 <tr><td>Voucher Name</td><td><input name="voucherName" value="${requestScope.voucher.name}" required="Please enter" </td></tr>
                 <tr><td>Voucher Image</td><td><input name="voucherImage" value="${requestScope.voucher.image}" required="Please enter" </td></tr>
                 <tr><td>Description</td><td><input name="description" value="${requestScope.voucher.description}" required="Please enter"</td></tr>
