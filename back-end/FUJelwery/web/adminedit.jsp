@@ -25,7 +25,7 @@
 
         <h1>Administrator Edit </h1>
         <p> Login user: ${sessionScope.managersession.username}</p>
-        
+
         <% String error1 = (String) request.getAttribute("error"); %>
         <% if (error1 != null) {%>
         <h4 style="color: red; text-align: center"> <%= error1%> </h4>
@@ -116,20 +116,26 @@
                                                     <input name="action" value="${requestScope.nextaction}" type="hidden">
                                                     <button type="submit" class="btn btn-custom">Save</button>
                                                 </div>
-                                            </div>
+
                                         </form>
-                                        <form action="AdminController" style="padding-top: 10px">
-                                            <button type="submit" class="btn btn-custom">Return</button>
-                                        </form>
+                                        <div class="col-sm-4">
+                                            <form action="AdminController">
+                                                <button type="submit" class="btn btn-custom">Return</button>
+                                            </form>
+                                        </div>
                                     </div>
+                                    <!--<form action="AdminController" style="padding-top: 10px">
+                                        <button type="submit" class="btn btn-custom">Return</button>
+                                    </form>-->
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <script src="js/showPasswordFunc.js"></script>
+        <script src="js/showPasswordFunc.js"></script>
 
     </body>
 </html>

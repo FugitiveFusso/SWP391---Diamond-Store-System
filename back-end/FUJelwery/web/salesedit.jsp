@@ -118,14 +118,13 @@
                                                     <input name="action" value="${requestScope.nextaction}" type="hidden">
                                                     <button type="submit" class="btn btn-custom">Save</button>
                                                 </div>
-                                            </div>
+
                                         </form>
-                                        <div class="row" style="margin-top: 20px; justify-content: center">
-                                            <div class="col-sm-4">
-                                                <form action="SalesController" style="padding-top: 10px">
-                                                    <button type="submit" class="btn btn-custom">Return</button>
-                                                </form>
-                                            </div>
+
+                                        <div class="col-sm-4">
+                                            <form action="SalesController">
+                                                <button type="submit" class="btn btn-custom">Return</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -135,8 +134,9 @@
                 </div>
             </div>
         </div>
-        <script src="js/showPasswordFunc.js"></script>
+    </div>
+    <script src="js/showPasswordFunc.js"></script>
 
 
-    </body>
+</body>
 </html>
