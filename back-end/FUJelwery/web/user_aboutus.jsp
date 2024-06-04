@@ -1,8 +1,3 @@
-<%-- 
-    Document   : user_aboutus
-    Created on : Jun 4, 2024, 10:46:44 AM
-    Author     : Le Anh Khoa
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -30,7 +25,7 @@
                     </div>                  
                 </li>
                 <li class="navbar__link"><a href='./VoucherController'>Voucher</a></li>
-                <li class="navbar__link"><a href="#">Blog</a></li>
+                <li class="navbar__link"><a href="./UserPostController">Blog</a></li>
                 <a href="user_homepage.jsp"><img src="./images/Screenshot (656).png"></a>
                 <li class="navbar__link"><a href="#">About Us</a></li>
                 <li class="navbar__link"><a href="#">Order</a></li>
