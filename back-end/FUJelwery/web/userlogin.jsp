@@ -52,6 +52,10 @@
 
                         </select>             
                     </div>
+                    
+                    <div class="forgot-password">
+                        <a href="forgotPassword.jsp">Forgot Password</a>
+                    </div>
 
                     <button type="submit" class="btn">Login</button>
                     
