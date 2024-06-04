@@ -6,7 +6,7 @@
         <title>JSP Page</title>
         <link rel="stylesheet" href="css/post_edit.css"/>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-        
+
         <script>
             function isValidImageUrlFormat(url) {
                 const regex = /^https:\/\/.*\.(jpg|jpeg|png|gif|bmp|webp)$/i;
@@ -53,7 +53,7 @@
         <% if (success != null) {%>
         <h4 style="color: green; text-align: center"> <%= success%> </h4>
         <% }%>
-        
+
         <div class="container content">
             <form action="./WarrantyController" method="POST" onsubmit="return validateForm()" onsubmit="return validateInput()">
                 <div class="row content-info">
@@ -82,11 +82,19 @@
                         </div>
                         <div class="info-input">                          
                             <h2>Warranty Month</h2>
-                            <input name="warrantyMonth" value="${requestScope.warranty.month}" required="Please enter" class="form-control">                           
+                            <input name="warrantyMonth" type="number" value="${requestScope.warranty.month}" required="required" class="form-control" min="1">                           
                         </div>
                         <div class="info-input">                          
                             <h2>Warranty Type</h2>
-                            <input name="warrantyType" value="${requestScope.warranty.type}" required="Please enter" class="form-control">                           
+                            <select name="warrantyType" required="" class="form-control">
+                                <option value="">Please select an Warranty Type</option>
+                                <option value="Limited Warranty" ${requestScope.warranty.type == 'Limited Warranty' ? 'selected' : ''}>Limited Warranty</option>
+                                <option value="Lifetime Warranty" ${requestScope.warranty.type == 'Lifetime Warranty' ? 'selected' : ''}>Lifetime Warranty</option>
+                                <option value="Extended Warranty" ${requestScope.warranty.type == 'Extended Warranty' ? 'selected' : ''}>Extended Warranty</option>
+                                <option value="Manufacturer Warranty" ${requestScope.warranty.type == 'Manufacturer Warranty' ? 'selected' : ''}>Manufacturer's Warranty</option>
+                                <option value="Retailer Warranty" ${requestScope.warranty.type == 'Retailer Warranty' ? 'selected' : ''}>Retailer's  Warranty</option>
+
+                            </select>
                         </div>
                         <div class="info-input">                          
                             <h2>Terms and Conditions</h2>
@@ -116,29 +124,29 @@
 
     </div>
 
-<!--        <form action="./WarrantyController" method="POST" onsubmit="return validateForm()" onsubmit="return validateInput()">
-            <table>
-                <tr>
-                    <td>ID</td>
-                    <td><input type="number" name="id" value="${requestScope.warranty.id}" min="1" required></td>
-                </tr>
-
-                <tr><td>Name</td><td><input name="warrantyName" value="${requestScope.warranty.name}" required="Please enter" </td></tr>
-                <tr><td>Image</td><td><input name="warrantyImage" value="${requestScope.warranty.image}" required="Please enter" </td></tr>
-                <tr><td>Month</td><td><input name="warrantyMonth" value="${requestScope.warranty.month}" required="Please enter" </td></tr>
-                <tr><td>Description</td><td><input name="warrantyDescription" value="${requestScope.warranty.description}" required="Please enter"</td></tr>
-                <tr><td>Type</td><td><input name="warrantyType" value="${requestScope.warranty.type}" required="Please enter"</td></tr>
-                <tr><td>Start Date</td><td><input name="startDate" value="${requestScope.warranty.startdate}" required="Please enter" </td></tr>
-                <tr><td>Terms and Conditions</td><td><input name="termsAndConditions" value="${requestScope.warranty.termsandconditions}" required="Please enter"</td></tr>
-                <tr><td colspan="2">
-                        <input name="action" value="${requestScope.nextaction}" type="hidden">
-                        <input type="submit" value="Save">
-                    </td></tr>
-            </table>
-
-        </form>
-        <form action="WarrantyController" style="padding-top: 10px">
-            <input type=hidden name="action" value="list">
-            <input type=submit value="Return" ></form>-->
-    </body>
+    <!--        <form action="./WarrantyController" method="POST" onsubmit="return validateForm()" onsubmit="return validateInput()">
+                <table>
+                    <tr>
+                        <td>ID</td>
+                        <td><input type="number" name="id" value="${requestScope.warranty.id}" min="1" required></td>
+                    </tr>
+    
+                    <tr><td>Name</td><td><input name="warrantyName" value="${requestScope.warranty.name}" required="Please enter" </td></tr>
+                    <tr><td>Image</td><td><input name="warrantyImage" value="${requestScope.warranty.image}" required="Please enter" </td></tr>
+                    <tr><td>Month</td><td><input name="warrantyMonth" value="${requestScope.warranty.month}" required="Please enter" </td></tr>
+                    <tr><td>Description</td><td><input name="warrantyDescription" value="${requestScope.warranty.description}" required="Please enter"</td></tr>
+                    <tr><td>Type</td><td><input name="warrantyType" value="${requestScope.warranty.type}" required="Please enter"</td></tr>
+                    <tr><td>Start Date</td><td><input name="startDate" value="${requestScope.warranty.startdate}" required="Please enter" </td></tr>
+                    <tr><td>Terms and Conditions</td><td><input name="termsAndConditions" value="${requestScope.warranty.termsandconditions}" required="Please enter"</td></tr>
+                    <tr><td colspan="2">
+                            <input name="action" value="${requestScope.nextaction}" type="hidden">
+                            <input type="submit" value="Save">
+                        </td></tr>
+                </table>
+    
+            </form>
+            <form action="WarrantyController" style="padding-top: 10px">
+                <input type=hidden name="action" value="list">
+                <input type=submit value="Return" ></form>-->
+</body>
 </html>
