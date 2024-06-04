@@ -65,7 +65,7 @@
                 </div>
                 <div class="list">
                     <div class="swiper">
-                        <a href="./DiamondController">
+                        <a href="">
                             <img src="images/img1.jpeg" alt="">
                         </a>
                         <h2>Diamond</h2>
@@ -112,10 +112,10 @@
 
                     <div class="info-text">
                         <p>
-                            Address: FPT University, District 9, HCMC
+                            Address: FPT University, District 9, Ho Chi Minh City
                         </p>
                         <p>
-                            Email: CuongNPSE183844@fpt.edu.vn
+                            Email: KhacFUJ@gmail.com
                         </p>
                         <p>
                             Phone: (+ 84) 898876512
