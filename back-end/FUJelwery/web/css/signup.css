@@ -64,8 +64,8 @@
 
 .eye {
     position: absolute;
-    right: 94px;
-    top: 68%;
+    right: 7px;
+    top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
 }

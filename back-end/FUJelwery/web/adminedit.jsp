@@ -15,7 +15,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="./css/signup.css">
+        <link rel="stylesheet" href="./css/editstaff_password.css">
         <script defer src="./js/inputFormat.js"></script>
 
 
@@ -25,44 +25,7 @@
 
         <h1>Administrator Edit </h1>
         <p> Login user: ${sessionScope.managersession.username}</p>
-        <!--        <div class="menu">
-                    you will code the horizontal menu here
-                    <ul class="navbar">
         
-                        <li class="navbar__link">
-                            <a href="#">Products</a>
-                            <div class="sub-menu-1">
-                                <ul>
-                                    <li><a href='DiamondController'>Diamond</a></li>
-                                    <li><a href='RingController'>Ring</a></li>
-                                    <li><a href='CollectionController'>Collection</a></li>
-                                </ul>
-                            </div>                  
-                        </li>
-                        <li class="navbar__link"><a href='VoucherController'>Voucher</a></li>
-                        <img src="./images/Screenshot (656).png">
-                        <li class="navbar__link">
-                            <a href="#">Dashboard</a>
-                            <div class="sub-menu-1">
-                                <ul>
-                                    <li><a href='AdminController'>View Admins</a></li>   
-                                    <li><a href='DeliveryStaffController'>View Delivery Staffs</a></li>
-                                    <li><a href='SalesController'>View Sale Staffs</a></li>
-                                    <li><a href='CertificateController'>View Certificate</a></li>
-        
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="navbar__link">
-                            <a href="#">Account</a>
-                            <div class="sub-menu-1">
-                                <ul>
-                                    <li><a href='adminlogin?action=logout'>Logout</a></li>          
-                                </ul>
-                            </div>
-                        </li>               
-                    </ul>
-                </div>-->
         <% String error1 = (String) request.getAttribute("error"); %>
         <% if (error1 != null) {%>
         <h4 style="color: red; text-align: center"> <%= error1%> </h4>
