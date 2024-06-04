@@ -19,12 +19,12 @@
             <div class="wrapper">
                 <form action="./userlogin" name="" method="POST" class="signin-form">
                     <h1>User Login</h1>
-                    
+
                     <% String error = (String) request.getAttribute("error"); %>
                     <% if (error != null) {%>
                     <h3 style="color: red; display: flex; justify-content: center; text-align: center ;margin-top: 10px"> <%= error%> </h3>
                     <% }%>
-                    
+
                     <div class="input-box">
                         <input name="user" type="text" required>
                         <span class="placeholder">Username</span>
@@ -52,45 +52,66 @@
 
                         </select>             
                     </div>
-                    
+
                     <div class="forgot-password">
                         <a href="forgotPassword.jsp">Forgot Password</a>
                     </div>
 
                     <button type="submit" class="btn">Login</button>
-                    
+
                     <div class="register-link">
                         <p>Don't have an account? <a href="register.jsp">Register</a></p>
                     </div>
                     <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/FUJelwery/LoginGoogleServlet&response_type=code
-		   &client_id=792757160936-kke52p9ud3fl6h3qe93tl4i6lug4sotd.apps.googleusercontent.com&approval_prompt=force">Login with Google</a>
+                       &client_id=792757160936-kke52p9ud3fl6h3qe93tl4i6lug4sotd.apps.googleusercontent.com&approval_prompt=force">Login with Google</a>
                 </form>
             </div>
         </section>
+
+
+        <!--JS-->
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <link rel="stylesheet" href="alert/dist/sweetalert.css">
         <script src="js/login.js"></script>
 
         <script>
-                                function myFunction() {
-                                    var x = document.getElementById("myInput");
-                                    var y = document.getElementById("hide1");
-                                    var z = document.getElementById("hide2");
+                            function myFunction() {
+                                var x = document.getElementById("myInput");
+                                var y = document.getElementById("hide1");
+                                var z = document.getElementById("hide2");
 
-                                    if (x.type === 'password') {
-                                        x.type = "text";
-                                        y.style.display = "block";
-                                        z.style.display = "none"
-                                    } else {
-                                        x.type = "password";
-                                        y.style.display = "none";
-                                        z.style.display = "block"
-                                    }
+                                if (x.type === 'password') {
+                                    x.type = "text";
+                                    y.style.display = "block";
+                                    z.style.display = "none"
+                                } else {
+                                    x.type = "password";
+                                    y.style.display = "none";
+                                    z.style.display = "block"
                                 }
+                            }
 
-                                let dropdown = document.querySelector('.dropdown');
-                                dropdown.onclick = function () {
-                                    dropdown.classList.toggle('active');
-                                }
+                            let dropdown = document.querySelector('.dropdown');
+                            dropdown.onclick = function () {
+                                dropdown.classList.toggle('active');
+                            }
         </script>
 
+        <script type="text/javascript">
+            window.onload = function() {
+                var status = "<%= request.getAttribute("status") %>";
+                if (status == "failed") {
+                    swal("Sorry", "Wrong Username or Password", "error");
+                } else if (status == "invalidEmail") {
+                    swal("Sorry", "Please Enter Username", "error");
+                } else if (status == "invalidPassword") {
+                    swal("Sorry", "Please Enter Password", "error");
+                } else if (status == "resetSuccess") {
+                    swal("Congrats", "Password Reset Successfully", "success");
+                } else if (status == "resetFailed") {
+                    swal("Sorry", "Password Reset Failed", "error");
+                }
+            };
+        </script>
     </body>
 </html>
