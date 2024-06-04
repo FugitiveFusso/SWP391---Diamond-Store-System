@@ -3,14 +3,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<<<<<<< HEAD
-        <title>JSP Page</title>
+
+        <title>Voucher Management Page </title>
         <link rel="stylesheet" href="css/post_edit.css"/>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
-=======
-        <title>Voucher Management Page </title>
->>>>>>> 3f1f1e1853e162a7dd6a8b48a8c7eecb6f4a62c2
+        
+
         <script>
             function isValidImageUrlFormat(url) {
                 const regex = /^https:\/\/.*\.(jpg|jpeg|png|gif|bmp|webp)$/i;
