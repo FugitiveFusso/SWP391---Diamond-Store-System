@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <script src="js/pagination.js"></script>
-        <!--<link rel="stylesheet" href="css/pagination.css">-->
+        <link rel="stylesheet" href="css/pagination.css">
 
     </head>
     <body>
@@ -31,7 +31,7 @@
                     <div class="list-intro-right">
                         <form action="VoucherController" method="POST" class="input1">
                             <input name="action" value="create" type="hidden">
-                            <button type="submit" class="styled-button3">
+                            <button type="submit" class="styled-button">
                                 <span>Add a Voucher</span>
                             </button>
                         </form>
@@ -64,7 +64,7 @@
                                 <td><a href="VoucherController?action=details&id=${voucher.id}">${voucher.id}</a></td>
                                 <td>${voucher.name}</td>
                                 <td><img src=${voucher.image} width="300px" height="300px"></td>
-                                <td>${voucher.description}</td>
+                                <td style="width: 40%">${voucher.description}</td>
                                 <td>
                                     <form action="VoucherController" method="POST" class="input">
                                         <input name="action" value="delete" type="hidden">

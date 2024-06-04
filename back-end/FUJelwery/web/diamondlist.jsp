@@ -37,7 +37,7 @@
                 <div class="list1">
                     <div class="list-intro-left">
                         <div class="left-icon">
-                            <i class='bx bxs-badge-dollar'></i>
+                            <i class='bx bx-diamond'></i>
                         </div>
                         <div class="left-info">
                             <div class="list-title">Diamond List</div>
@@ -47,7 +47,7 @@
                     <div class="list-intro-right">
                         <form action="DiamondController" method="POST" class="input1">
                             <input name="action" value="create" type="hidden">
-                            <button type="submit" class="styled-button3">
+                            <button type="submit" class="styled-button">
                                 <span>Add new Diamond</span>
                             </button>
                         </form>
@@ -94,7 +94,7 @@
                                 <td>${diamond.clarity}</td>
                                 <td>${diamond.diamondPrice}</td>
                                 <td>
-                                    <form action="DiamondController" method="POST">
+                                    <form action="DiamondController" method="POST" class="input">
                                         <input name="action" value="delete" type="hidden">
                                         <input name="id" value="${diamond.diamondID}" type="hidden">
                                         <input type="submit" value="Delete">

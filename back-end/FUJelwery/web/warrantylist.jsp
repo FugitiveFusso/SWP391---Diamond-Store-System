@@ -30,7 +30,7 @@
                     <div class="list-intro-right">
                         <form action="WarrantyController" method="POST" class="input1">
                             <input name="action" value="create" type="hidden">
-                            <button type="submit" class="styled-button3">
+                            <button type="submit" class="styled-button">
                                 <span>Add a Warranty</span>
                             </button>
                         </form>

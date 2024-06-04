@@ -93,12 +93,7 @@
                 </div>
             </div>
         </div>
-        <!--            <div class="buttons">
-                        <form action="CertificateController" style="padding-top: 10px">
-                            <input type=hidden name="action" value="list">
-                            <input type=submit value="Return" ></form>
         
-                    </div>-->
     </div>
 
     <!--        <form action="./CertificateController" method="POST" onclick="return validateForm()">
