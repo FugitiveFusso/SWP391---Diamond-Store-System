@@ -157,7 +157,7 @@ public class DiamondController extends HttpServlet {
                 DiamondDTO diamond = dao.checkDiamondExistByID(diamondid);
                 if (diamond == null) {
                     diamond = dao.checkDiamondExistByDiamondPrice(dpID);
-                    if (diamond == null) {
+                    if (diamond != null) {
                         diamond = dao.checkDiamondExistByDiamondCertificate(certificateID);
                         if (diamond == null) {
                             diamond = new DiamondDTO();
@@ -173,19 +173,19 @@ public class DiamondController extends HttpServlet {
                             RequestDispatcher rd = request.getRequestDispatcher("diamondedit.jsp");
                             rd.forward(request, response);
                         } else {
-                            request.setAttribute("error", "Your Diamond is not inserted!!");
+                            request.setAttribute("error", "Your Diamond is not inserted by wrong Certificate ID");
                             RequestDispatcher rd = request.getRequestDispatcher("diamondedit.jsp");
                             rd.forward(request, response);
                         }
 
                     } else {
-                        request.setAttribute("error", "Your Diamond is not inserted!!");
+                        request.setAttribute("error", "Your Diamond is not inserted by wrong Diamond Price");
                         RequestDispatcher rd = request.getRequestDispatcher("diamondedit.jsp");
                         rd.forward(request, response);
                     }
 
                 } else {
-                    request.setAttribute("error", "Your Diamond is not inserted!!");
+                    request.setAttribute("error", "Your Diamond is not inserted by wrong ID");
                     RequestDispatcher rd = request.getRequestDispatcher("diamondedit.jsp");
                     rd.forward(request, response);
                 }

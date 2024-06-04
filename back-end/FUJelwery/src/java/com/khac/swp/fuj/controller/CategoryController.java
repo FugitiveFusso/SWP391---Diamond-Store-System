@@ -34,8 +34,8 @@ public class CategoryController extends HttpServlet {
 
             CategoryDAO categoryDAO = new CategoryDAO();
             HttpSession session = request.getSession(false);
-            if (session == null || session.getAttribute("adminsession") == null) {
-                response.sendRedirect("adminlogin.jsp");
+            if (session == null || session.getAttribute("salessession") == null) {
+                response.sendRedirect("saleslogin.jsp");
                 return;
             } else if (action == null || action.equals("list")) {//lists
 

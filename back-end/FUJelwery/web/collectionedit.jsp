@@ -38,11 +38,11 @@
                 return true;
             }
         </script>
-        <jsp:include page="/menu.jsp" flush="true" />
+        <jsp:include page="/salesmenu.jsp" flush="true" />
 
         <div class="title">
             <h1>Collection Edit</h1>
-            <p> Login user: ${sessionScope.adminsession.username}</p>
+            <p> Login user: ${sessionScope.salessession.username}</p>
         </div>
 
         <% String error1 = (String) request.getAttribute("error"); %>

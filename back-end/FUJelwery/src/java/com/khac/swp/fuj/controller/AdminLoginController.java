@@ -22,7 +22,7 @@ public class AdminLoginController extends HttpServlet {
             String password = request.getParameter("password");
             if (action == null || action.equals("login")) {
                 UserDAO dao = new UserDAO();
-                UserDTO user = dao.login(username, password, "Adminstrator");
+                UserDTO user = dao.login(username, password, "Administrator");
 
                 if (user != null) {
                     HttpSession session = request.getSession(true);

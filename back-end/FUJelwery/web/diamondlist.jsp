@@ -39,7 +39,7 @@
                         <input name=keyword type=text value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
                         <input type=submit value=Search >
                     </form>
-                    <p>You need to add Diamond Price, before you add a Diamond</p>
+                    <p>You need to add Diamond Price, Certificate, before you add a Diamond</p>
                     <table id="pagination">
                         <thead>
                             <tr>

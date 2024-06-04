@@ -1,4 +1,4 @@
-INSERT INTO [Role] VALUES (1,'Adminstrator'), (2,'Manager'), (3,'Sales Staff'), (4,'Delivery Staff'), (5,'Customer')
+INSERT INTO [Role] VALUES (1,'Administrator'), (2,'Manager'), (3,'Sales Staff'), (4,'Delivery Staff'), (5,'Customer')
 SELECT * FROM [Role]
 
 INSERT INTO [User] VALUES 

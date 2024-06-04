@@ -188,22 +188,52 @@ public class RingController extends HttpServlet {
 
                 RingDAO dao = new RingDAO();
                 RingDTO ring = dao.checkRingExistbyID(ringid);
-                        if (ring == null) {
-                            ring = new RingDTO();
-                            ring.setRingID(ringid);
-                            ring.setRpID(rpID);
-                            ring.setRingName(ringName);
-                            ring.setRingImage(ringImage);
-                            ring.setDiamondID(diamondID);
-                            ring.setPrice(price);
-                            ring.setCategoryID(categoryID);
-                            ring.setCollectionID(collectionID);
-                            request.setAttribute("ring", ring);
-                            ringDAO.insert(ring);
-                            request.setAttribute("success", "Added Successfully!!!");
+                if (ring == null) {
+                    ring = dao.checkRingExistbyRpID(rpID);
+                    if (ring != null) {
+                        ring = dao.checkRingExistbyDiamondID(diamondID);
+                        if (ring != null) {
+                            ring = dao.checkRingExistbyCollectionID(collectionID);
+                            if (ring != null) {
+                                ring = dao.checkRingExistbyCategoryID(categoryID);
+                                if (ring != null) {
+                                    ring = new RingDTO();
+                                    ring.setRingID(ringid);
+                                    ring.setRpID(rpID);
+                                    ring.setRingName(ringName);
+                                    ring.setRingImage(ringImage);
+                                    ring.setDiamondID(diamondID);
+                                    ring.setPrice(price);
+                                    ring.setCategoryID(categoryID);
+                                    ring.setCollectionID(collectionID);
+                                    request.setAttribute("ring", ring);
+                                    ringDAO.insert(ring);
+                                    request.setAttribute("success", "Added Successfully!!!");
+                                    RequestDispatcher rd = request.getRequestDispatcher("ringedit.jsp");
+                                    rd.forward(request, response);
+                                } else {
+                                    request.setAttribute("error", "Your Ring is not inserted by wrong Category ID");
+                                    RequestDispatcher rd = request.getRequestDispatcher("ringedit.jsp");
+                                    rd.forward(request, response);
+                                }
+
+                            } else {
+                                request.setAttribute("error", "Your Ring is not inserted by wrong Collectionn ID");
+                                RequestDispatcher rd = request.getRequestDispatcher("ringedit.jsp");
+                                rd.forward(request, response);
+                            }
+
+                        } else {
+                            request.setAttribute("error", "Your Ring is not inserted by wrong Diamond ID");
                             RequestDispatcher rd = request.getRequestDispatcher("ringedit.jsp");
                             rd.forward(request, response);
+                        }
 
+                    } else {
+                        request.setAttribute("error", "Your Ring is not inserted by wrong RP ID");
+                        RequestDispatcher rd = request.getRequestDispatcher("ringedit.jsp");
+                        rd.forward(request, response);
+                    }
 
                 } else {
                     request.setAttribute("error", "Your Ring is not inserted by wrong ID");

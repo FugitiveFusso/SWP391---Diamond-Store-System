@@ -39,7 +39,7 @@ public class AdminController extends HttpServlet {
             } else if (action == null || action.equals("list")) {//lists
 
                 UserDAO dao = new UserDAO();
-                List<UserDTO> list = dao.list(keyword, sortCol, "Adminstrator");
+                List<UserDTO> list = dao.list(keyword, sortCol, "Administrator");
                 request.setAttribute("adminlist", list);
 
                 request.getRequestDispatcher("/adminlist.jsp").forward(request, response);
@@ -55,7 +55,7 @@ public class AdminController extends HttpServlet {
 
                 UserDTO admin = null;
                 if (id != null) {
-                    admin = userDAO.load(id, "Adminstrator");
+                    admin = userDAO.load(id, "Administrator");
                 }
 
                 request.setAttribute("admin", admin);//object
@@ -72,7 +72,7 @@ public class AdminController extends HttpServlet {
 
                 UserDTO admin = null;
                 if (id != null) {
-                    admin = userDAO.load(id, "Adminstrator");
+                    admin = userDAO.load(id, "Administrator");
                 }
 
                 request.setAttribute("admin", admin);
@@ -110,7 +110,7 @@ public class AdminController extends HttpServlet {
 
                 UserDTO admin = null;
                 if (adminid != null) {
-                    admin = userDAO.load(adminid, "Adminstrator");
+                    admin = userDAO.load(adminid, "Administrator");
                 }
                 admin.setUserid(adminid);
                 admin.setUsername(adminname);

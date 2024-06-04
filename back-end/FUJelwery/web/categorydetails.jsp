@@ -10,11 +10,11 @@
 
     </head>
     <body>
-        <jsp:include page="/menu.jsp" flush="true" />
+        <jsp:include page="/salesmenu.jsp" flush="true" />
 
         <div class="post-title">
             <h1>Category Details </h1>         
-            <p> Login username: ${sessionScope.adminsession.username}</p>
+            <p> Login username: ${sessionScope.salessession.username}</p>
         </div>
 
         <div class="content">

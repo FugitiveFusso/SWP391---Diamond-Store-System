@@ -247,7 +247,7 @@ public class DiamondDAO {
 
     public DiamondDTO checkDiamondExistByDiamondPrice(int dpriceID) {
 
-        String sql = "SELECT d.diamondID, d.diamondName, d.diamondImage, d.origin, d.dpID, d.certificateID, dp.diamondSize, dp.caratWeight, dp.color, dp.clarity, dp.cut, dp.price FROM Diamond d LEFT JOIN DiamondPrice dp ON d.dpID = dp.dpID where d.dpID = ?";
+        String sql = "SELECT dpID from DiamondPrice where dpID = ?";
 
         try {
 
@@ -258,32 +258,12 @@ public class DiamondDAO {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
 
-                int diamondid = rs.getInt("diamondID");
-                String diamondName = rs.getString("diamondName");
-                String diamondImage = rs.getString("diamondImage");
-                String origin = rs.getString("origin");
                 int dpID = rs.getInt("dpID");
-                int certificateID = rs.getInt("certificateID");
-                double diamondSize = rs.getDouble("diamondSize");
-                double caratWeight = rs.getDouble("caratWeight");
-                String color = rs.getString("color");
-                String clarity = rs.getString("clarity");
-                String cut = rs.getString("cut");
-                int price = rs.getInt("price");
 
                 DiamondDTO diamond = new DiamondDTO();
-                diamond.setDiamondID(diamondid);
-                diamond.setDiamondName(diamondName);
-                diamond.setDiamondImage(diamondImage);
-                diamond.setOrigin(origin);
+
                 diamond.setDpID(dpID);
-                diamond.setCertificateID(certificateID);
-                diamond.setDiamondSize(diamondSize);
-                diamond.setCaratWeight(caratWeight);
-                diamond.setColor(color);
-                diamond.setClarity(clarity);
-                diamond.setCut(cut);
-                diamond.setDiamondPrice(price);
+
                 return diamond;
             }
         } catch (SQLException ex) {
@@ -340,5 +320,5 @@ public class DiamondDAO {
         }
         return null;
     }
-    
+
 }
