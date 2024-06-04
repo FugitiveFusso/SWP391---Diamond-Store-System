@@ -7,7 +7,11 @@ INSERT INTO [User] VALUES
 ('khoa', '1','Khoa','Le Anh','0563098372','khoalac12nam@gmail.com','Dau do o Sai Gon',0,3),
 ('hoang', '1','Hoang','Nguyen Minh','0487354221','hoangnv0912@gmail.com','Ben Thanh',0,4),
 ('kien', '1','Kien','Ngo Chi','032033471','kiennc666@yahoo.com.vn','O gan day',0,5),
-('huy', '1','Huy','Pham Phu','075776871','phuhuydaydoi@gmail.com','Gan dau do',0,5)
+('huy', '1','Huy','Pham Phu','075776871','phuhuydaydoi@gmail.com','Gan dau do',0,5),
+('cuong1', '1','Cuong','Nguyen Phu','0898876512','phucuong479@gmail.com','Vo Van Ngan gi gi do',0,5),
+('an1', '1','An','Do Dinh','0937368003','dodinhan1973@gmail.com','Quang Truong Thong Nhat',0,5),
+('khoa1', '1','Khoa','Le Anh','0563098372','lekhoa2703@gmail.com','Dau do o Sai Gon',0,5),
+('hoang1', '1','Hoang','Nguyen Minh','0487354221','hoang390dbp@gmail.com','Ben Thanh',0,5)
 
 INSERT INTO [Category] VALUES 
 (1, '5K Gold'),
