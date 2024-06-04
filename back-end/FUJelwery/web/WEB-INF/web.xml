@@ -52,6 +52,14 @@
         <servlet-name>WarrantyController</servlet-name>
         <servlet-class>com.khac.swp.fuj.controller.WarrantyController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserPostController</servlet-name>
+        <servlet-class>com.khac.swp.fuj.controller.UserPostController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserVoucherController</servlet-name>
+        <servlet-class>com.khac.swp.fuj.controller.UserVoucherController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AdminLoginController</servlet-name>
         <url-pattern>/adminlogin</url-pattern>
@@ -103,6 +111,14 @@
     <servlet-mapping>
         <servlet-name>WarrantyController</servlet-name>
         <url-pattern>/WarrantyController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserPostController</servlet-name>
+        <url-pattern>/UserPostController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserVoucherController</servlet-name>
+        <url-pattern>/UserVoucherController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

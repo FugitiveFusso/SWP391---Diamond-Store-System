@@ -48,23 +48,5 @@
                 </div>
             </div>                   
         </div>
-
-        <!--        <table>
-        
-                    <tr><td>Post ID</td><td>${requestScope.post.id}</td></tr>
-                    <tr><td>Post Name</td><td>${requestScope.post.name}</td></tr>
-                    <tr><td>Post Image</td><td><img src=${requestScope.post.image} width="300px" height="300px"></td></tr>
-                    <tr><td>Description</td><td>${requestScope.post.description}</td></tr>
-        
-                </table>
-        
-                <form action="PostController" style="padding-top: 10px">
-                    <input type=hidden name="action" value="list">
-                    <input type=submit value="Return" ></form>
-        
-                <form action="PostController" style="padding-top: 10px">
-                    <input type=hidden name="id" value="${requestScope.post.id}">
-                    <input type=hidden name="action" value="edit">
-                    <input type=submit value="Edit" ></form>-->
     </body>
 </html>
