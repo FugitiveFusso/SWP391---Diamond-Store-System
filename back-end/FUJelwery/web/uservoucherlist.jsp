@@ -5,7 +5,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Voucher Management Page</title>
+        <title>Voucher Page</title>
         <link rel="stylesheet" href="css/navbar.css">
         <link rel="stylesheet" href="css/customer_list.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -15,7 +15,35 @@
 
     </head>
     <body>
-        <%@ include file="/salesmenu.jsp" %>
+        <div class="menu">
+            <ul class="navbar">
+                <li class="navbar__link">
+                    <a href="#">Jewelry</a>
+                    <div class="sub-menu-1">
+                        <ul>
+                            <li><a href='./ProductController'>Diamond</a></li>
+                            <li><a href='./ProductController'>Ring</a></li>
+                            <li><a href='CollectionController'>Collection</a></li>
+                        </ul>
+                    </div>                  
+                </li>
+                <li class="navbar__link"><a href='./UserVoucherController'>Voucher</a></li>
+                <li class="navbar__link"><a href="./UserPostController">Blog</a></li>
+                <a href="user_homepage.jsp"><img src="./images/Screenshot (656).png"></a>
+                <li class="navbar__link"><a href="user_aboutus.jsp">About Us</a></li>
+                <li class="navbar__link"><a href="#">Order</a></li>
+
+                <li class="navbar__link">
+                    <a href="#">Account</a>
+                    <div class="sub-menu-1">
+                        <ul>
+                            <li><a href='userlogin?action=logout'>Logout</a></li>          
+                        </ul>
+                    </div>
+                </li>
+
+            </ul>
+        </div> 
         <div class="list-container">
             <div class="smaller-container">
                 <div class="list1">
@@ -27,14 +55,6 @@
                             <div class="list-title">Voucher List</div>
                             <div class="">List of Voucher</div>
                         </div>
-                    </div>
-                    <div class="list-intro-right">
-                        <form action="VoucherController" method="POST" class="input1">
-                            <input name="action" value="create" type="hidden">
-                            <button type="submit" class="styled-button3">
-                                <span>Add a Voucher</span>
-                            </button>
-                        </form>
                     </div>
                 </div>
 
@@ -51,27 +71,19 @@
                                 <th><a href=?colSort=postName>Voucher Name</a></th>
                                 <th>Image</th>
                                 <th>Description</th>
-                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
                             <%
-                                List<VoucherDTO> list = (List<VoucherDTO>) request.getAttribute("voucherlist");
+                                List<VoucherDTO> list = (List<VoucherDTO>) request.getAttribute("uservoucherlist");
                                 for (VoucherDTO voucher : list) {
                                     pageContext.setAttribute("voucher", voucher);
                             %>
                             <tr>
-                                <td><a href="VoucherController?action=details&id=${voucher.id}">${voucher.id}</a></td>
+                                <td><a href="UserVoucherController?action=details&id=${voucher.id}">${voucher.id}</a></td>
                                 <td>${voucher.name}</td>
                                 <td><img src=${voucher.image} width="300px" height="300px"></td>
                                 <td>${voucher.description}</td>
-                                <td>
-                                    <form action="VoucherController" method="POST" class="input">
-                                        <input name="action" value="delete" type="hidden">
-                                        <input name="id" value="${voucher.id}" type="hidden">
-                                        <input type="submit" value="Delete">
-                                    </form>
-                                </td>
                             </tr>
                             <%
                                 }
