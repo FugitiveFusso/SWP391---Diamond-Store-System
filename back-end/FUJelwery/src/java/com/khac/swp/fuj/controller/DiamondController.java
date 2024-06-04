@@ -131,36 +131,63 @@ public class DiamondController extends HttpServlet {
                 rd.forward(request, response);
 
             } else if (action.equals("insert")) {//insert
+
+                Integer diamondid = null;
                 try {
-                    Connection conn = DBUtils.getConnection();
-                    int diamondid = 0;
-                    String diamondName = request.getParameter("diamondName");
-                    String diamondImage = request.getParameter("diamondImage");
-                    String origin = request.getParameter("origin");
-                    int dpID = Integer.parseInt(request.getParameter("dpID"));
-                    int certificateID = Integer.parseInt(request.getParameter("certificateID"));
+                    diamondid = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+                String diamondName = request.getParameter("diamondName");
+                String diamondImage = request.getParameter("diamondImage");
+                String origin = request.getParameter("origin");
+                Integer dpID = null;
+                try {
+                    dpID = Integer.parseInt(request.getParameter("dpID"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter dpID has wrong format.");
+                }
+                Integer certificateID = null;
+                try {
+                    certificateID = Integer.parseInt(request.getParameter("certificateID"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter dpID has wrong format.");
+                }
+                DiamondDAO dao = new DiamondDAO();
+                DiamondDTO diamond = dao.checkDiamondExistByID(diamondid);
+                if (diamond == null) {
+                    diamond = dao.checkDiamondExistByDiamondPrice(dpID);
+                    if (diamond != null) {
+                        diamond = dao.checkDiamondExistByDiamondCertificate(certificateID);
+                        if (diamond == null) {
+                            diamond = new DiamondDTO();
+                            diamond.setDiamondID(diamondid);
+                            diamond.setDiamondName(diamondName);
+                            diamond.setDiamondImage(diamondImage);
+                            diamond.setOrigin(origin);
+                            diamond.setDpID(dpID);
+                            diamond.setCertificateID(certificateID);
+                            request.setAttribute("diamond", diamond);
+                            diamondDAO.insert(diamond);
+                            request.setAttribute("success", "Added Successfully!!!");
+                            RequestDispatcher rd = request.getRequestDispatcher("diamondedit.jsp");
+                            rd.forward(request, response);
+                        } else {
+                            request.setAttribute("error", "Your Diamond is not inserted by wrong Certificate ID");
+                            RequestDispatcher rd = request.getRequestDispatcher("diamondedit.jsp");
+                            rd.forward(request, response);
+                        }
 
-                    PreparedStatement ps = conn.prepareStatement("select max(diamondID) from [Diamond]");
-                    ResultSet rs = ps.executeQuery();
-                    if (rs.next()) {
-                        diamondid = rs.getInt(1);
-                        diamondid++;
+                    } else {
+                        request.setAttribute("error", "Your Diamond is not inserted by wrong Diamond Price");
+                        RequestDispatcher rd = request.getRequestDispatcher("diamondedit.jsp");
+                        rd.forward(request, response);
                     }
-                    DiamondDTO diamond = new DiamondDTO();
-                    diamond.setDiamondID(diamondid);
-                    diamond.setDiamondName(diamondName);
-                    diamond.setDiamondImage(diamondImage);
-                    diamond.setOrigin(origin);
-                    diamond.setDpID(dpID);
-                    diamond.setCertificateID(certificateID);
-                    request.setAttribute("diamond", diamond);
-                    diamondDAO.insert(diamond);
 
-                    RequestDispatcher rd = request.getRequestDispatcher("diamonddetails.jsp");
+                } else {
+                    request.setAttribute("error", "Your Diamond is not inserted by wrong ID");
+                    RequestDispatcher rd = request.getRequestDispatcher("diamondedit.jsp");
                     rd.forward(request, response);
-                } catch (SQLException ex) {
-                    System.out.println("Insert diamond error!" + ex.getMessage());
-                    ex.printStackTrace();
                 }
 
             } else if (action.equals("delete")) {//delete

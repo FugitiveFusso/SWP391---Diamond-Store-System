@@ -119,25 +119,26 @@ public class RingPlacementPriceController extends HttpServlet {
                 rd.forward(request, response);
 
             } else if (action.equals("insert")) {//insert
+                Connection conn = DBUtils.getConnection();
+                Integer rpid = null;
                 try {
-                    Connection conn = DBUtils.getConnection();
-                    int rpid = 0;
-                    String name = request.getParameter("rName");
-                    String material = request.getParameter("material");
-                    String color = request.getParameter("color");
-                    Integer price = null;
-                    try {
-                        price = Integer.parseInt(request.getParameter("rpPrice"));
-                    } catch (NumberFormatException ex) {
-                        log("Parameter price has wrong format.");
-                    }
-                    PreparedStatement ps = conn.prepareStatement("select max(rpID) from [RingPlacementPrice]");
-                    ResultSet rs = ps.executeQuery();
-                    if (rs.next()) {
-                        rpid = rs.getInt(1);
-                        rpid++;
-                    }
-                    RingPlacementPriceDTO rp = new RingPlacementPriceDTO();
+                    rpid = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+                String name = request.getParameter("rName");
+                String material = request.getParameter("material");
+                String color = request.getParameter("color");
+                Integer price = null;
+                try {
+                    price = Integer.parseInt(request.getParameter("rpPrice"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter price has wrong format.");
+                }
+                RingPlacementPriceDAO dao = new RingPlacementPriceDAO();
+                RingPlacementPriceDTO rp = dao.checkRPPByID(rpid);
+                if (rp == null) {
+                    rp = new RingPlacementPriceDTO();
                     rp.setId(rpid);
                     rp.setName(name);
                     rp.setMaterial(material);
@@ -145,11 +146,13 @@ public class RingPlacementPriceController extends HttpServlet {
                     rp.setPrice(price);
                     rpDAO.insert(rp);
                     request.setAttribute("rp", rp);
-                    RequestDispatcher rd = request.getRequestDispatcher("rpdetails.jsp");
+                    request.setAttribute("success", "Added Successfully!!!");
+                    RequestDispatcher rd = request.getRequestDispatcher("rpedit.jsp");
                     rd.forward(request, response);
-                } catch (SQLException ex) {
-                    System.out.println("Insert rp error!" + ex.getMessage());
-                    ex.printStackTrace();
+                } else {
+                    request.setAttribute("error", "Your Ring Placement Price ID is already existed!!!");
+                    RequestDispatcher rd = request.getRequestDispatcher("rpedit.jsp");
+                    rd.forward(request, response);
                 }
 
             } else if (action.equals("delete")) {//delete

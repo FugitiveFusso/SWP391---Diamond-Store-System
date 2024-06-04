@@ -34,8 +34,8 @@ public class CertificateController extends HttpServlet {
 
             CertificateDAO certificateDAO = new CertificateDAO();
             HttpSession session = request.getSession(false);
-            if (session == null || session.getAttribute("adminsession") == null) {
-                response.sendRedirect("adminlogin.jsp");
+            if (session == null || session.getAttribute("salessession") == null) {
+                response.sendRedirect("saleslogin.jsp");
                 return;
             } else if (action == null || action.equals("list")) {//lists
 
@@ -112,30 +112,33 @@ public class CertificateController extends HttpServlet {
                 rd.forward(request, response);
 
             } else if (action.equals("insert")) {//insert
-                try {
-                    Connection conn = DBUtils.getConnection();
-                    int certificateid = 0;
-                    String certificateImage = request.getParameter("certificateImage");
-                    String certificateDescription = request.getParameter("description");
 
-                    PreparedStatement ps = conn.prepareStatement("select max(certificateID) from [Certificate]");
-                    ResultSet rs = ps.executeQuery();
-                    if (rs.next()) {
-                        certificateid = rs.getInt(1);
-                        certificateid++;
-                    }
-                    CertificateDTO certificate = new CertificateDTO();
+                Integer certificateid = null;
+                try {
+                    certificateid = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+                String certificateImage = request.getParameter("certificateImage");
+                String certificateDescription = request.getParameter("description");
+
+                CertificateDAO dao = new CertificateDAO();
+                CertificateDTO certificate = dao.checkCertificateExistByID(certificateid);
+                if (certificate == null) {
+                    certificate = new CertificateDTO();
                     certificate.setCertificateID(certificateid);
                     certificate.setCertificateImage(certificateImage);
                     certificate.setCertificateDescription(certificateDescription);
+
                     request.setAttribute("certificate", certificate);
                     certificateDAO.insert(certificate);
-
-                    RequestDispatcher rd = request.getRequestDispatcher("certificatedetails.jsp");
+                    request.setAttribute("success", "Added Successfully!!!");
+                    RequestDispatcher rd = request.getRequestDispatcher("certificateedit.jsp");
                     rd.forward(request, response);
-                } catch (SQLException ex) {
-                    System.out.println("Insert certificate error!" + ex.getMessage());
-                    ex.printStackTrace();
+                } else {
+                    request.setAttribute("error", "Your certificate ID is already existed!!!");
+                    RequestDispatcher rd = request.getRequestDispatcher("certificateedit.jsp");
+                    rd.forward(request, response);
                 }
 
             } else if (action.equals("delete")) {//delete

@@ -20,7 +20,7 @@
                 <div class="list1">
                     <div class="list-intro-left">
                         <div class="left-icon">
-                            <i class='bx bxs-badge-dollar'></i>
+                            <i class='bx bxs-check-shield'></i>
                         </div>
                         <div class="left-info">
                             <div class="list-title">Warranty List</div>

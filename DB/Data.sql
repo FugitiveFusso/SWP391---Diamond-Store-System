@@ -1,4 +1,4 @@
-INSERT INTO [Role] VALUES (1,'Adminstrator'), (2,'Manager'), (3,'Sales Staff'), (4,'Delivery Staff'), (5,'Customer')
+INSERT INTO [Role] VALUES (1,'Administrator'), (2,'Manager'), (3,'Sales Staff'), (4,'Delivery Staff'), (5,'Customer')
 SELECT * FROM [Role]
 
 INSERT INTO [User] VALUES 
@@ -167,8 +167,8 @@ INSERT INTO [RingPlacementPrice] VALUES
 (4,'12K White Gold','Gold, Nickle','White',20000000)
 
 INSERT INTO [Ring] VALUES
-(1,1,'0.7ct Diamond Ring','https://www.acredo-bridals.com/_nuxt/img/header-engagementRings070Carat.5f99e30.jpg',21,15000000,1,1),
-(2,2,'0.7ct Diamond Solitaire Ring','https://www.acredo-bridals.com/_nuxt/img/header-engagementRings070Carat.5f99e30.jpg',22,12000000,1,1),
+(1,1,'0.7ct Diamond Ring','https://i5.walmartimages.com/seo/Women-s-ring-zircon-sparkling-diamond-ring-with-beautiful-romantic-jewelry-gift-Zirconia-Decorative-Flower-Ring_7489d8b4-1869-4524-916f-e3eebe30c7af.7597fda62aebae63fa30bd620ad12cb7.jpeg',21,15000000,1,1),
+(2,2,'0.7ct Diamond Solitaire Ring','https://i5.walmartimages.com/seo/Women-s-ring-zircon-sparkling-diamond-ring-with-beautiful-romantic-jewelry-gift-Zirconia-Decorative-Flower-Ring_7489d8b4-1869-4524-916f-e3eebe30c7af.7597fda62aebae63fa30bd620ad12cb7.jpeg',22,12000000,1,1),
 (3,3,'0.36ct Diamond Solitaire Ring','https://www.berrysjewellers.co.uk/cdn/shop/products/1620389070-28905700.jpg',1,7000000,2,2),
 (4,4,'0.36ct Diamond Solitaire Ring','https://www.berrysjewellers.co.uk/cdn/shop/products/1620389070-28905700.jpg',2,5000000,2,2)
 

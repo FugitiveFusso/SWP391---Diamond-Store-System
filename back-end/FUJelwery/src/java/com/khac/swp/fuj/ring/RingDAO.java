@@ -236,9 +236,6 @@ public class RingDAO {
         return false;
     }
 
-    /*
-    Delete student 
-     */
     public boolean delete(int id) {
         String sql = "DELETE [Ring] WHERE ringID = ? ";
         try {
@@ -257,6 +254,194 @@ public class RingDAO {
         }
 
         return false;
+    }
+
+    public RingDTO checkRingExistbyID(int ringID) {
+
+        String sql = "SELECT r.ringID, r.rpID, r.ringName, r.ringImage, r.diamondID, r.price AS [ringPrice], r.price + rp.rpPrice + dp.price AS [totalPrice], r.collectionID, r.categoryID, rp.rName, rp.material, rp.color AS [ringColor], rp.rpPrice, d.diamondName, d.diamondImage, d.origin, d.certificateID, dp.diamondSize, dp.caratWeight, dp.color AS [diamondColor], dp.clarity, dp.cut, dp.price AS [diamondShapePrice] "
+                + " FROM [Ring] r LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID WHERE r.ringID = ? ";
+
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, ringID);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                int ID = rs.getInt("ringID");
+                String ringName = rs.getString("ringName");
+                int rpID = rs.getInt("rpID");
+                String ringImage = rs.getString("ringImage");
+                int diamondID = rs.getInt("diamondID");
+                int price = rs.getInt("ringPrice");
+                int collectionID = rs.getInt("collectionID");
+                int categoryID = rs.getInt("categoryID");
+
+                String rName = rs.getString("rName");
+                String material = rs.getString("material");
+                String ringColor = rs.getString("ringColor");
+                int rpPrice = rs.getInt("rpPrice");
+
+                String diamondName = rs.getString("diamondName");
+                String diamondImage = rs.getString("diamondImage");
+                String origin = rs.getString("origin");
+                int certificateID = rs.getInt("certificateID");
+
+                double diamondSize = rs.getDouble("diamondSize");
+                double caratWeight = rs.getDouble("caratWeight");
+                String color = rs.getString("diamondColor");
+                String clarity = rs.getString("clarity");
+                String cut = rs.getString("cut");
+                int diamondPrice = rs.getInt("diamondShapePrice");
+                int totalPrice = rs.getInt("totalPrice");
+
+                RingDTO ring = new RingDTO();
+                ring.setRingID(ID);
+                ring.setRpID(rpID);
+                ring.setRingName(ringName);
+                ring.setRingImage(ringImage);
+                ring.setDiamondID(diamondID);
+                ring.setPrice(price);
+                ring.setCategoryID(categoryID);
+                ring.setCollectionID(collectionID);
+                ring.setRingPlacementName(rName);
+                ring.setMaterial(material);
+                ring.setRingColor(ringColor);
+                ring.setRpPrice(rpPrice);
+
+                ring.setDiamondName(diamondName);
+                ring.setDiamondImage(diamondImage);
+                ring.setOrigin(origin);
+                ring.setCertificateID(certificateID);
+
+                ring.setDiamondSize(diamondSize);
+                ring.setCaratWeight(caratWeight);
+                ring.setColor(color);
+                ring.setClarity(clarity);
+                ring.setCut(cut);
+                ring.setDiamondPrice(diamondPrice);
+                ring.setTotalPrice(totalPrice);
+                return ring;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Query User error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public RingDTO checkRingExistbyRpID(int ringPID) {
+
+        String sql = "SELECT rp.rpID from [RingPlacementPrice] rp WHERE rp.rpID = ? ";
+
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, ringPID);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                int rpID = rs.getInt("rpID");
+
+                RingDTO ring = new RingDTO();
+
+                ring.setRpID(rpID);
+
+                return ring;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Query User error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public RingDTO checkRingExistbyDiamondID(int diamondID) {
+
+        String sql = "select diamondID from Diamond WHERE diamondID = ? ";
+
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, diamondID);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                int dID = rs.getInt("diamondID");
+
+                RingDTO ring = new RingDTO();
+
+                ring.setDiamondID(dID);
+
+                return ring;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Query User error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public RingDTO checkRingExistbyCategoryID(int categoryID) {
+
+        String sql = "select categoryID from Category WHERE categoryID = ? ";
+
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, categoryID);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                int caID = rs.getInt("categoryID");
+
+                RingDTO ring = new RingDTO();
+
+                ring.setCategoryID(caID);
+
+                return ring;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Query User error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public RingDTO checkRingExistbyCollectionID(int collectionID) {
+
+        String sql = "select collectionID from Collection where collectionID = ? ";
+
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, collectionID);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                int coID = rs.getInt("collectionID");
+
+                RingDTO ring = new RingDTO();
+
+                ring.setCollectionID(coID);
+
+                return ring;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Query User error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return null;
     }
 
 }

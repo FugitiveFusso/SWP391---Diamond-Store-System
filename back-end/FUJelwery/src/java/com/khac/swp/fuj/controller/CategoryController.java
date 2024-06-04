@@ -34,8 +34,8 @@ public class CategoryController extends HttpServlet {
 
             CategoryDAO categoryDAO = new CategoryDAO();
             HttpSession session = request.getSession(false);
-            if (session == null || session.getAttribute("adminsession") == null) {
-                response.sendRedirect("adminlogin.jsp");
+            if (session == null || session.getAttribute("salessession") == null) {
+                response.sendRedirect("saleslogin.jsp");
                 return;
             } else if (action == null || action.equals("list")) {//lists
 
@@ -110,28 +110,33 @@ public class CategoryController extends HttpServlet {
                 rd.forward(request, response);
 
             } else if (action.equals("insert")) {//insert
+                Connection conn = DBUtils.getConnection();
+                Integer categoryid = null;
                 try {
-                    Connection conn = DBUtils.getConnection();
-                    int categoryid = 0;
-                    String categoryName = request.getParameter("categoryName");
+                    categoryid = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+                String categoryName = request.getParameter("categoryName");
 
-                    PreparedStatement ps = conn.prepareStatement("select max(categoryID) from [Category]");
-                    ResultSet rs = ps.executeQuery();
-                    if (rs.next()) {
-                        categoryid = rs.getInt(1);
-                        categoryid++;
-                    }
-                    CategoryDTO category = new CategoryDTO();
+                CategoryDAO dao = new CategoryDAO();
+                CategoryDTO category = dao.checkCategoryExistByID(categoryid);
+                if (category == null) {
+
+                    category = new CategoryDTO();
                     category.setCategoryID(categoryid);
                     category.setCategoryName(categoryName);
                     request.setAttribute("category", category);
+                    
                     categoryDAO.insert(category);
-
-                    RequestDispatcher rd = request.getRequestDispatcher("categorydetails.jsp");
+                    request.setAttribute("success", "Added Successfully!!!");
+                    RequestDispatcher rd = request.getRequestDispatcher("categoryedit.jsp");
                     rd.forward(request, response);
-                } catch (SQLException ex) {
-                    System.out.println("Insert category error!" + ex.getMessage());
-                    ex.printStackTrace();
+
+                } else {
+                    request.setAttribute("error", "Your category ID is already existed!!!");
+                    RequestDispatcher rd = request.getRequestDispatcher("categoryedit.jsp");
+                    rd.forward(request, response);
                 }
 
             } else if (action.equals("delete")) {//delete

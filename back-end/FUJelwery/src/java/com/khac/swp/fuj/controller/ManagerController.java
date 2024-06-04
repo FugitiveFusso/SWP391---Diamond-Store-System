@@ -128,30 +128,37 @@ public class ManagerController extends HttpServlet {
                 rd.forward(request, response);
 
             } else if (action.equals("insert")) {//insert
+                Connection conn = DBUtils.getConnection();
+                Integer managerid = null;
                 try {
-                    Connection conn = DBUtils.getConnection();
-                    int managerid = 0;
-                    String managername = request.getParameter("userName");
-                    String password = request.getParameter("password");
-                    String firstname = request.getParameter("firstName");
-                    String lastname = request.getParameter("lastName");
-                    String phonenumber = request.getParameter("phoneNumber");
-                    String email = request.getParameter("email");
-                    String address = request.getParameter("address");
-                    int roleid = Integer.parseInt(request.getParameter("roleID"));
-                    Integer point = null;
-                    try {
-                        point = Integer.parseInt(request.getParameter("point"));
-                    } catch (NumberFormatException ex) {
-                        log("Parameter point has wrong format.");
-                    }
-                    PreparedStatement ps = conn.prepareStatement("select max(userID) from [User]");
-                    ResultSet rs = ps.executeQuery();
-                    if (rs.next()) {
-                        managerid = rs.getInt(1);
-                        managerid++;
-                    }
-                    UserDTO manager = new UserDTO();
+                    managerid = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+                String managername = request.getParameter("userName");
+                String password = request.getParameter("password");
+                String firstname = request.getParameter("firstName");
+                String lastname = request.getParameter("lastName");
+                String phonenumber = request.getParameter("phoneNumber");
+                String email = request.getParameter("email");
+                String address = request.getParameter("address");
+                Integer point = null;
+                try {
+                    point = Integer.parseInt(request.getParameter("point"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter point has wrong format.");
+                }
+                Integer roleid = null;
+                try {
+                    roleid = Integer.parseInt(request.getParameter("roleID"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter roleid has wrong format.");
+                }
+                UserDAO dao = new UserDAO();
+
+                UserDTO manager = dao.checkAccountExist(managername);
+                if (manager == null) {
+                    manager = new UserDTO();
                     manager.setUserid(managerid);
                     manager.setUsername(managername);
                     manager.setPassword(password);
@@ -164,11 +171,16 @@ public class ManagerController extends HttpServlet {
                     manager.setRoleid(roleid);
                     userDAO.insert(manager);
                     request.setAttribute("manager", manager);
-                    RequestDispatcher rd = request.getRequestDispatcher("managerdetails.jsp");
+                    request.setAttribute("success", "Added Successfully!!!");
+                    RequestDispatcher rd = request.getRequestDispatcher("manageredit.jsp");
                     rd.forward(request, response);
-                } catch (SQLException ex) {
-                    System.out.println("Insert manager error!" + ex.getMessage());
-                    ex.printStackTrace();
+
+                } else {
+
+                    request.setAttribute("error", "The username of the Manager is already existed!!!");
+                    RequestDispatcher rd = request.getRequestDispatcher("manageredit.jsp");
+                    rd.forward(request, response);
+
                 }
 
             } else if (action.equals("delete")) {//delete

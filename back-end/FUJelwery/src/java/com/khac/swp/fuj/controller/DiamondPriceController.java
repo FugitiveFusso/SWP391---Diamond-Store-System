@@ -133,38 +133,38 @@ public class DiamondPriceController extends HttpServlet {
                 rd.forward(request, response);
 
             } else if (action.equals("insert")) {//insert
+                Connection conn = DBUtils.getConnection();
+                Integer dpid = null;
                 try {
-                    Connection conn = DBUtils.getConnection();
-                    int dpid = 0;
-                    Double size = null;
-                    try {
-                        size = Double.parseDouble(request.getParameter("diamondSize"));
-                    } catch (NumberFormatException ex) {
-                        log("Parameter size has wrong format.");
-                    }
-                    Double caratWeight = null;
-                    try {
-                        caratWeight = Double.parseDouble(request.getParameter("caratWeight"));
-                    } catch (NumberFormatException ex) {
-                        log("Parameter caratWeight has wrong format.");
-                    }
-                    String color = request.getParameter("color");
-                    String clarity = request.getParameter("clarity");
-                    String cut = request.getParameter("cut");
-                    Integer price = null;
-                    try {
-                        price = Integer.parseInt(request.getParameter("price"));
-                    } catch (NumberFormatException ex) {
-                        log("Parameter price has wrong format.");
-                    }
-
-                    PreparedStatement ps = conn.prepareStatement("select max(dpID) from [DiamondPrice]");
-                    ResultSet rs = ps.executeQuery();
-                    if (rs.next()) {
-                        dpid = rs.getInt(1);
-                        dpid++;
-                    }
-                    DiamondPriceDTO dp = new DiamondPriceDTO();
+                    dpid = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+                Double size = null;
+                try {
+                    size = Double.parseDouble(request.getParameter("diamondSize"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter size has wrong format.");
+                }
+                Double caratWeight = null;
+                try {
+                    caratWeight = Double.parseDouble(request.getParameter("caratWeight"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter caratWeight has wrong format.");
+                }
+                String color = request.getParameter("color");
+                String clarity = request.getParameter("clarity");
+                String cut = request.getParameter("cut");
+                Integer price = null;
+                try {
+                    price = Integer.parseInt(request.getParameter("price"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter price has wrong format.");
+                }
+                DiamondPriceDAO dao = new DiamondPriceDAO();
+                DiamondPriceDTO dp = dao.checkDPExist(dpid);
+                if (dp == null) {
+                    dp = new DiamondPriceDTO();
                     dp.setId(dpid);
                     dp.setSize(size);
                     dp.setCaratWeight(caratWeight);
@@ -174,11 +174,13 @@ public class DiamondPriceController extends HttpServlet {
                     dp.setPrice(price);
                     dpDAO.insert(dp);
                     request.setAttribute("dp", dp);
-                    RequestDispatcher rd = request.getRequestDispatcher("dpdetails.jsp");
+                    request.setAttribute("success", "Added Successfully!!!");
+                    RequestDispatcher rd = request.getRequestDispatcher("dpedit.jsp");
                     rd.forward(request, response);
-                } catch (SQLException ex) {
-                    System.out.println("Insert dp error!" + ex.getMessage());
-                    ex.printStackTrace();
+                } else {
+                    request.setAttribute("error", "Your Diamond Price ID is already existed!!!");
+                    RequestDispatcher rd = request.getRequestDispatcher("dpedit.jsp");
+                    rd.forward(request, response);
                 }
 
             } else if (action.equals("delete")) {//delete
@@ -200,7 +202,7 @@ public class DiamondPriceController extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

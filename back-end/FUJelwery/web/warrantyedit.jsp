@@ -1,10 +1,9 @@
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Warranty Management Page</title>
+        <title>JSP Page</title>
         <script>
             function isValidImageUrlFormat(url) {
                 const regex = /^https:\/\/.*\.(jpg|jpeg|png|gif|bmp|webp)$/i;
@@ -21,28 +20,17 @@
                 }
                 return true;
             }
-            document.addEventListener('DOMContentLoaded', function () {
-                const warrantyMonthInput = document.getElementById('warrantyMonth');
-                const form = warrantyMonthInput.closest('form');
-
-                warrantyMonthInput.addEventListener('input', function () {
-                    const value = parseInt(this.value, 10);
-                    if (value < 0 || isNaN(value)) {
-                        this.setCustomValidity('Please enter a valid month (0 or greater)');
-                    } else {
-                        this.setCustomValidity('');
-                    }
-                });
-
-                form.addEventListener('submit', function (event) {
-                    const value = parseInt(warrantyMonthInput.value, 10);
-                    if (value < 0 || isNaN(value)) {
-                        event.preventDefault();
-                        warrantyMonthInput.reportValidity();
-                    }
-                });
-            });
-
+        </script>
+        <script type="text/javascript">
+            function validateInput() {
+                var input = document.getElementsByName('id')[0];
+                var value = input.value;
+                if (value === "" || isNaN(value) || parseInt(value) <= 1) {
+                    alert("Please enter an integer larger than one.");
+                    return false;
+                }
+                return true;
+            }
         </script>
     </head>
     <body>
@@ -51,25 +39,30 @@
         <h1>Warranty Edit </h1>
         <p> Login user: ${sessionScope.salessession.username}</p>
 
-        <form action="./WarrantyController" method="POST" onsubmit="return validateForm()">
-            <table>
+        <% String error1 = (String) request.getAttribute("error"); %>
+        <% if (error1 != null) {%>
+        <h4 style="color: red; text-align: center"> <%= error1%> </h4>
+        <% }%>
 
-                <tr><td></td><td><input name="id" value="${requestScope.warranty.id}" required="Please enter" type="hidden"</td></tr>
+        <% String success = (String) request.getAttribute("success"); %>
+        <% if (success != null) {%>
+        <h4 style="color: green; text-align: center"> <%= success%> </h4>
+        <% }%>
+
+        <form action="./WarrantyController" method="POST" onsubmit="return validateForm()" onsubmit="return validateInput()">
+            <table>
+                <tr>
+                    <td>ID</td>
+                    <td><input type="number" name="id" value="${requestScope.warranty.id}" min="1" required></td>
+                </tr>
+
                 <tr><td>Name</td><td><input name="warrantyName" value="${requestScope.warranty.name}" required="Please enter" </td></tr>
                 <tr><td>Image</td><td><input name="warrantyImage" value="${requestScope.warranty.image}" required="Please enter" </td></tr>
-                <tr>
-                    <td>Month</td>
-                    <td>
-                        <input type="number" id="warrantyMonth" name="warrantyMonth" value="${requestScope.warranty.month}" required min="0">
-                    </td>
-                </tr>                <tr><td>Description</td><td><input name="warrantyDescription" value="${requestScope.warranty.description}" required="Please enter"</td></tr>
+                <tr><td>Month</td><td><input name="warrantyMonth" value="${requestScope.warranty.month}" required="Please enter" </td></tr>
+                <tr><td>Description</td><td><input name="warrantyDescription" value="${requestScope.warranty.description}" required="Please enter"</td></tr>
                 <tr><td>Type</td><td><input name="warrantyType" value="${requestScope.warranty.type}" required="Please enter"</td></tr>
-                <tr>
-                    <td>Start Date</td>
-                    <td><input type="date" name="startDate" value="${requestScope.warranty.startdate}" required></td>
-                </tr>
+                <tr><td>Start Date</td><td><input name="startDate" value="${requestScope.warranty.startdate}" required="Please enter" </td></tr>
                 <tr><td>Terms and Conditions</td><td><input name="termsAndConditions" value="${requestScope.warranty.termsandconditions}" required="Please enter"</td></tr>
-
                 <tr><td colspan="2">
                         <input name="action" value="${requestScope.nextaction}" type="hidden">
                         <input type="submit" value="Save">
@@ -77,5 +70,8 @@
             </table>
 
         </form>
+        <form action="WarrantyController" style="padding-top: 10px">
+            <input type=hidden name="action" value="list">
+            <input type=submit value="Return" ></form>
     </body>
 </html>

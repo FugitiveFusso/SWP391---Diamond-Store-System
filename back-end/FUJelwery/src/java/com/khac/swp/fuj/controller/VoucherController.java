@@ -120,26 +120,29 @@ public class VoucherController extends HttpServlet {
                 rd.forward(request, response);
 
             } else if (action.equals("insert")) {//insert
+
+                Connection conn = DBUtils.getConnection();
+                Integer voucherid = null;
                 try {
-                    Connection conn = DBUtils.getConnection();
-                    int voucherid = 0;
-                    String vouchername = request.getParameter("voucherName");
-                    String voucherimage = request.getParameter("voucherImage");
-                    String description = request.getParameter("description");
-                    String coupon = request.getParameter("coupon");
-                    Integer percentage = null;
-                    try {
-                        percentage = Integer.parseInt(request.getParameter("percentage"));
-                    } catch (NumberFormatException ex) {
-                        log("Parameter percentage has wrong format.");
-                    }
-                    PreparedStatement ps = conn.prepareStatement("select max(voucherID) from [Voucher]");
-                    ResultSet rs = ps.executeQuery();
-                    if (rs.next()) {
-                        voucherid = rs.getInt(1);
-                        voucherid++;
-                    }
-                    VoucherDTO voucher = new VoucherDTO();
+                    voucherid = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+                String vouchername = request.getParameter("voucherName");
+                String voucherimage = request.getParameter("voucherImage");
+                String description = request.getParameter("description");
+                String coupon = request.getParameter("coupon");
+                Integer percentage = null;
+                try {
+                    percentage = Integer.parseInt(request.getParameter("percentage"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter percentage has wrong format.");
+                }
+
+                VoucherDAO dao = new VoucherDAO();
+                VoucherDTO voucher = dao.checkVoucherExistByID(voucherid);
+                if (voucher == null) {
+                    voucher = new VoucherDTO();
                     voucher.setId(voucherid);
                     voucher.setName(vouchername);
                     voucher.setImage(voucherimage);
@@ -147,12 +150,15 @@ public class VoucherController extends HttpServlet {
                     voucher.setCoupon(coupon);
                     voucher.setPercentage(percentage);
                     voucherDAO.insert(voucher);
-                    request.setAttribute("voucher", voucher);
-                    RequestDispatcher rd = request.getRequestDispatcher("voucherdetails.jsp");
+                    
+                    request.setAttribute("voucher", voucher);                       
+                    request.setAttribute("success", "Added Successfully!!!");
+                    RequestDispatcher rd = request.getRequestDispatcher("voucheredit.jsp");
                     rd.forward(request, response);
-                } catch (SQLException ex) {
-                    System.out.println("Insert voucher error!" + ex.getMessage());
-                    ex.printStackTrace();
+                } else {
+                    request.setAttribute("error", "Your voucher ID is already existed!!!");
+                    RequestDispatcher rd = request.getRequestDispatcher("voucheredit.jsp");
+                    rd.forward(request, response);
                 }
 
             } else if (action.equals("delete")) {//delete

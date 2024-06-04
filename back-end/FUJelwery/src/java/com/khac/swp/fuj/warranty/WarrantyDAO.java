@@ -184,4 +184,36 @@ public class WarrantyDAO {
 
         return false;
     }
+    
+    public WarrantyDTO checkWarrantyExistByID(int warrantyID) {
+
+        String sql = "select warrantyID, warrantyName, warrantyImage, warrantyMonth, warrantyDescription, warrantyType, startDate, endDate, termsAndConditions from Warranty where warrantyID = ?";
+
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, warrantyID);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                WarrantyDTO warranty = new WarrantyDTO();
+                warranty.setId(rs.getInt("warrantyID"));
+                warranty.setName(rs.getString("warrantyName"));
+                warranty.setImage(rs.getString("warrantyImage"));
+                warranty.setMonth(rs.getInt("warrantyMonth"));
+                warranty.setDescription(rs.getString("warrantyDescription"));
+                warranty.setType(rs.getString("warrantyType"));
+                warranty.setStartdate(rs.getString("startDate"));
+                warranty.setEnddate(rs.getString("endDate"));
+                warranty.setTermsandconditions(rs.getString("termsAndConditions"));
+                return warranty;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Query User error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return null;
+    }
 }

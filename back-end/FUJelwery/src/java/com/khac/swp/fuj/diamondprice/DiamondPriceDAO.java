@@ -171,4 +171,34 @@ public class DiamondPriceDAO {
 
         return false;
     }
+
+    public DiamondPriceDTO checkDPExist(int dpID) {
+
+        String sql = "select dpID, diamondSize, caratWeight, color, clarity, cut, price from DiamondPrice where dpID = ?";
+
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, dpID);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                DiamondPriceDTO dp = new DiamondPriceDTO();
+                dp.setId(rs.getInt("dpID"));
+                dp.setSize(rs.getDouble("diamondSize"));
+                dp.setCaratWeight(rs.getDouble("caratWeight"));
+                dp.setColor(rs.getString("color"));
+                dp.setClarity(rs.getString("clarity"));
+                dp.setCut(rs.getString("cut"));
+                dp.setPrice(rs.getInt("price"));
+                return dp;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Query DiamonPrice error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return null;
+    }
 }

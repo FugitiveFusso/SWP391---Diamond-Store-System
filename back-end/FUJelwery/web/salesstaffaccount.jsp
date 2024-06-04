@@ -56,7 +56,7 @@
             </ul>
         </div>-->
         
-        <%@ include file="/managermenu.jsp" %>
+        <%@ include file="/salesmenu.jsp" %>
 
         Login user: ${sessionScope.salessession.username}
        <div class="container">

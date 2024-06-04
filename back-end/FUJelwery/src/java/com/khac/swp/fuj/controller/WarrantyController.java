@@ -125,45 +125,76 @@ public class WarrantyController extends HttpServlet {
                 rd.forward(request, response);
 
             } else if (action.equals("insert")) {//insert
+                Connection conn = null;
+                Integer warrantyid = null;
+                Integer month = null;
+
                 try {
-                    Connection conn = DBUtils.getConnection();
-                    int warrantyid = 0;
+                    conn = DBUtils.getConnection();
+                    if (conn == null) {
+                        throw new SQLException("Failed to establish a database connection.");
+                    }
+
+                    try {
+                        warrantyid = Integer.parseInt(request.getParameter("id"));
+                    } catch (NumberFormatException ex) {
+                        log("Parameter id has wrong format.");
+                        throw new ServletException("Parameter id has wrong format.");
+                    }
+
                     String warrantyname = request.getParameter("warrantyName");
                     String warrantyimage = request.getParameter("warrantyImage");
-                    Integer month = null;
+
                     try {
                         month = Integer.parseInt(request.getParameter("warrantyMonth"));
                     } catch (NumberFormatException ex) {
                         log("Parameter month has wrong format.");
+                        throw new ServletException("Parameter month has wrong format.");
                     }
+
                     String description = request.getParameter("warrantyDescription");
                     String type = request.getParameter("warrantyType");
                     String startDate = request.getParameter("startDate");
                     String tac = request.getParameter("termsAndConditions");
 
-                    PreparedStatement ps = conn.prepareStatement("select max(warrantyID) from [Warranty]");
-                    ResultSet rs = ps.executeQuery();
-                    if (rs.next()) {
-                        warrantyid = rs.getInt(1);
-                        warrantyid++;
+                    WarrantyDAO dao = new WarrantyDAO();
+                    WarrantyDTO warranty = dao.checkWarrantyExistByID(warrantyid);
+
+                    if (warranty == null) {
+                        warranty = new WarrantyDTO();
+                        warranty.setId(warrantyid);
+                        warranty.setName(warrantyname);
+                        warranty.setImage(warrantyimage);
+                        warranty.setMonth(month);
+                        warranty.setDescription(description);
+                        warranty.setType(type);
+                        warranty.setStartdate(startDate);
+                        warranty.setTermsandconditions(tac);
+
+                        dao.insert(warranty);
+                        request.setAttribute("warranty", warranty);
+                        request.setAttribute("success", "Added Successfully!!!");
+                        RequestDispatcher rd = request.getRequestDispatcher("warrantyedit.jsp");
+                        rd.forward(request, response);
+                    } else {
+                        request.setAttribute("error", "Your warranty ID already exists!!!");
+                        RequestDispatcher rd = request.getRequestDispatcher("warrantyedit.jsp");
+                        rd.forward(request, response);
                     }
-                    WarrantyDTO warranty = new WarrantyDTO();
-                    warranty.setId(warrantyid);
-                    warranty.setName(warrantyname);
-                    warranty.setImage(warrantyimage);
-                    warranty.setMonth(month);
-                    warranty.setDescription(description);
-                    warranty.setType(type);
-                    warranty.setStartdate(startDate);
-                    warranty.setTermsandconditions(tac);
-                    
-                    warrantyDAO.insert(warranty);
-                    request.setAttribute("warranty", warranty);
-                    RequestDispatcher rd = request.getRequestDispatcher("warrantydetails.jsp");
-                    rd.forward(request, response);
-                } catch (SQLException ex) {
-                    System.out.println("Insert warranty error!" + ex.getMessage());
-                    ex.printStackTrace();
+                } catch (SQLException e) {
+                    log("Database connection error: " + e.getMessage());
+                    throw new ServletException("Database connection error.", e);
+                } catch (Exception e) {
+                    log("An error occurred: " + e.getMessage());
+                    throw new ServletException("An error occurred.", e);
+                } finally {
+                    if (conn != null) {
+                        try {
+                            conn.close();
+                        } catch (SQLException e) {
+                            log("Failed to close the connection: " + e.getMessage());
+                        }
+                    }
                 }
 
             } else if (action.equals("delete")) {//delete

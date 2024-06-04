@@ -26,6 +26,15 @@
         <h1>Sales Staff Edit </h1>
         <p> Login user: ${sessionScope.managersession.username}</p>
 
+        <% String error1 = (String) request.getAttribute("error"); %>
+        <% if (error1 != null) {%>
+        <h4 style="color: red; text-align: center"> <%= error1%> </h4>
+        <% }%>
+
+        <% String success = (String) request.getAttribute("success"); %>
+        <% if (success != null) {%>
+        <h4 style="color: green; text-align: center"> <%= success%> </h4>
+        <% }%>
         <div class="container">
             <div class="padding">
                 <div class="row d-flex justify-content-center">
@@ -54,7 +63,7 @@
                                                     <div class="error"></div>
 
                                                 </div>
-                                                    
+
                                                 <div class="col-sm-6 input-box password-input-container">
                                                     <p class="m-b-10 f-w-600">Password</p>
                                                     <input id="myInput" type="password" name="password" value="${requestScope.sales.password}" required="Please enter" >
@@ -62,7 +71,7 @@
                                                         <i id="hide1" class="fa-solid fa-eye"></i>
                                                         <i id="hide2" class="fa-solid fa-eye-slash" id="eyeicon"></i>
                                                     </span> 
-                                                    
+
                                                     <div class="error"></div>
 
                                                 </div>
@@ -102,15 +111,22 @@
                                                 </div>
 
                                             </div>
-                                    <input name="roleID" value=3 required="Please enter"   type="hidden">
-                                    <div class="row" style="margin-top: 20px; justify-content: center">
-                                        <div class="col-sm-4">
-                                            <input name="action" value="${requestScope.nextaction}" type="hidden">
-                                            <button type="submit" class="btn btn-custom">Save</button>
+                                            <input name="roleID" value=3 required="Please enter"   type="hidden">
+                                            <div class="row" style="margin-top: 20px; justify-content: center">
+                                                <div class="col-sm-4">
+                                                    <input name="action" value="${requestScope.nextaction}" type="hidden">
+                                                    <button type="submit" class="btn btn-custom">Save</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <div class="row" style="margin-top: 20px; justify-content: center">
+                                            <div class="col-sm-4">
+                                                <form action="SalesController" style="padding-top: 10px">
+                                                    <button type="submit" class="btn btn-custom">Return</button>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
-                                    </form>
-                                       </div>
                                 </div>
                             </div>
                         </div>
@@ -118,7 +134,7 @@
                 </div>
             </div>
         </div>
-            <script src="js/showPasswordFunc.js"></script>
+        <script src="js/showPasswordFunc.js"></script>
 
 
     </body>

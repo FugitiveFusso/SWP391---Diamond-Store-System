@@ -54,7 +54,7 @@
                 </li>               
             </ul>
         </div>-->
-                <%@ include file="/managermenu.jsp" %>
+                <%@ include file="/menu.jsp" %>
 
        <div class="container">
             <div class="padding">
@@ -105,7 +105,7 @@
                                         </div>
                                         <div class="row" style="margin-top: 20px; justify-content: center">
                                             <div class="col-sm-4">
-                                                <form action="AdminController" style="padding-top: 10px">
+                                                <form action="CustomerController" style="padding-top: 10px">
                                                     <button type="submit" class="btn btn-custom">Return</button>
                                                 </form>
                                             </div>
