@@ -17,6 +17,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="./css/editstaff_password.css">
+        <link rel="stylesheet" href="./css/signup.css">
         <script defer src="./js/inputFormat.js"></script>
 
     </head>
@@ -67,7 +68,7 @@
                                                 <div class="col-sm-6 input-box password-input-container">
                                                     <p class="m-b-10 f-w-600">Password</p>
                                                     <input id="myInput" type="password" name="password" value="${requestScope.sales.password}" required="Please enter" >
-                                                    <span class="eye" onclick="myFunction()">
+                                                    <span class="eye_edit" onclick="myFunction()">
                                                         <i id="hide1" class="fa-solid fa-eye"></i>
                                                         <i id="hide2" class="fa-solid fa-eye-slash" id="eyeicon"></i>
                                                     </span> 
