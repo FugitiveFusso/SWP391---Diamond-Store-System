@@ -64,7 +64,7 @@
                                                 <div class="col-sm-6 input-box password-input-container">
                                                     <p class="m-b-10 f-w-600">Password</p>
                                                     <input id="myInput" name="password" value="${requestScope.deliverystaff.password}" required="Please enter" >
-                                                    <span class="eye" onclick="myFunction()">
+                                                    <span class="eye_edit" onclick="myFunction()">
                                                         <i id="hide1" class="fa-solid fa-eye"></i>
                                                         <i id="hide2" class="fa-solid fa-eye-slash" id="eyeicon"></i>
                                                     </span> 
