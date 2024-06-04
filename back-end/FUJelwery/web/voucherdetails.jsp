@@ -6,11 +6,50 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
         <title>Voucher Management Page</title>
-        <link rel="stylesheet" href="css/voucher_details.css"/>
+
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            .post-title{
+                align-items: center;
+                text-align: center;
+                margin-top: 30px;
+            }
+
+            .post-title h1{
+                font-size: 50px;               
+                font-weight: 700;
+            }
+
+            .card {
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                transition: transform 0.2s;
+            }
+            .card:hover {
+                transform: scale(1.02);
+            }
+            .card-img-top {
+                border-radius: 0.25rem 0.25rem 0 0;
+            }
+            .btn-group .btn {
+                width: 100px;
+            }           
+
+            .btn-group{
+                display: flex;
+                justify-content: center;
+            }
+
+            .btn-group form button{
+                font-size: 20px;
+                padding: 8px 6px;
+                background: #15156b;
+                color: #fff;
+                border-radius: 10px;
+                cursor: pointer;
+            }
 
 
-        
+        </style>
 
     </head>
     <body>
@@ -38,7 +77,7 @@
                             <h6 class="card-subtitle mb-2 text-muted">${requestScope.voucher.name}</h6>
                             <p class="card-text"><strong>Description:</strong> ${requestScope.voucher.description}</p>
                             <p class="card-text"><strong>Coupon:</strong> ${requestScope.voucher.coupon}</p>
-                            <p class="card-text"><strong>Percentage:</strong> ${requestScope.voucher.percentage}</p>
+                            <p class="card-text"><strong>Percentage:</strong> ${requestScope.voucher.percentage}%</p>
                             <div class="btn-group" role="group" aria-label="Voucher Actions">
                                 <form action="VoucherController" method="post" class="mr-2">
                                     <input type="hidden" name="action" value="list">
@@ -57,23 +96,6 @@
         </div>
 
 
-        <!--        <table>
-        
-                    <tr><td>Voucher ID</td><td>${requestScope.voucher.id}</td></tr>
-                    <tr><td>Voucher Name</td><td>${requestScope.voucher.name}</td></tr>
-                    <tr><td>Voucher Image</td><td><img src=${requestScope.voucher.image} width="300px" height="300px"></td></tr>
-                    <tr><td>Description</td><td>${requestScope.voucher.description}</td></tr>
-                    <tr><td>Coupon</td><td>${requestScope.voucher.coupon}</td></tr>
-                    <tr><td>Percentage</td><td>${requestScope.voucher.percentage}%</td></tr>
-                </table>
-        
-                <form action="VoucherController" style="padding-top: 10px">
-                    <input type=hidden name="action" value="list">
-                    <input type=submit value="Return" ></form>
-        
-                <form action="VoucherController" style="padding-top: 10px">
-                    <input type=hidden name="id" value="${requestScope.voucher.id}">
-                    <input type=hidden name="action" value="edit">
-                    <input type=submit value="Edit" ></form>-->
+
     </body>
 </html>
