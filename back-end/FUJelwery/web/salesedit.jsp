@@ -22,12 +22,12 @@
 
     </head>
     <body>
-        <jsp:include page="/managermenu.jsp" flush="true" />
+        <jsp:include page="/menu.jsp" flush="true" />
 
         <div class="container d-flex justify-content-center align-items-center">
             <div class="text-center">
                 <h1 style="font-size: 50px; font-weight: 700">Sales Staff Edit</h1>
-                <p>Login username: ${sessionScope.managersession.username}</p>
+                <p>Login username: ${sessionScope.adminsession.username}</p>
             </div>
         </div>
 

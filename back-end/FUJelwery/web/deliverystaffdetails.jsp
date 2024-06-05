@@ -55,10 +55,10 @@
                     </ul>
                 </div>-->
 
-        <jsp:include page="/managermenu.jsp" flush="true" />
+        <jsp:include page="/menu.jsp" flush="true" />
 
         <!--        <h1>Delivery Staff Details Page</h1>         
-                <p> Login username: ${sessionScope.managersession.username}</p>-->
+                <p> Login username: ${sessionScope.adminsession.username}</p>-->
 
         <div class="container">
             <div class="padding">

@@ -33,8 +33,8 @@ public class DeliveryStaffController extends HttpServlet {
 
             UserDAO userDAO = new UserDAO();
             HttpSession session = request.getSession(false);
-            if (session == null || session.getAttribute("managersession") == null) {
-                response.sendRedirect("managerlogin.jsp");
+            if (session == null || session.getAttribute("adminsession") == null) {
+                response.sendRedirect("adminlogin.jsp");
                 return;
             } else if (action == null || action.equals("list")) {//lists
 
