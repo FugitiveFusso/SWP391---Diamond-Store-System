@@ -155,7 +155,7 @@
 
             <div class="col-md-4">
                 <div class="button text-center">
-                    <form action="./DiamondController">
+                    <form action="DiamondController">
                         <input type=hidden name="action" value="list">
                         <input type=submit value="Return" class="btn btn-primary"></form>
                 </div>

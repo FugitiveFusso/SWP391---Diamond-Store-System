@@ -58,7 +58,7 @@
                         <input name=keyword type=text class="search-input" value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
                         <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
                     </form>
-                    <p>You need to add Diamond Price, Certificate, before you add a Diamond</p>
+                    <p>You need to add Certificate before you add a Diamond</p>
                     <table id="pagination">
                         <thead>
                             <tr>

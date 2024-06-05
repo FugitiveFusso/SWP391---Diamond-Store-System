@@ -83,7 +83,7 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Voucher ID: ${requestScope.diamond.diamondID}</h5>
+                            <h5 class="card-title">Diamond ID: ${requestScope.diamond.diamondID}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">${requestScope.diamond.diamondName}</h6>
                             <p class="card-text"><strong>Origin:</strong> ${requestScope.diamond.origin}</p>
                             <p class="card-text"><strong>Diamond Size:</strong> ${requestScope.diamond.diamondSize}</p>
