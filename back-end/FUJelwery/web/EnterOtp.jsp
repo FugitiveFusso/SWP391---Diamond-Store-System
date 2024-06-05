@@ -14,6 +14,7 @@
         <link rel="stylesheet"
               href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
+        <link rel="stylesheet" href="css/enterOTP.css">
         <style type="text/css">
             .form-gap {
                 padding-top: 70px;
@@ -32,7 +33,7 @@
                                 <h3>
                                     <i class="fa fa-lock fa-4x"></i>
                                 </h3>
-                                <h2 class="text-center">Enter OTP</h2>
+                                <h2 class="text-center" id="title">Enter OTP</h2>
                                 <%
                                     if (request.getAttribute("message") != null) {
                                         out.print("<p class='text-danger ml-1'>" + request.getAttribute("message") + "</p>");

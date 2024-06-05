@@ -1,0 +1,12 @@
+#title{
+ font-weight: 700;    
+}
+
+.btn-primary:hover{
+    background-color: #151542;
+    transition: 0.3s;
+}
+
+.btn-primary{
+    transition: 0.3s;
+}

@@ -39,22 +39,22 @@
                         </span>              
                     </div>
 
+                    <div class="dropdown-forget">
+                        <div class="dropdown1">
+                            <select  id="roleSelect" class="select-box" style="width: 200px;">
+                                <option value="0">Select your role</option>
+                                <option value="1">Customer</option>
+                                <option value="2">Administrator</option>
+                                <option value="3">Manager</option>
+                                <option value="4">Sales Staff</option>
+                                <option value="5">Delivery Staff</option>
 
-                    <div class="dropdown">
-                        Or login as &nbsp
-                        <select  id="roleSelect" class="select-box" style="width: 200px;">
-                            <option value="0">Select your role</option>
-                            <option value="1">Customer</option>
-                            <option value="2">Administrator</option>
-                            <option value="3">Manager</option>
-                            <option value="4">Sales Staff</option>
-                            <option value="5">Delivery Staff</option>
+                            </select>             
+                        </div>
 
-                        </select>             
-                    </div>
-
-                    <div class="forgot-password">
-                        <a href="forgotPassword.jsp">Forgot Password</a>
+                        <div class="forgot-password">
+                            <a href="forgotPassword.jsp">Forgot Password?</a>
+                        </div>
                     </div>
 
                     <button type="submit" class="btn">Login</button>
