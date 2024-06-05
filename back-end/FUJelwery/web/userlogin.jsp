@@ -59,11 +59,17 @@
 
                     <button type="submit" class="btn">Login</button>
 
+                    <div class="other-login">Or Sign In With</div>
+
+                    <div class="social-icon">
+                        <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/FUJelwery/LoginGoogleServlet&response_type=code
+                           &client_id=792757160936-kke52p9ud3fl6h3qe93tl4i6lug4sotd.apps.googleusercontent.com&approval_prompt=force" class="social-login"><i class="fa-brands fa-google"></i></a>
+                    </div>
+
                     <div class="register-link">
                         <p>Don't have an account? <a href="register.jsp">Register</a></p>
                     </div>
-                    <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/FUJelwery/LoginGoogleServlet&response_type=code
-                       &client_id=792757160936-kke52p9ud3fl6h3qe93tl4i6lug4sotd.apps.googleusercontent.com&approval_prompt=force">Login with Google</a>
+
                 </form>
             </div>
         </section>
@@ -98,8 +104,8 @@
         </script>
 
         <script type="text/javascript">
-            window.onload = function() {
-                var status = "<%= request.getAttribute("status") %>";
+            window.onload = function () {
+                var status = "<%= request.getAttribute("status")%>";
                 if (status == "failed") {
                     swal("Sorry", "Wrong Username or Password", "error");
                 } else if (status == "invalidEmail") {
