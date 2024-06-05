@@ -66,8 +66,8 @@
                         <div class="card-body">
                             <h5 class="card-title">Ring Price ID: ${requestScope.rp.id}</h5>
 
-                            <p class="card-text"><strong>Ring Size: </strong>${requestScope.dp.size}</p>
-                            <p class="card-text"><strong>Ring Placement Name:</strong> ${requestScope.rp.name}</p>
+                            <p class="card-text"><strong>Ring Size: </strong>${requestScope.rp.id}</p>
+                            <h6 class="card-subtitle mb-2 text-muted">${requestScope.rp.name}</h6>
                             <p class="card-text"><strong>Material: </strong> ${requestScope.rp.material}</p>
                             <p class="card-text"><strong>Color: </strong> ${requestScope.rp.color}</p>
                             <p class="card-text"><strong>Price: </strong> ${requestScope.rp.price}</p>
@@ -89,23 +89,5 @@
             </div>
         </div>
 
-        
-<!--        <table>
-
-            <tr><td>Ring Price ID</td><td>${requestScope.rp.id}</td></tr>
-            <tr><td>Ring Placement Name</td><td>${requestScope.rp.name}</td></tr>
-            <tr><td>Material</td><td>${requestScope.rp.material}</td></tr>
-            <tr><td>Color</td><td>${requestScope.rp.color}</td></tr>
-            <tr><td>Price</td><td>${requestScope.rp.price}</td></tr>
-        </table>
-
-        <form action="RingPlacementPriceController" style="padding-top: 10px">
-            <input type=hidden name="action" value="list">
-            <input type=submit value="Return" ></form>
-
-        <form action="RingPlacementPriceController" style="padding-top: 10px">
-            <input type=hidden name="id" value="${requestScope.rp.id}">
-            <input type=hidden name="action" value="edit">
-            <input type=submit value="Edit" ></form>-->
     </body>
 </html>

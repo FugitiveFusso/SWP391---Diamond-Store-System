@@ -5,7 +5,62 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Collection Management Detail</title>
-        <link rel="stylesheet" href="css/post_detail.css"/>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        
+        <script>
+            window.onload = function () {
+                if (!sessionStorage.getItem('hasReloaded')) {
+                    sessionStorage.setItem('hasReloaded', 'true');
+                    location.reload();
+                } else {
+                    sessionStorage.removeItem('hasReloaded');
+                }
+            };
+        </script>
+        
+        <style>
+            .post-title{
+                align-items: center;
+                text-align: center;
+                margin-top: 30px;
+            }
+
+            .post-title h1{
+                font-size: 50px;               
+                font-weight: 700;
+            }
+
+            .card {
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                transition: transform 0.2s;
+            }
+            .card:hover {
+                transform: scale(1.02);
+            }
+            .card-img-top {
+                border-radius: 0.25rem 0.25rem 0 0;
+            }
+            .btn-group .btn {
+                width: 100px;
+            }           
+
+            .btn-group{
+                display: flex;
+                justify-content: center;
+            }
+
+            .btn-group form button{
+                font-size: 20px;
+                padding: 8px 6px;
+                background: #15156b;
+                color: #fff;
+                border-radius: 10px;
+                cursor: pointer;
+            }
+
+
+        </style>
+         
     </head>
     <body>
         <jsp:include page="/salesmenu.jsp" flush="true" />
@@ -15,56 +70,38 @@
             <p> Login username: ${sessionScope.salessession.username}</p>
         </div>
 
-        <div class="content">
-            <div class="content1">
-                <div class="small-content">
-                    <div class="content-left">
-                        <div class="content-img">
-                            <img src=${requestScope.collection.collectionImage} width="300px" height="300px">
-                        </div>
-                    </div>
-                    <div class="content-right">
-                        <div class="content-intro">
-                            <div class="intro-details">
-                                <p class="title">Collection ID: ${requestScope.collection.collectionID}</p>
-                                <p class="name">${requestScope.collection.collectionName}</p>
-                            </div>                       
-                        </div>
-                        <div class="description">
-                            <p class="description-title">Description</p>
-                            <p class="title">${requestScope.collection.collectionDescription}</p>
-                        </div>    
+        <div class="container mt-4">
+            <div class="row">
+                <!-- Left Column: Image -->
+                <div class="col-md-6">
+                    <div class="card">
+                        <img src="${requestScope.collection.collectionImage}" class="card-img-top" alt="Voucher Image" style="height: 500px;">
                     </div>
                 </div>
-                <div class="buttons">
-                    <form action="CollectionController" style="padding-top: 10px">
-                        <input type=hidden name="action" value="list">
-                        <input type=submit value="Return" ></form>
 
-                    <form action="CollectionController" style="padding-top: 10px">
-                        <input type=hidden name="id" value="${requestScope.certificate.certificateID}">
-                        <input type=hidden name="action" value="edit">
-                        <input type=submit value="Edit" ></form>     
+                <!-- Right Column: Information -->
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Collection ID: ${requestScope.collection.collectionID}</h5>     
+                            <h6 class="card-subtitle mb-2 text-muted">${requestScope.collection.collectionName}</h6>
+                            <p class="card-text"><strong>Description: </strong> ${requestScope.collection.collectionDescription}</p>                           
+                            <div class="btn-group" role="group" aria-label="Voucher Actions">
+                                <form action="CollectionController" method="post" class="mr-2">
+                                    <input type="hidden" name="action" value="list">
+                                    <button type="submit" class="btn btn-primary">Return</button>
+                                </form>
+                                <form action="CollectionController" method="post">
+                                    <input type="hidden" name="id" value="${requestScope.warranty.id}">
+                                    <input type="hidden" name="action" value="edit">
+                                    <button type="submit" class="btn btn-secondary">Edit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>                   
+            </div>
         </div>
-
-        <!--        <table>
-        
-                    <tr><td>Diamond ID</td><td>${requestScope.collection.collectionID}</td></tr>
-                    <tr><td>Diamond Name</td><td>${requestScope.collection.collectionName}</td></tr>
-                    <tr><td>Diamond Image</td><td><img src=${requestScope.collection.collectionImage} width="300px" height="300px"></td></tr>
-                    <tr><td>Origin</td><td>${requestScope.collection.collectionDescription}</td></tr>
-        
-                </table>
-                    
-                    <form action="CollectionController" style="padding-top: 10px">
-                    <input type=hidden name="action" value="list">
-                    <input type=submit value="Return" ></form>
-        
-                <form action="CollectionController" style="padding-top: 10px">
-                    <input type=hidden name="id" value="${requestScope.collection.collectionID}">
-                    <input type=hidden name="action" value="edit">
-                    <input type=submit value="Edit" ></form>-->
+      
     </body>
 </html>
