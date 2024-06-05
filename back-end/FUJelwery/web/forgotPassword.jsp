@@ -12,7 +12,7 @@
         src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
         <link rel="stylesheet" href="css/forgotpassword.css">
 
-       
+
     </head>
     <body oncontextmenu='return false' class='snippet-body'>
         <div class="container padding-bottom-3x mb-2 mt-5">
@@ -43,10 +43,11 @@
                         <div class="card-footer">
                             <button class="btn btn-success" type="submit">Get New
                                 Password</button>
-                            <button class="btn btn-danger" type="submit">Back to
-                                Login</button>
                         </div>
                     </form>
+                    <div class="card-footer">
+                        <a href="userlogin.jsp"><button class="btn btn-danger" type="submit"> Return to Login </button></a>
+                    </div>
                 </div>
             </div>
         </div>
