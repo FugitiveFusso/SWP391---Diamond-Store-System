@@ -115,7 +115,7 @@
                             Address: FPT University, District 9, Ho Chi Minh City
                         </p>
                         <p>
-                            Email: KhacFUJ@gmail.com
+                            Email: fuj.khac.diamondshopsystem@gmail.com
                         </p>
                         <p>
                             Phone: (+ 84) 898876512

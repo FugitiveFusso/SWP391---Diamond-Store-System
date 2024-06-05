@@ -148,8 +148,8 @@
                         <p class="general">General information</p>
                         <ul class="a">
                             <li>Head office address: Slot E2a-7, D1, Đ. D1 Road, Long Thanh My Ward,  Thu Duc City, HCMC</li>
-                            <li>Phone: (+84) 085 xxx xxxx</li>
-                            <li>Charter capital: VND 600 000 000 000 000</li>
+                            <li>Phone: (+84) 898876512</li>
+                            <li>Email: fuj.khac.diamondshopsystem@gmail.com</li>
                             <li>Stock code: FUJ</li>
                             <li>Officers and employees: 4 people</li>
                         </ul>
@@ -171,10 +171,10 @@
 
                         <div class="info-text">
                             <p>
-                                Address: FPT University, District 9, HCMC
+                                Address: FPT University, District 9, Ho Chi Minh City
                             </p>
                             <p>
-                                Email: CuongNPSE183844@fpt.edu.vn
+                                Email: fuj.khac.diamondshopsystem@gmail.com
                             </p>
                             <p>
                                 Phone: (+ 84) 898876512
