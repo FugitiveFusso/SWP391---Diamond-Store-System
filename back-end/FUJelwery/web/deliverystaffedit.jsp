@@ -23,8 +23,13 @@
     <body>
         <jsp:include page="/menu.jsp" flush="true" />
 
-        <h1>Delivery Staff Edit </h1>
-        <p> Login user: ${sessionScope.adminsession.username}</p>
+        <div class="container d-flex justify-content-center align-items-center">
+            <div class="text-center">
+                <h1 style="font-size: 50px; font-weight: 700">Delivery Staff Edit</h1>
+                <p>Login username: ${sessionScope.adminsession.username}</p>
+            </div>
+        </div>
+            
         <% String error1 = (String) request.getAttribute("error"); %>
         <% if (error1 != null) {%>
         <h4 style="color: red; text-align: center"> <%= error1%> </h4>

@@ -121,12 +121,12 @@
                                                     <input name="action" value="${requestScope.nextaction}" type="hidden">
                                                     <button type="submit" class="btn btn-custom">Save</button>
                                                 </div>
-                                            </div>
+                                            
                                         </form>
-                                        <div class="row" style="margin-top: 20px; justify-content: center">
+                                        
 
                                             <div class="col-sm-4">
-                                                <form action="ManagerController" style="padding-top: 10px">
+                                                <form action="ManagerController">
                                                     <button type="submit" class="btn btn-custom">Return</button>
                                                 </form>
                                             </div>
