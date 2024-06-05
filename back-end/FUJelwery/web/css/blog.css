@@ -1,0 +1,115 @@
+.content {
+    padding-bottom: 90px;
+    margin: 0 170px 10px 170px;
+}
+
+table{
+    border: none;
+    border-style: none;
+    border-collapse: collapse;
+    margin-top: 30px;
+}
+
+tr{
+    margin: 30px 0;
+    background-color: #ededed;
+}  
+
+.blog-intro {
+    text-align: center;
+    font-family: 'Italiana';
+    font-weight: 400;
+    font-size: 128px;
+    color: #000000;
+}
+
+table img{
+    vertical-align: bottom;
+    width: 450px;
+    height: 250px;
+}
+
+table p{
+    text-align: center;
+    margin: 0 80px;
+    font-size: 18px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+}
+
+tbody tr:nth-child(even){
+    background-color: #cdcdcd;
+
+}
+
+.blog-title{
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 30px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+}
+
+.footer {
+    background-color: black;
+    color: #fefefe;
+    position: relative;
+    width: 100%;
+    bottom: 0;
+}
+
+.footer-content-info {
+    padding-left: 100px;
+}
+
+.info-img {
+    margin-left: 60px;
+}
+
+.footer-content-info img {
+    width: 80px;
+    height: 80px;
+}
+
+.info-text p {
+    color: white;
+    font-size: 16px;
+    font-family: 'Raleway', sans-serif;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 30px 0;
+}
+
+.customer-service {
+    padding-top: 30px;
+    padding-left: 400px;
+}
+
+.customer-service-title {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: white;
+}
+
+.footer .footer-content a {
+    text-decoration: none;
+    color: #fefefe;
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+}
+
+.policy {
+    padding-top: 30px;
+    padding-right: 100px;
+}
+
+.policy-title {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: white;
+}
