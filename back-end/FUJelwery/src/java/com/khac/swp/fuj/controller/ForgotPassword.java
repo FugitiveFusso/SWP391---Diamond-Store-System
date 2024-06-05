@@ -58,7 +58,7 @@ public class ForgotPassword extends HttpServlet {
                 message.setFrom(new InternetAddress(email));// change accordingly
                 message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
                 message.setSubject("FUJ: OTP for Reset Password");
-                message.setText("YOUR OTP IS: " + otpvalue + ". DO NOT SHARE TO ANYONE ELSE!\n\nBest regards,\n\nFPTU Jewelry – KHAC Team\n\nAll students, Majoring in Software Engineering, FPT University of HCMC\n\nMobile: (+84) 898876512\n\nEmail: fuj.khac.diamondshopsystem@gmail.com\n\nGitHub: github.com/FugitiveFusso/SWP391-Diamond-Store-System\n\nFollow us on: Facebook | Twitter | LinkedIn\n\n");
+                message.setText("YOUR OTP IS: " + otpvalue + ". PLEASE USE THIS CODE TO RESET YOUR PASSWORD IN OUR WEBSITE!\nDO NOT SHARE TO ANYONE ELSE!\n\nBest regards,\n\nFPTU Jewelry – KHAC Team\n\nFour students, Major in Software Engineering, FPT University of HCMC\n\nMobile: (+84) 898876512\n\nEmail: fuj.khac.diamondshopsystem@gmail.com\n\nGitHub: github.com/FugitiveFusso/SWP391-Diamond-Store-System\n\nFollow us on: Facebook | Twitter | LinkedIn\n\n");
                 // send message
                 Transport.send(message);
                 System.out.println("message sent successfully");
