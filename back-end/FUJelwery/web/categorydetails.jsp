@@ -65,8 +65,8 @@
                 <div class="col-md-8">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Category ID: ${requestScope.category.categoryID}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">${requestScope.category.categoryName}</h6>
+                            <h6 class="card-subtitle mb-2 text-muted" >Category ID: ${requestScope.category.categoryID}</h6>
+                            <h4 class="card-title" style="font-weight: 700">${requestScope.category.categoryName}</h4>                               
 
                             <div class="btn-group" role="group" aria-label="Voucher Actions">
                                 <form action="RingPlacementPriceController" method="post" class="mr-2">

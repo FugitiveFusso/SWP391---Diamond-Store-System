@@ -61,11 +61,11 @@
 
         <div class="container mt-4">
             <div class="row justify-content-center">
-                <!-- Right Column: Information -->
+                
                 <div class="col-md-8">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Diamond Price ID: ${requestScope.dp.id}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted" >Diamond Price ID: ${requestScope.dp.id}</h6>                           
 
                             <p class="card-text"><strong>Diamond Size: </strong>${requestScope.dp.size}</p>
                             <p class="card-text"><strong>Carat Weight:</strong> ${requestScope.dp.caratWeight}</p>
@@ -90,24 +90,6 @@
             </div>
         </div>
 
-        <!--        <table>
         
-                    <tr><td>Diamond Price ID</td><td>${requestScope.dp.id}</td></tr>
-                    <tr><td>Diamond Size</td><td>${requestScope.dp.size}</td></tr>
-                    <tr><td>Carat Weight</td><td>${requestScope.dp.caratWeight}</td></tr>
-                    <tr><td>Color</td><td>${requestScope.dp.color}</td></tr>
-                    <tr><td>Clarity</td><td>${requestScope.dp.clarity}</td></tr>
-                    <tr><td>Cut</td><td>${requestScope.dp.cut}</td></tr>
-                    <tr><td>Price</td><td>${requestScope.dp.price}</td></tr>
-                </table>
-        
-                <form action="DiamondPriceController" style="padding-top: 10px">
-                    <input type=hidden name="action" value="list">
-                    <input type=submit value="Return" ></form>
-        
-                <form action="DiamondPriceController" style="padding-top: 10px">
-                    <input type=hidden name="id" value="${requestScope.dp.id}">
-                    <input type=hidden name="action" value="edit">
-                    <input type=submit value="Edit" ></form>-->
     </body>
 </html>

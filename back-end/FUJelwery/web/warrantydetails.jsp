@@ -72,20 +72,18 @@
         
         
         <div class="container mt-4">
-            <div class="row">
-                <!-- Left Column: Image -->
+            <div class="row">               
                 <div class="col-md-6">
                     <div class="card">
                         <img src="${requestScope.warranty.image}" class="card-img-top" alt="Voucher Image" style="height: 410px; object-fit: cover;">
                     </div>
                 </div>
-
-                <!-- Right Column: Information -->
+                    
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Warranty ID: ${requestScope.warranty.id}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">${requestScope.warranty.name}</h6>
+                            <h6 class="card-subtitle mb-2 text-muted" >Warranty ID: ${requestScope.warranty.id}</h6>
+                            <h4 class="card-title" style="font-weight: 700">${requestScope.warranty.name}</h4>                           
                             <p class="card-text"><strong>Warranty Month: </strong> ${requestScope.warranty.month}</p>
                             <p class="card-text"><strong>Description:</strong> ${requestScope.warranty.description}</p>
                             <p class="card-text"><strong>Warranty Type: </strong> ${requestScope.warranty.type}</p>

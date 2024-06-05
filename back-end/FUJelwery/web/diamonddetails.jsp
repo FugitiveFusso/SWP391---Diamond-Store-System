@@ -83,8 +83,8 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Diamond ID: ${requestScope.diamond.diamondID}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">${requestScope.diamond.diamondName}</h6>
+                            <h6 class="card-subtitle mb-2 text-muted" >Diamond ID: ${requestScope.diamond.diamondID}</h6>
+                            <h4 class="card-title" style="font-weight: 700">${requestScope.diamond.diamondName}</h4>
                             <p class="card-text"><strong>Origin:</strong> ${requestScope.diamond.origin}</p>
                             <p class="card-text"><strong>Diamond Size:</strong> ${requestScope.diamond.diamondSize}</p>
                             <p class="card-text"><strong>Carat Weight:</strong> ${requestScope.diamond.caratWeight}</p>
@@ -110,30 +110,5 @@
             </div>
         </div>
 
-        
-<!--        <table>
-            <tr><td>Diamond ID</td><td>${requestScope.diamond.diamondID}</td></tr>
-            <tr><td>Diamond Name</td><td>${requestScope.diamond.diamondName}</td></tr>
-            <tr><td>Diamond Image</td><td><img src="${requestScope.diamond.diamondImage}" width="300px" height="300px"></td></tr>
-            <tr><td>Origin</td><td>${requestScope.diamond.origin}</td></tr>
-            <tr><td>Diamond Size</td><td>${requestScope.diamond.diamondSize}</td></tr>
-            <tr><td>Carat Weight</td><td>${requestScope.diamond.caratWeight}</td></tr>
-            <tr><td>Cut</td><td>${requestScope.diamond.cut}</td></tr>
-            <tr><td>Color</td><td>${requestScope.diamond.color}</td></tr>
-            <tr><td>Clarity</td><td>${requestScope.diamond.clarity}</td></tr>
-            <tr><td>Certificate</td><td>${requestScope.diamond.certificateID}</td></tr>
-            <tr><td>Price</td><td>${requestScope.diamond.diamondPrice}</td></tr>
-        </table>
-
-        <form action="DiamondController" style="padding-top: 10px">
-            <input type="hidden" name="action" value="list">
-            <input type="submit" value="Return">
-        </form>
-
-        <form action="DiamondController" style="padding-top: 10px">
-            <input type="hidden" name="id" value="${requestScope.diamond.diamondID}">
-            <input type="hidden" name="action" value="edit">
-            <input type="submit" value="Edit">
-        </form>-->
     </body>
 </html>

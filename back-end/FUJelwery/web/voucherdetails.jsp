@@ -62,19 +62,19 @@
 
         <div class="container mt-4">
             <div class="row">
-                <!-- Left Column: Image -->
+                
                 <div class="col-md-6">
                     <div class="card">
                         <img src="${requestScope.voucher.image}" class="card-img-top" alt="Voucher Image" style="height: 300px; object-fit: cover;">
                     </div>
                 </div>
 
-                <!-- Right Column: Information -->
+                
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Voucher ID: ${requestScope.voucher.id}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">${requestScope.voucher.name}</h6>
+                            <h6 class="card-subtitle mb-2 text-muted" >Voucher ID: ${requestScope.voucher.id}</h6>
+                            <h4 class="card-title" style="font-weight: 700">${requestScope.voucher.name}</h4>                            
                             <p class="card-text"><strong>Description:</strong> ${requestScope.voucher.description}</p>
                             <p class="card-text"><strong>Coupon:</strong> ${requestScope.voucher.coupon}</p>
                             <p class="card-text"><strong>Percentage:</strong> ${requestScope.voucher.percentage}%</p>

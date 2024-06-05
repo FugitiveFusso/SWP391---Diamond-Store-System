@@ -71,18 +71,17 @@
 
         <div class="container mt-4">
             <div class="row">
-                <!-- Left Column: Image -->
+                
                 <div class="col-md-6">
                     <div class="card">
                         <img src="${certificate.certificateImage}" class="card-img-top" alt="Voucher Image" style="height: 500px; width: 500px;">
                     </div>
                 </div>
-
-                <!-- Right Column: Information -->
+                
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Certificate ID: ${requestScope.certificate.certificateID}</h5>                           
+                            <h6 class="card-subtitle mb-2 text-muted" >Certificate ID: ${requestScope.certificate.certificateID}</h6>                                                  
                             <p class="card-text"><strong>Description: </strong> ${requestScope.certificate.certificateDescription}</p>                           
                             <div class="btn-group" role="group" aria-label="Voucher Actions">
                                 <form action="CertificateController" method="post" class="mr-2">

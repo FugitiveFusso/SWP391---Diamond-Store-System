@@ -83,8 +83,8 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Collection ID: ${requestScope.collection.collectionID}</h5>     
-                            <h6 class="card-subtitle mb-2 text-muted">${requestScope.collection.collectionName}</h6>
+                            <h6 class="card-subtitle mb-2 text-muted" >Collection ID: ${requestScope.collection.collectionID}</h6>
+                            <h4 class="card-title" style="font-weight: 700">${requestScope.collection.collectionName}</h4>                            
                             <p class="card-text"><strong>Description: </strong> ${requestScope.collection.collectionDescription}</p>                           
                             <div class="btn-group" role="group" aria-label="Voucher Actions">
                                 <form action="CollectionController" method="post" class="mr-2">

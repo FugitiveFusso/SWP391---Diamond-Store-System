@@ -16,47 +16,10 @@
 
     </head>
     <body>
-<!--        <div class="menu">
-            you will code the horizontal menu here
-            <ul class="navbar">
 
-                <li class="navbar__link">
-                    <a href="#">Products</a>
-                    <div class="sub-menu-1">
-                        <ul>
-                            <li><a href='DiamondController'>Diamond</a></li>
-                            <li><a href='RingController'>Ring</a></li>
-                            <li><a href='CollectionController'>Collection</a></li>
-                        </ul>
-                    </div>                  
-                </li>
-                <li class="navbar__link"><a href='VoucherController'>Voucher</a></li>
-                <img src="./images/Screenshot (656).png">
-                <li class="navbar__link">
-                    <a href="#">Dashboard</a>
-                    <div class="sub-menu-1">
-                        <ul>
-                            <li><a href='AdminController'>View Admins</a></li>   
-                            <li><a href='DeliveryStaffController'>View Delivery Staffs</a></li>
-                            <li><a href='SalesController'>View Sale Staffs</a></li>
-                            <li><a href='CertificateController'>View Certificate</a></li>
-
-                        </ul>
-                    </div>
-                </li>
-                <li class="navbar__link">
-                    <a href="#">Account</a>
-                    <div class="sub-menu-1">
-                        <ul>
-                            <li><a href='adminlogin?action=logout'>Logout</a></li>          
-                        </ul>
-                    </div>
-                </li>               
-            </ul>
-        </div>-->
 
         <%@ include file="/menu.jsp" %>
-        <p> Login username: ${sessionScope.adminsession.username}</p>
+        
         
         <div class="list-container">
             <div class="smaller-container">

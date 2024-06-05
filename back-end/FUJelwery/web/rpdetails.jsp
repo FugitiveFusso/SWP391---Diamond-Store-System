@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Ring Price Management</title>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
         
         <style>
@@ -60,14 +60,15 @@
         
         <div class="container mt-4">
             <div class="row justify-content-center">
-                <!-- Right Column: Information -->
+                
                 <div class="col-md-8">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Ring Price ID: ${requestScope.rp.id}</h5>
-
+                            <h6 class="card-subtitle mb-2 text-muted" >Ring Price ID: ${requestScope.rp.id}</h6>
+                            <h4 class="card-title" style="font-weight: 700">${requestScope.rp.name}</h4>
+                            
                             <p class="card-text"><strong>Ring Size: </strong>${requestScope.rp.id}</p>
-                            <h6 class="card-subtitle mb-2 text-muted">${requestScope.rp.name}</h6>
+                            
                             <p class="card-text"><strong>Material: </strong> ${requestScope.rp.material}</p>
                             <p class="card-text"><strong>Color: </strong> ${requestScope.rp.color}</p>
                             <p class="card-text"><strong>Price: </strong> ${requestScope.rp.price}</p>
