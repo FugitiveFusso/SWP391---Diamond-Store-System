@@ -56,8 +56,12 @@
                 </div>-->
         <jsp:include page="/menu.jsp" flush="true" />
 
-        <!--   <h1>Manager Details </h1>         
-          <p> Login username: ${sessionScope.adminsession.username}</p>-->
+       <div class="container d-flex justify-content-center align-items-center">
+            <div class="text-center">
+                <h1 style="font-size: 50px; font-weight: 700">Sale Staff Details</h1>
+                <p>Login username: ${sessionScope.adminsession.username}</p>
+            </div>
+        </div>
 
         <div class="container">
             <div class="padding">
