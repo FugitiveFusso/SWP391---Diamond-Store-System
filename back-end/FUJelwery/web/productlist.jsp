@@ -1,4 +1,3 @@
-
 <%@page import="com.khac.swp.fuj.ring.RingDTO"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -8,6 +7,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link rel="stylesheet" href="css/navbaruser.css">
+        <link rel="stylesheet" href="css/user_productlist.css">
 
     </head>
     <body>
@@ -39,9 +39,21 @@
                         </ul>
                     </div>
                 </li>
-
             </ul>
-        </div> 
+        </div>
+
+        <div class="Main-hero">
+            <div class="hero-details">
+                <h2 style="font-family: Inter; font-weight: bold;">UP TO 50% OFF</h2>
+                <h1 style="font-family: Inika;">To Mom, With Love</h1>
+                <h3>A mother’s love is deep and everlasting. <br>Celebrate it with something that will always shin like she does (and save up to 50%)</h3>
+                <div class="button">
+                    <button id="button1" > <a href="#">Shop Sale Jewelry</a></button>
+                    <button><a href="#">Shop Engagement Rings</a></button>
+                </div>
+            </div>
+            <img src="images/hero1.jpg" alt="" srcset="">
+        </div>
 
         <div class="list-container">
             <div class="smaller-container">
@@ -51,42 +63,28 @@
                         <input name=keyword type=text value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
                         <input type=submit value=Search >
                     </form>
-                    <table>
-                        <tr>
-                            <th>Ring ID</th>
-                            <th><a href=?colSort=ringName>Ring Name</th>
-                            <th>Ring Image</th>
-                            <th><a href=?colSort=diamondName>Diamond Name</a></th>
-                            <th><a href=?colSort=price>Price</th>
-                            <th><a href=?colSort=categoryID>Category</th>
-                            <th><a href=?colSort=collectionID>Collection</th>
-                        </tr>
+                    <div class="card-container">
                         <%
                             List<RingDTO> list = (List<RingDTO>) request.getAttribute("productlist");
                             for (RingDTO product : list) {
                                 pageContext.setAttribute("product", product);
                         %>
-                        <tr>
-                            <td>
-                                <a href="ProductController?action=details&id=${product.ringID}">   ${product.ringID}</td>
-                            <td>${product.ringName}</td>
-                            <td><img src=${product.ringImage} width="300px" height="300px"></td>
-                            <td>${product.diamondName}</td>
-                            <td>${product.totalPrice}</td>
-                            <td>${product.categoryID}</td>
-                            <td>${product.collectionID}</td>
-
-                        </tr>
+                        <div class="product-card">
+                            <a href="ProductController?action=details&id=${product.ringID}">
+                                <img src="${product.ringImage}" alt="${product.ringName}">
+                                <h3>${product.ringName}</h3>
+                                <p>Diamond: ${product.diamondName}</p>
+                                <p>Price: ${product.totalPrice}</p>
+                                <p>Category: ${product.categoryID}</p>
+                                <p>Collection: ${product.collectionID}</p>
+                            </a>
+                        </div>
                         <%
                             }
-                        %>    
-                        <tr><td colspan="10">
-                            </td></tr>
-                    </table>
+                        %>
+                    </div>
                 </div>
             </div>
-
         </div>
-
     </body>
 </html>

@@ -200,24 +200,23 @@
                         </div>
 
                         <div class="customer-service-text">
-                            <div class="customer-service-text">
-                                <p><a href="ringmeasuring.jsp">Instructions for measuring rings</a></p>
-                                <p><a href="consulation.jsp">Product consultation by month of birth</a></p>
-                                <p><a href="faqs.jsp">Frequently asked questions</a></p>
-                            </div>
+                            <p><a href="ringmeasuring.jsp">Instructions for measuring rings</a></p>
+                            <p><a href="consulation.jsp">Product consultation by month of birth</a></p>
+                            <p><a href="faqs.jsp">Frequently asked questions</a></p>
+                        </div>
+                    </div>
+
+                    <div class="policy">
+                        <div class="policy-title">
+                            Policy
                         </div>
 
-                        <div class="policy">
-                            <div class="policy-title">
-                                Policy
-                            </div>
-
-                            <div class="policy-text">
-                                <p><a href="warrantyPolicy.jsp">Warranty Policy</a></p>
-                                <p><a href="deliveryPolicy.jsp">Delivery Policy</a></p>
-                                <p><a href="returnPolicy.jsp">Return Policy</a></p>
-                                <p><a href="#">Privacy policy</a></p>
-                            </div>
+                        <div class="policy-text">
+                            <p><a href="warrantyPolicy.jsp">Warranty Policy</a></p>
+                            <p><a href="deliveryPolicy.jsp">Delivery Policy</a></p>
+                            <p><a href="returnPolicy.jsp">Return Policy</a></p>
+                            <p><a href="privatePolicy.jsp">Privacy policy</a></p>
+                        </div>
                         </div>
                     </div>
 

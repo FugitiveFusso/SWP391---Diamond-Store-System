@@ -277,7 +277,7 @@
                         <p><a href="warrantyPolicy.jsp">Warranty Policy</a></p>
                         <p><a href="deliveryPolicy.jsp">Delivery Policy</a></p>
                         <p><a href="returnPolicy.jsp">Return Policy</a></p>
-                        <p><a href="#">Privacy policy</a></p>
+                        <p><a href="privatePolicy.jsp">Privacy policy</a></p>
                     </div>
                 </div>
             </div>
