@@ -8,6 +8,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Delivery Staff Management Page</title>
         <link rel="stylesheet" href="css/navbar.css">
+        <script src="https://unpkg.com/@phosphor-icons/web"></script>
         <link rel="stylesheet" href="css/customer_list.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -18,9 +19,77 @@
     <body>
 
 
-        <%@ include file="/menu.jsp" %>
+        <!--<%@ include file="/menu.jsp" %>-->
         
-        
+        <div class="header_menu">
+            <div id="mySidenav" class="sidenav menu">
+                <a href="javascript:void(0)" id="closebtn" class="closebtn" onclick="closeNav()">&times;</a>
+                <ul>                   
+                    <li>
+                        <a href="javascript:void(0)" onclick="toggleSubMenu(this)">
+                            <i class="icon ph-bold ph-user"></i>
+                            <span class="text">View List</span>
+                            <i class="arrow ph-bold ph-caret-down"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="CustomerController">
+                                    <span class="text">Customer List</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="AdminController">
+                                    <span class="text">Administrator List</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="DeliveryStaffController">
+                                    <span class="text">Delivery Staff List</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="SalesController">
+                                    <span class="text">Sale Staff List</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="ManagerController">
+                                    <span class="text">Manager List</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="active">
+                        <a href="PostController">
+                            <i class="icon ph-bold ph-file-text"></i>
+                            <span class="text">Posts</span>
+                        </a>
+                    </li>                   
+                </ul>
+                <div class="menu">
+
+                    <ul>
+                        <li>
+                            <a href="adminaccount.jsp">
+                                <i class="icon ph-bold ph-user"></i>
+                                <span class="text">Account</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="adminlogin?action=logout">
+                                <i class="icon ph-bold ph-sign-out"></i>
+                                <span class="text">Logout</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <span class="cainut" style="font-size:30px;cursor:pointer;" onclick="openNav()">&#9776; Menu</span>
+        </div>
+
+
         <div class="list-container">
             <div class="smaller-container">
                 <div class="list1">
@@ -49,7 +118,7 @@
                         <input name=keyword type=text class="search-input" value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
                         <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
                     </form>
-                        
+
                     <table id="pagination">
                         <thead>
                             <tr>
@@ -89,12 +158,12 @@
                                 }
                             %>    
 
-<!--                            <tr><td colspan="6">
-                                    <form action="AdminController" method="POST" class="input">
-                                        <input name="action" value="create" type="hidden">
-                                        <input type="submit" value="Create">
-                                    </form>
-                                </td></tr>-->
+                            <!--                            <tr><td colspan="6">
+                                                                <form action="AdminController" method="POST" class="input">
+                                                                    <input name="action" value="create" type="hidden">
+                                                                    <input type="submit" value="Create">
+                                                                </form>
+                                                            </td></tr>-->
                         </tbody>
                     </table>
                     <div id="paginationControls" class="pagination-controls">
@@ -107,6 +176,11 @@
         </div>
 
         <script src="js/pagination.js"></script>
+        <script src="js/pagination.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+                integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+        crossorigin="anonymous"></script>
+        <script src="js/sidenav.js"></script>
 
     </body>
 </html>

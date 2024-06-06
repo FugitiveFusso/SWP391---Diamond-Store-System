@@ -5,6 +5,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" href="css/navbar.css">
+        <script src="https://unpkg.com/@phosphor-icons/web"></script>
         <link rel="stylesheet" href="css/post_edit.css"/>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
@@ -39,7 +41,76 @@
         </script>
     </head>
     <body>
-        <jsp:include page="/menu.jsp" flush="true" />
+        <!--<jsp:include page="/menu.jsp" flush="true" />-->
+
+        <div class="header_menu">
+            <div id="mySidenav" class="sidenav menu">
+                <a href="javascript:void(0)" id="closebtn" class="closebtn" onclick="closeNav()">&times;</a>
+                <ul>                   
+                    <li>
+                        <a href="javascript:void(0)" onclick="toggleSubMenu(this)">
+                            <i class="icon ph-bold ph-user"></i>
+                            <span class="text">View List</span>
+                            <i class="arrow ph-bold ph-caret-down"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="CustomerController">
+                                    <span class="text">Customer List</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="AdminController">
+                                    <span class="text">Administrator List</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="DeliveryStaffController">
+                                    <span class="text">Delivery Staff List</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="SalesController">
+                                    <span class="text">Sale Staff List</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="ManagerController">
+                                    <span class="text">Manager List</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="active">
+                        <a href="PostController">
+                            <i class="icon ph-bold ph-file-text"></i>
+                            <span class="text">Posts</span>
+                        </a>
+                    </li>                   
+                </ul>
+                <div class="menu">
+
+                    <ul>
+                        <li>
+                            <a href="adminaccount.jsp">
+                                <i class="icon ph-bold ph-user"></i>
+                                <span class="text">Account</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="adminlogin?action=logout">
+                                <i class="icon ph-bold ph-sign-out"></i>
+                                <span class="text">Logout</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <span class="cainut" style="font-size:30px;cursor:pointer;" onclick="openNav()">&#9776; Menu</span>
+        </div>
+
         <div class="title">
             <h1>Post Edit</h1>
             <p> Login user: ${sessionScope.adminsession.username}</p>
@@ -101,27 +172,10 @@
 
     </div>
 </div>
+<script src="js/pagination.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+                                                integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+crossorigin="anonymous"></script>
+<script src="js/sidenav.js"></script>
 
-
-
-
-<!--                <form action="./PostController" method="POST" onsubmit="return validateForm()" onsubmit="return validateInput()">
-                    <table>
-                        <tr>
-                            <td>ID</td>
-                            <td><input type="number" name="id" value="${requestScope.post.id}" min="0" required></td>
-                        </tr>
-                        
-                        <tr><td>Post Name</td><td><input name="postName" value="${requestScope.post.name}" required="Please enter" </td></tr>
-                        <tr><td>Post Image</td><td><input name="postImage" value="${requestScope.post.image}" required="Please enter" </td></tr>
-                        <tr><td>Description</td><td><input name="description" value="${requestScope.post.description}" required="Please enter"</td></tr>
-        
-                        <tr><td colspan="2">
-                                <input name="action" value="${requestScope.nextaction}" type="hidden">
-                                <input type="submit" value="Save">
-                            </td></tr>
-                    </table>
-        
-                </form>-->
 </body>
 </html>

@@ -7,7 +7,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Delivery Staff Management Page</title>
         <link rel="stylesheet" href="css/navbar.css">
-        <!--<link rel="stylesheet" href="css/staff_detail.css">-->
+        <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
         <link rel="stylesheet" href="css/staff_details.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css" />
@@ -16,46 +16,75 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css" />
     </head>
     <body>
-        <!--         <div class="menu">
-                    you will code the horizontal menu here
-                    <ul class="navbar">
-                        
-                        <li class="navbar__link">
-                            <a href="#">Products</a>
-                            <div class="sub-menu-1">
-                                <ul>
-                                    <li><a href='DiamondController'>Diamond</a></li>
-                                    <li><a href='RingController'>Ring</a></li>
-                                    <li><a href='CollectionController'>Collection</a></li>
-                                </ul>
-                            </div>                  
-                        </li>
-                        <li class="navbar__link"><a href='VoucherController'>Voucher</a></li>
-                        <img src="./images/Screenshot (656).png">
-                        <li class="navbar__link">
-                            <a href="#">Dashboard</a>
-                            <div class="sub-menu-1">
-                                <ul>
-                                    <li><a href='AdminController'>View Admins</a></li>   
-                                    <li><a href='DeliveryStaffController'>View Delivery Staffs</a></li>
-                                    <li><a href='SalesController'>View Sale Staffs</a></li>
-                                    <li><a href='CertificateController'>View Certificate</a></li>
-                                    
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="navbar__link">
-                            <a href="#">Account</a>
-                            <div class="sub-menu-1">
-                                <ul>
-                                    <li><a href='adminlogin?action=logout'>Logout</a></li>          
-                                </ul>
-                            </div>
-                        </li>               
-                    </ul>
-                </div>-->
+        <div class="header_menu">
+            <div id="mySidenav" class="sidenav menu">
+                <a href="javascript:void(0)" id="closebtn" class="closebtn" onclick="closeNav()">&times;</a>
+                <ul>                   
+                    <li>
+                        <a href="javascript:void(0)" onclick="toggleSubMenu(this)">
+                            <i class="icon ph-bold ph-user"></i>
+                            <span class="text">View List</span>
+                            <i class="arrow ph-bold ph-caret-down"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="CustomerController">
+                                    <span class="text">Customer List</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="AdminController">
+                                    <span class="text">Administrator List</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="DeliveryStaffController">
+                                    <span class="text">Delivery Staff List</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="SalesController">
+                                    <span class="text">Sale Staff List</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="ManagerController">
+                                    <span class="text">Manager List</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="active">
+                        <a href="PostController">
+                            <i class="icon ph-bold ph-file-text"></i>
+                            <span class="text">Posts</span>
+                        </a>
+                    </li>                   
+                </ul>
+                <div class="menu">
 
-        <jsp:include page="/menu.jsp" flush="true" />
+                    <ul>
+                        <li>
+                            <a href="adminaccount.jsp">
+                                <i class="icon ph-bold ph-user"></i>
+                                <span class="text">Account</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="adminlogin?action=logout">
+                                <i class="icon ph-bold ph-sign-out"></i>
+                                <span class="text">Logout</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <span class="cainut" style="font-size:30px;cursor:pointer;" onclick="openNav()">&#9776; Menu</span>
+        </div>
+
+        <!--<jsp:include page="/menu.jsp" flush="true" />-->
 
         <div class="container d-flex justify-content-center align-items-center">
             <div class="text-center">
@@ -78,9 +107,9 @@
                                         <h6 class="f-w-600"style="font-size: 18px; margin: 10px 0;">${requestScope.deliverystaff.lastname} ${requestScope.deliverystaff.firstname}</h6>
                                         <p style="color: #fff; font-family: 'Inter'; font-size: 13px;">Delivery Staff of FUJ</p>
                                         <p style="color: #fff; font-family: 'Inter'; font-size: 13px;">${requestScope.deliverystaff.username}</p>
-                                    
-                                                <input name="roleID" value=4 required="Please enter"   type="hidden">
-                                        
+
+                                        <input name="roleID" value=4 required="Please enter"   type="hidden">
+
                                     </div>
                                 </div>
                                 <div class="col-md-9">
@@ -111,7 +140,7 @@
                                                 <p class="m-b-10 f-w-600">Point</p>
                                                 <h6 class="text-muted f-w-400">${requestScope.deliverystaff.point}</h6>
                                             </div>
-                                            
+
                                         </div>
                                         <div class="row" style="margin-top: 20px; justify-content: center">
                                             <div class="col-sm-4">
@@ -134,25 +163,10 @@
                     </div>
                 </div>
 
-                <!--        <table>
-                
-                            <tr><td>User Name</td><td>${requestScope.deliverystaff.username}</td></tr>
-                            <tr><td>Password</td><td>${requestScope.deliverystaff.password}</td></tr>
-                            <tr><td>First Name</td><td></td></tr>
-                            <tr><td>Last Name</td><td></td></tr>
-                            <tr><td>Phone Number</td><td></td></tr>
-                            <tr><td>Email</td><td></td></tr>
-                            <tr><td>Address</td><td>${requestScope.deliverystaff.address}</td></tr>
-                            <tr><td>Point</td><td>${requestScope.deliverystaff.point}</td></tr>
-                        </table>
-                
-                        <form action="DeliveryStaffController" style="padding-top: 10px">
-                            <input type=hidden name="action" value="list">
-                            <input type=submit value="Return" ></form>
-                
-                        <form action="DeliveryStaffController" style="padding-top: 10px">
-                            <input type=hidden name="id" value="${requestScope.deliverystaff.userid}">
-                            <input type=hidden name="action" value="edit">
-                            <input type=submit value="Edit" ></form>-->
+                <script src="js/pagination.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+                        integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+                crossorigin="anonymous"></script>
+                <script src="js/sidenav.js"></script>
                 </body>
                 </html>

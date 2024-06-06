@@ -65,8 +65,7 @@
                         </a>
                     </li>                   
                 </ul>
-                <div class="menu">
-                   
+                <div class="menu">                  
                     <ul>
                         <li>
                             <a href="adminaccount.jsp">

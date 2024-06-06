@@ -22,3 +22,29 @@ function openNav() {
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 }
+
+//function openNav() {
+//        document.getElementById("mySidenav").style.width = "250px";
+//        closeAllSubMenus();
+//    }
+//
+//    function closeNav() {
+//        document.getElementById("mySidenav").style.width = "0";
+//    }
+//
+//    function toggleSubMenu(element) {
+//        var subMenu = element.nextElementSibling;
+//        if (subMenu.style.display === "block") {
+//            subMenu.style.display = "none";
+//        } else {
+//            closeAllSubMenus();
+//            subMenu.style.display = "block";
+//        }
+//    }
+//
+//    function closeAllSubMenus() {
+//        var subMenus = document.querySelectorAll('.sidenav .sub-menu');
+//        subMenus.forEach(function(subMenu) {
+//            subMenu.style.display = "none";
+//        });
+//    }
