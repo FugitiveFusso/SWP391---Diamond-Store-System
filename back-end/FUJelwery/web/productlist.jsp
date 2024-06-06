@@ -7,7 +7,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link rel="stylesheet" href="css/navbar.css">
+        <link rel="stylesheet" href="css/navbaruser.css">
 
     </head>
     <body>
@@ -21,14 +21,14 @@
                         <ul>
                             <li><a href='./ProductController'>Diamond</a></li>
                             <li><a href='./RingController'>Ring</a></li>
-                            <li><a href='CollectionController'>Collection</a></li>
+                            <li><a href='#'>Collection</a></li>
                         </ul>
                     </div>                  
                 </li>
-                <li class="navbar__link"><a href='./VoucherController'>Voucher</a></li>
-                <li class="navbar__link"><a href="#">Blog</a></li>
+                <li class="navbar__link"><a href='./UserVoucherController'>Voucher</a></li>
+                <li class="navbar__link"><a href="UserPostController">Blog</a></li>
                 <a href="user_homepage.jsp"><img src="./images/Screenshot (656).png"></a>
-                <li class="navbar__link"><a href="#">About Us</a></li>
+                <li class="navbar__link"><a href="user_aboutus.jsp">About Us</a></li>
                 <li class="navbar__link"><a href="#">Order</a></li>
 
                 <li class="navbar__link">

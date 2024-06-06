@@ -6,7 +6,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>About Us</title>
         <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
-        <link rel="stylesheet" href="css/navbar.css">
+        <link rel="stylesheet" href="css/navbaruser.css">
         <link rel="stylesheet" href="css/aboutus.css">
 
     </head>
