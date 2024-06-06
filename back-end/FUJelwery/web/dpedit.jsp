@@ -6,6 +6,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Diamond Price Management</title>
+        <link rel="stylesheet" href="css/navbar.css">
+        <script src="https://unpkg.com/@phosphor-icons/web"></script>
         <link rel="stylesheet" href="css/post_edit.css"/>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
         <script>
@@ -34,7 +36,104 @@
         </script>
     </head>
     <body>
-        <jsp:include page="/salesmenu.jsp" flush="true" />
+        <!--<%@ include file="/salesmenu.jsp" %>-->
+
+        <div class="header_menu">
+            <div id="mySidenav" class="sidenav menu">
+                <a href="javascript:void(0)" id="closebtn" class="closebtn" onclick="closeNav()">&times;</a>
+                <ul>                   
+                    <li>
+                        <a href="javascript:void(0)" onclick="toggleSubMenu(this)">
+                            <i class="icon ph-bold ph-user"></i>
+                            <span class="text">View Product</span>
+                            <i class="arrow ph-bold ph-caret-down"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="DiamondController">
+                                    <span class="text">Diamond List</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="RingController">
+                                    <span class="text">Ring List</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="CollectionController">
+                                    <span class="text">Collection List</span>
+                                </a>
+                            </li>                           
+                        </ul>
+                        <a href="javascript:void(0)" onclick="toggleSubMenu(this)">
+                            <i class="icon ph-bold ph-user"></i>
+                            <span class="text">View Product Price</span>
+                            <i class="arrow ph-bold ph-caret-down"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="DiamondPriceController">
+                                    <span class="text">Diamond List</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="RingPlacementPriceController">
+                                    <span class="text">Ring List</span>
+                                </a>
+                            </li>                                                     
+                        </ul>
+                        <a href="javascript:void(0)" onclick="toggleSubMenu(this)">
+                            <i class="icon ph-bold ph-user"></i>
+                            <span class="text">View Document</span>
+                            <i class="arrow ph-bold ph-caret-down"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="VoucherController">
+                                    <span class="text">Voucher List</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="WarrantyController">
+                                    <span class="text">Warranty List</span>
+                                </a>
+                            </li> 
+                            <li>
+                                <a href="CertificateController">
+                                    <span class="text">Certificate List</span>
+                                </a>
+                            </li> 
+                        </ul>
+                    </li>
+                    <li class="active">
+                        <a href="CategoryController">
+                            <i class="icon ph-bold ph-file-text"></i>
+                            <span class="text">View Category</span>
+                        </a>
+                    </li>                   
+                </ul>
+                <div class="menu">
+
+                    <ul>
+                        <li>
+                            <a href="salesstaffaccount.jsp">
+                                <i class="icon ph-bold ph-user"></i>
+                                <span class="text">Account</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="saleslogin?action=logout">
+                                <i class="icon ph-bold ph-sign-out"></i>
+                                <span class="text">Logout</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <span class="cainut" style="font-size:30px;cursor:pointer;" onclick="openNav()">&#9776; Menu</span>
+        </div>
 
         <div class="title">
             <h1>Diamond Price Edit</h1>
@@ -50,7 +149,7 @@
         <% if (success != null) {%>
         <h4 style="color: green; text-align: center"> <%= success%> </h4>
         <% }%>
-        
+
         <div class="container content">
             <form action="./DiamondPriceController" method="POST" onsubmit="return validateForm()" onsubmit="return validateInput()">
                 <div class="row content-info">
@@ -122,7 +221,7 @@
                             <h2>Cut</h2>
                             <input type="text" name="cut" value="ROUND BRILLIANT" readonly="a" class="form-control">                           
                         </div>
-                        
+
 
                     </div>
                 </div>
@@ -146,100 +245,11 @@
         </div>
 
     </div>
-        
-<!--        <form action="./DiamondPriceController" method="POST" onsubmit="return validateInput()">
-            <table>
 
-                <table>
-                    <tr>
-                        <td>ID</td>
-                        <td><input type="number" name="id" value="${requestScope.dp.id}" min="1" required></td>
-                    </tr>                
-                    <tr>
-                        <td>Diamond Size</td>
-                        <td>
-                            <select name="diamondSize" required>
-                                <option value="">Please select</option>
-                                <option value="4.5" ${requestScope.dp.size == 4.5 ? 'selected' : ''}>4.5</option>
-                                <option value="5" ${requestScope.dp.size == 5 ? 'selected' : ''}>5</option>
-                                <option value="5.4" ${requestScope.dp.size == 5.4 ? 'selected' : ''}>5.4</option>
-                                <option value="5.7" ${requestScope.dp.size == 5.7 ? 'selected' : ''}>5.7</option>
-                                <option value="6" ${requestScope.dp.size == 6 ? 'selected' : ''}>6</option>
-                                <option value="6.3" ${requestScope.dp.size == 6.3 ? 'selected' : ''}>6.3</option>
-                                <option value="6.5" ${requestScope.dp.size == 6.5 ? 'selected' : ''}>6.5</option>
-                                <option value="6.8" ${requestScope.dp.size == 6.8 ? 'selected' : ''}>6.8</option>
-                                <option value="7.2" ${requestScope.dp.size == 7.2 ? 'selected' : ''}>7.2</option>
-                                <option value="8.1" ${requestScope.dp.size == 8.1 ? 'selected' : ''}>8.1</option>
-                                <option value="9.0" ${requestScope.dp.size == 9.0 ? 'selected' : ''}>9.0</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Carat Weight</td>
-                        <td>
-                            <select name="caratWeight" required>
-                                <option value="">Please select</option>
-                                <option value="0.36" ${requestScope.dp.caratWeight == 0.36 ? 'selected' : ''}>0.36</option>
-                                <option value="0.7" ${requestScope.dp.caratWeight == 0.7 ? 'selected' : ''}>0.7</option>
-                            </select>
-                        </td>
-                    </tr>                
-                    <tr>
-                        <td>Color</td>
-                        <td>
-                            <select name="color" required>
-                                <option value="">Please select</option>
-                                <option value="D" ${requestScope.dp.color == 'D' ? 'selected' : ''}>D</option>
-                                <option value="E" ${requestScope.dp.color == 'E' ? 'selected' : ''}>E</option>
-                                <option value="F" ${requestScope.dp.color == 'F' ? 'selected' : ''}>F</option>
-                                <option value="G" ${requestScope.dp.color == 'G' ? 'selected' : ''}>G</option>
-                                <option value="H" ${requestScope.dp.color == 'H' ? 'selected' : ''}>H</option>
-                                <option value="I" ${requestScope.dp.color == 'I' ? 'selected' : ''}>I</option>
-                                <option value="J" ${requestScope.dp.color == 'J' ? 'selected' : ''}>J</option>
-                            </select>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>Clarity</td>
-                        <td>
-                            <select name="clarity" required>
-                                <option value="">Please select</option>
-                                <option value="FL" ${requestScope.dp.clarity == 'FL' ? 'selected' : ''}>FL</option>
-                                <option value="IF" ${requestScope.dp.clarity == 'IF' ? 'selected' : ''}>IF</option>
-                                <option value="VVS1" ${requestScope.dp.clarity == 'VVS1' ? 'selected' : ''}>VVS1</option>
-                                <option value="VVS2" ${requestScope.dp.clarity == 'VVS2' ? 'selected' : ''}>VVS2</option>
-                                <option value="VS1" ${requestScope.dp.clarity == 'VS1' ? 'selected' : ''}>VS1</option>
-                                <option value="VS2" ${requestScope.dp.clarity == 'VS2' ? 'selected' : ''}>VS2</option>
-                                <option value="SI1" ${requestScope.dp.clarity == 'SI1' ? 'selected' : ''}>SI1</option>
-                                <option value="SI2" ${requestScope.dp.clarity == 'SI2' ? 'selected' : ''}>SI2</option>
-                            </select>
-                        </td>
-                    </tr>
-
-
-                    <tr>
-                        <td>Cut</td>
-                        <td>
-                            <input type="text" name="cut" value="ROUND BRILLIANT" readonly="a">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Price</td>
-                        <td>
-                            <input type="number" name="price" value="${requestScope.dp.price}" required min="1000000" max="1000000000">
-                            <span id="priceNotification" class="notification"></span>
-                        </td>
-                    </tr>                
-                    <tr><td colspan="2">
-                            <input name="action" value="${requestScope.nextaction}" type="hidden">
-                            <input type="submit" value="Save">
-                        </td></tr>
-                </table>
-
-        </form>
-        <form action="DiamondPriceController" style="padding-top: 10px">
-            <input type=hidden name="action" value="list">
-            <input type=submit value="Return" ></form>-->
-    </body>
+    
+    <script src="js/pagination.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+                                                    integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+    crossorigin="anonymous"></script>
+    <script src="js/sidenav.js"></script>
+</body>
 </html>

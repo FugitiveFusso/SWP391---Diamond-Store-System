@@ -7,7 +7,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Manager Account</title>
         <link rel="stylesheet" href="css/navbar.css">
-        <!--<link rel="stylesheet" href="css/staff_detail.css">-->
+        <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
         <link rel="stylesheet" href="css/staff_details.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css" />
@@ -17,50 +17,37 @@
 
     </head>
     <body>
-        
-<!--        <div class="menu">
-            you will code the horizontal menu here
-            <ul class="navbar">
 
-                <li class="navbar__link">
-                    <a href="#">Products</a>
-                    <div class="sub-menu-1">
-                        <ul>
-                            <li><a href='DiamondController'>Diamond</a></li>
-                            <li><a href='RingController'>Ring</a></li>
-                            <li><a href='CollectionController'>Collection</a></li>
-                        </ul>
-                    </div>                  
-                </li>
-                <li class="navbar__link"><a href='VoucherController'>Voucher</a></li>
-                <img src="./images/Screenshot (656).png">
-                <li class="navbar__link">
-                    <a href="#">Dashboard</a>
-                    <div class="sub-menu-1">
-                        <ul>
-                            <li><a href='AdminController'>View Admins</a></li>   
-                            <li><a href='DeliveryStaffController'>View Delivery Staffs</a></li>
-                            <li><a href='SalesController'>View Sale Staffs</a></li>
-                            <li><a href='CertificateController'>View Certificate</a></li>
+        <div class="header_menu">
+            <div id="mySidenav" class="sidenav menu">
+                <a href="javascript:void(0)" id="closebtn" class="closebtn" onclick="closeNav()">&times;</a>               
+                <div class="menu">
 
-                        </ul>
-                    </div>
-                </li>
-                <li class="navbar__link">
-                    <a href="adminaccount.jsp">Account</a>
-                    <div class="sub-menu-1">
-                        <ul>
-                            <li><a href='adminlogin?action=logout'>Logout</a></li>          
-                        </ul>
-                    </div>
-                </li>               
-            </ul>
-        </div>-->
-        
-        <%@ include file="/managermenu.jsp" %>
+                    <ul>
+                        <li>
+                            <a href="adminaccount.jsp">
+                                <i class="icon ph-bold ph-user"></i>
+                                <span class="text">Account</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="adminlogin?action=logout">
+                                <i class="icon ph-bold ph-sign-out"></i>
+                                <span class="text">Logout</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <span class="cainut" style="font-size:30px;cursor:pointer;" onclick="openNav()">&#9776; Menu</span>
+        </div>
+
+        <!--<%@ include file="/managermenu.jsp" %>-->
 
         <!--Login user: ${sessionScope.managersession.username};-->
-       <div class="container">
+        <div class="container">
             <div class="padding">
                 <div class="row d-flex justify-content-center">
                     <div class="col-xl-12 col-md-12">
@@ -121,6 +108,10 @@
                     </div>
                 </div>
             </div>
-       </div>
+        </div>
+        <script src="js/pagination.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+                                                        integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+        crossorigin="anonymous"></script>
+        <script src="js/sidenav.js"></script>
     </body>
 </html>

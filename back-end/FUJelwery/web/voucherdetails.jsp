@@ -6,6 +6,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
         <title>Voucher Management Page</title>
+        <link rel="stylesheet" href="css/navbar.css">
+        <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
         <style>
@@ -53,7 +55,104 @@
 
     </head>
     <body>
-        <jsp:include page="/salesmenu.jsp" flush="true" />
+         <!--<%@ include file="/salesmenu.jsp" %>-->
+        
+        <div class="header_menu">
+            <div id="mySidenav" class="sidenav menu">
+                <a href="javascript:void(0)" id="closebtn" class="closebtn" onclick="closeNav()">&times;</a>
+                <ul>                   
+                    <li>
+                        <a href="javascript:void(0)" onclick="toggleSubMenu(this)">
+                            <i class="icon ph-bold ph-user"></i>
+                            <span class="text">View Product</span>
+                            <i class="arrow ph-bold ph-caret-down"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="DiamondController">
+                                    <span class="text">Diamond List</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="RingController">
+                                    <span class="text">Ring List</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="CollectionController">
+                                    <span class="text">Collection List</span>
+                                </a>
+                            </li>                           
+                        </ul>
+                        <a href="javascript:void(0)" onclick="toggleSubMenu(this)">
+                            <i class="icon ph-bold ph-user"></i>
+                            <span class="text">View Product Price</span>
+                            <i class="arrow ph-bold ph-caret-down"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="DiamondPriceController">
+                                    <span class="text">Diamond List</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="RingPlacementPriceController">
+                                    <span class="text">Ring List</span>
+                                </a>
+                            </li>                                                     
+                        </ul>
+                        <a href="javascript:void(0)" onclick="toggleSubMenu(this)">
+                            <i class="icon ph-bold ph-user"></i>
+                            <span class="text">View Document</span>
+                            <i class="arrow ph-bold ph-caret-down"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="VoucherController">
+                                    <span class="text">Voucher List</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="WarrantyController">
+                                    <span class="text">Warranty List</span>
+                                </a>
+                            </li> 
+                            <li>
+                                <a href="CertificateController">
+                                    <span class="text">Certificate List</span>
+                                </a>
+                            </li> 
+                        </ul>
+                    </li>
+                    <li class="active">
+                        <a href="CategoryController">
+                            <i class="icon ph-bold ph-file-text"></i>
+                            <span class="text">View Category</span>
+                        </a>
+                    </li>                   
+                </ul>
+                <div class="menu">
+
+                    <ul>
+                        <li>
+                            <a href="salesstaffaccount.jsp">
+                                <i class="icon ph-bold ph-user"></i>
+                                <span class="text">Account</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="saleslogin?action=logout">
+                                <i class="icon ph-bold ph-sign-out"></i>
+                                <span class="text">Logout</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <span class="cainut" style="font-size:30px;cursor:pointer;" onclick="openNav()">&#9776; Menu</span>
+        </div>
 
         <div class="post-title">
             <h1>Voucher Details </h1>         
@@ -62,14 +161,14 @@
 
         <div class="container mt-4">
             <div class="row">
-                
+
                 <div class="col-md-6">
                     <div class="card">
                         <img src="${requestScope.voucher.image}" class="card-img-top" alt="Voucher Image" style="height: 300px; object-fit: cover;">
                     </div>
                 </div>
 
-                
+
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-body">
@@ -95,7 +194,10 @@
             </div>
         </div>
 
-
+        <script src="js/pagination.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+                                                        integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+        crossorigin="anonymous"></script>
+        <script src="js/sidenav.js"></script>
 
     </body>
 </html>
