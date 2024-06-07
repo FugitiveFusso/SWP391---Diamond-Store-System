@@ -34,7 +34,7 @@ public class NewPassword extends HttpServlet {
             try {
                 Connection con = DBUtils.getConnection();
                 if (con != null) {
-                    PreparedStatement pst = con.prepareStatement("UPDATE [User] SET password = ? WHERE email = ?");
+                    PreparedStatement pst = con.prepareStatement("UPDATE [User] SET password = ? WHERE email = ? AND roleID = 5");
                     pst.setString(1, newPassword);
                     pst.setString(2, (String) session.getAttribute("email"));
 
