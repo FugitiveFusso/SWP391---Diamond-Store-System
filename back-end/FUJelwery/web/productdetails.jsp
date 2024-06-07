@@ -9,58 +9,225 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Product Details</title>
+        <link rel="stylesheet" type="text/css" href="css/user_prodcutdetails.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     </head>
     <body>
-        <jsp:include page="/productmenu.jsp" flush="true" />
-        <h1>Ring Details </h1>         
-        <p> Login username: ${sessionScope.customersession.username}</p>
+        <%--<jsp:include page="/productmenu.jsp" flush="true" />--%>
+        <div class="product-details">
+            <div class="left-column">
+                <div class="image-section">
+                    <img src="${requestScope.product.ringImage}" alt="Ring Image">
+                </div>
+                <div class="additional-details">
+                    <h2>Product Details</h2>
+                    <div class="detail-row">
+                        <strong>Category:</strong> <span>${requestScope.product.categoryID}</span>
+                    </div>
+                    <div class="detail-row">
+                        <strong>Collection:</strong> <span>${requestScope.product.collectionID}</span>
+                    </div>
+                    <div class="detail-row">
+                        <strong>Ring Placement Name:</strong> <span>${requestScope.product.ringPlacementName}</span>
+                    </div>
+                    <div class="detail-row">
+                        <strong>Material:</strong> <span>${requestScope.product.material}</span>
+                    </div>
+                    <div class="detail-row">
+                        <strong>Ring Placement Color:</strong> <span>${requestScope.product.ringColor}</span>
+                    </div>
 
-        <style>
-            #searchbox{
-                margin-top: 5px;
-            }
-            body{
-                font-size: 16px;
-                font-family: Arial, Helvetica, sans-serif;
-            }
-            table{
-                margin-top: 10px
-            }
-            table, tr, td{
-                border-collapse: collapse;
-                width: 400px;
-                border: 2px solid black;
-                text-align: center;
-            }
-            tr,td{
-                padding: 6px 10px;
-            }
-        </style>
-        <table>
+                    <div class="detail-row">
+                        <strong>Diamond Name:</strong> <span>${requestScope.product.diamondName}</span>
+                    </div>
+                    <div class="detail-row">
+                        <strong>Diamond Size:</strong> <span>${requestScope.product.diamondSize}</span>
+                    </div>
+                    <div class="detail-row">
+                        <strong>Carat Weight:</strong> <span>${requestScope.product.caratWeight}</span>
+                    </div>
+                    <div class="detail-row">
+                        <strong>Color:</strong> <span>${requestScope.product.color}</span>
+                    </div>
+                    <div class="detail-row">
+                        <strong>Clarity:</strong> <span>${requestScope.product.clarity}</span>
+                    </div>
+                    <div class="detail-row">
+                        <strong>Cut:</strong> <span>${requestScope.product.cut}</span>
+                    </div>
 
-            <tr><td>Ring Name</td><td>${requestScope.product.ringName}</td></tr>
-            <tr><td>Ring Image</td><td><img src=${requestScope.product.ringImage} width="300px" height="300px"></td></tr>
-            <tr><td>Price</td><td>${requestScope.product.price}</td></tr>
-            <tr><td>Category</td><td>${requestScope.product.categoryID}</td></tr>
-            <tr><td>Collection</td><td>${requestScope.product.collectionID}</td></tr>
-            <tr><td>Ring Placement Name</td><td>${requestScope.product.ringPlacementName}</td></tr>
-            <tr><td>Material</td><td>${requestScope.product.material}</td></tr>
-            <tr><td>Ring Placement Color</td><td>${requestScope.product.ringColor}</td></tr>
-            <tr><td>Ring Placement Price</td><td>${requestScope.product.rpPrice}</td></tr>
-            <tr><td>Diamond Name</td><td>${requestScope.product.diamondName}</td></tr>
-            <tr><td>Diamond Size</td><td>${requestScope.product.diamondSize}</td></tr>
-            <tr><td>Carat Weight</td><td>${requestScope.product.caratWeight}</td></tr>
-            <tr><td>Color</td><td>${requestScope.product.color}</td></tr>
-            <tr><td>Clarity</td><td>${requestScope.product.clarity}</td></tr>
-            <tr><td>Cut</td><td>${requestScope.product.cut}</td></tr>
-            <tr><td>Diamond Price</td><td>${requestScope.product.diamondPrice}</td></tr>
-            <tr><td>Total Price</td><td>${requestScope.product.totalPrice}</td></tr>
+                    <h2>Adds on</h2>
+                    <div class="detail-row">
+                        <strong>Diamond Price:</strong> <span>${requestScope.product.diamondPrice} VND</span>
+                    </div>
+                    <div class="detail-row">
+                        <strong>Ring Placement Price:</strong> <span>${requestScope.product.rpPrice} VND</span>
+                    </div>
+                </div>
+            </div>
+            <div class="right-column">
+                <div class="title-wishlist">
+                    <h1>${requestScope.product.ringName}</h1>
+                    <button id="wishlist-btn" onclick="addtoWishlist()"><i class="fa-regular fa-heart"></i></button>
+                </div>
+                <hr style="margin-bottom: 10px;">
+                <p class="price">${requestScope.product.price} VND</p>
+                <p style="margin-top: 20px;"><strong>Total Price:</strong> ${requestScope.product.totalPrice} VND</p>
+                <form action="ProductController" method="get" class="buttons-form">
+                    <input type="hidden" name="action" value="list">
+                    <input type="submit" value="Return" class="btn">
+                    <input type="button" value="Add to Cart" class="btn" onclick="addToCart()">
+                </form>
 
-        </table>    
-        <form action="ProductController" style="padding-top: 10px">
-            <input type=hidden name="action" value="list">
-            <input type=submit value="Return" ></form>
+                <div class="Inclusion">
+                    <h2>Your Order Includes:</h2>
+                    <div class="Inclusion-container">
+                        <div class="Inclusion-wrapper">
+                            <div class="Inclusion-image">
+                                <img src="images/trackFastShipping.2b103.png">
+                            </div>
+                            <div class="Inclustion-content">
+                                <h3>Free Shipping</h3>
+                                <p>We're committed to making your entire experience a pleasant one, from shopping to shipping.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Inclusion-container">
+                        <div class="Inclusion-wrapper">
+                            <div class="Inclusion-image">
+                                <img src="images/freeReturns.c7cd2.png">
+                            </div>
+                            <div class="Inclustion-content">
+                                <h3>Free Returns</h3>
+                                <p>Our commitment to you does not end at delivery. We offer free returns (U.S and Canada) to make your experience as easy as possible.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="more-details">
+                    <div class="more-details-title-wrapper" onclick="toggleDropdown(this)">
+                        Don't know your ring size yet?
+                        <button class="plus-button">+</button>
+                    </div>
+                    <div class="more-details-content">
+                        Click this link to know your size: <a href="static_webpages/ringmeasuring.jsp">Ring Size Measuring</a>
+                    </div>
+                </div>
+                <div class="more-details">
+                    <div class="more-details-title-wrapper" onclick="toggleDropdown(this)">
+                        Is this product has GIA Certificate?
+                        <button class="plus-button">+</button>
+                    </div>
+                    <div class="more-details-content">
+                        Each product from FUJ has it own GIA Certificate <br> <br>
+                        Click this link to know about GIA Certificate: <a href="static_webpages/certificate_certification.jsp">GIA Certificate</a>
+                    </div>
+                </div>
+                <div class="more-details">
+                    <div class="more-details-title-wrapper" onclick="toggleDropdown(this)">
+                        Need a consultant? 
+                        <button class="plus-button">+</button>
+                    </div>
+                    <div class="more-details-content">
+                        Feel free to contact with us through our hotline: (+ 84) 898876512 <br> <br>
+                        Or you can read by yourself through: <a href="static_webpages/consulation.jsp">Consulation</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="footer-content">
+                <div class="info">
+                    <div class="info-img">
+                        <img src="images/Screenshot (659).png" />
+                    </div>
+
+                    <div class="info-text">
+                        <p>
+                            Address: FPT University, District 9, HCMC
+                        </p>
+                        <p>
+                            Email: CuongNPSE183844@fpt.edu.vn
+                        </p>
+                        <p>
+                            Phone: (+ 84) 898876512
+                        </p>
+                        <p>
+                            © Copyright 2024
+                        </p>
+                    </div>
+                </div>
+
+                <div class="customer-service">
+                    <div class="customer-service-title">
+                        Customer service
+                    </div>
+
+                    <div class="customer-service-text">
+                        <p><a href="ringmeasuring.jsp">Instructions for measuring rings</a></p>
+                        <p><a href="consulation.jsp">Product consultation by month of birth</a></p>
+                        <p><a href="faqs.jsp">Frequently asked questions</a></p>
+                    </div>
+                </div>
+
+                <div class="policy">
+                    <div class="policy-title">
+                        Policy
+                    </div>
+
+                    <div class="policy-text">
+                        <p><a href="warrantyPolicy.jsp">Warranty Policy</a></p>
+                        <p><a href="deliveryPolicy.jsp">Delivery Policy</a></p>
+                        <p><a href="returnPolicy.jsp">Return Policy</a></p>
+                        <p><a href="privatePolicy.jsp">Privacy policy</a></p>
+                    </div>
+                </div>
+            </div>  
+
+
+        </div>
+
+
+        <script>
+            function addToCart() {
+                // Logic to add the product to the cart
+                alert('Product added to cart');
+            }
+
+            document.getElementById('wishlist-btn').addEventListener('click', function () {
+                const icon = this.querySelector('i');
+                if (icon.classList.contains('fa-regular')) {
+                    icon.classList.remove('fa-regular');
+                    icon.classList.add('fa-solid');
+                } else {
+                    icon.classList.remove('fa-solid');
+                    icon.classList.add('fa-regular');
+                }
+            });
+
+            function addtoWishlist() {
+                alert('Added successfully');
+            }
+
+            function toggleDropdown(header) {
+                var content = header.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                    header.querySelector(".plus-button").innerText = "+";
+                    header.parentElement.style.height = header.offsetHeight + "px";
+                } else {
+                    content.style.display = "block";
+                    header.querySelector(".plus-button").innerText = "-";
+                    header.parentElement.style.height = (header.offsetHeight + content.offsetHeight) + "px";
+                }
+            }
+
+
+        </script>
     </body>
 </html>
