@@ -5,126 +5,60 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- ICONS -->
-  <script src="https://unpkg.com/@phosphor-icons/web"></script>
-  <!-- STYLESHEET -->
-  <link rel="stylesheet" href="sidenav.css" />
+  <link rel="stylesheet" href="sidenav.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <title>Sidebar</title>
 </head>
 
 <body>
-  <div class="container">
-    <div class="sidebar">
-      <div class="menu-btn">
-        <i class="ph-bold ph-caret-left"></i>
+  <div class="menu-btn">
+    <i class="fas fa-bars"></i>
+  </div>
+
+  <div class="side-bar">
+    <header>
+      <div class="close-btn">
+        <i class="fa-solid fa-xmark"></i>
       </div>
-      <div class="head">
-        <div class="user-img">
-          <img src="images/Screenshot (656).png" alt="" />
-        </div>
-        <div class="user-details">
-          <p class="title">Administrator</p>
-          <p class="name">Do Dinh An</p>
-        </div>
+      <img src="images/Screenshot (656).png">
+      <h1>An Do Dinh</h1>
+    </header>
+
+    <div class="menu">
+      <div class="item"><a href=""><i class="fas fa-desktop"></i>Dashboard</a></div>
+      <div class="item"><a class="sub-btn"><i class="fas fa-table"></i>Tables
+          <i class="fas fa-angle-right dropdown"></i>
+          <div class="sub-menu">
+            <a href="" class="sub-item">Sub Item 01</a>
+            <a href="" class="sub-item">Sub Item 02</a>
+            <a href="" class="sub-item">Sub Item 03</a>
+          </div>
+        </a>
       </div>
-      <div class="nav">
-        <div class="menu">
-          <p class="title">Main</p>
-          <ul>
-            <li>
-              <a href="#">
-                <i class="icon ph-bold ph-house-simple"></i>
-                <span class="text">Dashboard</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="icon ph-bold ph-diamond"></i>
-                <span class="text">Products</span>
-                <i class="arrow ph-bold ph-caret-down"></i>
-              </a>
-              <ul class="sub-menu">
-                <li>
-                  <a href="#">
-                    <span class="text">Diamond</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <span class="text">Rings</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <span class="text">Collections</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="active">
-              <a href="#">
-                <i class="icon ph-bold ph-file-text"></i>
-                <span class="text">Blog</span>
-              </a>
-            </li>            
-            <li>
-              <a href="#">
-                <i class="icon ph-bold ph-chart-bar"></i>
-                <span class="text">View</span>
-                <i class="arrow ph-bold ph-caret-down"></i>
-              </a>
-              <ul class="sub-menu">
-                <li>
-                  <a href="#">
-                    <span class="text">Customer List</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <span class="text">Manager List</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <span class="text">Certificate List</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <span class="text">Category List</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-        
-      </div>
-      <div class="menu">
-        <p class="title">Account</p>
-        <ul>
-          <li>
-            <a href="#">
-              <i class="icon ph-bold ph-user"></i>
-              <span class="text">Account</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="icon ph-bold ph-sign-out"></i>
-              <span class="text">Logout</span>
-            </a>
-          </li>
-        </ul>
-      </div>
+
+      <div class="item"><a href=""><i class="fas fa-th"></i>Forms</a></div>
+      <div class="item"><a class="sub-btn"><i class="fas fa-cog"></i>Settings
+          <i class="fas fa-angle-right dropdown"></i>
+          <div class="sub-menu">
+            <a href="" class="sub-item">Sub Item 01</a>
+            <a href="" class="sub-item">Sub Item 02</a>
+            <a href="" class="sub-item">Sub Item 03</a>
+          </div>
+
+        </a></div>
+      <div class="item"><a href=""><i class="fas fa-info-circle"></i>About Us</a></div>
+
     </div>
   </div>
 
-  <!-- Jquery -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
     integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
     crossorigin="anonymous"></script>
   <script src="sidenav.js"></script>
+
 </body>
+
 </html>

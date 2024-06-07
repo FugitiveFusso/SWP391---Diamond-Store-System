@@ -1,50 +1,16 @@
-$(".menu > ul > li").click(function (e) {
-    // remove active from already active
-    $(this).siblings().removeClass("active");
-    // add active to clicked
-    $(this).toggleClass("active");
-    // if has sub menu open it
-    $(this).find("ul").slideToggle();
-    // close other sub menu if any open
-    $(this).siblings().find("ul").slideUp();
-    // remove active class of sub menu items
-    $(this).siblings().find("ul").find("li").removeClass("active");
-});
+$(document).ready(function () {
+    $('.menu-btn').click(function () {
+        $('.side-bar').addClass('active');
+        $('.menu-btn').css("visibility", "hidden");
+    });
 
-$(".menu-btn").click(function () {
-    $(".sidebar").toggleClass("active");
-});
+    $('.close-btn').click(function () {
+        $('.side-bar').removeClass('active');
+        $('.menu-btn').css("visibility", "visible");
+    });
 
-function openNav() {
-    document.getElementById("mySidenav").style.width = "300px";
-}
-
-function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-}
-
-//function openNav() {
-//        document.getElementById("mySidenav").style.width = "250px";
-//        closeAllSubMenus();
-//    }
-//
-//    function closeNav() {
-//        document.getElementById("mySidenav").style.width = "0";
-//    }
-//
-//    function toggleSubMenu(element) {
-//        var subMenu = element.nextElementSibling;
-//        if (subMenu.style.display === "block") {
-//            subMenu.style.display = "none";
-//        } else {
-//            closeAllSubMenus();
-//            subMenu.style.display = "block";
-//        }
-//    }
-//
-//    function closeAllSubMenus() {
-//        var subMenus = document.querySelectorAll('.sidenav .sub-menu');
-//        subMenus.forEach(function(subMenu) {
-//            subMenu.style.display = "none";
-//        });
-//    }
+    $('.sub-btn').click(function () {
+        $(this).next('.sub-menu').slideToggle();
+        $(this).find('.dropdown').toggleClass('rotate');
+    });
+})

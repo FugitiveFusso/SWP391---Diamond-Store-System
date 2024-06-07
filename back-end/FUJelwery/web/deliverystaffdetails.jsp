@@ -14,74 +14,46 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
     <body>
-        <div class="header_menu">
-            <div id="mySidenav" class="sidenav menu">
-                <a href="javascript:void(0)" id="closebtn" class="closebtn" onclick="closeNav()">&times;</a>
-                <ul>                   
-                    <li>
-                        <a href="javascript:void(0)" onclick="toggleSubMenu(this)">
-                            <i class="icon ph-bold ph-user"></i>
-                            <span class="text">View List</span>
-                            <i class="arrow ph-bold ph-caret-down"></i>
-                        </a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="CustomerController">
-                                    <span class="text">Customer List</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="AdminController">
-                                    <span class="text">Administrator List</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="DeliveryStaffController">
-                                    <span class="text">Delivery Staff List</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="SalesController">
-                                    <span class="text">Sale Staff List</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="ManagerController">
-                                    <span class="text">Manager List</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="active">
-                        <a href="PostController">
-                            <i class="icon ph-bold ph-file-text"></i>
-                            <span class="text">Posts</span>
-                        </a>
-                    </li>                   
-                </ul>
-                <div class="menu">
+        <div class="menu-btn">
+            <div class="btn-cover">
+                <i class="fas fa-bars"></i>
+            </div>            
+        </div>
 
-                    <ul>
-                        <li>
-                            <a href="adminaccount.jsp">
-                                <i class="icon ph-bold ph-user"></i>
-                                <span class="text">Account</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="adminlogin?action=logout">
-                                <i class="icon ph-bold ph-sign-out"></i>
-                                <span class="text">Logout</span>
-                            </a>
-                        </li>
-                    </ul>
+        <div class="side-bar">
+            <header>
+                <div class="close-btn">
+                    <i class="fa-solid fa-xmark"></i>
                 </div>
+                <img src="images/Screenshot (656).png">
+                <h1>${requestScope.admin.lastname} ${requestScope.admin.firstname}</h1>
+            </header>
+
+            <div class="menu">               
+                <div class="item"><a class="sub-btn"><i class="fas fa-table"></i>View List
+                        <i class="fas fa-angle-right dropdown"></i>
+                        <div class="sub-menu">
+                            <a href="CustomerController" class="sub-item">Customer List</a>
+                            <a href="AdminController" class="sub-item">Administrator List</a>
+                            <a href="DeliveryStaffController" class="sub-item">Delivery Staff List</a>
+                            <a href="SalesController" class="sub-item">Sale Staff List</a>
+                            <a href="ManagerController" class="sub-item">Manager List</a>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="item"><a href="PostController"><i class="fas fa-file"></i>Posts</a></div>
+                
+                <div class="item"><a href="adminaccount.jsp"><i class="fas fa-user"></i>Account</a></div>
+                <div class="item"><a href="adminlogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
+
             </div>
-
-
-            <span class="cainut" style="font-size:30px;cursor:pointer;" onclick="openNav()">&#9776; Menu</span>
         </div>
 
         <!--<jsp:include page="/menu.jsp" flush="true" />-->
