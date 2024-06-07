@@ -107,7 +107,7 @@
                 <div class="footer-content">
                     <div class="info">
                         <div class="info-img">
-                            <img src="../images/Screenshot (659).png" />
+                            <img src="images/Screenshot (659).png" />
                         </div>
 
                         <div class="info-text">
