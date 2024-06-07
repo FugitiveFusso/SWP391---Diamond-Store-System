@@ -16,48 +16,57 @@
 
     </head>
     <body>
-        <!--        <div class="menu">
-                    you will code the horizontal menu here
-                    <ul class="navbar">
-                        <li class="navbar__link"><a href="#">Order</a></li>
-                        <li class="navbar__link">
-                            <a href="#">Products</a>
-                            <div class="sub-menu-1">
-                                <ul>
-                                    <li><a href='DiamondController'>Diamond</a></li>
-                                    <li><a href='RingController'>Ring</a></li>
-                                    <li><a href='CollectionController'>Collection</a></li>
-                                </ul>
-                            </div>                  
-                        </li>
-                        <li class="navbar__link"><a href='VoucherController'>Voucher</a></li>
-                        <img src="./images/Screenshot (656).png">
-                        <li class="navbar__link"><a href="#">Delivery</a></li>
-                        <li class="navbar__link">
-                            <a href="#">Dashboard</a>
-                            <div class="sub-menu-1">
-                                <ul>
-                                    <li><a href='CustomerController'>View Customer</a></li>
-                                    <li><a href='ManagerController'>View Manager</a></li>
-                                    <li><a href='CertificateController'>View Certificate</a></li>
-                                    <li><a href='CategoryController'>View Category</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="navbar__link">
-                            <a href="#">Account</a>
-                            <div class="sub-menu-1">
-                                <ul>
-                                    <li><a href='adminlogin?action=logout'>Logout</a></li>          
-                                </ul>
-                            </div>
-                        </li>
-        
-                    </ul>
-                </div>-->       
-        <%@ include file="/salesmenu.jsp" %>
+        <div class="menu-btn">
+            <div class="btn-cover">
+                <i class="fas fa-bars"></i>
+            </div>            
+        </div>
 
+        <div class="side-bar">
+            <header>
+                <div class="close-btn">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+                <img src="images/Screenshot (656).png">
+                <h1>${requestScope.admin.lastname} ${requestScope.admin.firstname}</h1>
+            </header>
 
+            <div class="menu">               
+                <div class="item"><a class="sub-btn"><i class="fas fa-ring"></i>View Product
+                        <i class="fas fa-angle-right dropdown"></i>
+                        <div class="sub-menu">
+                            <a href="DiamondController" class="sub-item">Diamond List</a>
+                            <a href="RingController" class="sub-item">Ring List</a>
+                            <a href="CollectionController" class="sub-item">Collection List</a>
+
+                        </div>
+                    </a>
+                </div>
+                <div class="item"><a class="sub-btn"><i class="fas fa-tags"></i>View Product Price
+                        <i class="fas fa-angle-right dropdown"></i>
+                        <div class="sub-menu">
+                            <a href="DiamondPriceController" class="sub-item">Diamond Price List</a>
+                            <a href="RingPlacementPriceController" class="sub-item">Ring Price List</a>                                                    
+                        </div>
+                    </a>
+                </div>
+                <div class="item"><a class="sub-btn"><i class="fas fa-folder"></i>View Document
+                        <i class="fas fa-angle-right dropdown"></i>
+                        <div class="sub-menu">
+                            <a href="VoucherController" class="sub-item">Voucher List</a>
+                            <a href="WarrantyController" class="sub-item">Warranty List</a> 
+                            <a href="CertificateController" class="sub-item">Certificate List</a>  
+                        </div>
+                    </a>
+                </div>
+
+                <div class="item"><a href="CategoryController"><i class="fas fa-layer-group"></i>View Category</a></div>
+
+                <div class="item"><a href="salesstaffaccount.jsp"><i class="fas fa-user"></i>Account</a></div>
+                <div class="item"><a href="saleslogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
+
+            </div>
+        </div>
 
         <div class="list-container">
             <div class="smaller-container">
@@ -135,6 +144,10 @@
         </div>
 
         <script src="js/pagination.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+                integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+        crossorigin="anonymous"></script>
+        <script src="js/sidenav.js"></script>
 
 
     </body>
