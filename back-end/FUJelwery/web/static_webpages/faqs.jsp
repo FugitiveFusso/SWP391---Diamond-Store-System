@@ -1,8 +1,3 @@
-<%-- 
-    Document   : faqs
-    Created on : Jun 5, 2024, 10:43:25 PM
-    Author     : Le Anh Khoa
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -180,10 +175,10 @@
 
                         <div class="info-text">
                             <p>
-                                Address: FPT University, District 9, HCMC
+                                Address: FPT University, District 9, Ho Chi Minh City
                             </p>
                             <p>
-                                Email: CuongNPSE183844@fpt.edu.vn
+                                Email: fuj.khac.diamondshopsystem@gmail.com
                             </p>
                             <p>
                                 Phone: (+ 84) 898876512
@@ -217,12 +212,12 @@
                             <p><a href="returnPolicy.jsp">Return Policy</a></p>
                             <p><a href="privatePolicy.jsp">Privacy policy</a></p>
                         </div>
-                        </div>
                     </div>
-
-
                 </div>
 
+
             </div>
+
+        </div>
     </body>
 </html>

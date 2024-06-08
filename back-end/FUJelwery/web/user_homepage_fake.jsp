@@ -30,16 +30,16 @@
                 <div class="link-list">
                     <div class="register">
                         To continue, <br>
-                    <a href='register.jsp'>CREATE A FREE ACCOUNT</a>
+                        <a href='register.jsp'>CREATE A FREE ACCOUNT</a>
+                    </div>
+                    <div class="login">
+                        Already registered? <br>
+                        <a href='userlogin.jsp'>LOG IN</a>
+                    </div>
                 </div>
-                <div class="login">
-                    Already registered? <br>
-                    <a href='userlogin.jsp'>LOG IN</a>
-                </div>
-                </div>
-                
-                
-                
+
+
+
             </div>
         </div>
 
@@ -140,10 +140,10 @@
 
                     <div class="info-text">
                         <p>
-                            Address: FPT University, District 9, HCMC
+                            Address: FPT University, District 9, Ho Chi Minh City
                         </p>
                         <p>
-                            Email: CuongNPSE183844@fpt.edu.vn
+                            Email: fuj.khac.diamondshopsystem@gmail.com
                         </p>
                         <p>
                             Phone: (+ 84) 898876512

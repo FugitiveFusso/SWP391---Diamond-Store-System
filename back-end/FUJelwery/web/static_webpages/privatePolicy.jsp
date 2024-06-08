@@ -1,8 +1,3 @@
-<%-- 
-    Document   : privatePolicy
-    Created on : Jun 6, 2024, 11:45:22 PM
-    Author     : Le Anh Khoa
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -91,7 +86,7 @@
                         Customer service staff: (+84) 898876512 - (+84) 085 xxx xxxx
                     </p>
                     <p class="text">
-                        Email: hoangnmse183997@fpt.edu.vn
+                        Email: fuj.khac.diamondshopsystem@gmail.com
                     </p>               
                 </div>
 
@@ -138,10 +133,10 @@
 
                         <div class="info-text">
                             <p>
-                                Address: FPT University, District 9, HCMC
+                                Address: FPT University, District 9, Ho Chi Minh City
                             </p>
                             <p>
-                                Email: CuongNPSE183844@fpt.edu.vn
+                                Email: fuj.khac.diamondshopsystem@gmail.com
                             </p>
                             <p>
                                 Phone: (+ 84) 898876512

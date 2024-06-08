@@ -86,7 +86,7 @@
 
                 <div class="info">                     
                     <p class="text">
-                        Customer service staff: (+84) 898876512 - (+84) 085 xxx xxxx
+                        Customer service staff: (+84) 898876512
                     <p class="text">
                         Address: FPT University, District 9, Ho Chi Minh City
                     </p>            
@@ -102,11 +102,12 @@
                         </div>
 
                         <div class="info-text">
+
                             <p>
-                                Address: FPT University, District 9, HCMC
+                                Address: FPT University, District 9, Ho Chi Minh City
                             </p>
                             <p>
-                                Email: CuongNPSE183844@fpt.edu.vn
+                                Email: fuj.khac.diamondshopsystem@gmail.com
                             </p>
                             <p>
                                 Phone: (+ 84) 898876512
