@@ -5,7 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
         <title>Voucher Management Page </title>
-        <link rel="stylesheet" href="css/navbar.css">
+        <link rel="stylesheet" href="css/navbar_admin.css">
         <script src="https://unpkg.com/@phosphor-icons/web"></script>
         <link rel="stylesheet" href="css/post_edit.css"/>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
