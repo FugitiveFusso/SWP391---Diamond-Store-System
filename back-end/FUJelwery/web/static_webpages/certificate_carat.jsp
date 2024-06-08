@@ -1,8 +1,4 @@
-<%-- 
-    Document   : certificate_carat
-    Created on : Jun 5, 2024, 9:50:29 PM
-    Author     : Le Anh Khoa
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

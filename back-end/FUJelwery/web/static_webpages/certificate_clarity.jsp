@@ -1,8 +1,3 @@
-<%-- 
-    Document   : certificate_clarity
-    Created on : Jun 5, 2024, 9:13:41 PM
-    Author     : Le Anh Khoa
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

@@ -1,8 +1,3 @@
-<%-- 
-    Document   : certificate_certification
-    Created on : Jun 5, 2024, 9:09:43 PM
-    Author     : Le Anh Khoa
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
