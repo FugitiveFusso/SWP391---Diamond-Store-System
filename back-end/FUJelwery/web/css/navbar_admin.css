@@ -1,0 +1,125 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: “Poppins”, sans-serif;
+}
+
+/*body {
+  min-height: 100vh;
+  background: white;
+  color: white;
+  background-size: cover;
+  background-position: center;
+}*/
+
+.side-bar {
+  background: #fff;
+  width: 250px;
+  left: -250px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  overflow-y: auto;
+  transition: 0.6s ease;
+  transition-property: left;
+  border: 2px solid black;
+  border-radius: 20px;
+  z-index: 1000;
+}
+
+header {
+  background: rgb(227, 227, 227);
+}
+
+header img {
+  width: 100px;
+  margin: 15px;
+  margin-left: 70px;
+  border-radius: 50%;
+  border: 3px solid #b4b8b9;
+}
+
+header h1 {
+  text-align: center;
+  font-size: 25px;
+  font-weight: 600;
+  padding-bottom: 13px;
+  font-family: 'Inter', sans-serif;
+  color: #3d3d3d;
+}
+
+.close-btn {
+  position: absolute;
+  color: #3d3d3d;
+  font-size: 23px;
+  right: 0px;
+  margin: 15px;
+  cursor: pointer;
+}
+
+.menu {
+  width: 100%;
+  margin-top: 30px;
+}
+
+.menu .item {
+  position: relative;
+  cursor: pointer;
+}
+
+.menu .item a {
+  color: #3d3d3d;
+  font-size: 16px;
+  text-decoration: none;
+  display: block;
+  padding: 1px 20px;
+  line-height: 48px;
+}
+
+.item i {
+  margin-right: 15px;
+}
+
+.item a .dropdown {
+  position: absolute;
+  right: 0;
+  margin: 20px;
+  transition: 0.3s ease;
+}
+
+.item .sub-menu {
+  background: #fff;
+  display: none;
+}
+
+.menu-btn{
+  position: absolute;
+  color: rgb(0, 0, 0);
+  font-size: 35px;
+  cursor: pointer;
+  margin-left: 130px;
+  margin-top: 10px;
+}
+/*
+.btn-cover{
+    background: #d9d9d9;
+    padding: 10px;
+    border-radius: 50%;
+}*/
+
+.side-bar.active{
+  left: 0;
+}
+
+.side-bar::-webkit-scrollbar{
+  width: 0px;
+}
+
+.item .sub-menu a{
+  padding-left: 80px;
+}
+
+.rotate{
+  transform: rotate(90deg);
+}
