@@ -134,9 +134,9 @@
                         </div>
 
                         <div class="customer-service-text">
-                            <p><a href="#">Instructions for measuring rings</a></p>
-                            <p><a href="#">Product consultation by month of birth</a></p>
-                            <p><a href="#">Frequently asked questions</a></p>
+                            <p><a href="static_webpages/ringmeasuring.jsp">Instructions for measuring rings</a></p>
+                            <p><a href="static_webpages/consulation.jsp">Product consultation by month of birth</a></p>
+                            <p><a href="static_webpages/faqs.jsp">Frequently asked questions</a></p>
                         </div>
                     </div>
 
@@ -146,10 +146,10 @@
                         </div>
 
                         <div class="policy-text">
-                            <p><a href="#">Warranty Policy</a></p>
-                            <p><a href="#">Delivery Policy</a></p>
-                            <p><a href="#">Return Policy</a></p>
-                            <p><a href="#">Privacy policy</a></p>
+                            <p><a href="static_webpages/warrantyPolicy.jsp">Warranty Policy</a></p>
+                            <p><a href="static_webpages/deliveryPolicy.jsp">Delivery Policy</a></p>
+                            <p><a href="static_webpages/returnPolicy.jsp">Return Policy</a></p>
+                            <p><a href="static_webpages/privatePolicy.jsp">Privacy policy</a></p>
                         </div>
                     </div>
                 </div>
