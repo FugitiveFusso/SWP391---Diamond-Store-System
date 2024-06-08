@@ -9,7 +9,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Post List</title>
         <link rel="stylesheet" href="css/navbaruser.css">
-        <link rel="stylesheet" href="css/customer_list.css">
+        <link rel="stylesheet" href="css/blog.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <script src="js/pagination.js"></script>
@@ -17,7 +17,7 @@
 
     </head>
     <body>
-       
+
         <div class="menu">
             <ul class="navbar">
                 <li class="navbar__link">
@@ -48,61 +48,172 @@
             </ul>
         </div> 
 
-
-        <div class="list-container">
-            <div class="smaller-container">
-                <div class="list1">
-                    <div class="list-intro-left">
-                        <div class="left-icon">
-                            <i class="fa-regular fa-newspaper"></i>
-                        </div>
-                        <div class="left-info">
-                            <div class="list-title">Post List</div>
-                            <div class="">List of Post</div>
-                        </div>
-                    </div>
-
+        <div class="main">           
+            <div class="content">
+                <div class="blog-intro">
+                    BLOG
                 </div>
-                <div class="list">
-                    <form action='' method=GET id="searchbox"> 
-                        <input name=keyword type=text class="search-input" value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
-                        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
-                    </form>
 
-                    <table id="pagination">
-                        <thead>
-                            <tr>
-                                <th>Post ID</th>
-                                <th><a href=?colSort=postName>Post Name</a></th>
-                                <th>Post Image</th>
-                                <th>Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <%
-                                List<PostDTO> list = (List<PostDTO>) request.getAttribute("userpostlist");
-                                for (PostDTO post : list) {
-                                    pageContext.setAttribute("post", post);
-                            %>
-                            <tr>
-                                <td><a href="UserPostController?action=details&id=${post.id}">${post.id}</td>
-                                <td>${post.name}</td>
-                                <td><img src="${post.image}" width="300px" height="300px" style="border-radius: 10px;"></td>
-                                <td style="width: 50%; font-size: 18px">${post.description}</td>
-                            </tr>
-                            <%
-                                }
-                            %>    
-                        </tbody>
-                    </table>
-                    <div id="paginationControls" class="pagination-controls">
-                        <button id="prevButton" class="pagination-button"><i class="fas fa-chevron-left"></i></button>
-                        <div id="pageNumbers"></div>
-                        <button id="nextButton" class="pagination-button"><i class="fas fa-chevron-right"></i></button>
-                    </div>
-                </div>
+                <table>
+                    <tr>
+                        <td>
+                            <img src="https://bluenile-blog.r2net.com/wp-content/uploads/Wedding-Ring-Guide-Hero.jpg">
+                        </td>
+                        <td>
+                            <div class="blog-content">
+                                <div class="blog-title">
+                                    Your Guide To Popular Wedding Ring Styles
+                                </div>
+                                <p>Get tips for choosing between today’s most popular designs and wedding ring styles
+                                    to find the band that matches your tastes and budget.</p>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <img src="https://bluenile-blog.r2net.com/wp-content/uploads/Diamond-Blog.jpg">
+                        </td>
+                        <td>
+                            <div class="blog-content">
+                                <div class="blog-title">
+                                    How To Tell If A Diamond Is Real
+                                </div>
+                                <p>There are several techniques for checking diamonds at home including tests 
+                                    that work with loose diamonds or diamonds set in jewelry.</p>
+                            </div>
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <img src="https://bluenile-blog.r2net.com/wp-content/uploads/Ring-Resize-Hero-.jpg">
+                        </td>
+                        <td>
+                            <div class="blog-content">
+                                <div class="blog-title">
+                                Are There Rings That Can’t Be Resized?
+                            </div>
+                            <p>Find out which rings can’t be resized and what to do if you need a different size in these styles.</p>
+                            </div>
+                            
+                        </td>
+                    </tr>
+                </table>
             </div>
+
+
+
+            <div class="footer">
+                <div class="footer-content">
+                    <div class="footer-content-info">
+                        <div class="info-img">
+                            <img src="images/Screenshot (659).png" />
+                        </div>
+
+                        <div class="info-text">
+                            <p>
+                                Address: FPT University, District 9, HCMC
+                            </p>
+                            <p>
+                                Email: CuongNPSE183844@fpt.edu.vn
+                            </p>
+                            <p>
+                                Phone: (+ 84) 898876512
+                            </p>
+                            <p>
+                                © Copyright 2024
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="customer-service">
+                        <div class="customer-service-title">
+                            Customer service
+                        </div>
+
+                        <div class="customer-service-text">
+                            <p><a href="#">Instructions for measuring rings</a></p>
+                            <p><a href="#">Product consultation by month of birth</a></p>
+                            <p><a href="#">Frequently asked questions</a></p>
+                        </div>
+                    </div>
+
+                    <div class="policy">
+                        <div class="policy-title">
+                            Policy
+                        </div>
+
+                        <div class="policy-text">
+                            <p><a href="#">Warranty Policy</a></p>
+                            <p><a href="#">Delivery Policy</a></p>
+                            <p><a href="#">Return Policy</a></p>
+                            <p><a href="#">Privacy policy</a></p>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
         </div>
+
+
+        <!--        <div class="list-container">
+                    <div class="smaller-container">
+                        <div class="list1">
+                            <div class="list-intro-left">
+                                <div class="left-icon">
+                                    <i class="fa-regular fa-newspaper"></i>
+                                </div>
+                                <div class="left-info">
+                                    <div class="list-title">Post List</div>
+                                    <div class="">List of Post</div>
+                                </div>
+                            </div>
+        
+                        </div>
+                        <div class="list">
+                            <form action='' method=GET id="searchbox"> 
+                                <input name=keyword type=text class="search-input" value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
+                                <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+                            </form>
+        
+                            <table id="pagination">
+                                <thead>
+                                    <tr>
+                                        <th>Post ID</th>
+                                        <th><a href=?colSort=postName>Post Name</a></th>
+                                        <th>Post Image</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+        <%
+            List<PostDTO> list = (List<PostDTO>) request.getAttribute("userpostlist");
+            for (PostDTO post : list) {
+                pageContext.setAttribute("post", post);
+        %>
+        <tr>
+            <td><a href="UserPostController?action=details&id=${post.id}">${post.id}</td>
+            <td>${post.name}</td>
+            <td><img src="${post.image}" width="300px" height="300px" style="border-radius: 10px;"></td>
+            <td style="width: 50%; font-size: 18px">${post.description}</td>
+        </tr>
+        <%
+            }
+        %>    
+    </tbody>
+</table>
+<div id="paginationControls" class="pagination-controls">
+    <button id="prevButton" class="pagination-button"><i class="fas fa-chevron-left"></i></button>
+    <div id="pageNumbers"></div>
+    <button id="nextButton" class="pagination-button"><i class="fas fa-chevron-right"></i></button>
+</div>
+</div>
+</div>
+</div>-->
         <script src="js/pagination.js"></script>
 
     </body>
