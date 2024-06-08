@@ -1,15 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
-.modal-content h1 {
-    font-size: 30px;
-    font-family: "Inter", san-serif;
-    font-weight: bold;
-    padding: -100px;
-}
-
-
 .modal-content a {
-    color: #151542;
+    color: gray;
     text-decoration: none;
     font-family: "Inter", san-serif;
     font-style: italic; 
@@ -17,7 +9,7 @@
 
 .register, .login{
     font-family: "Inter", san-serif;
-    color: #151542;
+    color: gray;
     margin: 0 0;
     font-style: italic; 
 }
@@ -53,8 +45,8 @@
 .modal-content {
     background-color: #fefefe;
     margin: 15% auto; 
-    padding: 40px 100px;
-    border: 1px solid #888;
+    padding: 40px 50px;
+    border: 5px solid red;
     width: 40%; 
     border-radius: 20px;
 }

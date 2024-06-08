@@ -30,11 +30,11 @@
                 <div class="link-list">
                     <div class="register">
                         To continue, <br>
-                    <a href="register.jsp">CREATE A FREE ACCOUNT</a>
+                    <a href='register.jsp'>CREATE A FREE ACCOUNT</a>
                 </div>
                 <div class="login">
                     Already registered? <br>
-                    <a href="userlogin.jsp">LOG IN</a>
+                    <a href='userlogin.jsp'>LOG IN</a>
                 </div>
                 </div>
                 
