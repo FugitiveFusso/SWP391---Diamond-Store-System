@@ -49,7 +49,6 @@
                     <a href="#">Jewelry</a>
                     <div class="sub-menu-1">
                         <ul>
-                            <li><a href='#'>Diamond</a></li>
                             <li><a href='#'>Ring</a></li>
                             <li><a href='#'>Collection</a></li>
                         </ul>

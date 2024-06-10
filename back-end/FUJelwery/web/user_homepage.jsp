@@ -1,8 +1,3 @@
-<%-- 
-    Document   : user_homepage
-    Created on : Jun 4, 2024, 10:20:10 AM
-    Author     : Le Anh Khoa
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -21,7 +16,6 @@
                     <a href="#">Jewelry</a>
                     <div class="sub-menu-1">
                         <ul>
-                            <li><a href='./ProductController'>Diamond</a></li>
                             <li><a href='./ProductController'>Ring</a></li>
                             <li><a href='./UserCollectionController'>Collection</a></li>
                         </ul>

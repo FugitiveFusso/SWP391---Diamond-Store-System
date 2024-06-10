@@ -1,8 +1,4 @@
-<%-- 
-    Document   : productdetails
-    Created on : Jun 2, 2024, 7:56:34 AM
-    Author     : Dell
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
