@@ -201,7 +201,8 @@
                                 <th>Voucher ID</th>
                                 <th><a href=?colSort=postName>Voucher Name</a></th>
                                 <th>Image</th>
-                                <th>Description</th>
+                                <th>Created Date</th>
+                                <th>Created By</th>
                                 <th>Delete</th>
                             </tr>
                         </thead>
@@ -215,7 +216,8 @@
                                 <td><a href="VoucherController?action=details&id=${voucher.id}">${voucher.id}</a></td>
                                 <td>${voucher.name}</td>
                                 <td><img src=${voucher.image} width="300px" height="300px"></td>
-                                <td style="width: 40%">${voucher.description}</td>
+                                    <td>${voucher.createddate}</td>
+                                <td>${voucher.createdby}</td>
                                 <td>
                                     <form action="VoucherController" method="POST" class="input">
                                         <input name="action" value="delete" type="hidden">

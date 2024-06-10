@@ -60,8 +60,8 @@
 
     </head>
     <body>
-         <!--<%@ include file="/salesmenu.jsp" %>-->
-        
+        <!--<%@ include file="/salesmenu.jsp" %>-->
+
         <div class="menu-btn">
             <div class="btn-cover">
                 <i class="fas fa-bars"></i>
@@ -84,7 +84,7 @@
                             <a href="DiamondController" class="sub-item">Diamond List</a>
                             <a href="RingController" class="sub-item">Ring List</a>
                             <a href="CollectionController" class="sub-item">Collection List</a>
-                            
+
                         </div>
                     </a>
                 </div>
@@ -107,7 +107,7 @@
                 </div>
 
                 <div class="item"><a href="CategoryController"><i class="fas fa-layer-group"></i>View Category</a></div>
-                
+
                 <div class="item"><a href="salesstaffaccount.jsp"><i class="fas fa-user"></i>Account</a></div>
                 <div class="item"><a href="saleslogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
 
@@ -124,7 +124,7 @@
 
                 <div class="col-md-6">
                     <div class="card">
-                        <img src="${requestScope.voucher.image}" class="card-img-top" alt="Voucher Image" style="height: 300px; object-fit: cover;">
+                        <img src="${requestScope.voucher.image}" class="card-img-top" alt="Voucher Image" style="height: 400px; object-fit: cover;">
                     </div>
                 </div>
 
@@ -133,7 +133,9 @@
                     <div class="card">
                         <div class="card-body">
                             <h6 class="card-subtitle mb-2 text-muted" >Voucher ID: ${requestScope.voucher.id}</h6>
-                            <h4 class="card-title" style="font-weight: 700">${requestScope.voucher.name}</h4>                            
+                            <h4 class="card-title" style="font-weight: 700">${requestScope.voucher.name}</h4>  
+                            <p class="card-text"><strong>Created By:</strong> ${requestScope.voucher.createdby}</p>
+                            <p class="card-text"><strong>Created Date:</strong> ${requestScope.voucher.createddate}</p>
                             <p class="card-text"><strong>Description:</strong> ${requestScope.voucher.description}</p>
                             <p class="card-text"><strong>Coupon:</strong> ${requestScope.voucher.coupon}</p>
                             <p class="card-text"><strong>Percentage:</strong> ${requestScope.voucher.percentage}%</p>
@@ -143,7 +145,7 @@
                                     <button type="submit" class="btn btn-primary">Return</button>
                                 </form>
                                 <form action="VoucherController" method="post">
-                                    <input type="hidden" name="id" value="${requestScope.certificate.certificateID}">
+                                    <input type="hidden" name="id" value="${requestScope.voucher.id}">
                                     <input type="hidden" name="action" value="edit">
                                     <button type="submit" class="btn btn-secondary">Edit</button>
                                 </form>

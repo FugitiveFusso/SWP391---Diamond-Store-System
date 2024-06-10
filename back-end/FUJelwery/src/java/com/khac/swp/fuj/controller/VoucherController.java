@@ -95,6 +95,8 @@ public class VoucherController extends HttpServlet {
                 }
                 String vouchername = request.getParameter("voucherName");
                 String voucherimage = request.getParameter("voucherImage");
+                String createddate = request.getParameter("createdDate");
+                String createdby = request.getParameter("createdBy");
                 String description = request.getParameter("description");
                 String coupon = request.getParameter("coupon");
                 Integer percentage = null;
@@ -110,6 +112,8 @@ public class VoucherController extends HttpServlet {
                 voucher.setId(voucherid);
                 voucher.setName(vouchername);
                 voucher.setImage(voucherimage);
+                voucher.setCreateddate(createddate);
+                voucher.setCreatedby(createdby);
                 voucher.setDescription(description);
                 voucher.setCoupon(coupon);
                 voucher.setPercentage(percentage);
@@ -130,6 +134,8 @@ public class VoucherController extends HttpServlet {
                 }
                 String vouchername = request.getParameter("voucherName");
                 String voucherimage = request.getParameter("voucherImage");
+                String createddate = request.getParameter("createdDate");
+                String createdby = request.getParameter("createdBy");
                 String description = request.getParameter("description");
                 String coupon = request.getParameter("coupon");
                 Integer percentage = null;
@@ -146,12 +152,14 @@ public class VoucherController extends HttpServlet {
                     voucher.setId(voucherid);
                     voucher.setName(vouchername);
                     voucher.setImage(voucherimage);
+                    voucher.setCreateddate(createddate);
+                    voucher.setCreatedby(createdby);
                     voucher.setDescription(description);
                     voucher.setCoupon(coupon);
                     voucher.setPercentage(percentage);
                     voucherDAO.insert(voucher);
-                    
-                    request.setAttribute("voucher", voucher);                       
+
+                    request.setAttribute("voucher", voucher);
                     request.setAttribute("success", "Added Successfully!!!");
                     RequestDispatcher rd = request.getRequestDispatcher("voucheredit.jsp");
                     rd.forward(request, response);

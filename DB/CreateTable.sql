@@ -56,6 +56,7 @@ CREATE TABLE [User](
     email varchar(255) NOT NULL,
     [address] varchar(8000) NOT NULL,
     point int NOT NULL,
+	[status] varchar(10), 
     roleID int NOT NULL,
     FOREIGN KEY (roleID) REFERENCES [Role](roleID)
 );
@@ -83,6 +84,8 @@ CREATE TABLE [Voucher](
 	voucherID int NOT NULL primary key,
 	voucherName varchar(255) NOT NULL,
 	voucherImage varchar(8000) NOT NULL,
+	createdDate date not null,
+	createdBy varchar(255) not null,
 	[description] varchar(8000),
 	coupon varchar(255) NOT NULL,
 	percentage int NOT NULL

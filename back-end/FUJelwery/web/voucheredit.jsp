@@ -132,6 +132,10 @@
                             <input name="voucherImage" value="${requestScope.voucher.image}" required="Please enter" class="form-control">
                         </div> 
                         <div class="info-input">                          
+                            <h2>Created By</h2>
+                            <input name="createdBy" readonly="" value="${sessionScope.salessession.firstname} ${sessionScope.salessession.lastname}" required="Please enter" class="form-control">                           
+                        </div>
+                        <div class="info-input">                          
                             <h2>Voucher Coupon</h2>
                             <input name="coupon" value="${requestScope.voucher.coupon}" required="Please enter" class="form-control">                           
                         </div>
@@ -144,6 +148,10 @@
                         <div class="info-input">                          
                             <h2>Voucher Description</h2>
                             <input name="description" value="${requestScope.voucher.description}" required="Please enter" class="form-control">                           
+                        </div>
+                        <div class="info-input">                          
+                            <h2>Created Date</h2>
+                            <input type="date" name="createdDate" value="${requestScope.voucher.createddate}" required="Please enter" class="form-control">                           
                         </div>
                         <div class="info-input">                          
                             <h2>Voucher Percentage</h2>

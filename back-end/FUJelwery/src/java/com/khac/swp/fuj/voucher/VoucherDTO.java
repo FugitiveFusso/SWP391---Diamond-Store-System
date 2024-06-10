@@ -5,10 +5,30 @@ public class VoucherDTO {
     private int id;
     private String name;
     private String image;
+    private String createddate;
+    private String createdby;
     private String description;
     private String coupon;
     private int percentage;
 
+    public String getCreateddate() {
+        return createddate;
+    }
+
+    public void setCreateddate(String createddate) {
+        this.createddate = createddate;
+    }
+
+    public String getCreatedby() {
+        return createdby;
+    }
+
+    public void setCreatedby(String createdby) {
+        this.createdby = createdby;
+    }
+
+    
+    
     public int getId() {
         return id;
     }
@@ -57,4 +77,11 @@ public class VoucherDTO {
         this.percentage = percentage;
     }
 
+    @Override
+    public String toString() {
+        return "VoucherDTO{" + "id=" + id + ", name=" + name + ", image=" + image + ", createddate=" + createddate + ", createdby=" + createdby + ", description=" + description + ", coupon=" + coupon + ", percentage=" + percentage + '}';
+    }
+
+    
+    
 }

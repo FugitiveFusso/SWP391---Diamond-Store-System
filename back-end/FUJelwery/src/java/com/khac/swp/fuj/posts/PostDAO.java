@@ -102,7 +102,7 @@ public class PostDAO {
     }
 
     public Integer insert(PostDTO post) {
-        String sql = "INSERT INTO [Post] (postID, postName, postImage, postDate, author, description, postText) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO [Post] (postID, postName, postImage, postDate, author, description, postText) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -193,10 +193,4 @@ public class PostDAO {
         return null;
     }
 
-    public static void main(String[] args) {
-        PostDAO dao = new PostDAO();
-        PostDTO list = dao.load(1);
-        System.out.println(list);
-
-    }
 }
