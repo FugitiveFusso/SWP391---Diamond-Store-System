@@ -17,24 +17,43 @@
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-
-
-
         <script>
             function isValidImageUrlFormat(url) {
                 const regex = /^https:\/\/.*\.(jpg|jpeg|png|gif|bmp|webp)$/i;
                 return regex.test(url);
             }
 
+            function numberOfWords(str) {
+                const words = str.trim().match(/\S+/g) || [];
+                return words.length;
+            }
+
             function validateForm() {
                 const voucherImageInput = document.querySelector('input[name="voucherImage"]');
                 const imageUrl = voucherImageInput.value;
+                const description = document.getElementsByName('description')[0].value;
 
+                const descriptionMinWords = 20;
+                const descriptionMaxWords = 70;
+
+                let isValid = true;
+
+                // Validate Image URL
                 if (!isValidImageUrlFormat(imageUrl)) {
                     alert('Invalid image URL. It must start with "https://" and end with one of the following extensions: .jpg, .jpeg, .png, .gif, .bmp, .webp.');
-                    return false;
+                    isValid = false;
                 }
-                return true;
+
+                // Validate Description
+                const descriptionWordCount = numberOfWords(description);
+                if (descriptionWordCount < descriptionMinWords || descriptionWordCount > descriptionMaxWords) {
+                    document.getElementById('description-error').innerText = 'Description must be between 20 and 70 words. Currently ' + descriptionWordCount + ' words.';
+                    isValid = false;
+                } else {
+                    document.getElementById('description-error').innerText = '';
+                }
+
+                return isValid;
             }
         </script>
         <script type="text/javascript">
@@ -50,8 +69,8 @@
         </script>
     </head>
     <body>
-         <!--<%@ include file="/salesmenu.jsp" %>-->
-        
+        <!--<%@ include file="/salesmenu.jsp" %>-->
+
         <div class="menu-btn">
             <div class="btn-cover">
                 <i class="fas fa-bars"></i>
@@ -74,7 +93,7 @@
                             <a href="DiamondController" class="sub-item">Diamond List</a>
                             <a href="RingController" class="sub-item">Ring List</a>
                             <a href="CollectionController" class="sub-item">Collection List</a>
-                            
+
                         </div>
                     </a>
                 </div>
@@ -97,7 +116,7 @@
                 </div>
 
                 <div class="item"><a href="CategoryController"><i class="fas fa-layer-group"></i>View Category</a></div>
-                
+
                 <div class="item"><a href="salesstaffaccount.jsp"><i class="fas fa-user"></i>Account</a></div>
                 <div class="item"><a href="saleslogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
 
@@ -148,6 +167,8 @@
                         <div class="info-input">                          
                             <h2>Voucher Description</h2>
                             <input name="description" value="${requestScope.voucher.description}" required="Please enter" class="form-control">                           
+                            <span id="description-error" class="error" style="color: red"></span>
+
                         </div>
                         <div class="info-input">                          
                             <h2>Created Date</h2>
@@ -155,7 +176,7 @@
                         </div>
                         <div class="info-input">                          
                             <h2>Voucher Percentage</h2>
-                            <input name="percentage" value="${requestScope.voucher.percentage}" required="Please enter" class="form-control">                           
+                            <input type="number" name="percentage" value="${requestScope.voucher.percentage}" required="Please enter" min="1" max="100" class="form-control">                           
                         </div>
 
                     </div>
@@ -181,7 +202,7 @@
 
     </div>
 
-    
+
     <script src="js/pagination.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
                                                     integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
     crossorigin="anonymous"></script>

@@ -24,15 +24,50 @@
                 return regex.test(url);
             }
 
+            function numberOfWords(str) {
+                // Use match to find all words, returning an empty array if there are no matches
+                const words = str.trim().match(/\S+/g) || [];
+                return words.length;
+            }
+
             function validateForm() {
                 const postImageInput = document.querySelector('input[name="postImage"]');
                 const imageUrl = postImageInput.value;
+                const description = document.getElementsByName('description')[0].value;
+                const postText = document.getElementsByName('postText')[0].value;
 
+                const descriptionMinWords = 20;
+                const descriptionMaxWords = 70;
+                const scriptMinWords = 50;
+                const scriptMaxWords = 2000;
+
+                let isValid = true;
+
+                // Validate Image URL
                 if (!isValidImageUrlFormat(imageUrl)) {
                     alert('Invalid image URL. It must start with "https://" and end with one of the following extensions: .jpg, .jpeg, .png, .gif, .bmp, .webp.');
-                    return false;
+                    isValid = false;
                 }
-                return true;
+
+                // Validate Description
+                const descriptionWordCount = numberOfWords(description);
+                if (descriptionWordCount < descriptionMinWords || descriptionWordCount > descriptionMaxWords) {
+                    document.getElementById('description-error').innerText = 'Description must be between 20 and 70 words. Currently ' + descriptionWordCount + ' words.';
+                    isValid = false;
+                } else {
+                    document.getElementById('description-error').innerText = '';
+                }
+
+                // Validate Script
+                const postTextWordCount = numberOfWords(postText);
+                if (postTextWordCount < scriptMinWords || postTextWordCount > scriptMaxWords) {
+                    document.getElementById('postText-error').innerText = 'Script must be between 50 and 2000 words. Currently ' + postTextWordCount + ' words.';
+                    isValid = false;
+                } else {
+                    document.getElementById('postText-error').innerText = '';
+                }
+
+                return isValid;
             }
         </script>
         <script type="text/javascript">
@@ -48,7 +83,6 @@
         </script>
     </head>
     <body>
-        <!--<jsp:include page="/menu.jsp" flush="true" />-->
 
         <div class="menu-btn">
             <div class="btn-cover">
@@ -89,6 +123,7 @@
         <div class="title">
             <h1>Post Edit</h1>
             <p> Login user: ${sessionScope.adminsession.username}</p>
+
         </div>
         <% String error1 = (String) request.getAttribute("error"); %>
         <% if (error1 != null) {%>
@@ -165,45 +200,5 @@
                                                 integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
 crossorigin="anonymous"></script>
 <script src="js/sidenav.js"></script>
-<script>
-        function numberOfWords(str) {
-            // Use match to find all words, returning an empty array if there are no matches
-            const words = str.trim().match(/\S+/g) || [];
-            return words.length;
-        }
-
-        function validateForm() {
-            const description = document.getElementsByName('description')[0].value;
-            const postText = document.getElementsByName('postText')[0].value;
-            
-            const descriptionMinWords = 20;
-            const descriptionMaxWords = 70;
-            const scriptMinWords = 50;  // Corrected from 100 to 50 as per your original script
-            const scriptMaxWords = 2000;
-
-            let isValid = true;
-
-            // Validate Description
-            const descriptionWordCount = numberOfWords(description);
-            if (descriptionWordCount < descriptionMinWords || descriptionWordCount > descriptionMaxWords) {
-                document.getElementById('description-error').innerText = 'Description must be between 20 and 70 words. Currently ' + descriptionWordCount + ' words.';
-                isValid = false;
-            } else {
-                document.getElementById('description-error').innerText = '';
-            }
-
-            // Validate Script
-            const postTextWordCount = numberOfWords(postText);
-            if (postTextWordCount < scriptMinWords || postTextWordCount > scriptMaxWords) {
-                document.getElementById('postText-error').innerText = 'Script must be between 50 and 2000 words. Currently ' + postTextWordCount + ' words.';
-                isValid = false;
-            } else {
-                document.getElementById('postText-error').innerText = '';
-            }
-
-            return isValid;
-        }
-    </script>
-
 </body>
 </html>

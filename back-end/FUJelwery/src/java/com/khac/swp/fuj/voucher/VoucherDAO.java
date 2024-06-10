@@ -206,12 +206,4 @@ public class VoucherDAO {
         }
         return null;
     }
-    
-    public static void main(String[] args) {
-        VoucherDAO dao = new VoucherDAO();
-        List<VoucherDTO> list = dao.getAllVoucher("", "");
-        for (VoucherDTO voucherDTO : list) {
-            System.out.println(voucherDTO);
-        }
-    }
 }
