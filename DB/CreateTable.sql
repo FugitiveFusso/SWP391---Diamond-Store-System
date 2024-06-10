@@ -88,28 +88,16 @@ CREATE TABLE [Voucher](
 	percentage int NOT NULL
 );
 
-CREATE TABLE [RingSize](
-	ringID int foreign key REFERENCES [Ring](ringID),
-	size8 int NOT NULL,
-	size9 int NOT NULL,
-	size10 int NOT NULL,
-	size11 int NOT NULL
-);
 CREATE TABLE [Order](
 	orderID int NOT NULL primary key,
 	userID int NOT NULL foreign key REFERENCES [User](userID),
 	orderDate date NOT NULL,
-	status bit,
-	delivered varchar(255)
-);
-
-CREATE TABLE [OrderDetails](
-	orderDetailsID int primary key NOT NULL, 
-	orderID int NOT NULL foreign key REFERENCES [Order](orderID),
 	ringID int NOT NULL foreign key REFERENCES [Ring](ringID),
-	diamondID int NOT NULL foreign key REFERENCES [Diamond](diamondID),
-	voucherID int NOT NULL foreign key REFERENCES [Voucher](voucherID),
-	totalPrice bigint NOT NULL
+	voucherID int foreign key REFERENCES [Voucher](voucherID),
+	ringSize int,
+	totalPrice float,
+	[status] bit,
+	delivered varchar(255)
 );
 
 CREATE TABLE [ProcessOrder](
