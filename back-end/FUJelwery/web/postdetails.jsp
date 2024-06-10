@@ -73,7 +73,7 @@
     </head>
     <body>
         <!--<jsp:include page="/menu.jsp" flush="true" />-->
-        
+
         <div class="menu-btn">
             <div class="btn-cover">
                 <i class="fas fa-bars"></i>
@@ -103,7 +103,7 @@
                 </div>
 
                 <div class="item"><a href="PostController"><i class="fas fa-file"></i>Posts</a></div>
-                
+
                 <div class="item"><a href="adminaccount.jsp"><i class="fas fa-user"></i>Account</a></div>
                 <div class="item"><a href="adminlogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
 
@@ -128,7 +128,9 @@
                     <div class="card">
                         <div class="card-body">
                             <h6 class="card-subtitle mb-2 text-muted" >Post ID: ${requestScope.post.id}</h6>
-                            <h4 class="card-title" style="font-weight: 700">${requestScope.post.name}</h4>                                                       
+                            <h4 class="card-title" style="font-weight: 700">${requestScope.post.name}</h4> 
+                            <p class="card-text"><strong>Date: </strong> ${requestScope.post.date}</p>
+                            <p class="card-text"><strong>Author: </strong> ${requestScope.post.author}</p>
                             <p class="card-text"><strong>Description: </strong> ${requestScope.post.description}</p>
                             <p class="card-text"><strong>Script: </strong> ${requestScope.post.text}</p>
                             <div class="btn-group" role="group" aria-label="Voucher Actions">
@@ -148,7 +150,7 @@
             </div>
         </div>
 
-        
+
         <script src="js/pagination.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
                                                         integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
         crossorigin="anonymous"></script>

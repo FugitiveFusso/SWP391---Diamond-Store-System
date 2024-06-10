@@ -53,28 +53,40 @@
                     BLOG
                 </div>
 
-                <table>
-                    <%
-                        List<PostDTO> list = (List<PostDTO>) request.getAttribute("userpostlist");
-                        for (PostDTO post : list) {
-                            pageContext.setAttribute("post", post);
-                    %>
-                    <tr>
-                        <td>
-                            <img src="${post.image}">
-                        </td>
-                        <td>
-                            <div class="blog-content">
-                                <div class="blog-title">
-                                    Your Guide To Popular Wedding Ring Styles
+                <table id="pagination">
+                    <tbody>
+                        <%
+                            List<PostDTO> list = (List<PostDTO>) request.getAttribute("userpostlist");
+                            for (PostDTO post : list) {
+                                pageContext.setAttribute("post", post);
+                        %>
+                        <tr>
+                            <td>
+                                <img src="${post.image}">
+                            </td>
+                            <td>
+                                <div class="blog-content">
+                                    <div class="blog-title" style="text-align: left; margin-left: 40px;">
+                                        
+                                        ${post.name}
+                                    </div>
+                                    <p>${post.description}</p>
+                                    <br>
+                                    <p class="read-more" style="text-align: right;"><a href="UserPostController?action=details&id=${post.id}" style="color: blue; text-decoration: none">Read More</a></p>
                                 </div>
-                                <p>Get tips for choosing between today’s most popular designs and wedding ring styles
-                                    to find the band that matches your tastes and budget.</p>
-                            </div>
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
+                        <%
+                            }
+                        %>    
+                    </tbody>
+                </table>  
 
-                </table>
+                <div id="paginationControls" class="pagination-controls">
+                    <button id="prevButton" class="pagination-button"><i class="fas fa-chevron-left"></i></button>
+                    <div id="pageNumbers"></div>
+                    <button id="nextButton" class="pagination-button"><i class="fas fa-chevron-right"></i></button>
+                </div>
             </div>
 
 
@@ -164,20 +176,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-        <%
-            List<PostDTO> list = (List<PostDTO>) request.getAttribute("userpostlist");
-            for (PostDTO post : list) {
-                pageContext.setAttribute("post", post);
-        %>
+        
         <tr>
             <td><a href="UserPostController?action=details&id=${post.id}">${post.id}</td>
             <td>${post.name}</td>
             <td><img src="${post.image}" width="300px" height="300px" style="border-radius: 10px;"></td>
             <td style="width: 50%; font-size: 18px">${post.description}</td>
         </tr>
-        <%
-            }
-        %>    
+          
     </tbody>
 </table>
 <div id="paginationControls" class="pagination-controls">

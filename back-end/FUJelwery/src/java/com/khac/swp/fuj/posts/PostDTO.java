@@ -5,9 +5,29 @@ public class PostDTO {
     private int id;
     private String name;
     private String image;
+    private String date;
+    private String author;
     private String description;
     private String text;
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    
+    
     public String getText() {
         return text;
     }
@@ -50,7 +70,7 @@ public class PostDTO {
 
     @Override
     public String toString() {
-        return "PostDTO{" + "id=" + id + ", name=" + name + ", image=" + image + ", description=" + description + ", text=" + text + '}';
+        return "PostDTO{" + "id=" + id + ", name=" + name + ", image=" + image + ", date=" + date + ", author=" + author + ", description=" + description + ", text=" + text + '}';
     }
    
 }

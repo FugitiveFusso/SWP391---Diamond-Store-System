@@ -3,12 +3,16 @@
     margin: 0 170px 10px 170px;
 }
 
-table{
+#pagination {
     border: none;
     border-style: none;
     border-collapse: separate;
     border-spacing: 0 30px;
-    margin-top: 30px;
+    margin-top: 10px;    
+}
+
+tbody{
+    border-radius: 20px;
 }
 
 tr {
@@ -21,7 +25,7 @@ tr:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-td{
+td {
     border-radius: 0 20px 20px 0;
 }
 
@@ -33,29 +37,29 @@ td{
     color: #000000;
 }
 
-table img{
+table img {
     vertical-align: bottom;
     width: 450px;
     height: 250px;
     border-radius: 20px 0 0 20px;
 }
 
-table p{
-    text-align: center;
-    margin: 0 80px;
-    font-size: 18px;
+table p {
+    margin: 0 40px;
+    font-size: 15px;
     font-family: 'Inter', sans-serif;
     font-weight: 500;
+    color: #999999;
 }
 
-/*tbody tr:nth-child(even){
+tbody tr:nth-child(even){
     background-color: #cdcdcd;
 
-}*/
+}
 
 .blog-title{
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     font-size: 30px;
     font-family: 'Inter', sans-serif;
     font-weight: 700;

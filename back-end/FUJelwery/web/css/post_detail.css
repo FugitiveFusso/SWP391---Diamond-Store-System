@@ -5,10 +5,8 @@
     font-family: "Inter", sans-serif;
 }
 
-.post-title{
-    align-items: center;
-    text-align: center;
-    margin-top: 30px;
+body{
+    background-color: #fff;
 }
 
 .post-title h1{
@@ -20,7 +18,6 @@
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    border: 2px solid #d9d9d9;
     border-radius: 20px;
     margin: 50px 300px 0 300px;
 }
@@ -31,63 +28,41 @@
     width: 100%;
 }
 
-.content-left .content-img img{
-    border-radius: 20px;
-}
-
-.content-right {
-    margin-left: 30px;
-}
-
 .intro-details p{
     padding: 5px 0;
-}
-
-.intro-details .title{
-    font-size: 14px;
-    font-weight: 500;
-    color: #000000;
+    margin-bottom: 40px;
 }
 
 .intro-details .name{
     font-size: 30px;
     font-weight: 700;
+    font-size: 60px
 }
 
-.description .description-title{
-    padding-top: 10px;
-    padding-bottom: 5px;
-    font-size: 15px;
-    font-weight: 700;
-    color: #000000;
-}
-
-.buttons{
-    display: flex;
-    justify-content: space-between;
-    margin-left: 300px;
-}
-
-.buttons form {
-    margin: 0 50px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.buttons form input{
+.title{
     font-size: 20px;
-    padding: 6px 30px;
-    background: #15156b;
-    color: #fff;
-    border-radius: 10px;
-    cursor: pointer;
 }
 
 .buttons form input:hover{
     background: #151542;
 }
 
+.return-btn{
+    margin: 30px 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.return-btn a{
+    font-size: 20px;
+    padding: 6px 30px;
+    text-decoration: none;
+    background: #15156b;
+    color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+}
 
 
 
