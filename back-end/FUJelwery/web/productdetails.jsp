@@ -65,6 +65,9 @@
                     <div class="detail-row">
                         <strong>Ring Placement Price:</strong> <span>${requestScope.product.rpPrice} VND</span>
                     </div>
+                    <div class="detail-row">
+                        <strong>Adds-on Fee:</strong> <span>${requestScope.product.price} VND</span>
+                    </div>
                 </div>
             </div>
             <div class="right-column">
@@ -73,8 +76,7 @@
                     <button id="wishlist-btn" onclick="addtoWishlist()"><i class="fa-regular fa-heart"></i></button>
                 </div>
                 <hr style="margin-bottom: 10px;">
-                <p class="price">${requestScope.product.price} VND</p>
-                <p style="margin-top: 20px;"><strong>Total Price:</strong> ${requestScope.product.totalPrice} VND</p>
+                <p class="price" style="margin-top: 20px;"><strong style="color: #151542">Total Price:</strong> ${requestScope.product.totalPrice} VND</p>
                 <form action="ProductController" method="get" class="buttons-form">
                     <input type="hidden" name="action" value="list">
                     <input type="submit" value="Return" class="btn">
