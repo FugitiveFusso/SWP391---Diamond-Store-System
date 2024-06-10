@@ -96,6 +96,7 @@ public class PostController extends HttpServlet {
                 String postname = request.getParameter("postName");
                 String postimage = request.getParameter("postImage");
                 String description = request.getParameter("description");
+                String posttext = request.getParameter("postText");
 
                 PostDTO post = null;
                 if (postid != null) {
@@ -105,6 +106,7 @@ public class PostController extends HttpServlet {
                 post.setName(postname);
                 post.setImage(postimage);
                 post.setDescription(description);
+                post.setText(posttext);
                 postDAO.update(post);
 
                 request.setAttribute("post", post);
@@ -123,6 +125,7 @@ public class PostController extends HttpServlet {
                 String postname = request.getParameter("postName");
                 String postimage = request.getParameter("postImage");
                 String description = request.getParameter("description");
+                String posttext = request.getParameter("postText");
 
                 PostDAO dao = new PostDAO();
                 PostDTO post = dao.checkPostExistByID(postid);
@@ -132,6 +135,7 @@ public class PostController extends HttpServlet {
                     post.setName(postname);
                     post.setImage(postimage);
                     post.setDescription(description);
+                    post.setText(posttext);
                     postDAO.insert(post);
                     
                     request.setAttribute("post", post);

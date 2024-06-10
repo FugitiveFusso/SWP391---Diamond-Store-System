@@ -6,6 +6,15 @@ public class PostDTO {
     private String name;
     private String image;
     private String description;
+    private String text;
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
 
     public int getId() {
         return id;
@@ -41,6 +50,7 @@ public class PostDTO {
 
     @Override
     public String toString() {
-        return "PostDTO{" + "id=" + id + ", name=" + name + ", image=" + image + ", description=" + description + '}';
+        return "PostDTO{" + "id=" + id + ", name=" + name + ", image=" + image + ", description=" + description + ", text=" + text + '}';
     }
+   
 }

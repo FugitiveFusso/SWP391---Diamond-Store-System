@@ -113,6 +113,10 @@
                             <h2>Description</h2>
                             <input name="description" value="${requestScope.post.description}" required="Please enter" class="form-control">
                         </div>
+                        <div class="info-input">
+                            <h2>Script</h2>
+                            <input name="postText" value="${requestScope.post.text}" required="Please enter" class="form-control">
+                        </div>
                     </div>
                     <div class="col-md-6 content-right">
                         <div class="info-input">                                                      

@@ -14,7 +14,7 @@ public class PostDAO {
         List<PostDTO> list = new ArrayList<PostDTO>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = " select postID, postName, postImage, description from Post ";
+            String sql = " select postID, postName, postImage, description, postText from Post ";
             if (keyword != null && !keyword.isEmpty()) {
                 sql += " where postName like ? ";
             }
@@ -37,12 +37,14 @@ public class PostDAO {
                     String postname = rs.getString("postName");
                     String postimage = rs.getString("postImage");
                     String description = rs.getString("description");
+                    String posttext = rs.getString("postText");
 
                     PostDTO post = new PostDTO();
                     post.setId(postid);
                     post.setName(postname);
                     post.setImage(postimage);
                     post.setDescription(description);
+                    post.setText(posttext);
 
                     list.add(post);
                 }
@@ -58,7 +60,7 @@ public class PostDAO {
 
     public PostDTO load(int postID) {
 
-        String sql = "select postID, postName, postImage, description from Post where postID = ?";
+        String sql = "select postID, postName, postImage, description, postText from Post where postID = ?";
 
         try {
 
@@ -73,12 +75,14 @@ public class PostDAO {
                 String postname = rs.getString("postName");
                 String postimage = rs.getString("postImage");
                 String description = rs.getString("description");
+                String text = rs.getString("postText");
 
                 PostDTO post = new PostDTO();
                 post.setId(postid);
                 post.setName(postname);
                 post.setImage(postimage);
                 post.setDescription(description);
+                post.setText(text);
                 return post;
             }
         } catch (SQLException ex) {
@@ -89,7 +93,7 @@ public class PostDAO {
     }
 
     public Integer insert(PostDTO post) {
-        String sql = "INSERT INTO [Post] (postID, postName, postImage, description) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO [Post] (postID, postName, postImage, description, postText) VALUES (?, ?, ?, ?, ?)";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -99,7 +103,7 @@ public class PostDAO {
             ps.setString(2, post.getName());
             ps.setString(3, post.getImage());
             ps.setString(4, post.getDescription());
-
+            ps.setString(5, post.getText());
             ps.executeUpdate();
             conn.close();
             return post.getId();
@@ -111,7 +115,7 @@ public class PostDAO {
     }
 
     public boolean update(PostDTO post) {
-        String sql = "UPDATE [Post] SET postName = ?, postImage = ?, description = ? WHERE postID = ? ";
+        String sql = "UPDATE [Post] SET postName = ?, postImage = ?, description = ?, postText WHERE postID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -121,6 +125,7 @@ public class PostDAO {
             ps.setString(1, post.getName());
             ps.setString(2, post.getImage());
             ps.setString(3, post.getDescription());
+            ps.setString(5, post.getText());
 
             ps.executeUpdate();
             conn.close();
@@ -130,10 +135,6 @@ public class PostDAO {
         }
         return false;
     }
-
-    /*
-    Delete student 
-     */
     public boolean delete(int id) {
         String sql = "DELETE [Post] WHERE postID = ? ";
         try {
@@ -156,7 +157,7 @@ public class PostDAO {
 
     public PostDTO checkPostExistByID(int postID) {
 
-        String sql = "select postID, postName, postImage, [description] from Post where postID = ?";
+        String sql = "select postID from Post where postID = ?";
 
         try {
 
@@ -169,9 +170,6 @@ public class PostDAO {
 
                 PostDTO post = new PostDTO();
                 post.setId(rs.getInt("postID"));
-                post.setName(rs.getString("postName"));
-                post.setImage(rs.getString("postImage"));
-                post.setDescription(rs.getString("description"));
                 return post;
             }
         } catch (SQLException ex) {
@@ -179,5 +177,12 @@ public class PostDAO {
             ex.printStackTrace();
         }
         return null;
+    }
+    
+    public static void main(String[] args) {
+        PostDAO dao = new PostDAO();
+        PostDTO list = dao.load(1);
+            System.out.println(list);
+
     }
 }

@@ -129,14 +129,15 @@
                         <div class="card-body">
                             <h6 class="card-subtitle mb-2 text-muted" >Post ID: ${requestScope.post.id}</h6>
                             <h4 class="card-title" style="font-weight: 700">${requestScope.post.name}</h4>                                                       
-                            <p class="card-text"><strong>Description: </strong> ${requestScope.post.description}</p>                           
+                            <p class="card-text"><strong>Description: </strong> ${requestScope.post.description}</p>
+                            <p class="card-text"><strong>Script: </strong> ${requestScope.post.text}</p>
                             <div class="btn-group" role="group" aria-label="Voucher Actions">
                                 <form action="PostController" method="post" class="mr-2">
                                     <input type="hidden" name="action" value="list">
                                     <button type="submit" class="btn btn-primary">Return</button>
                                 </form>
                                 <form action="PostController" method="post">
-                                    <input type="hidden" name="id" value="${requestScope.warranty.id}">
+                                    <input type="hidden" name="id" value="${requestScope.post.id}">
                                     <input type="hidden" name="action" value="edit">
                                     <button type="submit" class="btn btn-secondary">Edit</button>
                                 </form>
