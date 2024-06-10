@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,23 +10,77 @@
             font-family: Arial, sans-serif;
             font-size: 16px;
             line-height: 1.6;
-            width: 600px; /* Adjust the width as needed */
+            width: 600px;
+            /* Adjust the width as needed */
         }
+
         .text::first-letter {
-            font-size: 3em; /* Increase size of the first letter */
+            font-size: 3em;
+            /* Increase size of the first letter */
             font-weight: bold;
             float: left;
-            margin-right: 10px; /* Space between the first letter and the text */
-            line-height: 1; /* Adjust to align text properly next to the first letter */
+            margin-right: 10px;
+            /* Space between the first letter and the text */
+            line-height: 1;
+            /* Adjust to align text properly next to the first letter */
         }
+
         .text p {
-            text-indent: 0; /* Prevent text indentation for paragraphs */
+            text-indent: 0;
+            /* Prevent text indentation for paragraphs */
         }
     </style>
 </head>
+
 <body>
-    <div class="text">
-        <p>Within the realm of jewelry, the significance of seemingly inconspicuous elements often surpasses their modest appearance. Such is the case with thin rings, unassuming bands measuring no more than 2.5mm in width, colloquially known as ring spacers or spacer bands. Despite their unpretentious nature, these accessories play a pivotal role in the practice of stacking rings, contributing significantly to the refinement and coherence of layered compositions. Thin rings are meticulously designed to seamlessly integrate into larger stacks, facilitating the creation of intricate arrangements. Their slender profile enables them to occupy the interstices between more substantial rings without compromising the overall aesthetic balance.</p>
-    </div>
+    <form method="post" onsubmit="return validateForm()">
+        <p id="description"  >Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus eligendi eum reiciendis
+            pariatur, quae nemo obcaecati sunt animi architecto cupiditate voluptatibus dolore esse itaque numquam accusamus
+            quas aut quam earum. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati inventore alias fuga odit dolorum illo corrupti hic expedita et. Saepe ea recusandae tenetur modi, molestiae harum accusamus exercitationem amet ex? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis ratione, incidunt explicabo debitis dignissimos eum molestiae impedit. Dolorem dignissimos tenetur cum quam corporis necessitatibus suscipit! Nihil maxime doloremque quae autem. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit, commodi et quia distinctio, consequatur ab quos soluta exercitationem officiis blanditiis, earum consectetur possimus numquam optio natus recusandae nulla repudiandae? Laboriosam?</p>
+            <span id="description-error" class="error" style="color: red"></span>
+        <form>
+            <button>Submit</button>
+        </form>
+    </form>
+    
+
+    <script>
+        function countWords(str) {
+            return str.trim().split(/\s+/).length;
+        }
+
+        function validateForm() {
+            const description = document.getElementById('description').value;
+            const postText = document.getElementById('postText').value;
+
+            const descriptionMinWords = 20;
+            const descriptionMaxWords = 70;
+            const scriptMinWords = 50;
+            const scriptMaxWords = 2000;
+
+            let isValid = true;
+
+            // Validate Description
+            const descriptionWordCount = countWords(description);
+            if (descriptionWordCount < descriptionMinWords || descriptionWordCount > descriptionMaxWords) {
+                document.getElementById('description-error').innerText = `Description must be between 20 and 70 words. Currently ${descriptionWordCount} words.`;
+                isValid = false;
+            } else {
+                document.getElementById('description-error').innerText = '';
+            }
+
+            // Validate Script
+            const postTextWordCount = countWords(postText);
+            if (postTextWordCount < scriptMinWords || postTextWordCount > scriptMaxWords) {
+                document.getElementById('postText-error').innerText = `Script must be between 100 and 2000 words. Currently ${postTextWordCount} words.`;
+                isValid = false;
+            } else {
+                document.getElementById('postText-error').innerText = '';
+            }
+
+            return isValid;
+        }
+    </script>
 </body>
+
 </html>

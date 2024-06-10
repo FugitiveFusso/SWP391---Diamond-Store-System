@@ -79,7 +79,7 @@
                 </div>
 
                 <div class="item"><a href="PostController"><i class="fas fa-file"></i>Posts</a></div>
-                
+
                 <div class="item"><a href="adminaccount.jsp"><i class="fas fa-user"></i>Account</a></div>
                 <div class="item"><a href="adminlogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
 
@@ -111,7 +111,8 @@
                         </div>
                         <div class="info-input">
                             <h2>Description</h2>
-                            <input name="description" value="${requestScope.post.description}" required="Please enter" class="form-control">
+                            <input id="description" name="description" value="${requestScope.post.description}" required="Please enter" class="form-control">
+                            <span id="description-error" class="error" style="color: red"></span>
                         </div>
                         <div class="info-input">
                             <h2>Date</h2>
@@ -133,7 +134,8 @@
                         </div>
                         <div class="info-input">
                             <h2>Script</h2>
-                            <input name="postText" value="${requestScope.post.text}" required="Please enter" class="form-control">
+                            <input id="postText" name="postText" value="${requestScope.post.text}" required="Please enter" class="form-control">
+                            <span id="postText-error" class="error" style="color: red"></span>
                         </div>
                     </div>
                 </div>
@@ -163,6 +165,45 @@
                                                 integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
 crossorigin="anonymous"></script>
 <script src="js/sidenav.js"></script>
+<script>
+        function numberOfWords(str) {
+            // Use match to find all words, returning an empty array if there are no matches
+            const words = str.trim().match(/\S+/g) || [];
+            return words.length;
+        }
+
+        function validateForm() {
+            const description = document.getElementsByName('description')[0].value;
+            const postText = document.getElementsByName('postText')[0].value;
+
+            const descriptionMinWords = 20;
+            const descriptionMaxWords = 70;
+            const scriptMinWords = 50;  // Corrected from 100 to 50 as per your original script
+            const scriptMaxWords = 2000;
+
+            let isValid = true;
+
+            // Validate Description
+            const descriptionWordCount = numberOfWords(description);
+            if (descriptionWordCount < descriptionMinWords || descriptionWordCount > descriptionMaxWords) {
+                document.getElementById('description-error').innerText = `Description must be between 20 and 70 words. `;
+                isValid = false;
+            } else {
+                document.getElementById('description-error').innerText = '';
+            }
+
+            // Validate Script
+            const postTextWordCount = numberOfWords(postText);
+            if (postTextWordCount < scriptMinWords || postTextWordCount > scriptMaxWords) {
+                document.getElementById('postText-error').innerText = `Script must be between 50 and 2000 words. `;
+                isValid = false;
+            } else {
+                document.getElementById('postText-error').innerText = '';
+            }
+
+            return isValid;
+        }
+    </script>
 
 </body>
 </html>

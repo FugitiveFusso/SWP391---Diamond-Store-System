@@ -117,16 +117,12 @@
 
         <div class="container mt-4">
             <div class="row">
-
-                <div class="col-md-6">
-                    <div class="card">
-                        <img src="${requestScope.post.image}" class="card-img-top" alt="Voucher Image" style="height: 250px; object-fit: cover">
-                    </div>
-                </div>
-
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
+                            <div class="card">
+                                <img src="${requestScope.post.image}" class="card-img-top" alt="Voucher Image" style="height: 250px; object-fit: cover">
+                            </div>
                             <h6 class="card-subtitle mb-2 text-muted" >Post ID: ${requestScope.post.id}</h6>
                             <h4 class="card-title" style="font-weight: 700">${requestScope.post.name}</h4> 
                             <p class="card-text"><strong>Date: </strong> ${requestScope.post.date}</p>
