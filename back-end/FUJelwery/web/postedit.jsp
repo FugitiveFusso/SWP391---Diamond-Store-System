@@ -175,7 +175,7 @@ crossorigin="anonymous"></script>
         function validateForm() {
             const description = document.getElementsByName('description')[0].value;
             const postText = document.getElementsByName('postText')[0].value;
-
+            
             const descriptionMinWords = 20;
             const descriptionMaxWords = 70;
             const scriptMinWords = 50;  // Corrected from 100 to 50 as per your original script
@@ -186,7 +186,7 @@ crossorigin="anonymous"></script>
             // Validate Description
             const descriptionWordCount = numberOfWords(description);
             if (descriptionWordCount < descriptionMinWords || descriptionWordCount > descriptionMaxWords) {
-                document.getElementById('description-error').innerText = `Description must be between 20 and 70 words. `;
+                document.getElementById('description-error').innerText = 'Description must be between 20 and 70 words. Currently ' + descriptionWordCount + ' words.';
                 isValid = false;
             } else {
                 document.getElementById('description-error').innerText = '';
@@ -195,7 +195,7 @@ crossorigin="anonymous"></script>
             // Validate Script
             const postTextWordCount = numberOfWords(postText);
             if (postTextWordCount < scriptMinWords || postTextWordCount > scriptMaxWords) {
-                document.getElementById('postText-error').innerText = `Script must be between 50 and 2000 words. `;
+                document.getElementById('postText-error').innerText = 'Script must be between 50 and 2000 words. Currently ' + postTextWordCount + ' words.';
                 isValid = false;
             } else {
                 document.getElementById('postText-error').innerText = '';
