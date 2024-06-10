@@ -27,17 +27,17 @@
                     <a href="#">Jewelry</a>
                     <div class="sub-menu-1">
                         <ul>
-                            <li><a href='.././ProductController'>Ring</a></li>
-                            <li><a href='.././UserCollectionController'>Collection</a></li>
+                            <li><a href='../ProductController'>Ring</a></li>
+                            <li><a href='../UserCollectionController'>Collection</a></li>
                         </ul>
                     </div>                  
                 </li>
-                <li class="navbar__link"><a href='.././UserVoucherController'>Voucher</a></li>
+                <li class="navbar__link"><a href='../UserVoucherController'>Voucher</a></li>
                 <li class="navbar__link">
                     <a href="certificate_edu.jsp">Education</a>
                     <div class="sub-menu-1">
                         <ul>
-                            <li><a href='blog.jsp'>Blog</a></li>
+                            <li><a href='../UserPostController'>Blog</a></li>
                             <li><a href='ringmeasuring.jsp'>Ring Measuring Guide</a></li>          
                             <li><a href='faqs.jsp'>Frequently Asking Questions</a></li>
                         </ul>
@@ -46,7 +46,6 @@
                 <a href="user_homepage.jsp"><img src="../images/Screenshot (656).png"></a>
                 <li class="navbar__link"><a href="../user_aboutus.jsp">About Us</a></li>
                 <li class="navbar__link"><a href="#">Order</a></li>
-
                 <li class="navbar__link">
                     <a href="#">Account</a>
                     <div class="sub-menu-1">
@@ -57,7 +56,7 @@
                 </li>
 
             </ul>
-        </div>   
+        </div> 
 
         <div class="main-container">
             <div class="Main-hero">

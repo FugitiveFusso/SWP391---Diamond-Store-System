@@ -25,14 +25,14 @@
 }
 
 .navbar__link a {
-    text-decoration: none;
-    margin: 27.5px 0 30.5px 0;
-    display: inline-block;
-    overflow-wrap: break-word;
-    font-family: 'Inter';
-    font-weight: 600;
-    font-size: 20px;
-    color: #000000;
+    text-decoration: none  !important;
+    margin: 27.5px 0 30.5px 0 !important;
+    display: inline-block !important;
+    overflow-wrap: break-word !important;
+    font-family: 'Inter' !important;
+    font-weight: 600 !important;
+    font-size: 20px  !important;
+    color: #000000 !important;
 }
 
 .navbar img {

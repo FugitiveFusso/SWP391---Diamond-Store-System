@@ -27,11 +27,19 @@
                     </div>                  
                 </li>
                 <li class="navbar__link"><a href='./UserVoucherController'>Voucher</a></li>
-                <li class="navbar__link"><a href="UserPostController">Blog</a></li>
-                <a href="user_homepage.jsp"><img src="./images/Screenshot (656).png"></a>
+                <li class="navbar__link">
+                    <a href="static_webpages/certificate_edu.jsp">Education</a>
+                    <div class="sub-menu-1">
+                        <ul>
+                            <li><a href='UserPostController'>Blog</a></li>
+                            <li><a href='static_webpages/ringmeasuring.jsp'>Ring Measuring Guide</a></li>          
+                            <li><a href='static_webpages/faqs.jsp'>Frequently Asking Questions</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <a href="user_homepage.jsp"><img src="images/Screenshot (656).png"></a>
                 <li class="navbar__link"><a href="user_aboutus.jsp">About Us</a></li>
                 <li class="navbar__link"><a href="#">Order</a></li>
-
                 <li class="navbar__link">
                     <a href="#">Account</a>
                     <div class="sub-menu-1">
@@ -40,8 +48,10 @@
                         </ul>
                     </div>
                 </li>
+
             </ul>
-        </div>
+        </div> 
+
 
         <div class="bannerContainer">
             <div class="bannerContent">
@@ -120,29 +130,29 @@
                 </div>
 
                 <div class="customer-service">
-                        <div class="customer-service-title">
-                            Customer service
-                        </div>
-
-                        <div class="customer-service-text">
-                            <p><a href="static_webpages/ringmeasuring.jsp">Instructions for measuring rings</a></p>
-                            <p><a href="static_webpages/consulation.jsp">Product consultation by month of birth</a></p>
-                            <p><a href="static_webpages/faqs.jsp">Frequently asked questions</a></p>
-                        </div>
+                    <div class="customer-service-title">
+                        Customer service
                     </div>
 
-                    <div class="policy">
-                        <div class="policy-title">
-                            Policy
-                        </div>
-
-                        <div class="policy-text">
-                            <p><a href="static_webpages/warrantyPolicy.jsp">Warranty Policy</a></p>
-                            <p><a href="static_webpages/deliveryPolicy.jsp">Delivery Policy</a></p>
-                            <p><a href="static_webpages/returnPolicy.jsp">Return Policy</a></p>
-                            <p><a href="static_webpages/privatePolicy.jsp">Privacy policy</a></p>
-                        </div>
+                    <div class="customer-service-text">
+                        <p><a href="static_webpages/ringmeasuring.jsp">Instructions for measuring rings</a></p>
+                        <p><a href="static_webpages/consulation.jsp">Product consultation by month of birth</a></p>
+                        <p><a href="static_webpages/faqs.jsp">Frequently asked questions</a></p>
                     </div>
+                </div>
+
+                <div class="policy">
+                    <div class="policy-title">
+                        Policy
+                    </div>
+
+                    <div class="policy-text">
+                        <p><a href="static_webpages/warrantyPolicy.jsp">Warranty Policy</a></p>
+                        <p><a href="static_webpages/deliveryPolicy.jsp">Delivery Policy</a></p>
+                        <p><a href="static_webpages/returnPolicy.jsp">Return Policy</a></p>
+                        <p><a href="static_webpages/privatePolicy.jsp">Privacy policy</a></p>
+                    </div>
+                </div>
             </div>
         </div>
 
