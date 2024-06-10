@@ -130,6 +130,6 @@ CREATE TABLE [Post](
 	postID int NOT NULL primary key,
 	postName varchar(8000) NOT NULL,
 	postImage varchar(8000) NOT NULL,
-	description varchar(max) NOT NULL
-	
+	description varchar(max) NOT NULL, 
+	postText varchar(max)
 );
