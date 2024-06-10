@@ -55,9 +55,14 @@
                 </div>
 
                 <table>
+                    <%
+                        List<PostDTO> list = (List<PostDTO>) request.getAttribute("userpostlist");
+                        for (PostDTO post : list) {
+                            pageContext.setAttribute("post", post);
+                    %>
                     <tr>
                         <td>
-                            <img src="https://bluenile-blog.r2net.com/wp-content/uploads/Wedding-Ring-Guide-Hero.jpg">
+                            <img src="${post.image}">
                         </td>
                         <td>
                             <div class="blog-content">
@@ -70,36 +75,6 @@
                         </td>
                     </tr>
 
-                    <tr>
-                        <td>
-                            <img src="https://bluenile-blog.r2net.com/wp-content/uploads/Diamond-Blog.jpg">
-                        </td>
-                        <td>
-                            <div class="blog-content">
-                                <div class="blog-title">
-                                    How To Tell If A Diamond Is Real
-                                </div>
-                                <p>There are several techniques for checking diamonds at home including tests 
-                                    that work with loose diamonds or diamonds set in jewelry.</p>
-                            </div>
-
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <img src="https://bluenile-blog.r2net.com/wp-content/uploads/Ring-Resize-Hero-.jpg">
-                        </td>
-                        <td>
-                            <div class="blog-content">
-                                <div class="blog-title">
-                                Are There Rings That Can’t Be Resized?
-                            </div>
-                            <p>Find out which rings can’t be resized and what to do if you need a different size in these styles.</p>
-                            </div>
-                            
-                        </td>
-                    </tr>
                 </table>
             </div>
 
