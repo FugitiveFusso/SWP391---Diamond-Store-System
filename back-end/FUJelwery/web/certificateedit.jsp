@@ -18,16 +18,38 @@
                 const regex = /^https:\/\/.*\.(jpg|jpeg|png|gif|bmp|webp)$/i;
                 return regex.test(url);
             }
+            
+            function numberOfWords(str) {
+                const words = str.trim().match(/\S+/g) || [];
+                return words.length;
+            }
 
             function validateForm() {
-                const postImageInput = document.querySelector('input[name="certificateImage"]');
-                const imageUrl = postImageInput.value;
+                const voucherImageInput = document.querySelector('input[name="certificateImage"]');
+                const imageUrl = voucherImageInput.value;
+                const description = document.getElementsByName('description')[0].value;
 
+                const descriptionMinWords = 5;
+                const descriptionMaxWords = 20;
+
+                let isValid = true;
+
+                // Validate Image URL
                 if (!isValidImageUrlFormat(imageUrl)) {
                     alert('Invalid image URL. It must start with "https://" and end with one of the following extensions: .jpg, .jpeg, .png, .gif, .bmp, .webp.');
-                    return false;
+                    isValid = false;
                 }
-                return true;
+
+                // Validate Description
+                const descriptionWordCount = numberOfWords(description);
+                if (descriptionWordCount < descriptionMinWords || descriptionWordCount > descriptionMaxWords) {
+                    document.getElementById('description-error').innerText = 'Description must be between 20 and 70 words. Currently ' + descriptionWordCount + ' words.';
+                    isValid = false;
+                } else {
+                    document.getElementById('description-error').innerText = '';
+                }
+
+                return isValid;
             }
         </script>
         <script type="text/javascript">
@@ -40,6 +62,7 @@
                 }
                 return true;
             }
+            
         </script>
         <!--<%@ include file="/salesmenu.jsp" %>-->
         
@@ -120,7 +143,8 @@
                         </div> 
                         <div class="info-input">                                                      
                             <h2>Certificate Description</h2>
-                            <input name="description" value="${requestScope.certificate.certificateDescription}" required="Please enter" class="form-control">
+                            <textarea id="description" name="description" required="Please enter" class="form-control" style="resize: both;">${requestScope.certificate.certificateDescription}</textarea>                                                   
+                            <span id="description-error" class="error" style="color: red"></span>                           
                         </div> 
                     </div>
                     <div class="col-md-6 content-right">

@@ -145,17 +145,19 @@
                             <input type="number" name="id" value="${requestScope.post.id}" min="1" required="Please enter" class="form-control">                           
                         </div>
                         <div class="info-input">
-                            <h2>Description</h2>
-                            <input id="description" name="description" value="${requestScope.post.description}" required="Please enter" class="form-control">
-                            <span id="description-error" class="error" style="color: red"></span>
+                            <h2>Author</h2>
+                            <input name="author" value="${sessionScope.adminsession.firstname} ${sessionScope.adminsession.lastname}" required="Please enter" class="form-control" readonly="">
                         </div>
+                        
                         <div class="info-input">
                             <h2>Date</h2>
                             <input type="date" name="postDate" value="${requestScope.post.date}" required="Please enter" class="form-control">
                         </div>
+                        
                         <div class="info-input">
-                            <h2>Author</h2>
-                            <input name="author" value="${sessionScope.adminsession.firstname} ${sessionScope.adminsession.lastname}" required="Please enter" class="form-control" readonly="">
+                            <h2>Description</h2>
+                            <textarea id="description" name="description" required="Please enter" class="form-control" style="resize: both;">${requestScope.post.description}</textarea>
+                            <span id="description-error" class="error" style="color: red"></span>
                         </div>
                     </div>
                     <div class="col-md-6 content-right">
@@ -169,7 +171,7 @@
                         </div>
                         <div class="info-input">
                             <h2>Script</h2>
-                            <input id="postText" name="postText" value="${requestScope.post.text}" required="Please enter" class="form-control">
+                            <textarea id="postText" name="postText" required="Please enter" class="form-control" style="resize: both;">${requestScope.post.text}</textarea>
                             <span id="postText-error" class="error" style="color: red"></span>
                         </div>
                     </div>
@@ -181,19 +183,17 @@
                             <input type="submit" value="Save" class="btn btn-primary">
                         </div>
                     </div>
-
             </form>
 
             <div class="col-md-4">
                 <div class="button text-center">
                     <form action="PostController">
-                        <input type=hidden name="action" value="list">
-                        <input type=submit value="Return" style="color: white" ></form>
+                        <input type="hidden" name="action" value="list">
+                        <input type="submit" value="Return" style="color: white" >
+                    </form>
                 </div>
             </div>
         </div>
-
-
     </div>
 </div>
 <script src="js/pagination.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"

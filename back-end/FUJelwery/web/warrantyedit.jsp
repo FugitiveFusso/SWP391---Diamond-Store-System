@@ -16,16 +16,50 @@
                 const regex = /^https:\/\/.*\.(jpg|jpeg|png|gif|bmp|webp)$/i;
                 return regex.test(url);
             }
+            
+            function numberOfWords(str) {
+                const words = str.trim().match(/\S+/g) || [];
+                return words.length;
+            }
 
             function validateForm() {
-                const warrantyImageInput = document.querySelector('input[name="warrantyImage"]');
-                const imageUrl = warrantyImageInput.value;
+                const voucherImageInput = document.querySelector('input[name="warrantyImage"]');
+                const imageUrl = voucherImageInput.value;
+                const description = document.getElementsByName('warrantyDescription')[0].value;
+                const tac = document.getElementsByName('termsAndConditions')[0].value;
 
+                const descriptionMinWords = 10;
+                const descriptionMaxWords = 50;
+                
+                const tacMinWords = 10;
+                const tacMaxWords = 50;
+
+                let isValid = true;
+
+                // Validate Image URL
                 if (!isValidImageUrlFormat(imageUrl)) {
                     alert('Invalid image URL. It must start with "https://" and end with one of the following extensions: .jpg, .jpeg, .png, .gif, .bmp, .webp.');
-                    return false;
+                    isValid = false;
                 }
-                return true;
+
+                // Validate Description
+                const descriptionWordCount = numberOfWords(description);
+                if (descriptionWordCount < descriptionMinWords || descriptionWordCount > descriptionMaxWords) {
+                    document.getElementById('description-error').innerText = 'Description must be between 20 and 70 words. Currently ' + descriptionWordCount + ' words.';
+                    isValid = false;
+                } else {
+                    document.getElementById('description-error').innerText = '';
+                }
+                
+                const tacWordCount = numberOfWords(tac);
+                if (tacWordCount < tacMinWords || tacWordCount > tacMaxWords) {
+                    document.getElementById('tac-error').innerText = 'Terms and conditions must be between 20 and 70 words. Currently ' + tacWordCount + ' words.';
+                    isValid = false;
+                } else {
+                    document.getElementById('tac-error').innerText = '';
+                }
+
+                return isValid;
             }
         </script>
         <script type="text/javascript">
@@ -122,13 +156,17 @@
                             <h2>Warranty Image</h2>
                             <input name="warrantyImage" value="${requestScope.warranty.image}" required="Please enter" class="form-control">
                         </div> 
-                        <div class="info-input">                          
-                            <h2>Warranty Description</h2>
-                            <input name="warrantyDescription" value="${requestScope.warranty.description}" required="Please enter" class="form-control">                           
-                        </div>
+                       
+                        
                         <div class="info-input">                          
                             <h2>Warranty Start Date</h2>
                             <input type="date" name="startDate" value="${requestScope.warranty.startdate}" required="Please enter" class="form-control">                           
+                        </div>
+                         <div class="info-input">                          
+                            <h2>Warranty Description</h2>
+                            <textarea id="description" name="warrantyDescription" required="Please enter" class="form-control" style="resize: both;">${requestScope.warranty.description}</textarea>                                                   
+                            <span id="description-error" class="error" style="color: red"></span>
+                                                    
                         </div>
                     </div>
                     <div class="col-md-6 content-right">
@@ -154,7 +192,9 @@
                         </div>
                         <div class="info-input">                          
                             <h2>Terms and Conditions</h2>
-                            <input name="termsAndConditions" value="${requestScope.warranty.termsandconditions}" required="Please enter" class="form-control">                           
+                            <textarea id="termandcondition" name="termsAndConditions" required="Please enter" class="form-control" style="resize: both;">${requestScope.warranty.termsandconditions}</textarea>                                                   
+                            <span id="tac-error" class="error" style="color: red"></span>
+                                 
                         </div>
 
                     </div>
