@@ -21,9 +21,8 @@
                     <a href="#">Jewelry</a>
                     <div class="sub-menu-1">
                         <ul>
-                            <li><a href='./ProductController'>Diamond</a></li>
-                            <li><a href='./RingController'>Ring</a></li>
-                            <li><a href='#'>Collection</a></li>
+                            <li><a href='./ProductController'>Ring</a></li>
+                            <li><a href='./UserCollectionController'>Collection</a></li>
                         </ul>
                     </div>                  
                 </li>
