@@ -26,9 +26,9 @@
                     <a href="static_webpages/certificate_edu.jsp">Education</a>
                     <div class="sub-menu-1">
                         <ul>
-                            <li><a href='blog.jsp'>Blog</a></li>
-                            <li><a href='ringmeasuring.jsp'>Ring Measuring Guide</a></li>          
-                            <li><a href='faqs.jsp'>Frequently Asking Questions</a></li>
+                            <li><a href='UserPostController'>Blog</a></li>
+                            <li><a href='static_webpages/ringmeasuring.jsp'>Ring Measuring Guide</a></li>          
+                            <li><a href='static_webpages/faqs.jsp'>Frequently Asking Questions</a></li>
                         </ul>
                     </div>
                 </li>
