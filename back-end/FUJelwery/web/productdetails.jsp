@@ -8,7 +8,8 @@
         <title>Product Details</title>
         <link rel="stylesheet" type="text/css" href="css/user_prodcutdetails.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </head>
     <body>
         <%--<jsp:include page="/productmenu.jsp" flush="true" />--%>
@@ -162,29 +163,29 @@
                 </div>
 
                 <div class="customer-service">
-                        <div class="customer-service-title">
-                            Customer service
-                        </div>
-
-                        <div class="customer-service-text">
-                            <p><a href="static_webpages/ringmeasuring.jsp">Instructions for measuring rings</a></p>
-                            <p><a href="static_webpages/consulation.jsp">Product consultation by month of birth</a></p>
-                            <p><a href="static_webpages/faqs.jsp">Frequently asked questions</a></p>
-                        </div>
+                    <div class="customer-service-title">
+                        Customer service
                     </div>
 
-                    <div class="policy">
-                        <div class="policy-title">
-                            Policy
-                        </div>
-
-                        <div class="policy-text">
-                            <p><a href="static_webpages/warrantyPolicy.jsp">Warranty Policy</a></p>
-                            <p><a href="static_webpages/deliveryPolicy.jsp">Delivery Policy</a></p>
-                            <p><a href="static_webpages/returnPolicy.jsp">Return Policy</a></p>
-                            <p><a href="static_webpages/privatePolicy.jsp">Privacy policy</a></p>
-                        </div>
+                    <div class="customer-service-text">
+                        <p><a href="static_webpages/ringmeasuring.jsp">Instructions for measuring rings</a></p>
+                        <p><a href="static_webpages/consulation.jsp">Product consultation by month of birth</a></p>
+                        <p><a href="static_webpages/faqs.jsp">Frequently asked questions</a></p>
                     </div>
+                </div>
+
+                <div class="policy">
+                    <div class="policy-title">
+                        Policy
+                    </div>
+
+                    <div class="policy-text">
+                        <p><a href="static_webpages/warrantyPolicy.jsp">Warranty Policy</a></p>
+                        <p><a href="static_webpages/deliveryPolicy.jsp">Delivery Policy</a></p>
+                        <p><a href="static_webpages/returnPolicy.jsp">Return Policy</a></p>
+                        <p><a href="static_webpages/privatePolicy.jsp">Privacy policy</a></p>
+                    </div>
+                </div>
             </div>  
 
 
@@ -192,10 +193,6 @@
 
 
         <script>
-            function addToCart() {
-                // Logic to add the product to the cart
-                alert('Product added to cart');
-            }
 
             document.getElementById('wishlist-btn').addEventListener('click', function () {
                 const icon = this.querySelector('i');
@@ -209,8 +206,12 @@
             });
 
             function addtoWishlist() {
-                alert('Added successfully');
-            }
+                Swal.fire({
+                    title: 'Added to your Wishlist!',
+                    text: 'The item has been added to your wishlist.',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });            }
 
             function toggleDropdown(header) {
                 var content = header.nextElementSibling;
@@ -224,7 +225,14 @@
                     header.parentElement.style.height = (header.offsetHeight + content.offsetHeight) + "px";
                 }
             }
-
+            function addToCart() {
+                Swal.fire({
+                    title: 'Added to Cart!',
+                    text: 'The item has been added to your cart.',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+            }
 
         </script>
     </body>
