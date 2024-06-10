@@ -92,7 +92,8 @@
                                 <th>Post ID</th>
                                 <th><a href=?colSort=postName>Post Name</a></th>
                                 <th>Post Image</th>
-                                <th>Description</th>
+                                <th>Date</th>
+                                <th>Author</th>
                                 <th>Delete</th>
                             </tr>
                         </thead>
@@ -106,7 +107,8 @@
                                 <td><a href="PostController?action=details&id=${post.id}">${post.id}</td>
                                 <td>${post.name}</td>
                                 <td><img src="${post.image}" width="300px" height="300px" style="border-radius: 10px;"></td>
-                                <td style="width: 50%; font-size: 18px">${post.description}</td>
+                                <td>${post.date}</td>
+                                <td>${post.author}</td>
 
                                 <td>
                                     <form action="PostController" method="POST" class="input">

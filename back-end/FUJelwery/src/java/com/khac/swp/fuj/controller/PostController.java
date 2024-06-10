@@ -95,6 +95,8 @@ public class PostController extends HttpServlet {
                 }
                 String postname = request.getParameter("postName");
                 String postimage = request.getParameter("postImage");
+                String postdate = request.getParameter("postDate");
+                String author = request.getParameter("author");
                 String description = request.getParameter("description");
                 String posttext = request.getParameter("postText");
 
@@ -105,6 +107,8 @@ public class PostController extends HttpServlet {
                 post.setId(postid);
                 post.setName(postname);
                 post.setImage(postimage);
+                post.setDate(postdate);
+                post.setAuthor(author);
                 post.setDescription(description);
                 post.setText(posttext);
                 postDAO.update(post);
@@ -124,6 +128,8 @@ public class PostController extends HttpServlet {
                 }
                 String postname = request.getParameter("postName");
                 String postimage = request.getParameter("postImage");
+                String postdate = request.getParameter("postDate");
+                String author = request.getParameter("author");
                 String description = request.getParameter("description");
                 String posttext = request.getParameter("postText");
 
@@ -134,10 +140,12 @@ public class PostController extends HttpServlet {
                     post.setId(postid);
                     post.setName(postname);
                     post.setImage(postimage);
+                    post.setDate(postdate);
+                    post.setAuthor(author);
                     post.setDescription(description);
                     post.setText(posttext);
                     postDAO.insert(post);
-                    
+
                     request.setAttribute("post", post);
                     request.setAttribute("success", "Added Successfully!!!");
                     RequestDispatcher rd = request.getRequestDispatcher("postedit.jsp");

@@ -114,8 +114,12 @@
                             <input name="description" value="${requestScope.post.description}" required="Please enter" class="form-control">
                         </div>
                         <div class="info-input">
-                            <h2>Script</h2>
-                            <input name="postText" value="${requestScope.post.text}" required="Please enter" class="form-control">
+                            <h2>Date</h2>
+                            <input type="date" name="postDate" value="${requestScope.post.date}" required="Please enter" class="form-control">
+                        </div>
+                        <div class="info-input">
+                            <h2>Author</h2>
+                            <input name="author" value="${sessionScope.adminsession.firstname} ${sessionScope.adminsession.lastname}" required="Please enter" class="form-control" readonly="">
                         </div>
                     </div>
                     <div class="col-md-6 content-right">
@@ -126,6 +130,10 @@
                         <div class="info-input">
                             <h2>Post Image</h2>
                             <input name="postImage" value="${requestScope.post.image}" required="Please enter" class="form-control">
+                        </div>
+                        <div class="info-input">
+                            <h2>Script</h2>
+                            <input name="postText" value="${requestScope.post.text}" required="Please enter" class="form-control">
                         </div>
                     </div>
                 </div>
