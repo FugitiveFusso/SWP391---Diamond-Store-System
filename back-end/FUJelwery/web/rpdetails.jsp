@@ -135,7 +135,7 @@
                                     <button type="submit" class="btn btn-primary">Return</button>
                                 </form>
                                 <form action="RingPlacementPriceController" method="post">
-                                    <input type="hidden" name="id" value="${requestScope.warranty.id}">
+                                    <input type="hidden" name="id" value="${requestScope.rp.id}">
                                     <input type="hidden" name="action" value="edit">
                                     <button type="submit" class="btn btn-secondary">Edit</button>
                                 </form>

@@ -154,7 +154,7 @@
                                     <button type="submit" class="btn btn-primary">Return</button>
                                 </form>
                                 <form action="DiamondController" method="post">
-                                    <input type="hidden" name="id" value="${requestScope.certificate.certificateID}">
+                                    <input type="hidden" name="id" value="${requestScope.diamond.diamondID}">
                                     <input type="hidden" name="action" value="edit">
                                     <button type="submit" class="btn btn-secondary">Edit</button>
                                 </form>

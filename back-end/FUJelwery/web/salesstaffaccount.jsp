@@ -131,13 +131,7 @@
                                                 <h6 class="text-muted f-w-400">${sessionScope.salessession.point}</h6>
                                             </div>
                                         </div>
-                                        <div class="row" style="margin-top: 20px; justify-content: center">
-                                            <div class="col-sm-4">
-                                                <form action="VoucherController" style="padding-top: 10px">
-                                                    <button type="submit" class="btn btn-custom">Return</button>
-                                                </form>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>

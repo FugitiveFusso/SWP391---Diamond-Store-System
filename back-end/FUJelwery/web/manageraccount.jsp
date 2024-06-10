@@ -14,39 +14,46 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css" />
-
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
     <body>
 
-        <div class="header_menu">
-            <div id="mySidenav" class="sidenav menu">
-                <a href="javascript:void(0)" id="closebtn" class="closebtn" onclick="closeNav()">&times;</a>               
-                <div class="menu">
-
-                    <ul>
-                        <li>
-                            <a href="adminaccount.jsp">
-                                <i class="icon ph-bold ph-user"></i>
-                                <span class="text">Account</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="adminlogin?action=logout">
-                                <i class="icon ph-bold ph-sign-out"></i>
-                                <span class="text">Logout</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
 
 
-            <span class="cainut" style="font-size:30px;cursor:pointer;" onclick="openNav()">&#9776; Menu</span>
+        <div class="menu-btn">
+            <div class="btn-cover">
+                <i class="fas fa-bars"></i>
+            </div>            
         </div>
 
-        <!--<%@ include file="/managermenu.jsp" %>-->
+        <div class="side-bar">
+            <header>
+                <div class="close-btn">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+                <img src="images/Screenshot (656).png">
+                <h1>${requestScope.manager.lastname} ${requestScope.manager.firstname}</h1>
+            </header>
 
-        <!--Login user: ${sessionScope.managersession.username};-->
+            <div class="menu">                             
+                <div class="item"><a href="manageraccount.jsp"><i class="fas fa-user"></i>Account</a></div>
+                <div class="item"><a href="managerlogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
+
+            </div>
+        </div>
+
+        <!--<jsp:include page="/menu.jsp" flush="true" />-->
+
+        <div class="container d-flex justify-content-center align-items-center">
+            <div class="text-center">
+                <h1 style="font-size: 50px; font-weight: 700">Manager Account</h1>
+                <p>Login username: ${sessionScope.managersession.username}</p>
+            </div>
+        </div>
+
         <div class="container">
             <div class="padding">
                 <div class="row d-flex justify-content-center">
@@ -94,24 +101,17 @@
                                                 <h6 class="text-muted f-w-400">${sessionScope.managersession.point}</h6>
                                             </div>
                                         </div>
-                                        <div class="row" style="margin-top: 20px; justify-content: center">
-                                            <div class="col-sm-4">
-                                                <form action="AdminController" style="padding-top: 10px">
-                                                    <button type="submit" class="btn btn-custom">Return</button>
-                                                </form>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <script src="js/pagination.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
-                                                        integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
-        crossorigin="anonymous"></script>
-        <script src="js/sidenav.js"></script>
-    </body>
-</html>
+
+                <script src="js/pagination.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+                                                                integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+                crossorigin="anonymous"></script>
+                <script src="js/sidenav.js"></script>
+                </body>
+                </html>

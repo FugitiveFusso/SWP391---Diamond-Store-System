@@ -122,12 +122,12 @@
                             <h4 class="card-title" style="font-weight: 700">${requestScope.category.categoryName}</h4>                               
 
                             <div class="btn-group" role="group" aria-label="Voucher Actions">
-                                <form action="RingPlacementPriceController" method="post" class="mr-2">
+                                <form action="CategoryController" method="post" class="mr-2">
                                     <input type="hidden" name="action" value="list">
                                     <button type="submit" class="btn btn-primary">Return</button>
                                 </form>
-                                <form action="RingPlacementPriceController" method="post">
-                                    <input type="hidden" name="id" value="${requestScope.warranty.id}">
+                                <form action="CategoryController" method="post">
+                                    <input type="hidden" name="id" value="${requestScope.category.categoryID}">
                                     <input type="hidden" name="action" value="edit">
                                     <button type="submit" class="btn btn-secondary">Edit</button>
                                 </form>

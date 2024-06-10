@@ -107,16 +107,10 @@
                                             </div>
                                             <div class="col-sm-6">
                                                 <p class="m-b-10 f-w-600">Point</p>
-                                                <h6 class="text-muted f-w-400">${requestScope.admin.point}</h6>
+                                                <h6 class="text-muted f-w-400">${sessionScope.adminsession.point}</h6>
                                             </div>
                                         </div>
-                                        <div class="row" style="margin-top: 20px; justify-content: center">
-                                            <div class="col-sm-4">
-                                                <form action="CustomerController" style="padding-top: 10px">
-                                                    <button type="submit" class="btn btn-custom">Return</button>
-                                                </form>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>

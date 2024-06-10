@@ -6,60 +6,52 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Delivery Staff Account</title>
         <link rel="stylesheet" href="css/navbar.css">
-        <!--<link rel="stylesheet" href="css/staff_detail.css">-->
 
         <link rel="stylesheet" href="css/staff_details.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     </head>
     <body>
-        
-<!--        <div class="menu">
-            you will code the horizontal menu here
-            <ul class="navbar">
 
-                <li class="navbar__link">
-                    <a href="#">Products</a>
-                    <div class="sub-menu-1">
-                        <ul>
-                            <li><a href='DiamondController'>Diamond</a></li>
-                            <li><a href='RingController'>Ring</a></li>
-                            <li><a href='CollectionController'>Collection</a></li>
-                        </ul>
-                    </div>                  
-                </li>
-                <li class="navbar__link"><a href='VoucherController'>Voucher</a></li>
-                <img src="./images/Screenshot (656).png">
-                <li class="navbar__link">
-                    <a href="#">Dashboard</a>
-                    <div class="sub-menu-1">
-                        <ul>
-                            <li><a href='AdminController'>View Admins</a></li>   
-                            <li><a href='DeliveryStaffController'>View Delivery Staffs</a></li>
-                            <li><a href='SalesController'>View Sale Staffs</a></li>
-                            <li><a href='CertificateController'>View Certificate</a></li>
+        <div class="menu-btn">
+            <div class="btn-cover">
+                <i class="fas fa-bars"></i>
+            </div>            
+        </div>
 
-                        </ul>
-                    </div>
-                </li>
-                <li class="navbar__link">
-                    <a href="adminaccount.jsp">Account</a>
-                    <div class="sub-menu-1">
-                        <ul>
-                            <li><a href='adminlogin?action=logout'>Logout</a></li>          
-                        </ul>
-                    </div>
-                </li>               
-            </ul>
-        </div>-->
-        
-        <%@ include file="/managermenu.jsp" %>
+        <div class="side-bar">
+            <header>
+                <div class="close-btn">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+                <img src="images/Screenshot (656).png">
+                <h1>${sessionScope.deliverystaffsession.lastname} ${sessionScope.deliverystaffsession.firstname}</h1>
+            </header>
 
-        Login user: ${sessionScope.deliverystaffsession.username}
-       <div class="container">
+            <div class="menu">                             
+                <div class="item"><a href="deliverystaffaccount.jsp"><i class="fas fa-user"></i>Account</a></div>
+                <div class="item"><a href="deliverystafflogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
+
+            </div>
+        </div>
+
+        <!--<jsp:include page="/menu.jsp" flush="true" />-->
+
+        <div class="container d-flex justify-content-center align-items-center">
+            <div class="text-center">
+                <h1 style="font-size: 50px; font-weight: 700">Delivery Staff Account</h1>
+                <p>Login username: ${sessionScope.deliverystaffsession.username}</p>
+            </div>
+        </div>
+
+        <div class="container">
             <div class="padding">
                 <div class="row d-flex justify-content-center">
                     <div class="col-xl-12 col-md-12">
@@ -106,20 +98,17 @@
                                                 <h6 class="text-muted f-w-400">${sessionScope.deliverystaffsession.point}</h6>
                                             </div>
                                         </div>
-                                        <div class="row" style="margin-top: 20px; justify-content: center">
-                                            <div class="col-sm-4">
-                                                <form action="#" style="padding-top: 10px">
-                                                    <button type="submit" class="btn btn-custom">Return</button>
-                                                </form>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-       </div>
+
+                <script src="js/pagination.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+                                                                integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+                crossorigin="anonymous"></script>
+                <script src="js/sidenav.js"></script>
     </body>
 </html>

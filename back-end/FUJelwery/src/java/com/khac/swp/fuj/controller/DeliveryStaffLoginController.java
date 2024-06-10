@@ -30,7 +30,7 @@ public class DeliveryStaffLoginController extends HttpServlet {
                 if (user != null) {
                     HttpSession session = request.getSession(true);
                     session.setAttribute("deliverystaffsession", user);
-                    response.sendRedirect("./OrderController");
+                    response.sendRedirect("./deliverystaffaccount.jsp");
                 } else {
                     request.setAttribute("error", "Your username or password is incorrect! Please try again");
                     RequestDispatcher rd = request.getRequestDispatcher("deliverystafflogin.jsp");

@@ -148,7 +148,7 @@
                                     <button type="submit" class="btn btn-primary">Return</button>
                                 </form>
                                 <form action="CollectionController" method="post">
-                                    <input type="hidden" name="id" value="${requestScope.warranty.id}">
+                                    <input type="hidden" name="id" value="${requestScope.collection.collectionID}">
                                     <input type="hidden" name="action" value="edit">
                                     <button type="submit" class="btn btn-secondary">Edit</button>
                                 </form>
