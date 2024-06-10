@@ -22,8 +22,17 @@
                     </div>                  
                 </li>
                 <li class="navbar__link"><a href='./UserVoucherController'>Voucher</a></li>
-                <li class="navbar__link"><a href="./UserPostController">Blog</a></li>
-                <a href="user_homepage.jsp"><img src="./images/Screenshot (656).png"></a>
+                <li class="navbar__link">
+                    <a href="static_webpages/certificate_edu.jsp">Education</a>
+                    <div class="sub-menu-1">
+                        <ul>
+                            <li><a href='blog.jsp'>Blog</a></li>
+                            <li><a href='ringmeasuring.jsp'>Ring Measuring Guide</a></li>          
+                            <li><a href='faqs.jsp'>Frequently Asking Questions</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <a href="user_homepage.jsp"><img src="images/Screenshot (656).png"></a>
                 <li class="navbar__link"><a href="user_aboutus.jsp">About Us</a></li>
                 <li class="navbar__link"><a href="#">Order</a></li>
 

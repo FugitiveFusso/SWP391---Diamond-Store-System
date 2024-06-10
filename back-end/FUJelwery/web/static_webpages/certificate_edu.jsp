@@ -13,10 +13,48 @@
             href="https://fonts.googleapis.com/css2?family=Gantari:ital,wght@0,100..900;1,100..900&family=Inika:wght@400;700&family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:wght@100..900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Syne:wght@400..800&display=swap"
             rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="../css/navbaruser.css">
+
     </head>
 
     <body>
+        <div class="menu">
+            <ul class="navbar">
+                <li class="navbar__link">
+                    <a href="#">Jewelry</a>
+                    <div class="sub-menu-1">
+                        <ul>
+                            <li><a href='.././ProductController'>Ring</a></li>
+                            <li><a href='.././UserCollectionController'>Collection</a></li>
+                        </ul>
+                    </div>                  
+                </li>
+                <li class="navbar__link"><a href='.././UserVoucherController'>Voucher</a></li>
+                <li class="navbar__link">
+                    <a href="certificate_edu.jsp">Education</a>
+                    <div class="sub-menu-1">
+                        <ul>
+                            <li><a href='blog.jsp'>Blog</a></li>
+                            <li><a href='ringmeasuring.jsp'>Ring Measuring Guide</a></li>          
+                            <li><a href='faqs.jsp'>Frequently Asking Questions</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <a href="user_homepage.jsp"><img src="../images/Screenshot (656).png"></a>
+                <li class="navbar__link"><a href="../user_aboutus.jsp">About Us</a></li>
+                <li class="navbar__link"><a href="#">Order</a></li>
 
+                <li class="navbar__link">
+                    <a href="#">Account</a>
+                    <div class="sub-menu-1">
+                        <ul>
+                            <li><a href='userlogin?action=logout'>Logout</a></li>          
+                        </ul>
+                    </div>
+                </li>
+
+            </ul>
+        </div>  
 
         <div class="main-container">
             <div class="Main-hero">
@@ -25,7 +63,7 @@
                     <h3>Every loose diamond that we sell is graded by the Gemological Institute of <br>America (GIA), regarded as
                         the world's foremost authority on diamonds.</h3>
                     <div class="button">
-                        <button id="button1"> <a href="certificate.html" id="learn-more">Learn More</a></button>
+                        <button id="button1"> <a href="certificate_edu.jsp" id="learn-more">Learn More</a></button>
                     </div>
                 </div>
                 <img src="../images/diamond_certificate_1.jpg" alt="" srcset="">
@@ -39,15 +77,14 @@
                 <h3 class="dropdown-btn">Diamond Education <i class="fa-solid fa-angle-down"></i></h3>
                 <div class="dropdown-content">
                     <div class="list">
-                        <a href="certificate_cut.html">Cut</a>
-                        <a href="certificate_color.html">Color</a>
-                        <a href="clarity.html">Clarity</a>
-                        <a href="carat.html">Carat</a>
-                        <a href="#">Shape vs Price</a>
+                        <a href="certificate_cut.jsp">Cut</a>
+                        <a href="certificate_color.jsp">Color</a>
+                        <a href="certificate_clarity.jsp">Clarity</a>
+                        <a href="certificate_carat.jsp">Carat</a>
                     </div>
 
                 </div>
-                <h3 id="Cert_link"><a href="#">Certification</a></h3>
+                <h3 id="Cert_link"><a href="certificate_certification.jsp">Certification</a></h3>
             </div>
 
 

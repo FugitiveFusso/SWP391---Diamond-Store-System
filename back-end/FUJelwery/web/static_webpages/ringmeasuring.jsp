@@ -15,10 +15,50 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
               integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
               crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="../css/navbaruser.css">
+
 
     </head>
 
     <body>
+        <div class="menu">
+            <ul class="navbar">
+                <li class="navbar__link">
+                    <a href="#">Jewelry</a>
+                    <div class="sub-menu-1">
+                        <ul>
+                            <li><a href='.././ProductController'>Ring</a></li>
+                            <li><a href='.././UserCollectionController'>Collection</a></li>
+                        </ul>
+                    </div>                  
+                </li>
+                <li class="navbar__link"><a href='.././UserVoucherController'>Voucher</a></li>
+                <li class="navbar__link">
+                    <a href="certificate_edu.jsp">Education</a>
+                    <div class="sub-menu-1">
+                        <ul>
+                            <li><a href='blog.jsp'>Blog</a></li>
+                            <li><a href='ringmeasuring.jsp'>Ring Measuring Guide</a></li>          
+                            <li><a href='faqs.jsp'>Frequently Asking Questions</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <a href="user_homepage.jsp"><img src="../images/Screenshot (656).png"></a>
+                <li class="navbar__link"><a href="../user_aboutus.jsp">About Us</a></li>
+                <li class="navbar__link"><a href="#">Order</a></li>
+
+                <li class="navbar__link">
+                    <a href="#">Account</a>
+                    <div class="sub-menu-1">
+                        <ul>
+                            <li><a href='userlogin?action=logout'>Logout</a></li>          
+                        </ul>
+                    </div>
+                </li>
+
+            </ul>
+        </div>  
+
         <div class="container">
             <div class="certi-detail">
                 <div class="heading1">
