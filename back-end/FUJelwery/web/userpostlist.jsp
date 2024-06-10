@@ -66,13 +66,14 @@
                             </td>
                             <td>
                                 <div class="blog-content">
-                                    <div class="blog-title" style="text-align: left; margin-left: 40px;">
-                                        
+                                    <div class="blog-title" style="text-align: left; margin-left: 40px; margin-bottom: 5px">
+
                                         ${post.name}
                                     </div>
+                                        <p class="date" style="margin-bottom: 10px; font-weight: bolder">${post.author} - ${post.date}</p>  
                                     <p>${post.description}</p>
                                     <br>
-                                    <p class="read-more" style="text-align: right;"><a href="UserPostController?action=details&id=${post.id}" style="color: blue; text-decoration: none">Read More</a></p>
+                                    <p class="read-more" style="text-align: right;"><a href="UserPostController?action=details&id=${post.id}" style="color: blue; text-decoration: none; font-style: italic">Read More...</a></p>
                                 </div>
                             </td>
                         </tr>
