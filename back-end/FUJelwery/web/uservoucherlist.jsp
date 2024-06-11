@@ -69,7 +69,11 @@
                                 <th>Voucher ID</th>
                                 <th><a href=?colSort=postName>Voucher Name</a></th>
                                 <th>Image</th>
+                                <th>Created Date</th>
+                                <th>Created By</th>
+                                <th>Coupon</th>
                                 <th>Description</th>
+                                <th>Percentage</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -82,7 +86,11 @@
                                 <td><a href="UserVoucherController?action=details&id=${voucher.id}">${voucher.id}</a></td>
                                 <td>${voucher.name}</td>
                                 <td><img src=${voucher.image} width="300px" height="300px"></td>
+                                <td>${voucher.createddate}</td>
+                                <td>${voucher.createdby}</td>
+                                <td>${voucher.coupon}</td>
                                 <td>${voucher.description}</td>
+                                <td>${voucher.percentage}</td>
                             </tr>
                             <%
                                 }
