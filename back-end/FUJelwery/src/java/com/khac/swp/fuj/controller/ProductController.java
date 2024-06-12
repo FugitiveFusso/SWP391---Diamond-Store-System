@@ -1,5 +1,7 @@
 package com.khac.swp.fuj.controller;
 
+import com.khac.swp.fuj.order.OrderDAO;
+import com.khac.swp.fuj.order.OrderDTO;
 import com.khac.swp.fuj.ring.RingDAO;
 import com.khac.swp.fuj.ring.RingDTO;
 import com.khac.swp.fuj.utils.DBUtils;
@@ -62,6 +64,68 @@ public class ProductController extends HttpServlet {
                 request.setAttribute("product", product);//object
                 request.getRequestDispatcher("/productdetails.jsp").forward(request, response);
 
+            } else if(action.equals("buy")){
+                Integer orderID = null;
+                try {
+                    orderID = Integer.parseInt(request.getParameter("orderID"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+                
+                Integer userID = null;
+                try {
+                    userID = Integer.parseInt(request.getParameter("userID"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter ringID has wrong format.");
+                }
+                
+                String orderDate = request.getParameter("orderDate");
+                
+                Integer ringID = null;
+                try {
+                    ringID = Integer.parseInt(request.getParameter("ringID"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter ringID has wrong format.");
+                }
+                Integer voucherID = null;
+                try {
+                    voucherID = Integer.parseInt(request.getParameter("voucherID"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter voucherID has wrong format.");
+                }
+                Integer ringSize = null;
+                try {
+                    voucherID = Integer.parseInt(request.getParameter("ringSize"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter ringSize has wrong format.");
+                }
+                String status = "pending";
+                String delivered = "none";
+                
+                OrderDAO dao = new OrderDAO();
+                OrderDTO order = null;
+                        if (order == null) {
+                            order = new OrderDTO();
+                            order.setOrderID(orderID);
+                            order.setUserID(userID);
+                            order.setOrderDate(orderDate);
+                            order.setRingID(ringID);
+                            order.setVoucherID(voucherID);
+                            order.setRingSize(ringSize);
+                            order.setStatus(status);
+                            order.setDelivered(delivered);
+                            request.setAttribute("order", order);
+                            dao.insert(order);
+                            request.setAttribute("success", "Added Successfully!!!");
+                            RequestDispatcher rd = request.getRequestDispatcher("productdetails.jsp");
+                            rd.forward(request, response);
+                        } else {
+                            request.setAttribute("error", "Your Diamond is not inserted by wrong Certificate ID");
+                            RequestDispatcher rd = request.getRequestDispatcher("productdetails.jsp");
+                            rd.forward(request, response);
+                        }
+
+                    
             }
         }
     }

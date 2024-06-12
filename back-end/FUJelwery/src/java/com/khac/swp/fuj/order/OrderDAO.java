@@ -56,7 +56,73 @@ public class OrderDAO {
                     int ringSize = rs.getInt("ringSize");
                     double totalPrice = rs.getDouble("totalPrice");
                     String status = rs.getString("status");
-                    boolean delivered = rs.getBoolean("delivered");
+                    String delivered = rs.getString("delivered");
+                    
+                    OrderDTO order = new OrderDTO();
+                    
+                    order.setOrderID(orderID);
+                    order.setUserID(userID);
+                    order.setUserName(userName);
+                    order.setOrderDate(orderDate);
+                    order.setRingID(ringID);
+                    order.setRingName(ringName);
+                    order.setVoucherID(voucherID);
+                    order.setVoucherName(voucherName);
+                    order.setRingSize(ringSize);
+                    order.setTotalPrice(totalPrice);
+                    order.setStatus(status);
+                    order.setDelivered(delivered);
+                    
+                    list.add(order);
+                }
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return list;
+    }
+    
+    public List<OrderDTO> listToCart(String keyword, String sortCol) {
+        List<OrderDTO> list = new ArrayList<OrderDTO>();
+        try {
+
+            Connection con = DBUtils.getConnection();
+            String sql = " select o.orderID, u.userID, u.userName, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, o.ringSize, ((r.price + rp.rpPrice + dp.price)*1.02) AS [totalPrice], o.status, o.delivery ";
+                   sql += " from [Order] o left join [User] u left join [Ring] r LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID  left join [Voucher] v ";
+                   sql += " WHERE o.orderID = ? AND o.status = 'pending' ";
+                   
+            if (keyword != null && !keyword.isEmpty()) {
+                sql += " WHERE ringName = ?";
+            }
+
+            if (sortCol != null && !sortCol.isEmpty()) {
+                sql += " ORDER BY " + sortCol + " ASC ";
+            }
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            if (keyword != null && !keyword.isEmpty()) {
+                stmt.setString(1, "%" + keyword + "%");
+
+            }
+            ResultSet rs = stmt.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    int orderID = rs.getInt("orderID");
+                    int userID = rs.getInt("userID");
+                    String userName = rs.getString("userName");
+                    String orderDate = rs.getString("orderDate");
+                    int ringID = rs.getInt("ringID");
+                    String ringName = rs.getString("ringName");
+                    int voucherID = rs.getInt("voucherID");
+                    String voucherName = rs.getString("voucherName");
+                    int ringSize = rs.getInt("ringSize");
+                    double totalPrice = rs.getDouble("totalPrice");
+                    String status = rs.getString("status");
+                    String delivered = rs.getString("delivered");
                     
                     OrderDTO order = new OrderDTO();
                     
@@ -85,6 +151,56 @@ public class OrderDAO {
         return list;
     }
 
+    public OrderDTO load(int orderID) {
+
+        String sql = " select o.orderID, u.userID, u.userName, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, o.ringSize, ((r.price + rp.rpPrice + dp.price)*1.02) AS [totalPrice], o.status, o.delivery ";
+                   sql += " from [Order] o left join [User] u left join [Ring] r LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID  left join [Voucher] v ";
+                   sql += " WHERE o.orderID = ? AND o.status = 'pending' ";
+
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, orderID);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                int ID = rs.getInt("orderID");
+                    int userID = rs.getInt("userID");
+                    String userName = rs.getString("userName");
+                    String orderDate = rs.getString("orderDate");
+                    int ringID = rs.getInt("ringID");
+                    String ringName = rs.getString("ringName");
+                    int voucherID = rs.getInt("voucherID");
+                    String voucherName = rs.getString("voucherName");
+                    int ringSize = rs.getInt("ringSize");
+                    double totalPrice = rs.getDouble("totalPrice");
+                    String status = rs.getString("status");
+                    String delivered = rs.getString("delivered");
+                    
+                    OrderDTO order = new OrderDTO();
+                    
+                    order.setOrderID(ID);
+                    order.setUserID(userID);
+                    order.setUserName(userName);
+                    order.setOrderDate(orderDate);
+                    order.setRingID(ringID);
+                    order.setRingName(ringName);
+                    order.setVoucherID(voucherID);
+                    order.setVoucherName(voucherName);
+                    order.setRingSize(ringSize);
+                    order.setTotalPrice(totalPrice);
+                    order.setStatus(status);
+                    order.setDelivered(delivered);
+                    return order;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Query User error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return null;
+    }
     
     public Integer insert(OrderDTO order) {
         String sql = "INSERT INTO [Order] (orderID, userID, orderDate, ringID, voucherID, ringSize, status, delivery) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -100,7 +216,7 @@ public class OrderDAO {
             ps.setInt(5, order.getVoucherID());
             ps.setInt(6,order.getRingSize());
             ps.setString(7, order.getStatus());
-            ps.setBoolean(8, order.isDelivered());
+            ps.setString(8, order.getDelivered());
 
             ps.executeUpdate();
             conn.close();
@@ -119,13 +235,13 @@ public class OrderDAO {
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
 
-            ps.setInt(1, order.getOrderID());
-            ps.setInt(2, order.getUserID());
-            ps.setString(3, order.getOrderDate());
-            ps.setInt(4, order.getRingID());
-            ps.setInt(5, order.getVoucherID());
-            ps.setString(6, order.getStatus());
-            ps.setBoolean(7, order.isDelivered());
+            ps.setInt(1, order.getRingID());
+            ps.setInt(2, order.getVoucherID());
+            ps.setInt(3, order.getRingSize());
+            ps.setInt(4, order.getVoucherID());
+            ps.setString(5, order.getStatus());
+            ps.setString(6, order.getDelivered());
+            ps.setInt(7, order.getOrderID());
 
             ps.executeUpdate();
             conn.close();

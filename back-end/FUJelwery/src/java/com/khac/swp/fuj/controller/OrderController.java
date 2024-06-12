@@ -59,10 +59,36 @@ public class OrderController extends HttpServlet {
                 List<OrderDTO> list = dao.list(keyword, sortCol);
                 request.setAttribute("orderlist", list);
 
-                request.getRequestDispatcher("/cart.jsp").forward(request, response);
-        } else if (action.equals("insert")){
-            
-        }
+                request.getRequestDispatcher("/cartlist.jsp").forward(request, response);
+                
+        } else if (action.equals("update")) {//update
+                Integer orderID = null;
+                try {
+                    orderID = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter ringSize has wrong format.");
+                }
+                
+                Integer ringSize = null;
+                try {
+                    ringSize = Integer.parseInt(request.getParameter("ringSize"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter ringSize has wrong format.");
+                }
+
+                OrderDTO order = null;
+                if (orderID != null) {
+                    order = orderDAO.load(orderID);
+                }
+                order.setRingID(orderID);
+                order.setRingSize(ringSize);
+
+                orderDAO.update(order);
+                request.setAttribute("order", order);
+                RequestDispatcher rd = request.getRequestDispatcher("cartdetails.jsp");
+                rd.forward(request, response);
+
+            }
     }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -21,7 +21,7 @@ public class OrderDTO {
     private int ringSize;
     private double totalPrice;
     private String status;
-    private boolean delivered;
+    private String delivered;
 
     public int getOrderID() {
         return orderID;
@@ -111,12 +111,13 @@ public class OrderDTO {
         this.status = status;
     }
 
-    public boolean isDelivered() {
+    public String getDelivered() {
         return delivered;
     }
 
-    public void setDelivered(boolean delivered) {
+    public void setDelivered(String delivered) {
         this.delivered = delivered;
     }
+
     
 }
