@@ -40,7 +40,7 @@
                 <li class="navbar__link"><a href="user_aboutus.jsp">About Us</a></li>
                 <li class="navbar__link"><a href="#">Order</a></li>
                 <li class="navbar__link">
-                    <a href="#">Account</a>
+                    <a href="user_accountdetails.jsp">Account</a>
                     <div class="sub-menu-1">
                         <ul>
                             <li><a href='userlogin?action=logout'>Logout</a></li>          
@@ -74,10 +74,10 @@
 
 
         <div class="list-container">
-            <div class="smaller-container">                
+            <div class="smaller-container">
                 <div class="list">
                     <form action='' method=GET id="searchbox">
-                        <input name=keyword type=text class="search-input" value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
+                        <input name="keyword" type="text" class="search-input" value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
                         <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
                     </form>
 
@@ -87,65 +87,38 @@
                             for (VoucherDTO voucher : list) {
                                 pageContext.setAttribute("voucher", voucher);
                         %>
-                        <div class="voucher-left">
-                            <h1>${voucher.name}</h1>
-                            <div class="detail-row">
-                                <strong>Created date:</strong> <p>${voucher.createddate}</p>
+                        <div class="voucher-container">
+                            <div class="voucher-left">
+                                <h1>${voucher.name}</h1>
+                                <div class="detail-row">
+                                    <strong>Created date:</strong> <p>${voucher.createddate}</p>
+                                </div>
+                                <div class="detail-row">
+                                    <strong>Added by:</strong> <p>${voucher.createdby}</p>
+                                </div>
+                                <div class="detail-row">
+                                    <strong>Code:</strong> <p>${voucher.coupon}</p>
+                                </div>
+                                <div class="detail-row">
+                                    <p>${voucher.description}</p>
+                                </div>
+                                <div class="detail-row">
+                                    <strong>Discount percentage:</strong> <p>${voucher.percentage}%</p>
+                                </div>
+                                <div class="button-container">
+                                    <a href="UserVoucherController?action=details&id=${voucher.id}" class="detail-button">View Details</a>
+                                </div>
                             </div>
-                            <div class="detail-row">
-                                <strong>Added by:</strong> <p>${voucher.createdby}</p>
-                            </div>
-                            <div class="detail-row">
-                                <strong>Code:</strong> <p>${voucher.coupon}</p>
-                            </div>
-                            <div class="detail-row">
-                                <p>${voucher.description}</p>
-                            </div>
-                            <div class="detail-row">
-                                <strong>Discount percentage:</strong> <p>${voucher.percentage}%</p>
-                            </div>
-                            <div class="button-container">
-                                <a href="UserVoucherController?action=details&id=${voucher.id}" class="detail-button">View Details</a>
-                            </div>
-                        </div>
-                        <div class="voucher-right">
-                            <div class="voucher-img">
-                                <img src=${voucher.image} style="width: 500px; height: 300px;">
+                            <div class="voucher-right">
+                                <div class="voucher-img">
+                                    <img src="${voucher.image}" style="width: 500px; height: 300px;">
+                                </div>
                             </div>
                         </div>
                         <%
                             }
                         %>
-                    </div>    
-
-                    <!--                    <table id="pagination">
-                                            <thead>
-                                                <tr>
-                                                    <th>Voucher ID</th>
-                                                    <th><a href=?colSort=postName>Voucher Name</a></th>
-                                                    <th>Image</th>
-                                                    <th>Created Date</th>
-                                                    <th>Created By</th>
-                                                    <th>Coupon</th>
-                                                    <th>Description</th>
-                                                    <th>Percentage</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                
-                                                <tr>
-                                                    <td><a href="UserVoucherController?action=details&id=${voucher.id}">${voucher.id}</a></td>
-                                                    <td>${voucher.name}</td>
-                                                    <td><img src=${voucher.image} width="300px" height="300px"></td>
-                                                    <td>${voucher.createddate}</td>
-                                                    <td>${voucher.createdby}</td>
-                                                    <td>${voucher.coupon}</td>
-                                                    <td>${voucher.description}</td>
-                                                    <td>${voucher.percentage}</td>
-                                                </tr>
-                                                
-                                            </tbody>
-                                        </table>-->
+                    </div>
                     <div id="paginationControls" class="pagination-controls">
                         <button id="prevButton" class="pagination-button"><i class="fas fa-chevron-left"></i></button>
                         <div id="pageNumbers"></div>
@@ -205,7 +178,7 @@
             </div>
         </div>
 
-        <script src="js/pagination.js"></script>
+        <script src="js/pagination_voucher.js"></script>
 
     </body>
 </html>
