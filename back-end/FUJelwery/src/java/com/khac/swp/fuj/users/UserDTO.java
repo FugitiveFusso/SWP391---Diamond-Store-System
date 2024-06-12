@@ -20,9 +20,20 @@ public class UserDTO {
     public String email;
     public String address;
     public int point;
+    public String status;
     public int roleid;
     public String rolename;
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    
+    
     public int getUserid() {
         return userid;
     }
@@ -109,6 +120,11 @@ public class UserDTO {
 
     public void setRolename(String rolename) {
         this.rolename = rolename;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDTO{" + "userid=" + userid + ", username=" + username + ", password=" + password + ", firstname=" + firstname + ", lastname=" + lastname + ", phonenumber=" + phonenumber + ", email=" + email + ", address=" + address + ", point=" + point + ", status=" + status + ", roleid=" + roleid + ", rolename=" + rolename + '}';
     }
 
     

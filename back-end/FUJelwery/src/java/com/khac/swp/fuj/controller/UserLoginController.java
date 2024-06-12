@@ -25,16 +25,24 @@ public class UserLoginController extends HttpServlet {
             if (action == null || action.equals("login")) {
                 UserDAO dao = new UserDAO();
                 UserDTO user = dao.login(username, password, "Customer");
-
                 if (user != null) {
-                    HttpSession session = request.getSession(true);
-                    session.setAttribute("usersession", user);
-                    response.sendRedirect("./user_homepage.jsp");
+                    user = dao.loginActive(username, password, "Customer");
+                    if (user != null) {
+                        HttpSession session = request.getSession(true);
+                        session.setAttribute("usersession", user);
+                        response.sendRedirect("./user_homepage.jsp");
+                    } else {
+                        request.setAttribute("error", "Your account is banned! Please contact Shop or Register new account!");
+                        RequestDispatcher rd = request.getRequestDispatcher("userlogin.jsp");
+                        rd.forward(request, response);
+                    }
                 } else {
+
                     request.setAttribute("error", "Your username or password is incorrect! Please try again");
                     RequestDispatcher rd = request.getRequestDispatcher("userlogin.jsp");
                     rd.forward(request, response);
                 }
+
             } else if (action != null && action.equals("logout")) {
                 HttpSession session = request.getSession(false);
                 if (session != null) {

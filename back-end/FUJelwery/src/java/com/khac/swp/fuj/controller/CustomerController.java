@@ -182,6 +182,36 @@ public class CustomerController extends HttpServlet {
                 request.setAttribute("customerlist", list);
                 RequestDispatcher rd = request.getRequestDispatcher("customerlist.jsp");
                 rd.forward(request, response);
+            } else if (action.equals("active")) {//active
+
+                Integer id = null;
+                try {
+                    id = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+
+                userDAO.active(id);
+
+                List<UserDTO> list = userDAO.list(keyword, sortCol, "Customer");
+                request.setAttribute("customerlist", list);
+                RequestDispatcher rd = request.getRequestDispatcher("customerlist.jsp");
+                rd.forward(request, response);
+            }else if (action.equals("banned")) {//active
+
+                Integer id = null;
+                try {
+                    id = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+
+                userDAO.banned(id);
+
+                List<UserDTO> list = userDAO.list(keyword, sortCol, "Customer");
+                request.setAttribute("customerlist", list);
+                RequestDispatcher rd = request.getRequestDispatcher("customerlist.jsp");
+                rd.forward(request, response);
             }
 
         }

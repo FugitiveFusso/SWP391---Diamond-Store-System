@@ -154,6 +154,9 @@
                                 <th><a href=?colSort=lastname>Last Name</a></th>
                                 <th><a href=?colSort=email>Email</a></th>
                                 <th>Address</th>
+                                <th>Status</th>
+                                <th>Active</th>
+                                <th>Banned</th>
                                 <th>Delete</th>
                             </tr>
                         </thead>
@@ -171,6 +174,21 @@
                                 <td>${customer.lastname}</td>
                                 <td>${customer.email}</td>
                                 <td>${customer.address}</td>
+                                <td>${customer.status}</td>
+                                <td>
+                                    <form action="CustomerController" method="POST" class="input">
+                                        <input name="action" value="active" type="hidden">
+                                        <input name="id" value="${customer.userid}" type="hidden">
+                                        <input type="submit" value="Active">
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="CustomerController" method="POST" class="input">
+                                        <input name="action" value="banned" type="hidden">
+                                        <input name="id" value="${customer.userid}" type="hidden">
+                                        <input type="submit" value="Banned">
+                                    </form>
+                                </td>
                                 <td>
                                     <form action="CustomerController" method="POST" class="input">
                                         <input name="action" value="delete" type="hidden">

@@ -24,8 +24,45 @@ public class UserDAO {
         try {
 
             Connection con = DBUtils.getConnection();
-            String sql = " select userID, userName, firstName, lastName, email, phoneNumber, address, point, roleName from [User] u full join [Role] r on u.roleID = r.roleID ";
+            String sql = " select userID, userName, firstName, lastName, email, phoneNumber, address, point, status, roleName from [User] u full join [Role] r on u.roleID = r.roleID ";
             sql += " WHERE roleName = ? AND password = ? AND userName = ?";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, rolename);
+            stmt.setString(2, password);
+            stmt.setString(3, username);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs != null) {
+                if (rs.next()) {
+                    user = new UserDTO();
+                    user.setUsername(rs.getString("userName"));
+                    user.setFirstname(rs.getString("firstName"));
+                    user.setUserid(rs.getInt("userID"));
+                    user.setLastname(rs.getString("lastName"));
+                    user.setEmail(rs.getString("email"));
+                    user.setPhonenumber(rs.getString("phoneNumber"));
+                    user.setAddress(rs.getString("address"));
+                    user.setPoint(rs.getInt("point"));
+                    user.setRolename(rs.getString("roleName"));
+                }
+            }
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+
+        }
+        return user;
+    }
+    public UserDTO loginActive(String username, String password, String rolename) {
+        UserDTO user = null;
+        try {
+
+            Connection con = DBUtils.getConnection();
+            String sql = " select userID, userName, firstName, lastName, email, phoneNumber, address, point, status, roleName from [User] u full join [Role] r on u.roleID = r.roleID ";
+            sql += " WHERE roleName = ? AND password = ? AND userName = ? AND STATUS = 'active' ";
 
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, rolename);
@@ -61,7 +98,7 @@ public class UserDAO {
         List<UserDTO> list = new ArrayList<UserDTO>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = " select userID, userName, firstName, lastName, email, address from [User] u full join [Role] r on u.roleID = r.roleID where roleName like ? ";
+            String sql = " select userID, userName, firstName, lastName, email, address, status, r.roleID, roleName  from [User] u full join [Role] r on u.roleID = r.roleID where roleName like ? ";
             if (keyword != null && !keyword.isEmpty()) {
                 sql += " and (userName like ? or firstName like ? or lastName like ? or email like ?)";
             }
@@ -91,6 +128,9 @@ public class UserDAO {
                     String lastname = rs.getString("lastName");
                     String email = rs.getString("email");
                     String address = rs.getString("address");
+                    String status = rs.getString("status");
+                    int roleid = rs.getInt("roleID");
+                    String rolename = rs.getString("roleName");
 
                     UserDTO user = new UserDTO();
                     user.setUserid(customerid);
@@ -99,6 +139,9 @@ public class UserDAO {
                     user.setLastname(lastname);
                     user.setEmail(email);
                     user.setAddress(address);
+                    user.setStatus(status);
+                    user.setRoleid(roleid);
+                    user.setRolename(rolename);
                     list.add(user);
                 }
             }
@@ -155,7 +198,7 @@ public class UserDAO {
     }
 
     public Integer insert(UserDTO user) {
-        String sql = "INSERT INTO [User] (userName, password, firstName, lastName, phoneNumber, email, address, point, roleID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO [User] (userName, password, firstName, lastName, phoneNumber, email, address, point, status, roleID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'active', ?)";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -230,7 +273,7 @@ public class UserDAO {
     }
 
     public void signup(String username, String password, String firstname, String lastname, String phonenumber, String email, String address, int point, int roleid) {
-        String sql = "INSERT INTO [User] (userName, password, firstName, lastName, phoneNumber, email, address, point, roleID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO [User] (userName, password, firstName, lastName, phoneNumber, email, address, point, status, roleID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'active', ?)";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -288,6 +331,7 @@ public class UserDAO {
         }
         return user;
     }
+
     public UserDTO checkAccountExistByGoogle(String email) {
         UserDTO user = null;
         try {
@@ -322,5 +366,81 @@ public class UserDAO {
 
         }
         return user;
+    }
+    
+    public UserDTO checkAccountExistByGoogleActive(String email) {
+        UserDTO user = null;
+        try {
+
+            Connection con = DBUtils.getConnection();
+            String sql = " select userName, firstName, lastName, email, phoneNumber, point, roleID from [User] u ";
+            sql += " WHERE email = ? and status = 'active' ";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            stmt.setString(1, email);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs != null) {
+                if (rs.next()) {
+                    user = new UserDTO();
+                    user.setUsername(rs.getString("userName"));
+                    user.setFirstname(rs.getString("firstName"));
+                    user.setUserid(rs.getInt("userID"));
+                    user.setLastname(rs.getString("lastName"));
+                    user.setEmail(rs.getString("email"));
+                    user.setPhonenumber(rs.getString("phoneNumber"));
+                    user.setPoint(rs.getInt("point"));
+                    user.setRoleid(rs.getInt("roleID"));
+                }
+            }
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+
+        }
+        return user;
+    }
+
+    public boolean active(int id) {
+        String sql = "UPDATE [User] set status = 'active' where userID = ? ";
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, id);
+
+            ps.executeUpdate();
+            conn.close();
+            return true;
+        } catch (SQLException ex) {
+            System.out.println("Active User error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public boolean banned(int id) {
+        String sql = "UPDATE [User] set status = 'banned' where userID = ? ";
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, id);
+
+            ps.executeUpdate();
+            conn.close();
+            return true;
+        } catch (SQLException ex) {
+            System.out.println("Banned User error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+
+        return false;
     }
 }
