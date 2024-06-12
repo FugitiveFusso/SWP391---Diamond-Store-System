@@ -48,7 +48,7 @@
                 </div>
 
                 <div class="item"><a href="PostController"><i class="fas fa-file"></i>Posts</a></div>
-                
+
                 <div class="item"><a href="adminaccount.jsp"><i class="fas fa-user"></i>Account</a></div>
                 <div class="item"><a href="adminlogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
 
@@ -174,7 +174,10 @@
                                 <td>${customer.lastname}</td>
                                 <td>${customer.email}</td>
                                 <td>${customer.address}</td>
-                                <td>${customer.status}</td>
+                                <td style="${customer.status == 'active' ? 'color: green; font-weight: bold;' : (customer.status == 'banned' ? 'color: red; font-weight: bold;' : '')}">
+                                    ${customer.status}
+                                </td>
+                                <!--<td>${customer.status}</td>-->
                                 <td>
                                     <form action="CustomerController" method="POST" class="input">
                                         <input name="action" value="active" type="hidden">
