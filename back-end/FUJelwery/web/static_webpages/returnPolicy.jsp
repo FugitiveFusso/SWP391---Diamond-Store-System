@@ -6,7 +6,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Return Policy</title>
         <link rel="stylesheet" href="../css/returnPolicy.css">
-        <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="../css/navbaruser.css">
 
     </head>
@@ -119,10 +119,10 @@
 
                 <div class="info">                     
                     <p class="text">
-                        Customer service staff: (+84) 898876512
+                        Customer service staff: (+84) 898876512 - (+84) 085 xxx xxxx
                     <p class="text">
                         Address: FPT University, District 9, Ho Chi Minh City
-                    </p>            
+                    </p>           
                 </div>
 
             </div>

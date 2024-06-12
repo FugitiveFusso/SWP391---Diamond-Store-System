@@ -38,9 +38,9 @@
   }
   
   .content .text{
-    font-family: 'iNT', sans-serif;
-    font-weight: 700;
-    font-size: 20px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
     color: #000000;
   }
   
@@ -51,22 +51,22 @@
   }
   
   .info .text{
-    font-family: 'Raleway', sans-serif;
-    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
     font-size: 18px;
     color: #000000;
   }
   
   ul li{
     padding: 11px 0;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 600;
     font-size: 18px;
     color: #000000;
   }
   
   .cautious h3{
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Inter', sans-serif;
     color: red;
     font-style: italic;
   }
@@ -102,7 +102,7 @@
   .info-text p{
     color: white;
     font-size: 16px;
-    font-family: 'Raleway', sans-serif; 
+    font-family: 'Inter', sans-serif; 
   }
   
   .footer-content{
@@ -117,7 +117,7 @@
   }
   
   .customer-service-title{
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
     font-size: 20px;
     color: white;
@@ -126,7 +126,7 @@
   .footer .footer-content a {
     text-decoration: none;
     color: #fefefe;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 14px;  
   }
   
@@ -136,7 +136,7 @@
   }
   
   .policy-title{
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
     font-size: 20px;
     color: white;

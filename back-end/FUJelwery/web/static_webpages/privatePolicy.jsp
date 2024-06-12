@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Privacy Policy</title>
         <link rel="stylesheet" href="../css/privatePolicy.css">
-        <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="../css/navbaruser.css">
 
     </head>
@@ -60,7 +60,7 @@
                     PRIVACY POLICY
                 </div>
                 <div class="return-policy-intro">
-                    <p>
+                    <p style="font-family: 'Inter', sans-serif; font-weight: 500;">
                         Thank you for visiting the website operated by FUJ. Protecting customer information is always a top
                         issue for FUJ. Therefore, we respect and commit to keeping private information confidential and only
                         collect necessary information related to purchase transactions. To ensure the security of customer
@@ -76,7 +76,7 @@
                     </div>
                     <p class="text">We provide services and manage the use of customers' personal information to manage the customer database and promptly handle arising problems (if any).</p>
                     <p class="text">Collecting information is aimed at building a system that brings the most benefits to customers. Therefore, the information will be used for the following activities:</p>
-                    <p class="text">(All of the above cases must be addressed within 7 days of receiving the goods; after
+                    <p class="text1">(All of the above cases must be addressed within 7 days of receiving the goods; after
                         this period, FUJ will not facilitate the exchange).
                     </p>
                     <ul class="a">
@@ -155,7 +155,7 @@
 
                 <div class="info">
                     <p class="text">
-                        Customer service staff: (+84) 898876512
+                        Customer service staff: (+84) 898876512 - (+84) 085 xxx xxxx
                     <p class="text">
                         Address: FPT University, District 9, Ho Chi Minh City
                     </p>
