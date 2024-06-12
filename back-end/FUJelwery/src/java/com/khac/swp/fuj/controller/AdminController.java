@@ -192,7 +192,7 @@ public class AdminController extends HttpServlet {
 
                 userDAO.delete(id);
 
-                List<UserDTO> list = userDAO.list(keyword, sortCol, "Adminstrator");
+                List<UserDTO> list = userDAO.list(keyword, sortCol, "Administrator");
                 request.setAttribute("adminlist", list);
                 RequestDispatcher rd = request.getRequestDispatcher("adminlist.jsp");
                 rd.forward(request, response);
