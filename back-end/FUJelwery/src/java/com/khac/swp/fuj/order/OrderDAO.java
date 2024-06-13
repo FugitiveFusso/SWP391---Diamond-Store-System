@@ -259,11 +259,5 @@ public class OrderDAO {
 
         return false;
     }
-    public static void main(String[] args) {
-        OrderDAO dao = new OrderDAO();
-        List<OrderDTO> list = dao.list(0);
-        for (OrderDTO orderDTO : list) {
-            System.out.println(orderDTO);
-        }
-    }
+
 }
