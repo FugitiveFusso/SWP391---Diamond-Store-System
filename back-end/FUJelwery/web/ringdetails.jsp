@@ -33,18 +33,18 @@
             .card-img-top {
                 border-radius: 0.25rem 0.25rem 0 0;
             }
-            .btn-group .btn {
-                width: 100px;
+            .d-flex .btn {
+                width: 150px;
             }           
 
-            .btn-group{
+            .d-flex{
                 display: flex;
-                justify-content: center;
+                justify-content: space-around;
             }
 
-            .btn-group form button{
+            .d-flex form button{
                 font-size: 20px;
-                padding: 8px 6px;
+                padding: 8px 10px;
                 background: #15156b;
                 color: #fff;
                 border-radius: 10px;
@@ -153,15 +153,15 @@
                             <p class="card-text"><strong>Cut:</strong> ${requestScope.ring.cut}</p>
                             <p class="card-text"><strong>Diamond Price:</strong> ${requestScope.ring.diamondPrice}</p>
                             <p class="card-text"><strong>Total Price:</strong> ${requestScope.ring.totalPrice}</p>
-                            <div class="btn-group" role="group" aria-label="Voucher Actions">
-                                <form action="RingController" method="post" class="mr-2">
+                            <div class="d-flex" role="group" aria-label="Voucher Actions">
+                                <form action="RingController" method="post">
                                     <input type="hidden" name="action" value="list">
                                     <button type="submit" class="btn btn-primary">Return</button>
                                 </form>
                                 <form action="CollectionController" method="POST">
                                     <input name="action" value="details" type="hidden">
                                     <input name="id" value="${ring.collectionID}" type="hidden">
-                                    <input type="submit" value="Return Collection" class="btn btn-primary">
+                                    <button type="submit" class="btn btn-primary">Collection</button>
                                 </form>
                                 <form action="RingController" method="post">
                                     <input type="hidden" name="id" value="${requestScope.ring.ringID}">
