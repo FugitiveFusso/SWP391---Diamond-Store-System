@@ -69,7 +69,7 @@
                             for (PostDTO post : list) {
                                 pageContext.setAttribute("post", post);
                         %>
-                        <tr>
+                        <tr style="border-radius: 20px">
                             <td>
                                 <img src="${post.image}">
                             </td>
