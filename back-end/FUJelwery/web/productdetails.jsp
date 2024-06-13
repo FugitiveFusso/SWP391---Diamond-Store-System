@@ -125,7 +125,7 @@
                 <form action="AddToCart" method="post" class="buttons-form">
                     <input type="hidden" name="userID" value=${sessionScope.usersession.userid}>
                     <input type="hidden" name="ringID" value=${requestScope.product.ringID}>
-                    <input type="hidden" name="ringSize" value="3"> 
+                    <input type="number" name="ringSize" min="3" max="11">
                     <button type="submit" class="btn btn-primary" onclick="addToCart()">Add to Cart</button>
                 </form>
                 <div class="Inclusion">

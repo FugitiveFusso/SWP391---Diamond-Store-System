@@ -94,7 +94,7 @@
                         %>
                         <tr>
                             <td>
-                                ${order.orderID}</td>
+                                <a href="OrderController?action=details&id=${order.orderID}">${order.orderID}</td>
                             <td>${order.ringName}</td>
                             <td>${order.ringSize}</td>
                             <td>${order.totalPrice}</td>
@@ -112,8 +112,9 @@
                         %>    
                         <tr><td colspan="10">
                                 <form action="OrderController" method="POST">
-                                    <input name="action" value="create" type="hidden">
-                                    <input type="submit" value="Create">
+                                    <input name="action" value="purchase" type="hidden">
+                                    <input type="hidden" name="userid" value=${sessionScope.usersession.userid}>
+                                    <input type="submit" value="Purchase">
                                 </form>
                             </td></tr>
                     </table>

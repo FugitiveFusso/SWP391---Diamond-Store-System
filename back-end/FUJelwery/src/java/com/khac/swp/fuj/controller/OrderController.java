@@ -68,6 +68,22 @@ public class OrderController extends HttpServlet {
 
                 request.getRequestDispatcher("/cartlist.jsp").forward(request, response);
 
+            } else if (action.equals("details")) {//details
+
+                Integer id = null;
+                try {
+                    id = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+
+                OrderDTO order = null;
+                if (id != null) {
+                    order = orderDAO.load(id);
+                }
+
+                request.setAttribute("order", order);//object
+                request.getRequestDispatcher("/cartdetails.jsp").forward(request, response);
             } else if (action.equals("update")) {//update
                 Integer orderID = null;
                 try {
@@ -96,28 +112,31 @@ public class OrderController extends HttpServlet {
                 rd.forward(request, response);
 
             } else if (action.equals("purchase")) {//purchase
-                Integer orderID = null;
+                Integer userID = null;
                 try {
-                    orderID = Integer.parseInt(request.getParameter("id"));
+                    userID = Integer.parseInt(request.getParameter("userid"));
                 } catch (NumberFormatException ex) {
-                    log("Parameter ringSize has wrong format.");
+                    log("Parameter UserID has wrong format.");
                 }
 
-                String status = "purchased";
-
-                OrderDTO order = null;
-                if (orderID != null) {
-                    order = orderDAO.load(orderID);
+                if (userID != null) {
+                    try {
+                        orderDAO.purchase(userID);
+                        request.getSession().setAttribute("success", "Purchase Successfully!!!");
+                    } catch (Exception e) {
+                        log("Error deleting order: " + e.getMessage());
+                        request.getSession().setAttribute("errorMessage", "Error deleting order.");
+                    }
+                } else {
+                    request.getSession().setAttribute("errorMessage", "Invalid order ID.");
                 }
-                order.setOrderID(orderID);
-                order.setStatus(status);
 
-                orderDAO.update(order);
-                request.setAttribute("order", order);
-                RequestDispatcher rd = request.getRequestDispatcher("cartdetails.jsp");
-                rd.forward(request, response);
+                response.sendRedirect(request.getContextPath() + "/user_homepage.jsp");
+       
 
-            } else if (action.equals("delete")) {
+            
+
+        }else if (action.equals("delete")) {
                 Integer id = null;
                 try {
                     id = Integer.parseInt(request.getParameter("id"));
@@ -140,20 +159,20 @@ public class OrderController extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/user_homepage.jsp");
             }
 
-        }
     }
+}
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+/**
+ * Handles the HTTP <code>GET</code> method.
+ *
+ * @param request servlet request
+ * @param response servlet response
+ * @throws ServletException if a servlet-specific error occurs
+ * @throws IOException if an I/O error occurs
+ */
+@Override
+        protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -167,7 +186,7 @@ public class OrderController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -178,7 +197,7 @@ public class OrderController extends HttpServlet {
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo() {
+        public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 }
