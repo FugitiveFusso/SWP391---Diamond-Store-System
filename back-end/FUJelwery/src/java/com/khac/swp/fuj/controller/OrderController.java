@@ -127,10 +127,8 @@ public class OrderController extends HttpServlet {
                 }
 
                 orderDAO.delete(id);
-
-                List<OrderDTO> list = orderDAO.listToCart(keyword, sortCol);
-                request.setAttribute("cartlist", list);
-                RequestDispatcher rd = request.getRequestDispatcher("cartlist.jsp");
+                request.setAttribute("success", "Delete Successfully!!!");
+                RequestDispatcher rd = request.getRequestDispatcher("user_homepage.jsp");
                 rd.forward(request, response);
             }
         }

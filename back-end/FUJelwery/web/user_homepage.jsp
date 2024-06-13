@@ -7,17 +7,72 @@
         <title>Home Page</title>
         <link rel="stylesheet" href="css/navbaruser.css">
         <link rel="stylesheet" href="css/user_mainpage.css">
+        <style>
+            /* The popup (background) */
+            .popup {
+                display: none;
+                position: fixed; 
+                z-index: 1; 
+                left: 0;
+                top: 0;
+                width: 100%; 
+                height: 100%; 
+                overflow: auto; 
+                background-color: rgba(0, 0, 0, 0.4); 
+            }
 
+            /* Popup content */
+            .popup-content {
+                background-color: #fefefe;
+                margin: 15% auto; 
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+                max-width: 300px;
+                text-align: center;
+                border-radius: 5px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            }
+
+            /* Close button */
+            .close {
+                color: #aaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+            }
+
+            .close:hover,
+            .close:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+            h4 {
+                color: green;
+            }
+
+        </style>
+        <script>
+            function closePopup() {
+                document.getElementById("successPopup").style.display = "none";
+            }
+        </script>
     </head>
     <body>
-        <% String error1 = (String) request.getAttribute("error"); %>
-        <% if (error1 != null) {%>
-        <h4 style="color: red; text-align: center"> <%= error1%> </h4>
-        <% }%>
-
         <% String success = (String) request.getAttribute("success"); %>
         <% if (success != null) {%>
-        <h4 style="color: green; text-align: center"> <%= success%> </h4>
+        <div id="successPopup" class="popup">
+            <div class="popup-content">
+                <span class="close" onclick="closePopup()">&times;</span>
+                <h4><%= success%></h4>
+            </div>
+        </div>
+        <script>
+            // Display the pop-up
+            document.getElementById("successPopup").style.display = "block";
+        </script>
         <% }%>
         <div class="menu">
             <ul class="navbar">

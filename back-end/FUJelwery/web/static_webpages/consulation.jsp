@@ -48,7 +48,7 @@
                         </ul>
                     </div>
                 </li>
-                <a href="user_homepage.jsp"><img src="../images/Screenshot (656).png"></a>
+                <a href="./../user_homepage.jsp"><img src="../images/Screenshot (656).png"></a>
                 <li class="navbar__link"><a href="../user_aboutus.jsp">About Us</a></li>
                 <li class="navbar__link"><a href="#">Order</a></li>
                 <li class="navbar__link">

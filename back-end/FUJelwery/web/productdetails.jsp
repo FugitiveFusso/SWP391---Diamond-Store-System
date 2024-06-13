@@ -113,16 +113,20 @@
                 </div>
                 <hr style="margin-bottom: 10px;">
                 <p class="price" style="margin-top: 20px;"><strong style="color: #151542">Total Price:</strong> ${requestScope.product.totalPrice} VND</p>
-                <form action="ProductController" method="get" class="buttons-form">
+                <form action="ProductController" method="post" class="buttons-form">
                     <input type="hidden" name="action" value="list">
                     <input type="submit" value="Return" class="btn">
-                    <input type="button" value="buy" class="btn" onclick="addToCart()">
+                </form>
+                <form action="UserCollectionController" method="POST" class="buttons-form">
+                    <input name="action" value="details" type="hidden">
+                    <input name="id" value="${product.collectionID}" type="hidden">
+                    <button type="submit" class="btn btn-primary">Collection</button>
                 </form>
                 <form action="AddToCart" method="post" class="buttons-form">
-                <input type="hidden" name="userID" value=${sessionScope.usersession.userid}>
-                <input type="hidden" name="ringID" value=${requestScope.product.ringID}>
-                <input type="hidden" name="ringSize" value="3"> 
-                <button onclick="addToCart()">Add to Cart</button>
+                    <input type="hidden" name="userID" value=${sessionScope.usersession.userid}>
+                    <input type="hidden" name="ringID" value=${requestScope.product.ringID}>
+                    <input type="hidden" name="ringSize" value="3"> 
+                    <button type="submit" class="btn btn-primary" onclick="addToCart()">Add to Cart</button>
                 </form>
                 <div class="Inclusion">
                     <h2>Your Order Includes:</h2>
