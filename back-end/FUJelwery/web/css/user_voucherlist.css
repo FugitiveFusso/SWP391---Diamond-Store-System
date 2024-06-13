@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 body{
     margin: 0; 
+    overflow-x: hidden;
 }
 
 .bannerContainer .bannerContent{
@@ -149,13 +150,46 @@ body{
     border-radius: 10px;
 }
 
+#pagination {
+    border: none;
+    border-style: none;
+    border-collapse: separate;
+    border-spacing: 0 30px;
+    margin-top: 10px;  
+    border-radius: 20px;
+}
+
+tbody{
+    border-radius: 20px;
+}
+
+tr {
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+tr:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+td {
+    border-radius: 0 20px 20px 0;
+}
+
+table img {
+    vertical-align: bottom;
+    width: 450px;
+    height: 250px;
+    border-radius: 20px 0 0 20px;
+}
+
 .voucher-content {
     margin: 20px;
 }
 
 .voucher-container {
     display: flex;
-    overflow: hidden;
     margin: 50px 100px;
 }
 

@@ -91,9 +91,9 @@
                                             for (VoucherDTO voucher : list) {
                                                 pageContext.setAttribute("voucher", voucher);
                                         %>
-                                        <tr class="voucher-item">
+                                        <tr class="voucher-item" style="border-radius: 20px">
                                             <td class="voucher-image">
-                                                <img src="${voucher.image}" style="width: 500px; ">
+                                                <img src="${voucher.image}" style="width: 700px; ">
                                             </td>
                                             <td class="voucher-details" style="font-family: 'Inter', sans-serif; ">
                                                 <h2>${voucher.name}</h2>
