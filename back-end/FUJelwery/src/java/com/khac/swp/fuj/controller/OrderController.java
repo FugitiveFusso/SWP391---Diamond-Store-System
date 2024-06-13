@@ -57,7 +57,7 @@ public class OrderController extends HttpServlet {
 
                 OrderDAO dao = new OrderDAO();
                 List<OrderDTO> list = dao.listToCart(keyword, sortCol);
-                request.setAttribute("orderlist", list);
+                request.setAttribute("cartlist", list);
 
                 request.getRequestDispatcher("/cartlist.jsp").forward(request, response);
                 
@@ -96,7 +96,7 @@ public class OrderController extends HttpServlet {
                     log("Parameter ringSize has wrong format.");
                 }
                 
-                String status = "purchase";
+                String status = "purchased";
 
                 OrderDTO order = null;
                 if (orderID != null) {
@@ -110,6 +110,21 @@ public class OrderController extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("cartdetails.jsp");
                 rd.forward(request, response);
 
+            } else if (action.equals("delete")) {//delete
+
+                Integer id = null;
+                try {
+                    id = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+
+                orderDAO.delete(id);
+
+                List<OrderDTO> list = orderDAO.listToCart(keyword, sortCol);
+                request.setAttribute("cartlist", list);
+                RequestDispatcher rd = request.getRequestDispatcher("cartlist.jsp");
+                rd.forward(request, response);
             }
     }
     }

@@ -98,8 +98,7 @@ CREATE TABLE [Order](
 	ringID int NOT NULL foreign key REFERENCES [Ring](ringID),
 	voucherID int foreign key REFERENCES [Voucher](voucherID),
 	ringSize int,
-	totalPrice float,
-	[status] bit,
+	[status] varchar(255),
 	delivered varchar(255)
 );
 
