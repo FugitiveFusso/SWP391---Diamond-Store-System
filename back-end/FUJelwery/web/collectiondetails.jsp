@@ -1,4 +1,7 @@
 
+<%@page import="com.khac.swp.fuj.ring.RingDTO"%>
+<%@page import="com.khac.swp.fuj.ring.RingDTO"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -7,10 +10,11 @@
         <title>Collection Management Detail</title>
         <link rel="stylesheet" href="css/navbar_admin.css">
         <script src="https://unpkg.com/@phosphor-icons/web"></script>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
+        <script src="js/pagination.js"></script>
+        <link rel="stylesheet" href="css/pagination.css">
         <script>
             window.onload = function () {
                 if (!sessionStorage.getItem('hasReloaded')) {
@@ -91,7 +95,7 @@
                             <a href="DiamondController" class="sub-item">Diamond List</a>
                             <a href="RingController" class="sub-item">Ring List</a>
                             <a href="CollectionController" class="sub-item">Collection List</a>
-                            
+
                         </div>
                     </a>
                 </div>
@@ -114,7 +118,7 @@
                 </div>
 
                 <div class="item"><a href="CategoryController"><i class="fas fa-layer-group"></i>View Category</a></div>
-                
+
                 <div class="item"><a href="salesstaffaccount.jsp"><i class="fas fa-user"></i>Account</a></div>
                 <div class="item"><a href="saleslogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
 
@@ -156,12 +160,48 @@
                         </div>
                     </div>
                 </div>
+
+            </div>
+            <table id="pagination">
+                <thead>
+                    <tr>
+                        <th>Ring ID</th>
+                        <th>Ring Name</th>
+                        <th>Ring Image</th>
+                        <th>Diamond Name</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <%
+                        List<RingDTO> list = (List<RingDTO>) request.getAttribute("ringclist");
+                        for (RingDTO ring : list) {
+                            pageContext.setAttribute("ring", ring);
+                    %>
+                    <tr>
+                        <td>
+                            <a href="RingController?action=details&id=${ring.ringID}">   ${ring.ringID}</td>
+                        <td>${ring.ringName}</td>
+                        <td><img src=${ring.ringImage} width="300px" height="300px"></td>
+                        <td>${ring.diamondName}</td>
+                        <td>${ring.totalPrice}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id="paginationControls" class="pagination-controls">
+                <button id="prevButton" class="pagination-button"><i class="fas fa-chevron-left"></i></button>
+                <div id="pageNumbers"></div>
+                <button id="nextButton" class="pagination-button"><i class="fas fa-chevron-right"></i></button>
             </div>
         </div>
-        <script src="js/pagination.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
-                                                        integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
-        crossorigin="anonymous"></script>
-        <script src="js/sidenav.js"></script>
+    </div>
+</div>
+</div>
+<script src="js/pagination.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+                                                integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+crossorigin="anonymous"></script>
+<script src="js/sidenav.js"></script>
 
-    </body>
+</body>
 </html>

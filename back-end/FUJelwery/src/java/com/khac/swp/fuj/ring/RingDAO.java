@@ -444,4 +444,86 @@ public class RingDAO {
         return null;
     }
 
+    public List<RingDTO> listByCollection(int collectionID) {
+        List<RingDTO> list = new ArrayList<RingDTO>();
+        try {
+            Connection con = DBUtils.getConnection();
+            String sql = "SELECT r.ringID, r.rpID, r.ringName, r.ringImage, r.diamondID, r.price AS [ringPrice], ((r.price + rp.rpPrice + dp.price)*1.02) AS [totalPrice], r.collectionID, r.categoryID, rp.rName, rp.material, rp.color AS [ringColor], rp.rpPrice, d.diamondName, d.diamondImage, d.origin, d.certificateID, dp.diamondSize, dp.caratWeight, dp.color AS [diamondColor], dp.clarity, dp.cut, dp.price AS [diamondShapePrice]"
+                    + " FROM [Ring] r LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID where r.collectionID = ?";
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, collectionID);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+
+                    int ringID = rs.getInt("ringID");
+                    int rpID = rs.getInt("rpID");
+                    String ringName = rs.getString("ringName");
+                    String ringImage = rs.getString("ringImage");
+                    int diamondID = rs.getInt("diamondID");
+                    int price = rs.getInt("ringPrice");
+                    int collectionID1 = rs.getInt("collectionID");
+                    int categoryID = rs.getInt("categoryID");
+
+                    String rName = rs.getString("rName");
+                    String material = rs.getString("material");
+                    String ringColor = rs.getString("ringColor");
+                    int rpPrice = rs.getInt("rpPrice");
+
+                    String diamondName = rs.getString("diamondName");
+                    String diamondImage = rs.getString("diamondImage");
+                    String origin = rs.getString("origin");
+                    int certificateID = rs.getInt("certificateID");
+
+                    double diamondSize = rs.getDouble("diamondSize");
+                    double caratWeight = rs.getDouble("caratWeight");
+                    String color = rs.getString("diamondColor");
+                    String clarity = rs.getString("clarity");
+                    String cut = rs.getString("cut");
+                    int diamondPrice = rs.getInt("diamondShapePrice");
+                    int totalPrice = rs.getInt("totalPrice");
+
+                    RingDTO ring = new RingDTO();
+
+                    ring.setRingID(ringID);
+                    ring.setRpID(rpID);
+                    ring.setRingName(ringName);
+                    ring.setRingImage(ringImage);
+                    ring.setDiamondID(diamondID);
+                    ring.setPrice(price);
+                    ring.setCategoryID(categoryID);
+                    ring.setCollectionID(collectionID1);
+                    ring.setRingPlacementName(rName);
+                    ring.setMaterial(material);
+                    ring.setRingColor(ringColor);
+                    ring.setRpPrice(rpPrice);
+
+                    ring.setDiamondName(diamondName);
+                    ring.setDiamondImage(diamondImage);
+                    ring.setOrigin(origin);
+                    ring.setCertificateID(certificateID);
+
+                    ring.setDiamondSize(diamondSize);
+                    ring.setCaratWeight(caratWeight);
+                    ring.setColor(color);
+                    ring.setClarity(clarity);
+                    ring.setCut(cut);
+                    ring.setDiamondPrice(diamondPrice);
+                    ring.setTotalPrice(totalPrice);
+
+                    list.add(ring);
+                }
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return list;
+    }
+
 }

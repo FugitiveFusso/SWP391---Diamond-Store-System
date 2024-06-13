@@ -2,6 +2,8 @@ package com.khac.swp.fuj.controller;
 
 import com.khac.swp.fuj.collection.CollectionDAO;
 import com.khac.swp.fuj.collection.CollectionDTO;
+import com.khac.swp.fuj.ring.RingDAO;
+import com.khac.swp.fuj.ring.RingDTO;
 import com.khac.swp.fuj.utils.DBUtils;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -31,7 +33,7 @@ public class CollectionController extends HttpServlet {
                 keyword = "";
             }
             String sortCol = request.getParameter("colSort");
-
+            RingDAO ringDAO = new RingDAO();
             CollectionDAO collectionDAO = new CollectionDAO();
             HttpSession session = request.getSession(false);
             if (session == null || session.getAttribute("salessession") == null) {
@@ -53,10 +55,13 @@ public class CollectionController extends HttpServlet {
                 } catch (NumberFormatException ex) {
                     log("Parameter id has wrong format.");
                 }
-
+                RingDTO ring = null;
                 CollectionDTO collection = null;
                 if (id != null) {
+                    RingDAO dao_1 = new RingDAO();
                     collection = collectionDAO.load(id);
+                    List<RingDTO> ring_1 = dao_1.listByCollection(id);
+                    request.setAttribute("ringclist", ring_1);
                 }
 
                 request.setAttribute("collection", collection);//object
@@ -135,7 +140,7 @@ public class CollectionController extends HttpServlet {
                     collection.setCollectionImage(collectionImage);
                     collection.setCollectionDescription(description);
                     request.setAttribute("collection", collection);
-                    
+
                     collectionDAO.insert(collection);
                     request.setAttribute("success", "Added Successfully!!!");
                     RequestDispatcher rd = request.getRequestDispatcher("collectionedit.jsp");

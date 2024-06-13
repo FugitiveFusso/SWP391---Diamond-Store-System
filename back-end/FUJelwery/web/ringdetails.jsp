@@ -90,7 +90,7 @@
                             <a href="DiamondController" class="sub-item">Diamond List</a>
                             <a href="RingController" class="sub-item">Ring List</a>
                             <a href="CollectionController" class="sub-item">Collection List</a>
-                            
+
                         </div>
                     </a>
                 </div>
@@ -113,7 +113,7 @@
                 </div>
 
                 <div class="item"><a href="CategoryController"><i class="fas fa-layer-group"></i>View Category</a></div>
-                
+
                 <div class="item"><a href="salesstaffaccount.jsp"><i class="fas fa-user"></i>Account</a></div>
                 <div class="item"><a href="saleslogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
 
@@ -157,6 +157,11 @@
                                 <form action="RingController" method="post" class="mr-2">
                                     <input type="hidden" name="action" value="list">
                                     <button type="submit" class="btn btn-primary">Return</button>
+                                </form>
+                                <form action="CollectionController" method="POST">
+                                    <input name="action" value="details" type="hidden">
+                                    <input name="id" value="${ring.collectionID}" type="hidden">
+                                    <input type="submit" value="Return Collection" class="btn btn-primary">
                                 </form>
                                 <form action="RingController" method="post">
                                     <input type="hidden" name="id" value="${requestScope.ring.ringID}">
