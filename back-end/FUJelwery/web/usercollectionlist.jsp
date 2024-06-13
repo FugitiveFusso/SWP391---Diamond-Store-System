@@ -10,7 +10,6 @@
         <link rel="stylesheet" href="css/navbaruser.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-        <script src="js/pagination.js"></script>
         <link rel="stylesheet" href="css/pagination.css">
         <link rel="stylesheet" href="./css/user_collectionlist.css">
     </head>
@@ -51,65 +50,81 @@
 
             </ul>
         </div> 
+
+        <div class="bannerContainer">
+            <div class="bannerContent">
+                <div class="bannerText">
+                    <p class="intro">Today we have</p>
+                    <h1>Exquisite Ring Collection</h1>
+                    <div class="description_hero">
+                        <span>Discover our stunning range of rings, meticulously crafted to perfection. From timeless classics to contemporary designs, our collection offers a variety of styles to suit every taste. Each piece is designed with the utmost attention to detail, ensuring that it not only dazzles but also stands the test of time. Whether you're looking for an engagement ring, a gift for a loved one, or a special treat for yourself, our collection promises to deliver elegance and sophistication for every occasion.</span>
+                    </div>                   
+                </div>
+                <div class="bannerImage">
+                    <img src="images/Women's_Diamond_Wedding_Rings.webp" id="diamondHero" style="width: 432px; height: 432px">
+                </div>
+            </div>
+        </div>
+
         <div class="list-container">
             <div class="smaller-container">
-                <div class="list1">
+                <form action='' method=GET id="searchbox" class="center-searchbox"> 
+                    <input name=keyword type=text class="search-input" value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
+                    <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+                </form>
+                <div class="list-title">Collection List</div>
+                <div class="list">
+                    <div class="card-container">
+                        <%
+                            List<CollectionDTO> list = (List<CollectionDTO>) request.getAttribute("collectionlist");
+                            for (CollectionDTO collection : list) {
+                                pageContext.setAttribute("collection", collection);
+                        %>
+                        <div class="product-card">
+                            <a href="UserCollectionController?action=details&id=${collection.collectionID}">
+                                <img src=${collection.collectionImage} alt="${collection.collectionName}">
+                                <h3>${collection.collectionName}</h3>
 
-                    <div class="list-intro-left">
-                        <div class="left-icon">
-                            <i class='bx bx-collection' ></i>
+                                <p>${collection.collectionDescription}</p>
+
+                            </a>
                         </div>
-                        <div class="left-info">
-                            <div class="list-title">Collection List</div>
-                            <div class="">List of Collection</div>
-                        </div>
+                        <%
+                            }
+                        %>  
                     </div>
 
-
-                </div>
-
-                <div class="list">
-                    <form action='' method=GET id="searchbox"> 
-                        <input name=keyword type=text class="search-input" value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
-                        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
-                    </form>
-
-                    <table id="pagination">
-                        <thead>
-                            <tr>
-                                <th>Collection ID</th>
-                                <th><a href=?colSort=collectionName>Collection Name</a></th>
-                                <th>Collection Image</th>
-                                <th>Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            <%
-                                List<CollectionDTO> list = (List<CollectionDTO>) request.getAttribute("collectionlist");
-                                for (CollectionDTO collection : list) {
-                                    pageContext.setAttribute("collection", collection);
-                            %>
-                            <tr>
-                                <td>
-                                    <a href="UserCollectionController?action=details&id=${collection.collectionID}">   ${collection.collectionID}</td>
-                                <td>${collection.collectionName}</td>
-                                <td><img src=${collection.collectionImage} width="300px" height="300px" style="border-radius: 20px;"></td>
-                                <td>${collection.collectionDescription}</td>
+                    <!--                    <table id="pagination">
+                                            <thead>
+                                                <tr>
+                                                    <th>Collection ID</th>
+                                                    <th><a href=?colSort=collectionName>Collection Name</a></th>
+                                                    <th>Collection Image</th>
+                                                    <th>Description</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                    
+                    
+                    <tr>
+                        <td>
+                            <a href="UserCollectionController?action=details&id=${collection.collectionID}">   ${collection.collectionID}</td>
+                        <td>${collection.collectionName}</td>
+                        <td><img src=${collection.collectionImage} width="300px" height="300px" style="border-radius: 20px;"></td>
+                        <td>${collection.collectionDescription}</td>
 
 
-                            </tr>
-                            <%
-                                }
-                            %>    
-                        </tbody>
-                    </table>
+                    </tr>
+                      
+                </tbody>
+            </table>-->
                     <div id="paginationControls" class="pagination-controls">
                         <button id="prevButton" class="pagination-button"><i class="fas fa-chevron-left"></i></button>
                         <div id="pageNumbers"></div>
                         <button id="nextButton" class="pagination-button"><i class="fas fa-chevron-right"></i></button>
                     </div>
                 </div>
+
                 <div class="footer">
                     <div class="footer-content">
                         <div class="footer-content-info">
@@ -163,5 +178,7 @@
                 </div>
 
             </div>
+        </div>
+        <script src="js/productlist_pagination.js"></script>
     </body>
 </html>

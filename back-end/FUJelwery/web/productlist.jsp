@@ -56,27 +56,27 @@
         <div class="bannerContainer">
             <div class="bannerContent">
                 <div class="bannerText">
-                    <p class="intro">To day we have</p>
-                    <h1>Diamond</h1>
+                    <p class="intro">Today we have</p>
+                    <h1>Elegant Rings for Every Occasion</h1>
                     <div class="description_hero">
-                        <span>Round is our most popular cut. For almost 100 years, diamond cutters have been using advanced theories of light behavior and precise mathematical calculations to optimize the fire and brilliance in a round diamond. Round cuts also have the widest variety of setting styles so you can customize to your heart's content.</span>
+                        <span>Explore our exquisite collection of rings, designed to capture the essence of elegance and style. From sparkling diamonds to vibrant gemstones, our rings are crafted with precision and passion. Whether you're searching for a timeless engagement ring, a chic statement piece, or a meaningful gift, our diverse selection offers something for everyone. Let our rings adorn your moments with beauty and grace.</span>
                     </div>
                     <a style="margin-top: 15px" class="slpBtn" title="Shop Diamond" href="productlist.jsp">Shop Diamond</a>
                 </div>
                 <div class="bannerImage">
-                    <img src="images/diamond_hero.webp" id="diamondHero" style="width: 432px; height: 432px">
+                    <img src="images/Blue_Nile_Studio.webp" id="diamondHero" style="width: 432px; height: 432px">
                 </div>
             </div>
         </div>
 
         <div class="list-container">
             <div class="smaller-container">
+                <form action='' method=GET id="searchbox" class="center-searchbox"> 
+                    <input name=keyword type=text class="search-input" value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
+                    <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+                </form>
                 <div class="list-title">Ring List</div>
                 <div class="list">
-                    <form action='' method=GET id="searchbox" class="center-searchbox"> 
-                        <input name=keyword type=text class="search-input" value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
-                        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
-                    </form>
                     <div class="card-container">
                         <%
                             List<RingDTO> list = (List<RingDTO>) request.getAttribute("productlist");

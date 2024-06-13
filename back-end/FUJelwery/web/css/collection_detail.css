@@ -302,3 +302,77 @@ td a{
     border: none;
     border-radius: 10px;
 }
+
+.btn-group form button{
+    font-size: 20px;
+    padding: 8px 20px;
+    background: #15156b;
+    color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.footer {
+    background-color: black;
+    color: #fefefe;
+    position: relative;
+    width: 100%;
+    bottom: 0;
+}
+
+.info{
+    padding-left: 100px;
+}
+
+info-img{
+    margin-left: 60px;
+}
+
+.info img{
+    width: 80px;
+    height: 80px;
+}
+
+.info-text p{
+    color: white;
+    font-size: 16px;
+    font-family: 'Raleway', sans-serif; 
+}
+
+.footer-content{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 30px 0;
+}
+
+.customer-service{   
+    padding-top: 30px;
+    padding-left: 400px;
+}
+
+.customer-service-title{
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: white;
+}
+
+.footer .footer-content a {
+    text-decoration: none;
+    color: #fefefe;
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;  
+}
+
+.policy{
+    padding-top: 30px;
+    padding-right: 100px;
+}
+
+.policy-title{
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: white;
+}
+

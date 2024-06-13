@@ -8,11 +8,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Colletion Details</title>
         <link rel="stylesheet" href="css/navbaruser.css">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <script src="js/pagination.js"></script>
         <link rel="stylesheet" href="css/pagination.css">
-        <link rel="stylesheet" href="./css/user_collectionlist.css">
+        <link rel="stylesheet" href="css/collection_detail.css">
+
     </head>
     <body>
         <div class="menu">
@@ -51,6 +53,7 @@
 
             </ul>
         </div> 
+
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6 col-sm-6 col-12"> <!-- Adjust the column size as needed -->
@@ -68,7 +71,7 @@
                                 <form action="UserCollectionController" method="post" class="mr-2">
                                     <input type="hidden" name="action" value="list">
                                     <button type="submit" class="btn btn-primary">Return</button>
-                                </form>
+                                </form>                               
                             </div>
                         </div>
                     </div>
@@ -110,56 +113,56 @@
                 <div id="pageNumbers"></div>
                 <button id="nextButton" class="pagination-button"><i class="fas fa-chevron-right"></i></button>
             </div>
-            <div class="footer">
-                <div class="footer-content">
-                    <div class="footer-content-info">
-                        <div class="info-img">
-                            <img src="images/Screenshot (659).png" />
-                        </div>
+        </div>   
 
-                        <div class="info-text">
-                            <p>
-                                Address: FPT University, District 9, Ho Chi Minh City
-                            </p>
-                            <p>
-                                Email: fuj.khac.diamondshopsystem@gmail.com
-                            </p>
-                            <p>
-                                Phone: (+ 84) 898876512
-                            </p>
-                            <p>
-                                © Copyright 2024
-                            </p>
-                        </div>
+        <div class="footer">
+            <div class="footer-content">
+                <div class="footer-content-info">
+                    <div class="info-img">
+                        <img src="images/Screenshot (659).png" style="width: 80px; height: 80px;"/>
                     </div>
 
-                    <div class="customer-service">
-                        <div class="customer-service-title">
-                            Customer service
-                        </div>
-
-                        <div class="customer-service-text">
-                            <p><a href="static_webpages/ringmeasuring.jsp">Instructions for measuring rings</a></p>
-                            <p><a href="static_webpages/consulation.jsp">Product consultation by month of birth</a></p>
-                            <p><a href="static_webpages/faqs.jsp">Frequently asked questions</a></p>
-                        </div>
-                    </div>
-
-                    <div class="policy">
-                        <div class="policy-title">
-                            Policy
-                        </div>
-
-                        <div class="policy-text">
-                            <p><a href="static_webpages/warrantyPolicy.jsp">Warranty Policy</a></p>
-                            <p><a href="static_webpages/deliveryPolicy.jsp">Delivery Policy</a></p>
-                            <p><a href="static_webpages/returnPolicy.jsp">Return Policy</a></p>
-                            <p><a href="static_webpages/privatePolicy.jsp">Privacy policy</a></p>
-                        </div>
+                    <div class="info-text">
+                        <p>
+                            Address: FPT University, District 9, Ho Chi Minh City
+                        </p>
+                        <p>
+                            Email: fuj.khac.diamondshopsystem@gmail.com
+                        </p>
+                        <p>
+                            Phone: (+ 84) 898876512
+                        </p>
+                        <p>
+                            © Copyright 2024
+                        </p>
                     </div>
                 </div>
 
+                <div class="customer-service">
+                    <div class="customer-service-title">
+                        Customer service
+                    </div>
 
+                    <div class="customer-service-text">
+                        <p><a href="static_webpages/ringmeasuring.jsp">Instructions for measuring rings</a></p>
+                        <p><a href="static_webpages/consulation.jsp">Product consultation by month of birth</a></p>
+                        <p><a href="static_webpages/faqs.jsp">Frequently asked questions</a></p>
+                    </div>
+                </div>
+
+                <div class="policy">
+                    <div class="policy-title">
+                        Policy
+                    </div>
+
+                    <div class="policy-text">
+                        <p><a href="static_webpages/warrantyPolicy.jsp">Warranty Policy</a></p>
+                        <p><a href="static_webpages/deliveryPolicy.jsp">Delivery Policy</a></p>
+                        <p><a href="static_webpages/returnPolicy.jsp">Return Policy</a></p>
+                        <p><a href="static_webpages/privatePolicy.jsp">Privacy policy</a></p>
+                    </div>
+                </div>
             </div>
+        </div>
     </body>
 </html>
