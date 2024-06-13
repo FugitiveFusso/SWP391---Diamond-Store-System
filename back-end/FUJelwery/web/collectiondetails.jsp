@@ -187,6 +187,9 @@
                         <td>${ring.diamondName}</td>
                         <td>${ring.totalPrice}</td>
                     </tr>
+                    <%
+                        }
+                    %>    
                 </tbody>
             </table>
             <div id="paginationControls" class="pagination-controls">
