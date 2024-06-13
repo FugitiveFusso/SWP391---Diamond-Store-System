@@ -56,23 +56,6 @@ public class UserVoucherController extends HttpServlet {
 
                 request.getRequestDispatcher("/uservoucherlist.jsp").forward(request, response);
 
-            } else if (action.equals("details")) {//details
-
-                Integer id = null;
-                try {
-                    id = Integer.parseInt(request.getParameter("id"));
-                } catch (NumberFormatException ex) {
-                    log("Parameter id has wrong format.");
-                }
-
-                VoucherDTO voucher = null;
-                if (id != null) {
-                    voucher = voucherDAO.load(id);
-                }
-
-                request.setAttribute("voucher", voucher);//object
-                RequestDispatcher rd = request.getRequestDispatcher("uservoucherdetails.jsp");
-                rd.forward(request, response);
             }
         }
     }

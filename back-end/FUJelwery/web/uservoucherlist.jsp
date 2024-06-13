@@ -105,9 +105,6 @@
                                 <div class="detail-row">
                                     <strong>Discount percentage:</strong> <p>${voucher.percentage}%</p>
                                 </div>
-                                <div class="button-container">
-                                    <a href="UserVoucherController?action=details&id=${voucher.id}" class="detail-button">View Details</a>
-                                </div>
                             </div>
                             <div class="voucher-right">
                                 <div class="voucher-img">
