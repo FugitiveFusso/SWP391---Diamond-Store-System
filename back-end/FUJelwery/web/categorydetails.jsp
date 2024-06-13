@@ -1,4 +1,6 @@
 
+<%@page import="com.khac.swp.fuj.ring.RingDTO"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -137,6 +139,36 @@
                 </div>
             </div>
         </div>
+        <table id="pagination">
+            <thead>
+                <tr>
+                    <th>Ring ID</th>
+                    <th>Ring Name</th>
+                    <th>Ring Image</th>
+                    <th>Diamond Name</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <%
+                    List<RingDTO> list = (List<RingDTO>) request.getAttribute("ringclist");
+                    for (RingDTO ring : list) {
+                        pageContext.setAttribute("ring", ring);
+                %>
+                <tr>
+                    <td>
+                        <a href="RingController?action=details&id=${ring.ringID}">   ${ring.ringID}</td>
+                    <td>${ring.ringName}</td>
+                    <td><img src=${ring.ringImage} width="300px" height="300px"></td>
+                    <td>${ring.diamondName}</td>
+                    <td>${ring.totalPrice}</td>
+                </tr>
+                <%
+                    }
+                %>    
+            </tbody>
+        </table>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
                 integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
         crossorigin="anonymous"></script>

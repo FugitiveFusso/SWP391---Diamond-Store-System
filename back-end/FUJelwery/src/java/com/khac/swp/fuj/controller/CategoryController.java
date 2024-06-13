@@ -2,6 +2,8 @@ package com.khac.swp.fuj.controller;
 
 import com.khac.swp.fuj.category.CategoryDAO;
 import com.khac.swp.fuj.category.CategoryDTO;
+import com.khac.swp.fuj.ring.RingDAO;
+import com.khac.swp.fuj.ring.RingDTO;
 import com.khac.swp.fuj.utils.DBUtils;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -53,9 +55,13 @@ public class CategoryController extends HttpServlet {
                 } catch (NumberFormatException ex) {
                     log("Parameter id has wrong format.");
                 }
+                
 
                 CategoryDTO category = null;
                 if (id != null) {
+                    RingDAO dao_1 = new RingDAO();
+                    List<RingDTO> ring_1 = dao_1.listByCategory(id);
+                    request.setAttribute("ringclist", ring_1);
                     category = categoryDAO.load(id);
                 }
 
