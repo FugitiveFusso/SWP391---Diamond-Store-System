@@ -39,7 +39,7 @@
                             <a href="DiamondController" class="sub-item">Diamond List</a>
                             <a href="RingController" class="sub-item">Ring List</a>
                             <a href="CollectionController" class="sub-item">Collection List</a>
-                            
+
                         </div>
                     </a>
                 </div>
@@ -62,7 +62,7 @@
                 </div>
 
                 <div class="item"><a href="CategoryController"><i class="fas fa-layer-group"></i>View Category</a></div>
-                
+
                 <div class="item"><a href="salesstaffaccount.jsp"><i class="fas fa-user"></i>Account</a></div>
                 <div class="item"><a href="saleslogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
 
@@ -117,8 +117,10 @@
                             <tr>
                                 <td><a href="VoucherController?action=details&id=${voucher.id}">${voucher.id}</a></td>
                                 <td>${voucher.name}</td>
-                                <td><img src=${voucher.image} width="300px" height="300px"></td>
-                                    <td>${voucher.createddate}</td>
+                                <td>                                   
+                                    <img src=${voucher.image} width="300px" height="300px" style="border-radius: 20px;">                                 
+                                </td>
+                                <td>${voucher.createddate}</td>
                                 <td>${voucher.createdby}</td>
                                 <td>
                                     <form action="VoucherController" method="POST" class="input">

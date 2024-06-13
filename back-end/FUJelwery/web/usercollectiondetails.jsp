@@ -1,23 +1,20 @@
 
-<%@page import="com.khac.swp.fuj.posts.PostDTO"%>
-<%@page import="java.util.List"%>
+<%@page import="com.khac.swp.fuj.ring.RingDTO"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Post List</title>
+        <title>Colletion Details</title>
         <link rel="stylesheet" href="css/navbaruser.css">
-        <link rel="stylesheet" href="css/blog.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <script src="js/pagination.js"></script>
         <link rel="stylesheet" href="css/pagination.css">
-
+        <link rel="stylesheet" href="./css/user_collectionlist.css">
     </head>
     <body>
-
         <div class="menu">
             <ul class="navbar">
                 <li class="navbar__link">
@@ -54,53 +51,65 @@
 
             </ul>
         </div> 
- 
-
-        <div class="main">           
-            <div class="content">
-                <div class="blog-intro">
-                    BLOG
-                </div>
-
-                <table id="pagination">
-                    <tbody>
-                        <%
-                            List<PostDTO> list = (List<PostDTO>) request.getAttribute("userpostlist");
-                            for (PostDTO post : list) {
-                                pageContext.setAttribute("post", post);
-                        %>
-                        <tr style="border-radius: 20px">
-                            <td>
-                                <img src="${post.image}">
-                            </td>
-                            <td>
-                                <div class="blog-content">
-                                    <div class="blog-title" style="text-align: left; margin-left: 40px; margin-bottom: 5px">
-
-                                        ${post.name}
-                                    </div>
-                                        <p class="date" style="margin-bottom: 10px; font-weight: bolder">Author: ${post.author} - Created date: ${post.date}</p>  
-                                    <p>${post.description}</p>
-                                    <br>
-                                    <p class="read-more" style="text-align: right;"><a href="UserPostController?action=details&id=${post.id}" style="color: blue; text-decoration: none; font-style: italic">Read More...</a></p>
-                                </div>
-                            </td>
-                        </tr>
-                        <%
-                            }
-                        %>    
-                    </tbody>
-                </table>  
-
-                <div id="paginationControls" class="pagination-controls">
-                    <button id="prevButton" class="pagination-button"><i class="fas fa-chevron-left"></i></button>
-                    <div id="pageNumbers"></div>
-                    <button id="nextButton" class="pagination-button"><i class="fas fa-chevron-right"></i></button>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-sm-6 col-12"> <!-- Adjust the column size as needed -->
+                    <div class="card">
+                        <!-- Left Column: Image -->
+                        <div class="card-image-container">
+                            <img src="${requestScope.collection.collectionImage}" class="card-img-left" alt="Voucher Image" style="width: 260px; height: 350px;">
+                        </div>
+                        <!-- Right Column: Information -->
+                        <div class="card-body">
+                            <h6 class="card-subtitle mb-2 text-muted">Collection ID: ${requestScope.collection.collectionID}</h6>
+                            <h4 class="card-title" style="font-weight: 700">${requestScope.collection.collectionName}</h4>
+                            <p class="card-text"><strong>Description: </strong> ${requestScope.collection.collectionDescription}</p>
+                            <div class="btn-group d-flex justify-content-center align-items-center" role="group" aria-label="Voucher Actions">
+                                <form action="UserCollectionController" method="post" class="mr-2">
+                                    <input type="hidden" name="action" value="list">
+                                    <button type="submit" class="btn btn-primary">Return</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
+            <table id="pagination">
+                <thead>
+                    <tr>
+                        <th>Ring ID</th>
+                        <th>Ring Name</th>
+                        <th>Ring Image</th>
+                        <th>Diamond Name</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-
+                    <%
+                        List<RingDTO> list = (List<RingDTO>) request.getAttribute("ringclist");
+                        for (RingDTO ring : list) {
+                            pageContext.setAttribute("ring", ring);
+                    %>
+                    <tr>
+                        <td>
+                            <a href="ProductController?action=details&id=${ring.ringID}">   ${ring.ringID}</td>
+                        <td>${ring.ringName}</td>
+                        <td><img src=${ring.ringImage} width="300px" height="300px"></td>
+                        <td>${ring.diamondName}</td>
+                        <td>${ring.totalPrice}</td>
+                    </tr>
+                    <%
+                        }
+                    %>    
+                </tbody>
+            </table>
+            <div id="paginationControls" class="pagination-controls">
+                <button id="prevButton" class="pagination-button"><i class="fas fa-chevron-left"></i></button>
+                <div id="pageNumbers"></div>
+                <button id="nextButton" class="pagination-button"><i class="fas fa-chevron-right"></i></button>
+            </div>
             <div class="footer">
                 <div class="footer-content">
                     <div class="footer-content-info">
@@ -152,9 +161,5 @@
 
 
             </div>
-
-        </div>
-        <script src="js/pagination.js"></script>
-
     </body>
 </html>

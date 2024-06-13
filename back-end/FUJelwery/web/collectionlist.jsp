@@ -124,7 +124,7 @@
                                 <td>
                                     <a href="CollectionController?action=details&id=${collection.collectionID}">   ${collection.collectionID}</td>
                                 <td>${collection.collectionName}</td>
-                                <td><img src=${collection.collectionImage} width="300px" height="300px"></td>
+                                <td><img src=${collection.collectionImage} width="300px" height="300px" style="border-radius: 20px;"></td>
                                 <td>${collection.collectionDescription}</td>
                                 <td>
                                     <form action="CollectionController" method="POST" class="input">

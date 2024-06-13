@@ -15,6 +15,7 @@
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <script src="js/pagination.js"></script>
         <link rel="stylesheet" href="css/pagination.css">
+        <link rel="stylesheet" href="css/collection_detail.css">
         <script>
             window.onload = function () {
                 if (!sessionStorage.getItem('hasReloaded')) {
@@ -130,23 +131,20 @@
             <p> Login username: ${sessionScope.salessession.username}</p>
         </div>
 
-        <div class="container mt-4">
-            <div class="row">
-                <!-- Left Column: Image -->
-                <div class="col-md-6">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-sm-6 col-12"> <!-- Adjust the column size as needed -->
                     <div class="card">
-                        <img src="${requestScope.collection.collectionImage}" class="card-img-top" alt="Voucher Image" style="height: 500px;">
-                    </div>
-                </div>
-
-                <!-- Right Column: Information -->
-                <div class="col-md-6">
-                    <div class="card">
+                        <!-- Left Column: Image -->
+                        <div class="card-image-container">
+                            <img src="${requestScope.collection.collectionImage}" class="card-img-left" alt="Voucher Image" style="width: 260px; height: 350px;">
+                        </div>
+                        <!-- Right Column: Information -->
                         <div class="card-body">
-                            <h6 class="card-subtitle mb-2 text-muted" >Collection ID: ${requestScope.collection.collectionID}</h6>
-                            <h4 class="card-title" style="font-weight: 700">${requestScope.collection.collectionName}</h4>                            
-                            <p class="card-text"><strong>Description: </strong> ${requestScope.collection.collectionDescription}</p>                           
-                            <div class="btn-group" role="group" aria-label="Voucher Actions">
+                            <h6 class="card-subtitle mb-2 text-muted">Collection ID: ${requestScope.collection.collectionID}</h6>
+                            <h4 class="card-title" style="font-weight: 700">${requestScope.collection.collectionName}</h4>
+                            <p class="card-text"><strong>Description: </strong> ${requestScope.collection.collectionDescription}</p>
+                            <div class="btn-group d-flex justify-content-center align-items-center" role="group" aria-label="Voucher Actions">
                                 <form action="CollectionController" method="post" class="mr-2">
                                     <input type="hidden" name="action" value="list">
                                     <button type="submit" class="btn btn-primary">Return</button>
@@ -160,8 +158,8 @@
                         </div>
                     </div>
                 </div>
-
             </div>
+
             <table id="pagination">
                 <thead>
                     <tr>
