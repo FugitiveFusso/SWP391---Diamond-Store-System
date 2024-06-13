@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/collection_detail.css">
 
         <style>
             .post-title{
@@ -160,7 +161,7 @@
                     <td>
                         <a href="RingController?action=details&id=${ring.ringID}">   ${ring.ringID}</td>
                     <td>${ring.ringName}</td>
-                    <td><img src=${ring.ringImage} width="300px" height="300px"></td>
+                    <td><img src=${ring.ringImage} width="300px" height="300px" style="border-radius: 20px;"></td>
                     <td>${ring.diamondName}</td>
                     <td>${ring.totalPrice}</td>
                 </tr>

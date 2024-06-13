@@ -153,33 +153,30 @@
                             <p class="card-text"><strong>Cut:</strong> ${requestScope.ring.cut}</p>
                             <p class="card-text"><strong>Diamond Price:</strong> ${requestScope.ring.diamondPrice}</p>
                             <p class="card-text"><strong>Total Price:</strong> ${requestScope.ring.totalPrice}</p>
-                            <div class="d-flex" role="group" aria-label="Voucher Actions">
-                                <div>
-                                    <form action="RingController" method="post">
+                            <div class="d-flex flex-column align-items-center" role="group" aria-label="Voucher Actions">
+                                <div class="button-top mb-2">
+                                    <form action="RingController" method="post" style="display:inline-block; margin-right: 10px;">
                                         <input type="hidden" name="action" value="list">
-                                        <button type="submit" class="btn btn-primary">Return</button>
+                                        <button type="submit" class="btn btn-primary">Ring</button>
                                     </form>
-                                    <form action="RingController" method="post">
+                                    <form action="RingController" method="post" style="display:inline-block;">
                                         <input type="hidden" name="id" value="${requestScope.ring.ringID}">
                                         <input type="hidden" name="action" value="edit">
                                         <button type="submit" class="btn btn-secondary">Edit</button>
                                     </form>
                                 </div>
-                                <div>
-                                    <form action="CollectionController" method="POST">
+                                <div class="button-down mt-2">
+                                    <form action="CollectionController" method="POST" style="display:inline-block; margin-right: 10px;">
                                         <input name="action" value="details" type="hidden">
                                         <input name="id" value="${ring.collectionID}" type="hidden">
                                         <button type="submit" class="btn btn-primary">Collection</button>
                                     </form>
-                                    <form action="CategoryController" method="POST">
+                                    <form action="CategoryController" method="POST" style="display:inline-block;">
                                         <input name="action" value="details" type="hidden">
                                         <input name="id" value="${ring.categoryID}" type="hidden">
                                         <button type="submit" class="btn btn-primary">Category</button>
                                     </form>
                                 </div>
-
-
-
                             </div>
                         </div>
                     </div>
