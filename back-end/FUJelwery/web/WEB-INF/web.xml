@@ -60,6 +60,10 @@
         <servlet-name>UserVoucherController</servlet-name>
         <servlet-class>com.khac.swp.fuj.controller.UserVoucherController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserCollectionController</servlet-name>
+        <servlet-class>com.khac.swp.fuj.controller.UserCollectionController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AdminLoginController</servlet-name>
         <url-pattern>/adminlogin</url-pattern>
@@ -119,6 +123,10 @@
     <servlet-mapping>
         <servlet-name>UserVoucherController</servlet-name>
         <url-pattern>/UserVoucherController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserCollectionController</servlet-name>
+        <url-pattern>/UserCollectionController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
