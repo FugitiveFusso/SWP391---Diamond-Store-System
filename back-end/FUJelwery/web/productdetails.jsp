@@ -125,7 +125,7 @@
                 <form action="AddToCart" method="post" class="buttons-form">
                     <input type="hidden" name="userID" value=${sessionScope.usersession.userid}>
                     <input type="hidden" name="ringID" value=${requestScope.product.ringID}>
-                    <input type="number" name="ringSize" min="3" max="11">
+                    <input type="number" name="ringSize" min="3" max="11" class="productquantities">
                     <button type="submit" class="btn btn-primary" onclick="addToCart()">Add to Cart</button>
                 </form>
                 <div class="Inclusion">
@@ -156,11 +156,11 @@
 
                 <div class="more-details">
                     <div class="more-details-title-wrapper" onclick="toggleDropdown(this)">
-                        Don't know your ring size yet?
+                        Worried about product warranty? 
                         <button class="plus-button">+</button>
                     </div>
                     <div class="more-details-content">
-                        Click this link to know your size: <a href="static_webpages/ringmeasuring.jsp">Ring Size Measuring</a>
+                        Click this link to know about our warranty policy: <a href="static_webpages/warrantyPolicy.jsp">Ring Size Measuring</a>
                     </div>
                 </div>
                 <div class="more-details">
@@ -184,6 +184,23 @@
                     </div>
                 </div>
 
+            </div>
+        </div>
+
+        <div class="bannerContainer">
+            <div class="bannerContent">
+                <div class="bannerText">
+                    <p class="intro"></p>
+                    <h1>How to measure your ring size</h1>
+                    <div class="description_hero">
+                        <span>To help you find your ring size, our diamond jewelry experts have put together this complete ring size guide including a ring size chart, printable ring sizer, and tips for measuring at home.</span>
+                    </div>      
+                    <button type="submit" class="btn btn-primary"><a href="static_webpages/ringmeasuring.jsp"style="text-decoration: none;color: #fff">How to measure your ring size</a></button>
+
+                </div>
+                <div class="bannerImage">
+                    <img src="images/how_to_measure_your_ring_size_1.jfif" id="diamondHero" style="width: 580px; height: 100%">
+                </div>
             </div>
         </div>
 
