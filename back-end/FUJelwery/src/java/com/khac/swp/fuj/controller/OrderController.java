@@ -117,8 +117,7 @@ public class OrderController extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("cartdetails.jsp");
                 rd.forward(request, response);
 
-            } else if (action.equals("delete")) {//delete
-
+            } else if (action.equals("delete")) {
                 Integer id = null;
                 try {
                     id = Integer.parseInt(request.getParameter("id"));
@@ -126,11 +125,21 @@ public class OrderController extends HttpServlet {
                     log("Parameter id has wrong format.");
                 }
 
-                orderDAO.delete(id);
-                request.setAttribute("success", "Delete Successfully!!!");
-                RequestDispatcher rd = request.getRequestDispatcher("user_homepage.jsp");
-                rd.forward(request, response);
+                if (id != null) {
+                    try {
+                        orderDAO.delete(id);
+                        request.getSession().setAttribute("success", "Delete Successfully!!!");
+                    } catch (Exception e) {
+                        log("Error deleting order: " + e.getMessage());
+                        request.getSession().setAttribute("errorMessage", "Error deleting order.");
+                    }
+                } else {
+                    request.getSession().setAttribute("errorMessage", "Invalid order ID.");
+                }
+
+                response.sendRedirect(request.getContextPath() + "/user_homepage.jsp");
             }
+
         }
     }
 

@@ -61,8 +61,11 @@
         </script>
     </head>
     <body>
-        <% String success = (String) request.getAttribute("success"); %>
-        <% if (success != null) {%>
+        <%
+            String success = (String) session.getAttribute("success");
+            if (success != null) {
+                session.removeAttribute("success");
+        %>
         <div id="successPopup" class="popup">
             <div class="popup-content">
                 <span class="close" onclick="closePopup()">&times;</span>

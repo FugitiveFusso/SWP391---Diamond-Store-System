@@ -115,7 +115,7 @@
                 <p class="price" style="margin-top: 20px;"><strong style="color: #151542">Total Price:</strong> ${requestScope.product.totalPrice} VND</p>
                 <form action="ProductController" method="post" class="buttons-form">
                     <input type="hidden" name="action" value="list">
-                    <input type="submit" value="Return" class="btn">
+                    <input type="submit" value="Product" class="btn">
                 </form>
                 <form action="UserCollectionController" method="POST" class="buttons-form">
                     <input name="action" value="details" type="hidden">
