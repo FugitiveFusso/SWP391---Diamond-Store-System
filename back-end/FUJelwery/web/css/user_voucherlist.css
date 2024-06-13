@@ -146,45 +146,37 @@
     border-radius: 10px;
 }
 
+.voucher-content {
+    margin: 20px;
+}
 
-.voucher-left{
-    font-family: "Inter", sans-serif;
+.voucher-container {
+    display: flex;
+    overflow: hidden;
+    margin: 50px 100px;
+}
+
+.voucher-item {
+    border-bottom: 1px solid #ddd;
+}
+
+.voucher-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+.voucher-details{
+    padding: 10px 50px;
 }
 
 .detail-row {
-    display: flex;
-    align-items: center;
     margin-bottom: 10px;
 }
 
 .detail-row strong {
-    margin-right: 5px;
+    margin-right: 10px;
     font-weight: bold;
 }
-
-.detail-row p {
-    margin: 0;
-}
-
-.button-container {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.detail-button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #151542;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-.detail-button:hover {
-    background-color: #003366;
-}
-
 .footer {
     background-color: black;
     color: #fefefe;

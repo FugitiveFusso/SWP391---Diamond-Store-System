@@ -82,40 +82,71 @@
                     </form>
 
                     <div class="voucher-content">
-                        <%
-                            List<VoucherDTO> list = (List<VoucherDTO>) request.getAttribute("uservoucherlist");
-                            for (VoucherDTO voucher : list) {
-                                pageContext.setAttribute("voucher", voucher);
-                        %>
                         <div class="voucher-container">
                             <div class="voucher-left">
-                                <h1>${voucher.name}</h1>
-                                <div class="detail-row">
-                                    <strong>Created date:</strong> <p>${voucher.createddate}</p>
-                                </div>
-                                <div class="detail-row">
-                                    <strong>Added by:</strong> <p>${voucher.createdby}</p>
-                                </div>
-                                <div class="detail-row">
-                                    <strong>Code:</strong> <p>${voucher.coupon}</p>
-                                </div>
-                                <div class="detail-row">
-                                    <p>${voucher.description}</p>
-                                </div>
-                                <div class="detail-row">
-                                    <strong>Discount percentage:</strong> <p>${voucher.percentage}%</p>
-                                </div>
-                            </div>
-                            <div class="voucher-right">
-                                <div class="voucher-img">
-                                    <img src="${voucher.image}" style="width: 500px; height: 300px;">
-                                </div>
+                                <table id="pagination">
+                                    <tbody>
+                                        <%
+                                            List<VoucherDTO> list = (List<VoucherDTO>) request.getAttribute("uservoucherlist");
+                                            for (VoucherDTO voucher : list) {
+                                                pageContext.setAttribute("voucher", voucher);
+                                        %>
+                                        <tr class="voucher-item">
+                                            <td class="voucher-image">
+                                                <img src="${voucher.image}" style="width: 500px; ">
+                                            </td>
+                                            <td class="voucher-details" style="font-family: 'Inter', sans-serif; ">
+                                                <h2>${voucher.name}</h2>
+                                                <div class="detail-row">
+                                                    <strong>Created date:</strong> ${voucher.createddate}
+                                                </div>
+                                                <div class="detail-row">
+                                                    <strong>Added by:</strong> ${voucher.createdby}
+                                                </div>
+                                                <div class="detail-row">
+                                                    <strong>Code:</strong> ${voucher.coupon}
+                                                </div>
+                                                <div class="detail-row">
+                                                    <p>${voucher.description}</p>
+                                                </div>
+                                                <div class="detail-row">
+                                                    <strong>Discount percentage:</strong> ${voucher.percentage}%
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <%
+                                            }
+                                        %>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        <%
-                            }
-                        %>
                     </div>
+
+                    <!--                    <table id="pagination">
+                                            <tbody>
+                    
+                    <tr style="border-radius: 20px;">
+                        <td>
+                            <img src="${voucher.image}">
+                        </td>
+                        <td style="font-family: 'Inter', sans-serif; padding: 0 30px;">
+                            <div class="voucher-content">
+                                <div class="voucher-title" style="font-weight: bold;">
+                    ${voucher.name}
+                </div>
+                <div class="voucher-detail"><strong>Created date:</strong> <p>${voucher.createddate}</p></div>
+                <div class="voucher-detail"><strong>Added by:</strong> <p>${voucher.createdby}</p></div>
+                <div class="voucher-detail"><strong>Code:</strong> <p>${voucher.coupon}</p></div>
+                <div class="voucher-detail"><strong>Description:</strong> <p>${voucher.description}</p></div>
+                <div class="voucher-detail"><strong>Discount percentage:</strong> <p>${voucher.percentage}%</p></div>
+            </div>
+        </td>
+    </tr>
+                    
+                </tbody>
+            </table>-->
+
                     <div id="paginationControls" class="pagination-controls">
                         <button id="prevButton" class="pagination-button"><i class="fas fa-chevron-left"></i></button>
                         <div id="pageNumbers"></div>
@@ -175,7 +206,9 @@
             </div>
         </div>
 
-        <script src="js/pagination_voucher.js"></script>
+        <!--        <script src="js/pagination_voucher.js"></script>-->
+        <script src="js/pagination.js"></script>
+
 
     </body>
 </html>

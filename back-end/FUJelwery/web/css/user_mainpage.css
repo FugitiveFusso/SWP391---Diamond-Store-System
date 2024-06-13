@@ -1,6 +1,10 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Gantari:ital,wght@0,100..900;1,100..900&family=Syne:wght@400..800&display=swap');
   
+body{
+    margin: 0;
+}
+
   .Main-hero img{
     max-width: 100%;
     width: 1920px;
