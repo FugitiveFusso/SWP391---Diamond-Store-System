@@ -9,12 +9,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Ring Management Page</title>
+        <title>Item Details</title>
     </head>
     <body>
         <jsp:include page="/menu.jsp" flush="true" />
         <h1>Ring Details </h1>         
-        <p> Login username: ${sessionScope.adminsession.username}</p>
+        <p> Login username: ${sessionScope.usersession.username}</p>
 
         <style>
             #searchbox{
@@ -39,23 +39,19 @@
         </style>
         <table>
 
-            <tr><td>Ring Name</td><td>${requestScope.ring.ringName}</td></tr>
-            <tr><td>Ring Image</td><td><img src=${requestScope.ring.ringImage} width="300px" height="300px"></td></tr>
-            <tr><td>Diamond ID</td><td>${requestScope.ring.diamondID}</td></tr>
-            <tr><td>Gender</td><td>${requestScope.ring.gender}</td></tr>
-            <tr><td>Price</td><td>${requestScope.ring.price}</td></tr>
-            <tr><td>Category</td><td>${requestScope.ring.categoryID}</td></tr>
-            <tr><td>Collection</td><td>${requestScope.ring.collectionID}</td></tr>
+            <tr><td>Ring Name</td><td>${requestScope.order.ringName}</td></tr>
+            <tr><td>Ring Size</td><td>${requestScope.order.ringSize}</td></tr>
+            <tr><td>Price</td><td>${requestScope.order.totalPrice}</td></tr>
+            
 
         </table>    
-        <form action="RingController" style="padding-top: 10px">
+        <form action="OrderController" style="padding-top: 10px">
             <input type=hidden name="action" value="list">
             <input type=submit value="Return" ></form>
-
-        <form action="RingController" style="padding-top: 10px">
-            <input type=hidden name="id" value="${requestScope.ring.ringID}">
+            
+            <form action="OrderController" style="padding-top: 10px">
+            <input type=hidden name="id" value="${requestScope.order.orderID}">
             <input type=hidden name="action" value="edit">
-            <input type=submit value="Edit" ></form>
-
+            <input type=submit value="Purchase" ></form>
     </body>
 </html>

@@ -4,12 +4,21 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Home Page</title>
         <link rel="stylesheet" href="css/navbaruser.css">
         <link rel="stylesheet" href="css/user_mainpage.css">
 
     </head>
     <body>
+        <% String error1 = (String) request.getAttribute("error"); %>
+        <% if (error1 != null) {%>
+        <h4 style="color: red; text-align: center"> <%= error1%> </h4>
+        <% }%>
+
+        <% String success = (String) request.getAttribute("success"); %>
+        <% if (success != null) {%>
+        <h4 style="color: green; text-align: center"> <%= success%> </h4>
+        <% }%>
         <div class="menu">
             <ul class="navbar">
                 <li class="navbar__link">
@@ -18,6 +27,7 @@
                         <ul>
                             <li><a href='./ProductController'>Ring</a></li>
                             <li><a href='./UserCollectionController'>Collection</a></li>
+                            <li><a href='OrderController?action=list&id=${sessionScope.usersession.userid}'>Cart</a></li>
                         </ul>
                     </div>                  
                 </li>

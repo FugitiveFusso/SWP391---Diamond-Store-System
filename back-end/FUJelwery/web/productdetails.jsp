@@ -116,9 +116,14 @@
                 <form action="ProductController" method="get" class="buttons-form">
                     <input type="hidden" name="action" value="list">
                     <input type="submit" value="Return" class="btn">
-                    <input type="button" value="Add to Cart" class="btn" onclick="addToCart()">
+                    <input type="button" value="buy" class="btn" onclick="addToCart()">
                 </form>
-
+                <form action="AddToCart" method="post" class="buttons-form">
+                <input type="hidden" name="userID" value=${sessionScope.usersession.userid}>
+                <input type="hidden" name="ringID" value=${requestScope.product.ringID}>
+                <input type="hidden" name="ringSize" value="3"> 
+                <button onclick="addToCart()">Add to Cart</button>
+                </form>
                 <div class="Inclusion">
                     <h2>Your Order Includes:</h2>
                     <div class="Inclusion-container">

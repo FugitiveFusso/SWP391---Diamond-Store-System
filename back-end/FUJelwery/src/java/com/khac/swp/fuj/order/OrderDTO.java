@@ -119,5 +119,10 @@ public class OrderDTO {
         this.delivered = delivered;
     }
 
+    @Override
+    public String toString() {
+        return "OrderDTO{" + "orderID=" + orderID + ", userID=" + userID + ", userName=" + userName + ", orderDate=" + orderDate + ", ringID=" + ringID + ", ringName=" + ringName + ", voucherID=" + voucherID + ", voucherName=" + voucherName + ", ringSize=" + ringSize + ", totalPrice=" + totalPrice + ", status=" + status + ", delivered=" + delivered + '}';
+    }
+
     
 }

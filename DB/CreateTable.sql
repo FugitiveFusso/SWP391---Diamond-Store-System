@@ -94,7 +94,7 @@ CREATE TABLE [Voucher](
 CREATE TABLE [Order](
 	orderID int NOT NULL primary key,
 	userID int NOT NULL foreign key REFERENCES [User](userID),
-	orderDate date NOT NULL,
+	orderDate varchar(255),
 	ringID int NOT NULL foreign key REFERENCES [Ring](ringID),
 	voucherID int foreign key REFERENCES [Voucher](voucherID),
 	ringSize int,
@@ -102,11 +102,6 @@ CREATE TABLE [Order](
 	delivered varchar(255)
 );
 
-CREATE TABLE [ProcessOrder](
-	processID int NOT NULL primary key,
-	orderID int NOT NULL foreign key REFERENCES [Order](orderID),
-	userID int NOT NULL foreign key REFERENCES [User](userID)
-);
 
 CREATE TABLE [Warranty] (
     warrantyID int NOT NULL PRIMARY KEY,        

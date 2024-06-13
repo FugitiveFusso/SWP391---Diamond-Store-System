@@ -54,21 +54,28 @@ public class OrderController extends HttpServlet {
                 response.sendRedirect("userlogin.jsp");
                 return;
             } else if (action == null || action.equals("list")) {//lists
-
-                OrderDAO dao = new OrderDAO();
-                List<OrderDTO> list = dao.listToCart(keyword, sortCol);
-                request.setAttribute("cartlist", list);
+                Integer id = null;
+                try {
+                    id = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+                if (id != null) {
+                    OrderDAO dao = new OrderDAO();
+                    List<OrderDTO> list = dao.list(id);
+                    request.setAttribute("cartlist", list);
+                }
 
                 request.getRequestDispatcher("/cartlist.jsp").forward(request, response);
-                
-        } else if (action.equals("update")) {//update
+
+            } else if (action.equals("update")) {//update
                 Integer orderID = null;
                 try {
                     orderID = Integer.parseInt(request.getParameter("id"));
                 } catch (NumberFormatException ex) {
                     log("Parameter ringSize has wrong format.");
                 }
-                
+
                 Integer ringSize = null;
                 try {
                     ringSize = Integer.parseInt(request.getParameter("ringSize"));
@@ -80,7 +87,7 @@ public class OrderController extends HttpServlet {
                 if (orderID != null) {
                     order = orderDAO.load(orderID);
                 }
-                order.setRingID(orderID);
+                order.setOrderID(orderID);
                 order.setRingSize(ringSize);
 
                 orderDAO.update(order);
@@ -88,21 +95,21 @@ public class OrderController extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("cartdetails.jsp");
                 rd.forward(request, response);
 
-            }else if (action.equals("purchase")) {//purchase
+            } else if (action.equals("purchase")) {//purchase
                 Integer orderID = null;
                 try {
                     orderID = Integer.parseInt(request.getParameter("id"));
                 } catch (NumberFormatException ex) {
                     log("Parameter ringSize has wrong format.");
                 }
-                
+
                 String status = "purchased";
 
                 OrderDTO order = null;
                 if (orderID != null) {
                     order = orderDAO.load(orderID);
                 }
-                order.setRingID(orderID);
+                order.setOrderID(orderID);
                 order.setStatus(status);
 
                 orderDAO.update(order);
@@ -126,8 +133,9 @@ public class OrderController extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("cartlist.jsp");
                 rd.forward(request, response);
             }
+        }
     }
-    }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -166,4 +174,4 @@ public class OrderController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    }
+}
