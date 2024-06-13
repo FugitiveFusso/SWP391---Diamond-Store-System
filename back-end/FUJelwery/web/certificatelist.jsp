@@ -117,7 +117,7 @@
                             <tr>
                                 <td>
                                     <a href="CertificateController?action=details&id=${certificate.certificateID}">   ${certificate.certificateID}</td>
-                                <td><img src=${certificate.certificateImage} width="300px" height="300px"></td>
+                                <td><img src=${certificate.certificateImage} width="300px" height="300px" style="border-radius: 20px;"></td>
                                 <td>${certificate.certificateDescription}</td>
                                 <td>
                                     <form action="CertificateController" method="POST" class="input">

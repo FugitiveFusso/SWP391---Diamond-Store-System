@@ -247,6 +247,10 @@ td a{
     
 }
 
+tr td img{
+    border-radius: 20px;
+}
+
 #searchbox {
     display: flex;
     justify-content: center;

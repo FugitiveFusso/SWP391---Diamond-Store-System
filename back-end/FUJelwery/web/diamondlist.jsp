@@ -138,7 +138,7 @@
                                 <td>
                                     <a href="DiamondController?action=details&id=${diamond.diamondID}">   ${diamond.diamondID}</td>
                                 <td>${diamond.diamondName}</td>
-                                <td><img src=${diamond.diamondImage} width="300px" height="300px"></td>
+                                <td><img src=${diamond.diamondImage} width="300px" height="300px" style="border-radius: 20px;"></td>
                                 <td>${diamond.origin}</td>
                                 <td>${diamond.diamondSize}</td>
                                 <td>${diamond.caratWeight}</td>

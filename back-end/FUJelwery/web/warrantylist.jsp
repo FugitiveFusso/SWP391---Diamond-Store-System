@@ -121,7 +121,7 @@
                             <tr>
                                 <td style="text-align: center"><a href="WarrantyController?action=details&id=${warranty.id}">${warranty.id}</a></td>
                                 <td style="width: 20%; text-align: center">${warranty.name}</td>
-                                <td><img src=${warranty.image} width="250px" height="250px"></td>
+                                <td><img src=${warranty.image} width="250px" height="250px" style="border-radius: 20px;"></td>
                                 <td style="text-align: center; width: 5%;">${warranty.month}</td>
                                 <td style="width: 20%; text-align: center">${warranty.description}</td>
                                 <td style="text-align: center">${warranty.type}</td>
