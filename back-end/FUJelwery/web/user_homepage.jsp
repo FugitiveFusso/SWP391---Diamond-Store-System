@@ -104,7 +104,7 @@
                 <li class="navbar__link"><a href="user_aboutus.jsp">About Us</a></li>
                 <li class="navbar__link"><a href="#">Order</a></li>
                 <li class="navbar__link">
-                    <a href="#">Account</a>
+                    <a href="user_accountdetails.jsp">Account</a>
                     <div class="sub-menu-1">
                         <ul>
                             <li><a href='userlogin?action=logout'>Logout</a></li>          

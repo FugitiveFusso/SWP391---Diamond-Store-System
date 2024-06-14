@@ -36,9 +36,9 @@
                 const description = document.getElementsByName('description')[0].value;
                 const postText = document.getElementsByName('postText')[0].value;
 
-                const descriptionMinWords = 20;
-                const descriptionMaxWords = 70;
-                const scriptMinWords = 50;
+                const descriptionMinWords = 5;
+                const descriptionMaxWords = 30;
+                const scriptMinWords = 20;
                 const scriptMaxWords = 2000;
 
                 let isValid = true;
@@ -52,7 +52,7 @@
                 // Validate Description
                 const descriptionWordCount = numberOfWords(description);
                 if (descriptionWordCount < descriptionMinWords || descriptionWordCount > descriptionMaxWords) {
-                    document.getElementById('description-error').innerText = 'Description must be between 20 and 70 words. Currently ' + descriptionWordCount + ' words.';
+                    document.getElementById('description-error').innerText = 'Description must be between 5 and 30 words. Currently ' + descriptionWordCount + ' words.';
                     isValid = false;
                 } else {
                     document.getElementById('description-error').innerText = '';
@@ -61,7 +61,7 @@
                 // Validate Script
                 const postTextWordCount = numberOfWords(postText);
                 if (postTextWordCount < scriptMinWords || postTextWordCount > scriptMaxWords) {
-                    document.getElementById('postText-error').innerText = 'Script must be between 50 and 2000 words. Currently ' + postTextWordCount + ' words.';
+                    document.getElementById('postText-error').innerText = 'Script must be between 20 and 2000 words. Currently ' + postTextWordCount + ' words.';
                     isValid = false;
                 } else {
                     document.getElementById('postText-error').innerText = '';
