@@ -200,9 +200,27 @@ VALUES
 (10, 'Comprehensive Jewelry Warranty', 'https://innhanhsieuviet.com/wp-content/uploads/2020/03/in-phien-bao-hanh-2-1.jpg', 36, 'Extensive coverage for all types of jewelry, including rings, necklaces, and bracelets, for three years.', 'Premium', '2024-06-01', 'See attached warranty document for terms and conditions.');
 
 INSERT INTO [Order] VALUES
-(1,8,2024-06-13,1,1,3,'pending','none'),
-(2,8,2024-06-13,2,1,3,'pending','none')
+(1,8,2024-06-13,1,1,3,'pending'),
+(2,8,2024-06-13,2,1,3,'pending')
 
 SELECT * FROM [Order]
 
 SELECT * FROM Voucher
+
+SELECT SUM(((r.price + rp.rpPrice + dp.price)*1.02)) AS totalPrice FROM [Order] o left join [Ring] r ON o.ringID = r.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID WHERE userID = 8 AND status = 'pending'
+
+
+SELECT 
+    SUM((r.price + rp.rpPrice + dp.price) * 1.02) AS total_price
+FROM 
+    [Order] o 
+LEFT JOIN 
+    [Ring] r ON o.ringID = r.ringID 
+LEFT JOIN 
+    [RingPlacementPrice] rp ON r.rpID = rp.rpID 
+LEFT JOIN 
+    [Diamond] d ON d.diamondID = r.diamondID 
+LEFT JOIN 
+    [DiamondPrice] dp ON d.dpID = dp.dpID 
+WHERE 
+    o.userID = 8;

@@ -71,7 +71,6 @@ public class AddToCart extends HttpServlet {
                 }
                 Integer voucherID = 1;
                 String status = "pending";
-                String delivered = "none";
 
                 OrderDTO order = new OrderDTO();
                 order.setOrderID(orderID);
@@ -80,7 +79,6 @@ public class AddToCart extends HttpServlet {
                 order.setRingSize(ringSize);
                 order.setVoucherID(1);
                 order.setStatus(status);
-                order.setDelivered(delivered);
 
                 OrderDAO dao = new OrderDAO();
                 dao.insert(order);

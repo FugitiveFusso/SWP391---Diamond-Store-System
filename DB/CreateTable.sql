@@ -91,18 +91,6 @@ CREATE TABLE [Voucher](
 	percentage int NOT NULL
 );
 
-CREATE TABLE [Order](
-	orderID int NOT NULL primary key,
-	userID int NOT NULL foreign key REFERENCES [User](userID),
-	orderDate varchar(255),
-	ringID int NOT NULL foreign key REFERENCES [Ring](ringID),
-	voucherID int foreign key REFERENCES [Voucher](voucherID),
-	ringSize int,
-	[status] varchar(255),
-	delivered varchar(255)
-);
-
-
 CREATE TABLE [Warranty] (
     warrantyID int NOT NULL PRIMARY KEY,        
     warrantyName varchar(255) NOT NULL,                  
@@ -113,6 +101,18 @@ CREATE TABLE [Warranty] (
     startDate date NOT NULL,                                  
     endDate AS DATEADD(month, warrantyMonth, startDate),      
     termsAndConditions text                      
+);
+
+CREATE TABLE [Order](
+	orderID int NOT NULL primary key,
+	userID int NOT NULL foreign key REFERENCES [User](userID),
+	orderDate varchar(255),
+	ringID int NOT NULL foreign key REFERENCES [Ring](ringID),
+	voucherID int foreign key REFERENCES [Voucher](voucherID),
+	warrantyID int foreign key REFERENCES [Warranty](warrantyID),
+	ringSize int,
+	purchaseMethod varchar(50),
+	[status] varchar(255)
 );
 
 CREATE TABLE [Bill](

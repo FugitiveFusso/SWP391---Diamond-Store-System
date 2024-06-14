@@ -18,8 +18,13 @@ public class OrderDTO {
     private String ringName;
     private int voucherID;
     private String voucherName;
+    private int warrantyID;
+    private String warrantyName;
+    private int certificateID;
+    private String certificateName;
     private int ringSize;
-    private double totalPrice;
+    private int totalPrice;
+    private String purchaseMethod;
     private String status;
     private String delivered;
 
@@ -87,6 +92,38 @@ public class OrderDTO {
         this.voucherName = voucherName;
     }
 
+    public int getWarrantyID() {
+        return warrantyID;
+    }
+
+    public void setWarrantyID(int warrantyID) {
+        this.warrantyID = warrantyID;
+    }
+
+    public String getWarrantyName() {
+        return warrantyName;
+    }
+
+    public void setWarrantyName(String warrantyName) {
+        this.warrantyName = warrantyName;
+    }
+
+    public int getCertificateID() {
+        return certificateID;
+    }
+
+    public void setCertificateID(int certificateID) {
+        this.certificateID = certificateID;
+    }
+
+    public String getCertificateName() {
+        return certificateName;
+    }
+
+    public void setCertificateName(String certificateName) {
+        this.certificateName = certificateName;
+    }
+    
     public int getRingSize() {
         return ringSize;
     }
@@ -95,12 +132,20 @@ public class OrderDTO {
         this.ringSize = ringSize;
     }
 
-    public double getTotalPrice() {
+    public int getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(double totalPrice) {
+    public void setTotalPrice(int totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public String getPurchaseMethod() {
+        return purchaseMethod;
+    }
+
+    public void setPurchaseMethod(String purchaseMethod) {
+        this.purchaseMethod = purchaseMethod;
     }
 
     public String getStatus() {

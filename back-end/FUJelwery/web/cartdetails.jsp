@@ -41,6 +41,7 @@
 
             <tr><td>Ring Name</td><td>${requestScope.order.ringName}</td></tr>
             <tr><td>Ring Size</td><td>${requestScope.order.ringSize}</td></tr>
+            <tr><td>Voucher</td><td>${requestScope.order.voucherName}</td></tr>
             <tr><td>Price</td><td>${requestScope.order.totalPrice}</td></tr>
             
 

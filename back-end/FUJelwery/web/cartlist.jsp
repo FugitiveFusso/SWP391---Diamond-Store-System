@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="css/pagination.css">
 
+
     </head>
     <body>
         <%--<%@ include file="/productmenu.jsp" %>--%>
@@ -93,9 +94,8 @@
                                 pageContext.setAttribute("order", order);
                         %>
                         <tr>
-                            <td>
-                                <a href="OrderController?action=details&id=${order.orderID}">${order.orderID}</td>
-                            <td>${order.ringName}</td>
+                            <td>${order.orderID}</td>
+                            <td><a href="ProductController?action=details&id=${order.ringID}">${order.ringName}</td>
                             <td>${order.ringSize}</td>
                             <td>${order.totalPrice}</td>
                             <td>
@@ -110,14 +110,30 @@
                         <%
                             }
                         %>    
-                        <tr><td colspan="10">
-                                <form action="OrderController" method="POST">
-                                    <input name="action" value="purchase" type="hidden">
-                                    <input type="hidden" name="userid" value=${sessionScope.usersession.userid}>
-                                    <input type="submit" value="Purchase">
-                                </form>
-                            </td></tr>
+
+
+                        </td></tr>
                     </table>
+                    <h1>Total Price: ${totalPrice} VND</h1>
+
+                    <form action="OrderController" method="POST">
+                        <select name="purchaseMethod" required class="form-control" class="purchase">
+                            <option value="">Please select your preferred payment method: </option>
+                            <option value="Received at store" ${requestScope.order.purchaseMethod == 'Received at store' ? 'selected' : ''}>Received at store</option>
+                            <option value="Door-to=door delivery service" ${requestScope.order.purchaseMethod == 'Door-to-door delivery service' ? 'selected' : ''}>Door-to-door delivery service</option>
+                        </select>
+                        <br>
+                        <input name="action" value="purchase" type="hidden">
+                        <input name=searchCoupon type=text value="<%=request.getParameter("coupon") != null ? request.getParameter("coupon") : ""%>">
+                        <input type=submit value="Search for coupon">
+                        <br>
+                        <h4>You have searched: ${voucherName}</h4>
+                        <br>
+                        <input type=submit value="Apply Voucher">
+                        <br>
+                        <input type="hidden" name="userid" value=${sessionScope.usersession.userid}>
+                        <input type="submit" value="Purchase">
+                    </form>
 
                     <div class="footer">
                         <div class="footer-content">
