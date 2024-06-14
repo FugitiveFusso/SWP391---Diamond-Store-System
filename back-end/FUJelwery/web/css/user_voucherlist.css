@@ -150,6 +150,11 @@ body{
     border-radius: 10px;
 }
 
+.one{
+    display: flex;
+    justify-content: space-between;
+}
+
 #pagination {
     border: none;
     border-style: none;

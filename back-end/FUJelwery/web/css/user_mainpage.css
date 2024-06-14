@@ -3,12 +3,13 @@
   
 body{
     margin: 0;
+    overflow-x: hidden;
 }
 
   .Main-hero img{
     max-width: 100%;
-    width: 1920px;
-    height: 640px;
+    width: 1434px;
+    height: 506px;
   }
 
   .hero-details{

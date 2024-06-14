@@ -93,24 +93,27 @@
                                         %>
                                         <tr class="voucher-item" style="border-radius: 20px">
                                             <td class="voucher-image">
-                                                <img src="${voucher.image}" style="width: 700px; ">
+                                                <img src="${voucher.image}" style="width: 400px; height: 280px">
                                             </td>
                                             <td class="voucher-details" style="font-family: 'Inter', sans-serif; ">
                                                 <h2>${voucher.name}</h2>
-                                                <div class="detail-row">
-                                                    <strong>Created date:</strong> ${voucher.createddate}
-                                                </div>
-                                                <div class="detail-row">
-                                                    <strong>Added by:</strong> ${voucher.createdby}
-                                                </div>
-                                                <div class="detail-row">
-                                                    <strong>Code:</strong> ${voucher.coupon}
+                                                <div class="one">
+                                                    <div class="detail-row">
+                                                        <strong>Created date:</strong>${voucher.createddate}
+                                                    </div>
+                                                    <div class="detail-row">
+                                                        <strong>Added by:</strong>${voucher.createdby}
+                                                    </div>
                                                 </div>
                                                 <div class="detail-row">
                                                     <p>${voucher.description}</p>
                                                 </div>
                                                 <div class="detail-row">
-                                                    <strong>Discount percentage:</strong> ${voucher.percentage}%
+                                                    <strong>Code:</strong>${voucher.coupon}
+                                                </div>
+
+                                                <div class="detail-row">
+                                                    <strong>Discount percentage:</strong>${voucher.percentage}%
                                                 </div>
                                             </td>
                                         </tr>

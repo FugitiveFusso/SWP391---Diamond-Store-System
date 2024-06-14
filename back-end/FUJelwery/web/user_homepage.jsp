@@ -126,7 +126,7 @@
                         <button><a href="#">Shop Engagement Rings</a></button>
                     </div>
                 </div>
-                <img src="images/hero1.jpg" alt="" srcset="">
+                <img src="images/hero1.jpg" height="1px" alt="" srcset="">
             </div>
 
             <div class="trending">
