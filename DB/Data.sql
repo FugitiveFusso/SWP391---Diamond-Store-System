@@ -199,9 +199,6 @@ VALUES
 (9, 'Lifetime Ring Warranty', 'https://innhanhhaiduong.vn/uploads/shops/2020_05/unnamed.jpg', 120, 'Lifetime coverage for manufacturing defects and repairs.', 'Premium', '2024-06-01', 'See attached warranty document for terms and conditions.'),
 (10, 'Comprehensive Jewelry Warranty', 'https://innhanhsieuviet.com/wp-content/uploads/2020/03/in-phien-bao-hanh-2-1.jpg', 36, 'Extensive coverage for all types of jewelry, including rings, necklaces, and bracelets, for three years.', 'Premium', '2024-06-01', 'See attached warranty document for terms and conditions.');
 
-INSERT INTO [Order] VALUES
-(1,8,2024-06-13,1,1,3,'pending'),
-(2,8,2024-06-13,2,1,3,'pending')
 
 SELECT * FROM [Order]
 
