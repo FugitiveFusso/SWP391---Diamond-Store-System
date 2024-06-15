@@ -141,13 +141,60 @@ public class OrderController extends HttpServlet {
 
                 response.sendRedirect(request.getContextPath() + "/user_homepage.jsp");
 
-            } else if (action.equals("Search for Coupon")) {
-                    String code = request.getParameter("coupon");
-                    
-            } else if (action.equals("Apply Coupon")) {
-                    String code = request.getParameter("coupon");
-                    
-            }else if (action.equals("delete")) {
+            } else if (action.equals("searchCoupon")) {
+                String code = request.getParameter("coupon");
+                if (code == null) {
+                    code = "none";
+                }
+                String voucherName = orderDAO.searchVoucher(code);
+                request.setAttribute("voucherName", voucherName);
+                request.getRequestDispatcher("/user_homepage.jsp").forward(request, response);
+            } else if (action.equals("applyVoucher")) {
+                String code = request.getParameter("coupon");
+                Integer userID = null;
+                try {
+                    userID = Integer.parseInt(request.getParameter("userid"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter UserID has wrong format.");
+                }
+
+                if (userID != null) {
+                    try {
+                        int voucherID = orderDAO.searchVoucherID(code);
+                        orderDAO.applyVoucher(voucherID, userID);
+                        request.setAttribute("success", "Apply Voucher Successfully!!!");
+                    } catch (Exception e) {
+                        log("Error Apply Coupon order: " + e.getMessage());
+                        request.setAttribute("errorMessage", "Error applying voucher.");
+                    }
+                } else {
+                    request.setAttribute("errorMessage", "Invalid voucher code.");
+                }
+
+                request.getRequestDispatcher("/user_homepage.jsp").forward(request, response);
+
+            } else if (action.equals("removeVoucher")) {
+                Integer userID = null;
+                try {
+                    userID = Integer.parseInt(request.getParameter("userid"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter UserID has wrong format.");
+                }
+
+                if (userID != null) {
+                    try {
+                        orderDAO.removeVoucher(userID);
+                        request.setAttribute("success", "Remove Voucher Successfully!!!");
+                    } catch (Exception e) {
+                        log("Error Remove Coupon order: " + e.getMessage());
+                        request.setAttribute("errorMessage", "Error removing voucher.");
+                    }
+                } else {
+                    request.setAttribute("errorMessage", "Invalid order ID.");
+                }
+
+                request.getRequestDispatcher("/user_homepage.jsp").forward(request, response);
+            } else if (action.equals("delete")) {
                 Integer id = null;
                 try {
                     id = Integer.parseInt(request.getParameter("id"));

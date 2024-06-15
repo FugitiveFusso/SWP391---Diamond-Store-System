@@ -126,15 +126,26 @@
                         <input type="hidden" name="userid" value=${sessionScope.usersession.userid}>
                         <input type="submit" value="Purchase">
                     </form>
-                        
+
                     <!--Still have error with search-->
                     <form action="OrderController" method="POST">
-                        <input name="action" value="search" type="hidden">
-                        <input name="searchCoupon" type="text" value="<%=request.getParameter("coupon") != null ? request.getParameter("coupon") : ""%>">
-                        <input type=submit value="Search for coupon">
-                        <h4>You have searched: ${voucherName}</h4>
-                        <input type=submit value="Apply Voucher">
+                        <input name="action" value="searchCoupon" type="hidden">
+                        <input name="coupon" type="text" value="<%=request.getParameter("coupon") != null ? request.getParameter("coupon") : ""%>">
+                        <input type="submit" value="Search for coupon">
                     </form>
+                    <form action="OrderController" method="POST">
+                        <input name="action" value="applyVoucher" type="hidden">
+                        <input name="coupon" type="text" placeholder="Enter coupon code">
+                        <input type="hidden" name="userid" value=${sessionScope.usersession.userid}>
+                        <input type="submit" value="Apply Voucher">
+                    </form>
+                    <form action="OrderController" method="POST">
+                        <input name="action" value="removeVoucher" type="hidden">
+                        <input type="hidden" name="userid" value=${sessionScope.usersession.userid}>
+                        <input type="submit" value="Remove Voucher">
+                    </form>
+                    <h4>You have searched: ${voucherName}</h4>
+
 
                     <div class="footer">
                         <div class="footer-content">

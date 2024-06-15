@@ -26,7 +26,7 @@ public class OrderDAO {
         try {
 
             Connection con = DBUtils.getConnection();
-            String sql = " select o.orderID, o.userID, u.userName, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, o.ringSize, ((r.price + rp.rpPrice + dp.price)*1.02) AS [totalPrice], o.status from [Order] o left join [User] u ON o.userID = u.userID left join [Ring] r ON o.ringID = r.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID  left join [Voucher] v ON o.voucherID = v.voucherID WHERE o.userID = ? AND o.status = 'pending' ";
+            String sql = "select o.orderID, o.userID, u.userName, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, o.ringSize, ((SUM(COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02) * ((100.0 - COALESCE(v.percentage, 0)) / 100)) AS [totalPrice], o.status from [Order] o left join [User] u ON o.userID = u.userID left join [Ring] r ON o.ringID = r.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID  left join [Voucher] v ON o.voucherID = v.voucherID group by o.orderID, o.userID, u.userName, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, v.percentage, o.ringSize, o.status HAVING o.userID = ? AND o.status = 'pending' ";
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -75,18 +75,31 @@ public class OrderDAO {
 
     public int totalAllProduct(int userID) throws SQLException {
         Connection connection = DBUtils.getConnection();
-        String query = "SELECT SUM((r.price + rp.rpPrice + dp.price) * 1.02) AS total_price FROM [Order] o "
-                + "LEFT JOIN [Ring] r ON o.ringID = r.ringID "
-                + "LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID "
-                + "LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID "
-                + "LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID "
-                + "WHERE o.userID = ? AND status = 'pending'";
+        String query = "SELECT \n"
+                + "    SUM(\n"
+                + "        (COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * ((100.0 - COALESCE(v.percentage, 0)) / 100)\n"
+                + "    ) AS totalPrice\n"
+                + "FROM \n"
+                + "    [Order] o \n"
+                + "LEFT JOIN \n"
+                + "    [Ring] r ON o.ringID = r.ringID \n"
+                + "LEFT JOIN \n"
+                + "    [RingPlacementPrice] rp ON r.rpID = rp.rpID \n"
+                + "LEFT JOIN \n"
+                + "    [Diamond] d ON r.diamondID = d.diamondID \n"
+                + "LEFT JOIN \n"
+                + "    [DiamondPrice] dp ON d.dpID = dp.dpID \n"
+                + "LEFT JOIN \n"
+                + "    [Voucher] v ON o.voucherID = v.voucherID \n"
+                + "WHERE \n"
+                + "	o.userID = ? AND\n"
+                + "    o.status = 'pending';";
 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, userID);
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {  // Move to the first row, if it exists
-                    return resultSet.getInt("total_price");
+                    return resultSet.getInt("totalPrice");
                 } else {
                     // Handle the case when no rows are returned
                     throw new SQLException("No data found for user ID: " + userID);
@@ -197,7 +210,7 @@ public class OrderDAO {
     }
 
     public Integer insert(OrderDTO order) {
-        String sql = "INSERT INTO [Order] (orderID, userID, orderDate, ringID, voucherID, ringSize, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO [Order] (orderID, userID, orderDate, ringID, ringSize, status) VALUES (?, ?, ?, ?, ?, ?)";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -207,9 +220,8 @@ public class OrderDAO {
             ps.setInt(2, order.getUserID());
             ps.setString(3, order.getOrderDate());
             ps.setInt(4, order.getRingID());
-            ps.setInt(5, order.getVoucherID());
-            ps.setInt(6, order.getRingSize());
-            ps.setString(7, order.getStatus());
+            ps.setInt(5, order.getRingSize());
+            ps.setString(6, order.getStatus());
 
             ps.executeUpdate();
             conn.close();
@@ -250,7 +262,7 @@ public class OrderDAO {
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            
+
             ps.setString(1, paymentMethod);
             ps.setInt(2, userID);
 
@@ -262,7 +274,7 @@ public class OrderDAO {
         }
         return false;
     }
-    
+
     public String searchVoucher(String code) {
         String sql = "SELECT voucherName FROM [Voucher] WHERE coupon = ?";
         String voucherName = null;
@@ -270,11 +282,11 @@ public class OrderDAO {
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            
+
             ps.setString(1, code);
             ResultSet rs = ps.executeQuery();
-            if(rs!=null){
-                while(rs.next()){
+            if (rs != null) {
+                while (rs.next()) {
                     voucherName = rs.getString("voucherName");
                     return voucherName;
                 }
@@ -287,21 +299,64 @@ public class OrderDAO {
         }
         return voucherName;
     }
-    
+
+    public int searchVoucherID(String code) {
+        String sql = "SELECT voucherID FROM [Voucher] WHERE coupon = ?";
+        int voucherID = 0;
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setString(1, code);
+            ResultSet rs = ps.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    voucherID = rs.getInt("voucherID");
+                    return voucherID;
+                }
+            }
+            ps.executeUpdate();
+            conn.close();
+        } catch (SQLException ex) {
+            System.out.println("Get Voucher error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return voucherID;
+    }
+
     public boolean applyVoucher(int voucherID, int userID) {
         String sql = "UPDATE [Order] SET voucherID = ? WHERE userID = ? AND status = 'pending' ";
         try {
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            
+
             ps.setInt(1, voucherID);
             ps.setInt(2, userID);
 
             ps.executeUpdate();
             conn.close();
         } catch (SQLException ex) {
-            System.out.println("Purchase error!" + ex.getMessage());
+            System.out.println("Adding voucher error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean removeVoucher(int userID) {
+        String sql = "UPDATE [Order] SET voucherID = null WHERE userID = ? AND status = 'pending' ";
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, userID);
+
+            ps.executeUpdate();
+            conn.close();
+        } catch (SQLException ex) {
+            System.out.println("Remove voucher error!" + ex.getMessage());
             ex.printStackTrace();
         }
         return false;

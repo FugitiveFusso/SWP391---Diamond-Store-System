@@ -69,7 +69,6 @@ public class AddToCart extends HttpServlet {
                 } catch (NumberFormatException ex) {
                     log("Parameter ringSize has wrong format.");
                 }
-                Integer voucherID = 1;
                 String status = "pending";
 
                 OrderDTO order = new OrderDTO();
@@ -77,7 +76,6 @@ public class AddToCart extends HttpServlet {
                 order.setUserID(userID);
                 order.setRingID(ringID);
                 order.setRingSize(ringSize);
-                order.setVoucherID(1);
                 order.setStatus(status);
 
                 OrderDAO dao = new OrderDAO();
