@@ -113,7 +113,7 @@ public class OrderDAO {
         try {
 
             Connection con = DBUtils.getConnection();
-            String sql = " select o.orderID, o.userID, u.userName, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, o.ringSize, ((r.price + rp.rpPrice + dp.price)*1.02) AS [totalPrice], o.status from [Order] o left join [User] u ON o.userID = u.userID left join [Ring] r ON o.ringID = r.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID  left join [Voucher] v ON o.voucherID = v.voucherID WHERE o.userID = ? AND o.status = 'purchased' AND 'received' ";
+            String sql = " select o.orderID, o.userID, u.userName, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, o.ringSize, ((r.price + rp.rpPrice + dp.price)*1.02) AS [totalPrice], o.status from [Order] o left join [User] u ON o.userID = u.userID left join [Ring] r ON o.ringID = r.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID  left join [Voucher] v ON o.voucherID = v.voucherID WHERE o.userID = ? AND o.status = 'purchased' ";
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -256,15 +256,16 @@ public class OrderDAO {
         return false;
     }
 
-    public boolean purchase(String paymentMethod, int userID) {
-        String sql = "UPDATE [Order] SET purchaseMethod = ?, status = 'purchased' WHERE userID = ? AND status = 'pending' ";
+    public boolean purchase(String paymentMethod, int userID, String purchasedDate) {
+        String sql = "UPDATE [Order] SET orderDate = ?, purchaseMethod = ?, status = 'purchased' WHERE userID = ? AND status = 'pending' ";
         try {
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-
-            ps.setString(1, paymentMethod);
-            ps.setInt(2, userID);
+            
+            ps.setString(1, purchasedDate);
+            ps.setString(2, paymentMethod);
+            ps.setInt(3, userID);
 
             ps.executeUpdate();
             conn.close();

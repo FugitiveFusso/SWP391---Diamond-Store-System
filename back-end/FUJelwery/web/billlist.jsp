@@ -85,6 +85,7 @@
                             <th>Order ID</th>
                             <th>Ring Name</th>
                             <th>Ring Size</th>
+                            <th>Date Purchased</th>
                             <th>Price</th>
                         </tr>
                         <%
@@ -96,6 +97,7 @@
                             <td>${bill.orderID}</td>
                             <td><a href="ProductController?action=details&id=${bill.ringID}">${bill.ringName}</td>
                             <td>${bill.ringSize}</td>
+                            <td>${bill.orderDate}</td>
                             <td>${bill.totalPrice}</td>
                         </tr>
                         <%

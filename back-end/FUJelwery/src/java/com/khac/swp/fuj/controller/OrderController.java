@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,6 +48,9 @@ public class OrderController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             String action = request.getParameter("action");
             String keyword = request.getParameter("keyword");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate localDate = LocalDate.now();
+            String purchasedDate = localDate.format(formatter);
             if (keyword == null) {
                 keyword = "";
             }
@@ -129,7 +134,7 @@ public class OrderController extends HttpServlet {
 
                 if (userID != null) {
                     try {
-                        orderDAO.purchase(purchaseMethod, userID);
+                        orderDAO.purchase(purchaseMethod, userID, purchasedDate);
                         request.getSession().setAttribute("success", "Purchase Successfully!!!");
                     } catch (Exception e) {
                         log("Error deleting order: " + e.getMessage());
