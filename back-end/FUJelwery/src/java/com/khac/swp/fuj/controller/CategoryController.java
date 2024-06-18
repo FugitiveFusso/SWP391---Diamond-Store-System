@@ -55,7 +55,6 @@ public class CategoryController extends HttpServlet {
                 } catch (NumberFormatException ex) {
                     log("Parameter id has wrong format.");
                 }
-                
 
                 CategoryDTO category = null;
                 if (id != null) {
@@ -111,29 +110,34 @@ public class CategoryController extends HttpServlet {
                 category.setCategoryName(categoryName);
                 categoryDAO.update(category);
 
-                request.setAttribute("category", category);
+                Integer id = null;
+                try {
+                    id = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+                if (id != null) {
+                    RingDAO dao_1 = new RingDAO();
+                    List<RingDTO> ring_1 = dao_1.listByCategory(id);
+                    request.setAttribute("ringclist", ring_1);
+                    category = categoryDAO.load(id);
+                }
+                request.setAttribute("category", category);//object
                 RequestDispatcher rd = request.getRequestDispatcher("categorydetails.jsp");
                 rd.forward(request, response);
 
             } else if (action.equals("insert")) {//insert
-                Connection conn = DBUtils.getConnection();
-                Integer categoryid = null;
-                try {
-                    categoryid = Integer.parseInt(request.getParameter("id"));
-                } catch (NumberFormatException ex) {
-                    log("Parameter id has wrong format.");
-                }
+
                 String categoryName = request.getParameter("categoryName");
 
                 CategoryDAO dao = new CategoryDAO();
-                CategoryDTO category = dao.checkCategoryExistByID(categoryid);
+                CategoryDTO category = dao.checkCategoryExistByName(categoryName);
                 if (category == null) {
 
                     category = new CategoryDTO();
-                    category.setCategoryID(categoryid);
                     category.setCategoryName(categoryName);
                     request.setAttribute("category", category);
-                    
+
                     categoryDAO.insert(category);
                     request.setAttribute("success", "Added Successfully!!!");
                     RequestDispatcher rd = request.getRequestDispatcher("categoryedit.jsp");

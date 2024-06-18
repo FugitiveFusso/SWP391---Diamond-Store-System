@@ -1,4 +1,6 @@
 
+<%@page import="com.khac.swp.fuj.ring.RingDTO"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -110,14 +112,10 @@
 
         <div class="container content">
             <form action="./CategoryController" method="POST" onsubmit="return validateForm()" onsubmit="return validateInput()">
+                <input type="number" name="id" value="${requestScope.category.categoryID}" hidden="" class="form-control">                           
+
                 <div class="row content-info">
-                    <div class="col-md-6 content-left">
-                        <div class="info-input">                          
-                            <h2>Category ID</h2>
-                            <input type="number" name="id" value="${requestScope.category.categoryID}" min="1" required="Please enter" class="form-control">                           
-                        </div>                      
-                    </div>
-                    <div class="col-md-6 content-right">
+                    <div class="col-md-12">
                         <div class="info-input">                                                      
                             <h2>Category Name</h2>
                             <input name="categoryName" value="${requestScope.category.categoryName}" required="Please enter" class="form-control">
