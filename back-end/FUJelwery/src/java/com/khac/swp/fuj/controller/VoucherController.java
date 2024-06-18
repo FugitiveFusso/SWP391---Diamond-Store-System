@@ -126,12 +126,7 @@ public class VoucherController extends HttpServlet {
             } else if (action.equals("insert")) {//insert
 
                 Connection conn = DBUtils.getConnection();
-                Integer voucherid = null;
-                try {
-                    voucherid = Integer.parseInt(request.getParameter("id"));
-                } catch (NumberFormatException ex) {
-                    log("Parameter id has wrong format.");
-                }
+
                 String vouchername = request.getParameter("voucherName");
                 String voucherimage = request.getParameter("voucherImage");
                 String createddate = request.getParameter("createdDate");
@@ -146,10 +141,9 @@ public class VoucherController extends HttpServlet {
                 }
 
                 VoucherDAO dao = new VoucherDAO();
-                VoucherDTO voucher = dao.checkVoucherExistByID(voucherid);
+                VoucherDTO voucher = dao.checkVoucherExistByName(vouchername);
                 if (voucher == null) {
                     voucher = new VoucherDTO();
-                    voucher.setId(voucherid);
                     voucher.setName(vouchername);
                     voucher.setImage(voucherimage);
                     voucher.setCreateddate(createddate);
@@ -164,7 +158,7 @@ public class VoucherController extends HttpServlet {
                     RequestDispatcher rd = request.getRequestDispatcher("voucheredit.jsp");
                     rd.forward(request, response);
                 } else {
-                    request.setAttribute("error", "Your voucher ID is already existed!!!");
+                    request.setAttribute("error", "Your voucher name is already existed!!!");
                     RequestDispatcher rd = request.getRequestDispatcher("voucheredit.jsp");
                     rd.forward(request, response);
                 }

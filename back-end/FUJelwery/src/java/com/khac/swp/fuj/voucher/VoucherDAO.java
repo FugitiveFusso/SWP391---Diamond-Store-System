@@ -15,9 +15,9 @@ public class VoucherDAO {
         List<VoucherDTO> list = new ArrayList<VoucherDTO>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = " select voucherID, voucherName, voucherImage, createdDate, createdBy, description, coupon, percentage from Voucher ";
+            String sql = " select voucherID, voucherName, voucherImage, createdDate, createdBy, description, coupon, percentage from Voucher where isDeleted = 'active'  ";
             if (keyword != null && !keyword.isEmpty()) {
-                sql += " where voucherName like ? or createdBy like ?";
+                sql += " and ( voucherName like ? or createdBy like ?)";
             }
 
             if (sortCol != null && !sortCol.isEmpty()) {
@@ -105,20 +105,19 @@ public class VoucherDAO {
     }
 
     public Integer insert(VoucherDTO voucher) {
-        String sql = "INSERT INTO [Voucher] (voucherID, voucherName, voucherImage, createdDate, createdBy, description, coupon, percentage) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO [Voucher] (voucherName, voucherImage, createdDate, createdBy, description, coupon, percentage, isDeleted) VALUES (?, ?, ?, ?, ?, ?, ?, 'active')";
         try {
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
 
-            ps.setInt(1, voucher.getId());
-            ps.setString(2, voucher.getName());
-            ps.setString(3, voucher.getImage());
-            ps.setString(4, voucher.getCreateddate());
-            ps.setString(5, voucher.getCreatedby());
-            ps.setString(6, voucher.getDescription());
-            ps.setString(7, voucher.getCoupon());
-            ps.setInt(8, voucher.getPercentage());
+            ps.setString(1, voucher.getName());
+            ps.setString(2, voucher.getImage());
+            ps.setString(3, voucher.getCreateddate());
+            ps.setString(4, voucher.getCreatedby());
+            ps.setString(5, voucher.getDescription());
+            ps.setString(6, voucher.getCoupon());
+            ps.setInt(7, voucher.getPercentage());
 
             ps.executeUpdate();
             conn.close();
@@ -159,7 +158,7 @@ public class VoucherDAO {
     Delete student 
      */
     public boolean delete(int id) {
-        String sql = "DELETE [Voucher] WHERE voucherID = ? ";
+        String sql = "Update [Voucher] set isDeleted = 'delete' WHERE voucherID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -178,21 +177,20 @@ public class VoucherDAO {
         return false;
     }
 
-    public VoucherDTO checkVoucherExistByID(int voucherID) {
+    public VoucherDTO checkVoucherExistByName(String voucherName) {
 
-        String sql = "select voucherID, voucherName, voucherImage, description, coupon, percentage from Voucher where voucherID = ?";
+        String sql = "select voucherID, voucherName, voucherImage, description, coupon, percentage from Voucher where voucherName like ? and isDeleted = 'active' ";
 
         try {
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, voucherID);
+            ps.setString(1, "%" + voucherName + "%");
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
 
                 VoucherDTO voucher = new VoucherDTO();
-                voucher.setId(rs.getInt("voucherID"));
                 voucher.setName(rs.getString("voucherName"));
                 voucher.setImage(rs.getString("voucherImage"));
                 voucher.setDescription(rs.getString("description"));

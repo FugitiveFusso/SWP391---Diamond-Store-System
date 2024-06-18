@@ -142,10 +142,7 @@
             <form action="./VoucherController" method="POST" onsubmit="return validateForm()" onsubmit="return validateInput()">
                 <div class="row content-info">
                     <div class="col-md-6 content-left">
-                        <div class="info-input">                          
-                            <h2>Voucher ID</h2>
-                            <input type="number" name="id" value="${requestScope.voucher.id}" min="1" required="Please enter" class="form-control">                           
-                        </div> 
+
                         <div class="info-input">                                                      
                             <h2>Voucher Image</h2>
                             <input name="voucherImage" value="${requestScope.voucher.image}" required="Please enter" class="form-control">
@@ -154,7 +151,10 @@
                             <h2>Created By</h2>
                             <input name="createdBy" readonly="" value="${sessionScope.salessession.firstname} ${sessionScope.salessession.lastname}" required="Please enter" class="form-control">                           
                         </div>
-                        
+                        <div class="info-input">                          
+                            <h2>Voucher Coupon</h2>
+                            <input name="coupon" value="${requestScope.voucher.coupon}" required="Please enter" class="form-control">                           
+                        </div>
                         <div class="info-input">                          
                             <h2>Voucher Description</h2>
                             <textarea id="description" name="description" required="Please enter" class="form-control" style="resize: both;">${requestScope.voucher.description}</textarea>                                                   
@@ -167,7 +167,7 @@
                             <h2>Voucher Name</h2>
                             <input name="voucherName" value="${requestScope.voucher.name}" required="Please enter" class="form-control">                           
                         </div>
-                        
+
                         <div class="info-input">                          
                             <h2>Created Date</h2>
                             <input type="date" name="createdDate" value="${requestScope.voucher.createddate}" required="Please enter" class="form-control">                           
@@ -176,10 +176,7 @@
                             <h2>Voucher Percentage</h2>
                             <input type="number" name="percentage" value="${requestScope.voucher.percentage}" required="Please enter" min="1" max="100" class="form-control">                           
                         </div>
-                        <div class="info-input">                          
-                            <h2>Voucher Coupon</h2>
-                            <input name="coupon" value="${requestScope.voucher.coupon}" required="Please enter" class="form-control">                           
-                        </div>
+                        <input name="id" value="${requestScope.voucher.id}" required="Please enter" type="hidden">
 
                     </div>
                 </div>
