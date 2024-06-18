@@ -23,6 +23,17 @@ public class UserDTO {
     public String status;
     public int roleid;
     public String rolename;
+    public String isDeleted;
+
+    public String getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(String isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+    
+    
 
     public String getStatus() {
         return status;
@@ -124,8 +135,10 @@ public class UserDTO {
 
     @Override
     public String toString() {
-        return "UserDTO{" + "userid=" + userid + ", username=" + username + ", password=" + password + ", firstname=" + firstname + ", lastname=" + lastname + ", phonenumber=" + phonenumber + ", email=" + email + ", address=" + address + ", point=" + point + ", status=" + status + ", roleid=" + roleid + ", rolename=" + rolename + '}';
+        return "UserDTO{" + "userid=" + userid + ", username=" + username + ", password=" + password + ", firstname=" + firstname + ", lastname=" + lastname + ", phonenumber=" + phonenumber + ", email=" + email + ", address=" + address + ", point=" + point + ", status=" + status + ", roleid=" + roleid + ", rolename=" + rolename + ", isDeleted=" + isDeleted + '}';
     }
+
+
 
     
     

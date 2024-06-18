@@ -25,7 +25,7 @@ public class UserDAO {
 
             Connection con = DBUtils.getConnection();
             String sql = " select userID, userName, firstName, lastName, email, phoneNumber, address, point, status, roleName from [User] u full join [Role] r on u.roleID = r.roleID ";
-            sql += " WHERE roleName = ? AND password = ? AND userName = ?";
+            sql += " WHERE roleName = ? AND password = ? AND userName = ? and isDeleted = 'active' ";
 
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, rolename);
@@ -62,7 +62,7 @@ public class UserDAO {
 
             Connection con = DBUtils.getConnection();
             String sql = " select userID, userName, firstName, lastName, email, phoneNumber, address, point, status, roleName from [User] u full join [Role] r on u.roleID = r.roleID ";
-            sql += " WHERE roleName = ? AND password = ? AND userName = ? AND STATUS = 'active' ";
+            sql += " WHERE roleName = ? AND password = ? AND userName = ? AND STATUS = 'active'";
 
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, rolename);
@@ -98,7 +98,7 @@ public class UserDAO {
         List<UserDTO> list = new ArrayList<UserDTO>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = " select userID, userName, firstName, lastName, email, address, status, r.roleID, roleName  from [User] u full join [Role] r on u.roleID = r.roleID where roleName like ? ";
+            String sql = " select userID, userName, firstName, lastName, email, address, status, r.roleID, roleName  from [User] u full join [Role] r on u.roleID = r.roleID where roleName like ? AND isDeleted = 'active' ";
             if (keyword != null && !keyword.isEmpty()) {
                 sql += " and (userName like ? or firstName like ? or lastName like ? or email like ?)";
             }
@@ -198,7 +198,7 @@ public class UserDAO {
     }
 
     public Integer insert(UserDTO user) {
-        String sql = "INSERT INTO [User] (userName, password, firstName, lastName, phoneNumber, email, address, point, status, roleID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'active', ?)";
+        String sql = "INSERT INTO [User] (userName, password, firstName, lastName, phoneNumber, email, address, point, status, roleID, isDeleted) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'active', ?, 'active' )";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -253,7 +253,7 @@ public class UserDAO {
     Delete student 
      */
     public boolean delete(int id) {
-        String sql = "DELETE [User] WHERE userID = ? ";
+        String sql = "UPDATE [User] set isDeleted = 'delete' where userID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();
