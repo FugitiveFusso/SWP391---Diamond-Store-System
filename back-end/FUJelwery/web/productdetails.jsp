@@ -126,7 +126,7 @@
                     <input type="hidden" name="userID" value=${sessionScope.usersession.userid}>
                     <input type="hidden" name="ringID" value=${requestScope.product.ringID}>
                     <input type="number" name="ringSize" min="3" max="11" class="productquantities" required="">
-                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+                    <button type="submit" onclick="addToCart()" class="btn btn-primary">Add to Cart</button>
                 </form>
                 <div class="Inclusion">
                     <h2>Your Order Includes:</h2>

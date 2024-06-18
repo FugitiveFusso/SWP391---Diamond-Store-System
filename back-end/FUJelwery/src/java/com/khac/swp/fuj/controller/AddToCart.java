@@ -82,7 +82,21 @@ public class AddToCart extends HttpServlet {
                 dao.insert(order);
 
                 // Redirect to prevent duplicate submission
-                response.sendRedirect(request.getContextPath() + "/user_homepage.jsp");
+                Integer id = null;
+                try {
+                    id = Integer.parseInt(request.getParameter("ringID"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+
+                RingDTO product = null;
+                RingDAO ringDAO = new RingDAO();
+                if (id != null) {
+                    product = ringDAO.load(id);
+                }
+
+                request.setAttribute("product", product);//object
+                request.getRequestDispatcher("/productdetails.jsp").forward(request, response);
             } catch (SQLException e) {
                 throw new ServletException(e);
             } finally {

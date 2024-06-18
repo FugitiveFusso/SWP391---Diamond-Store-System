@@ -86,7 +86,6 @@
                             <th>Ring Name</th>
                             <th>Ring Size</th>
                             <th>Price</th>
-                            <th>Delete</th>
                         </tr>
                         <%
                             List<OrderDTO> list = (List<OrderDTO>) request.getAttribute("billlist");
@@ -98,14 +97,6 @@
                             <td><a href="ProductController?action=details&id=${bill.ringID}">${bill.ringName}</td>
                             <td>${bill.ringSize}</td>
                             <td>${bill.totalPrice}</td>
-                            <td>
-                                <form action="OrderController" method="POST">
-                                    <input name="action" value="delete" type="hidden">
-                                    <input name="id" value="${bill.orderID}" type="hidden">
-                                    <input type="submit" value="Delete">
-                                </form>
-                            </td>
-
                         </tr>
                         <%
                             }
