@@ -138,22 +138,19 @@
 
         <div class="container content">
             <form action="./PostController" method="POST" onsubmit="return validateForm()" onsubmit="return validateInput()">
+                <input type="number" name="id" value="${requestScope.post.id}"class="form-control" hidden="">                           
                 <div class="row content-info">
                     <div class="col-md-6 content-left">
-                        <div class="info-input">                          
-                            <h2>Post ID</h2>
-                            <input type="number" name="id" value="${requestScope.post.id}" min="1" required="Please enter" class="form-control">                           
-                        </div>
                         <div class="info-input">
                             <h2>Author</h2>
                             <input name="author" value="${sessionScope.adminsession.firstname} ${sessionScope.adminsession.lastname}" required="Please enter" class="form-control" readonly="">
                         </div>
-                        
+
                         <div class="info-input">
                             <h2>Date</h2>
                             <input type="date" name="postDate" value="${requestScope.post.date}" required="Please enter" class="form-control">
                         </div>
-                        
+
                         <div class="info-input">
                             <h2>Description</h2>
                             <textarea id="description" name="description" required="Please enter" class="form-control" style="resize: both;">${requestScope.post.description}</textarea>

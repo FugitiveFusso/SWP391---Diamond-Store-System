@@ -169,7 +169,7 @@ public class WarrantyController extends HttpServlet {
                         RequestDispatcher rd = request.getRequestDispatcher("warrantyedit.jsp");
                         rd.forward(request, response);
                     } else {
-                        request.setAttribute("error", "Your warranty Name already exists!!!");
+                        request.setAttribute("error", "Your warranty name already exists!!!");
                         RequestDispatcher rd = request.getRequestDispatcher("warrantyedit.jsp");
                         rd.forward(request, response);
                     }

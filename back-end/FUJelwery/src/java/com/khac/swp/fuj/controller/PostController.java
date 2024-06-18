@@ -120,12 +120,7 @@ public class PostController extends HttpServlet {
             } else if (action.equals("insert")) {//insert
 
                 Connection conn = DBUtils.getConnection();
-                Integer postid = null;
-                try {
-                    postid = Integer.parseInt(request.getParameter("id"));
-                } catch (NumberFormatException ex) {
-                    log("Parameter id has wrong format.");
-                }
+
                 String postname = request.getParameter("postName");
                 String postimage = request.getParameter("postImage");
                 String postdate = request.getParameter("postDate");
@@ -134,10 +129,9 @@ public class PostController extends HttpServlet {
                 String posttext = request.getParameter("postText");
 
                 PostDAO dao = new PostDAO();
-                PostDTO post = dao.checkPostExistByID(postid);
+                PostDTO post = dao.checkPostExistByName(postname);
                 if (post == null) {
                     post = new PostDTO();
-                    post.setId(postid);
                     post.setName(postname);
                     post.setImage(postimage);
                     post.setDate(postdate);
@@ -151,7 +145,7 @@ public class PostController extends HttpServlet {
                     RequestDispatcher rd = request.getRequestDispatcher("postedit.jsp");
                     rd.forward(request, response);
                 } else {
-                    request.setAttribute("error", "Your post ID is already existed!!!");
+                    request.setAttribute("error", "Your post name is already existed!!!");
                     RequestDispatcher rd = request.getRequestDispatcher("postedit.jsp");
                     rd.forward(request, response);
                 }

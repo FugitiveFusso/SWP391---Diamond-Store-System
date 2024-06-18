@@ -14,9 +14,9 @@ public class PostDAO {
         List<PostDTO> list = new ArrayList<PostDTO>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = " select postID, postName, postDate, author, postImage, description, postText from Post ";
+            String sql = " select postID, postName, postDate, author, postImage, description, postText from Post where isDeleted = 'active' ";
             if (keyword != null && !keyword.isEmpty()) {
-                sql += " where postName like ? or author like ?";
+                sql += " and (postName like ? or author like ?)";
             }
 
             if (sortCol != null && !sortCol.isEmpty()) {
@@ -102,19 +102,18 @@ public class PostDAO {
     }
 
     public Integer insert(PostDTO post) {
-        String sql = "INSERT INTO [Post] (postID, postName, postImage, postDate, author, description, postText) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO [Post] (postName, postImage, postDate, author, description, postText, isDeleted) VALUES (?, ?, ?, ?, ?, ?, 'active')";
         try {
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
 
-            ps.setInt(1, post.getId());
-            ps.setString(2, post.getName());
-            ps.setString(3, post.getImage());
-            ps.setString(4, post.getDate());
-            ps.setString(5, post.getAuthor());
-            ps.setString(6, post.getDescription());
-            ps.setString(7, post.getText());
+            ps.setString(1, post.getName());
+            ps.setString(2, post.getImage());
+            ps.setString(3, post.getDate());
+            ps.setString(4, post.getAuthor());
+            ps.setString(5, post.getDescription());
+            ps.setString(6, post.getText());
             ps.executeUpdate();
             conn.close();
             return post.getId();
@@ -126,7 +125,7 @@ public class PostDAO {
     }
 
     public boolean update(PostDTO post) {
-        String sql = "UPDATE [Post] SET postName = ?, postImage = ?, postDate = ?, author = ?, description = ?, postText WHERE postID = ? ";
+        String sql = "UPDATE [Post] SET postName = ?, postImage = ?, postDate = ?, author = ?, description = ?, postText = ? WHERE postID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -150,7 +149,7 @@ public class PostDAO {
     }
 
     public boolean delete(int id) {
-        String sql = "DELETE [Post] WHERE postID = ? ";
+        String sql = "UPDATE [Post] set isDeleted = 'delete' WHERE postID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -169,21 +168,21 @@ public class PostDAO {
         return false;
     }
 
-    public PostDTO checkPostExistByID(int postID) {
+    public PostDTO checkPostExistByName(String postName) {
 
-        String sql = "select postID from Post where postID = ?";
+        String sql = "select postName from Post where postName like ?";
 
         try {
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, postID);
+            ps.setString(1, postName);
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
 
                 PostDTO post = new PostDTO();
-                post.setId(rs.getInt("postID"));
+                post.setName(rs.getString("postName"));
                 return post;
             }
         } catch (SQLException ex) {
