@@ -9,41 +9,46 @@ CREATE TABLE [Role](
 );
 
 CREATE TABLE [Certificate](
-	certificateID int NOT NULL primary key,
+	certificateID int IDENTITY(1,1) NOT NULL primary key,
 	certificateImage varchar(8000),
-	[description] varchar(8000)
+	[description] varchar(8000),
+	isDeleted varchar(10)
 );
 
 CREATE TABLE [DiamondPrice](
-	dpID int primary key,
+	dpID int IDENTITY(1,1) NOT NULL primary key,
 	diamondSize float,
 	caratWeight float,
 	color varchar(255),
 	clarity varchar(255),
 	cut varchar(255),
-	price bigint
+	price bigint,
+	isDeleted varchar(10)
 );
 
 CREATE TABLE [Diamond](
-	diamondID int NOT NULL primary key,
+	diamondID int IDENTITY(1,1) NOT NULL primary key,
 	diamondName varchar(255) NOT NULL,
 	diamondImage varchar(8000) NOT NULL,
 	origin varchar(255) NOT NULL,
+	isDeleted varchar(10),
 	dpID int foreign key REFERENCES [DiamondPrice](dpID),
 	certificateID int foreign key REFERENCES [Certificate](certificateID)
 );
 
 
 CREATE TABLE [Collection](
-	collectionID int NOT NULL primary key,
+	collectionID int IDENTITY(1,1) NOT NULL primary key,
 	collectionName varchar(255) NOT NULL,
 	collectionImage varchar(8000) NOT NULL,
-	[description] varchar(8000)
+	[description] varchar(8000),
+	isDeleted varchar(10)
 );
 
 CREATE TABLE [Category](
-	categoryID int NOT NULL primary key,
-	categoryName varchar(255) NOT NULL
+	categoryID int IDENTITY(1,1) NOT NULL primary key,
+	categoryName varchar(255) NOT NULL,
+	isDeleted varchar(10)
 );
 
 CREATE TABLE [User](
@@ -58,41 +63,45 @@ CREATE TABLE [User](
     point int NOT NULL,
 	[status] varchar(10), 
     roleID int NOT NULL,
+	isDeleted varchar(10),
     FOREIGN KEY (roleID) REFERENCES [Role](roleID)
 );
 
 CREATE TABLE [RingPlacementPrice](
-	rpID int primary key,
+	rpID int IDENTITY(1,1) primary key,
 	rName varchar(800),
 	material varchar(255),
 	color varchar(255),
-	rpPrice bigint
+	rpPrice bigint,
+	isDeleted varchar(10)
 );
 
 CREATE TABLE [Ring](
-	ringID int NOT NULL primary key,
+	ringID int IDENTITY(1,1) NOT NULL primary key,
 	rpID int foreign key REFERENCES [RingPlacementPrice](rpID),
 	ringName varchar(255) NOT NULL,
 	ringImage varchar(8000) NOT NULL,
 	diamondID int NOT NULL foreign key REFERENCES [Diamond](diamondID),
 	price bigint NOT NULL,
 	collectionID int NOT NULL foreign key REFERENCES [Collection](collectionID),
-	categoryID int NOT NULL foreign key REFERENCES [Category](categoryID)
+	categoryID int NOT NULL foreign key REFERENCES [Category](categoryID),
+	isDeleted varchar(10)
 );
 
 CREATE TABLE [Voucher](
-	voucherID int NOT NULL primary key,
+	voucherID int IDENTITY(1,1) NOT NULL primary key,
 	voucherName varchar(255) NOT NULL,
 	voucherImage varchar(8000) NOT NULL,
 	createdDate date not null,
 	createdBy varchar(255) not null,
 	[description] varchar(8000),
 	coupon varchar(255) NOT NULL,
-	percentage int NOT NULL
+	percentage int NOT NULL,
+	isDeleted varchar(10)
 );
 
 CREATE TABLE [Warranty] (
-    warrantyID int NOT NULL PRIMARY KEY,        
+    warrantyID int IDENTITY(1,1) NOT NULL PRIMARY KEY,        
     warrantyName varchar(255) NOT NULL,                  
     warrantyImage varchar(8000),                              
     warrantyMonth int NOT NULL CHECK (warrantyMonth > 0),     
@@ -100,7 +109,8 @@ CREATE TABLE [Warranty] (
     warrantyType varchar(255),                                
     startDate date NOT NULL,                                  
     endDate AS DATEADD(month, warrantyMonth, startDate),      
-    termsAndConditions text                      
+    termsAndConditions text,
+	isDeleted varchar(10)
 );
 
 CREATE TABLE [Order](
@@ -124,11 +134,12 @@ CREATE TABLE [Bill](
 );
 
 CREATE TABLE [Post](
-	postID int NOT NULL primary key,
+	postID int IDENTITY(1,1) NOT NULL primary key,
 	postName varchar(8000) NOT NULL,
 	postImage varchar(8000) NOT NULL,
     postDate date not null,
 	author varchar(255) not null,
 	description varchar(max) NOT NULL, 
-	postText varchar(max)
+	postText varchar(max),
+	isDeleted varchar(10)
 );
