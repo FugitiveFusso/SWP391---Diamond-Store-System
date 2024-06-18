@@ -141,14 +141,6 @@ public class OrderController extends HttpServlet {
 
                 response.sendRedirect(request.getContextPath() + "/user_homepage.jsp");
 
-            } else if (action.equals("searchCoupon")) {
-                String code = request.getParameter("coupon");
-                if (code == null) {
-                    code = "none";
-                }
-                String voucherName = orderDAO.searchVoucher(code);
-                request.setAttribute("voucherName", voucherName);
-                request.getRequestDispatcher("/user_homepage.jsp").forward(request, response);
             } else if (action.equals("applyVoucher")) {
                 String code = request.getParameter("coupon");
                 Integer userID = null;
@@ -171,7 +163,16 @@ public class OrderController extends HttpServlet {
                     request.setAttribute("errorMessage", "Invalid voucher code.");
                 }
 
-                request.getRequestDispatcher("/user_homepage.jsp").forward(request, response);
+                if (userID != null) {
+                    OrderDAO dao = new OrderDAO();
+                    List<OrderDTO> list = dao.list(userID);
+                    request.setAttribute("cartlist", list);
+
+                    int totalPrice = orderDAO.totalAllProduct(userID);
+                    request.setAttribute("totalPrice", totalPrice);
+                }
+
+                request.getRequestDispatcher("/cartlist.jsp").forward(request, response);
 
             } else if (action.equals("removeVoucher")) {
                 Integer userID = null;
@@ -193,7 +194,16 @@ public class OrderController extends HttpServlet {
                     request.setAttribute("errorMessage", "Invalid order ID.");
                 }
 
-                request.getRequestDispatcher("/user_homepage.jsp").forward(request, response);
+                if (userID != null) {
+                    OrderDAO dao = new OrderDAO();
+                    List<OrderDTO> list = dao.list(userID);
+                    request.setAttribute("cartlist", list);
+
+                    int totalPrice = orderDAO.totalAllProduct(userID);
+                    request.setAttribute("totalPrice", totalPrice);
+                }
+
+                request.getRequestDispatcher("/cartlist.jsp").forward(request, response);
             } else if (action.equals("delete")) {
                 Integer id = null;
                 try {
