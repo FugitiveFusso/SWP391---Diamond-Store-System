@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Warranty Management Page</title>
         <link rel="stylesheet" href="css/post_edit.css"/>
         <link rel="stylesheet" href="css/navbar_admin.css">
         <script src="https://unpkg.com/@phosphor-icons/web"></script>
