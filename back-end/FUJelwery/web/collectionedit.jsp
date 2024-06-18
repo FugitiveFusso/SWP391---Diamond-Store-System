@@ -18,7 +18,7 @@
                 const regex = /^https:\/\/.*\.(jpg|jpeg|png|gif|bmp|webp)$/i;
                 return regex.test(url);
             }
-            
+
             function numberOfWords(str) {
                 const words = str.trim().match(/\S+/g) || [];
                 return words.length;
@@ -88,7 +88,7 @@
                             <a href="DiamondController" class="sub-item">Diamond List</a>
                             <a href="RingController" class="sub-item">Ring List</a>
                             <a href="CollectionController" class="sub-item">Collection List</a>
-                            
+
                         </div>
                     </a>
                 </div>
@@ -111,7 +111,7 @@
                 </div>
 
                 <div class="item"><a href="CategoryController"><i class="fas fa-layer-group"></i>View Category</a></div>
-                
+
                 <div class="item"><a href="salesstaffaccount.jsp"><i class="fas fa-user"></i>Account</a></div>
                 <div class="item"><a href="saleslogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
 
@@ -135,12 +135,11 @@
 
         <div class="container content">
             <form action="./CollectionController" method="POST" onsubmit="return validateForm()" onsubmit="return validateInput()">
+                <input type="number" name="id" value="${requestScope.collection.collectionID}" hidden="" class="form-control">                           
+
                 <div class="row content-info">
                     <div class="col-md-6 content-left">
-                        <div class="info-input">                          
-                            <h2>Collection ID</h2>
-                            <input type="number" name="id" value="${requestScope.collection.collectionID}" min="1" required="Please enter" class="form-control">                           
-                        </div> 
+
                         <div class="info-input">                          
                             <h2>Collection Name</h2>
                             <input name="collectionName" value="${requestScope.collection.collectionName}" required="Please enter" class="form-control">                           
@@ -151,12 +150,13 @@
                             <h2>Collection Image</h2>
                             <input name="collectionImage" value="${requestScope.collection.collectionImage}" required="Please enter" class="form-control">
                         </div>  
-                        <div class="info-input">                                                      
-                            <h2>Collection Description</h2>
-                            <textarea id="description" name="description" required="Please enter" class="form-control" style="resize: both;">${requestScope.collection.collectionDescription}</textarea>                                                   
-                            <span id="description-error" class="error" style="color: red"></span>
-                            
-                        </div>
+
+                    </div>
+                    <div class="col-md-12">                                                      
+                        <h2>Collection Description</h2>
+                        <textarea id="description" name="description" required="Please enter" class="form-control" style="resize: both;">${requestScope.collection.collectionDescription}</textarea>                                                   
+                        <span id="description-error" class="error" style="color: red"></span>
+
                     </div>
                 </div>
                 <div class="row justify-content-center">
@@ -176,7 +176,7 @@
                         <input type=submit value="Return" class="btn btn-primary"></form>
                 </div>
             </div>
-         
+
         </div>
     </div>
 

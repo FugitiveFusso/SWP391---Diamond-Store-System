@@ -114,28 +114,35 @@ public class CollectionController extends HttpServlet {
                 collection.setCollectionDescription(description);
                 collectionDAO.update(collection);
 
-                request.setAttribute("collection", collection);
-                RequestDispatcher rd = request.getRequestDispatcher("collectiondetails.jsp");
-                rd.forward(request, response);
-
-            } else if (action.equals("insert")) {//insert
-                Connection conn = DBUtils.getConnection();
-                Integer collectionid = null;
+                Integer id = null;
                 try {
-                    collectionid = Integer.parseInt(request.getParameter("id"));
+                    id = Integer.parseInt(request.getParameter("id"));
                 } catch (NumberFormatException ex) {
                     log("Parameter id has wrong format.");
                 }
+                RingDTO ring = null;
+                if (id != null) {
+                    RingDAO dao_1 = new RingDAO();
+                    collection = collectionDAO.load(id);
+                    List<RingDTO> ring_1 = dao_1.listByCollection(id);
+                    request.setAttribute("ringclist", ring_1);
+                }
+
+                request.setAttribute("collection", collection);//object
+                RequestDispatcher rd = request.getRequestDispatcher("collectiondetails.jsp");
+                rd.forward(request, response);
+            } else if (action.equals("insert")) {//insert
+                Connection conn = DBUtils.getConnection();
+
                 String collectionName = request.getParameter("collectionName");
                 String collectionImage = request.getParameter("collectionImage");
                 String description = request.getParameter("description");
 
                 CollectionDAO dao = new CollectionDAO();
-                CollectionDTO collection = dao.checkCollectionExistByID(collectionid);
+                CollectionDTO collection = dao.checkCollectionExistByName(collectionName);
                 if (collection == null) {
 
                     collection = new CollectionDTO();
-                    collection.setCollectionID(collectionid);
                     collection.setCollectionName(collectionName);
                     collection.setCollectionImage(collectionImage);
                     collection.setCollectionDescription(description);
@@ -146,7 +153,7 @@ public class CollectionController extends HttpServlet {
                     RequestDispatcher rd = request.getRequestDispatcher("collectionedit.jsp");
                     rd.forward(request, response);
                 } else {
-                    request.setAttribute("error", "Your collection ID is already existed!!!");
+                    request.setAttribute("error", "Your collection name is already existed!!!");
                     RequestDispatcher rd = request.getRequestDispatcher("collectionedit.jsp");
                     rd.forward(request, response);
                 }

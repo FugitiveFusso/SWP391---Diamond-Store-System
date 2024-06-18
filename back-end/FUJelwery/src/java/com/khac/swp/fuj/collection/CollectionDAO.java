@@ -17,9 +17,9 @@ public class CollectionDAO {
         List<CollectionDTO> list = new ArrayList<CollectionDTO>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = "SELECT * FROM [Collection] ";
+            String sql = "SELECT * FROM [Collection] where isDeleted = 'active' ";
             if (keyword != null && !keyword.isEmpty()) {
-                sql += " WHERE collectionName like ?";
+                sql += " and collectionName like ?";
             }
 
             if (sortCol != null && !sortCol.isEmpty()) {
@@ -91,16 +91,15 @@ public class CollectionDAO {
     }
 
     public Integer insert(CollectionDTO collection) {
-        String sql = "INSERT INTO [Collection] (collectionID, collectionName, collectionImage, description) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO [Collection] (collectionName, collectionImage, description, isDeleted) VALUES (?, ?, ?, 'active' )";
         try {
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
 
-            ps.setInt(1, collection.getCollectionID());
-            ps.setString(2, collection.getCollectionName());
-            ps.setString(3, collection.getCollectionImage());
-            ps.setString(4, collection.getCollectionDescription());
+            ps.setString(1, collection.getCollectionName());
+            ps.setString(2, collection.getCollectionImage());
+            ps.setString(3, collection.getCollectionDescription());
 
             ps.executeUpdate();
             conn.close();
@@ -137,7 +136,7 @@ public class CollectionDAO {
     Delete student 
      */
     public boolean delete(int id) {
-        String sql = "DELETE [Collection] WHERE collectionID = ? ";
+        String sql = "UPDATE [Collection] SET isDeleted = 'delete' WHERE collectionID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -156,41 +155,15 @@ public class CollectionDAO {
         return false;
     }
     
-    public CollectionDTO checkCollectionExistByID(int collectionID) {
+    public CollectionDTO checkCollectionExistByName(String collectionName) {
 
-        String sql = "select collectionID, collectionName, collectionImage,[description] from [Collection] where collectionID = ?";
-
-        try {
-
-            Connection conn = DBUtils.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, collectionID);
-
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                CollectionDTO collection = new CollectionDTO();
-                collection.setCollectionID(rs.getInt("collectionID"));
-                collection.setCollectionName(rs.getString("collectionName"));
-                collection.setCollectionImage(rs.getString("collectionImage"));
-                collection.setCollectionDescription(rs.getString("description"));
-                return collection;
-            }
-        } catch (SQLException ex) {
-            System.out.println("Query Collection error!" + ex.getMessage());
-            ex.printStackTrace();
-        }
-        return null;
-    }
-    
-    public CollectionDTO checkCollectionExistByName(String name) {
-
-        String sql = "select collectionID, collectionName, collectionImage,[description] from [Collection] where collectionName like ?";
+        String sql = "select collectionID, collectionName, collectionImage,[description] from [Collection] where collectionName like ? and isDeleted = 'active' ";
 
         try {
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, name);
+            ps.setString(1, collectionName);
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
