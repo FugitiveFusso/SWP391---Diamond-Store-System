@@ -302,7 +302,7 @@ public class UserDAO {
 
             Connection con = DBUtils.getConnection();
             String sql = " select userName, firstName, lastName, email, phoneNumber, point, roleID from [User] u ";
-            sql += " WHERE userName = ?";
+            sql += " WHERE userName = ? and status = 'active' and isDeleted = 'active' ";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
@@ -338,7 +338,7 @@ public class UserDAO {
 
             Connection con = DBUtils.getConnection();
             String sql = " select userName, firstName, lastName, email, phoneNumber, point, roleID from [User] u ";
-            sql += " WHERE email = ?";
+            sql += " WHERE email = ? AND isDeleted = 'active'";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
