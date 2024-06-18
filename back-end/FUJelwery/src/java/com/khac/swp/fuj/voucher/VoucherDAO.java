@@ -185,7 +185,7 @@ public class VoucherDAO {
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, "%" + voucherName + "%");
+            ps.setString(1,voucherName);
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {

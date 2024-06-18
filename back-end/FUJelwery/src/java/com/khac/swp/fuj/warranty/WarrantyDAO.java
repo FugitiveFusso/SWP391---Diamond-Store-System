@@ -14,9 +14,9 @@ public class WarrantyDAO {
         List<WarrantyDTO> list = new ArrayList<WarrantyDTO>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = " select warrantyID, warrantyName, warrantyImage, warrantyMonth, warrantyDescription, warrantyType, startDate, endDate, termsAndConditions from Warranty ";
+            String sql = " select warrantyID, warrantyName, warrantyImage, warrantyMonth, warrantyDescription, warrantyType, startDate, endDate, termsAndConditions from Warranty where isDeleted = 'active'  ";
             if (keyword != null && !keyword.isEmpty()) {
-                sql += " where warrantyName like ? or warrantyMonth like ? or startDate like ? or endDate like ? or termsAndConditions like ? ";
+                sql += "and (warrantyName like ? or warrantyMonth like ? or startDate like ? or endDate like ? or termsAndConditions like ?) ";
             }
 
             if (sortCol != null && !sortCol.isEmpty()) {
@@ -112,20 +112,19 @@ public class WarrantyDAO {
     }
 
     public Integer insert(WarrantyDTO warranty) {
-        String sql = "INSERT INTO [Warranty] (warrantyID, warrantyName, warrantyImage, warrantyMonth, warrantyDescription, warrantyType, startDate, termsAndConditions) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO [Warranty] (warrantyName, warrantyImage, warrantyMonth, warrantyDescription, warrantyType, startDate, termsAndConditions, isDeleted) VALUES (?, ?, ?, ?, ?, ?, ?, 'active')";
         try {
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
 
-            ps.setInt(1, warranty.getId());
-            ps.setString(2, warranty.getName());
-            ps.setString(3, warranty.getImage());
-            ps.setInt(4, warranty.getMonth());
-            ps.setString(5, warranty.getDescription());
-            ps.setString(6, warranty.getType());
-            ps.setString(7, warranty.getStartdate());
-            ps.setString(8, warranty.getTermsandconditions());
+            ps.setString(1, warranty.getName());
+            ps.setString(2, warranty.getImage());
+            ps.setInt(3, warranty.getMonth());
+            ps.setString(4, warranty.getDescription());
+            ps.setString(5, warranty.getType());
+            ps.setString(6, warranty.getStartdate());
+            ps.setString(7, warranty.getTermsandconditions());
 
             ps.executeUpdate();
             conn.close();
@@ -166,7 +165,7 @@ public class WarrantyDAO {
     Delete student 
      */
     public boolean delete(int id) {
-        String sql = "DELETE [Warranty] WHERE warrantyID = ? ";
+        String sql = "UPDATE [Warranty] set isDeleted = 'delete' WHERE warrantyID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -185,21 +184,20 @@ public class WarrantyDAO {
         return false;
     }
     
-    public WarrantyDTO checkWarrantyExistByID(int warrantyID) {
+    public WarrantyDTO checkWarrantyExistByName(String warrantyName) {
 
-        String sql = "select warrantyID, warrantyName, warrantyImage, warrantyMonth, warrantyDescription, warrantyType, startDate, endDate, termsAndConditions from Warranty where warrantyID = ?";
+        String sql = "select warrantyName, warrantyImage, warrantyMonth, warrantyDescription, warrantyType, startDate, endDate, termsAndConditions from Warranty where warrantyName = ?";
 
         try {
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, warrantyID);
+            ps.setString(1, warrantyName);
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
 
                 WarrantyDTO warranty = new WarrantyDTO();
-                warranty.setId(rs.getInt("warrantyID"));
                 warranty.setName(rs.getString("warrantyName"));
                 warranty.setImage(rs.getString("warrantyImage"));
                 warranty.setMonth(rs.getInt("warrantyMonth"));

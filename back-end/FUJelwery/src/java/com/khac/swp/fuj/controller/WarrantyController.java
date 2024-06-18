@@ -135,13 +135,6 @@ public class WarrantyController extends HttpServlet {
                         throw new SQLException("Failed to establish a database connection.");
                     }
 
-                    try {
-                        warrantyid = Integer.parseInt(request.getParameter("id"));
-                    } catch (NumberFormatException ex) {
-                        log("Parameter id has wrong format.");
-                        throw new ServletException("Parameter id has wrong format.");
-                    }
-
                     String warrantyname = request.getParameter("warrantyName");
                     String warrantyimage = request.getParameter("warrantyImage");
 
@@ -158,11 +151,10 @@ public class WarrantyController extends HttpServlet {
                     String tac = request.getParameter("termsAndConditions");
 
                     WarrantyDAO dao = new WarrantyDAO();
-                    WarrantyDTO warranty = dao.checkWarrantyExistByID(warrantyid);
+                    WarrantyDTO warranty = dao.checkWarrantyExistByName(warrantyname);
 
                     if (warranty == null) {
                         warranty = new WarrantyDTO();
-                        warranty.setId(warrantyid);
                         warranty.setName(warrantyname);
                         warranty.setImage(warrantyimage);
                         warranty.setMonth(month);
@@ -177,7 +169,7 @@ public class WarrantyController extends HttpServlet {
                         RequestDispatcher rd = request.getRequestDispatcher("warrantyedit.jsp");
                         rd.forward(request, response);
                     } else {
-                        request.setAttribute("error", "Your warranty ID already exists!!!");
+                        request.setAttribute("error", "Your warranty Name already exists!!!");
                         RequestDispatcher rd = request.getRequestDispatcher("warrantyedit.jsp");
                         rd.forward(request, response);
                     }

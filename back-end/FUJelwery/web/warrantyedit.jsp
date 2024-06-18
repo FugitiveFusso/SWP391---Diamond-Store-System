@@ -16,7 +16,7 @@
                 const regex = /^https:\/\/.*\.(jpg|jpeg|png|gif|bmp|webp)$/i;
                 return regex.test(url);
             }
-            
+
             function numberOfWords(str) {
                 const words = str.trim().match(/\S+/g) || [];
                 return words.length;
@@ -30,7 +30,7 @@
 
                 const descriptionMinWords = 5;
                 const descriptionMaxWords = 30;
-                
+
                 const tacMinWords = 5;
                 const tacMaxWords = 50;
 
@@ -50,7 +50,7 @@
                 } else {
                     document.getElementById('description-error').innerText = '';
                 }
-                
+
                 const tacWordCount = numberOfWords(tac);
                 if (tacWordCount < tacMinWords || tacWordCount > tacMaxWords) {
                     document.getElementById('tac-error').innerText = 'Terms and conditions must be between 20 and 70 words. Currently ' + tacWordCount + ' words.';
@@ -76,7 +76,7 @@
     </head>
     <body>
         <!--<%@ include file="/salesmenu.jsp" %>-->
-        
+
         <div class="menu-btn">
             <div class="btn-cover">
                 <i class="fas fa-bars"></i>
@@ -99,7 +99,7 @@
                             <a href="DiamondController" class="sub-item">Diamond List</a>
                             <a href="RingController" class="sub-item">Ring List</a>
                             <a href="CollectionController" class="sub-item">Collection List</a>
-                            
+
                         </div>
                     </a>
                 </div>
@@ -122,7 +122,7 @@
                 </div>
 
                 <div class="item"><a href="CategoryController"><i class="fas fa-layer-group"></i>View Category</a></div>
-                
+
                 <div class="item"><a href="salesstaffaccount.jsp"><i class="fas fa-user"></i>Account</a></div>
                 <div class="item"><a href="saleslogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
 
@@ -146,27 +146,24 @@
 
         <div class="container content">
             <form action="./WarrantyController" method="POST" onsubmit="return validateForm()" onsubmit="return validateInput()">
+                <input type="number" name="id" value="${requestScope.warranty.id}" class="form-control" hidden="">                           
                 <div class="row content-info">
-                    <div class="col-md-6 content-left">
-                        <div class="info-input">                          
-                            <h2>Warranty ID</h2>
-                            <input type="number" name="id" value="${requestScope.warranty.id}" min="1" required="Please enter" class="form-control">                           
-                        </div> 
+                    <div class="col-md-6 content-left"> 
                         <div class="info-input">                                                      
                             <h2>Warranty Image</h2>
                             <input name="warrantyImage" value="${requestScope.warranty.image}" required="Please enter" class="form-control">
                         </div> 
-                       
-                        
+
+
                         <div class="info-input">                          
                             <h2>Warranty Start Date</h2>
                             <input type="date" name="startDate" value="${requestScope.warranty.startdate}" required="Please enter" class="form-control">                           
                         </div>
-                         <div class="info-input">                          
+                        <div class="info-input">                          
                             <h2>Warranty Description</h2>
                             <textarea id="description" name="warrantyDescription" required="Please enter" class="form-control" style="resize: both;">${requestScope.warranty.description}</textarea>                                                   
                             <span id="description-error" class="error" style="color: red"></span>
-                                                    
+
                         </div>
                     </div>
                     <div class="col-md-6 content-right">
@@ -194,7 +191,7 @@
                             <h2>Terms and Conditions</h2>
                             <textarea id="termandcondition" name="termsAndConditions" required="Please enter" class="form-control" style="resize: both;">${requestScope.warranty.termsandconditions}</textarea>                                                   
                             <span id="tac-error" class="error" style="color: red"></span>
-                                 
+
                         </div>
 
                     </div>
