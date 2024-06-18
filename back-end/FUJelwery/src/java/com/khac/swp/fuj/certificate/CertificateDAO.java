@@ -17,9 +17,9 @@ public class CertificateDAO {
         List<CertificateDTO> list = new ArrayList<CertificateDTO>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = "SELECT * FROM [Certificate] ";
+            String sql = "SELECT * FROM [Certificate] where isDeleted = 'active' ";
             if (keyword != null && !keyword.isEmpty()) {
-                sql += " WHERE description like ?";
+                sql += " and description like ?";
             }
 
             if (sortCol != null && !sortCol.isEmpty()) {
@@ -87,15 +87,14 @@ public class CertificateDAO {
     }
 
     public Integer insert(CertificateDTO certificate) {
-        String sql = "INSERT INTO [Certificate] (certificateID, certificateImage, description) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO [Certificate] (certificateImage, description, isDeleted) VALUES (?, ?, 'active' )";
         try {
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
 
-            ps.setInt(1, certificate.getCertificateID());
-            ps.setString(2, certificate.getCertificateImage());
-            ps.setString(3, certificate.getCertificateDescription());
+            ps.setString(1, certificate.getCertificateImage());
+            ps.setString(2, certificate.getCertificateDescription());
 
             ps.executeUpdate();
             conn.close();
@@ -127,11 +126,8 @@ public class CertificateDAO {
         return false;
     }
 
-    /*
-    Delete student 
-     */
     public boolean delete(int id) {
-        String sql = "DELETE [Certificate] WHERE certificateID = ? ";
+        String sql = "UPDATE [Certificate] set isDeleted = 'delete' WHERE certificateID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -149,15 +145,15 @@ public class CertificateDAO {
 
         return false;
     }
-    public CertificateDTO checkCertificateExistByID(int certificateID) {
+    public CertificateDTO checkCertificateExistByDescription(String description) {
 
-        String sql = "select certificateID, certificateImage, [description] from [Certificate] where certificateID = ?";
+        String sql = "select certificateID, certificateImage, [description] from [Certificate] where [description] like ? and isDeleted = 'active' ";
 
         try {
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, certificateID);
+            ps.setString(1, description);
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {

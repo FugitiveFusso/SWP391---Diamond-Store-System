@@ -186,7 +186,7 @@ public class WarrantyDAO {
     
     public WarrantyDTO checkWarrantyExistByName(String warrantyName) {
 
-        String sql = "select warrantyName, warrantyImage, warrantyMonth, warrantyDescription, warrantyType, startDate, endDate, termsAndConditions from Warranty where warrantyName = ?";
+        String sql = "select warrantyName, warrantyImage, warrantyMonth, warrantyDescription, warrantyType, startDate, endDate, termsAndConditions from Warranty where warrantyName like ? and isDeleted = 'active'";
 
         try {
 

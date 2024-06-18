@@ -112,21 +112,13 @@ public class CertificateController extends HttpServlet {
                 rd.forward(request, response);
 
             } else if (action.equals("insert")) {//insert
-
-                Integer certificateid = null;
-                try {
-                    certificateid = Integer.parseInt(request.getParameter("id"));
-                } catch (NumberFormatException ex) {
-                    log("Parameter id has wrong format.");
-                }
                 String certificateImage = request.getParameter("certificateImage");
                 String certificateDescription = request.getParameter("description");
 
                 CertificateDAO dao = new CertificateDAO();
-                CertificateDTO certificate = dao.checkCertificateExistByID(certificateid);
+                CertificateDTO certificate = dao.checkCertificateExistByDescription(certificateDescription);
                 if (certificate == null) {
                     certificate = new CertificateDTO();
-                    certificate.setCertificateID(certificateid);
                     certificate.setCertificateImage(certificateImage);
                     certificate.setCertificateDescription(certificateDescription);
 
@@ -136,7 +128,7 @@ public class CertificateController extends HttpServlet {
                     RequestDispatcher rd = request.getRequestDispatcher("certificateedit.jsp");
                     rd.forward(request, response);
                 } else {
-                    request.setAttribute("error", "Your certificate ID is already existed!!!");
+                    request.setAttribute("error", "Your certificate description is already existed!!!");
                     RequestDispatcher rd = request.getRequestDispatcher("certificateedit.jsp");
                     rd.forward(request, response);
                 }

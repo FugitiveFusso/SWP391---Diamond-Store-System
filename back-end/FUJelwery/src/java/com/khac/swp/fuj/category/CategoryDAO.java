@@ -138,7 +138,7 @@ public class CategoryDAO {
     
     public CategoryDTO checkCategoryExistByName(String categoryName) {
 
-        String sql = "select categoryID, categoryName from Category where categoryName = ? and isDeleted = 'active' ";
+        String sql = "select categoryID, categoryName from Category where categoryName like ? and isDeleted = 'active' ";
 
         try {
 

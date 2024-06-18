@@ -18,7 +18,7 @@
                 const regex = /^https:\/\/.*\.(jpg|jpeg|png|gif|bmp|webp)$/i;
                 return regex.test(url);
             }
-            
+
             function numberOfWords(str) {
                 const words = str.trim().match(/\S+/g) || [];
                 return words.length;
@@ -43,7 +43,7 @@
                 // Validate Description
                 const descriptionWordCount = numberOfWords(description);
                 if (descriptionWordCount < descriptionMinWords || descriptionWordCount > descriptionMaxWords) {
-                    document.getElementById('description-error').innerText = 'Description must be between 20 and 70 words. Currently ' + descriptionWordCount + ' words.';
+                    document.getElementById('description-error').innerText = 'Description must be between 5 and 20 words. Currently ' + descriptionWordCount + ' words.';
                     isValid = false;
                 } else {
                     document.getElementById('description-error').innerText = '';
@@ -62,10 +62,10 @@
                 }
                 return true;
             }
-            
+
         </script>
         <!--<%@ include file="/salesmenu.jsp" %>-->
-        
+
         <div class="menu-btn">
             <div class="btn-cover">
                 <i class="fas fa-bars"></i>
@@ -88,7 +88,7 @@
                             <a href="DiamondController" class="sub-item">Diamond List</a>
                             <a href="RingController" class="sub-item">Ring List</a>
                             <a href="CollectionController" class="sub-item">Collection List</a>
-                            
+
                         </div>
                     </a>
                 </div>
@@ -111,7 +111,7 @@
                 </div>
 
                 <div class="item"><a href="CategoryController"><i class="fas fa-layer-group"></i>View Category</a></div>
-                
+
                 <div class="item"><a href="salesstaffaccount.jsp"><i class="fas fa-user"></i>Account</a></div>
                 <div class="item"><a href="saleslogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
 
@@ -135,23 +135,21 @@
 
         <div class="container content">
             <form action="./CertificateController" method="POST" onsubmit="return validateForm()" onsubmit="return validateInput()">
+                <input type="number" name="id" value="${requestScope.certificate.certificateID}" hidden="" class="form-control">                           
                 <div class="row content-info">
-                    <div class="col-md-6 content-left">
-                        <div class="info-input">                          
-                            <h2>Certificate ID</h2>
-                            <input type="number" name="id" value="${requestScope.certificate.certificateID}" min="1" required="Please enter" class="form-control">                           
-                        </div> 
-                        <div class="info-input">                                                      
-                            <h2>Certificate Description</h2>
-                            <textarea id="description" name="description" required="Please enter" class="form-control" style="resize: both;">${requestScope.certificate.certificateDescription}</textarea>                                                   
-                            <span id="description-error" class="error" style="color: red"></span>                           
-                        </div> 
-                    </div>
-                    <div class="col-md-6 content-right">
-                        <div class="info-input">                          
-                            <h2>Certificate Image</h2>
-                            <input name="certificateImage" value="${requestScope.certificate.certificateImage}" min="1" required="Please enter" class="form-control">                           
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="info-input">                          
+                                <h2>Certificate Image</h2>
+                                <input name="certificateImage" value="${requestScope.certificate.certificateImage}" min="1" required="Please enter" class="form-control">                           
+                            </div>
+                            <div class="info-input">                                                      
+                                <h2>Certificate Description</h2>
+                                <textarea id="description" name="description" required="Please enter" class="form-control" style="resize: both;">${requestScope.certificate.certificateDescription}</textarea>                                                   
+                                <span id="description-error" class="error" style="color: red"></span>                           
+                            </div> 
                         </div>
+
 
                     </div>
                 </div>
