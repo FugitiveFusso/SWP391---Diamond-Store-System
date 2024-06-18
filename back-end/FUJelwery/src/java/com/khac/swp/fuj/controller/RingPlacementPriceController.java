@@ -120,12 +120,7 @@ public class RingPlacementPriceController extends HttpServlet {
 
             } else if (action.equals("insert")) {//insert
                 Connection conn = DBUtils.getConnection();
-                Integer rpid = null;
-                try {
-                    rpid = Integer.parseInt(request.getParameter("id"));
-                } catch (NumberFormatException ex) {
-                    log("Parameter id has wrong format.");
-                }
+                
                 String name = request.getParameter("rName");
                 String material = request.getParameter("material");
                 String color = request.getParameter("color");
@@ -136,10 +131,9 @@ public class RingPlacementPriceController extends HttpServlet {
                     log("Parameter price has wrong format.");
                 }
                 RingPlacementPriceDAO dao = new RingPlacementPriceDAO();
-                RingPlacementPriceDTO rp = dao.checkRPPByID(rpid);
+                RingPlacementPriceDTO rp = dao.checkRPExist(name, material, color);
                 if (rp == null) {
                     rp = new RingPlacementPriceDTO();
-                    rp.setId(rpid);
                     rp.setName(name);
                     rp.setMaterial(material);
                     rp.setColor(color);
@@ -150,7 +144,7 @@ public class RingPlacementPriceController extends HttpServlet {
                     RequestDispatcher rd = request.getRequestDispatcher("rpedit.jsp");
                     rd.forward(request, response);
                 } else {
-                    request.setAttribute("error", "Your Ring Placement Price ID is already existed!!!");
+                    request.setAttribute("error", "Your Ring Placement Price is already existed!!!");
                     RequestDispatcher rd = request.getRequestDispatcher("rpedit.jsp");
                     rd.forward(request, response);
                 }

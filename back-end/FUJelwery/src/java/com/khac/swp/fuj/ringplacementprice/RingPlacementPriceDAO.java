@@ -19,9 +19,9 @@ public class RingPlacementPriceDAO {
         List<RingPlacementPriceDTO> list = new ArrayList<RingPlacementPriceDTO>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = " select rpID, rName, material, color, rpPrice from RingPlacementPrice ";
+            String sql = " select rpID, rName, material, color, rpPrice from RingPlacementPrice where isDeleted = 'active' ";
             if (keyword != null && !keyword.isEmpty()) {
-                sql += " where rName like ? or material like ? or color like ? or rpPrice like ? ";
+                sql += " and ( rName like ? or material like ? or color like ? or rpPrice like ?) ";
             }
 
             if (sortCol != null && !sortCol.isEmpty()) {
@@ -100,18 +100,17 @@ public class RingPlacementPriceDAO {
     }
 
     public Integer insert(RingPlacementPriceDTO rp) {
-        String sql = "INSERT INTO [RingPlacementPrice] (rpID, rName, material, color, rpPrice) "
-                + "VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO [RingPlacementPrice] (rName, material, color, rpPrice, isDeleted) "
+                + "VALUES (?, ?, ?, ?, 'active')";
         try {
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
 
-            ps.setInt(1, rp.getId());
-            ps.setString(2, rp.getName());
-            ps.setString(3, rp.getMaterial());
-            ps.setString(4, rp.getColor());
-            ps.setInt(5, rp.getPrice());
+            ps.setString(1, rp.getName());
+            ps.setString(2, rp.getMaterial());
+            ps.setString(3, rp.getColor());
+            ps.setInt(4, rp.getPrice());
 
             ps.executeUpdate();
             conn.close();
@@ -145,7 +144,7 @@ public class RingPlacementPriceDAO {
     }
 
     public boolean delete(int id) {
-        String sql = "DELETE [RingPlacementPrice] WHERE rpID = ? ";
+        String sql = "Update [RingPlacementPrice] set isDeleted = 'delete' WHERE rpID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -164,15 +163,18 @@ public class RingPlacementPriceDAO {
         return false;
     }
 
-    public RingPlacementPriceDTO checkRPPByID(int rpID) {
+    public RingPlacementPriceDTO checkRPExist(String rName, String material, String color) {
 
-        String sql = " select rpID, rName, material, color, rpPrice from RingPlacementPrice where rpID = ?";
+        String sql = " select rpID, rName, material, color, rpPrice from RingPlacementPrice"
+                + " where rName like ? and material = ? and color = ? ";
 
         try {
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, rpID);
+            ps.setString(1, rName);
+            ps.setString(2, material);
+            ps.setString(3, color);
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
