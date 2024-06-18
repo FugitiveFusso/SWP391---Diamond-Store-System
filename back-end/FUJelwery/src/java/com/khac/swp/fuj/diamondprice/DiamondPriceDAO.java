@@ -14,9 +14,9 @@ public class DiamondPriceDAO {
         List<DiamondPriceDTO> list = new ArrayList<DiamondPriceDTO>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = " select dpID, diamondSize, caratWeight, color, clarity, cut, price from DiamondPrice ";
+            String sql = " select dpID, diamondSize, caratWeight, color, clarity, cut, price from DiamondPrice where isDeleted = 'active' ";
             if (keyword != null && !keyword.isEmpty()) {
-                sql += " where diamondSize like ? or caratWeight like ? or color like ? or clarity like ? or price like ? ";
+                sql += " and ( diamondSize like ? or caratWeight like ? or color like ? or clarity like ? or price like ?) ";
             }
 
             if (sortCol != null && !sortCol.isEmpty()) {
@@ -104,20 +104,19 @@ public class DiamondPriceDAO {
     }
 
     public Integer insert(DiamondPriceDTO dp) {
-        String sql = "INSERT INTO [DiamondPrice] (dpID, diamondSize, caratWeight, color, clarity, cut, price) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO [DiamondPrice] (diamondSize, caratWeight, color, clarity, cut, price, isDeleted) "
+                + "VALUES (?, ?, ?, ?, ?, ?, 'active')";
         try {
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
 
-            ps.setInt(1, dp.getId());
-            ps.setDouble(2, dp.getSize());
-            ps.setDouble(3, dp.getCaratWeight());
-            ps.setString(4, dp.getColor());
-            ps.setString(5, dp.getClarity());
-            ps.setString(6, dp.getCut());
-            ps.setInt(7, dp.getPrice());
+            ps.setDouble(1, dp.getSize());
+            ps.setDouble(2, dp.getCaratWeight());
+            ps.setString(3, dp.getColor());
+            ps.setString(4, dp.getClarity());
+            ps.setString(5, dp.getCut());
+            ps.setInt(6, dp.getPrice());
 
             ps.executeUpdate();
             conn.close();
@@ -153,7 +152,7 @@ public class DiamondPriceDAO {
     }
 
     public boolean delete(int id) {
-        String sql = "DELETE [DiamondPrice] WHERE dpID = ? ";
+        String sql = "UPDATE [DiamondPrice] SET isDeleted = 'delete' WHERE dpID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -172,15 +171,20 @@ public class DiamondPriceDAO {
         return false;
     }
 
-    public DiamondPriceDTO checkDPExist(int dpID) {
+    public DiamondPriceDTO checkDPExist(double size, double weight, String color, String clarity, String cut) {
 
-        String sql = "select dpID, diamondSize, caratWeight, color, clarity, cut, price from DiamondPrice where dpID = ?";
+        String sql = "select dpID, diamondSize, caratWeight, color, clarity, cut, price from DiamondPrice where diamondSize = ? "
+                + " and caratWeight = ? and clarity = ? and color = ? and cut = ? ";
 
         try {
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, dpID);
+            ps.setDouble(1, size);
+            ps.setDouble(2, weight);
+            ps.setString(3, clarity);
+            ps.setString(4, color);
+            ps.setString(5, cut);
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {

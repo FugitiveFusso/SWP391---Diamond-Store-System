@@ -62,7 +62,7 @@
                             <a href="DiamondController" class="sub-item">Diamond List</a>
                             <a href="RingController" class="sub-item">Ring List</a>
                             <a href="CollectionController" class="sub-item">Collection List</a>
-                            
+
                         </div>
                     </a>
                 </div>
@@ -85,7 +85,7 @@
                 </div>
 
                 <div class="item"><a href="CategoryController"><i class="fas fa-layer-group"></i>View Category</a></div>
-                
+
                 <div class="item"><a href="salesstaffaccount.jsp"><i class="fas fa-user"></i>Account</a></div>
                 <div class="item"><a href="saleslogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
 
@@ -109,12 +109,9 @@
 
         <div class="container content">
             <form action="./DiamondPriceController" method="POST" onsubmit="return validateForm()" onsubmit="return validateInput()">
+                <input type="number" name="id" value="${requestScope.dp.id}" hidden="" class="form-control">                           
                 <div class="row content-info">
                     <div class="col-md-6 content-left">
-                        <div class="info-input">                          
-                            <h2>Diamond Price ID</h2>
-                            <input type="number" name="id" value="${requestScope.dp.id}" min="1" required="Please enter" class="form-control">                           
-                        </div> 
                         <div class="info-input">                                                      
                             <h2>Carat Weight</h2>
                             <select name="caratWeight" required class="form-control">
@@ -203,7 +200,7 @@
 
     </div>
 
-    
+
     <script src="js/pagination.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
                                                     integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
     crossorigin="anonymous"></script>
