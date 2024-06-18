@@ -79,6 +79,7 @@
         <% }%>
         <div class="menu">
             <ul class="navbar">
+                
                 <li class="navbar__link">
                     <a href="#">Jewelry</a>
                     <div class="sub-menu-1">
