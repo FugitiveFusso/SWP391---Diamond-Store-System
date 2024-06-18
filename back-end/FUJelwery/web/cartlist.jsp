@@ -127,12 +127,6 @@
                         <input type="submit" value="Purchase">
                     </form>
 
-                    <!--Still have error with search-->
-                    <form action="OrderController" method="POST">
-                        <input name="action" value="searchCoupon" type="hidden">
-                        <input name="coupon" type="text" value="<%=request.getParameter("coupon") != null ? request.getParameter("coupon") : ""%>">
-                        <input type="submit" value="Search for coupon">
-                    </form>
                     <form action="OrderController" method="POST">
                         <input name="action" value="applyVoucher" type="hidden">
                         <input name="coupon" type="text" placeholder="Enter coupon code">
