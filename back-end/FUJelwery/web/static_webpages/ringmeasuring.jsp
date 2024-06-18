@@ -62,14 +62,14 @@
             <div class="header-top">
                 <div class="top-info-left">
                     <ul>
-                        <li>FPT University, District 9, Ho Chi Minh City</li>                        
+                        <li>"Timeless elegance and craftsmanship</li>
+                        <li>at FUJ Jewelry Online Shop."</li>                         
                     </ul>
                 </div>
                 <a href="./../user_homepage.jsp"><img src="../images/Screenshot (656).png"></a>
                 <div class="top-info-right">
                     <ul>
-                        <li>Email: fuj.khac.diamondshopsystem@gmail.com</li>
-                        <li>Phone: (+ 84) 898876512</li>
+                        <li>FUJ Jewelry Online Shop</li>
                     </ul>
                 </div>
             </div>
