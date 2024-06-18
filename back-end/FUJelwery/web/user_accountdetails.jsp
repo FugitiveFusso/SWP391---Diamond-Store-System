@@ -10,10 +10,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>User Account</title>
-        <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="css/user_accountdetails.css">
         <link rel="stylesheet" href="css/navbaruser.css">
-
     </head>
     <body>
 
@@ -66,11 +65,13 @@
                             <p>${sessionScope.usersession.email}</p>
                         </div>
 
-                        <ul class="nav nav-pills nav-stacked">
-                            <li><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
-                            <li><a href="#"> <i class="fa fa-calendar"></i> Recent Activity</a></li>
-                            <li><a href="#"> <i class="fa fa-edit"></i> Edit profile</a></li>
-                        </ul>
+                        <div class="nav-stacks">
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
+                                <li><a href="#"> <i class="fa fa-calendar"></i> Recent Activity</a></li>
+                                <li><a href="#"> <i class="fa fa-edit"></i> Edit profile</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <div class="profile-info col-md-9">
@@ -124,7 +125,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div>
+                        <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="panel">
@@ -241,8 +242,5 @@
         </div>
 
 
-        <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-        <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     </body>
 </html>
