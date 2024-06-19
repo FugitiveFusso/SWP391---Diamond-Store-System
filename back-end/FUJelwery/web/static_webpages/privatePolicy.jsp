@@ -57,7 +57,7 @@
                         <a href="#" class="line">Account</a>
                         <div class="sub-menu-1">
                             <ul>
-                                <li><a href='userlogin?action=logout'>Logout</a></li>          
+                                <li><a href='../userlogin?action=logout'>Logout</a></li>          
                             </ul>
                         </div>
                     </li>

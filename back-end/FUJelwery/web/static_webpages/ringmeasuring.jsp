@@ -5,7 +5,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Diamond Color</title>
+        <title>Ring Measuring Instruction</title>
         <link rel="stylesheet" href="../css/ringmeasuring.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -102,7 +102,7 @@
                         <a href="#" class="line">Account</a>
                         <div class="sub-menu-1">
                             <ul>
-                                <li><a href='userlogin?action=logout'>Logout</a></li>          
+                                <li><a href='../userlogin?action=logout'>Logout</a></li>          
                             </ul>
                         </div>
                     </li>
