@@ -145,14 +145,6 @@ public class RingController extends HttpServlet {
                 rd.forward(request, response);
 
             } else if (action.equals("insert")) {//insert
-
-                Connection conn = DBUtils.getConnection();
-                Integer ringid = null;
-                try {
-                    ringid = Integer.parseInt(request.getParameter("id"));
-                } catch (NumberFormatException ex) {
-                    log("Parameter id has wrong format.");
-                }
                 Integer rpID = null;
                 try {
                     rpID = Integer.parseInt(request.getParameter("rpID"));
@@ -187,7 +179,7 @@ public class RingController extends HttpServlet {
                 }
 
                 RingDAO dao = new RingDAO();
-                RingDTO ring = dao.checkRingExistbyID(ringid);
+                RingDTO ring = dao.checkRingExistbyName(ringName);
                 if (ring == null) {
                     ring = dao.checkRingExistbyRpID(rpID);
                     if (ring != null) {
@@ -198,7 +190,6 @@ public class RingController extends HttpServlet {
                                 ring = dao.checkRingExistbyCategoryID(categoryID);
                                 if (ring != null) {
                                     ring = new RingDTO();
-                                    ring.setRingID(ringid);
                                     ring.setRpID(rpID);
                                     ring.setRingName(ringName);
                                     ring.setRingImage(ringImage);
@@ -236,7 +227,7 @@ public class RingController extends HttpServlet {
                     }
 
                 } else {
-                    request.setAttribute("error", "Your Ring is not inserted by wrong ID");
+                    request.setAttribute("error", "Your Ring is not inserted by duplicate name");
                     RequestDispatcher rd = request.getRequestDispatcher("ringedit.jsp");
                     rd.forward(request, response);
                 }

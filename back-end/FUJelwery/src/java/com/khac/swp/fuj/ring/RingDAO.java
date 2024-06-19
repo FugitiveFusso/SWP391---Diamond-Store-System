@@ -23,9 +23,9 @@ public class RingDAO {
         try {
             Connection con = DBUtils.getConnection();
             String sql = "SELECT r.ringID, r.rpID, r.ringName, r.ringImage, r.diamondID, r.price AS [ringPrice], ((r.price + rp.rpPrice + dp.price)*1.02) AS [totalPrice], r.collectionID, r.categoryID, rp.rName, rp.material, rp.color AS [ringColor], rp.rpPrice, d.diamondName, d.diamondImage, d.origin, d.certificateID, dp.diamondSize, dp.caratWeight, dp.color AS [diamondColor], dp.clarity, dp.cut, dp.price AS [diamondShapePrice]"
-                    + " FROM [Ring] r LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID ";
+                    + " FROM [Ring] r LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID where r.isDeleted = 'active' ";
             if (keyword != null && !keyword.isEmpty()) {
-                sql += " WHERE ringName like ? ";
+                sql += " and ringName like ? ";
             }
 
             if (sortCol != null && !sortCol.isEmpty()) {
@@ -186,20 +186,19 @@ public class RingDAO {
     }
 
     public Integer insert(RingDTO ring) {
-        String sql = "INSERT INTO [Ring] (ringID, rpID, ringName, ringImage, diamondID, price, collectionID, categoryID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO [Ring] (rpID, ringName, ringImage, diamondID, price, collectionID, categoryID, isDeleted) VALUES (?, ?, ?, ?, ?, ?, ?, 'active' )";
         try {
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
 
-            ps.setInt(1, ring.getRingID());
-            ps.setInt(2, ring.getRpID());
-            ps.setString(3, ring.getRingName());
-            ps.setString(4, ring.getRingImage());
-            ps.setInt(5, ring.getDiamondID());
-            ps.setInt(6, ring.getPrice());
-            ps.setInt(7, ring.getCollectionID());
-            ps.setInt(8, ring.getCategoryID());
+            ps.setInt(1, ring.getRpID());
+            ps.setString(2, ring.getRingName());
+            ps.setString(3, ring.getRingImage());
+            ps.setInt(4, ring.getDiamondID());
+            ps.setInt(5, ring.getPrice());
+            ps.setInt(6, ring.getCollectionID());
+            ps.setInt(7, ring.getCategoryID());
 
             ps.executeUpdate();
             conn.close();
@@ -237,7 +236,7 @@ public class RingDAO {
     }
 
     public boolean delete(int id) {
-        String sql = "DELETE [Ring] WHERE ringID = ? ";
+        String sql = "UPDATE [Ring] SET isDeleted = 'delete' WHERE ringID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -256,22 +255,22 @@ public class RingDAO {
         return false;
     }
 
-    public RingDTO checkRingExistbyID(int ringID) {
+    public RingDTO checkRingExistbyName(String ringName) {
 
         String sql = "SELECT r.ringID, r.rpID, r.ringName, r.ringImage, r.diamondID, r.price AS [ringPrice], r.price + rp.rpPrice + dp.price AS [totalPrice], r.collectionID, r.categoryID, rp.rName, rp.material, rp.color AS [ringColor], rp.rpPrice, d.diamondName, d.diamondImage, d.origin, d.certificateID, dp.diamondSize, dp.caratWeight, dp.color AS [diamondColor], dp.clarity, dp.cut, dp.price AS [diamondShapePrice] "
-                + " FROM [Ring] r LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID WHERE r.ringID = ? ";
+                + " FROM [Ring] r LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID WHERE r.ringName = ? and r.isDeleted = 'active' ";
 
         try {
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, ringID);
+            ps.setString(1, ringName);
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
 
                 int ID = rs.getInt("ringID");
-                String ringName = rs.getString("ringName");
+                String ringName1 = rs.getString("ringName");
                 int rpID = rs.getInt("rpID");
                 String ringImage = rs.getString("ringImage");
                 int diamondID = rs.getInt("diamondID");
@@ -300,7 +299,7 @@ public class RingDAO {
                 RingDTO ring = new RingDTO();
                 ring.setRingID(ID);
                 ring.setRpID(rpID);
-                ring.setRingName(ringName);
+                ring.setRingName(ringName1);
                 ring.setRingImage(ringImage);
                 ring.setDiamondID(diamondID);
                 ring.setPrice(price);
@@ -334,7 +333,7 @@ public class RingDAO {
 
     public RingDTO checkRingExistbyRpID(int ringPID) {
 
-        String sql = "SELECT rp.rpID from [RingPlacementPrice] rp WHERE rp.rpID = ? ";
+        String sql = "SELECT rp.rpID from [RingPlacementPrice] rp WHERE rp.rpID = ?  and isDeleted = 'active' ";
 
         try {
 
@@ -362,7 +361,7 @@ public class RingDAO {
 
     public RingDTO checkRingExistbyDiamondID(int diamondID) {
 
-        String sql = "select diamondID from Diamond WHERE diamondID = ? ";
+        String sql = "select diamondID from Diamond WHERE diamondID = ? and isDeleted = 'active' ";
 
         try {
 
@@ -390,7 +389,7 @@ public class RingDAO {
 
     public RingDTO checkRingExistbyCategoryID(int categoryID) {
 
-        String sql = "select categoryID from Category WHERE categoryID = ? ";
+        String sql = "select categoryID from Category WHERE categoryID = ? and isDeleted = 'active' ";
 
         try {
 
@@ -418,7 +417,7 @@ public class RingDAO {
 
     public RingDTO checkRingExistbyCollectionID(int collectionID) {
 
-        String sql = "select collectionID from Collection where collectionID = ? ";
+        String sql = "select collectionID from Collection where collectionID = ? and isDeleted = 'active' ";
 
         try {
 
@@ -449,7 +448,7 @@ public class RingDAO {
         try {
             Connection con = DBUtils.getConnection();
             String sql = "SELECT r.ringID, r.rpID, r.ringName, r.ringImage, r.diamondID, r.price AS [ringPrice], ((r.price + rp.rpPrice + dp.price)*1.02) AS [totalPrice], r.collectionID, r.categoryID, rp.rName, rp.material, rp.color AS [ringColor], rp.rpPrice, d.diamondName, d.diamondImage, d.origin, d.certificateID, dp.diamondSize, dp.caratWeight, dp.color AS [diamondColor], dp.clarity, dp.cut, dp.price AS [diamondShapePrice]"
-                    + " FROM [Ring] r LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID where r.collectionID = ?";
+                    + " FROM [Ring] r LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID where r.collectionID = ? and r.isDeleted = 'active' ";
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -531,7 +530,7 @@ public class RingDAO {
         try {
             Connection con = DBUtils.getConnection();
             String sql = "SELECT r.ringID, r.rpID, r.ringName, r.ringImage, r.diamondID, r.price AS [ringPrice], ((r.price + rp.rpPrice + dp.price)*1.02) AS [totalPrice], r.collectionID, r.categoryID, rp.rName, rp.material, rp.color AS [ringColor], rp.rpPrice, d.diamondName, d.diamondImage, d.origin, d.certificateID, dp.diamondSize, dp.caratWeight, dp.color AS [diamondColor], dp.clarity, dp.cut, dp.price AS [diamondShapePrice]"
-                    + " FROM [Ring] r LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID where r.categoryID = ?";
+                    + " FROM [Ring] r LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID where r.categoryID = ? and r.isDeleted = 'active' ";
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);

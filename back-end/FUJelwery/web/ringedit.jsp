@@ -123,7 +123,7 @@
                             <a href="DiamondController" class="sub-item">Diamond List</a>
                             <a href="RingController" class="sub-item">Ring List</a>
                             <a href="CollectionController" class="sub-item">Collection List</a>
-                            
+
                         </div>
                     </a>
                 </div>
@@ -146,7 +146,7 @@
                 </div>
 
                 <div class="item"><a href="CategoryController"><i class="fas fa-layer-group"></i>View Category</a></div>
-                
+
                 <div class="item"><a href="salesstaffaccount.jsp"><i class="fas fa-user"></i>Account</a></div>
                 <div class="item"><a href="saleslogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
 
@@ -170,12 +170,9 @@
 
         <div class="container content">
             <form action="./RingController" method="POST" onsubmit="return validateForm()" onsubmit="return validateInput()">
+                <input type="number" name="id" value="${requestScope.ring.ringID}" hidden="" class="form-control">                           
                 <div class="row content-info">
                     <div class="col-md-6 content-left">
-                        <div class="info-input">                          
-                            <h2>Ring ID</h2>
-                            <input type="number" name="id" value="${requestScope.ring.ringID}" min="1" required="Please enter" class="form-control">                           
-                        </div> 
                         <div class="info-input">                                                      
                             <h2>Ring Image</h2>
                             <input name="ringImage" value="${requestScope.ring.ringImage}" required="Please enter" class="form-control">
@@ -203,11 +200,12 @@
                             <input type="number" name="price" value="${requestScope.ring.price}" required min="1000000" max="1000000000" class="form-control">                           
                             <span id="priceNotification" class="notification"></span>
                         </div>
-                        <div class="info-input">                          
-                            <h2>Category ID</h2>
-                            <input name="categoryID" type="number" value="${requestScope.ring.categoryID}" required="Please enter" min="1" class="form-control">                           
-                        </div>
 
+
+                    </div>
+                    <div class="col-md-12">                          
+                        <h2>Category ID</h2>
+                        <input name="categoryID" type="number" value="${requestScope.ring.categoryID}" required="Please enter" min="1" class="form-control">                           
                     </div>
                 </div>
                 <div class="row justify-content-center">
