@@ -69,7 +69,7 @@
                 <a href="./../user_homepage.jsp"><img src="../images/Screenshot (656).png"></a>
                 <div class="top-info-right">
                     <ul>
-                        <li>FUJ Jewelry Online Shop</li>
+                        <li>FUJ Jewelry Shop - (+ 84) 898876512</li>
                     </ul>
                 </div>
             </div>
@@ -77,7 +77,7 @@
             <div class="header-bottom">
                 <ul class="navbar">
                     <li class="navbar-link">
-                        <a href="#">Jewelry</a>
+                        <a href="#" class="line">Jewelry</a>
                         <div class="sub-menu-1">
                             <ul>
                                 <li><a href='../ProductController'>Ring</a></li>
@@ -85,9 +85,9 @@
                             </ul>
                         </div>   
                     </li>
-                    <li class="navbar-link"><a href='../UserVoucherController'>Voucher</a></li>
+                    <li class="navbar-link"><a href='../UserVoucherController' class="line">Voucher</a></li>
                     <li class="navbar-link">
-                        <a href="certificate_edu.jsp">Education</a>
+                        <a href="certificate_edu.jsp" class="line">Education</a>
                         <div class="sub-menu-1">
                             <ul>
                                 <li><a href='../UserPostController'>Blog</a></li>
@@ -96,10 +96,10 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="navbar-link"><a href="../user_aboutus.jsp">About Us</a></li>
-                    <li class="navbar-link"><a href="#">Order</a></li>
+                    <li class="navbar-link"><a href="../user_aboutus.jsp" class="line">About Us</a></li>
+                    <li class="navbar-link"><a href="#" class="line">Order</a></li>
                     <li class="navbar-link">
-                        <a href="#">Account</a>
+                        <a href="#" class="line">Account</a>
                         <div class="sub-menu-1">
                             <ul>
                                 <li><a href='userlogin?action=logout'>Logout</a></li>          

@@ -8,46 +8,62 @@
         <title>Privacy Policy</title>
         <link rel="stylesheet" href="../css/privatePolicy.css">
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="../css/navbaruser.css">
+        <link rel="stylesheet" href="../css/navigation_bar.css">
 
     </head>
 
     <body>
-        <div class="menu">
-            <ul class="navbar">
-                <li class="navbar__link">
-                    <a href="#">Jewelry</a>
-                    <div class="sub-menu-1">
-                        <ul>
-                            <li><a href='../ProductController'>Ring</a></li>
-                            <li><a href='../UserCollectionController'>Collection</a></li>
-                        </ul>
-                    </div>                  
-                </li>
-                <li class="navbar__link"><a href='../UserVoucherController'>Voucher</a></li>
-                <li class="navbar__link">
-                    <a href="certificate_edu.jsp">Education</a>
-                    <div class="sub-menu-1">
-                        <ul>
-                            <li><a href='../UserPostController'>Blog</a></li>
-                            <li><a href='ringmeasuring.jsp'>Ring Measuring Guide</a></li>          
-                            <li><a href='faqs.jsp'>Frequently Asking Questions</a></li>
-                        </ul>
-                    </div>
-                </li>
+        <div class="header">
+            <div class="header-top">
+                <div class="top-info-left">
+                    <ul>
+                        <li>"Timeless elegance and craftsmanship</li>
+                        <li>at FUJ Jewelry Online Shop."</li>                         
+                    </ul>
+                </div>
                 <a href="./../user_homepage.jsp"><img src="../images/Screenshot (656).png"></a>
-                <li class="navbar__link"><a href="../user_aboutus.jsp">About Us</a></li>
-                <li class="navbar__link"><a href="#">Order</a></li>
-                <li class="navbar__link">
-                    <a href="#">Account</a>
-                    <div class="sub-menu-1">
-                        <ul>
-                            <li><a href='userlogin?action=logout'>Logout</a></li>          
-                        </ul>
-                    </div>
-                </li>
+                <div class="top-info-right">
+                    <ul>
+                        <li>FUJ Jewelry Shop - (+ 84) 898876512</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="header-bottom">
+                <ul class="navbar">
+                    <li class="navbar-link">
+                        <a href="#" class="line">Jewelry</a>
+                        <div class="sub-menu-1">
+                            <ul>
+                                <li><a href='../ProductController'>Ring</a></li>
+                                <li><a href='../UserCollectionController'>Collection</a></li>
+                            </ul>
+                        </div>   
+                    </li>
+                    <li class="navbar-link"><a href='../UserVoucherController' class="line">Voucher</a></li>
+                    <li class="navbar-link">
+                        <a href="certificate_edu.jsp" class="line">Education</a>
+                        <div class="sub-menu-1">
+                            <ul>
+                                <li><a href='../UserPostController'>Blog</a></li>
+                                <li><a href='ringmeasuring.jsp'>Ring Measuring Guide</a></li>          
+                                <li><a href='faqs.jsp'>Frequently Asking Questions</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="navbar-link"><a href="../user_aboutus.jsp" class="line">About Us</a></li>
+                    <li class="navbar-link"><a href="#" class="line">Order</a></li>
+                    <li class="navbar-link">
+                        <a href="#" class="line">Account</a>
+                        <div class="sub-menu-1">
+                            <ul>
+                                <li><a href='userlogin?action=logout'>Logout</a></li>          
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
 
-            </ul>
+            </div>
         </div>   
 
         <div class="main">
@@ -68,7 +84,7 @@
                     </p>
                 </div>
 
-                <div>
+                <div class="one">
                     <div class="title">
                         <h3>
                             1. PURPOSE OF USE OF CUSTOMER PERSONAL INFORMATION:
