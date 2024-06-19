@@ -65,8 +65,8 @@
                 return true;
             }
         </script>
-         <!--<%@ include file="/salesmenu.jsp" %>-->
-        
+        <!--<%@ include file="/salesmenu.jsp" %>-->
+
         <div class="menu-btn">
             <div class="btn-cover">
                 <i class="fas fa-bars"></i>
@@ -89,7 +89,7 @@
                             <a href="DiamondController" class="sub-item">Diamond List</a>
                             <a href="RingController" class="sub-item">Ring List</a>
                             <a href="CollectionController" class="sub-item">Collection List</a>
-                            
+
                         </div>
                     </a>
                 </div>
@@ -112,7 +112,7 @@
                 </div>
 
                 <div class="item"><a href="CategoryController"><i class="fas fa-layer-group"></i>View Category</a></div>
-                
+
                 <div class="item"><a href="salesstaffaccount.jsp"><i class="fas fa-user"></i>Account</a></div>
                 <div class="item"><a href="saleslogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
 
@@ -136,12 +136,9 @@
 
         <div class="container content">
             <form action="./DiamondController" method="POST" onsubmit="return validateForm()" onsubmit="return validateInput()">
+                <input type="number" name="id" value="${requestScope.diamond.diamondID}" hidden="" class="form-control">                           
                 <div class="row content-info">
                     <div class="col-md-6 content-left">
-                        <div class="info-input">                          
-                            <h2>Diamond ID</h2>
-                            <input type="number" name="id" value="${requestScope.diamond.diamondID}" min="1" required="Please enter" class="form-control">                           
-                        </div> 
                         <div class="info-input">                                                      
                             <h2>Diamond Image</h2>
                             <input name="diamondImage" value="${requestScope.diamond.diamondImage}" required="Please enter" class="form-control">
@@ -156,47 +153,48 @@
                             <h2>Diamond Name</h2>
                             <input name="diamondName" value="${requestScope.diamond.diamondName}" required="Please enter" class="form-control">                           
                         </div>
-                        <div class="info-input">                          
-                            <h2>Diamond Origin</h2>
-                            <select name="origin" required class="form-control">
-                                <option value="">Please select an origin</option>
-                                <option value="South Africa" ${requestScope.diamond.origin == 'South Africa' ? 'selected' : ''}>South Africa</option>
-                                <option value="Botswana" ${requestScope.diamond.origin == 'Botswana' ? 'selected' : ''}>Botswana</option>
-                                <option value="Russia" ${requestScope.diamond.origin == 'Russia' ? 'selected' : ''}>Russia</option>
-                                <option value="Canada" ${requestScope.diamond.origin == 'Canada' ? 'selected' : ''}>Canada</option>
-                                <option value="Australia" ${requestScope.diamond.origin == 'Australia' ? 'selected' : ''}>Australia</option>
-                                <option value="Namibia" ${requestScope.diamond.origin == 'Namibia' ? 'selected' : ''}>Namibia</option>
-                                <option value="Angola" ${requestScope.diamond.origin == 'Angola' ? 'selected' : ''}>Angola</option>
-                                <option value="Democratic Republic of the Congo" ${requestScope.diamond.origin == 'Democratic Republic of the Congo' ? 'selected' : ''}>Democratic Republic of the Congo</option>
-                                <option value="Sierra Leone" ${requestScope.diamond.origin == 'Sierra Leone' ? 'selected' : ''}>Sierra Leone</option>
-                                <option value="Lesotho" ${requestScope.diamond.origin == 'Lesotho' ? 'selected' : ''}>Lesotho</option>
-                                <option value="Zimbabwe" ${requestScope.diamond.origin == 'Zimbabwe' ? 'selected' : ''}>Zimbabwe</option>
-                                <option value="Tanzania" ${requestScope.diamond.origin == 'Tanzania' ? 'selected' : ''}>Tanzania</option>
-                                <option value="Brazil" ${requestScope.diamond.origin == 'Brazil' ? 'selected' : ''}>Brazil</option>
-                                <option value="India" ${requestScope.diamond.origin == 'India' ? 'selected' : ''}>India</option>
-                                <option value="Central African Republic" ${requestScope.diamond.origin == 'Central African Republic' ? 'selected' : ''}>Central African Republic</option>
-                                <option value="Guinea" ${requestScope.diamond.origin == 'Guinea' ? 'selected' : ''}>Guinea</option>
-                                <option value="Ghana" ${requestScope.diamond.origin == 'Ghana' ? 'selected' : ''}>Ghana</option>
-                                <option value="Liberia" ${requestScope.diamond.origin == 'Liberia' ? 'selected' : ''}>Liberia</option>
-                                <option value="Ivory Coast" ${requestScope.diamond.origin == 'Ivory Coast' ? 'selected' : ''}>Ivory Coast</option>
-                                <option value="Guyana" ${requestScope.diamond.origin == 'Guyana' ? 'selected' : ''}>Guyana</option>
-                                <option value="Venezuela" ${requestScope.diamond.origin == 'Venezuela' ? 'selected' : ''}>Venezuela</option>
-                                <option value="Indonesia" ${requestScope.diamond.origin == 'Indonesia' ? 'selected' : ''}>Indonesia</option>
-                                <option value="Cameroon" ${requestScope.diamond.origin == 'Cameroon' ? 'selected' : ''}>Cameroon</option>
-                                <option value="Gabon" ${requestScope.diamond.origin == 'Gabon' ? 'selected' : ''}>Gabon</option>
-                                <option value="Republic of the Congo" ${requestScope.diamond.origin == 'Republic of the Congo (Congo-Brazzaville)' ? 'selected' : ''}>Republic of the Congo</option>
-                                <option value="Swaziland" ${requestScope.diamond.origin == 'Swaziland (Eswatini)' ? 'selected' : ''}>Swaziland</option>
-                                <option value="Mali" ${requestScope.diamond.origin == 'Mali' ? 'selected' : ''}>Mali</option>
-                                <option value="Mozambique" ${requestScope.diamond.origin == 'Mozambique' ? 'selected' : ''}>Mozambique</option>
-                                <option value="Suriname" ${requestScope.diamond.origin == 'Suriname' ? 'selected' : ''}>Suriname</option>
-                                <option value="United States" ${requestScope.diamond.origin == 'United States' ? 'selected' : ''}>United States</option>
-                            </select>                           
-                        </div>
+
                         <div class="info-input">                          
                             <h2>Certificate ID</h2>
                             <input name="certificateID" type="number" value="${requestScope.diamond.certificateID}" required="Please enter" min="1" class="form-control">                           
                         </div>
 
+                    </div>
+                    <div class="col-md-12">                          
+                        <h2>Diamond Origin</h2>
+                        <select name="origin" required class="form-control">
+                            <option value="">Please select an origin</option>
+                            <option value="South Africa" ${requestScope.diamond.origin == 'South Africa' ? 'selected' : ''}>South Africa</option>
+                            <option value="Botswana" ${requestScope.diamond.origin == 'Botswana' ? 'selected' : ''}>Botswana</option>
+                            <option value="Russia" ${requestScope.diamond.origin == 'Russia' ? 'selected' : ''}>Russia</option>
+                            <option value="Canada" ${requestScope.diamond.origin == 'Canada' ? 'selected' : ''}>Canada</option>
+                            <option value="Australia" ${requestScope.diamond.origin == 'Australia' ? 'selected' : ''}>Australia</option>
+                            <option value="Namibia" ${requestScope.diamond.origin == 'Namibia' ? 'selected' : ''}>Namibia</option>
+                            <option value="Angola" ${requestScope.diamond.origin == 'Angola' ? 'selected' : ''}>Angola</option>
+                            <option value="Democratic Republic of the Congo" ${requestScope.diamond.origin == 'Democratic Republic of the Congo' ? 'selected' : ''}>Democratic Republic of the Congo</option>
+                            <option value="Sierra Leone" ${requestScope.diamond.origin == 'Sierra Leone' ? 'selected' : ''}>Sierra Leone</option>
+                            <option value="Lesotho" ${requestScope.diamond.origin == 'Lesotho' ? 'selected' : ''}>Lesotho</option>
+                            <option value="Zimbabwe" ${requestScope.diamond.origin == 'Zimbabwe' ? 'selected' : ''}>Zimbabwe</option>
+                            <option value="Tanzania" ${requestScope.diamond.origin == 'Tanzania' ? 'selected' : ''}>Tanzania</option>
+                            <option value="Brazil" ${requestScope.diamond.origin == 'Brazil' ? 'selected' : ''}>Brazil</option>
+                            <option value="India" ${requestScope.diamond.origin == 'India' ? 'selected' : ''}>India</option>
+                            <option value="Central African Republic" ${requestScope.diamond.origin == 'Central African Republic' ? 'selected' : ''}>Central African Republic</option>
+                            <option value="Guinea" ${requestScope.diamond.origin == 'Guinea' ? 'selected' : ''}>Guinea</option>
+                            <option value="Ghana" ${requestScope.diamond.origin == 'Ghana' ? 'selected' : ''}>Ghana</option>
+                            <option value="Liberia" ${requestScope.diamond.origin == 'Liberia' ? 'selected' : ''}>Liberia</option>
+                            <option value="Ivory Coast" ${requestScope.diamond.origin == 'Ivory Coast' ? 'selected' : ''}>Ivory Coast</option>
+                            <option value="Guyana" ${requestScope.diamond.origin == 'Guyana' ? 'selected' : ''}>Guyana</option>
+                            <option value="Venezuela" ${requestScope.diamond.origin == 'Venezuela' ? 'selected' : ''}>Venezuela</option>
+                            <option value="Indonesia" ${requestScope.diamond.origin == 'Indonesia' ? 'selected' : ''}>Indonesia</option>
+                            <option value="Cameroon" ${requestScope.diamond.origin == 'Cameroon' ? 'selected' : ''}>Cameroon</option>
+                            <option value="Gabon" ${requestScope.diamond.origin == 'Gabon' ? 'selected' : ''}>Gabon</option>
+                            <option value="Republic of the Congo" ${requestScope.diamond.origin == 'Republic of the Congo (Congo-Brazzaville)' ? 'selected' : ''}>Republic of the Congo</option>
+                            <option value="Swaziland" ${requestScope.diamond.origin == 'Swaziland (Eswatini)' ? 'selected' : ''}>Swaziland</option>
+                            <option value="Mali" ${requestScope.diamond.origin == 'Mali' ? 'selected' : ''}>Mali</option>
+                            <option value="Mozambique" ${requestScope.diamond.origin == 'Mozambique' ? 'selected' : ''}>Mozambique</option>
+                            <option value="Suriname" ${requestScope.diamond.origin == 'Suriname' ? 'selected' : ''}>Suriname</option>
+                            <option value="United States" ${requestScope.diamond.origin == 'United States' ? 'selected' : ''}>United States</option>
+                        </select>                           
                     </div>
                 </div>
                 <div class="row justify-content-center">
