@@ -23,7 +23,7 @@ body{
 
 h1 {
   font-family: Inter, 'sans-serif';
-  color: #151542;
+  color: #000000;
   font-size: 40px;
 }
 
@@ -54,14 +54,6 @@ h1 {
   margin-bottom: 10px;
   font-family: Inter;
   font-size: 16px;
-}
-
-.info-list li{
-  list-style-type: disc;
-  font-family: 'Times New Roman', Times, serif !important;
-  color: #151542;
-  margin-left: 20px;
-  margin-bottom: 10px;
 }
 
 .color-image img{
@@ -108,13 +100,16 @@ h3 {
 
 .content p {
   margin-left: 15px;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
 }
 
 .content-title {
   font-family: Inter;
-  color: #151542;
+  color: #000000;
   font-size: 20px;
-  font-weight: bold;
+  font-weight: 800;
   margin: 40px auto;
 }
 

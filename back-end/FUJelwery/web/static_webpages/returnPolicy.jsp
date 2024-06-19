@@ -124,7 +124,7 @@
                 <div class="three">
                     <div class="cautious">
                         <h3>
-                            Caution
+                            Caution:
                         </h3>
                     </div>                               
                     <ul class="b">
@@ -139,7 +139,7 @@
 
                 <div class="info">                     
                     <p class="text">
-                        Customer service staff: (+84) 898876512 - (+84) 085 xxx xxxx
+                        Customer service staff: (+84) 898876512 - (+84) 859849026
                     <p class="text">
                         Address: FPT University, District 9, Ho Chi Minh City
                     </p>           

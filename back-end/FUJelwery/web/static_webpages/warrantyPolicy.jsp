@@ -142,7 +142,7 @@
 
                 <div class="dial-info">
                     <p class="text">
-                        Customer service staff: (+84) 898876512 - (+84) 085 xxx xxxx
+                        Customer service staff: (+84) 898876512 - (+84) 859849026
                     <p class="text">
                         Address: FPT University, District 9, Ho Chi Minh City
                     </p>

@@ -83,7 +83,7 @@
 
             <div class="content">
                 <div class="faqs">
-                    <img src="../images/Q&A.png" alt="">
+                    <img src="../images/FAQ.jpg" alt="">
                 </div>
 
                 <div class="title">

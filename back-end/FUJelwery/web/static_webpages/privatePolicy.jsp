@@ -69,14 +69,14 @@
         <div class="main">
             <div class="content">
                 <div class="title-image">
-                    <img src="../images/chinh-sach-bao-mat.png">
+                    <img src="../images/Privacy-Policy-Dark-400x267.jpg">
                 </div>
 
                 <div class="return-policy">
                     PRIVACY POLICY
                 </div>
                 <div class="return-policy-intro">
-                    <p style="font-family: 'Inter', sans-serif; font-weight: 500;">
+                    <p style="font-family: 'Inter', sans-serif; font-weight: 400;">
                         Thank you for visiting the website operated by FUJ. Protecting customer information is always a top
                         issue for FUJ. Therefore, we respect and commit to keeping private information confidential and only
                         collect necessary information related to purchase transactions. To ensure the security of customer
@@ -171,7 +171,7 @@
 
                 <div class="info">
                     <p class="text">
-                        Customer service staff: (+84) 898876512 - (+84) 085 xxx xxxx
+                        Customer service staff: (+84) 898876512 - (+84) 859849026
                     <p class="text">
                         Address: FPT University, District 9, Ho Chi Minh City
                     </p>

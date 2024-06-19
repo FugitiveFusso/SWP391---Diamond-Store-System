@@ -16,7 +16,7 @@ body{
   }
   
   .title-image img{
-    width: 500px;
+    width: 400px;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -48,13 +48,13 @@ body{
   .content .title h3{
     font-family: 'Inter', sans-serif;
     font-weight: 800;
-    font-size: 20px;
+    font-size: 18px;
     color: #000000;
   }
   
   .content .text{
     font-family: 'Inter', sans-serif;
-    font-weight: 500;
+    font-weight: 400;
     font-size: 18px;
     color: #000000;
   }
@@ -83,7 +83,7 @@ body{
   .one ul li{
     padding: 11px 0;
     font-family: 'Inter', sans-serif;
-    font-weight: 500;
+    font-weight: 400;
     font-size: 18px;
     color: #000000;
   }
@@ -134,7 +134,7 @@ body{
   
   .customer-service-title{
     font-family: 'Inter', sans-serif;
-    font-weight: 700;
+    font-weight: 800;
     font-size: 20px;
     color: white;
   }

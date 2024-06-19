@@ -21,43 +21,7 @@
     </head>
 
     <body>
-        <!--        <div class="menu">
-                    <ul class="navbar">
-                        <li class="navbar__link">
-                            <a href="#">Jewelry</a>
-                            <div class="sub-menu-1">
-                                <ul>
-                                    <li><a href='../ProductController'>Ring</a></li>
-                                    <li><a href='../UserCollectionController'>Collection</a></li>
-                                </ul>
-                            </div>                  
-                        </li>
-                        <li class="navbar__link"><a href='../UserVoucherController'>Voucher</a></li>
-                        <li class="navbar__link">
-                            <a href="certificate_edu.jsp">Education</a>
-                            <div class="sub-menu-1">
-                                <ul>
-                                    <li><a href='../UserPostController'>Blog</a></li>
-                                    <li><a href='ringmeasuring.jsp'>Ring Measuring Guide</a></li>          
-                                    <li><a href='faqs.jsp'>Frequently Asking Questions</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <a href="./../user_homepage.jsp"><img src="../images/Screenshot (656).png"></a>
-                        <li class="navbar__link"><a href="../user_aboutus.jsp">About Us</a></li>
-                        <li class="navbar__link"><a href="#">Order</a></li>
-                        <li class="navbar__link">
-                            <a href="#">Account</a>
-                            <div class="sub-menu-1">
-                                <ul>
-                                    <li><a href='userlogin?action=logout'>Logout</a></li>          
-                                </ul>
-                            </div>
-                        </li>
         
-                    </ul>
-                </div>  -->
-
         <div class="header">
             <div class="header-top">
                 <div class="top-info-left">
@@ -206,7 +170,7 @@
                         metal weight, which may cause an increase or decrease in the price.</p>
 
                     <div class="content-title">HAVE A QUESTION?</div>
-                    <p>Contact us by phone at (+ 84) 898876512 or email at CuongNPSE183844@fpt.edu.vn </p>
+                    <p>Contact us by phone at <strong>(+ 84) 898876512</strong> or email at <strong>fuj.khac.diamondshopsystem@gmail.com</strong> </p>
                     <p>In addition, Live Chat is available during most business hours. </p>
 
                 </div>
