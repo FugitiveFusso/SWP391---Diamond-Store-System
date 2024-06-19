@@ -219,7 +219,7 @@ public class DiamondDAO {
 
     public DiamondDTO checkDiamondExistByDiamondCertificate(int cID) {
 
-        String sql = " select certificateID from Certificate where isDeleted = 'active' AND certificateID = ? ";
+        String sql = " SELECT c.certificateID FROM Certificate c LEFT JOIN Diamond d ON c.certificateID = d.certificateID AND d.isDeleted = 'active' WHERE c.isDeleted = 'active' AND c.certificateID = ? AND d.certificateID IS NULL ";
         try {
 
             Connection conn = DBUtils.getConnection();
