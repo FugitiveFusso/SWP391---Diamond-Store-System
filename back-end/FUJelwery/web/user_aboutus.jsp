@@ -11,7 +11,6 @@
 
     </head>
     <body>
-
         <div class="header">
             <div class="header-top">
                 <div class="top-info-left">
@@ -20,7 +19,7 @@
                         <li>at FUJ Jewelry Online Shop."</li>                         
                     </ul>
                 </div>
-                <a href="user_homepage.jsp"><img src="images/Screenshot (656).png"></a>
+                <a href="./user_homepage.jsp"><img src="./images/Screenshot (656).png"></a>
                 <div class="top-info-right">
                     <ul>
                         <li>FUJ Jewelry Shop - (+ 84) 898876512</li>
@@ -36,27 +35,28 @@
                             <ul>
                                 <li><a href='./ProductController'>Ring</a></li>
                                 <li><a href='./UserCollectionController'>Collection</a></li>
+                                <li><a href='./UserDiamondPriceController'>Diamond Price</a></li>
                             </ul>
                         </div>   
                     </li>
                     <li class="navbar-link"><a href='./UserVoucherController' class="line">Voucher</a></li>
                     <li class="navbar-link">
-                        <a href="certificate_edu.jsp" class="line">Education</a>
+                        <a href="./static_webpages/certificate_edu.jsp" class="line">Education</a>
                         <div class="sub-menu-1">
                             <ul>
                                 <li><a href='./UserPostController'>Blog</a></li>
-                                <li><a href='ringmeasuring.jsp'>Ring Measuring Guide</a></li>          
-                                <li><a href='faqs.jsp'>Frequently Asking Questions</a></li>
+                                <li><a href='./static_webpages/ringmeasuring.jsp'>Ring Measuring Guide</a></li>          
+                                <li><a href='./static_webpages/faqs.jsp'>Frequently Asking Questions</a></li>
                             </ul>
                         </div>
                     </li>
-                    <li class="navbar-link"><a href="user_aboutus.jsp" class="line">About Us</a></li>
+                    <li class="navbar-link"><a href="./user_aboutus.jsp" class="line">About Us</a></li>
                     <li class="navbar-link"><a href="#" class="line">Order</a></li>
                     <li class="navbar-link">
                         <a href="#" class="line">Account</a>
                         <div class="sub-menu-1">
                             <ul>
-                                <li><a href='userlogin?action=logout'>Logout</a></li>          
+                                <li><a href='./userlogin?action=logout'>Logout</a></li> 
                             </ul>
                         </div>
                     </li>
@@ -64,7 +64,6 @@
 
             </div>
         </div>
-
         <div class="main"> 
             <div class="content">
                 <div class="about-us-title">

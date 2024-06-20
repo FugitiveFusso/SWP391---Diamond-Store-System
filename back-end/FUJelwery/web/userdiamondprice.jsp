@@ -12,8 +12,62 @@
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <script src="js/pagination.js"></script>
         <link rel="stylesheet" href="css/pagination.css">
+        <link rel="stylesheet" href="./css/navigation_bar.css">
     </head>
     <body>
+        <div class="header">
+            <div class="header-top">
+                <div class="top-info-left">
+                    <ul>
+                        <li>"Timeless elegance and craftsmanship</li>
+                        <li>at FUJ Jewelry Online Shop."</li>                         
+                    </ul>
+                </div>
+                <a href="./user_homepage.jsp"><img src="./images/Screenshot (656).png"></a>
+                <div class="top-info-right">
+                    <ul>
+                        <li>FUJ Jewelry Shop - (+ 84) 898876512</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="header-bottom">
+                <ul class="navbar">
+                    <li class="navbar-link">
+                        <a href="#" class="line">Jewelry</a>
+                        <div class="sub-menu-1">
+                            <ul>
+                                <li><a href='./ProductController'>Ring</a></li>
+                                <li><a href='./UserCollectionController'>Collection</a></li>
+                                <li><a href='./UserDiamondPriceController'>Diamond Price</a></li>
+                            </ul>
+                        </div>   
+                    </li>
+                    <li class="navbar-link"><a href='./UserVoucherController' class="line">Voucher</a></li>
+                    <li class="navbar-link">
+                        <a href="./static_webpages/certificate_edu.jsp" class="line">Education</a>
+                        <div class="sub-menu-1">
+                            <ul>
+                                <li><a href='./UserPostController'>Blog</a></li>
+                                <li><a href='./static_webpages/ringmeasuring.jsp'>Ring Measuring Guide</a></li>          
+                                <li><a href='./static_webpages/faqs.jsp'>Frequently Asking Questions</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="navbar-link"><a href="./user_aboutus.jsp" class="line">About Us</a></li>
+                    <li class="navbar-link"><a href="#" class="line">Order</a></li>
+                    <li class="navbar-link">
+                        <a href="#" class="line">Account</a>
+                        <div class="sub-menu-1">
+                            <ul>
+                                <li><a href='./userlogin?action=logout'>Logout</a></li> 
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
         <div class="list-container">
             <div class="smaller-container">
 

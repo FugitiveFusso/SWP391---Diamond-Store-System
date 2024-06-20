@@ -46,6 +46,7 @@
                             <ul>
                                 <li><a href='../ProductController'>Ring</a></li>
                                 <li><a href='../UserCollectionController'>Collection</a></li>
+                                <li><a href='../UserDiamondPriceController'>Diamond Price</a></li>
                             </ul>
                         </div>   
                     </li>
@@ -66,15 +67,14 @@
                         <a href="#" class="line">Account</a>
                         <div class="sub-menu-1">
                             <ul>
-                                <li><a href='../userlogin?action=logout'>Logout</a></li>          
+                                <li><a href='../userlogin?action=logout'>Logout</a></li> 
                             </ul>
                         </div>
                     </li>
                 </ul>
 
             </div>
-        </div> 
-
+        </div>
 
         <div class="container">
             <div class="side_nav">

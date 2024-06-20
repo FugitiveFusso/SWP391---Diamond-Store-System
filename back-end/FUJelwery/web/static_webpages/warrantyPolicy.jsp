@@ -42,6 +42,7 @@
                             <ul>
                                 <li><a href='../ProductController'>Ring</a></li>
                                 <li><a href='../UserCollectionController'>Collection</a></li>
+                                <li><a href='../UserDiamondPriceController'>Diamond Price</a></li>
                             </ul>
                         </div>   
                     </li>
