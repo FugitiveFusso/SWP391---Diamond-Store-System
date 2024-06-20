@@ -105,20 +105,6 @@
     width: auto;
 }
 
-.list1{
-    display: flex;
-    width: auto;
-    height: auto;
-    justify-content: space-around;
-    align-items: center;
-    background-color: #fff;
-    border-radius: 40px;
-    margin-top: 20px;
-    padding: 15px 20px;
-
-
-}
-
 .list-intro-right .styled-button{
     align-items: center;   
     background: none;
@@ -224,47 +210,6 @@
     box-sizing: border-box;   
 }
 
-.list-intro-left .left-icon{
-    width: 80px;
-    height: 80px;
-    margin-left: 50px;
-    background: #d9d9d9;
-    border-radius: 40px;
-}
-
-.list-intro-left .left-icon-fa{
-    width: 80px;
-    height: 80px;
-    margin-left: 50px;
-    background: #d9d9d9;
-    border-radius: 40px;
-}
-
-.left-icon .bx{
-    font-size: 60px;
-    margin-left: 10px;
-    margin-top: 10px;
-}
-
-.left-icon .fa-regular{
-    font-size: 55px;
-    margin-left: 12px;
-    margin-top: 12px;
-}
-
-.left-icon .fa-solid{
-    font-size: 55px;
-    margin-left: 12px;
-    margin-top: 12px;
-    align-items: center;
-}
-
-.left-icon-fa i{
-    font-size: 55px;
-    margin-left: 15px;
-    margin-top: 12px;
-}
-
 .list-title{
     display: flex;
     justify-content: center;
@@ -305,34 +250,34 @@ table{
     justify-content: center;
     overflow: hidden;
     border-radius: 20px;
-    border: 1px solid black;
 }
 
 table, tr{
     border-collapse: collapse;
-    border: 1px solid #b6b6b6;
-    text-align: center;   
+    border: 1px solid #d0d0d0;
+    text-align: center;  
+    font-family: "Inter", sans-serif;
 
 }
 tr,td,th{
     padding: 20px 10px;
-    background: #f1f1f1;   
+    background: #f9f9f9;   
 }
 
 th{
-    background-color: #d9d9d9;    
-
+    background-color: #f1f1f1;    
 }
 
 th a{
     color: #000000;
     text-decoration: none;
+    font-family: "Inter", sans-serif;
 }
 
 td a{
     color: #000000;
     text-decoration: none;
-
+    font-family: "Inter", sans-serif;
 }
 
 tr td img{
@@ -387,4 +332,68 @@ tr td img{
     color: #fff;
     border: none;
     border-radius: 10px;
+}
+
+.footer {
+    background-color: black;
+    color: #fefefe;
+    position: relative;
+    width: 100%;
+    bottom: 0;
+}
+
+.info{
+    padding-left: 100px;
+}
+
+info-img{
+    margin-left: 60px;
+}
+
+.info img{
+    width: 80px;
+    height: 80px;
+}
+
+.info-text p{
+    color: white;
+    font-size: 16px;
+    font-family: 'Raleway', sans-serif; 
+}
+
+.footer-content{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 30px 0;
+}
+
+.customer-service{   
+    padding-top: 30px;
+    padding-left: 400px;
+}
+
+.customer-service-title{
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: white;
+}
+
+.footer .footer-content a {
+    text-decoration: none;
+    color: #fefefe;
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;  
+}
+
+.policy{
+    padding-top: 30px;
+    padding-right: 100px;
+}
+
+.policy-title{
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: white;
 }

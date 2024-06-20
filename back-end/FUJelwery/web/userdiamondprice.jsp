@@ -85,7 +85,7 @@
                     </div>                   
                 </div>
                 <div class="bannerImage">
-                    <img src="images/Blue_Nile_Studio.webp" id="diamondHero" style="width: 432px; height: 432px">
+                    <img src="images/Men's_Wedding_Bands.jpeg" id="diamondHero" style="width: 432px; height: 432px">
                 </div>
             </div>
         </div>
@@ -108,22 +108,6 @@
 
 
                 <div class="list">  
-                    <div class="list1">
-                        <div class="list-intro-left">
-                            <div class="left-icon">
-                                <i class='bx bx-diamond'></i>
-                            </div>
-                            <div class="left-info">
-                                <div class="list-title">Diamond Price List</div>
-                                <div class="">List of Diamond Price</div>
-                            </div>
-                        </div>
-                    </div>
-                    <form action='' method=GET id="searchbox">
-                        <input name=keyword type=text class="search-input" value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
-                        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
-                    </form>
-
                     <table id="pagination">
                         <thead>
                             <tr>
@@ -164,6 +148,57 @@
                 </div>
             </div>
         </div>  
+
+        <div class="footer">
+            <div class="footer-content">
+                <div class="info">
+                    <div class="info-img">
+                        <img src="images/Screenshot (659).png" />
+                    </div>
+
+                    <div class="info-text">
+                        <p>
+                            Address: FPT University, District 9, HCMC
+                        </p>
+                        <p>
+                            Email: CuongNPSE183844@fpt.edu.vn
+                        </p>
+                        <p>
+                            Phone: (+ 84) 898876512
+                        </p>
+                        <p>
+                            © Copyright 2024
+                        </p>
+                    </div>
+                </div>
+
+                <div class="customer-service">
+                    <div class="customer-service-title">
+                        Customer service
+                    </div>
+
+                    <div class="customer-service-text">
+                        <p><a href="static_webpages/ringmeasuring.jsp">Instructions for measuring rings</a></p>
+                        <p><a href="static_webpages/consulation.jsp">Product consultation by month of birth</a></p>
+                        <p><a href="static_webpages/faqs.jsp">Frequently asked questions</a></p>
+                    </div>
+                </div>
+
+                <div class="policy">
+                    <div class="policy-title">
+                        Policy
+                    </div>
+
+                    <div class="policy-text">
+                        <p><a href="static_webpages/warrantyPolicy.jsp">Warranty Policy</a></p>
+                        <p><a href="static_webpages/deliveryPolicy.jsp">Delivery Policy</a></p>
+                        <p><a href="static_webpages/returnPolicy.jsp">Return Policy</a></p>
+                        <p><a href="static_webpages/privatePolicy.jsp">Privacy policy</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <script src="js/pagination.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
                 integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
