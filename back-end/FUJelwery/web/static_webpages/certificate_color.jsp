@@ -44,12 +44,13 @@
                         <div class="sub-menu-1">
                             <ul>
                                 <li><a href='../ProductController'>Ring</a></li>
-                                <li><a href='../UserCollectionController'>Collection</a></li>
-                                <li><a href='../UserDiamondPriceController'>Diamond Price</a></li>
+                                <li><a href='../UserCollectionController'>Collection</a></li>                                
                             </ul>
                         </div>   
                     </li>
+                    <li class="navbar-link"><a href='../UserDiamondPriceController' class="line">Diamond Price</a></li>
                     <li class="navbar-link"><a href='../UserVoucherController' class="line">Voucher</a></li>
+                    <li class="navbar-link"><a href="#" class="line">Order</a></li>
                     <li class="navbar-link">
                         <a href="certificate_edu.jsp" class="line">Education</a>
                         <div class="sub-menu-1">
@@ -60,8 +61,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="navbar-link"><a href="../user_aboutus.jsp" class="line">About Us</a></li>
-                    <li class="navbar-link"><a href="#" class="line">Order</a></li>
+                    <li class="navbar-link"><a href="../user_aboutus.jsp" class="line">About Us</a></li>                    
                     <li class="navbar-link">
                         <a href="#" class="line">Account</a>
                         <div class="sub-menu-1">
