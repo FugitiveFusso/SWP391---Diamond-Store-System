@@ -1,8 +1,3 @@
-<%-- 
-    Document   : user_accountdetails
-    Created on : Jun 12, 2024, 11:45:05 PM
-    Author     : Le Anh Khoa
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,45 +8,64 @@
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="css/user_accountdetails.css">
         <link rel="stylesheet" href="css/navbaruser.css">
+        <link rel="stylesheet" href="css/navigation_bar.css">
+
     </head>
     <body>
 
-        <div class="menu">
-            <ul class="navbar">
-                <li class="navbar__link">
-                    <a href="#">Jewelry</a>
-                    <div class="sub-menu-1">
-                        <ul>
-                            <li><a href='./ProductController'>Ring</a></li>
-                            <li><a href='./UserCollectionController'>Collection</a></li>
-                        </ul>
-                    </div>                  
-                </li>
-                <li class="navbar__link"><a href='./UserVoucherController'>Voucher</a></li>
-                <li class="navbar__link">
-                    <a href="static_webpages/certificate_edu.jsp">Education</a>
-                    <div class="sub-menu-1">
-                        <ul>
-                            <li><a href='UserPostController'>Blog</a></li>
-                            <li><a href='static_webpages/ringmeasuring.jsp'>Ring Measuring Guide</a></li>          
-                            <li><a href='static_webpages/faqs.jsp'>Frequently Asking Questions</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <a href="user_homepage.jsp"><img src="images/Screenshot (656).png"></a>
-                <li class="navbar__link"><a href="user_aboutus.jsp">About Us</a></li>
-                <li class="navbar__link"><a href="#">Order</a></li>
-                <li class="navbar__link">
-                    <a href="user_accountdetails.jsp">Account</a>
-                    <div class="sub-menu-1">
-                        <ul>
-                            <li><a href='userlogin?action=logout'>Logout</a></li>          
-                        </ul>
-                    </div>
-                </li>
+        <div class="header">
+            <div class="header-top">
+                <div class="top-info-left">
+                    <ul>
+                        <li>"Timeless elegance and craftsmanship</li>
+                        <li>at FUJ Jewelry Online Shop."</li>                         
+                    </ul>
+                </div>
+                <a href="./user_homepage.jsp"><img src="./images/Screenshot (656).png"></a>
+                <div class="top-info-right">
+                    <ul>
+                        <li>FUJ Jewelry Shop - (+ 84) 898876512</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="header-bottom">
+                <ul class="navbar">
+                    <li class="navbar-link">
+                        <a href="#" class="line">Jewelry</a>
+                        <div class="sub-menu-1">
+                            <ul>
+                                <li><a href='./ProductController'>Ring</a></li>
+                                <li><a href='./UserCollectionController'>Collection</a></li>
+                                <li><a href='./UserDiamondPriceController'>Diamond Price</a></li>
+                            </ul>
+                        </div>   
+                    </li>
+                    <li class="navbar-link"><a href='./UserVoucherController' class="line">Voucher</a></li>
+                    <li class="navbar-link">
+                        <a href="./static_webpages/certificate_edu.jsp" class="line">Education</a>
+                        <div class="sub-menu-1">
+                            <ul>
+                                <li><a href='./UserPostController'>Blog</a></li>
+                                <li><a href='./static_webpages/ringmeasuring.jsp'>Ring Measuring Guide</a></li>          
+                                <li><a href='./static_webpages/faqs.jsp'>Frequently Asking Questions</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="navbar-link"><a href="./user_aboutus.jsp" class="line">About Us</a></li>
+                    <li class="navbar-link"><a href="#" class="line">Order</a></li>
+                    <li class="navbar-link">
+                        <a href="#" class="line">Account</a>
+                        <div class="sub-menu-1">
+                            <ul>
+                                <li><a href='./userlogin?action=logout'>Logout</a></li> 
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
 
-            </ul>
-        </div> 
+            </div>
+        </div>
 
         <div class="container bootstrap snippets bootdey">
             <div class="row">
