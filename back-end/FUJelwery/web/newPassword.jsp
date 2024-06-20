@@ -34,7 +34,7 @@
                         <!-- Main Heading -->
                         <div class="row justify-content-center align-items-center pt-3">
                             <h1>
-                                <strong>Reset Password</strong>
+                                <strong style="color: #fff">Reset Password</strong>
                             </h1>
                         </div>
                         <div class="pt-3 pb-3">

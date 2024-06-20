@@ -27,7 +27,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4 col-md-offset-4">
-                    <div class="panel panel-default">
+                    <div class="wrapper">
                         <div class="panel-body">
                             <div class="text-center">
                                 <h3>
@@ -46,13 +46,18 @@
                                     <form id="register-form" action="ValidateOtp" role="form" autocomplete="off"
                                           class="form" method="post">
 
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><i
-                                                        class="glyphicon glyphicon-envelope color-blue"></i></span> <input
-                                                    id="opt" name="otp" placeholder="Enter OTP"
-                                                    class="form-control" type="text" required="required">
-                                            </div>
+                                        <!--                                        <div class="form-group">
+                                                                                    <div class="input-group">
+                                                                                        <span class="input-group-addon"><i
+                                                                                                class="glyphicon glyphicon-envelope color-blue"></i></span> 
+                                                                                        <input id="opt" name="otp" placeholder="Enter OTP"
+                                                                                               class="form-control" type="text" required="required">
+                                                                                    </div>
+                                                                                </div>-->
+                                        <div class="input-box ">
+                                            <input type="text" name="email" id="email-for-pass" required="">
+                                            <span class="placeholder">Enter OTP</span>
+                                            <i class='bx bxs-user'></i>
                                         </div>
                                         <div class="form-group">
                                             <input name="recover-submit"
