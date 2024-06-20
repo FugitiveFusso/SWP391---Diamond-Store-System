@@ -164,7 +164,7 @@ public class OrderDAO {
 
         String sql = " select o.orderID, u.userID, u.userName, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, o.ringSize, ((r.price + rp.rpPrice + dp.price)*1.02) AS [totalPrice], o.status, o.delivered ";
         sql += " from [Order] o left join [User] u ON o.userID = u.userID left join [Ring] r ON r.ringID = o.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID  left join [Voucher] v ON o.voucherID = v.voucherID";
-        sql += " WHERE o.orderID = ? AND o.status = 'pending' ";
+        sql += " WHERE o.orderID = ? AND o.status = 'pending' r.isDeleted = 'active'";
 
         try {
 
@@ -302,7 +302,7 @@ public class OrderDAO {
     }
 
     public int searchVoucherID(String code) {
-        String sql = "SELECT voucherID FROM [Voucher] WHERE coupon = ?";
+        String sql = "SELECT voucherID FROM [Voucher] WHERE coupon = ? AND isDeleted = 'active'";
         int voucherID = 0;
         try {
 
