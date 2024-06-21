@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.khac.swp.fuj.controller;
 
 import com.khac.swp.fuj.users.UserDAO;
@@ -12,40 +17,57 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "DeliveryStaffLoginController", urlPatterns = {"/deliverystafflogin"})
-public class DeliveryStaffLoginController extends HttpServlet {
+/**
+ *
+ * @author Dell
+ */
+@WebServlet(name = "Delivery_Customer_Controller", urlPatterns = {"/Delivery_Customer_Controller"})
+public class Delivery_Customer_Controller extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
             String action = request.getParameter("action");
-            String username = request.getParameter("user");
-            String password = request.getParameter("password");
-            if (action == null || action.equals("login")) {
-                UserDAO dao = new UserDAO();
-                UserDTO user = dao.login(username, password, "Delivery Staff");
-
-                if (user != null) {
-                    HttpSession session = request.getSession(true);
-                    session.setAttribute("deliverystaffsession", user);
-                    response.sendRedirect("./DeliveryStaffOrderController");
-                } else {
-                    request.setAttribute("error", "Your username or password is incorrect! Please try again");
-                    RequestDispatcher rd = request.getRequestDispatcher("deliverystafflogin.jsp");
-                    rd.forward(request, response);
-                }
-            } else if (action != null && action.equals("logout")) {
-                HttpSession session = request.getSession(false);
-                if (session != null) {
-                    session.invalidate();
-                }
-                request.setAttribute("error", "Logout successfully");
-                RequestDispatcher rd = request.getRequestDispatcher("deliverystafflogin.jsp");
-                rd.forward(request, response);
+            String keyword = request.getParameter("keyword");
+            if (keyword == null) {
+                keyword = "";
             }
+            String sortCol = request.getParameter("colSort");
 
+            UserDAO userDAO = new UserDAO();
+            HttpSession session = request.getSession(false);
+            if (session == null || session.getAttribute("deliverystaffsession") == null) {
+                response.sendRedirect("deliverystafflogin.jsp");
+                return;
+            } else if (action.equals("details")) {//details
+
+                Integer id = null;
+                try {
+                    id = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+
+                UserDTO customer = null;
+                if (id != null) {
+                    customer = userDAO.load(id, "Customer");
+                }
+
+                request.setAttribute("customer", customer);//object
+                RequestDispatcher rd = request.getRequestDispatcher("deliverystaff_customerdetails.jsp");
+                rd.forward(request, response);
+
+            }
         }
     }
 

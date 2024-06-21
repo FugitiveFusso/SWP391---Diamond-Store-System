@@ -30,7 +30,7 @@ public class SalesStaffLoginController extends HttpServlet {
                 if (user != null) {
                     HttpSession session = request.getSession(true);
                     session.setAttribute("salessession", user);
-                    response.sendRedirect("./VoucherController");
+                    response.sendRedirect("./SalesStaffOrderController");
                 } else {
                     request.setAttribute("error", "Your username or password is incorrect! Please try again");
                     RequestDispatcher rd = request.getRequestDispatcher("saleslogin.jsp");

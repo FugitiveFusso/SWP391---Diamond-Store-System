@@ -13,6 +13,7 @@ public class OrderDTO {
     private int orderID;
     private int userID;
     private String userName;
+    private String address;
     private String orderDate;
     private int ringID;
     private String ringName;
@@ -35,6 +36,9 @@ public class OrderDTO {
     public void setOrderID(int orderID) {
         this.orderID = orderID;
     }
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
 
     public int getUserID() {
         return userID;
@@ -47,11 +51,15 @@ public class OrderDTO {
     public void setUserName(String userName) {
         this.userName = userName;
     }
-
-    public void setUserID(int userID) {
-        this.userID = userID;
+    
+    public String getAddress() {
+        return address;
     }
 
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    
     public String getOrderDate() {
         return orderDate;
     }
