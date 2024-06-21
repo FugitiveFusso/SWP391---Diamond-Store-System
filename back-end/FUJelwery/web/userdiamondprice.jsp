@@ -99,18 +99,25 @@
                     such as rings, necklaces, or earrings, stay informed with our latest 
                     price updates. Refer to the current price quotes below to make an informed 
                     decision on your investment.</p>
-                <p>{Unit of Currency: VNĐ}</p> 
+                <p>{Unit of Currency: VND}</p> 
             </div>
         </div>
 
+
+
         <div class="list-container">
             <div class="smaller-container">
-                <div class="list">  
-                    <table>
+                <div class="list">
+                    <div class="introContainer" style="">
+                        <div class="introContent1">
+                            <h1>0.36 Carat Diamond</h1>                               
+                        </div>
+                    </div>
+                    <table class="diamond-table">
                         <thead>
                             <tr>
-                                <th><a href=?colSort=diamondSize>Diamond Size</a></th>
                                 <th><a href=?colSort=caratWeight>Carat Weight</a></th>
+                                <th><a href=?colSort=diamondSize>Diamond Size</a></th>                               
                                 <th><a href=?colSort=color>Color</a></th>
                                 <th><a href=?colSort=clarity>Clarity</a></th>
                                 <th>Cut</th>
@@ -125,8 +132,8 @@
                                     pageContext.setAttribute("dp", dp);
                             %>
                             <tr>
-                                <td>${dp.size}</td>    
                                 <td>${dp.caratWeight}</td>  
+                                <td>${dp.size}</td>                                   
                                 <td>${dp.color}</td>  
                                 <td>${dp.clarity}</td>  
                                 <td>${dp.cut}</td>  
@@ -144,27 +151,31 @@
         <div class="list-container">
             <div class="smaller-container">
                 <div class="list">  
-                    <table>
+                    <div class="introContainer" style="">
+                        <div class="introContent1">
+                            <h1>0.7 Carat Diamond</h1>                               
+                        </div>
+                    </div>
+                    <table class="diamond-table">
                         <thead>
                             <tr>
-                                <th><a href=?colSort=diamondSize>Diamond Size</a></th>
-                                <th><a href=?colSort=caratWeight>Carat Weight</a></th>
-                                <th><a href=?colSort=color>Color</a></th>
-                                <th><a href=?colSort=clarity>Clarity</a></th>
+                                <th><a href="?colSort=caratWeight">Carat Weight</a></th>
+                                <th><a href="?colSort=diamondSize">Diamond Size</a></th>                                
+                                <th><a href="?colSort=color">Color</a></th>
+                                <th><a href="?colSort=clarity">Clarity</a></th>
                                 <th>Cut</th>
-                                <th><a href=?colSort=price>Price</a></th>
+                                <th><a href="?colSort=price">Price</a></th>
                             </tr>
                         </thead>
                         <tbody>
-
                             <%
                                 List<DiamondPriceDTO> list1 = (List<DiamondPriceDTO>) request.getAttribute("dplist1");
                                 for (DiamondPriceDTO dp : list1) {
                                     pageContext.setAttribute("dp", dp);
                             %>
                             <tr>
-                                <td>${dp.size}</td>    
                                 <td>${dp.caratWeight}</td>  
+                                <td>${dp.size}</td>                                   
                                 <td>${dp.color}</td>  
                                 <td>${dp.clarity}</td>  
                                 <td>${dp.cut}</td>  
@@ -173,12 +184,41 @@
                             <%
                                 }
                             %>    
-
-
+                        </tbody>
                     </table>
+                    <p>Note: The diamond price chart may fluctuate over time. 
+                        For the most accurate diamond price quote, 
+                        please contact FUJ Jewelry directly.</p>
                 </div>
             </div>
-        </div>  
+        </div> 
+
+        <div class="outtro">
+            <div class="outtro-info">
+                <p>Loose diamonds or natural diamonds with international 
+                    inspection certificates today range in price from 5 
+                    million to hundreds of millions , with particularly 
+                    large diamonds costing up to billions of copper. 
+                    According to market research experts, prices depend 
+                    primarily on the 4C standards (cut, color, clarity, 
+                    and carat weight), as well as other factors such as 
+                    symmetry, fluorescence, cleanliness, and certification.</p>
+                <br>
+                <p>At FUJ Jewelry, every diamond undergoes rigorous selection 
+                    and thorough inspection, from the smallest diamond slabs to the 
+                    largest gems. All diamonds come with GIA or other certification 
+                    documents verifying their origin before being displayed in the store.</p>
+                <div>
+                    <img src="./images/ATTIC_GIA_Report.webp">
+                </div>
+                <p>When customers visit our showroom, our product consultants 
+                    provide detailed and competitive pricing for natural diamonds. 
+                    If you wish to order custom designs, we can create products 
+                    tailored to your specifications as quickly as possible. Please 
+                    contact FUJ Jewelry via our hotline at (+ 84) 898876512 to 
+                    receive free advice from our team of experts.</p>
+            </div>
+        </div>                
 
         <div class="footer">
             <div class="footer-content">

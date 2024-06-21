@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Gantari:ital,wght@0,100..900;1,100..900&family=Syne:wght@400..800&display=swap');
 
+body{
+    overflow-x: hidden;
+}
+
 .bannerContainer .bannerContent{
     align-items: center;
     display: flex;
@@ -77,13 +81,19 @@
     justify-content: center;
     align-items: center;
     margin: 0 auto;
-    padding: 20px; /* Optional padding for spacing */
     text-align: center; /* Center text within the container */
 }
 
 .introContent {
     max-width: 800px; /* Adjust as needed for your layout */
-    margin: 0 20px; /* Margin on the left and right */
+    margin: 50px 20px 0 20px; /* Margin on the left and right */
+
+}
+
+.introContent1 {
+    max-width: 800px; /* Adjust as needed for your layout */
+    margin: 0 20px 0 20px; /* Margin on the left and right */
+    font-family: "Inter", sans-serif;
 }
 
 .introContent h1, .introContent h2, .introContent p {
@@ -96,6 +106,17 @@
     line-height: 1.6; /* Improve readability */
 }
 
+.list-intro {
+    text-align: center;
+}
+
+.list-intro h2, .list-intro p {
+    margin: 0 auto;
+    display: inline-block;
+    color: #151542;
+    font-family: "Inter", sans-serif;
+}
+
 .list-container{
     margin: 10px 50px;
 }
@@ -105,92 +126,6 @@
     width: auto;
 }
 
-.list-intro-right .styled-button{
-    align-items: center;   
-    background: none;
-    color: #8f8f8f;
-    border: 2px solid #8f8f8f;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s, transform 0.3s;
-    font-size: 16px;
-    font-weight: 600;
-    width: 250px;
-    height: 50px;
-    margin-right: 80px;
-}
-
-.list-intro-right .styled-button1{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: none;
-    color: #8f8f8f;
-    border: 2px solid #8f8f8f;
-    padding: 15px 60px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s, transform 0.3s;
-    font-size: 16px;
-    font-weight: 600;
-    margin-left: 680px;
-    margin-top: 25px;
-}
-
-.list-intro-right .styled-button2{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: none;
-    color: #8f8f8f;
-    border: 2px solid #8f8f8f;
-    padding: 15px 60px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s, transform 0.3s;
-    font-size: 16px;
-    font-weight: 600;
-    margin-left: 565px;
-    margin-top: 25px;
-}
-
-.list-intro-right .styled-button3{
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    background: none;
-    color: #8f8f8f;
-    border: 2px solid #8f8f8f;
-    padding: 15px 60px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s, transform 0.3s;
-    font-size: 16px;
-    font-weight: 600;
-    /*    margin-left: 530px;
-        margin-top: 25px;*/
-}
-
-.styled-button:hover {
-    background-color: #8f8f8f;
-    color: #fff;
-}
-
-.styled-button1:hover {
-    background-color: #8f8f8f;
-    color: #fff;
-}
-
-.styled-button2:hover {
-    background-color: #8f8f8f;
-    color: #fff;
-}
-
-.styled-button3:hover {
-    background-color: #8f8f8f;
-    color: #fff;
-}
-
 .list{
     width: auto;
     height: auto;
@@ -198,6 +133,12 @@
     border-radius: 40px;
     margin-top: 20px;
     padding: 15px 20px;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+}
+
+.list p{
+    font-size: 13px;
 }
 
 .list1 .list-intro-left{
@@ -244,44 +185,63 @@ body{
     margin: 0;
 }
 
-table{
-    margin: 10px auto;
-    width: 100%;
+table {
+    margin: 5px auto;
+    width: 90%;
     justify-content: center;
     overflow: hidden;
-    border-radius: 20px;
+    border-radius: 15px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
-table, tr{
+table, tr {
     border-collapse: collapse;
     border: 1px solid #d0d0d0;
-    text-align: center;  
+    text-align: center;
     font-family: "Inter", sans-serif;
-
-}
-tr,td,th{
-    padding: 20px 10px;
-    background: #f9f9f9;   
+    font-size: 14px; /* Adjusted font size */
 }
 
-th{
-    background-color: #f1f1f1;    
+tr, td, th {
+    padding: 10px 5px; /* Adjusted padding */
+    background: #f9f9f9;
 }
 
-th a{
+tr:hover {
+    background-color: #e0e0e0;
+}
+
+th {
+    background-color: #f1f1f1;
+    cursor: pointer;
+    font-size: 14px; /* Adjusted font size */
+}
+
+th a {
     color: #000000;
     text-decoration: none;
     font-family: "Inter", sans-serif;
+    font-size: 14px; /* Adjusted font size */
 }
 
-td a{
+td a {
     color: #000000;
     text-decoration: none;
     font-family: "Inter", sans-serif;
+    font-size: 14px; /* Adjusted font size */
 }
 
-tr td img{
-    border-radius: 20px;
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr td img {
+    border-radius: 15px;
+}
+
+.diamond-table td:last-child {
+    font-weight: bold;
+    color: #151542;
 }
 
 #searchbox {
@@ -332,6 +292,31 @@ tr td img{
     color: #fff;
     border: none;
     border-radius: 10px;
+}
+
+.outtro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.outtro-info {
+    text-align: center;
+    font-family: "Inter", sans-serif;
+}
+
+.outtro-info p {
+    margin: 10px 0;
+    line-height: 1.6;
+}
+
+.outtro-info img {
+    max-width: 100%;
+    height: auto;
+    margin: 20px 0;
 }
 
 .footer {
