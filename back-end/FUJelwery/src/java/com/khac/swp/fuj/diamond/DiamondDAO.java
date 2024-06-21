@@ -17,7 +17,7 @@ public class DiamondDAO {
         List<DiamondDTO> list = new ArrayList<DiamondDTO>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = "SELECT d.diamondID, d.diamondName, d.diamondImage, d.origin, d.dpID, d.certificateID, dp.diamondSize, dp.caratWeight, dp.color, dp.clarity, dp.cut, dp.price FROM Diamond d LEFT JOIN DiamondPrice dp ON d.dpID = dp.dpID where d.isDeleted = 'active' ";
+            String sql = "SELECT d.diamondID, d.diamondName, d.diamondImage, d.origin, d.dpID, d.certificateID, dp.diamondSize, dp.caratWeight, dp.color, dp.clarity, dp.cut, FORMAT(dp.price, 'N0') AS price FROM Diamond d LEFT JOIN DiamondPrice dp ON d.dpID = dp.dpID where d.isDeleted = 'active' ";
             if (keyword != null && !keyword.isEmpty()) {
                 sql += " and ( d.diamondName like ? or dp.diamondSize like ? or dp.caratWeight like ? or dp.color like ? or dp.clarity like ? or dp.price like ?) ";
             }
@@ -52,7 +52,7 @@ public class DiamondDAO {
                     String color = rs.getString("color");
                     String clarity = rs.getString("clarity");
                     String cut = rs.getString("cut");
-                    int price = rs.getInt("price");
+                    String price = rs.getString("price");
 
                     DiamondDTO diamond = new DiamondDTO();
                     diamond.setDiamondID(diamondID);
@@ -81,7 +81,7 @@ public class DiamondDAO {
 
     public DiamondDTO load(int diamondID) {
 
-        String sql = "SELECT d.diamondID, d.diamondName, d.diamondImage, d.origin, d.dpID, d.certificateID, dp.diamondSize, dp.caratWeight, dp.color, dp.clarity, dp.cut, dp.price FROM Diamond d LEFT JOIN DiamondPrice dp ON d.dpID = dp.dpID where diamondID = ?";
+        String sql = "SELECT d.diamondID, d.diamondName, d.diamondImage, d.origin, d.dpID, d.certificateID, dp.diamondSize, dp.caratWeight, dp.color, dp.clarity, dp.cut, FORMAT(dp.price, 'N0') AS price FROM Diamond d LEFT JOIN DiamondPrice dp ON d.dpID = dp.dpID where diamondID = ?";
 
         try {
 
@@ -103,7 +103,7 @@ public class DiamondDAO {
                 String color = rs.getString("color");
                 String clarity = rs.getString("clarity");
                 String cut = rs.getString("cut");
-                int price = rs.getInt("price");
+                String price = rs.getString("price");
 
                 DiamondDTO diamond = new DiamondDTO();
                 diamond.setDiamondID(diamondid);

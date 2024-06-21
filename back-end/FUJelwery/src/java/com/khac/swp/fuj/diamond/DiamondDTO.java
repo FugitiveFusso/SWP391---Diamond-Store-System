@@ -13,7 +13,7 @@ public class DiamondDTO {
     private String color;
     private String clarity;
     private String cut;
-    private int diamondPrice;
+    private String diamondPrice;
 
     public int getDiamondID() {
         return diamondID;
@@ -103,12 +103,14 @@ public class DiamondDTO {
         this.cut = cut;
     }
 
-    public int getDiamondPrice() {
+    public String getDiamondPrice() {
         return diamondPrice;
     }
 
-    public void setDiamondPrice(int diamondPrice) {
+    public void setDiamondPrice(String diamondPrice) {
         this.diamondPrice = diamondPrice;
     }
+
+    
 
 }
