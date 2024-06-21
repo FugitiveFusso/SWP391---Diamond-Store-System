@@ -48,6 +48,8 @@ public class RingPlacementPriceDTO {
         this.price = price;
     }
 
+    
+
     @Override
     public String toString() {
         return "RingPlacementPriceDTO{" + "id=" + id + ", name=" + name + ", material=" + material + ", color=" + color + ", price=" + price + '}';
