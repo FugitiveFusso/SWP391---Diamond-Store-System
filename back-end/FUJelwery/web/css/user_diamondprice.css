@@ -296,29 +296,31 @@ tr td img {
 
 .outtro {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
+    justify-content: center; /* Canh giữa theo chiều ngang */
+    align-items: center; /* Canh giữa theo chiều dọc */
+    flex-direction: column; /* Sắp xếp các phần tử theo chiều dọc */
+    text-align: center; /* Canh giữa nội dung văn bản */
+    padding: 20px; /* Khoảng cách bên trong cho phần tử */
 }
 
 .outtro-info {
-    text-align: center;
-    font-family: "Inter", sans-serif;
+    max-width: 800px; /* Đặt chiều rộng tối đa cho nội dung */
+    text-align: justify;
+    text-align-last: justify;
 }
 
 .outtro-info p {
-    margin: 10px 0;
-    line-height: 1.6;
+    display: inline-block;
+    margin-bottom: 20px; /* Khoảng cách giữa các đoạn văn */
+    line-height: 1.5; /* Khoảng cách giữa các dòng */
+    font-family: "Inter", sans-serif;
 }
 
 .outtro-info img {
-    max-width: 100%;
-    height: auto;
-    margin: 20px 0;
+    max-width: 100%; /* Đặt chiều rộng tối đa cho hình ảnh */
+    height: auto; /* Giữ tỷ lệ khung hình của hình ảnh */
+    margin: 20px 0; /* Khoảng cách trên và dưới của hình ảnh */
 }
-
 .footer {
     background-color: black;
     color: #fefefe;

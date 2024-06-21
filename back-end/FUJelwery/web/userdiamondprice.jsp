@@ -115,13 +115,11 @@
                     </div>
                     <table class="diamond-table">
                         <thead>
-                            <tr>
-                                <th><a href=?colSort=caratWeight>Carat Weight</a></th>
-                                <th><a href=?colSort=diamondSize>Diamond Size</a></th>                               
-                                <th><a href=?colSort=color>Color</a></th>
-                                <th><a href=?colSort=clarity>Clarity</a></th>
-                                <th>Cut</th>
-                                <th><a href=?colSort=price>Price</a></th>
+                            <tr>                               
+                                <th>Diamond Size</th>                               
+                                <th>Color</th>
+                                <th>Clarity</th>                               
+                                <th>Price</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -131,12 +129,10 @@
                                 for (DiamondPriceDTO dp : list) {
                                     pageContext.setAttribute("dp", dp);
                             %>
-                            <tr>
-                                <td>${dp.caratWeight}</td>  
+                            <tr> 
                                 <td>${dp.size}</td>                                   
                                 <td>${dp.color}</td>  
-                                <td>${dp.clarity}</td>  
-                                <td>${dp.cut}</td>  
+                                <td>${dp.clarity}</td>   
                                 <td>${dp.price}</td>  
                             </tr>
                             <%
@@ -159,12 +155,10 @@
                     <table class="diamond-table">
                         <thead>
                             <tr>
-                                <th><a href="?colSort=caratWeight">Carat Weight</a></th>
-                                <th><a href="?colSort=diamondSize">Diamond Size</a></th>                                
-                                <th><a href="?colSort=color">Color</a></th>
-                                <th><a href="?colSort=clarity">Clarity</a></th>
-                                <th>Cut</th>
-                                <th><a href="?colSort=price">Price</a></th>
+                                <th>Diamond Size</th>                                
+                                <th>Color</th>
+                                <th>Clarity</th>
+                                <th>Price</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -174,11 +168,9 @@
                                     pageContext.setAttribute("dp", dp);
                             %>
                             <tr>
-                                <td>${dp.caratWeight}</td>  
                                 <td>${dp.size}</td>                                   
                                 <td>${dp.color}</td>  
                                 <td>${dp.clarity}</td>  
-                                <td>${dp.cut}</td>  
                                 <td>${dp.price}</td>  
                             </tr>
                             <%
@@ -196,27 +188,25 @@
         <div class="outtro">
             <div class="outtro-info">
                 <p>Loose diamonds or natural diamonds with international 
-                    inspection certificates today range in price from 5 
-                    million to hundreds of millions , with particularly 
+                    inspection certificates today range in price , with particularly 
                     large diamonds costing up to billions of copper. 
                     According to market research experts, prices depend 
                     primarily on the 4C standards (cut, color, clarity, 
-                    and carat weight), as well as other factors such as 
-                    symmetry, fluorescence, cleanliness, and certification.</p>
+                    and carat weight), as well as other factors including 
+                    symmetry, fluorescence, luminescence, cleanliness, certificates and many more factors.</p>
                 <br>
-                <p>At FUJ Jewelry, every diamond undergoes rigorous selection 
-                    and thorough inspection, from the smallest diamond slabs to the 
-                    largest gems. All diamonds come with GIA or other certification 
-                    documents verifying their origin before being displayed in the store.</p>
+                <p>At FUJ Jewelry, every single diamond that we offer comes with certification documents 
+                    from the most renowned institutions, not to mention the Gemological Institute of America (GIA). 
+                    These certificates provide exquisite and detailed information on the diamond's origin, cut, 
+                    clarity, color, and carat weight. </p>
                 <div>
-                    <img src="./images/ATTIC_GIA_Report.webp">
+                    <img src="images/ATTIC_GIA_Report.webp">
                 </div>
-                <p>When customers visit our showroom, our product consultants 
-                    provide detailed and competitive pricing for natural diamonds. 
-                    If you wish to order custom designs, we can create products 
-                    tailored to your specifications as quickly as possible. Please 
-                    contact FUJ Jewelry via our hotline at (+ 84) 898876512 to 
-                    receive free advice from our team of experts.</p>
+                <p>To explore these bespoke options further or to receive expert 
+                    guidance on selecting the perfect diamond, we invite you to contact 
+                    FUJ Jewelry via our hotline at (+84) 898876512. Our team of experts 
+                    is ready to provide detail and personalized advice and assist you in making a confident 
+                    and informed choices.</p>
             </div>
         </div>                
 

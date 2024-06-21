@@ -50,36 +50,17 @@
                         </ul>
                     </div>
                 </li>
-
             </ul>
         </div> 
 
-
-        <div class="bannerContainer">
-            <div class="bannerContent">
-                <div class="bannerText">
-                    <p class="intro">To day we have</p>
-                    <h1>Diamond</h1>
-                    <div class="description_hero">
-                        <span>Round is our most popular cut. For almost 100 years, diamond cutters have been using advanced theories of light behavior and precise mathematical calculations to optimize the fire and brilliance in a round diamond. Round cuts also have the widest variety of setting styles so you can customize to your heart's content.</span>
-                    </div>
-                    <a style="margin-top: 15px" class="slpBtn" title="Shop Diamond" href="productlist.jsp">Shop Diamond</a>
-                </div>
-                <div class="bannerImage">
-                    <img src="images/diamond_hero.webp" id="diamondHero" style="width: 432px; height: 432px">
-                </div>
-            </div>
-        </div>
-
         <div class="list-container">
             <div class="smaller-container">
-                <div class="list-title">Ring List</div>
+                <div class="list-title">Your Cart</div>
                 <div class="list">
-                    <form action='' method=GET id="searchbox"> 
-                        <input name=keyword type=text value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
-                        <input type=submit value=Search >
+                    <form action='' method=GET id="searchbox" class="center-searchbox"> 
+                        <input name=keyword type=text class="search-input" value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
+                        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
                     </form>
-
                     <table>
                         <tr>
                             <th>Order ID</th>
@@ -111,88 +92,90 @@
                             }
                         %>    
 
-
                         </td></tr>
-                    </table>
-                    <h1>Total Price: ${totalPrice} VND</h1>
+                    </table>    
+                </div>
+            </div>
+        </div>
 
-                    <form action="OrderController" method="POST">
-                        <select name="purchaseMethod" required class="form-control" class="purchase">
-                            <option value="">Please select your preferred payment method: </option>
-                            <option value="Received at store" ${requestScope.order.purchaseMethod == 'Received at store' ? 'selected' : ''}>Received at store</option>
-                            <option value="Door-to=door delivery service" ${requestScope.order.purchaseMethod == 'Door-to-door delivery service' ? 'selected' : ''}>Door-to-door delivery service</option>
-                        </select>
-                        <input name="action" value="purchase" type="hidden">
-                        <input type="hidden" name="userid" value=${sessionScope.usersession.userid}>
-                        <input type="submit" value="Purchase">
-                    </form>
+        <h1>Total Price: ${totalPrice} VND</h1>
 
-                    <form action="OrderController" method="POST">
-                        <input name="action" value="applyVoucher" type="hidden">
-                        <input name="coupon" type="text" placeholder="Enter coupon code">
-                        <input type="hidden" name="userid" value=${sessionScope.usersession.userid}>
-                        <input type="submit" value="Apply Voucher">
-                    </form>
-                    <form action="OrderController" method="POST">
-                        <input name="action" value="removeVoucher" type="hidden">
-                        <input type="hidden" name="userid" value=${sessionScope.usersession.userid}>
-                        <input type="submit" value="Remove Voucher">
-                    </form>
-                    <h4>You have searched: ${voucherName}</h4>
+        <form action="OrderController" method="POST">
+            <select name="purchaseMethod" required class="form-control" class="purchase">
+                <option value="">Please select your preferred payment method: </option>
+                <option value="Received at store" ${requestScope.order.purchaseMethod == 'Received at store' ? 'selected' : ''}>Received at store</option>
+                <option value="Door-to=door delivery service" ${requestScope.order.purchaseMethod == 'Door-to-door delivery service' ? 'selected' : ''}>Door-to-door delivery service</option>
+            </select>
+            <input name="action" value="purchase" type="hidden">
+            <input type="hidden" name="userid" value=${sessionScope.usersession.userid}>
+            <input type="submit" value="Purchase">
+        </form>
+
+        <form action="OrderController" method="POST">
+            <input name="action" value="applyVoucher" type="hidden">
+            <input name="coupon" type="text" placeholder="Enter coupon code">
+            <input type="hidden" name="userid" value=${sessionScope.usersession.userid}>
+            <input type="submit" value="Apply Voucher">
+        </form>
+        <form action="OrderController" method="POST">
+            <input name="action" value="removeVoucher" type="hidden">
+            <input type="hidden" name="userid" value=${sessionScope.usersession.userid}>
+            <input type="submit" value="Remove Voucher">
+        </form>
 
 
-                    <div class="footer">
-                        <div class="footer-content">
-                            <div class="info">
-                                <div class="info-img">
-                                    <img src="images/Screenshot (659).png" />
-                                </div>
-
-                                <div class="info-text">
-                                    <p>
-                                        Address: FPT University, District 9, HCMC
-                                    </p>
-                                    <p>
-                                        Email: CuongNPSE183844@fpt.edu.vn
-                                    </p>
-                                    <p>
-                                        Phone: (+ 84) 898876512
-                                    </p>
-                                    <p>
-                                        © Copyright 2024
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="customer-service">
-                                <div class="customer-service-title">
-                                    Customer service
-                                </div>
-
-                                <div class="customer-service-text">
-                                    <p><a href="static_webpages/ringmeasuring.jsp">Instructions for measuring rings</a></p>
-                                    <p><a href="static_webpages/consulation.jsp">Product consultation by month of birth</a></p>
-                                    <p><a href="static_webpages/faqs.jsp">Frequently asked questions</a></p>
-                                </div>
-                            </div>
-
-                            <div class="policy">
-                                <div class="policy-title">
-                                    Policy
-                                </div>
-
-                                <div class="policy-text">
-                                    <p><a href="static_webpages/warrantyPolicy.jsp">Warranty Policy</a></p>
-                                    <p><a href="static_webpages/deliveryPolicy.jsp">Delivery Policy</a></p>
-                                    <p><a href="static_webpages/returnPolicy.jsp">Return Policy</a></p>
-                                    <p><a href="static_webpages/privatePolicy.jsp">Privacy policy</a></p>
-                                </div>
-                            </div>
-                        </div>
+        <div class="footer">
+            <div class="footer-content">
+                <div class="info">
+                    <div class="info-img">
+                        <img src="images/Screenshot (659).png" />
                     </div>
 
+                    <div class="info-text">
+                        <p>
+                            Address: FPT University, District 9, HCMC
+                        </p>
+                        <p>
+                            Email: CuongNPSE183844@fpt.edu.vn
+                        </p>
+                        <p>
+                            Phone: (+ 84) 898876512
+                        </p>
+                        <p>
+                            © Copyright 2024
+                        </p>
+                    </div>
+                </div>
 
-                    <script src="js/productlist_pagination.js"></script>
+                <div class="customer-service">
+                    <div class="customer-service-title">
+                        Customer service
+                    </div>
 
-                    </body>
-                    </html>
+                    <div class="customer-service-text">
+                        <p><a href="static_webpages/ringmeasuring.jsp">Instructions for measuring rings</a></p>
+                        <p><a href="static_webpages/consulation.jsp">Product consultation by month of birth</a></p>
+                        <p><a href="static_webpages/faqs.jsp">Frequently asked questions</a></p>
+                    </div>
+                </div>
+
+                <div class="policy">
+                    <div class="policy-title">
+                        Policy
+                    </div>
+
+                    <div class="policy-text">
+                        <p><a href="static_webpages/warrantyPolicy.jsp">Warranty Policy</a></p>
+                        <p><a href="static_webpages/deliveryPolicy.jsp">Delivery Policy</a></p>
+                        <p><a href="static_webpages/returnPolicy.jsp">Return Policy</a></p>
+                        <p><a href="static_webpages/privatePolicy.jsp">Privacy policy</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <script src="js/productlist_pagination.js"></script>
+
+    </body>
+</html>
