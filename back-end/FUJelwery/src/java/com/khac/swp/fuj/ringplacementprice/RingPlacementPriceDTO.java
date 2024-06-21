@@ -6,7 +6,7 @@ public class RingPlacementPriceDTO {
     public String name;
     public String material;
     public String color;
-    public int price;
+    public String price;
 
     public int getId() {
         return id;
@@ -40,11 +40,11 @@ public class RingPlacementPriceDTO {
         this.color = color;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

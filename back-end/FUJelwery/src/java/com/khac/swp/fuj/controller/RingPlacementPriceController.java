@@ -96,12 +96,7 @@ public class RingPlacementPriceController extends HttpServlet {
                 String name = request.getParameter("rName");
                 String material = request.getParameter("material");
                 String color = request.getParameter("color");
-                Integer price = null;
-                try {
-                    price = Integer.parseInt(request.getParameter("rpPrice"));
-                } catch (NumberFormatException ex) {
-                    log("Parameter price has wrong format.");
-                }
+                String price = request.getParameter("rpPrice");
 
                 RingPlacementPriceDTO rp = null;
                 if (rpid != null) {
@@ -120,16 +115,12 @@ public class RingPlacementPriceController extends HttpServlet {
 
             } else if (action.equals("insert")) {//insert
                 Connection conn = DBUtils.getConnection();
-                
+
                 String name = request.getParameter("rName");
                 String material = request.getParameter("material");
                 String color = request.getParameter("color");
-                Integer price = null;
-                try {
-                    price = Integer.parseInt(request.getParameter("rpPrice"));
-                } catch (NumberFormatException ex) {
-                    log("Parameter price has wrong format.");
-                }
+                String price = request.getParameter("rpPrice");
+
                 RingPlacementPriceDAO dao = new RingPlacementPriceDAO();
                 RingPlacementPriceDTO rp = dao.checkRPExist(name, material, color);
                 if (rp == null) {

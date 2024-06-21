@@ -129,10 +129,10 @@
                                 <option value="Stainless Steel" ${requestScope.rp.material == 'Stainless Steel' ? 'selected' : ''}>Stainless Steel</option>
                             </select>                          
                         </div>
-                        <div class="info-input">                          
+                        <div class="info-input">      
                             <h2>Price</h2>
-                            <input type="number" name="rpPrice" value="${requestScope.rp.price}" required min="1000000" max="1000000000" class="form-control">
-                            <span id="priceNotification" class="notification"></span>                           
+                            <input type="text" id="priceInput" name="rpPrice" value="${requestScope.rp.price}" required class="form-control" oninput="formatPrice()">
+                            <span style="color: red" id="priceNotification" class="notification"></span>                           
                         </div>
                     </div>
                     <div class="col-md-6 content-right">
@@ -192,5 +192,26 @@
                                                     integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
     crossorigin="anonymous"></script>
     <script src="js/sidenav.js"></script>
+    <script>
+               function formatPrice() {
+                   const input = document.getElementById('priceInput');
+                   const value = input.value.replace(/,/g, '');
+                   if (value && !isNaN(value)) {
+                       input.value = Number(value).toLocaleString('en-US');
+                   }
+               }
+
+               document.getElementById('priceInput').addEventListener('input', function () {
+                   const value = parseInt(this.value.replace(/,/g, ''), 10);
+                   const min = 1000000;
+                   const max = 1000000000;
+                   const notification = document.getElementById('priceNotification');
+                   if (value < min || value > max) {
+                       notification.textContent = 'Value must be between ' + min.toLocaleString() + ' and ' + max.toLocaleString();
+                   } else {
+                       notification.textContent = '';
+                   }
+               });
+    </script>
 </body>
 </html>

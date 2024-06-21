@@ -19,7 +19,7 @@ public class RingPlacementPriceDAO {
         List<RingPlacementPriceDTO> list = new ArrayList<RingPlacementPriceDTO>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = " select rpID, rName, material, color, rpPrice from RingPlacementPrice where isDeleted = 'active' ";
+            String sql = " select rpID, rName, material, color, FORMAT(rpPrice, 'N0') AS rpPrice from RingPlacementPrice where isDeleted = 'active' ";
             if (keyword != null && !keyword.isEmpty()) {
                 sql += " and ( rName like ? or material like ? or color like ? or rpPrice like ?) ";
             }
@@ -44,7 +44,7 @@ public class RingPlacementPriceDAO {
                     String name = rs.getString("rName");
                     String material = rs.getString("material");
                     String color = rs.getString("color");
-                    int price = rs.getInt("rpPrice");
+                    String price = rs.getString("rpPrice");
 
                     RingPlacementPriceDTO rp = new RingPlacementPriceDTO();
                     rp.setId(rpid);
@@ -67,7 +67,7 @@ public class RingPlacementPriceDAO {
 
     public RingPlacementPriceDTO load(int rpID) {
 
-        String sql = " select rpID, rName, material, color, rpPrice from RingPlacementPrice where rpID = ?";
+        String sql = " select rpID, rName, material, color, FORMAT(rpPrice, 'N0') AS rpPrice from RingPlacementPrice where rpID = ?";
 
         try {
 
@@ -82,7 +82,7 @@ public class RingPlacementPriceDAO {
                 String name = rs.getString("rName");
                 String material = rs.getString("material");
                 String color = rs.getString("color");
-                int price = rs.getInt("rpPrice");
+                String price = rs.getString("rpPrice");
 
                 RingPlacementPriceDTO rp = new RingPlacementPriceDTO();
                 rp.setId(rpid);
@@ -110,7 +110,7 @@ public class RingPlacementPriceDAO {
             ps.setString(1, rp.getName());
             ps.setString(2, rp.getMaterial());
             ps.setString(3, rp.getColor());
-            ps.setInt(4, rp.getPrice());
+            ps.setString(4, rp.getPrice());
 
             ps.executeUpdate();
             conn.close();
@@ -132,7 +132,7 @@ public class RingPlacementPriceDAO {
             ps.setString(1, rp.getName());
             ps.setString(2, rp.getMaterial());
             ps.setString(3, rp.getColor());
-            ps.setInt(4, rp.getPrice());
+            ps.setString(4, rp.getPrice());
             ps.setInt(5, rp.getId());
             ps.executeUpdate();
             conn.close();
@@ -184,7 +184,7 @@ public class RingPlacementPriceDAO {
                 rp.setName(rs.getString("rName"));
                 rp.setMaterial(rs.getString("material"));
                 rp.setColor(rs.getString("color"));
-                rp.setPrice(rs.getInt("rpPrice"));
+                rp.setPrice(rs.getString("rpPrice"));
                 return rp;
             }
         } catch (SQLException ex) {
