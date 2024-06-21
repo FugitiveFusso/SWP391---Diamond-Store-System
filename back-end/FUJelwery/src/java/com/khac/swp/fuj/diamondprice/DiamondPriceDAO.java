@@ -14,7 +14,7 @@ public class DiamondPriceDAO {
         List<DiamondPriceDTO> list = new ArrayList<DiamondPriceDTO>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = " select dpID, diamondSize, caratWeight, color, clarity, cut, price from DiamondPrice where isDeleted = 'active' ";
+            String sql = " SELECT dpID, diamondSize, caratWeight, color, clarity, cut, FORMAT(price, 'N0') AS price FROM DiamondPrice WHERE isDeleted = 'active' ";
             if (keyword != null && !keyword.isEmpty()) {
                 sql += " and ( diamondSize like ? or caratWeight like ? or color like ? or clarity like ? or price like ?) ";
             }
@@ -42,7 +42,7 @@ public class DiamondPriceDAO {
                     String color = rs.getString("color");
                     String clarity = rs.getString("clarity");
                     String cut = rs.getString("cut");
-                    int price = rs.getInt("price");
+                    String price = rs.getString("price");
 
                     DiamondPriceDTO dp = new DiamondPriceDTO();
                     dp.setId(dpid);
@@ -69,7 +69,7 @@ public class DiamondPriceDAO {
         List<DiamondPriceDTO> list = new ArrayList<DiamondPriceDTO>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = " select dpID, diamondSize, caratWeight, color, clarity, cut, price from DiamondPrice where isDeleted = 'active' and caratWeight = 0.36 ";
+            String sql = " SELECT dpID, diamondSize, caratWeight, color, clarity, cut, FORMAT(price, 'N0') AS price FROM DiamondPrice WHERE isDeleted = 'active' and caratWeight = 0.36 ";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
@@ -82,7 +82,7 @@ public class DiamondPriceDAO {
                     String color = rs.getString("color");
                     String clarity = rs.getString("clarity");
                     String cut = rs.getString("cut");
-                    int price = rs.getInt("price");
+                    String price = rs.getString("price");
 
                     DiamondPriceDTO dp = new DiamondPriceDTO();
                     dp.setId(dpid);
@@ -109,7 +109,7 @@ public class DiamondPriceDAO {
         List<DiamondPriceDTO> list = new ArrayList<DiamondPriceDTO>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = " select dpID, diamondSize, caratWeight, color, clarity, cut, price from DiamondPrice where isDeleted = 'active' and caratWeight = 0.7 ";
+            String sql = " SELECT dpID, diamondSize, caratWeight, color, clarity, cut, FORMAT(price, 'N0') AS price FROM DiamondPrice WHERE isDeleted = 'active' and caratWeight = 0.7 ";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
@@ -122,7 +122,7 @@ public class DiamondPriceDAO {
                     String color = rs.getString("color");
                     String clarity = rs.getString("clarity");
                     String cut = rs.getString("cut");
-                    int price = rs.getInt("price");
+                    String price = rs.getString("price");
 
                     DiamondPriceDTO dp = new DiamondPriceDTO();
                     dp.setId(dpid);
@@ -164,7 +164,7 @@ public class DiamondPriceDAO {
                 String color = rs.getString("color");
                 String clarity = rs.getString("clarity");
                 String cut = rs.getString("cut");
-                int price = rs.getInt("price");
+                String price = rs.getString("price");
 
                 DiamondPriceDTO dp = new DiamondPriceDTO();
                 dp.setId(dpid);
@@ -196,7 +196,7 @@ public class DiamondPriceDAO {
             ps.setString(3, dp.getColor());
             ps.setString(4, dp.getClarity());
             ps.setString(5, dp.getCut());
-            ps.setInt(6, dp.getPrice());
+            ps.setString(6, dp.getPrice());
 
             ps.executeUpdate();
             conn.close();
@@ -220,7 +220,7 @@ public class DiamondPriceDAO {
             ps.setString(3, dp.getColor());
             ps.setString(4, dp.getClarity());
             ps.setString(5, dp.getCut());
-            ps.setInt(6, dp.getPrice());
+            ps.setString(6, dp.getPrice());
             ps.setInt(7, dp.getId());
             ps.executeUpdate();
             conn.close();
@@ -276,7 +276,7 @@ public class DiamondPriceDAO {
                 dp.setColor(rs.getString("color"));
                 dp.setClarity(rs.getString("clarity"));
                 dp.setCut(rs.getString("cut"));
-                dp.setPrice(rs.getInt("price"));
+                dp.setPrice(rs.getString("price"));
                 return dp;
             }
         } catch (SQLException ex) {

@@ -108,12 +108,7 @@ public class DiamondPriceController extends HttpServlet {
                 String color = request.getParameter("color");
                 String clarity = request.getParameter("clarity");
                 String cut = request.getParameter("cut");
-                Integer price = null;
-                try {
-                    price = Integer.parseInt(request.getParameter("price"));
-                } catch (NumberFormatException ex) {
-                    log("Parameter price has wrong format.");
-                }
+                String price = request.getParameter("price");
 
                 DiamondPriceDTO dp = null;
                 if (dpid != null) {
@@ -150,12 +145,8 @@ public class DiamondPriceController extends HttpServlet {
                 String color = request.getParameter("color");
                 String clarity = request.getParameter("clarity");
                 String cut = request.getParameter("cut");
-                Integer price = null;
-                try {
-                    price = Integer.parseInt(request.getParameter("price"));
-                } catch (NumberFormatException ex) {
-                    log("Parameter price has wrong format.");
-                }
+                String price = request.getParameter("price");
+
                 DiamondPriceDAO dao = new DiamondPriceDAO();
                 DiamondPriceDTO dp = dao.checkDPExist(size, caratWeight, color, clarity, cut);
                 if (dp == null) {

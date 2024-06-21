@@ -8,7 +8,7 @@ public class DiamondPriceDTO {
     public String color;
     public String clarity;
     public String cut;
-    public int price;
+    public String price;
 
     public int getId() {
         return id;
@@ -58,13 +58,15 @@ public class DiamondPriceDTO {
         this.cut = cut;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
     }
+
+
 
     @Override
     public String toString() {
