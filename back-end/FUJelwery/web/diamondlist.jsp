@@ -31,8 +31,8 @@
     </head>
     <body>
 
-         <!--<%@ include file="/salesmenu.jsp" %>-->
-        
+        <!--<%@ include file="/salesmenu.jsp" %>-->
+
         <div class="menu-btn">
             <div class="btn-cover">
                 <i class="fas fa-bars"></i>
@@ -55,7 +55,7 @@
                             <a href="DiamondController" class="sub-item">Diamond List</a>
                             <a href="RingController" class="sub-item">Ring List</a>
                             <a href="CollectionController" class="sub-item">Collection List</a>
-                            
+
                         </div>
                     </a>
                 </div>
@@ -78,13 +78,13 @@
                 </div>
 
                 <div class="item"><a href="CategoryController"><i class="fas fa-layer-group"></i>View Category</a></div>
-                
+
                 <div class="item"><a href="salesstaffaccount.jsp"><i class="fas fa-user"></i>Account</a></div>
                 <div class="item"><a href="saleslogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
 
             </div>
         </div>
-        
+
         <div class="list-container">
             <div class="smaller-container">
                 <div class="list1">
@@ -147,10 +147,10 @@
                                 <td>${diamond.clarity}</td>
                                 <td>${diamond.diamondPrice}</td>
                                 <td>
-                                    <form action="DiamondController" method="POST" class="input">
+                                    <form id="deleteForm" action="DiamondController" method="POST" class="input">
                                         <input name="action" value="delete" type="hidden">
                                         <input name="id" value="${diamond.diamondID}" type="hidden">
-                                        <input type="submit" value="Delete">
+                                        <input type="submit" value="Delete" class="deleteButton">
                                     </form>
                                 </td>
 
@@ -174,6 +174,7 @@
                                                         integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
         crossorigin="anonymous"></script>
         <script src="js/sidenav.js"></script>
-
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.0/dist/sweetalert2.all.min.js"></script>
+        <script src="js/deleteConfirmation.js"></script>
     </body>
 </html>

@@ -46,7 +46,7 @@
                 </div>
 
                 <div class="item"><a href="PostController"><i class="fas fa-file"></i>Posts</a></div>
-                
+
                 <div class="item"><a href="adminaccount.jsp"><i class="fas fa-user"></i>Account</a></div>
                 <div class="item"><a href="adminlogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
 
@@ -54,7 +54,7 @@
         </div>
 
         <!--<jsp:include page="/menu.jsp" flush="true" />-->
-        
+
         <div class="list-container">
             <div class="smaller-container">
                 <div class="list1">
@@ -110,10 +110,10 @@
                                 <td>${manager.email}</td>
                                 <td>${manager.address}</td>
                                 <td>
-                                    <form action="ManagerController" method="POST" class="input">
+                                    <form id="deleteForm" action="ManagerController" method="POST" class="input">
                                         <input name="action" value="delete" type="hidden">
                                         <input name="id" value="${manager.userid}" type="hidden">
-                                        <input type="submit" value="Delete">
+                                        <input type="submit" value="Delete"class="deleteButton">
                                     </form>
                                 </td>
 
@@ -133,9 +133,11 @@
         </div>
 
         <script src="js/pagination.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
-                integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+                                                        integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
         crossorigin="anonymous"></script>
         <script src="js/sidenav.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.0/dist/sweetalert2.all.min.js"></script>
+        <script src="js/deleteConfirmation.js"></script>
 
     </body>
 </html>

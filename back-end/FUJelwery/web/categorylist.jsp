@@ -115,10 +115,10 @@
                                     <a href="CategoryController?action=details&id=${category.categoryID}">   ${category.categoryID}</td>
                                 <td>${category.categoryName}</td>
                                 <td>
-                                    <form action="CategoryController" method="POST" class="input">
+                                    <form id="deleteForm" action="CategoryController" method="POST" class="input">
                                         <input name="action" value="delete" type="hidden">
                                         <input name="id" value="${category.categoryID}" type="hidden">
-                                        <input type="submit" value="Delete">
+                                        <input type="submit" value="Delete"class="deleteButton">
                                     </form>
                                 </td>
 
@@ -148,7 +148,7 @@
                 integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
         crossorigin="anonymous"></script>
         <script src="js/sidenav.js"></script>
-
-
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.0/dist/sweetalert2.all.min.js"></script>
+        <script src="js/deleteConfirmation.js"></script>
     </body>
 </html>
