@@ -88,7 +88,7 @@
                             <div class="">List of Ring</div>
                         </div>
                     </div>
-                    
+
                 </div>
                 <div class="list">
                     <form action='' method=GET id="searchbox"> 
@@ -121,14 +121,14 @@
                             <td>${salesorder.orderDate}</td>
                             <td>${salesorder.address}</td>
                             <td>
-                                <input type="text" name="warrantyID" id="warrantyID_${salesorder.warrantyID}" placeholder="Enter Warranty ID" required>
-                            </td>
-                            <td>${salesorder.totalPrice}</td>
-                            <td>
-                                <form action="SalesStaffController" method="POST">
-                                    <input name="action" value="accept" type="hidden">
-                                    <input name="id" value="${salesorder.orderID}" type="hidden">
-                                    <input type="submit" value="Accept">
+                                <form action="SalesStaffOrderController" method="POST">
+                                    <input type="text" name="warrantyID" id="warrantyID_${salesorder.orderID}" placeholder="Enter Warranty ID" required>
+                                    </td>
+                                    <td>${salesorder.totalPrice}</td>
+                                    <td>
+                                        <input name="action" value="accept" type="hidden">
+                                        <input name="orderID" value="${salesorder.orderID}" type="hidden">
+                                        <input type="submit" value="Accept">
                                 </form>
                             </td>
                         </tr>

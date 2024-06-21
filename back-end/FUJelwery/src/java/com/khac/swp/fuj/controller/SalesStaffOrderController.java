@@ -63,10 +63,9 @@ public class SalesStaffOrderController extends HttpServlet {
                 return;
             } else if (action == null || action.equals("list")) {//lists
 
-                    OrderDAO dao = new OrderDAO();
-                    List<OrderDTO> list = dao.listForSales();
-                    request.setAttribute("salesorderlist", list);
-
+                OrderDAO dao = new OrderDAO();
+                List<OrderDTO> list = dao.listForSales();
+                request.setAttribute("salesorderlist", list);
 
                 request.getRequestDispatcher("/salesstafforderlist.jsp").forward(request, response);
 
@@ -86,39 +85,50 @@ public class SalesStaffOrderController extends HttpServlet {
 
                 request.setAttribute("order", order);//object
                 request.getRequestDispatcher("/cartdetails.jsp").forward(request, response);
-            } else if (action.equals("accept")) {//update
+            } else if (action.equals("accept")) {
                 Integer orderID = null;
                 try {
-                    orderID = Integer.parseInt(request.getParameter("id"));
+                    orderID = Integer.parseInt(request.getParameter("orderID"));
                 } catch (NumberFormatException ex) {
-                    log("Parameter ringSize has wrong format.");
+                    log("Parameter orderID has wrong format.");
                 }
-                
+
                 Integer warrantyID = null;
                 try {
                     warrantyID = Integer.parseInt(request.getParameter("warrantyID"));
                 } catch (NumberFormatException ex) {
-                    log("Parameter id has wrong format.");
+                    log("Parameter warrantyID has wrong format.");
                 }
 
-
-                if (orderID != null) {
+                if (orderID != null && warrantyID != null) {
                     try {
                         orderDAO.addWarranty(warrantyID, orderID);
                         orderDAO.acceptOrder(orderID);
-                        request.getSession().setAttribute("success", "Purchase Successfully!!!");
+                        request.getSession().setAttribute("success", "Received order Successfully!!!");
                     } catch (Exception e) {
-                        log("Error adding Warranty: " + e.getMessage());
-                        request.getSession().setAttribute("errorMessage", "Error deleting order.");
+                        log("Error processing order with orderID " + orderID + " and warrantyID " + warrantyID + ": " + e.getMessage());
+                        request.getSession().setAttribute("errorMessage", "Error receiving order.");
                     }
                 } else {
-                    request.getSession().setAttribute("errorMessage", "Invalid order ID.");
+                    if (orderID == null) {
+                        request.getSession().setAttribute("errorMessage", "Invalid order ID.");
+                    } else {
+                        request.getSession().setAttribute("errorMessage", "Invalid warranty ID.");
+                    }
                 }
-                RequestDispatcher rd = request.getRequestDispatcher("salesstafforderlist.jsp");
-                rd.forward(request, response);
 
+                try {
+                    List<OrderDTO> list = orderDAO.listForSales();
+                    request.setAttribute("salesorderlist", list);
+                    request.getRequestDispatcher("/salesstafforderlist.jsp").forward(request, response);
+                } catch (Exception e) {
+                    log("Error forwarding to sales staff order list: " + e.getMessage());
+                    request.getSession().setAttribute("errorMessage", "Error loading order list.");
+                    response.sendRedirect("errorPage.jsp"); // Redirect to an error page if forwarding fails
+                }
             }
-        }    
+
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
