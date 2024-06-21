@@ -62,17 +62,11 @@ public class SalesStaffOrderController extends HttpServlet {
                 response.sendRedirect("saleslogin.jsp");
                 return;
             } else if (action == null || action.equals("list")) {//lists
-                Integer id = null;
-                try {
-                    id = Integer.parseInt(request.getParameter("id"));
-                } catch (NumberFormatException ex) {
-                    log("Parameter id has wrong format.");
-                }
-                if (id != null) {
+
                     OrderDAO dao = new OrderDAO();
                     List<OrderDTO> list = dao.listForSales();
                     request.setAttribute("salesorderlist", list);
-                }
+
 
                 request.getRequestDispatcher("/salesstafforderlist.jsp").forward(request, response);
 
@@ -100,18 +94,6 @@ public class SalesStaffOrderController extends HttpServlet {
                     log("Parameter ringSize has wrong format.");
                 }
                 
-                orderDAO.acceptOrder(orderID);
-                RequestDispatcher rd = request.getRequestDispatcher("salesstafforderlist.jsp");
-                rd.forward(request, response);
-
-            } else if (action.equals("updateWarranty")) {//purchase
-                Integer orderID = null;
-                try {
-                    orderID = Integer.parseInt(request.getParameter("id"));
-                } catch (NumberFormatException ex) {
-                    log("Parameter id has wrong format.");
-                }
-
                 Integer warrantyID = null;
                 try {
                     warrantyID = Integer.parseInt(request.getParameter("warrantyID"));
@@ -123,6 +105,7 @@ public class SalesStaffOrderController extends HttpServlet {
                 if (orderID != null) {
                     try {
                         orderDAO.addWarranty(warrantyID, orderID);
+                        orderDAO.acceptOrder(orderID);
                         request.getSession().setAttribute("success", "Purchase Successfully!!!");
                     } catch (Exception e) {
                         log("Error adding Warranty: " + e.getMessage());
@@ -131,8 +114,8 @@ public class SalesStaffOrderController extends HttpServlet {
                 } else {
                     request.getSession().setAttribute("errorMessage", "Invalid order ID.");
                 }
-
-                response.sendRedirect(request.getContextPath() + "/user_homepage.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("salesstafforderlist.jsp");
+                rd.forward(request, response);
 
             }
         }    
