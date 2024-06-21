@@ -25,7 +25,7 @@ body{
     border-radius: 40px;
     margin-top: 20px;
     padding: 15px 20px;
-    
+
 
 }
 
@@ -91,8 +91,8 @@ body{
     transition: background-color 0.3s, transform 0.3s;
     font-size: 16px;
     font-weight: 600;
-/*    margin-left: 530px;
-    margin-top: 25px;*/
+    /*    margin-left: 530px;
+        margin-top: 25px;*/
 }
 
 .styled-button:hover {
@@ -233,7 +233,7 @@ tr,td,th{
 
 th{
     background-color: #d9d9d9;    
-    
+
 }
 
 th a{
@@ -244,7 +244,7 @@ th a{
 td a{
     color: #000000;
     text-decoration: none;
-    
+
 }
 
 tr td img{
@@ -294,6 +294,14 @@ tr td img{
 }
 
 .input input{
+    padding: 8px 20px;
+    background-color: #151542;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+}
+
+button{
     padding: 8px 20px;
     background-color: #151542;
     color: #fff;
