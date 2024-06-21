@@ -95,6 +95,8 @@ public class AddToCart extends HttpServlet {
                     product = ringDAO.load(id);
                 }
 
+                request.setAttribute("success", "Added Successfully!!!");
+
                 request.setAttribute("product", product);//object
                 request.getRequestDispatcher("/productdetails.jsp").forward(request, response);
             } catch (SQLException e) {

@@ -51,7 +51,10 @@
 
             </ul>
         </div> 
-
+        <% String success = (String) request.getAttribute("success"); %>
+        <% if (success != null) {%>
+        <h4 style="color: green; text-align: center"> <%= success%> </h4>
+        <% }%>
         <div class="product-details">
             <div class="left-column">
                 <div class="image-section">
@@ -125,8 +128,19 @@
                 <form action="AddToCart" method="post" class="buttons-form">
                     <input type="hidden" name="userID" value=${sessionScope.usersession.userid}>
                     <input type="hidden" name="ringID" value=${requestScope.product.ringID}>
-                    <input type="number" name="ringSize" min="3" max="11" class="productquantities" required="">
-                    <button type="submit" onclick="addToCart()" class="btn btn-primary">Add to Cart</button>
+                    <select name="ringSize" class="productquantities" required>
+                        <option value="" disabled selected>Select ring size</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary">Add to Cart</button>
                 </form>
                 <div class="Inclusion">
                     <h2>Your Order Includes:</h2>
