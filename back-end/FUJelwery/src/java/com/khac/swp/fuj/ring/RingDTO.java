@@ -7,13 +7,13 @@ public class RingDTO {
     private String ringName;
     private String ringImage;
     private int diamondID;
-    private int price;
+    private String price;
     private int categoryID;
     private int collectionID;
     private String ringPlacementName;
     private String material;
     private String ringColor;
-    private int rpPrice;
+    private String rpPrice;
     private String diamondName;
     private String diamondImage;
     private String origin;
@@ -23,16 +23,8 @@ public class RingDTO {
     private String cut;
     private String color;
     private String clarity;
-    private int diamondPrice;
-    private int totalPrice;
-
-    public int getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(int totalPrice) {
-        this.totalPrice = totalPrice;
-    }
+    private String diamondPrice;
+    private String totalPrice;
 
     public int getRingID() {
         return ringID;
@@ -74,14 +66,6 @@ public class RingDTO {
         this.diamondID = diamondID;
     }
 
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
     public int getCategoryID() {
         return categoryID;
     }
@@ -120,14 +104,6 @@ public class RingDTO {
 
     public void setRingColor(String ringColor) {
         this.ringColor = ringColor;
-    }
-
-    public int getRpPrice() {
-        return rpPrice;
-    }
-
-    public void setRpPrice(int rpPrice) {
-        this.rpPrice = rpPrice;
     }
 
     public String getDiamondName() {
@@ -202,8 +178,36 @@ public class RingDTO {
         this.clarity = clarity;
     }
 
-    public int getDiamondPrice() {
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getRpPrice() {
+        return rpPrice;
+    }
+
+    public void setRpPrice(String rpPrice) {
+        this.rpPrice = rpPrice;
+    }
+
+    public String getDiamondPrice() {
         return diamondPrice;
+    }
+
+    public void setDiamondPrice(String diamondPrice) {
+        this.diamondPrice = diamondPrice;
+    }
+
+    public String getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(String totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     @Override
@@ -211,7 +215,4 @@ public class RingDTO {
         return "RingDTO{" + "ringID=" + ringID + ", rpID=" + rpID + ", ringName=" + ringName + ", ringImage=" + ringImage + ", diamondID=" + diamondID + ", price=" + price + ", categoryID=" + categoryID + ", collectionID=" + collectionID + ", ringPlacementName=" + ringPlacementName + ", material=" + material + ", ringColor=" + ringColor + ", rpPrice=" + rpPrice + ", diamondName=" + diamondName + ", diamondImage=" + diamondImage + ", origin=" + origin + ", certificateID=" + certificateID + ", diamondSize=" + diamondSize + ", caratWeight=" + caratWeight + ", cut=" + cut + ", color=" + color + ", clarity=" + clarity + ", diamondPrice=" + diamondPrice + ", totalPrice=" + totalPrice + '}';
     }
 
-    public void setDiamondPrice(int diamondPrice) {
-        this.diamondPrice = diamondPrice;
-    }
 }
