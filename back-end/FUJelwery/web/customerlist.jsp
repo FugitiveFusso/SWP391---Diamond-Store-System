@@ -31,7 +31,7 @@
                     <i class="fa-solid fa-xmark"></i>
                 </div>
                 <img src="images/Screenshot (656).png">
-                <h1>${requestScope.admin.lastname} ${requestScope.admin.firstname}</h1>
+                <h1>${sessionScope.adminsession.lastname} ${sessionScope.adminsession.firstname}</h1>
             </header>
 
             <div class="menu">               
