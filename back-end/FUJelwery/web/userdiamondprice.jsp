@@ -105,10 +105,8 @@
 
         <div class="list-container">
             <div class="smaller-container">
-
-
                 <div class="list">  
-                    <table id="pagination">
+                    <table>
                         <thead>
                             <tr>
                                 <th><a href=?colSort=diamondSize>Diamond Size</a></th>
@@ -140,11 +138,44 @@
 
 
                     </table>
-                    <div id="paginationControls" class="pagination-controls">
-                        <button id="prevButton" class="pagination-button"><i class="fas fa-chevron-left"></i></button>
-                        <div id="pageNumbers"></div>
-                        <button id="nextButton" class="pagination-button"><i class="fas fa-chevron-right"></i></button>
-                    </div>
+                </div>
+            </div>
+        </div>  
+        <div class="list-container">
+            <div class="smaller-container">
+                <div class="list">  
+                    <table>
+                        <thead>
+                            <tr>
+                                <th><a href=?colSort=diamondSize>Diamond Size</a></th>
+                                <th><a href=?colSort=caratWeight>Carat Weight</a></th>
+                                <th><a href=?colSort=color>Color</a></th>
+                                <th><a href=?colSort=clarity>Clarity</a></th>
+                                <th>Cut</th>
+                                <th><a href=?colSort=price>Price</a></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <%
+                                List<DiamondPriceDTO> list1 = (List<DiamondPriceDTO>) request.getAttribute("dplist1");
+                                for (DiamondPriceDTO dp : list1) {
+                                    pageContext.setAttribute("dp", dp);
+                            %>
+                            <tr>
+                                <td>${dp.size}</td>    
+                                <td>${dp.caratWeight}</td>  
+                                <td>${dp.color}</td>  
+                                <td>${dp.clarity}</td>  
+                                <td>${dp.cut}</td>  
+                                <td>${dp.price}</td>  
+                            </tr>
+                            <%
+                                }
+                            %>    
+
+
+                    </table>
                 </div>
             </div>
         </div>  

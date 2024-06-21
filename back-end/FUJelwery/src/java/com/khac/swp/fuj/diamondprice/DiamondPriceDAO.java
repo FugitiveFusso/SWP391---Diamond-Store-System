@@ -65,6 +65,86 @@ public class DiamondPriceDAO {
         return list;
     }
 
+    public List<DiamondPriceDTO> getAllDiamondPriceBy036() {
+        List<DiamondPriceDTO> list = new ArrayList<DiamondPriceDTO>();
+        try {
+            Connection con = DBUtils.getConnection();
+            String sql = " select dpID, diamondSize, caratWeight, color, clarity, cut, price from DiamondPrice where isDeleted = 'active' and caratWeight = 0.36 ";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    int dpid = rs.getInt("dpID");
+                    double size = rs.getDouble("diamondSize");
+                    double caratWeight = rs.getDouble("caratWeight");
+                    String color = rs.getString("color");
+                    String clarity = rs.getString("clarity");
+                    String cut = rs.getString("cut");
+                    int price = rs.getInt("price");
+
+                    DiamondPriceDTO dp = new DiamondPriceDTO();
+                    dp.setId(dpid);
+                    dp.setSize(size);
+                    dp.setCaratWeight(caratWeight);
+                    dp.setColor(color);
+                    dp.setClarity(clarity);
+                    dp.setCut(cut);
+                    dp.setPrice(price);
+
+                    list.add(dp);
+                }
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return list;
+    }
+
+    public List<DiamondPriceDTO> getAllDiamondPriceBy07() {
+        List<DiamondPriceDTO> list = new ArrayList<DiamondPriceDTO>();
+        try {
+            Connection con = DBUtils.getConnection();
+            String sql = " select dpID, diamondSize, caratWeight, color, clarity, cut, price from DiamondPrice where isDeleted = 'active' and caratWeight = 0.7 ";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    int dpid = rs.getInt("dpID");
+                    double size = rs.getDouble("diamondSize");
+                    double caratWeight = rs.getDouble("caratWeight");
+                    String color = rs.getString("color");
+                    String clarity = rs.getString("clarity");
+                    String cut = rs.getString("cut");
+                    int price = rs.getInt("price");
+
+                    DiamondPriceDTO dp = new DiamondPriceDTO();
+                    dp.setId(dpid);
+                    dp.setSize(size);
+                    dp.setCaratWeight(caratWeight);
+                    dp.setColor(color);
+                    dp.setClarity(clarity);
+                    dp.setCut(cut);
+                    dp.setPrice(price);
+
+                    list.add(dp);
+                }
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return list;
+    }
+
     public DiamondPriceDTO load(int dpID) {
 
         String sql = "select dpID, diamondSize, caratWeight, color, clarity, cut, price from DiamondPrice where dpID = ?";

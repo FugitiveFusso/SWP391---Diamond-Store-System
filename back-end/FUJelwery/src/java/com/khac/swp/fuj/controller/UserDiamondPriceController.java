@@ -34,8 +34,10 @@ public class UserDiamondPriceController extends HttpServlet {
             } else if (action == null || action.equals("list")) {//lists
 
                 DiamondPriceDAO dao = new DiamondPriceDAO();
-                List<DiamondPriceDTO> list = dao.getAllDiamondPrice(keyword, sortCol);
+                List<DiamondPriceDTO> list = dao.getAllDiamondPriceBy036();
                 request.setAttribute("dplist", list);
+                List<DiamondPriceDTO> list1 = dao.getAllDiamondPriceBy07();
+                request.setAttribute("dplist1", list1);
 
                 request.getRequestDispatcher("/userdiamondprice.jsp").forward(request, response);
 
