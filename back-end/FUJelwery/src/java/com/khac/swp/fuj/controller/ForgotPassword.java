@@ -35,7 +35,9 @@ public class ForgotPassword extends HttpServlet {
         if (email != null || !email.equals("")) {
             // sending otp
             Random rand = new Random();
-            otpvalue = rand.nextInt(1255650);
+//            otpvalue = rand.nextInt(1255650);
+            otpvalue = rand.nextInt(10000000);
+            String otp = String.format("%07d", otpvalue); 
 
             String to = email;// change accordingly
             // Get the session object
@@ -66,7 +68,7 @@ public class ForgotPassword extends HttpServlet {
                 throw new RuntimeException(e);
             }
             dispatcher = request.getRequestDispatcher("EnterOtp.jsp");
-            request.setAttribute("message", "OTP is sent to your email id");
+            request.setAttribute("message", "OTP is sent to your email");
             //request.setAttribute("connection", con);
             mySession.setAttribute("otp", otpvalue);
             mySession.setAttribute("email", email);

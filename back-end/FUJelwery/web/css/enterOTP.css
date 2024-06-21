@@ -107,7 +107,7 @@ body{
 }
 
 .btn{
-    width: 30%;
+    width: 100%;
     background: #151542;
     border: none;
     outline: none;
@@ -115,6 +115,11 @@ body{
     box-shadow: 0 0 10px rgba(0, 0, 0, .1);
     cursor: pointer;
     font-size: 15px;
-    color: #ffffff;
+    color: #fff;
     font-weight: 600;
+    transition: 0.3s;
+}
+
+p{
+    margin: 0;
 }

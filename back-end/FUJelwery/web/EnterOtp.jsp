@@ -36,26 +36,16 @@
                                 <h2 class="text-center" id="title">Enter OTP</h2>
                                 <%
                                     if (request.getAttribute("message") != null) {
-                                        out.print("<p class='text-danger ml-1'>" + request.getAttribute("message") + "</p>");
+                                        out.print("<p style='color: red; font-size: 17px; font-weight: 900'>" + request.getAttribute("message") + "</p>");
                                     }
 
                                 %>
 
                                 <div class="panel-body">
 
-                                    <form id="register-form" action="ValidateOtp" role="form" autocomplete="off"
-                                          class="form" method="post">
-
-                                        <!--                                        <div class="form-group">
-                                                                                    <div class="input-group">
-                                                                                        <span class="input-group-addon"><i
-                                                                                                class="glyphicon glyphicon-envelope color-blue"></i></span> 
-                                                                                        <input id="opt" name="otp" placeholder="Enter OTP"
-                                                                                               class="form-control" type="text" required="required">
-                                                                                    </div>
-                                                                                </div>-->
+                                    <form id="register-form" action="ValidateOtp" role="form" autocomplete="off" class="form" method="post">
                                         <div class="input-box ">
-                                            <input type="text" name="email" id="email-for-pass" required="">
+                                            <input id="opt" name="otp" type="text" id="email-for-pass" required="">
                                             <span class="placeholder">Enter OTP</span>
                                             <i class='bx bxs-user'></i>
                                         </div>
