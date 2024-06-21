@@ -15,12 +15,14 @@
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <script src="js/pagination.js"></script>
         <link rel="stylesheet" href="css/pagination.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.0/dist/sweetalert2.min.css">
+
     </head>
     <body>
 
 
         <!--<jsp:include page="/menu.jsp" flush="true" />-->
-        
+
         <div class="menu-btn">
             <div class="btn-cover">
                 <i class="fas fa-bars"></i>
@@ -50,7 +52,7 @@
                 </div>
 
                 <div class="item"><a href="PostController"><i class="fas fa-file"></i>Posts</a></div>
-                
+
                 <div class="item"><a href="adminaccount.jsp"><i class="fas fa-user"></i>Account</a></div>
                 <div class="item"><a href="adminlogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
 
@@ -112,10 +114,10 @@
                                 <td>${sales.email}</td>
                                 <td>${sales.address}</td>
                                 <td>
-                                    <form action="SalesController" method="POST" class="input">
+                                    <form id="deleteForm" action="SalesController" method="POST" class="input">
                                         <input name="action" value="delete" type="hidden">
                                         <input name="id" value="${sales.userid}" type="hidden">
-                                        <input type="submit" value="Delete">
+                                        <input type="submit" value="Delete"  class="deleteButton">
                                     </form>
                                 </td>
 
@@ -123,7 +125,7 @@
                             <%
                                 }
                             %>    
-                            
+
                         </tbody>
                     </table>
                     <div id="paginationControls" class="pagination-controls">
@@ -136,11 +138,43 @@
 
         </div>
 
+
+
         <script src="js/pagination.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
                 integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
         crossorigin="anonymous"></script>
         <script src="js/sidenav.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.0/dist/sweetalert2.all.min.js"></script>
+        <script>
+            document.querySelectorAll('.deleteButton').forEach(button => {
+                button.addEventListener('click', function (event) {
+                    event.preventDefault(); // Prevent the default form submission
+
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes, delete it!',
+                        cancelButtonText: 'No, cancel!',
+                        reverseButtons: true
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // If confirmed, submit the form
+                            this.closest('form').submit();
+                        } else if (result.dismiss === Swal.DismissReason.cancel) {
+                            Swal.fire(
+                                    'Cancelled',
+                                    'Your product is safe :)',
+                                    'error'
+                                    );
+                        }
+                    });
+                });
+            });
+        </script>
 
 
     </body>
