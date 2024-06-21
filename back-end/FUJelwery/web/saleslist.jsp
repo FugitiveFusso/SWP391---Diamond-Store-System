@@ -147,34 +147,7 @@
         <script src="js/sidenav.js"></script>
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.0/dist/sweetalert2.all.min.js"></script>
-        <script>
-            document.querySelectorAll('.deleteButton').forEach(button => {
-                button.addEventListener('click', function (event) {
-                    event.preventDefault(); // Prevent the default form submission
-
-                    Swal.fire({
-                        title: 'Are you sure?',
-                        text: "You won't be able to revert this!",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonText: 'Yes, delete it!',
-                        cancelButtonText: 'No, cancel!',
-                        reverseButtons: true
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            // If confirmed, submit the form
-                            this.closest('form').submit();
-                        } else if (result.dismiss === Swal.DismissReason.cancel) {
-                            Swal.fire(
-                                    'Cancelled',
-                                    'Your product is safe :)',
-                                    'error'
-                                    );
-                        }
-                    });
-                });
-            });
-        </script>
+        <script src="js/deleteConfirmation.js"></script>
 
 
     </body>
