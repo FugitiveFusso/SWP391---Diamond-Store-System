@@ -128,6 +128,6 @@
                 </div>
             </div>
         </div>
-        <script src="js/productlist_pagination.js"></script>
+                <script src="js/usercollectionlist_pagination.js"></script>
     </body>
 </html>
