@@ -58,97 +58,80 @@ public class DeliveryStaffOrderController extends HttpServlet {
 
             OrderDAO orderDAO = new OrderDAO();
             HttpSession session = request.getSession(false);
-            if (session == null || session.getAttribute("usersession") == null) {
-                response.sendRedirect("userlogin.jsp");
+            if (session == null || session.getAttribute("deliverystaffsession") == null) {
+                response.sendRedirect("deliverystafflogin.jsp");
                 return;
             } else if (action == null || action.equals("list")) {//lists
-                Integer id = null;
-                try {
-                    id = Integer.parseInt(request.getParameter("id"));
-                } catch (NumberFormatException ex) {
-                    log("Parameter id has wrong format.");
-                }
-                if (id != null) {
-                    OrderDAO dao = new OrderDAO();
-                    List<OrderDTO> list = dao.listForDelivery();
-                    request.setAttribute("cartlist", list);
 
-                    int totalPrice = orderDAO.totalAllProduct(id);
-                    request.setAttribute("totalPrice", totalPrice);
-                }
+                OrderDAO dao = new OrderDAO();
+                List<OrderDTO> list = dao.listForDelivery();
+                request.setAttribute("deliverystafforderlist", list);
 
-                request.getRequestDispatcher("/cartlist.jsp").forward(request, response);
-
-            } else if (action.equals("details")) {//details
-
-                Integer id = null;
-                try {
-                    id = Integer.parseInt(request.getParameter("id"));
-                } catch (NumberFormatException ex) {
-                    log("Parameter id has wrong format.");
-                }
-
-                OrderDTO order = null;
-                if (id != null) {
-                    order = orderDAO.load(id);
-                }
-
-                request.setAttribute("order", order);//object
-                request.getRequestDispatcher("/cartdetails.jsp").forward(request, response);
-            } else if (action.equals("update")) {//update
+                request.getRequestDispatcher("./deliverystafforderlist.jsp").forward(request, response);
+            } else if (action.equals("shipping")) {
                 Integer orderID = null;
                 try {
-                    orderID = Integer.parseInt(request.getParameter("id"));
+                    orderID = Integer.parseInt(request.getParameter("orderID"));
                 } catch (NumberFormatException ex) {
-                    log("Parameter ringSize has wrong format.");
+                    log("Parameter orderID has wrong format.");
                 }
-
-                Integer ringSize = null;
-                try {
-                    ringSize = Integer.parseInt(request.getParameter("ringSize"));
-                } catch (NumberFormatException ex) {
-                    log("Parameter ringSize has wrong format.");
-                }
-
-                OrderDTO order = null;
+                
                 if (orderID != null) {
-                    order = orderDAO.load(orderID);
-                }
-                order.setOrderID(orderID);
-                order.setRingSize(ringSize);
-
-                orderDAO.update(order);
-                request.setAttribute("order", order);
-                RequestDispatcher rd = request.getRequestDispatcher("cartdetails.jsp");
-                rd.forward(request, response);
-
-            } else if (action.equals("purchase")) {//purchase
-                Integer userID = null;
-                try {
-                    userID = Integer.parseInt(request.getParameter("userid"));
-                } catch (NumberFormatException ex) {
-                    log("Parameter UserID has wrong format.");
-                }
-
-                String purchaseMethod = request.getParameter("purchaseMethod");
-
-                if (userID != null) {
                     try {
-                        orderDAO.purchase(purchaseMethod, userID, purchasedDate);
-                        request.getSession().setAttribute("success", "Purchase Successfully!!!");
+                        orderDAO.deliveringOrder(orderID);
+                        request.getSession().setAttribute("success", "Received order Successfully!!!");
                     } catch (Exception e) {
-                        log("Error deleting order: " + e.getMessage());
-                        request.getSession().setAttribute("errorMessage", "Error deleting order.");
+                        log("Error processing order with orderID " + orderID + e.getMessage());
+                        request.getSession().setAttribute("errorMessage", "Error receiving order.");
                     }
                 } else {
-                    request.getSession().setAttribute("errorMessage", "Invalid order ID.");
+                    if (orderID == null) {
+                        request.getSession().setAttribute("errorMessage", "Invalid order ID.");
+                    }
                 }
 
-                response.sendRedirect(request.getContextPath() + "/user_homepage.jsp");
+                try {
+                    List<OrderDTO> list = orderDAO.listForDelivery();
+                    request.setAttribute("deliverystafforderlist", list);
+                    request.getRequestDispatcher("/deliverystafforderlist.jsp").forward(request, response);
+                } catch (Exception e) {
+                    log("Error forwarding to sales staff order list: " + e.getMessage());
+                    request.getSession().setAttribute("errorMessage", "Error loading order list.");
+                    response.sendRedirect("errorPage.jsp"); // Redirect to an error page if forwarding fails
+                }
+            } else if (action.equals("delivered")) {
+                Integer orderID = null;
+                try {
+                    orderID = Integer.parseInt(request.getParameter("orderID"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter orderID has wrong format.");
+                }
+                
+                if (orderID != null) {
+                    try {
+                        orderDAO.deliveredOrder(orderID);
+                        request.getSession().setAttribute("success", "Received order Successfully!!!");
+                    } catch (Exception e) {
+                        log("Error processing order with orderID " + orderID + e.getMessage());
+                        request.getSession().setAttribute("errorMessage", "Error receiving order.");
+                    }
+                } else {
+                    if (orderID == null) {
+                        request.getSession().setAttribute("errorMessage", "Invalid order ID.");
+                    }
+                }
 
+                try {
+                    List<OrderDTO> list = orderDAO.listForDelivery();
+                    request.setAttribute("deliverystafforderlist", list);
+                    request.getRequestDispatcher("/deliverystafforderlist.jsp").forward(request, response);
+                } catch (Exception e) {
+                    log("Error forwarding to sales staff order list: " + e.getMessage());
+                    request.getSession().setAttribute("errorMessage", "Error loading order list.");
+                    response.sendRedirect("errorPage.jsp"); // Redirect to an error page if forwarding fails
+                }
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(OrderController.class.getName()).log(Level.SEVERE, null, ex);
+
         }
     }
 
