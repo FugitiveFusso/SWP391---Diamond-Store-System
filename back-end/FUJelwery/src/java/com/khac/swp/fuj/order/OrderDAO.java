@@ -26,12 +26,16 @@ public class OrderDAO {
         try {
 
             Connection con = DBUtils.getConnection();
-            String sql = "select o.orderID, o.userID, u.userName, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, o.ringSize, ((SUM(COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02) * ((100.0 - COALESCE(v.percentage, 0)) / 100)) AS [totalPrice], o.status from [Order] o left join [User] u ON o.userID = u.userID left join [Ring] r ON o.ringID = r.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID  left join [Voucher] v ON o.voucherID = v.voucherID group by o.orderID, o.userID, u.userName, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, v.percentage, o.ringSize, o.status HAVING o.userID = ? AND o.status = 'pending' ";
+            String sql = "SELECT o.orderID, o.userID, u.userName, o.orderDate, r.ringID, r.ringName, r.ringImage, v.voucherID, v.voucherName, o.ringSize, ((SUM(COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02) * ((100.0 - COALESCE(v.percentage, 0)) / 100)) AS [totalPrice], o.status,\n"
+                    + "(SELECT COUNT(DISTINCT o2.orderID) FROM [Order] o2 WHERE o2.userID = ? AND o2.status = 'pending') AS totalOrders\n"
+                    + "FROM [Order] o LEFT JOIN [User] u ON o.userID = u.userID LEFT JOIN [Ring] r ON o.ringID = r.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID \n"
+                    + "GROUP BY o.orderID, o.userID, u.userName, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, v.percentage,  o.ringSize, o.status, r.ringImage\n"
+                    + "HAVING o.userID = ? AND o.status = 'pending'";
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, userID);
-
+            ps.setInt(2, userID);
             ResultSet rs = ps.executeQuery();
             if (rs != null) {
                 while (rs.next()) {
@@ -46,6 +50,8 @@ public class OrderDAO {
                     int ringSize = rs.getInt("ringSize");
                     int totalPrice = rs.getInt("totalPrice");
                     String status = rs.getString("status");
+                    String image = rs.getString("ringImage");
+                    int totalOfOrders = rs.getInt("totalOrders");
 
                     OrderDTO order = new OrderDTO();
 
@@ -60,6 +66,8 @@ public class OrderDAO {
                     order.setRingSize(ringSize);
                     order.setTotalPrice(totalPrice);
                     order.setStatus(status);
+                    order.setImage(image);
+                    order.setNumberOfThings(totalOfOrders);
 
                     list.add(order);
                 }
@@ -470,14 +478,14 @@ public class OrderDAO {
         }
         return false;
     }
-    
+
     public boolean addWarranty(int warrantyID, int orderID) {
         String sql = "UPDATE [Order] SET warrantyID = ? WHERE orderID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            
+
             ps.setInt(1, warrantyID);
             ps.setInt(2, orderID);
 
@@ -507,7 +515,7 @@ public class OrderDAO {
         }
         return false;
     }
-    
+
     public boolean deliveringOrder(int orderID) {
         String sql = "UPDATE [Order] SET status = 'delivering' WHERE orderID = ? ";
         try {
@@ -525,7 +533,7 @@ public class OrderDAO {
         }
         return false;
     }
-    
+
     public boolean deliveredOrder(int orderID) {
         String sql = "UPDATE [Order] SET status = 'delivered' WHERE orderID = ? ";
         try {
@@ -564,4 +572,12 @@ public class OrderDAO {
         return false;
     }
 
+    public static void main(String[] args) {
+        OrderDAO dao = new OrderDAO();
+        List<OrderDTO> o = dao.list(8);
+        for (OrderDTO orderDTO : o) {
+            System.out.println(orderDTO);
+        }
+    }
+    
 }

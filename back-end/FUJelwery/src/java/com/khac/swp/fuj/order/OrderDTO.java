@@ -28,6 +28,8 @@ public class OrderDTO {
     private String purchaseMethod;
     private String status;
     private String delivered;
+    private int numberOfThings;
+    private String image;
 
     public int getOrderID() {
         return orderID;
@@ -172,10 +174,31 @@ public class OrderDTO {
         this.delivered = delivered;
     }
 
+    public int getNumberOfThings() {
+        return numberOfThings;
+    }
+
+    public void setNumberOfThings(int numberOfThings) {
+        this.numberOfThings = numberOfThings;
+    }
+
+    
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @Override
     public String toString() {
-        return "OrderDTO{" + "orderID=" + orderID + ", userID=" + userID + ", userName=" + userName + ", orderDate=" + orderDate + ", ringID=" + ringID + ", ringName=" + ringName + ", voucherID=" + voucherID + ", voucherName=" + voucherName + ", ringSize=" + ringSize + ", totalPrice=" + totalPrice + ", status=" + status + ", delivered=" + delivered + '}';
+        return "OrderDTO{" + "orderID=" + orderID + ", userID=" + userID + ", userName=" + userName + ", address=" + address + ", orderDate=" + orderDate + ", ringID=" + ringID + ", ringName=" + ringName + ", voucherID=" + voucherID + ", voucherName=" + voucherName + ", warrantyID=" + warrantyID + ", warrantyName=" + warrantyName + ", certificateID=" + certificateID + ", certificateName=" + certificateName + ", ringSize=" + ringSize + ", totalPrice=" + totalPrice + ", purchaseMethod=" + purchaseMethod + ", status=" + status + ", delivered=" + delivered + ", numberOfThings=" + numberOfThings + ", image=" + image + '}';
     }
+    
+    
+
 
     
 }

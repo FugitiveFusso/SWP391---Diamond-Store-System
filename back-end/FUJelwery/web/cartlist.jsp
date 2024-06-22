@@ -61,22 +61,36 @@
                         <input name=keyword type=text class="search-input" value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
                         <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
                     </form>
+
+                    <%
+                        List<OrderDTO> list = (List<OrderDTO>) request.getAttribute("cartlist");
+                        int totalNumberOfThings = 0;
+                        if (list != null) {
+                            for (OrderDTO order : list) {
+                                totalNumberOfThings = order.getNumberOfThings();
+                            }
+                        }
+                        request.setAttribute("totalNumberOfThings", totalNumberOfThings);
+                    %>
+
+                    <h2>Total Items in Orders: ${totalNumberOfThings}</h2>
+
+
                     <table>
                         <tr>
-                            <th>Order ID</th>
+                            <th>Ring Image</th>
                             <th>Ring Name</th>
                             <th>Ring Size</th>
                             <th>Price</th>
                             <th>Delete</th>
                         </tr>
                         <%
-                            List<OrderDTO> list = (List<OrderDTO>) request.getAttribute("cartlist");
                             for (OrderDTO order : list) {
                                 pageContext.setAttribute("order", order);
                         %>
                         <tr>
-                            <td>${order.orderID}</td>
-                            <td><a href="ProductController?action=details&id=${order.ringID}">${order.ringName}</td>
+                            <td><img src="${order.image}" width="300px" alt="${order.ringName}"></td>
+                            <td><a href="ProductController?action=details&id=${order.ringID}">${order.ringName}</a></td>
                             <td>${order.ringSize}</td>
                             <td>${order.totalPrice}</td>
                             <td>
@@ -86,14 +100,12 @@
                                     <input type="submit" value="Delete">
                                 </form>
                             </td>
-
                         </tr>
                         <%
                             }
-                        %>    
+                        %>
+                    </table>
 
-                        </td></tr>
-                    </table>    
                 </div>
             </div>
         </div>
