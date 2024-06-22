@@ -15,14 +15,14 @@
             <div class="header-top">
                 <div class="top-info-left">
                     <ul>
-                        <li>"Timeless elegance and craftsmanship</li>
-                        <li>at FUJ Jewelry Online Shop."</li>                         
+                        <li>Timeless elegance and craftsmanship</li>
+                        <li>at FUJ Jewelry Online Shop.</li>                         
                     </ul>
                 </div>
                 <a href="./user_homepage.jsp"><img src="./images/Screenshot (656).png"></a>
                 <div class="top-info-right">
                     <ul>
-                        <li>FUJ Jewelry Shop - (+ 84) 898876512</li>
+                        <li>FUJ Jewelry Shop - <strong>(+ 84) 898876512</strong></li>
                     </ul>
                 </div>
             </div>
