@@ -119,7 +119,7 @@
                                 }
                             %>
                         </div>
-                        
+
                         <div class="ibox-content">
                             <div class="voucher">
                                 <!-- Apply Voucher Form -->
@@ -174,20 +174,9 @@
                                 <span>
                                     Total
                                 </span>
-                                <h2 class="font-bold">
+                                <h2 class="font-bold" style="color: red">
                                     ${totalPrice} VND
                                 </h2>
-                                <div class="purchase">
-                                    <form action="OrderController" method="POST" class="mt-3">                                       
-                                        <input name="action" value="purchase" type="hidden">
-                                        <input type="hidden" name="userid" value="${sessionScope.usersession.userid}">
-                                        <div class="form-group text-center">
-                                            <button type="submit" class="btn btn-primary btn-large">
-                                                <i class="fa fa-shopping-cart"></i> Purchase
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
 
                             </div>
                         </div>
@@ -199,7 +188,19 @@
                             <div class="ibox-content text-center">
                                 <h5><i class="fa fa-phone"></i>(+ 84) 898876512</h5>
                                 <span class="small">
-                                    Please contact with us if you have any questions. We are avalible 24h.
+                                    Please contact with us if you have any questions. We are available 24h.
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="ibox">
+                            <div class="ibox-title">
+                                <h5>Trouble with ring?</h5>
+                            </div>
+                            <div class="ibox-content text-center">
+                                <h5 style="display: block; text-align: justify; text-justify: inter-word; width: 100%;">Having problems when choosing ring ?</h5>
+                                <span class="small">
+                                    <a href='static_webpages/ringmeasuring.jsp' style="color: black">We are here to help you to find the best ring that fits you.</a>
                                 </span>
                             </div>
                         </div>
