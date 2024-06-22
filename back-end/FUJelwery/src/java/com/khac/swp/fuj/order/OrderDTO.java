@@ -24,7 +24,7 @@ public class OrderDTO {
     private int certificateID;
     private String certificateName;
     private int ringSize;
-    private int totalPrice;
+    private String totalPrice;
     private String purchaseMethod;
     private String status;
     private String delivered;
@@ -142,11 +142,11 @@ public class OrderDTO {
         this.ringSize = ringSize;
     }
 
-    public int getTotalPrice() {
+    public String getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(int totalPrice) {
+    public void setTotalPrice(String totalPrice) {
         this.totalPrice = totalPrice;
     }
 

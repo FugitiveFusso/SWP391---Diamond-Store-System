@@ -73,7 +73,7 @@ public class DeliveryStaffOrderController extends HttpServlet {
                     List<OrderDTO> list = dao.listForDelivery();
                     request.setAttribute("cartlist", list);
 
-                    int totalPrice = orderDAO.totalAllProduct(id);
+                    String totalPrice = orderDAO.totalAllProduct(id);
                     request.setAttribute("totalPrice", totalPrice);
                 }
 
