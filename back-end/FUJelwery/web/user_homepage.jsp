@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="css/navigation_bar.css">
         <link rel="stylesheet" href="css/user_mainpage.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw=="/>
+
         <style>
             /* The popup (background) */
             .popup {
@@ -101,7 +102,9 @@
                         <div class="sub-menu-1">
                             <ul>
                                 <li><a href='./ProductController'>Ring</a></li>
-                                <li><a href='./UserCollectionController'>Collection</a></li>                                
+                                <li><a href='./UserCollectionController'>Collection</a></li>  
+                                <li><a href='OrderController?action=list&id=${sessionScope.usersession.userid}'>Cart</a></li>
+                                <li><a href='BillController?action=list&id=${sessionScope.usersession.userid}'>Bill</a></li>
                             </ul>
                         </div>   
                     </li>
@@ -228,7 +231,7 @@
                         <div class="description_hero">
                             <span>At FUJ, we are committed to providing the finest quality jewelry at unbeatable prices. Our journey began with a passion for excellence and a dedication to creating pieces that are not only beautiful but also accessible to everyone. With years of experience and a team of skilled artisans, we take pride in our craftsmanship and the exceptional service we offer to each of our customers.</span>
                         </div>
-                        <a style="margin-top: 15px" class="slpBtn" title="Shop Diamond" href="productlist.jsp">About FUJ</a>
+                        <a style="margin-top: 15px" class="slpBtn" title="Shop Diamond" href="user_aboutus.jsp">About FUJ</a>
                     </div>
                     <div class="bannerImage">
                         <img src="images/AboutUs.jpg" id="diamondHero" style="width: 76%; height: 50%">
