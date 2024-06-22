@@ -123,10 +123,10 @@
                                 <td>${voucher.createddate}</td>
                                 <td>${voucher.createdby}</td>
                                 <td>
-                                    <form action="VoucherController" method="POST" class="input">
+                                    <form id="deleteForm" action="VoucherController" method="POST" class="input">
                                         <input name="action" value="delete" type="hidden">
                                         <input name="id" value="${voucher.id}" type="hidden">
-                                        <input type="submit" value="Delete">
+                                        <input type="submit" value="Delete" class="deleteButton">
                                     </form>
                                 </td>
                             </tr>
@@ -149,6 +149,7 @@
                                                         integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
         crossorigin="anonymous"></script>
         <script src="js/sidenav.js"></script>
-
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.0/dist/sweetalert2.all.min.js"></script>
+        <script src="js/deleteConfirmation.js"></script>
     </body>
 </html>

@@ -37,7 +37,7 @@ public class ForgotPassword extends HttpServlet {
             Random rand = new Random();
 //            otpvalue = rand.nextInt(1255650);
             otpvalue = rand.nextInt(10000000);
-            String otp = String.format("%07d", otpvalue); 
+            String otp = String.format("%06d", otpvalue); 
 
             String to = email;// change accordingly
             // Get the session object

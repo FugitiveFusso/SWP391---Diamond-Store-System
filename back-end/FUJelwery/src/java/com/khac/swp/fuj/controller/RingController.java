@@ -107,12 +107,8 @@ public class RingController extends HttpServlet {
                 } catch (NumberFormatException ex) {
                     log("Parameter diamondID has wrong format.");
                 }
-                Integer price = null;
-                try {
-                    price = Integer.parseInt(request.getParameter("price"));
-                } catch (NumberFormatException ex) {
-                    log("Parameter price has wrong format.");
-                }
+                String price = request.getParameter("price");
+                
                 Integer collectionID = null;
                 try {
                     collectionID = Integer.parseInt(request.getParameter("collectionID"));
@@ -159,12 +155,7 @@ public class RingController extends HttpServlet {
                 } catch (NumberFormatException ex) {
                     log("Parameter diamondID has wrong format.");
                 }
-                Integer price = null;
-                try {
-                    price = Integer.parseInt(request.getParameter("price"));
-                } catch (NumberFormatException ex) {
-                    log("Parameter price has wrong format.");
-                }
+                String price = request.getParameter("price");
                 Integer collectionID = null;
                 try {
                     collectionID = Integer.parseInt(request.getParameter("collectionID"));

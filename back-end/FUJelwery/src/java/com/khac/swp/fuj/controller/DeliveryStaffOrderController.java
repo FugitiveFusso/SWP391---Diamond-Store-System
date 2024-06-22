@@ -63,9 +63,15 @@ public class DeliveryStaffOrderController extends HttpServlet {
                 return;
             } else if (action == null || action.equals("list")) {//lists
 
+<<<<<<< HEAD
                 OrderDAO dao = new OrderDAO();
                 List<OrderDTO> list = dao.listForDelivery();
                 request.setAttribute("deliverystafforderlist", list);
+=======
+                    String totalPrice = orderDAO.totalAllProduct(id);
+                    request.setAttribute("totalPrice", totalPrice);
+                }
+>>>>>>> 8315dbcfcb4ec67077d056d594268f62db8505b4
 
                 request.getRequestDispatcher("./deliverystafforderlist.jsp").forward(request, response);
             } else if (action.equals("shipping")) {

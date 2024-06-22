@@ -73,7 +73,7 @@ public class OrderController extends HttpServlet {
                     List<OrderDTO> list = dao.list(id);
                     request.setAttribute("cartlist", list);
 
-                    int totalPrice = orderDAO.totalAllProduct(id);
+                    String totalPrice = orderDAO.totalAllProduct(id);
                     request.setAttribute("totalPrice", totalPrice);
                 }
 
@@ -173,7 +173,7 @@ public class OrderController extends HttpServlet {
                     List<OrderDTO> list = dao.list(userID);
                     request.setAttribute("cartlist", list);
 
-                    int totalPrice = orderDAO.totalAllProduct(userID);
+                    String totalPrice = orderDAO.totalAllProduct(userID);
                     request.setAttribute("totalPrice", totalPrice);
                 }
 
@@ -204,7 +204,7 @@ public class OrderController extends HttpServlet {
                     List<OrderDTO> list = dao.list(userID);
                     request.setAttribute("cartlist", list);
 
-                    int totalPrice = orderDAO.totalAllProduct(userID);
+                    String totalPrice = orderDAO.totalAllProduct(userID);
                     request.setAttribute("totalPrice", totalPrice);
                 }
 

@@ -39,7 +39,7 @@
                             <a href="DiamondController" class="sub-item">Diamond List</a>
                             <a href="RingController" class="sub-item">Ring List</a>
                             <a href="CollectionController" class="sub-item">Collection List</a>
-                            
+
                         </div>
                     </a>
                 </div>
@@ -62,7 +62,7 @@
                 </div>
 
                 <div class="item"><a href="CategoryController"><i class="fas fa-layer-group"></i>View Category</a></div>
-                
+
                 <div class="item"><a href="salesstaffaccount.jsp"><i class="fas fa-user"></i>Account</a></div>
                 <div class="item"><a href="saleslogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
 
@@ -120,10 +120,10 @@
                                 <td><img src=${certificate.certificateImage} width="300px" height="300px" style="border-radius: 20px;"></td>
                                 <td>${certificate.certificateDescription}</td>
                                 <td>
-                                    <form action="CertificateController" method="POST" class="input">
+                                    <form id="deleteForm" action="CertificateController" method="POST" class="input">
                                         <input name="action" value="delete" type="hidden">
                                         <input name="id" value="${certificate.certificateID}" type="hidden">
-                                        <input type="submit" value="Delete">
+                                        <input type="submit" value="Delete" class="deleteButton">
                                     </form>
                                 </td>
 
@@ -150,6 +150,7 @@
                                                         integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
         crossorigin="anonymous"></script>
         <script src="js/sidenav.js"></script>
-
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.0/dist/sweetalert2.all.min.js"></script>
+        <script src="js/deleteConfirmation.js"></script>
     </body>
 </html>
