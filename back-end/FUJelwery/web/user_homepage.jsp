@@ -79,7 +79,7 @@
         <% }%>
         <div class="menu">
             <ul class="navbar">
-                
+
                 <li class="navbar__link">
                     <a href="#">Jewelry</a>
                     <div class="sub-menu-1">
@@ -131,38 +131,38 @@
                 <img src="images/hero1.jpg" height="1px" alt="" srcset="">
             </div>
 
-            <div class="trending">
-                <div class="title">
-                    <h1>MOSTLY SEARCH</h1>
-                </div>
-                <div class="list">
-                    <div class="swiper">
-                        <a href="">
-                            <img src="images/img1.jpeg" alt="">
-                        </a>
-                        <h2>Diamond</h2>
-                    </div>
-                    <div class="swiper">
-                        <a href="">
-                            <img src="images/img1.jpeg" alt="">
-                        </a>
-                        <h2>Diamond</h2>
-                    </div>
-                    <div class="swiper">
-                        <a href="">
-                            <img src="images/img1.jpeg" alt="">
-                        </a>
-                        <h2>Diamond</h2>
-                    </div>
-                    <div class="swiper">
-                        <a href="">
-                            <img src="images/img1.jpeg" alt="">
-                        </a>
-                        <h2>Diamond</h2>
-                    </div>
-                </div>
+            <!--            <div class="trending">
+                            <div class="title">
+                                <h1>MOSTLY SEARCH</h1>
+                            </div>
+                            <div class="list">
+                                <div class="swiper">
+                                    <a href="">
+                                        <img src="images/img1.jpeg" alt="">
+                                    </a>
+                                    <h2>Diamond</h2>
+                                </div>
+                                <div class="swiper">
+                                    <a href="">
+                                        <img src="images/img1.jpeg" alt="">
+                                    </a>
+                                    <h2>Diamond</h2>
+                                </div>
+                                <div class="swiper">
+                                    <a href="">
+                                        <img src="images/img1.jpeg" alt="">
+                                    </a>
+                                    <h2>Diamond</h2>
+                                </div>
+                                <div class="swiper">
+                                    <a href="">
+                                        <img src="images/img1.jpeg" alt="">
+                                    </a>
+                                    <h2>Diamond</h2>
+                                </div>
+                            </div>-->
 
-            </div>
+            <!--</div>-->
         </div>
 
         <div class="guarantee-container">
@@ -174,6 +174,35 @@
             <img src="images/image_5.png" alt="" width="auto">
 
         </div>
+
+
+        <section class="why-to-choose-us">
+            <div class="title">
+                <h1>Why to choose us</h1>
+            </div>
+            <div class="why-choose-us">
+                <div class="feature-box">
+                    <div class="icon">💎</div>
+                    <h3>Best Price Diamond</h3>
+                    <p>We offer the best prices on high-quality diamonds to fit your budget.</p>
+                </div>
+                <div class="feature-box">
+                    <div class="icon">🏆</div>
+                    <h3>Best Quality</h3>
+                    <p>Our products are crafted with the finest materials and unparalleled craftsmanship.</p>
+                </div>
+                <div class="feature-box">
+                    <div class="icon">⭐</div>
+                    <h3>Best Service</h3>
+                    <p>Experience exceptional customer service from our dedicated team.</p>
+                </div>
+                <div class="feature-box">
+                    <div class="icon">🔒</div>
+                    <h3>Attractive Warranty</h3>
+                    <p>Enjoy peace of mind with our comprehensive and attractive warranty packages.</p>
+                </div>
+            </div> 
+        </section>
 
         <div class="footer">
             <div class="footer-content">
