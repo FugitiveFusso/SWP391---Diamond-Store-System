@@ -88,7 +88,7 @@
                                                     <div class="cart-product-imitation">
                                                         <img src="${order.image}" width="80px" alt="${order.ringName}"
                                                     </div>                                                     
-                                                    
+
                                                 </td>
                                                 <td class="desc" width="600">
                                                     <h4>                                                      
@@ -118,23 +118,10 @@
                             <%
                                 }
                             %>
-
-                            <div class="ibox-content">                              
-                                <!-- Purchase Method Form -->
-                                <form action="OrderController" method="POST" class="mt-3">
-                                    <div class="form-group">
-                                        <label for="purchaseMethod">Select your preferred payment method:</label>
-                                        <select name="purchaseMethod" id="purchaseMethod" required class="form-control">
-                                            <option value="">Please select your preferred payment method:</option>
-                                            <option value="Received at store" ${requestScope.order.purchaseMethod == 'Received at store' ? 'selected' : ''}>Received at store</option>
-                                            <option value="Door-to-door delivery service" ${requestScope.order.purchaseMethod == 'Door-to-door delivery service' ? 'selected' : ''}>Door-to-door delivery service</option>
-                                        </select>
-                                    </div>
-                                    <input name="action" value="purchase" type="hidden">
-                                    <input type="hidden" name="userid" value="${sessionScope.usersession.userid}">
-                                    <button type="submit" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Purchase</button>
-                                </form>
-
+                        </div>
+                        
+                        <div class="ibox-content">
+                            <div class="voucher">
                                 <!-- Apply Voucher Form -->
                                 <form action="OrderController" method="POST" class="mt-3">
                                     <div class="form-group">
@@ -152,7 +139,29 @@
                                     <button type="submit" class="btn btn-danger"><i class="fa fa-ticket"></i>Remove Voucher</button>
                                 </form>
                             </div>
+                        </div>
 
+                        <div class="ibox-content">       
+                            <!-- Purchase Method Form -->
+                            <div class="purchase">
+                                <form action="OrderController" method="POST" class="mt-3">
+                                    <div class="form-group">
+                                        <label for="purchaseMethod">Select your preferred payment method:</label>
+                                        <select name="purchaseMethod" id="purchaseMethod" required class="form-control">
+                                            <option value="">Please select your preferred payment method:</option>
+                                            <option value="Received at store" ${requestScope.order.purchaseMethod == 'Received at store' ? 'selected' : ''}>Received at store</option>
+                                            <option value="Door-to-door delivery service" ${requestScope.order.purchaseMethod == 'Door-to-door delivery service' ? 'selected' : ''}>Door-to-door delivery service</option>
+                                        </select>
+                                    </div>
+                                    <input name="action" value="purchase" type="hidden">
+                                    <input type="hidden" name="userid" value="${sessionScope.usersession.userid}">
+                                    <div class="form-group text-right">
+                                        <button type="submit" class="btn btn-primary btn-large">
+                                            <i class="fa fa-shopping-cart"></i> Purchase
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
 
                     </div>
@@ -168,6 +177,17 @@
                                 <h2 class="font-bold">
                                     ${totalPrice} VND
                                 </h2>
+                                <div class="purchase">
+                                    <form action="OrderController" method="POST" class="mt-3">                                       
+                                        <input name="action" value="purchase" type="hidden">
+                                        <input type="hidden" name="userid" value="${sessionScope.usersession.userid}">
+                                        <div class="form-group text-center">
+                                            <button type="submit" class="btn btn-primary btn-large">
+                                                <i class="fa fa-shopping-cart"></i> Purchase
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
 
                             </div>
                         </div>
@@ -184,80 +204,11 @@
                             </div>
                         </div>
 
-                        
+
                     </div>
                 </div>
             </div>
         </div>
-
-        <!--        <div class="list-container">
-                    <div class="smaller-container">
-                        <div class="list-title">Your Cart</div>
-                        <div class="list">
-                            <form action='' method=GET id="searchbox" class="center-searchbox"> 
-                                <input name=keyword type=text class="search-input" value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
-                                <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
-                            </form>
-        
-        
-
-        <h2>Total Items in Orders: ${totalNumberOfThings}</h2>
-
-
-        <table>
-            <tr>
-                <th>Ring Image</th>
-                <th>Ring Name</th>
-                <th>Ring Size</th>
-                <th>Price</th>
-                <th>Delete</th>
-            </tr>
-        
-        <tr>
-            <td><img src="${order.image}" width="300px" alt="${order.ringName}"></td>
-            <td><a href="ProductController?action=details&id=${order.ringID}">${order.ringName}</a></td>
-            <td>${order.ringSize}</td>
-            <td>${order.totalPrice}</td>
-            <td>
-                <form action="OrderController" method="POST">
-                    <input name="action" value="delete" type="hidden">
-                    <input name="id" value="${order.orderID}" type="hidden">
-                    <input type="submit" value="Delete">
-                </form>
-            </td>
-        </tr>
-        
-    </table>
-
-</div>
-</div>
-</div>
-
-<h1>Total Price: ${totalPrice} VND</h1>
-
-<form action="OrderController" method="POST">
-<select name="purchaseMethod" required class="form-control" class="purchase">
-<option value="">Please select your preferred payment method: </option>
-<option value="Received at store" ${requestScope.order.purchaseMethod == 'Received at store' ? 'selected' : ''}>Received at store</option>
-<option value="Door-to=door delivery service" ${requestScope.order.purchaseMethod == 'Door-to-door delivery service' ? 'selected' : ''}>Door-to-door delivery service</option>
-</select>
-<input name="action" value="purchase" type="hidden">
-<input type="hidden" name="userid" value=${sessionScope.usersession.userid}>
-<input type="submit" value="Purchase">
-</form>
-
-<form action="OrderController" method="POST">
-<input name="action" value="applyVoucher" type="hidden">
-<input name="coupon" type="text" placeholder="Enter coupon code">
-<input type="hidden" name="userid" value=${sessionScope.usersession.userid}>
-<input type="submit" value="Apply Voucher">
-</form>
-<form action="OrderController" method="POST">
-<input name="action" value="removeVoucher" type="hidden">
-<input type="hidden" name="userid" value=${sessionScope.usersession.userid}>
-<input type="submit" value="Remove Voucher">
-</form>-->
-
 
         <div class="footer">
             <div class="footer-content">
@@ -311,6 +262,7 @@
 
 
         <script src="js/productlist_pagination.js"></script>
+
 
     </body>
 </html>
