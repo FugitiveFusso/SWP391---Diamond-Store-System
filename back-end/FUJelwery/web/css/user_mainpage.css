@@ -106,8 +106,8 @@ a{
 
 
 .guarantee-container {
-    margin: 50px auto; 
-    background-color: #FFF1E8;
+    margin: auto; 
+    background-color: #f6f6f6;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -124,6 +124,7 @@ a{
 .guarantee-container img {
     max-width: 700px; 
     height: auto; 
+    width: 40%;
 }
 
 .guarantee-details h1 {
