@@ -54,66 +54,30 @@
             </ul>
         </div> 
 
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-6 col-sm-6 col-12"> <!-- Adjust the column size as needed -->
-                    <div class="card">
-                        <!-- Left Column: Image -->
-                        <div class="card-image-container">
-                            <img src="${requestScope.collection.collectionImage}" class="card-img-left" alt="Voucher Image" style="width: 260px; height: 350px;">
-                        </div>
-                        <!-- Right Column: Information -->
-                        <div class="card-body">
-                            <h6 class="card-subtitle mb-2 text-muted">Collection ID: ${requestScope.collection.collectionID}</h6>
-                            <h4 class="card-title" style="font-weight: 700">${requestScope.collection.collectionName}</h4>
-                            <p class="card-text"><strong>Description: </strong> ${requestScope.collection.collectionDescription}</p>
-                            <div class="btn-group d-flex justify-content-center align-items-center" role="group" aria-label="Voucher Actions">
-                                <form action="UserCollectionController" method="post" class="mr-2">
-                                    <input type="hidden" name="action" value="list">
-                                    <button type="submit" class="btn btn-primary">Return</button>
-                                </form>                               
-                            </div>
-                        </div>
-                    </div>
+        <!--style="background-image: url('${requestScope.collection.collectionImage}');"-->
+        <div class="collection">
+            <h1 class="collection-name">${requestScope.collection.collectionName}</h1>
+            <p class="collection-description">${requestScope.collection.collectionDescription}</p>
+            <div class="product-list">
+                <%
+                    List<RingDTO> list = (List<RingDTO>) request.getAttribute("ringclist");
+                    for (RingDTO ring : list) {
+                        pageContext.setAttribute("ring", ring);
+                %>
+                <div class="product-item">
+                    <a href="ProductController?action=details&id=${ring.ringID}" class="product-link">
+                        <img src="${ring.ringImage}" alt="${ring.ringName}">
+                        <h2 class="product-name">${ring.ringName}</h2>
+                        <p class="product-description">Price: ${ring.totalPrice}</p>
+                    </a>
                 </div>
+                <% }%>
             </div>
+        </div>
 
-            <table id="pagination">
-                <thead>
-                    <tr>
-                        <th>Ring ID</th>
-                        <th>Ring Name</th>
-                        <th>Ring Image</th>
-                        <th>Diamond Name</th>
-                        <th>Price</th>
-                    </tr>
-                </thead>
-                <tbody>
 
-                    <%
-                        List<RingDTO> list = (List<RingDTO>) request.getAttribute("ringclist");
-                        for (RingDTO ring : list) {
-                            pageContext.setAttribute("ring", ring);
-                    %>
-                    <tr>
-                        <td>
-                            <a href="ProductController?action=details&id=${ring.ringID}">   ${ring.ringID}</td>
-                        <td>${ring.ringName}</td>
-                        <td><img src=${ring.ringImage} width="300px" height="300px"></td>
-                        <td>${ring.diamondName}</td>
-                        <td>${ring.totalPrice}</td>
-                    </tr>
-                    <%
-                        }
-                    %>    
-                </tbody>
-            </table>
-            <div id="paginationControls" class="pagination-controls">
-                <button id="prevButton" class="pagination-button"><i class="fas fa-chevron-left"></i></button>
-                <div id="pageNumbers"></div>
-                <button id="nextButton" class="pagination-button"><i class="fas fa-chevron-right"></i></button>
-            </div>
-        </div>   
+
+
 
         <div class="footer">
             <div class="footer-content">
