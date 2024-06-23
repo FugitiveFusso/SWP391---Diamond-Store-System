@@ -79,8 +79,10 @@
                             pageContext.setAttribute("collection", collection);
                     %>
                     <div class="container">
-                        <img src="${collection.collectionImage} " alt="Collection Image" class="image">
-                        <div class="title">${collection.collectionName} </div>
+                        <a href="UserCollectionController?action=details&id=${collection.collectionID}">
+                            <img src="${collection.collectionImage} " alt="Collection Image" class="image">
+                            <div class="title">${collection.collectionName} </div>
+                        </a>
                     </div>
                     <% }%>
                 </div>
@@ -128,6 +130,6 @@
                 </div>
             </div>
         </div>
-                <script src="js/usercollectionlist_pagination.js"></script>
+        <script src="js/usercollectionlist_pagination.js"></script>
     </body>
 </html>
