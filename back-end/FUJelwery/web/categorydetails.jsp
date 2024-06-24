@@ -1,5 +1,6 @@
 
 <%@page import="com.khac.swp.fuj.ring.RingDTO"%>
+<%@page import="com.khac.swp.fuj.ring.RingDTO"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -8,10 +9,23 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Category Management Page</title>
         <link rel="stylesheet" href="css/navbar_admin.css">
+        <script src="https://unpkg.com/@phosphor-icons/web"></script>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <script src="js/pagination.js"></script>
+        <link rel="stylesheet" href="css/pagination.css">
         <link rel="stylesheet" href="css/collection_detail.css">
+        <script>
+            window.onload = function () {
+                if (!sessionStorage.getItem('hasReloaded')) {
+                    sessionStorage.setItem('hasReloaded', 'true');
+                    location.reload();
+                } else {
+                    sessionStorage.removeItem('hasReloaded');
+                }
+            };
+        </script>
 
         <style>
             .post-title{
@@ -115,16 +129,19 @@
             <p> Login username: ${sessionScope.salessession.username}</p>
         </div>
 
-        <div class="container mt-4">
+        <div class="container">
             <div class="row justify-content-center">
-                <!-- Right Column: Information -->
-                <div class="col-md-8">
+                <div class="col-md-6 col-sm-6 col-12"> <!-- Adjust the column size as needed -->
                     <div class="card">
+                        <!-- Left Column: Image -->
+                        <div class="card-image-container">
+                            <img src="${requestScope.category.image}" class="card-img-left" alt="Category Image" style="width: 260px; height: 350px;">
+                        </div>
+                        <!-- Right Column: Information -->
                         <div class="card-body">
-                            <h6 class="card-subtitle mb-2 text-muted" >Category ID: ${requestScope.category.categoryID}</h6>
-                            <h4 class="card-title" style="font-weight: 700">${requestScope.category.categoryName}</h4>                               
-
-                            <div class="btn-group" role="group" aria-label="Voucher Actions">
+                            <h6 class="card-subtitle mb-2 text-muted">Category ID: ${requestScope.category.categoryID}</h6>
+                            <h4 class="card-title" style="font-weight: 700">${requestScope.category.categoryName}</h4>
+                            <div class="btn-group d-flex justify-content-center align-items-center" role="group" aria-label="Voucher Actions">
                                 <form action="CategoryController" method="post" class="mr-2">
                                     <input type="hidden" name="action" value="list">
                                     <button type="submit" class="btn btn-primary">Return</button>
@@ -139,41 +156,50 @@
                     </div>
                 </div>
             </div>
+
+            <table id="pagination">
+                <thead>
+                    <tr>
+                        <th>Ring ID</th>
+                        <th>Ring Name</th>
+                        <th>Ring Image</th>
+                        <th>Diamond Name</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <%
+                        List<RingDTO> list = (List<RingDTO>) request.getAttribute("ringclist");
+                        for (RingDTO ring : list) {
+                            pageContext.setAttribute("ring", ring);
+                    %>
+                    <tr>
+                        <td>
+                            <a href="RingController?action=details&id=${ring.ringID}">   ${ring.ringID}</td>
+                        <td>${ring.ringName}</td>
+                        <td><img src=${ring.ringImage} width="300px" height="300px"></td>
+                        <td>${ring.diamondName}</td>
+                        <td>${ring.totalPrice}</td>
+                    </tr>
+                    <%
+                        }
+                    %>    
+                </tbody>
+            </table>
+            <div id="paginationControls" class="pagination-controls">
+                <button id="prevButton" class="pagination-button"><i class="fas fa-chevron-left"></i></button>
+                <div id="pageNumbers"></div>
+                <button id="nextButton" class="pagination-button"><i class="fas fa-chevron-right"></i></button>
+            </div>
         </div>
-        <table id="pagination">
-            <thead>
-                <tr>
-                    <th>Ring ID</th>
-                    <th>Ring Name</th>
-                    <th>Ring Image</th>
-                    <th>Diamond Name</th>
-                    <th>Price</th>
-                </tr>
-            </thead>
-            <tbody>
+    </div>
+</div>
+</div>
+<script src="js/pagination.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+                                                integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+crossorigin="anonymous"></script>
+<script src="js/sidenav.js"></script>
 
-                <%
-                    List<RingDTO> list = (List<RingDTO>) request.getAttribute("ringclist");
-                    for (RingDTO ring : list) {
-                        pageContext.setAttribute("ring", ring);
-                %>
-                <tr>
-                    <td>
-                        <a href="RingController?action=details&id=${ring.ringID}">   ${ring.ringID}</td>
-                    <td>${ring.ringName}</td>
-                    <td><img src=${ring.ringImage} width="300px" height="300px" style="border-radius: 20px;"></td>
-                    <td>${ring.diamondName}</td>
-                    <td>${ring.totalPrice}</td>
-                </tr>
-                <%
-                    }
-                %>    
-            </tbody>
-        </table>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
-                integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
-        crossorigin="anonymous"></script>
-        <script src="js/sidenav.js"></script>
-
-    </body>
+</body>
 </html>

@@ -101,6 +101,7 @@ public class CategoryController extends HttpServlet {
                     log("Parameter id has wrong format.");
                 }
                 String categoryName = request.getParameter("categoryName");
+                String categoryImage = request.getParameter("categoryImage");
 
                 CategoryDTO category = null;
                 if (categoryid != null) {
@@ -108,6 +109,7 @@ public class CategoryController extends HttpServlet {
                 }
                 category.setCategoryID(categoryid);
                 category.setCategoryName(categoryName);
+                category.setImage(categoryImage);
                 categoryDAO.update(category);
 
                 Integer id = null;
@@ -127,7 +129,7 @@ public class CategoryController extends HttpServlet {
                 rd.forward(request, response);
 
             } else if (action.equals("insert")) {//insert
-
+                String categoryImage = request.getParameter("categoryImage");
                 String categoryName = request.getParameter("categoryName");
 
                 CategoryDAO dao = new CategoryDAO();
@@ -135,7 +137,9 @@ public class CategoryController extends HttpServlet {
                 if (category == null) {
 
                     category = new CategoryDTO();
+
                     category.setCategoryName(categoryName);
+                    category.setImage(categoryImage);
                     request.setAttribute("category", category);
 
                     categoryDAO.insert(category);
