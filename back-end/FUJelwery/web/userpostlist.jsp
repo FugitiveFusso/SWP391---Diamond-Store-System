@@ -23,7 +23,7 @@
                 <div class="top-info-left">
                     <ul>
                         <li>Timeless elegance and craftsmanship</li>
-                        <li>at FUJ Jewelry Online Shop.</li>                         
+                        <li style="margin-left: 30px">at FUJ Jewelry Online Shop.</li>                              
                     </ul>
                 </div>
                 <a href="./user_homepage.jsp"><img src="./images/Screenshot (656).png"></a>
