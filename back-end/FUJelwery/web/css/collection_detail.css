@@ -258,6 +258,7 @@ body {
     margin-top: 30px;
     font-weight: 700;
     font-family: 'Inter';
+    color: #151542;
 }
 
 .card-container {
@@ -318,12 +319,7 @@ body {
     padding: 10px;
     width: 17%; /* Adjust the width accordingly */
     box-sizing: border-box;
-    text-align: start;
     transition: 0.3s;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-
 }
 
 .product-card:hover{
@@ -347,6 +343,21 @@ body {
     color: #333;
 }
 
+.product-name {
+    font-size: 25x;
+    color: #151542;
+    margin: 10px 0;
+    white-space: nowrap; /* Prevents the text from wrapping to the next line */
+    overflow: hidden; /* Hides the overflow text */
+    text-overflow: ellipsis; /* Adds an ellipsis (...) to the end of the truncated text */
+    padding: 0 10px; /* Adds padding to make it look better */
+    font-weight: 500;
+}
+
+.product-price{
+    color: #333;
+    padding: 0 10px;
+}
 .button button{
     background-color: #151542;
     border-color: #151542;
@@ -405,7 +416,7 @@ a:hover{
     font-size: 16px;
     cursor: pointer;
     margin: 0 5px;
-    padding: 5px 10px;
+    padding: 5px 12px;
     transition: background-color 0.3s ease;
     border-radius: 20px;
 

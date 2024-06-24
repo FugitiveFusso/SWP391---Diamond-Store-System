@@ -71,10 +71,6 @@
 
         <div class="list-container">
             <div class="smaller-container">
-                <form action='' method=GET id="searchbox" class="center-searchbox"> 
-                    <input name=keyword type=text class="search-input" value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
-                    <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
-                </form>
                 <div class="list-title">Ring List</div>
                 <div class="list">
                     <div class="card-container">
@@ -86,9 +82,9 @@
                         <div class="product-card">
                             <a href="ProductController?action=details&id=${ring.ringID}">
                                 <img src="${ring.ringImage}" alt="${ring.ringName}">
-                                <h3>${ring.ringName}</h3>
+                                <h3 class="product-name">${ring.ringName}</h3>
                                 <!--<p>Diamond: ${product.diamondName}</p>-->
-                                <p>Price: ${ring.totalPrice} VND</p>
+                                <p class="product-price">Price: ${ring.totalPrice} VND</p>
                                 <!--<p>Category: ${product.categoryID}</p>-->
                                 <!--<p>Collection: ${product.collectionID}</p>-->
                             </a>
