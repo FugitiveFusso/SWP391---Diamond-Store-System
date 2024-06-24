@@ -66,7 +66,9 @@ public class DeliveryStaffOrderController extends HttpServlet {
 
                 OrderDAO dao = new OrderDAO();
                 List<OrderDTO> list = dao.listForDelivery();
+                List<OrderDTO> listHistory = dao.deliveryHistory();
                 request.setAttribute("deliverystafforderlist", list);
+                request.setAttribute("deliveryhistory", listHistory);
                 request.getRequestDispatcher("./deliverystafforderlist.jsp").forward(request, response);
             } else if (action.equals("shipping")) {
                 Integer orderID = null;
@@ -124,6 +126,8 @@ public class DeliveryStaffOrderController extends HttpServlet {
                 try {
                     List<OrderDTO> list = orderDAO.listForDelivery();
                     request.setAttribute("deliverystafforderlist", list);
+                    List<OrderDTO> listHistory = orderDAO.deliveryHistory();
+                    request.setAttribute("deliveryhistory", listHistory);
                     request.getRequestDispatcher("/deliverystafforderlist.jsp").forward(request, response);
                 } catch (Exception e) {
                     log("Error forwarding to sales staff order list: " + e.getMessage());
