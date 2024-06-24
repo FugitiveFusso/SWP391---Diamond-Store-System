@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function createPageButton(page) {
         const pageButton = document.createElement("button");
-        pageButton.className = "page-button";
+        pageButton.className = "page-number-button";
         pageButton.textContent = page;
         pageButton.addEventListener("click", function() {
             currentPage = page;

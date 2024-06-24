@@ -7,8 +7,14 @@ body {
     font-size: 13px;
     -webkit-font-smoothing: antialiased;
     -moz-font-smoothing: antialiased;
+    line-height: 1 !important;
+    font-weight: inherit;
+    overflow-x: hidden;
 }
 
+*{
+    box-sizing: inherit;
+}
 .profile-nav, .profile-info{
     margin: 50px 0
 }
@@ -389,18 +395,15 @@ ul.summary-list > li:last-child  {
 .footer {
     background-color: black !important;
     color: #fefefe !important;
-    position: relative!important;
-    width: 100%!important;
+    position: relative;
+    width: 100%;
     bottom: 0 !important;
 }
 
 .info{
-    padding-left: 100px;
+    padding-left: 100px !important;
 }
 
-info-img{
-    margin-left: 60px;
-}
 
 .info img{
     width: 80px;
@@ -410,7 +413,7 @@ info-img{
 .info-text p{
     color: white;
     font-size: 16px;
-    font-family: 'Inter', sans-serif; 
+    font-family: 'Raleway', sans-serif !important;
 }
 
 .footer-content{
@@ -420,34 +423,34 @@ info-img{
 }
 
 .customer-service{   
-    padding-top: 30px;
-    padding-left: 400px;
+    padding-top: 30px !important;
+    padding-left: 400px !important;
 }
 
 .customer-service-title{
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', sans-serif !important;
     font-weight: 700;
-    font-size: 20px;
+    font-size: 20px !important;
     color: white;
 }
 
 .footer .footer-content a {
-    text-decoration: none!important;
+    text-decoration: none !important;
     color: #fefefe !important;
     font-family: 'Inter', sans-serif;
-    font-size: 14px;  
+    font-size: 14px !important;  
 }
 
 .policy{
-    padding-top: 30px;
-    padding-right: 100px;
+    padding-top: 30px !important;
+    padding-right: 100px !important;
 }
 
 .policy-title{
     font-family: 'Inter', sans-serif;
     font-weight: 700;
     font-size: 20px;
-    color: white;
+    color: white !important;
 }
 
 .nav-stacks {
@@ -489,4 +492,19 @@ info-img{
 .col-md-6{
     border-top: 0.5px solid;
     padding-top: 10px;
+}
+
+p{
+    font-size: 16px;
+    color: #666;
+    margin: 16px auto;
+}
+
+a{
+    text-decoration: none !important;
+    color: black;
+}
+
+.container{
+    box-sizing: border-box;
 }
