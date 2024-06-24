@@ -48,6 +48,7 @@ CREATE TABLE [Collection](
 CREATE TABLE [Category](
 	categoryID int IDENTITY(1,1) NOT NULL primary key,
 	categoryName varchar(255) NOT NULL,
+    categoryImage varchar(8000) NOT NULL,
 	isDeleted varchar(10)
 );
 

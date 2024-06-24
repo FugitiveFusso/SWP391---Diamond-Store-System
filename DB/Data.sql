@@ -14,11 +14,13 @@ INSERT INTO [User] VALUES
 ('hoang1', '1','Hoang','Nguyen Minh','0487354221','hoang390dbp@gmail.com','Ben Thanh',0, 'active', 5, 'active')
 
 INSERT INTO [Category] VALUES 
-('5K Gold', 'active'),
-('12K Gold', 'active'),
-('14K Gold', 'active'),
-('18K Gold', 'active'),
-('20K Gold', 'active')
+('0.7 Carat Rings', 'https://www.lugaro.com/wp-content/uploads/2021/02/SGR1298-M_45.jpg', 'active'),
+('0.36 Carat Rings', 'https://zoom.jewelryimages.net/edge/jthomasjewelers/images/edge/140-02227.jpg', 'active'),
+('Engagement Rings', 'https://cdn.polisheddiamonds.co.nz/wp-content/uploads/2024/02/10170040/blog-post-image-930x620.jpg', 'active'),
+('Wedding Rings', 'https://www.varoujan.com.au/wp-content/uploads/2022/05/sandy-millar-8vaQKYnawHw-unsplash-scaled.jpg', 'active'),
+('Jewelry', 'https://time.com/shopping/static/cd09eba6652ee627f5e53b645dbd36fa/ca7ff/best-online-jewelry-stores.jpg', 'active'),
+('Gemstones', 'https://d2al04l58v9bun.cloudfront.net/blog/wp-content/uploads/2022/10/01161406/Gemstones-For-November-Born-1.jpg', 'active'),
+('Diamonds', 'https://df2sm3urulav.cloudfront.net/tenants/gr/uploads/content/v67gqo9cteit7qld.jpg', 'active')
 
 INSERT INTO [Collection] VALUES 
 ('EST. 2020','https://www.uniqlo.com/catalog-2021ss/vn/img/hero_sp.jpg','New additions', 'active'),

@@ -13,7 +13,7 @@
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <script src="js/pagination.js"></script>
         <link rel="stylesheet" href="css/pagination.css">
-        <link rel="stylesheet" href="css/collection_detail.css">
+        <link rel="stylesheet" href="css/user_collectiondetails.css">
 
     </head>
     <body>

@@ -101,6 +101,7 @@
                             <tr>
                                 <th>Category ID</th>
                                 <th><a href=?colSort=categoryName>Category Name</a></th>
+                                <th>Category Image</th>
                                 <th>Delete</th>
                             </tr>
                         </thead>
@@ -114,6 +115,7 @@
                                 <td>
                                     <a href="CategoryController?action=details&id=${category.categoryID}">   ${category.categoryID}</td>
                                 <td>${category.categoryName}</td>
+                                <td><img src=${category.image}  width="300px" ></td>
                                 <td>
                                     <form id="deleteForm" action="CategoryController" method="POST" class="input">
                                         <input name="action" value="delete" type="hidden">

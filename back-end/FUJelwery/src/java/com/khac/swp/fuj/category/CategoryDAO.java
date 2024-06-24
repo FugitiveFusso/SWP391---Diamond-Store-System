@@ -14,7 +14,7 @@ public class CategoryDAO {
         List<CategoryDTO> list = new ArrayList<CategoryDTO>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = " SELECT categoryID, categoryName FROM [Category] where isDeleted = 'active' ";
+            String sql = " SELECT categoryID, categoryName, categoryImage FROM [Category] where isDeleted = 'active' ";
             if (keyword != null && !keyword.isEmpty()) {
                 sql += " and categoryName like ?";
             }
@@ -35,10 +35,12 @@ public class CategoryDAO {
 
                     int categoryID = rs.getInt("categoryID");
                     String categoryName = rs.getString("categoryName");
+                    String image = rs.getString("categoryImage");
 
                     CategoryDTO category = new CategoryDTO();
                     category.setCategoryID(categoryID);
                     category.setCategoryName(categoryName);
+                    category.setImage(image);
                     list.add(category);
                 }
             }
@@ -53,7 +55,7 @@ public class CategoryDAO {
 
     public CategoryDTO load(int categoryID) {
 
-        String sql = " select categoryID, categoryName from Category where categoryID = ? ";
+        String sql = " select categoryID, categoryName, categoryImage from Category where categoryID = ? ";
 
         try {
 
@@ -66,10 +68,13 @@ public class CategoryDAO {
 
                 int ID = rs.getInt("categoryID");
                 String categoryName = rs.getString("categoryName");
+                String image = rs.getString("categoryImage");
 
                 CategoryDTO category = new CategoryDTO();
                 category.setCategoryID(ID);
                 category.setCategoryName(categoryName);
+                category.setImage(image);
+
                 return category;
             }
         } catch (SQLException ex) {
@@ -80,13 +85,14 @@ public class CategoryDAO {
     }
 
     public Integer insert(CategoryDTO category) {
-        String sql = "INSERT INTO [Category] (categoryName, isDeleted) VALUES (?, 'active' )";
+        String sql = "INSERT INTO [Category] (categoryName, categoryImage, isDeleted) VALUES (?, ?, 'active' )";
         try {
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
 
             ps.setString(1, category.getCategoryName());
+            ps.setString(2, category.getImage());
 
             ps.executeUpdate();
             conn.close();
@@ -99,13 +105,14 @@ public class CategoryDAO {
     }
 
     public boolean update(CategoryDTO category) {
-        String sql = "UPDATE [Category] SET categoryName = ? WHERE categoryID = ? ";
+        String sql = "UPDATE [Category] SET categoryName = ?, categoryImage = ? WHERE categoryID = ? ";
         try {
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
 
             ps.setString(1, category.getCategoryName());
-            ps.setInt(2, category.getCategoryID());
+            ps.setString(2, category.getImage());
+            ps.setInt(3, category.getCategoryID());
 
             ps.executeUpdate();
             conn.close();
@@ -135,7 +142,7 @@ public class CategoryDAO {
 
         return false;
     }
-    
+
     public CategoryDTO checkCategoryExistByName(String categoryName) {
 
         String sql = "select categoryID, categoryName from Category where categoryName like ? and isDeleted = 'active' ";
