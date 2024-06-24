@@ -54,28 +54,57 @@
             </ul>
         </div> 
 
-        <!--style="background-image: url('${requestScope.collection.collectionImage}');"-->
-        <div class="collection">
-            <h1 class="collection-name">${requestScope.collection.collectionName}</h1>
-            <p class="collection-description">${requestScope.collection.collectionDescription}</p>
-            <div class="product-list">
-                <%
-                    List<RingDTO> list = (List<RingDTO>) request.getAttribute("ringclist");
-                    for (RingDTO ring : list) {
-                        pageContext.setAttribute("ring", ring);
-                %>
-                <div class="product-item">
-                    <a href="ProductController?action=details&id=${ring.ringID}" class="product-link">
-                        <img src="${ring.ringImage}" alt="${ring.ringName}">
-                        <h2 class="product-name">${ring.ringName}</h2>
-                        <p class="product-description">Price: ${ring.totalPrice}</p>
-                    </a>
+        <div class="bannerContainer">
+            <div class="bannerContent">
+                <div class="bannerText">
+                    <p class="intro">Our Collection</p>
+                    <h1>${requestScope.collection.collectionName}</h1>
+                    <div class="description_hero">
+                        <span>${requestScope.collection.collectionDescription}</span>
+                    </div>
                 </div>
-                <% }%>
+                <div class="bannerImage">
+                    <img src="images/Blue_Nile_Studio.webp" id="diamondHero" style="width: 432px; height: 432px">
+                </div>
             </div>
         </div>
 
-
+        <div class="list-container">
+            <div class="smaller-container">
+                <form action='' method=GET id="searchbox" class="center-searchbox"> 
+                    <input name=keyword type=text class="search-input" value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
+                    <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+                </form>
+                <div class="list-title">Ring List</div>
+                <div class="list">
+                    <div class="card-container">
+                        <%
+                            List<RingDTO> list = (List<RingDTO>) request.getAttribute("ringclist");
+                            for (RingDTO ring : list) {
+                                pageContext.setAttribute("ring", ring);
+                        %>
+                        <div class="product-card">
+                            <a href="ProductController?action=details&id=${ring.ringID}">
+                                <img src="${ring.ringImage}" alt="${ring.ringName}">
+                                <h3>${ring.ringName}</h3>
+                                <!--<p>Diamond: ${product.diamondName}</p>-->
+                                <p>Price: ${ring.totalPrice} VND</p>
+                                <!--<p>Category: ${product.categoryID}</p>-->
+                                <!--<p>Collection: ${product.collectionID}</p>-->
+                            </a>
+                        </div>
+                        <%
+                            }
+                        %>
+                    </div>
+                    <div id="paginationControls" class="pagination-controls">
+                        <button id="prevButton" class="pagination-button"><i class="fas fa-chevron-left"></i></button>
+                        <div id="pageNumbers"></div>
+                        <button id="nextButton" class="pagination-button"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 
@@ -128,5 +157,8 @@
                 </div>
             </div>
         </div>
+
+        <script src="js/productlist_pagination.js"></script>
+
     </body>
 </html>
