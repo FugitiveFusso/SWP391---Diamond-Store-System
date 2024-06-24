@@ -126,12 +126,7 @@
                             <%
                                 }
                             %>    
-                            <!--                        <tr><td colspan="10">
-                                                            <form action="CategoryController" method="POST">
-                                                                <input name="action" value="create" type="hidden">
-                                                                <input type="submit" value="Create">
-                                                            </form>
-                                                        </td></tr>-->
+
                         </tbody>
                     </table>
                     <div id="paginationControls" class="pagination-controls">

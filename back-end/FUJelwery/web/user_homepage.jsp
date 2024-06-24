@@ -102,6 +102,7 @@
                         <div class="sub-menu-1">
                             <ul>
                                 <li><a href='./ProductController'>Ring</a></li>
+                                <li><a href='./UserCategoryController'>Category</a></li>  
                                 <li><a href='./UserCollectionController'>Collection</a></li>  
                                 <li><a href='OrderController?action=list&id=${sessionScope.usersession.userid}'>Cart</a></li>
                                 <li><a href='BillController?action=list&id=${sessionScope.usersession.userid}'>Bill</a></li>

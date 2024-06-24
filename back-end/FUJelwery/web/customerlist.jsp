@@ -55,74 +55,6 @@
             </div>
         </div>
 
-        <!--            <div class="header_menu">
-                    <div id="mySidenav" class="sidenav menu">
-                        <a href="javascript:void(0)" id="closebtn" class="closebtn" onclick="closeNav()">&times;</a>
-                        <ul>                   
-                            <li>
-                                <a href="#">
-                                    <i class="icon ph-bold ph-user"></i>
-                                    <span class="text">View List</span>
-                                    <i class="arrow ph-bold ph-caret-down"></i>
-                                </a>
-                                <ul class="sub-menu">
-                                    <li>
-                                        <a href="CustomerController">
-                                            <span class="text">Customer List</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="AdminController">
-                                            <span class="text">Administrator List</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="DeliveryStaffController">
-                                            <span class="text">Delivery Staff List</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="SalesController">
-                                            <span class="text">Sale Staff List</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="ManagerController">
-                                            <span class="text">Manager List</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="active">
-                                <a href="PostController">
-                                    <i class="icon ph-bold ph-file-text"></i>
-                                    <span class="text">Posts</span>
-                                </a>
-                            </li>                   
-                        </ul>
-                        <div class="menu">                  
-                            <ul>
-                                <li>
-                                    <a href="adminaccount.jsp">
-                                        <i class="icon ph-bold ph-user"></i>
-                                        <span class="text">Account</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="adminlogin?action=logout">
-                                        <i class="icon ph-bold ph-sign-out"></i>
-                                        <span class="text">Logout</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-        
-                    <span class="cainut" style="font-size:30px;cursor:pointer;" onclick="openNav()">&#9776; Menu</span>
-                </div>-->
-
-
         <div class="list-container">
 
             <div class="smaller-container">
@@ -156,7 +88,7 @@
                                 <th>Address</th>
                                 <th>Status</th>
                                 <th>Active</th>
-                                <th>Banned</th>
+                                <th>Ban</th>
                                 <th>Delete</th>
                             </tr>
                         </thead>
@@ -177,7 +109,6 @@
                                 <td style="${customer.status == 'active' ? 'color: green; font-weight: bold;' : (customer.status == 'banned' ? 'color: red; font-weight: bold;' : '')}">
                                     ${customer.status}
                                 </td>
-                                <!--<td>${customer.status}</td>-->
                                 <td>
                                     <form action="CustomerController" method="POST" class="input actionForm">
                                         <input name="action" value="active" type="hidden">
@@ -189,7 +120,7 @@
                                     <form action="CustomerController" method="POST" class="input actionForm">
                                         <input name="action" value="banned" type="hidden">
                                         <input name="id" value="${customer.userid}" type="hidden">
-                                        <button type="submit">Banned</button>
+                                        <button type="submit">Ban</button>
                                     </form>
                                 </td>
 
