@@ -5,61 +5,17 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Content-Type" content="text/h tml; charset=UTF-8">
         <title>Category Details</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>       
         <link rel="stylesheet" href="css/navigation_bar.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw=="/>
-        <link rel="stylesheet" href="css/customer_list.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <script src="js/pagination.js"></script>
         <link rel="stylesheet" href="css/pagination.css">
         <link rel="stylesheet" href="css/user_cataegorydetails.css">
-        <style>
-            .post-title{
-                align-items: center;
-                text-align: center;
-                margin-top: 30px;
-            }
-
-            .post-title h1{
-                font-size: 50px;               
-                font-weight: 700;
-            }
-
-            .card {
-                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-                transition: transform 0.2s;
-            }
-            .card:hover {
-                transform: scale(1.02);
-            }
-            .card-img-top {
-                border-radius: 0.25rem 0.25rem 0 0;
-            }
-            .btn-group .btn {
-                width: 100px;
-            }           
-
-            .btn-group{
-                display: flex;
-                justify-content: center;
-            }
-
-            .btn-group form button{
-                font-size: 20px;
-                padding: 8px 6px;
-                background: #15156b;
-                color: #fff;
-                border-radius: 10px;
-                cursor: pointer;
-            }
-
-
-        </style>
+        
 
     </head>
     <body>
@@ -119,61 +75,81 @@
 
             </div>
         </div>
-        <div class="post-title">
-            <h1>Category Details </h1>         
-            <p> Login username: ${sessionScope.usersession.username}</p>
+
+        <div class="bannerContainer">
+            <div class="bannerContent">
+                <div class="bannerText">
+                    <p class="intro">RINGS FOR MANY OCCASIONS</p>
+                    <h1>${requestScope.category.categoryName}</h1>
+                    <div class="description_hero">
+                        <span>Indulge in the allure of our meticulously curated ring collection. From classic solitaires to modern masterpieces, each piece tells a story of beauty and craftsmanship. Perfect for engagements, celebrations, or simply as a symbol of your unique style. Find your perfect ring today.</span>
+                    </div>
+                </div>
+                <div class="bannerImage">
+                    <img src="images/Blue_Nile_Studio.webp" id="diamondHero" style="width: 432px; height: 432px">
+                </div>
+            </div>
         </div>
 
-        <div class="container mt-4">
-            <div class="row justify-content-center">
-                <!-- Right Column: Information -->
-                <div class="col-md-8">
-                    <div class="card">
-                        <div class="card-body">
-                            <h6 class="card-subtitle mb-2 text-muted" >Category ID: ${requestScope.category.categoryID}</h6>
-                            <h4 class="card-title" style="font-weight: 700">${requestScope.category.categoryName}</h4>                               
-
-                            <div class="btn-group" role="group" aria-label="Voucher Actions">
-                                <form action="UserCategoryController" method="post" class="mr-2">
-                                    <input type="hidden" name="action" value="list">
-                                    <button type="submit" class="btn btn-primary">Return</button>
-                                </form>
-                            </div>
+        <div class="list-container">
+            <div class="smaller-container">
+                <div class="list-title">Ring List</div>
+                <div class="list">
+                    <div class="card-container">
+                        <%
+                            List<RingDTO> list = (List<RingDTO>) request.getAttribute("ringclist");
+                            for (RingDTO ring : list) {
+                                pageContext.setAttribute("ring", ring);
+                        %>
+                        <div class="product-card">
+                            <a href="ProductController?action=details&id=${ring.ringID}">
+                                <img src="${ring.ringImage}" alt="${ring.ringName}">
+                                <h3 class="product-name">${ring.ringName}</h3>
+                                <!--<p>Diamond: ${product.diamondName}</p>-->
+                                <p class="product-price">Price: ${ring.totalPrice} VND</p>
+                                <!--<p>Category: ${product.categoryID}</p>-->
+                                <!--<p>Collection: ${product.collectionID}</p>-->
+                            </a>
                         </div>
+                        <%
+                            }
+                        %>   
+                    </div>
+                    <div id="paginationControls" class="pagination-controls">
+                        <button id="prevButton" class="pagination-button"><i class="fas fa-chevron-left"></i></button>
+                        <div id="pageNumbers"></div>
+                        <button id="nextButton" class="pagination-button"><i class="fas fa-chevron-right"></i></button>
                     </div>
                 </div>
             </div>
         </div>
-        <table id="pagination">
-            <thead>
-                <tr>
-                    <th>Ring ID</th>
-                    <th>Ring Name</th>
-                    <th>Ring Image</th>
-                    <th>Diamond Name</th>
-                    <th>Price</th>
-                </tr>
-            </thead>
-            <tbody>
 
-                <%
-                    List<RingDTO> list = (List<RingDTO>) request.getAttribute("ringclist");
-                    for (RingDTO ring : list) {
-                        pageContext.setAttribute("ring", ring);
-                %>
-                <tr>
-                    <td>
-                        <a href="ProductController?action=details&id=${ring.ringID}">   ${ring.ringID}</td>
-                    <td>${ring.ringName}</td>
-                    <td><img src=${ring.ringImage} width="300px" height="300px" style="border-radius: 20px;"></td>
-                    <td>${ring.diamondName}</td>
-                    <td>${ring.totalPrice}</td>
-                </tr>
-                <%
-                    }
-                %>    
-            </tbody>
-        </table>
+        <!--        <table id="pagination">
+                    <thead>
+                        <tr>
+                            <th>Ring ID</th>
+                            <th>Ring Name</th>
+                            <th>Ring Image</th>
+                            <th>Diamond Name</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        
+        
+        <tr>
+            <td>
+                <a href="ProductController?action=details&id=${ring.ringID}">   ${ring.ringID}</td>
+            <td>${ring.ringName}</td>
+            <td><img src=${ring.ringImage} width="300px" height="300px" style="border-radius: 20px;"></td>
+            <td>${ring.diamondName}</td>
+            <td>${ring.totalPrice}</td>
+        </tr>
+         
+    </tbody>
+</table>-->
+
+
         <div class="footer">
             <div class="footer-content">
                 <div class="info">
@@ -223,13 +199,7 @@
                 </div>
             </div>  
         </div>
-        <script src="js/pagination.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
-                integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
-        crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.0/dist/sweetalert2.all.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
-                integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
-        crossorigin="anonymous"></script>
+        <script src="js/productlist_pagination.js"></script>
+        
     </body>
 </html>

@@ -80,6 +80,9 @@
                     <h1>${requestScope.collection.collectionName}</h1>
                     <div class="description_hero">
                         <span>${requestScope.collection.collectionDescription}</span>
+                        <br>
+                        <br>
+                        <span>Discover our exquisite range of rings, meticulously crafted to capture elegance and sophistication. Whether for a special occasion or everyday glamour, find the perfect ring to complement your unique charm.</span>
                     </div>
                 </div>
                 <div class="bannerImage">
