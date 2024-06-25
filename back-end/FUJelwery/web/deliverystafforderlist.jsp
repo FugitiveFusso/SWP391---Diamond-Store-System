@@ -37,39 +37,12 @@
             </header>
 
             <div class="menu">               
-                <div class="item"><a class="sub-btn"><i class="fas fa-ring"></i>View Product
-                        <i class="fas fa-angle-right dropdown"></i>
-                        <div class="sub-menu">
-                            <a href="DiamondController" class="sub-item">Diamond List</a>
-                            <a href="RingController" class="sub-item">Ring List</a>
-                            <a href="CollectionController" class="sub-item">Collection List</a>
 
-                        </div>
-                    </a>
-                    <a href="warrantydetails.jsp"></a>
-                </div>
-                <div class="item"><a class="sub-btn"><i class="fas fa-tags"></i>View Product Price
-                        <i class="fas fa-angle-right dropdown"></i>
-                        <div class="sub-menu">
-                            <a href="DiamondPriceController" class="sub-item">Diamond Price List</a>
-                            <a href="RingPlacementPriceController" class="sub-item">Ring Price List</a>                                                    
-                        </div>
-                    </a>
-                </div>
-                <div class="item"><a class="sub-btn"><i class="fas fa-folder"></i>View Document
-                        <i class="fas fa-angle-right dropdown"></i>
-                        <div class="sub-menu">
-                            <a href="VoucherController" class="sub-item">Voucher List</a>
-                            <a href="WarrantyController" class="sub-item">Warranty List</a> 
-                            <a href="CertificateController" class="sub-item">Certificate List</a>  
-                        </div>
-                    </a>
-                </div>
 
-                <div class="item"><a href="CategoryController"><i class="fas fa-layer-group"></i>View Category</a></div>
+                <div class="item"><a href="DeliveryStaffOrderController"><i class="fas fa-layer-group"></i>Delivery Order</a></div>
 
-                <div class="item"><a href="salesstaffaccount.jsp"><i class="fas fa-user"></i>Account</a></div>
-                <div class="item"><a href="saleslogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
+                <div class="item"><a href="deliverystaffaccount.jsp"><i class="fas fa-user"></i>Account</a></div>
+                <div class="item"><a href="deliverystafflogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
 
             </div>
         </div>
@@ -139,7 +112,7 @@
                             }
                         %>
                     </table>
-                    
+
                     <table>
                         <tr>
                             <th>Order ID</th>
