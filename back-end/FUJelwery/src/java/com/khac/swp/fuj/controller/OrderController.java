@@ -134,6 +134,7 @@ public class OrderController extends HttpServlet {
 
                 if (userID != null) {
                     try {
+                        orderDAO.updateScore(userID);
                         orderDAO.purchase(purchaseMethod, userID, purchasedDate);
                         request.getSession().setAttribute("success", "Purchase Successfully!!!");
                     } catch (Exception e) {

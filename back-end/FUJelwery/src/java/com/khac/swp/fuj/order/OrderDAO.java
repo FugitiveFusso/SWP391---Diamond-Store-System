@@ -98,6 +98,25 @@ public class OrderDAO {
         }
     }
 
+    public boolean updateScore(int userID) {
+        String sql = "UPDATE [User] set point = point + ((SELECT SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * ((100.0 - COALESCE(v.percentage, 0)) / 100))  AS totalPrice FROM [Order] o LEFT JOIN [Ring] r ON o.ringID = r.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON r.diamondID = d.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID WHERE o.userID = ? AND o.status = 'pending') / 1000000) where userID = ? ";
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, userID);
+            ps.setInt(2, userID);
+
+            ps.executeUpdate();
+            conn.close();
+        } catch (SQLException ex) {
+            System.out.println("Purchase error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
     public List<OrderDTO> listHistory(int userID) {
         List<OrderDTO> list = new ArrayList<OrderDTO>();
         try {
@@ -204,7 +223,7 @@ public class OrderDAO {
         }
         return list;
     }
-    
+
     public List<OrderDTO> receivedAtStore() {
         List<OrderDTO> list = new ArrayList<OrderDTO>();
         try {
@@ -313,7 +332,7 @@ public class OrderDAO {
         }
         return list;
     }
-    
+
     public List<OrderDTO> deliveryHistory() {
         List<OrderDTO> list = new ArrayList<OrderDTO>();
         try {
@@ -607,7 +626,7 @@ public class OrderDAO {
         }
         return false;
     }
-    
+
     public boolean receivedOrder(int orderID) {
         String sql = "UPDATE [Order] SET status = 'received at store' WHERE orderID = ? ";
         try {
