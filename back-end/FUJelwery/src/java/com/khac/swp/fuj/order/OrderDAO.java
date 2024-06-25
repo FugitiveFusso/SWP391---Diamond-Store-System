@@ -512,30 +512,47 @@ public class OrderDAO {
         }
         return false;
     }
-
-    public String searchVoucher(String code) {
-        String sql = "SELECT voucherName FROM [Voucher] WHERE coupon = ?";
-        String voucherName = null;
+    
+    public int checkWarrantyActive(int warrantyID) {
+        int warrantyID1 = 0;
+        String sql = "SELECT warrantyID FROM [Warranty] WHERE warrantyID = ? AND isDeleted = 'active' ";
         try {
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, warrantyID);
 
-            ps.setString(1, code);
             ResultSet rs = ps.executeQuery();
-            if (rs != null) {
-                while (rs.next()) {
-                    voucherName = rs.getString("voucherName");
-                    return voucherName;
-                }
+            if (rs.next()) {
+                warrantyID1 = rs.getInt("warrantyID");
+                return warrantyID1;
             }
-            ps.executeUpdate();
-            conn.close();
         } catch (SQLException ex) {
-            System.out.println("Get Voucher error!" + ex.getMessage());
+            System.out.println("Query User error!" + ex.getMessage());
             ex.printStackTrace();
         }
-        return voucherName;
+        return warrantyID1;
+    }
+    
+    public int checkWarranty(int warrantyID) {
+        int orderID = 0;
+        String sql = "SELECT orderID FROM [Order] WHERE warrantyID = ? ";
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, warrantyID);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                orderID = rs.getInt("orderID");
+                return orderID;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Query User error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return orderID;
     }
 
     public int searchVoucherID(String code) {

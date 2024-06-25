@@ -90,6 +90,20 @@
                     </div>
 
                 </div>
+                <%
+                    String errorMessage = (String) session.getAttribute("errorMessage");
+                    if (errorMessage != null) {
+                %>
+                <div class="error-message">
+                    <%= errorMessage%>
+                </div>
+                <%
+                    session.removeAttribute("errorMessage"); // Optionally remove the message after displaying it
+                %>
+                <%
+                    }
+                %>
+
                 <div class="list">
                     <form action='' method=GET id="searchbox"> 
                         <input name=keyword type=text value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
@@ -139,8 +153,8 @@
 
                         </td></tr>
                     </table>
-                    
-                     <table>
+
+                    <table>
                         <tr>
                             <th>Order ID</th>
                             <th>Username</th>
@@ -166,13 +180,13 @@
                             <td>${salesorder.address}</td>
                             <td>${salesorder.warrantyName}</td>
                             <td>${salesorder.totalPrice}</td>
-                                    <form action="SalesStaffOrderController" method="POST">
-                                    <td>
-                                        <input name="action" value="received" type="hidden">
-                                        <input name="orderID" value="${salesorder.orderID}" type="hidden">
-                                        <input type="submit" value="Customer has received at store">
-                                </form>
-                            </td>
+                        <form action="SalesStaffOrderController" method="POST">
+                            <td>
+                                <input name="action" value="received" type="hidden">
+                                <input name="orderID" value="${salesorder.orderID}" type="hidden">
+                                <input type="submit" value="Customer has received at store">
+                        </form>
+                        </td>
                         </tr>
                         <%
                             }

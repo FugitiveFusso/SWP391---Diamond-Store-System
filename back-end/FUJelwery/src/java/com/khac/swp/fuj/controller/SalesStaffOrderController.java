@@ -103,9 +103,18 @@ public class SalesStaffOrderController extends HttpServlet {
 
                 if (orderID != null && warrantyID != null) {
                     try {
-                        orderDAO.addWarranty(warrantyID, orderID);
-                        orderDAO.acceptOrder(orderID);
-                        request.getSession().setAttribute("success", "Received order Successfully!!!");
+                        if (orderDAO.checkWarrantyActive(warrantyID) == 0) {
+                            request.getSession().setAttribute("errorMessage", "Warranty does not exist.");
+
+                        } else {
+                            if (orderDAO.checkWarranty(warrantyID) != 0) {
+                                request.getSession().setAttribute("errorMessage", "Warranty has been assigned.");
+                            } else {
+                                orderDAO.addWarranty(warrantyID, orderID);
+                                orderDAO.acceptOrder(orderID);
+                                request.getSession().setAttribute("success", "Received order Successfully!!!");
+                            }
+                        }
                     } catch (Exception e) {
                         log("Error processing order with orderID " + orderID + " and warrantyID " + warrantyID + ": " + e.getMessage());
                         request.getSession().setAttribute("errorMessage", "Error receiving order.");
