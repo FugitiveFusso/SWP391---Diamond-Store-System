@@ -74,7 +74,7 @@
         <div class="bannerContainer">
             <div class="bannerContent">
                 <div class="bannerText">
-                    <p class="intro">To day we have</p>
+                    <p class="intro">Today we have</p>
                     <h1>Perfect Voucher For Your Jewelry</h1>
                     <div class="description_hero">
                         <span>Discover the perfect gift with our exclusive jewelry vouchers. 

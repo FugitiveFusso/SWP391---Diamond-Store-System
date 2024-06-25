@@ -74,7 +74,7 @@
             <div class="bannerContent">
                 <div class="bannerText">
                     <p class="intro">Today we have</p>
-                    <h1>How do rings contribute to the storytelling aspect of a jewelry collection?</h1>
+                    <h1>Discover Our Exquisite Ring Collection</h1>
                     <div class="description_hero">
                         <span>Discover our stunning range of rings, meticulously crafted to perfection. From timeless classics to contemporary designs, our collection offers a variety of styles to suit every taste. Each piece is designed with the utmost attention to detail, ensuring that it not only dazzles but also stands the test of time. Whether you're looking for an engagement ring, a gift for a loved one, or a special treat for yourself, our collection promises to deliver elegance and sophistication for every occasion.</span>
                     </div>                   
