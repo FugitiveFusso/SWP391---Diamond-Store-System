@@ -343,10 +343,12 @@ body{
     display: flex;
     justify-content: space-around;
     font-family: "Inter", sans-serif;
+    margin: 30px 0;
 }
 
 .faq-title h1{
     color: #151542;
+    font-size: 30px;
 }
 
 .more-details {
@@ -354,16 +356,16 @@ body{
     border-bottom: 1px solid #ccc;
     overflow: hidden;
     transition: height 0.3s ease;
-    margin: 30px 0;
+    margin: 10px 0;
 }
 
 .more-details-title-wrapper {
-    padding: 10px;
+    padding: 5px;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 600;
 }
 
@@ -385,4 +387,5 @@ body{
 
 .more-details-content p{
     padding: 0;
+    font-size: 12px;
 }

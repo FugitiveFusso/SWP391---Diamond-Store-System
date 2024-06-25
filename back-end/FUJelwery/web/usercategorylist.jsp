@@ -82,7 +82,7 @@
                     </div>                   
                 </div>
                 <div class="bannerImage">
-                    <img src="images/MiaDonna_Conflict-Free-Engagement-Rings_Best-Engagement-Rings_Vogue_Lab-Diamonds_mobile_1600x.jpg" id="diamondHero" style="width: 432px; height: 432px">
+                    <img src="images/Unique_Engagement_Rings.webp" id="diamondHero" style="width: 432px; height: 432px">
                 </div>
             </div>
         </div>
@@ -119,14 +119,19 @@
             </div>
         </div>
 
-        <div class="Main-hero">
-                <div class="hero-details">
-                    <h2 style="font-family: Inter; font-weight: bold;">UP TO 50% OFF</h2>
-                    <h1 style="font-family: Inika;">To Mom, With Love</h1>
-                    <h3>A mother’s love is deep and everlasting. <br>Celebrate it with something that will always shin like she does (and save up to 50%)</h3>                   
+        <div class="bannerContainer">
+            <div class="bannerContent">
+                <div class="bannerImage">
+                    <img src="images/Halo_Engagement_Rings.webp" id="diamondHero" alt="">
                 </div>
-                <img src="images/hero1.jpg" height="1px" alt="" srcset="">
+                <div class="bannerText">
+                    <h1>WHAT DOES A RING SYMBOLIZE IN THE REALM OF JEWELRY?</h1>
+                    <div class="description_hero">
+                        <span>A ring within the realm of jewelry signifies much more than just an accessory. It serves as a profound embodiment of personal expression, capturing individual style choices, sentimental attachments, and the commemoration of pivotal moments throughout life's journey. Each ring is crafted not only to adorn but also to narrate stories of love, commitment, and personal growth. From the elegance of its design to the choice of precious metals and gemstones, every aspect of a ring contributes to its role as a cherished symbol of enduring beauty and emotional significance. </span>
+                    </div>
+                </div>
             </div>
+        </div>
 
         <div class="faq">
             <div class="faq-left">

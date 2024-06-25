@@ -74,7 +74,7 @@
             <div class="bannerContent">
                 <div class="bannerText">
                     <p class="intro">Today we have</p>
-                    <h1>Exquisite Ring Collection</h1>
+                    <h1>How do rings contribute to the storytelling aspect of a jewelry collection?</h1>
                     <div class="description_hero">
                         <span>Discover our stunning range of rings, meticulously crafted to perfection. From timeless classics to contemporary designs, our collection offers a variety of styles to suit every taste. Each piece is designed with the utmost attention to detail, ensuring that it not only dazzles but also stands the test of time. Whether you're looking for an engagement ring, a gift for a loved one, or a special treat for yourself, our collection promises to deliver elegance and sophistication for every occasion.</span>
                     </div>                   
@@ -117,13 +117,18 @@
             </div>
         </div>
 
-        <div class="Main-hero">
-            <div class="hero-details">
-                <h2 style="font-family: Inter; font-weight: bold;">UP TO 50% OFF</h2>
-                <h1 style="font-family: Inika;">To Mom, With Love</h1>
-                <h3>A mother’s love is deep and everlasting. <br>Celebrate it with something that will always shin like she does (and save up to 50%)</h3>                   
+        <div class="bannerContainer">
+            <div class="bannerContent">
+                <div class="bannerImage">
+                    <img src="images/Three_Stone_Engagement_Rings.webp" id="diamondHero" alt="Three Stone Engagement Rings">
+                </div>
+                <div class="bannerText">
+                    <h1>HOW DO RINGS CONTRIBUTE TO THE STORYTELLING ASPECT OF A JEWELRY COLLECTION?</h1>
+                    <div class="description_hero">
+                        <span>Rings contribute significantly to the storytelling aspect of a jewelry collection by encapsulating memories, traditions, and aspirations. They serve as tangible reminders of cherished moments and the journey of love, making them heirlooms passed down through generations.</span>
+                    </div>
+                </div>
             </div>
-            <img src="images/hero1.jpg" height="1px" alt="" srcset="">
         </div>
 
         <div class="faq">
@@ -135,38 +140,32 @@
             <div class="faq-right">
                 <div class="more-details">
                     <div class="more-details-title-wrapper" onclick="toggleDropdown(this)">
-                        What materials are commonly used to make rings?
+                        How can I find out about the latest additions to my diverse ring collection?
                         <button class="plus-button">+</button>
                     </div>
                     <div class="more-details-content">
-                        <p>Rings can be made from a variety of materials, including gold, silver, platinum, titanium, </p> 
-                        <p>tungsten, stainless steel, and more. Some rings also incorporate  gemstones such as </p> 
-                        <p>diamonds, sapphires, emeralds, and rubies.</p> 
+                        <p>Subscribe to our newsletter or follow us on social media to stay updated on our latest</p> 
+                        <p>ring designs, promotions, and special offers.</p> 
                     </div>
                 </div>
                 <div class="more-details">
                     <div class="more-details-title-wrapper" onclick="toggleDropdown(this)">
-                        How do I determine my ring size?
+                        What materials are your rings made from?
                         <button class="plus-button">+</button>
                     </div>
                     <div class="more-details-content">
-                        <p>You can determine your ring size by using a ring sizer tool which measures the</p> 
-                        <p>circumference of your finger. Alternatively, you can visit a jeweler who can professionally</p> 
-                        <p>measure your ring size. It's important to measure your finger at different times of the day,</p> 
-                        <p>as finger size can vary with temperature and activity.</p>
+                        <p>Our rings are crafted from high-quality materials such as silver, 14k and 18k gold,</p> 
+                        <p>platinum, and occasionally feature gemstones like diamonds and emeralds.</p>                         
                     </div>
                 </div>
                 <div class="more-details">
                     <div class="more-details-title-wrapper" onclick="toggleDropdown(this)">
-                        What is the significance of different types of rings (e.g., engagement rings)?
+                        Do you offer a warranty or guarantee on your rings?
                         <button class="plus-button">+</button>
                     </div>
                     <div class="more-details-content">
-                        <p>Different types of rings have different significances. Engagement rings are typically</p> 
-                        <p>given during a proposal and often feature a prominent gemstone. Wedding rings are</p> 
-                        <p>exchanged during the wedding and symbolize the commitment of marriage. Other</p> 
-                        <p>rings, such as promise rings, fashion rings and anniversary rings, can also carry</p>
-                        <p>personal or cultural significance.</p>
+                        <p>Yes, we stand behind the quality of our rings. Each purchase is covered by a warranty</p> 
+                        <p>against manufacturing defects. Please refer to our warranty policy for more details.</p>                        
                     </div>
                 </div>
             </div>
@@ -208,5 +207,19 @@
             </div>
         </div>
         <script src="js/usercollectionlist_pagination.js"></script>
+        <script>
+                        function toggleDropdown(header) {
+                            var content = header.nextElementSibling;
+                            if (content.style.display === "block") {
+                                content.style.display = "none";
+                                header.querySelector(".plus-button").innerText = "+";
+                                header.parentElement.style.height = header.offsetHeight + "px";
+                            } else {
+                                content.style.display = "block";
+                                header.querySelector(".plus-button").innerText = "-";
+                                header.parentElement.style.height = (header.offsetHeight + content.offsetHeight) + "px";
+                            }
+                        }
+        </script>
     </body>
 </html>
