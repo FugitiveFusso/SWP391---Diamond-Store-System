@@ -148,9 +148,9 @@
                             <th>Ring Size</th>
                             <th>Date of Purchase</th>
                             <th>Destination</th>
-                            <th>Warranty ID</th>
+                            <th>Warranty</th>
                             <th>Price</th>
-                            <th>Accept</th>
+                            <th>Received ?</th>
                         </tr>
                         <%
                             list = (List<OrderDTO>) request.getAttribute("receiveatstore");
