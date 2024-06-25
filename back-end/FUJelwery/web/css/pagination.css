@@ -44,12 +44,12 @@ button:disabled{
 }
 
 .page-number.active {
-    background-color: #666; /* Adjust active page background color as needed */
-    color: #fff; /* Adjust active page text color as needed */
+    background-color: #666; 
+    color: #fff; 
 }
 
 .page-number:hover {
-    background-color: #ddd; /* Adjust hover background color as needed */
+    background-color: #ddd;
 }
 
 .page-number {
@@ -66,7 +66,7 @@ button:disabled{
 }
 
 .pagination-button i {
-    color: #333; /* Adjust icon color as needed */
+    color: #333; 
 }
 
 #pageNumbers {
