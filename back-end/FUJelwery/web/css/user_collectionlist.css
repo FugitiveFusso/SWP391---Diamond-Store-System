@@ -365,7 +365,7 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 15px;
+    font-size: 17px;
     font-weight: 600;
 }
 
@@ -387,5 +387,6 @@ body{
 
 .more-details-content p{
     padding: 0;
-    font-size: 12px;
+    font-size: 15px;
+    margin-top: 1px;
 }

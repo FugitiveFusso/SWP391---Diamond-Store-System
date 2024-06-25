@@ -106,6 +106,63 @@
             </div>
         </div>
 
+        <div class="bannerContainer">
+            <div class="bannerContent">
+                <div class="bannerImage">
+                    <img src="images/Vintage_Engagement_Rings.webp" id="diamondHero" alt="">
+                </div>
+                <div class="bannerText">
+                    <h1>WHY CHOOSE OUR RING?</h1>
+                    <div class="description_hero">
+                        <span>Our rings are crafted with precision and passion, each one designed to embody timeless elegance and personal style. Whether you're celebrating a milestone or expressing your individuality, our collection offers a stunning array of options to suit every occasion and taste.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq">
+            <div class="faq-left">
+                <div class="faq-title">
+                    <h1>FAQs about FUJ Ring</h1>
+                </div>
+            </div>
+            <div class="faq-right">
+                <div class="more-details">
+                    <div class="more-details-title-wrapper" onclick="toggleDropdown(this)">
+                        How do I determine my ring size?
+                        <button class="plus-button">+</button>
+                    </div>
+                    <div class="more-details-content">
+                        <p>We provide a ring size guide on our website that includes printable sizing tools and instructions </p> 
+                        <p>on how to measure your ring size accurately at home. You can also visit a local jeweler for a </p> 
+                        <p>professional sizing.</p> 
+                    </div>
+                </div>
+                <div class="more-details">
+                    <div class="more-details-title-wrapper" onclick="toggleDropdown(this)">
+                        Do you offer a warranty or guarantee on your rings?
+                        <button class="plus-button">+</button>
+                    </div>
+                    <div class="more-details-content">
+                        <p>Yes, we stand behind the quality of our rings. Each purchase is covered by a warranty against </p> 
+                        <p>manufacturing defects. Please refer to our warranty policy for specific details.</p>                        
+                    </div>
+                </div>
+                <div class="more-details">
+                    <div class="more-details-title-wrapper" onclick="toggleDropdown(this)">
+                        How can I contact customer support if I have more questions about your rings?
+                        <button class="plus-button">+</button>
+                    </div>
+                    <div class="more-details-content">
+                        <p>You can reach our support team via email at <strong>fuj.khac.diamondshopsystem@gmail.com</strong></p> 
+                        <p>by phone at <strong>(+ 84) 898876512</strong>, or through the contact form on our website.</p> 
+                        <p>We're here to assist you with any inquiries you may have about our rings.</p>                        
+                    </div>
+                </div>
+            </div>
+        </div>       
+
+
         <div class="footer">
             <div class="footer-content">
                 <div class="info">
@@ -118,7 +175,7 @@
                             Address: FPT University, District 9, HCMC
                         </p>
                         <p>
-                            Email: CuongNPSE183844@fpt.edu.vn
+                            Email: fuj.khac.diamondshopsystem@gmail.com
                         </p>
                         <p>
                             Phone: (+ 84) 898876512
@@ -156,7 +213,20 @@
             </div>
         </div>
 
-
+        <script>
+            function toggleDropdown(header) {
+                var content = header.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                    header.querySelector(".plus-button").innerText = "+";
+                    header.parentElement.style.height = header.offsetHeight + "px";
+                } else {
+                    content.style.display = "block";
+                    header.querySelector(".plus-button").innerText = "-";
+                    header.parentElement.style.height = (header.offsetHeight + content.offsetHeight) + "px";
+                }
+            }
+        </script>
         <script src="js/productlist_pagination.js"></script>
 
     </body>

@@ -255,6 +255,58 @@ a{
     text-decoration: none;
 }
 
+.faq{
+    display: flex;
+    justify-content: space-around;
+    font-family: "Inter", sans-serif;
+    margin: 30px 0;
+}
+
+.faq-title h1{
+    color: #151542;
+    font-size: 30px;
+}
+
+.more-details {
+    width: auto;
+    border-bottom: 1px solid #ccc;
+    overflow: hidden;
+    transition: height 0.3s ease;
+    margin: 10px 0;
+}
+
+.more-details-title-wrapper {
+    padding: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.plus-button {
+    color: #151542;
+    border: none;
+    background: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 20px;
+}
+
+.more-details-content {
+    padding: 5px;
+    display: none;
+    margin-left: 10px;
+}
+
+.more-details-content p{
+    padding: 0;
+    font-size: 15px;
+    margin-top: 1px;
+}
+
 
 .footer {
     background-color: black;
