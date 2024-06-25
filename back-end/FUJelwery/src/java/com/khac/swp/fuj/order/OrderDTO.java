@@ -17,6 +17,7 @@ public class OrderDTO {
     private String orderDate;
     private int ringID;
     private String ringName;
+    private String ringImage;
     private int voucherID;
     private String voucherName;
     private int warrantyID;
@@ -84,6 +85,14 @@ public class OrderDTO {
 
     public void setRingName(String ringName) {
         this.ringName = ringName;
+    }
+
+    public String getRingImage() {
+        return ringImage;
+    }
+
+    public void setRingImage(String ringImage) {
+        this.ringImage = ringImage;
     }
 
     public int getVoucherID() {

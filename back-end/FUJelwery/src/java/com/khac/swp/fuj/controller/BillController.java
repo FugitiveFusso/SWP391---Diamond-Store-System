@@ -58,11 +58,30 @@ public class BillController extends HttpServlet {
                 }
                 if (id != null) {
                     OrderDAO dao = new OrderDAO();
-                    List<OrderDTO> list = dao.listHistory(id);
-                    request.setAttribute("billlist", list);
+                    List<OrderDTO> listReceive = dao.listHistoryReceiveAtStore(id);
+                    request.setAttribute("listreceive", listReceive);
+                    List<OrderDTO> listDelivery = dao.listHistoryDelivery(id);
+                    request.setAttribute("listdelivery", listDelivery);
                 }
 
                 request.getRequestDispatcher("/billlist.jsp").forward(request, response);
+
+            } else if (action.equals("details")) {//details
+
+                Integer id = null;
+                try {
+                    id = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+
+                OrderDTO bill = null;
+                if (id != null) {
+                    bill = orderDAO.loadBillDetail(id);
+                }
+
+                request.setAttribute("bill", bill);//object
+                request.getRequestDispatcher("/billdetails.jsp").forward(request, response);
 
             }
         }
