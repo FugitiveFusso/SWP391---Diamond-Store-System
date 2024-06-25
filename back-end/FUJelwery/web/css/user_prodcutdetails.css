@@ -78,10 +78,36 @@ body {
     text-align: right;
 }
 
+.form-container{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+}
+
+.buttons-form1 {
+    display: flex;
+    gap: 10px;
+    width: 47%;
+}
+
 .buttons-form {
     display: flex;
     gap: 10px;
-    margin-top: 10px;
+    margin-top: 30px;
+}
+
+.More-Info{
+    margin-top: 40px;
+}
+
+.More-Info h2{
+    color: #151542;
+    font-family: 'Gantari';
+    font-size: 16px;
+    font-weight: 600;
+    font-weight: 700;
+    line-height: 20px;
 }
 
 .btn {
@@ -115,27 +141,33 @@ body {
 }
 
 
-#wishlist-btn {
-    font-size: 24px;
-    cursor: pointer;
+.btn1 {
+    align-items: center;
+    background-color: #151542;
     border: none;
-    background: none;
-    outline: none;
-    transition: transform 0.2s;
-}
-
-#wishlist-btn:active {
-    transform: scale(0.9);
-}
-
-.title-wishlist {
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
+    font-family: 'Gantari';
+    font-size: 16px;
+    height: 52px;
+    justify-content: center;
+    line-height: 20px;
+    padding: 12px;
+    text-transform: uppercase;
+    width: 100%;
+    transition: ease 0.3s;
 }
 
-.fa-heart{
-    font-size: 25px;
+.btn1:hover {
+    background-color: #0056b3;
+}
+
+.btn1:active {
+    background-color: #ddd;
+    color: #000
 }
 
 .Inclusion{

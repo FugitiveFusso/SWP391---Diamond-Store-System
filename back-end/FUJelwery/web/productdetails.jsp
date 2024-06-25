@@ -112,19 +112,10 @@
             <div class="right-column">
                 <div class="title-wishlist">
                     <h1>${requestScope.product.ringName}</h1>
-                    <button id="wishlist-btn" onclick="addtoWishlist()"><i class="fa-regular fa-heart"></i></button>
                 </div>
                 <hr style="margin-bottom: 10px;">
                 <p class="price" style="margin-top: 20px;"><strong style="color: #151542">Total Price:</strong> ${requestScope.product.totalPrice} VND</p>
-                <form action="ProductController" method="post" class="buttons-form">
-                    <input type="hidden" name="action" value="list">
-                    <input type="submit" value="Product" class="btn">
-                </form>
-                <form action="UserCollectionController" method="POST" class="buttons-form">
-                    <input name="action" value="details" type="hidden">
-                    <input name="id" value="${product.collectionID}" type="hidden">
-                    <button type="submit" class="btn btn-primary">Collection</button>
-                </form>
+
                 <form action="AddToCart" method="post" class="buttons-form">
                     <input type="hidden" name="userID" value=${sessionScope.usersession.userid}>
                     <input type="hidden" name="ringID" value=${requestScope.product.ringID}>
@@ -142,6 +133,21 @@
                     </select>
                     <button type="submit" class="btn btn-primary">Add to Cart</button>
                 </form>
+                <div class="More-Info">
+                    <h2>More products related:</h2>
+                    <div class="form-container">
+                        <form action="ProductController" method="post" class="buttons-form1">
+                            <input type="hidden" name="action" value="list">
+                            <input type="submit" value="Product" class="btn1">
+                        </form>
+                        <form action="UserCollectionController" method="POST" class="buttons-form1">
+                            <input name="action" value="details" type="hidden">
+                            <input name="id" value="${product.collectionID}" type="hidden">
+                            <button type="submit" class="btn1 btn-primary">Collection</button>
+                        </form>
+                    </div>
+                </div>
+
                 <div class="Inclusion">
                     <h2>Your Order Includes:</h2>
                     <div class="Inclusion-container">
@@ -283,15 +289,6 @@
                     icon.classList.add('fa-regular');
                 }
             });
-
-            function addtoWishlist() {
-                Swal.fire({
-                    title: 'Added to your Wishlist!',
-                    text: 'The item has been added to your wishlist.',
-                    icon: 'success',
-                    confirmButtonText: 'OK'
-                });
-            }
 
             function toggleDropdown(header) {
                 var content = header.nextElementSibling;
