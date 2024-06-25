@@ -7,7 +7,6 @@
         <title>User Account</title>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="css/user_accountdetails.css">
-        <link rel="stylesheet" href="css/navbaruser.css">
         <link rel="stylesheet" href="css/navigation_bar.css">
 
     </head>
@@ -58,7 +57,7 @@
                     </li>
                     <li class="navbar-link"><a href="./user_aboutus.jsp" class="line">About Us</a></li>                    
                     <li class="navbar-link">
-                        <a href="#" class="line">Account</a>
+                        <a href="./user_accountdetails.jsp" class="line">Account</a>
                         <div class="sub-menu-1">
                             <ul>
                                 <li><a href='./userlogin?action=logout'>Logout</a></li> 
