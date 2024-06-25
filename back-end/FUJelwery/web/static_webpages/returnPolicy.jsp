@@ -20,7 +20,7 @@
                 <div class="top-info-left">
                     <ul>
                         <li>Timeless elegance and craftsmanship</li>
-                        <li style="margin-left: 30px">at FUJ Jewelry Online Shop.</li>                                
+                        <li style="margin-left: 30px">at FUJ Jewelry Online Shop.</li>                             
                     </ul>
                 </div>
                 <a href="./../user_homepage.jsp"><img src="../images/Screenshot (656).png"></a>
@@ -38,7 +38,10 @@
                         <div class="sub-menu-1">
                             <ul>
                                 <li><a href='../ProductController'>Ring</a></li>
-                                <li><a href='../UserCollectionController'>Collection</a></li>                                
+                                <li><a href='../UserCategoryController'>Category</a></li>    
+                                <li><a href='../UserCollectionController'>Collection</a></li>  
+                                <li><a href='../OrderController?action=list&id=${sessionScope.usersession.userid}'>Cart</a></li>
+                                <li><a href='../BillController?action=list&id=${sessionScope.usersession.userid}'>Bill</a></li>
                             </ul>
                         </div>   
                     </li>
@@ -70,11 +73,6 @@
         </div>
 
         <div class="main">
-
-            <!--navbar-->
-
-            <!--.-->
-
             <div class="content">
                 <div class="title-image">
                     <img src="../images/1_FTht0n-r_BVtqSvmL-52tw.jpg">

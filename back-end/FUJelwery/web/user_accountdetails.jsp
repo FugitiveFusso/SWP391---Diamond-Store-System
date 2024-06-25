@@ -17,14 +17,14 @@
             <div class="header-top">
                 <div class="top-info-left">
                     <ul>
-                        <li>"Timeless elegance and craftsmanship</li>
-                        <li>at FUJ Jewelry Online Shop."</li>                         
+                        <li>Timeless elegance and craftsmanship</li>
+                        <li style="margin-left: 30px">at FUJ Jewelry Online Shop.</li>                         
                     </ul>
                 </div>
                 <a href="./user_homepage.jsp"><img src="./images/Screenshot (656).png"></a>
                 <div class="top-info-right">
                     <ul>
-                        <li>FUJ Jewelry Shop - (+ 84) 898876512</li>
+                        <li>FUJ Jewelry Shop - <strong>(+ 84) 898876512</strong></li>
                     </ul>
                 </div>
             </div>
@@ -36,14 +36,18 @@
                         <div class="sub-menu-1">
                             <ul>
                                 <li><a href='./ProductController'>Ring</a></li>
-                                <li><a href='./UserCollectionController'>Collection</a></li>
-                                <li><a href='./UserDiamondPriceController'>Diamond Price</a></li>
+                                <li><a href='./UserCategoryController'>Category</a></li>  
+                                <li><a href='./UserCollectionController'>Collection</a></li>  
+                                <li><a href='OrderController?action=list&id=${sessionScope.usersession.userid}'>Cart</a></li>
+                                <li><a href='BillController?action=list&id=${sessionScope.usersession.userid}'>Bill</a></li>                           
                             </ul>
                         </div>   
                     </li>
+                    <li class="navbar-link"><a href='./UserDiamondPriceController' class="line">Diamond Price</a></li>
                     <li class="navbar-link"><a href='./UserVoucherController' class="line">Voucher</a></li>
+                    <li class="navbar-link"><a href="#" class="line">Order</a></li>
                     <li class="navbar-link">
-                        <a href="./static_webpages/certificate_edu.jsp" class="line">Education</a>
+                        <a href="certificate_edu.jsp" class="line">Education</a>
                         <div class="sub-menu-1">
                             <ul>
                                 <li><a href='./UserPostController'>Blog</a></li>
@@ -52,8 +56,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="navbar-link"><a href="./user_aboutus.jsp" class="line">About Us</a></li>
-                    <li class="navbar-link"><a href="#" class="line">Order</a></li>
+                    <li class="navbar-link"><a href="./user_aboutus.jsp" class="line">About Us</a></li>                    
                     <li class="navbar-link">
                         <a href="#" class="line">Account</a>
                         <div class="sub-menu-1">
@@ -90,27 +93,6 @@
                 </div>
                 <div class="profile-info col-md-9">
                     <div class="panel">
-                        <!--                        <form>
-                                                    <textarea placeholder="Whats in your mind today?" rows="2" class="form-control input-lg p-text-area"></textarea>
-                                                </form>
-                                                <footer class="panel-footer">
-                                                    <button class="btn btn-warning pull-right">Post</button>
-                                                    <ul class="nav nav-pills">
-                                                        <li>
-                                                            <a href="#"><i class="fa fa-map-marker"></i></a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><i class="fa fa-camera"></i></a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><i class=" fa fa-film"></i></a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><i class="fa fa-microphone"></i></a>
-                                                        </li>
-                                                    </ul>
-                                                </footer>
-                                            </div>-->
                         <div class="panel">
                             <div class="bio-graph-heading">
                                 FUJ hope you have a great experience from using our service
