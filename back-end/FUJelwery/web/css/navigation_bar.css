@@ -82,7 +82,7 @@
     position: absolute;
     background-color: #fff;
     width: 230px;
-    margin: 5px; /* Adjust this value if necessary */
+    margin: 2px; /* Adjust this value if necessary */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.10);
     z-index: 10;
 }
@@ -109,98 +109,3 @@
     display: block;
 }
 
-
-/*.header-bottom ul li:hover .sub-menu-1 {
-    display: block;
-    margin: 50px;
-}
-
-.header-bottom ul li:hover .sub-menu-1 ul {
-    display: block;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.header-bottom ul li:hover .sub-menu-1 ul li {
-    width: 300px;
-    padding: 10px;
-    border-bottom: 1px dotted #fff;
-    background: transparent;
-    border-radius: 0;
-    text-align: left;
-}
-
-.header-bottom ul li:hover .sub-menu-1 ul li:last-child {
-    border-bottom: none; 
-}
-
-.header-bottom ul li:hover .sub-menu-1 ul li a:hover {
-    color: #757575;
-}*/
-
-/*.menu ul {
-    display: flex;
-    justify-content: space-around;  
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-}
-
-.menu ul li {
-    padding: 0 20px;  
-    margin: 0;
-    display: flex;
-    align-items: center;
-    position: relative;  
-}
-
-.menu ul li a {
-    text-decoration: none;
-    color: #000000;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 600;
-}
-
-.menu ul li:hover {
-    background: #efefef;
-    border-radius: 3px;
-}
-
-.sub-menu-1 {
-    display: none;
-    position: absolute;
-    top: 100%;  
-    left: 0;
-    background: #d9d9d9;
-    z-index: 10;  
-}
-
-.menu ul li:hover .sub-menu-1 {
-    display: block;
-}
-
-.menu ul li:hover .sub-menu-1 ul {
-    display: block;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.menu ul li:hover .sub-menu-1 ul li {
-    width: 300px;
-    padding: 10px;
-    border-bottom: 1px dotted #fff;
-    background: transparent;
-    border-radius: 0;
-    text-align: left;
-}
-
-.menu ul li:hover .sub-menu-1 ul li:last-child {
-    border-bottom: none; 
-}
-
-.menu ul li:hover .sub-menu-1 ul li a:hover {
-    color: #757575;
-}*/
