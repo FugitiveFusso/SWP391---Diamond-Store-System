@@ -139,6 +139,48 @@
 
                         </td></tr>
                     </table>
+                    
+                     <table>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Username</th>
+                            <th>Ring Name</th>
+                            <th>Ring Size</th>
+                            <th>Date of Purchase</th>
+                            <th>Destination</th>
+                            <th>Warranty ID</th>
+                            <th>Price</th>
+                            <th>Accept</th>
+                        </tr>
+                        <%
+                            list = (List<OrderDTO>) request.getAttribute("receiveatstore");
+                            for (OrderDTO salesorder : list) {
+                                pageContext.setAttribute("salesorder", salesorder);
+                        %>
+                        <tr>
+                            <td>${salesorder.orderID}</td>
+                            <td><a href="Staff_Customer_Controller?action=details&id=${salesorder.userID}">${salesorder.userName}</td>
+                            <td>${salesorder.ringName}</td>
+                            <td>${salesorder.ringSize}</td>
+                            <td>${salesorder.orderDate}</td>
+                            <td>${salesorder.address}</td>
+                            <td>${salesorder.warrantyName}</td>
+                            <td>${salesorder.totalPrice}</td>
+                                    <form action="SalesStaffOrderController" method="POST">
+                                    <td>
+                                        <input name="action" value="received" type="hidden">
+                                        <input name="orderID" value="${salesorder.orderID}" type="hidden">
+                                        <input type="submit" value="Customer has received at store">
+                                </form>
+                            </td>
+                        </tr>
+                        <%
+                            }
+                        %>    
+
+
+                        </td></tr>
+                    </table>
                     <script src="js/pagination.js"></script>
                     <script src="js/pagination.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
                                                                     integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="

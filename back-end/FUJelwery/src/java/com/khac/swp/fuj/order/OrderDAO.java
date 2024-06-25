@@ -204,6 +204,61 @@ public class OrderDAO {
         }
         return list;
     }
+    
+    public List<OrderDTO> receivedAtStore() {
+        List<OrderDTO> list = new ArrayList<OrderDTO>();
+        try {
+
+            Connection con = DBUtils.getConnection();
+            String sql = "select o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, COALESCE(v.voucherID, 0) AS [voucherID], COALESCE(v.voucherName,'n/a') AS [voucherName], COALESCE(o.warrantyID, 0) AS [warrantyID],o.ringSize, FORMAT(SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * ((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0' ) AS [totalPrice], o.status from [Order] o left join [User] u ON o.userID = u.userID left join [Ring] r ON o.ringID = r.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID  left join [Voucher] v ON o.voucherID = v.voucherID group by o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, v.percentage, o.warrantyID, o.ringSize, o.status, o.purchaseMethod HAVING o.status = 'verified' AND o.purchaseMethod = 'Received at store' ";
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    int orderID = rs.getInt("orderID");
+                    int userID1 = rs.getInt("userID");
+                    String userName = rs.getString("userName");
+                    String address = rs.getString("address");
+                    String orderDate = rs.getString("orderDate");
+                    int ringID = rs.getInt("ringID");
+                    String ringName = rs.getString("ringName");
+                    int voucherID = rs.getInt("voucherID");
+                    String voucherName = rs.getString("voucherName");
+                    int warrantyID = rs.getInt("warrantyID");
+                    int ringSize = rs.getInt("ringSize");
+                    String totalPrice = rs.getString("totalPrice");
+                    String status = rs.getString("status");
+
+                    OrderDTO order = new OrderDTO();
+
+                    order.setOrderID(orderID);
+                    order.setUserID(userID1);
+                    order.setUserName(userName);
+                    order.setAddress(address);
+                    order.setOrderDate(orderDate);
+                    order.setRingID(ringID);
+                    order.setRingName(ringName);
+                    order.setVoucherID(voucherID);
+                    order.setVoucherName(voucherName);
+                    order.setWarrantyID(warrantyID);
+                    order.setRingSize(ringSize);
+                    order.setTotalPrice(totalPrice);
+                    order.setStatus(status);
+
+                    list.add(order);
+                }
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return list;
+    }
 
     public List<OrderDTO> listForDelivery() {
         List<OrderDTO> list = new ArrayList<OrderDTO>();
@@ -211,7 +266,7 @@ public class OrderDAO {
 
             Connection con = DBUtils.getConnection();
 
-            String sql = "select o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, COALESCE(v.voucherID, 0) AS [voucherID], COALESCE(v.voucherName,'n/a') AS [voucherName], COALESCE(o.warrantyID, 0) AS [warrantyID],o.ringSize, FORMAT(SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * ((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0' ) AS [totalPrice], o.status from [Order] o left join [User] u ON o.userID = u.userID left join [Ring] r ON o.ringID = r.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID  left join [Voucher] v ON o.voucherID = v.voucherID group by o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, v.percentage, o.warrantyID, o.ringSize, o.status HAVING o.status = 'verified'  ";
+            String sql = "select o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, COALESCE(v.voucherID, 0) AS [voucherID], COALESCE(v.voucherName,'n/a') AS [voucherName], COALESCE(o.warrantyID, 0) AS [warrantyID],o.ringSize, FORMAT(SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * ((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0' ) AS [totalPrice], o.status from [Order] o left join [User] u ON o.userID = u.userID left join [Ring] r ON o.ringID = r.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID  left join [Voucher] v ON o.voucherID = v.voucherID group by o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, v.percentage, o.warrantyID, o.ringSize, o.status HAVING o.status = 'verified' AND o.purchaseMethod = 'Door-to-door delivery service' ";
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -537,6 +592,24 @@ public class OrderDAO {
 
     public boolean acceptOrder(int orderID) {
         String sql = "UPDATE [Order] SET status = 'verified' WHERE orderID = ? ";
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, orderID);
+
+            ps.executeUpdate();
+            conn.close();
+        } catch (SQLException ex) {
+            System.out.println("Adding voucher error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return false;
+    }
+    
+    public boolean receivedOrder(int orderID) {
+        String sql = "UPDATE [Order] SET status = 'received at store' WHERE orderID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();

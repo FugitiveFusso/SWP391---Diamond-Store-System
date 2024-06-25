@@ -66,7 +66,8 @@ public class SalesStaffOrderController extends HttpServlet {
                 OrderDAO dao = new OrderDAO();
                 List<OrderDTO> list = dao.listForSales();
                 request.setAttribute("salesorderlist", list);
-
+                List<OrderDTO> receiveAtStore = dao.receivedAtStore();
+                request.setAttribute("receiveatstore", receiveAtStore);
                 request.getRequestDispatcher("/salesstafforderlist.jsp").forward(request, response);
 
             } else if (action.equals("details")) {//details
@@ -120,6 +121,41 @@ public class SalesStaffOrderController extends HttpServlet {
                 try {
                     List<OrderDTO> list = orderDAO.listForSales();
                     request.setAttribute("salesorderlist", list);
+                    List<OrderDTO> receiveAtStore = orderDAO.receivedAtStore();
+                    request.setAttribute("receiveatstore", receiveAtStore);
+                    request.getRequestDispatcher("/salesstafforderlist.jsp").forward(request, response);
+                } catch (Exception e) {
+                    log("Error forwarding to sales staff order list: " + e.getMessage());
+                    request.getSession().setAttribute("errorMessage", "Error loading order list.");
+                    response.sendRedirect("errorPage.jsp"); // Redirect to an error page if forwarding fails
+                }
+            } else if (action.equals("received")) {
+                Integer orderID = null;
+                try {
+                    orderID = Integer.parseInt(request.getParameter("orderID"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter orderID has wrong format.");
+                }
+
+                if (orderID != null) {
+                    try {
+                        orderDAO.receivedOrder(orderID);
+                        request.getSession().setAttribute("success", "Received order Successfully!!!");
+                    } catch (Exception e) {
+                        log("Error processing order with orderID " + orderID + ": " + e.getMessage());
+                        request.getSession().setAttribute("errorMessage", "Error receiving order.");
+                    }
+                } else {
+                    if (orderID == null) {
+                        request.getSession().setAttribute("errorMessage", "Invalid order ID.");
+                    }
+                }
+
+                try {
+                    List<OrderDTO> list = orderDAO.listForSales();
+                    request.setAttribute("salesorderlist", list);
+                    List<OrderDTO> receiveAtStore = orderDAO.receivedAtStore();
+                    request.setAttribute("receiveatstore", receiveAtStore);
                     request.getRequestDispatcher("/salesstafforderlist.jsp").forward(request, response);
                 } catch (Exception e) {
                     log("Error forwarding to sales staff order list: " + e.getMessage());
