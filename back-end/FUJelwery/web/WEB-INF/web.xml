@@ -142,6 +142,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>adminlogin.jsp</welcome-file>
+        <welcome-file>userlogin.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

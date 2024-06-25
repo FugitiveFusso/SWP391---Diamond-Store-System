@@ -117,6 +117,61 @@
             </div>
         </div>
 
+        <div class="Main-hero">
+            <div class="hero-details">
+                <h2 style="font-family: Inter; font-weight: bold;">UP TO 50% OFF</h2>
+                <h1 style="font-family: Inika;">To Mom, With Love</h1>
+                <h3>A mother’s love is deep and everlasting. <br>Celebrate it with something that will always shin like she does (and save up to 50%)</h3>                   
+            </div>
+            <img src="images/hero1.jpg" height="1px" alt="" srcset="">
+        </div>
+
+        <div class="faq">
+            <div class="faq-left">
+                <div class="faq-title">
+                    <h1>FAQs about FUJ Ring Category</h1>
+                </div>
+            </div>
+            <div class="faq-right">
+                <div class="more-details">
+                    <div class="more-details-title-wrapper" onclick="toggleDropdown(this)">
+                        What materials are commonly used to make rings?
+                        <button class="plus-button">+</button>
+                    </div>
+                    <div class="more-details-content">
+                        <p>Rings can be made from a variety of materials, including gold, silver, platinum, titanium, </p> 
+                        <p>tungsten, stainless steel, and more. Some rings also incorporate  gemstones such as </p> 
+                        <p>diamonds, sapphires, emeralds, and rubies.</p> 
+                    </div>
+                </div>
+                <div class="more-details">
+                    <div class="more-details-title-wrapper" onclick="toggleDropdown(this)">
+                        How do I determine my ring size?
+                        <button class="plus-button">+</button>
+                    </div>
+                    <div class="more-details-content">
+                        <p>You can determine your ring size by using a ring sizer tool which measures the</p> 
+                        <p>circumference of your finger. Alternatively, you can visit a jeweler who can professionally</p> 
+                        <p>measure your ring size. It's important to measure your finger at different times of the day,</p> 
+                        <p>as finger size can vary with temperature and activity.</p>
+                    </div>
+                </div>
+                <div class="more-details">
+                    <div class="more-details-title-wrapper" onclick="toggleDropdown(this)">
+                        What is the significance of different types of rings (e.g., engagement rings)?
+                        <button class="plus-button">+</button>
+                    </div>
+                    <div class="more-details-content">
+                        <p>Different types of rings have different significances. Engagement rings are typically</p> 
+                        <p>given during a proposal and often feature a prominent gemstone. Wedding rings are</p> 
+                        <p>exchanged during the wedding and symbolize the commitment of marriage. Other</p> 
+                        <p>rings, such as promise rings, fashion rings and anniversary rings, can also carry</p>
+                        <p>personal or cultural significance.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="footer">
             <div class="footer-content">
                 <div class="footer-content-info">
