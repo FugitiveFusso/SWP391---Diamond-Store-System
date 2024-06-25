@@ -113,7 +113,7 @@
                                         %>
                                         <tr class="voucher-item" style="border-radius: 20px">
                                             <td class="voucher-image">
-                                                <img src="${voucher.image}" style="width: 400px; height: 280px">
+                                                <img src="${voucher.image}" style="width: 600px; height: 280px">
                                             </td>
                                             <td class="voucher-details" style="font-family: 'Inter', sans-serif; ">
                                                 <h2>${voucher.name}</h2>
@@ -129,7 +129,7 @@
                                                     <p>${voucher.description}</p>
                                                 </div>
                                                 <div class="detail-row">
-                                                    <strong>Code:</strong>${voucher.coupon}
+                                                    <strong>Code: ${voucher.coupon}</strong>
                                                 </div>
 
                                                 <div class="detail-row">
@@ -146,34 +146,65 @@
                         </div>
                     </div>
 
-                    <!--                    <table id="pagination">
-                                            <tbody>
-                    
-                    <tr style="border-radius: 20px;">
-                        <td>
-                            <img src="${voucher.image}">
-                        </td>
-                        <td style="font-family: 'Inter', sans-serif; padding: 0 30px;">
-                            <div class="voucher-content">
-                                <div class="voucher-title" style="font-weight: bold;">
-                    ${voucher.name}
-                </div>
-                <div class="voucher-detail"><strong>Created date:</strong> <p>${voucher.createddate}</p></div>
-                <div class="voucher-detail"><strong>Added by:</strong> <p>${voucher.createdby}</p></div>
-                <div class="voucher-detail"><strong>Code:</strong> <p>${voucher.coupon}</p></div>
-                <div class="voucher-detail"><strong>Description:</strong> <p>${voucher.description}</p></div>
-                <div class="voucher-detail"><strong>Discount percentage:</strong> <p>${voucher.percentage}%</p></div>
-            </div>
-        </td>
-    </tr>
-                    
-                </tbody>
-            </table>-->
-
                     <div id="paginationControls" class="pagination-controls">
                         <button id="prevButton" class="pagination-button"><i class="fas fa-chevron-left"></i></button>
                         <div id="pageNumbers"></div>
                         <button id="nextButton" class="pagination-button"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bannerContainer">
+            <div class="bannerContent">
+                <div class="bannerImage">
+                    <img src="images/Women's_Platinum_Wedding_Rings.webp" id="diamondHero" alt="">
+                </div>
+                <div class="bannerText">
+                    <h1>HOW CAN I REDEEM MY RING VOUCHER?</h1>
+                    <div class="description_hero">
+                        <span>Redeeming your ring voucher is easy! Simply enter the unique code provided at checkout to apply the voucher towards your purchase. Enjoy selecting from our exquisite collection of rings and use your voucher to add a touch of elegance to your jewelry collection.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq">
+            <div class="faq-left">
+                <div class="faq-title">
+                    <h1>FAQs about FUJ Ring Voucher</h1>
+                </div>
+            </div>
+            <div class="faq-right">
+                <div class="more-details">
+                    <div class="more-details-title-wrapper" onclick="toggleDropdown(this)">
+                        How do I receive a ring voucher?
+                        <button class="plus-button">+</button>
+                    </div>
+                    <div class="more-details-content">
+                        <p>Ring vouchers are typically issued through promotions, special offers, or as gifts. You may </p> 
+                        <p>receive them via email, physical mail, or by phone that can be redeemed on our website.</p> 
+                    </div>
+                </div>
+                <div class="more-details">
+                    <div class="more-details-title-wrapper" onclick="toggleDropdown(this)">
+                        Can I use a ring voucher to purchase any item on your website?
+                        <button class="plus-button">+</button>
+                    </div>
+                    <div class="more-details-content">
+                        <p>Ring vouchers can typically be used to purchase any ring or jewelry item available on our </p> 
+                        <p>website, unless otherwise specified in the voucher terms.</p>                        
+                    </div>
+                </div>
+                <div class="more-details">
+                    <div class="more-details-title-wrapper" onclick="toggleDropdown(this)">
+                        Can I use a voucher for online purchases only, or can I use it in-store as well?
+                        <button class="plus-button">+</button>
+                    </div>
+                    <div class="more-details-content">
+                        <p>Ring vouchers issued by our store are valid for online purchases through our website only.</p> 
+                        <p>Unfortunately, at this time, we are unable to accept vouchers for in-store purchases.</p> 
+                        <p>Please refer to the voucher terms for any specific restrictions or conditions.</p>                        
                     </div>
                 </div>
             </div>
@@ -231,7 +262,20 @@
 
         <!--        <script src="js/pagination_voucher.js"></script>-->
         <script src="js/pagination.js"></script>
-
+        <script>
+                                function toggleDropdown(header) {
+                                    var content = header.nextElementSibling;
+                                    if (content.style.display === "block") {
+                                        content.style.display = "none";
+                                        header.querySelector(".plus-button").innerText = "+";
+                                        header.parentElement.style.height = header.offsetHeight + "px";
+                                    } else {
+                                        content.style.display = "block";
+                                        header.querySelector(".plus-button").innerText = "-";
+                                        header.parentElement.style.height = (header.offsetHeight + content.offsetHeight) + "px";
+                                    }
+                                }
+        </script>
 
     </body>
 </html>

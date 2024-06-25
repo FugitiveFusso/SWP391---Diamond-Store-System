@@ -74,14 +74,33 @@
 
             </div>
         </div> 
- 
+
+        <div class="bannerContainer">
+            <div class="bannerContent">
+                <div class="bannerText">
+                    <p class="intro">Today we have</p>
+                    <h1>Explore the World of Rings: From Timeless Elegance to Modern Glamour</h1>
+                    <div class="description_hero">
+                        <span>Dive into a world of elegance and allure as we showcase stunning engagement 
+                            ring ideas, expert styling tips for any occasion, and insights into the latest 
+                            jewelry trends. Whether you're seeking inspiration for a special milestone or 
+                            simply fascinated by the craftsmanship behind each piece, join us on a journey 
+                            through the diverse and enchanting realm of rings.</span>
+                    </div>
+
+                </div>
+                <div class="bannerImage">
+                    <img src="images/Fashion_Rings.webp" id="diamondHero" style="width: 432px; height: 432px">
+                </div>
+            </div>
+        </div>
 
         <div class="main">           
-            <div class="content">
-                <div class="blog-intro">
-                    BLOG
-                </div>
-
+            <div class="content">    
+                <form action='' method=GET id="searchbox">
+                        <input name="keyword" type="text" class="search-input" value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
+                        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+                    </form>
                 <table id="pagination">
                     <tbody>
                         <%
@@ -91,7 +110,7 @@
                         %>
                         <tr style="border-radius: 20px">
                             <td>
-                                <img src="${post.image}">
+                                <img src="${post.image}" style="width: 400px; height: 280px">
                             </td>
                             <td>
                                 <div class="blog-content">
@@ -99,7 +118,7 @@
 
                                         ${post.name}
                                     </div>
-                                        <p class="date" style="margin-bottom: 10px; font-weight: bolder">Author: ${post.author} - Created date: ${post.date}</p>  
+                                    <p class="date" style="margin-bottom: 10px; font-weight: bolder">Author: ${post.author} - Created date: ${post.date}</p>  
                                     <p>${post.description}</p>
                                     <br>
                                     <p class="read-more" style="text-align: right;"><a href="UserPostController?action=details&id=${post.id}" style="color: blue; text-decoration: none; font-style: italic">Read More...</a></p>
