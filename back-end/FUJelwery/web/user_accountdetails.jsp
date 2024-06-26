@@ -84,7 +84,7 @@
                         <div class="nav-stacks">
                             <ul class="nav nav-pills nav-stacked">
                                 <li><a href="user_accountdetails.jsp"> <i class="fa fa-user"></i> Profile</a></li>
-                                <li><a href="user_accountdetails_orderhistory.jsp"> <i class="fa fa-calendar"></i> Recent Activity</a></li>
+                                <li><a href='BillController?action=list&id=${sessionScope.usersession.userid}'> <i class="fa fa-calendar"></i> Recent Activity</a></li>
                                 <li><a href="#"> <i class="fa fa-edit"></i> Edit profile</a></li>
                             </ul>
                         </div>
