@@ -25,16 +25,6 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title" style="font-weight: 700">${requestScope.bill.ringName}</h4>
-                            <p class="card-text"><strong>Certificate:</strong> ${requestScope.bill.certificateName}</p>
-                            <p class="card-text"><strong>Certificate Image:</strong> ${requestScope.bill.certificateImage}</p>
-                            <p class="card-text"><strong>Warranty Name:</strong> ${requestScope.bill.warrantyName}</p>
-                            <p class="card-text"><strong>Warranty Image:</strong> ${requestScope.bill.warrantyImage}</p>
-                            <p class="card-text"><strong>Month in effect:</strong> ${requestScope.bill.warrantyMonth}</p>
-                            <p class="card-text"><strong>Description:</strong> ${requestScope.bill.warrantyDescription}</p>
-                            <p class="card-text"><strong>Warranty Type:</strong> ${requestScope.bill.warrantyType}</p>
-                            <p class="card-text"><strong>Start Date:</strong> ${requestScope.bill.warrantyStartDate}</p>
-                            <p class="card-text"><strong>End Date:</strong> ${requestScope.bill.warrantyEndDate}</p>
-                            <p class="card-text"><strong>Terms and Conditions:</strong> ${requestScope.bill.warrantyTerms}</p>
                             <p class="card-text"><strong>Date of purchase</strong> ${requestScope.bill.orderDate}</p>
                             <p class="card-text"><strong>Voucher:</strong> ${requestScope.bill.voucherName}</p>
                             <p class="card-text"><strong>Total Price:</strong> ${requestScope.bill.totalPrice}</p>

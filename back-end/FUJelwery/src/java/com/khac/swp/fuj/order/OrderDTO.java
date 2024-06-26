@@ -22,8 +22,16 @@ public class OrderDTO {
     private String voucherName;
     private int warrantyID;
     private String warrantyName;
+    private String warrantyImage;
+    private int warrantyMonth;
+    private String warrantyDescription;
+    private String warrantyType;
+    private String warrantyStartDate;
+    private String warrantyEndDate;
+    private String warrantyTerms;
     private int certificateID;
     private String certificateName;
+    private String certificateImage;
     private int ringSize;
     private String totalPrice;
     private String purchaseMethod;
@@ -127,6 +135,63 @@ public class OrderDTO {
         this.warrantyName = warrantyName;
     }
 
+    public String getWarrantyImage() {
+        return warrantyImage;
+    }
+
+    public void setWarrantyImage(String warrantyImage) {
+        this.warrantyImage = warrantyImage;
+    }
+
+    public int getWarrantyMonth() {
+        return warrantyMonth;
+    }
+
+    public void setWarrantyMonth(int warrantyMonth) {
+        this.warrantyMonth = warrantyMonth;
+    }
+
+    public String getWarrantyDescription() {
+        return warrantyDescription;
+    }
+
+    public void setWarrantyDescription(String warrantyDescription) {
+        this.warrantyDescription = warrantyDescription;
+    }
+
+    public String getWarrantyType() {
+        return warrantyType;
+    }
+
+    public void setWarrantyType(String warrantyType) {
+        this.warrantyType = warrantyType;
+    }
+
+    public String getWarrantyStartDate() {
+        return warrantyStartDate;
+    }
+
+    public void setWarrantyStartDate(String warrantyStartDate) {
+        this.warrantyStartDate = warrantyStartDate;
+    }
+
+    public String getWarrantyEndDate() {
+        return warrantyEndDate;
+    }
+
+    public void setWarrantyEndDate(String warrantyEndDate) {
+        this.warrantyEndDate = warrantyEndDate;
+    }
+
+    public String getWarrantyTerms() {
+        return warrantyTerms;
+    }
+
+    public void setWarrantyTerms(String warrantyTerms) {
+        this.warrantyTerms = warrantyTerms;
+    }
+    
+
     public int getCertificateID() {
         return certificateID;
     }
@@ -141,6 +206,14 @@ public class OrderDTO {
 
     public void setCertificateName(String certificateName) {
         this.certificateName = certificateName;
+    }
+
+    public String getCertificateImage() {
+        return certificateImage;
+    }
+
+    public void setCertificateImage(String certificateImage) {
+        this.certificateImage = certificateImage;
     }
     
     public int getRingSize() {
