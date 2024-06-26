@@ -144,8 +144,8 @@
                     <h1 style="font-family: Inika;">To Mom, With Love</h1>
                     <h3>A mother’s love is deep and everlasting. <br>Celebrate it with something that will always shin like she does (and save up to 50%)</h3>
                     <div class="button">
-                        <button id="button1" > <a href="#">Shop Sale Jewelry</a></button>
-                        <button><a href="#">Shop Engagement Rings</a></button>
+                        <button id="button1" > <a href="./ProductController">Shop Luxurious Ring</a></button>
+                        <button><a href="./UserCollectionController">Select a Wonderful Collection</a></button>
                     </div>
                 </div>
                 <img src="images/hero1.jpg" height="1px" alt="" srcset="">

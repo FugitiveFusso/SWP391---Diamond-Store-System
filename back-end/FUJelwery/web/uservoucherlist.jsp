@@ -222,7 +222,7 @@
                             Address: FPT University, District 9, HCMC
                         </p>
                         <p>
-                            Email: CuongNPSE183844@fpt.edu.vn
+                            Email: fuj.khac.diamondshopsystem@gmail.com
                         </p>
                         <p>
                             Phone: (+ 84) 898876512

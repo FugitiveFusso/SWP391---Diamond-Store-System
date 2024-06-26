@@ -81,7 +81,7 @@
                     <div class="description_hero">
                         <span>Explore our exquisite collection of rings, designed to capture the essence of elegance and style. From sparkling diamonds to vibrant gemstones, our rings are crafted with precision and passion. Whether you're searching for a timeless engagement ring, a chic statement piece, or a meaningful gift, our diverse selection offers something for everyone. Let our rings adorn your moments with beauty and grace.</span>
                     </div>
-                    <a style="margin-top: 15px" class="slpBtn" title="Shop Diamond" href="productlist.jsp">Shop Diamond</a>
+                    
                 </div>
                 <div class="bannerImage">
                     <img src="images/Blue_Nile_Studio.webp" id="diamondHero" style="width: 432px; height: 432px">

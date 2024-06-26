@@ -181,7 +181,7 @@
                         most popular shape, we also offer nine non-round fancy-shaped diamonds that can save you up to 25.
                     </p>
                     <div class="content-title">HAVE A QUESTION?</div>
-                    <p>Contact us by phone at (+ 84) 898876512 or email at CuongNPSE183844@fpt.edu.vn </p>
+                    <p>Contact us by phone at <strong>(+ 84) 898876512</strong> or email at <strong>fuj.khac.diamondshopsystem@gmail.com</strong> </p>
                     <p>In addition, Live Chat is available during most business hours. </p>
                     <div class="Next"><a href="../static_webpages/certificate_color.jsp">NEXT: Diamond Color ></a></div>
                 </div>
@@ -208,7 +208,7 @@
                         </p>
                         <p>
                             © Copyright 2024
-                        </p> F
+                        </p> 
 
                     </div>
                 </div>
@@ -243,5 +243,5 @@
         </div>
         <script src="../js/certificate.js"></script>
     </body>
-    >
+    
 </html>

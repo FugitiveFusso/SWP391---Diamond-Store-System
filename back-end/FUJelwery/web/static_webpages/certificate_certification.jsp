@@ -225,7 +225,7 @@
                     </div>
                 </div>
                 <div class="content-title">HAVE A QUESTION?</div>
-                <p>Contact us by phone at (+ 84) 898876512 or email at CuongNPSE183844@fpt.edu.vn </p>
+                <p>Contact us by phone at <strong>(+ 84) 898876512</strong> or email at <strong>fuj.khac.diamondshopsystem@gmail.com</strong> </p>
                 <p>In addition, Live Chat is available during most business hours. </p>
             </div>
         </div>

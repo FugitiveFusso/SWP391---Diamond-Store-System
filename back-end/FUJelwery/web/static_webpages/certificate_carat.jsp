@@ -79,6 +79,20 @@
             </div>
         </div>
 
+        <div class="main-container">
+            <div class="Main-hero">
+                <div class="hero-details">
+                    <h1 style="font-family: Inika;">DIAMOND CERTIFICATE</h1>
+                    <h3>Every loose diamond that we sell is graded by the Gemological Institute of <br>America (GIA),
+                        regarded as the world's foremost authority on diamonds.</h3>
+                    <div class="button">
+                        <button id="button1"> <a href="certificate_edu.jsp" id="learn-more">Learn More</a></button>
+                    </div>
+                </div>
+                <img src="../images/diamond_certificate_1.jpg" alt="" srcset="">
+            </div>
+        </div>
+
         <div class="container">
             <div class="side_nav">
                 <h3 class="dropdown-btn">Diamond Education <i class="fa-solid fa-angle-down"></i></h3>
@@ -163,7 +177,7 @@
                         about the weights of the individual diamonds in any piece that you are buying. </div>
 
                     <div class="content-title">HAVE A QUESTION?</div>
-                    <p>Contact us by phone at (+ 84) 898876512 or email at CuongNPSE183844@fpt.edu.vn </p>
+                    <p>Contact us by phone at <strong>(+ 84) 898876512</strong> or email at <strong>fuj.khac.diamondshopsystem@gmail.com</strong> </p>
                     <p>In addition, Live Chat is available during most business hours. </p>
                 </div>
             </div>
