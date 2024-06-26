@@ -124,7 +124,60 @@
             </div>
         </div>
 
+        <div class="bannerContainer">
+            <div class="bannerContent">
+                <div class="bannerText">    
+                    <h1>HAVING TROUBLE WHEN CHOOSING YOUR BEST RING SIZE?</h1>
+                    <div class="description_hero">
+                        <span>Find the perfect fit! Visit our Ring Measuring Guide for easy-to-follow instructions on measuring your ring size at home. Ensure a comfortable and accurate fit with our helpful tips and downloadable sizing tools.</span>
+                    </div>
+                    <a style="margin-top: 15px" class="slpBtn" title="Shop Diamond" href="static_webpages/ringmeasuring.jsp">Check our guidance</a>
+                </div>
+                <div class="bannerImage">
+                    <img src="images/Ready-to-Ship_Rings.jpeg" id="diamondHero" style="width: 700px; height: 432px">
+                </div>
+            </div>
+        </div>
 
+        <div class="faq">
+            <div class="faq-left">
+                <div class="faq-title">
+                    <h1>FAQs about ${requestScope.collection.collectionName} Collection</h1>
+                </div>
+            </div>
+            <div class="faq-right">
+                <div class="more-details">
+                    <div class="more-details-title-wrapper" onclick="toggleDropdown(this)">
+                        How can I find out about the latest additions to my diverse ring collection?
+                        <button class="plus-button">+</button>
+                    </div>
+                    <div class="more-details-content">
+                        <p>Subscribe to our newsletter or follow us on social media to stay updated on our latest</p> 
+                        <p>ring designs, promotions, and special offers.</p> 
+                    </div>
+                </div>
+                <div class="more-details">
+                    <div class="more-details-title-wrapper" onclick="toggleDropdown(this)">
+                        What materials are your rings made from?
+                        <button class="plus-button">+</button>
+                    </div>
+                    <div class="more-details-content">
+                        <p>Our rings are crafted from high-quality materials such as silver, 14k and 18k gold,</p> 
+                        <p>platinum, and occasionally feature gemstones like diamonds and emeralds.</p>                         
+                    </div>
+                </div>
+                <div class="more-details">
+                    <div class="more-details-title-wrapper" onclick="toggleDropdown(this)">
+                        Do you offer a warranty or guarantee on your rings?
+                        <button class="plus-button">+</button>
+                    </div>
+                    <div class="more-details-content">
+                        <p>Yes, we stand behind the quality of our rings. Each purchase is covered by a warranty</p> 
+                        <p>against manufacturing defects. Please refer to our warranty policy for more details.</p>                        
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="footer">
             <div class="footer-content">
@@ -177,6 +230,20 @@
         </div>
 
         <script src="js/productlist_pagination.js"></script>
+        <script>
+                        function toggleDropdown(header) {
+                            var content = header.nextElementSibling;
+                            if (content.style.display === "block") {
+                                content.style.display = "none";
+                                header.querySelector(".plus-button").innerText = "+";
+                                header.parentElement.style.height = header.offsetHeight + "px";
+                            } else {
+                                content.style.display = "block";
+                                header.querySelector(".plus-button").innerText = "-";
+                                header.parentElement.style.height = (header.offsetHeight + content.offsetHeight) + "px";
+                            }
+                        }
+        </script>
 
     </body>
 </html>

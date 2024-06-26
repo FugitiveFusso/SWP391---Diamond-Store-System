@@ -15,7 +15,7 @@
         <script src="js/pagination.js"></script>
         <link rel="stylesheet" href="css/pagination.css">
         <link rel="stylesheet" href="css/user_cataegorydetails.css">
-        
+
 
     </head>
     <body>
@@ -124,6 +124,67 @@
             </div>
         </div>
 
+        <div class="bannerContainer">
+            <div class="bannerContent">
+                <div class="bannerText">    
+                    <h1>HAVING TROUBLE WHEN CHOOSING YOUR BEST RING SIZE?</h1>
+                    <div class="description_hero">
+                        <span>Find the perfect fit! Visit our Ring Measuring Guide for easy-to-follow instructions on measuring your ring size at home. Ensure a comfortable and accurate fit with our helpful tips and downloadable sizing tools.</span>
+                    </div>
+                    <a style="margin-top: 15px" class="slpBtn" title="Shop Diamond" href="static_webpages/ringmeasuring.jsp">Check our guidance</a>
+                </div>
+                <div class="bannerImage">
+                    <img src="images/Ready-to-Ship_Rings.jpeg" id="diamondHero" style="width: 700px; height: 432px">
+                </div>
+            </div>
+        </div>
+
+        <div class="faq">
+            <div class="faq-left">
+                <div class="faq-title">
+                    <h1>FAQs about ${requestScope.category.categoryName} Category</h1>
+                </div>
+            </div>
+            <div class="faq-right">
+                <div class="more-details">
+                    <div class="more-details-title-wrapper" onclick="toggleDropdown(this)">
+                        What materials are commonly used to make rings?
+                        <button class="plus-button">+</button>
+                    </div>
+                    <div class="more-details-content">
+                        <p>Rings can be made from a variety of materials, including gold, silver, platinum, titanium, </p> 
+                        <p>tungsten, stainless steel, and more. Some rings also incorporate  gemstones such as </p> 
+                        <p>diamonds, sapphires, emeralds, and rubies.</p> 
+                    </div>
+                </div>
+                <div class="more-details">
+                    <div class="more-details-title-wrapper" onclick="toggleDropdown(this)">
+                        How do I determine my ring size?
+                        <button class="plus-button">+</button>
+                    </div>
+                    <div class="more-details-content">
+                        <p>You can determine your ring size by using a ring sizer tool which measures the</p> 
+                        <p>circumference of your finger. Alternatively, you can visit a jeweler who can professionally</p> 
+                        <p>measure your ring size. It's important to measure your finger at different times of the day,</p> 
+                        <p>as finger size can vary with temperature and activity.</p>
+                    </div>
+                </div>
+                <div class="more-details">
+                    <div class="more-details-title-wrapper" onclick="toggleDropdown(this)">
+                        What is the significance of different types of rings (e.g., engagement rings)?
+                        <button class="plus-button">+</button>
+                    </div>
+                    <div class="more-details-content">
+                        <p>Different types of rings have different significances. Engagement rings are typically</p> 
+                        <p>given during a proposal and often feature a prominent gemstone. Wedding rings are</p> 
+                        <p>exchanged during the wedding and symbolize the commitment of marriage. Other</p> 
+                        <p>rings, such as promise rings, fashion rings and anniversary rings, can also carry</p>
+                        <p>personal or cultural significance.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!--        <table id="pagination">
                     <thead>
                         <tr>
@@ -200,6 +261,20 @@
             </div>  
         </div>
         <script src="js/productlist_pagination.js"></script>
-        
+        <script>
+                        function toggleDropdown(header) {
+                            var content = header.nextElementSibling;
+                            if (content.style.display === "block") {
+                                content.style.display = "none";
+                                header.querySelector(".plus-button").innerText = "+";
+                                header.parentElement.style.height = header.offsetHeight + "px";
+                            } else {
+                                content.style.display = "block";
+                                header.querySelector(".plus-button").innerText = "-";
+                                header.parentElement.style.height = (header.offsetHeight + content.offsetHeight) + "px";
+                            }
+                        }
+        </script>
+
     </body>
 </html>
