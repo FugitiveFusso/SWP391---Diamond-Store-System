@@ -500,7 +500,7 @@ public class OrderDAO {
     
     public OrderDTO loadBillDetail(int orderID) {
 
-        String sql = "select o.orderID, o.userID, u.userName, u.address, o.orderDate, o.purchaseMethod, r.ringID, r.ringName, r.ringImage, COALESCE(v.voucherID, 0) AS [voucherID], COALESCE(v.voucherName,'n/a') AS [voucherName], COALESCE(o.warrantyID, 0) AS [warrantyID], COALESCE(w.warrantyName, 'n/a') AS [warrantyName], o.ringSize, FORMAT(SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * ((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0' ) AS [totalPrice], o.status from [Order] o left join [User] u ON o.userID = u.userID left join [Ring] r ON o.ringID = r.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID  left join [Voucher] v ON o.voucherID = v.voucherID LEFT JOIN [Warranty] w ON o.warrantyID = w.warrantyID WHERE o.orderID = ? AND o.status <> 'pending' ";
+        String sql = "select o.orderID, o.userID, u.userName, u.address, o.orderDate, o.purchaseMethod, r.ringID, r.ringName, r.ringImage, COALESCE(v.voucherID, 0) AS [voucherID], COALESCE(v.voucherName,'n/a') AS [voucherName], COALESCE(o.warrantyID, 0) AS [warrantyID], COALESCE(w.warrantyName, 'n/a') AS [warrantyName], COALESCE(c.certificateID, 0) AS [certificateID], COALESCE(c.description,'n/a') AS [certificateName], o.ringSize, FORMAT(SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * ((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0' ) AS [totalPrice], o.status from [Order] o left join [User] u ON o.userID = u.userID left join [Ring] r ON o.ringID = r.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID  left join [Voucher] v ON o.voucherID = v.voucherID LEFT JOIN [Warranty] w ON o.warrantyID = w.warrantyID LEFT JOIN [Certificate] c ON d.certificateID = c.certificateID WHERE o.orderID = ? AND o.status <> 'pending' group by o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, r.ringImage, v.voucherID, v.voucherName, v.percentage, o.warrantyID, o.ringSize, o.status, o.purchaseMethod, w.warrantyID, w.warrantyName, c.certificateID, c.description";
 
         try {
 
@@ -521,6 +521,8 @@ public class OrderDAO {
                     String ringImage = rs.getString("ringImage");
                     int voucherID = rs.getInt("voucherID");
                     String voucherName = rs.getString("voucherName");
+                    int certificateID = rs.getInt("certificateID");
+                    String certificateName = rs.getString("certificateName");
                     int warrantyID = rs.getInt("warrantyID");
                     String warrantyName = rs.getString("warrantyName");
                     int ringSize = rs.getInt("ringSize");
@@ -541,6 +543,8 @@ public class OrderDAO {
                     order.setVoucherName(voucherName);
                     order.setWarrantyID(warrantyID);
                     order.setWarrantyName(warrantyName);
+                    order.setCertificateID(certificateID);
+                    order.setCertificateName(certificateName);
                     order.setRingSize(ringSize);
                     order.setTotalPrice(totalPrice);
                     order.setStatus(status);

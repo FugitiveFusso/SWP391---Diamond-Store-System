@@ -23,16 +23,12 @@
 
                 <div class="col-md-6">
                     <div class="card">
-                        <div class="card-body">    
-                            <h6 class="card-subtitle mb-2 text-muted" >Ring ID: ${requestScope.bill.ringID}</h6>
+                        <div class="card-body">
                             <h4 class="card-title" style="font-weight: 700">${requestScope.bill.ringName}</h4>
-                            <p class="card-text"><strong>Category:</strong> ${requestScope.bill.categoryID}</p>
-                            <p class="card-text"><strong>Collection:</strong> ${requestScope.bill.categoryID}</p>
                             <p class="card-text"><strong>Certificate:</strong> ${requestScope.bill.certificateName}</p>
                             <p class="card-text"><strong>Warranty:</strong> ${requestScope.bill.warrantyName}</p>
                             <p class="card-text"><strong>Date of purchase</strong> ${requestScope.bill.orderDate}</p>
                             <p class="card-text"><strong>Voucher:</strong> ${requestScope.bill.voucherName}</p>
-                            <p class="card-text"><strong>Your preferred purchase method:</strong> ${requestScope.bill.purchaseMethod}</p>
                             <p class="card-text"><strong>Total Price:</strong> ${requestScope.bill.totalPrice}</p>
                         </div>
                     </div>
