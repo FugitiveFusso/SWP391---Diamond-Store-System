@@ -25,6 +25,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title" style="font-weight: 700">${requestScope.bill.ringName}</h4>
+                            <p class="card-text"><strong>Status</strong> ${requestScope.bill.status}</p>
                             <p class="card-text"><strong>Date of purchase</strong> ${requestScope.bill.orderDate}</p>
                             <p class="card-text"><strong>Voucher:</strong> ${requestScope.bill.voucherName}</p>
                             <p class="card-text"><strong>Total Price:</strong> ${requestScope.bill.totalPrice}</p>
