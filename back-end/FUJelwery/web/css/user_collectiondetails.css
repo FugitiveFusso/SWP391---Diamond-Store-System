@@ -118,9 +118,8 @@ body {
 }
 
 .product-item img {
-    /*width: 90%;*/
-    width: 100%;
-    height: auto;
+    width: 275px;
+    height: 285px;
 }
 
 .product-item img:hover{
