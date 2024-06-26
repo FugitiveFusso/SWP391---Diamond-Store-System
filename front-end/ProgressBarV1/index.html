@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Step Progress Bar</title>
+    <style>
+        .progress-container {
+            width: 100%;
+            background-color: #f3f3f3;
+            border-radius: 25px;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            position: relative;
+        }
+
+        .progress-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background-color: #4caf50;
+            border-radius: 25px;
+            z-index: 1;
+        }
+
+        .step {
+            z-index: 2;
+            text-align: center;
+            width: 20%;
+            position: relative;
+        }
+
+        .step::after {
+            content: '';
+            display: block;
+            height: 10px;
+            width: 100%;
+            background: #f3f3f3;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            z-index: -1;
+        }
+
+        .step:first-child::after {
+            width: 50%;
+            left: 75%;
+        }
+
+        .step:last-child::after {
+            width: 50%;
+            left: 25%;
+        }
+    </style>
+    <script>
+        var steps = ["Purchased", "Verified", "Shipping", "Delivered"];
+
+        function updateProgressBar(status) {
+            var progressBar = document.getElementById("progressBar");
+            var stepIndex = steps.indexOf(status) + 1;
+            var percentage = (stepIndex / steps.length) * 100;
+            progressBar.style.width = percentage + "%";
+        }
+
+        function checkStatus() {
+            var statusElement = document.getElementById("status");
+            var status = statusElement.innerHTML.trim();
+            if (steps.includes(status)) {
+                updateProgressBar(status);
+            } else {
+                console.log("Invalid status: " + status);
+            }
+        }
+
+        window.onload = function() {
+            // Initially set the progress bar based on the current status
+            checkStatus();
+
+            // Check the status every second
+            setInterval(checkStatus, 1000);
+        }
+    </script>
+</head>
+<body>
+    <h2>Step Progress Bar Example</h2>
+    <div class="progress-container">
+        <div id="progressBar" class="progress-bar"></div>
+        <div class="step">Purchased</div>
+        <div class="step">Verified</div>
+        <div class="step">Shipping</div>
+        <div class="step">Delivered</div>
+    </div>
+
+    <br>
+    <div id="status" style="display:none;">Delivered</div> <!-- Simulate the status display -->
+
+    <script>
+        // Simulate status updates (this part is for demonstration purposes)
+        var statuses = ["Purchased", "Verified", "Shipping", "Delivered"];
+        var index = 0;
+        setInterval(function() {
+            index = (index + 1) % statuses.length;
+            document.getElementById("status").innerHTML = statuses[index];
+        }, 5000); // Change status every 5 seconds
+    </script>
+</body>
+</html>
