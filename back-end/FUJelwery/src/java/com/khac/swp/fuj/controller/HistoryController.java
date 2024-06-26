@@ -21,8 +21,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Dell
  */
-@WebServlet(name = "BillController", urlPatterns = {"/BillController"})
-public class BillController extends HttpServlet {
+@WebServlet(name = "HistoryController", urlPatterns = {"/HistoryController"})
+public class HistoryController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -58,15 +58,13 @@ public class BillController extends HttpServlet {
                 }
                 if (id != null) {
                     OrderDAO dao = new OrderDAO();
-                    List<OrderDTO> listReceive = dao.listHistoryReceiveAtStore(id);
-                    request.setAttribute("listreceive", listReceive);
-                    List<OrderDTO> listDelivery = dao.listHistoryDelivery(id);
-                    request.setAttribute("listdelivery", listDelivery);
+                    List<OrderDTO> listPastPurchase = dao.listPastPurchase(id);
+                    request.setAttribute("listpastpurchase", listPastPurchase);
                 }
 
-                request.getRequestDispatcher("/billlist.jsp").forward(request, response);
+                request.getRequestDispatcher("/history.jsp").forward(request, response);
 
-            } else if (action.equals("detailsprocess")) {//details
+            } else if (action.equals("details")) {//details
 
                 Integer id = null;
                 try {
@@ -77,11 +75,11 @@ public class BillController extends HttpServlet {
 
                 OrderDTO bill = null;
                 if (id != null) {
-                    bill = orderDAO.loadBillProcessDetails(id);
+                    bill = orderDAO.loadBillDetail(id);
                 }
 
                 request.setAttribute("bill", bill);//object
-                request.getRequestDispatcher("/billlprocessdetails.jsp").forward(request, response);
+                request.getRequestDispatcher("/billdetails.jsp").forward(request, response);
 
             }
         }

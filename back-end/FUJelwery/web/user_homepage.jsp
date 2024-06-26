@@ -106,6 +106,7 @@
                                 <li><a href='./UserCollectionController'>Collection</a></li>  
                                 <li><a href='OrderController?action=list&id=${sessionScope.usersession.userid}'>Cart</a></li>
                                 <li><a href='BillController?action=list&id=${sessionScope.usersession.userid}'>Bill</a></li>
+                                <li><a href='HistoryController?action=list&id=${sessionScope.usersession.userid}'>History</a></li>
                             </ul>
                         </div>   
                     </li>

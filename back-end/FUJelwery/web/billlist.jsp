@@ -87,6 +87,7 @@
                             <th>Ring Size</th>
                             <th>Date Purchased</th>
                             <th>Price</th>
+                            <th>Status</th>
                         </tr>
                         <%
                             List<OrderDTO> listForReceiveHistory = (List<OrderDTO>) request.getAttribute("listreceive");
@@ -99,6 +100,7 @@
                             <td>${bill.ringSize}</td>
                             <td>${bill.orderDate}</td>
                             <td>${bill.totalPrice}</td>
+                            <td>${bill.status}</td>
                         </tr>
                         <%
                             }
@@ -112,6 +114,7 @@
                             <th>Ring Size</th>
                             <th>Date Purchased</th>
                             <th>Price</th>
+                            <th>Status</th>
                         </tr>
                         <%
                             List<OrderDTO> listForDeliveryHistory = (List<OrderDTO>) request.getAttribute("listdelivery");
@@ -124,33 +127,7 @@
                             <td>${bill.ringSize}</td>
                             <td>${bill.orderDate}</td>
                             <td>${bill.totalPrice}</td>
-                        </tr>
-                        <%
-                            }
-                        %>    
-                    </table>
-                    
-                    </table>
-                    
-                    <table>
-                        <tr>
-                            <th>Order ID</th>
-                            <th>Ring Name</th>
-                            <th>Ring Size</th>
-                            <th>Date Purchased</th>
-                            <th>Price</th>
-                        </tr>
-                        <%
-                            List<OrderDTO> listForPastPurchase = (List<OrderDTO>) request.getAttribute("listpastpurchase");
-                            for (OrderDTO bill : listForPastPurchase) {
-                                pageContext.setAttribute("bill", bill);
-                        %>
-                        <tr>
-                            <td><a href="BillController?action=details&id=${bill.orderID}">${bill.orderID}</td>
-                            <td><a href="ProductController?action=details&id=${bill.ringID}">${bill.ringName}</td>
-                            <td>${bill.ringSize}</td>
-                            <td>${bill.orderDate}</td>
-                            <td>${bill.totalPrice}</td>
+                            <td>${bill.status}</td>
                         </tr>
                         <%
                             }
