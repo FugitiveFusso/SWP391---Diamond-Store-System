@@ -118,7 +118,7 @@
                                 <td><a href="VoucherController?action=details&id=${voucher.id}">${voucher.id}</a></td>
                                 <td>${voucher.name}</td>
                                 <td>                                   
-                                    <img src=${voucher.image} width="300px" height="300px" style="border-radius: 20px;">                                 
+                                    <img src=${voucher.image} width="380px" height="250px" style="border-radius: 20px;">                                 
                                 </td>
                                 <td>${voucher.createddate}</td>
                                 <td>${voucher.createdby}</td>

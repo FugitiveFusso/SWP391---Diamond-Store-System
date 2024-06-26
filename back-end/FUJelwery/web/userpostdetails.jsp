@@ -88,7 +88,7 @@
                             <p class="title">${requestScope.post.description}</p>
                         </div>   
                         <div class="content-img" style="margin: 30px 0;">
-                            <img src="${requestScope.post.image}" style="width: auto; height: 550px">
+                            <img src="${requestScope.post.image}" style="width: 850px; height: 550px">
                         </div>
                         <div class="text">
                             <p class="text-tile"></p>

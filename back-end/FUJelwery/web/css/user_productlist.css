@@ -164,17 +164,16 @@ body{
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin: 10px 30px;
     padding: 10px;
-    width: 17%; /* Adjust the width accordingly */
+    width: 300px; /* Adjust the width accordingly */
     box-sizing: border-box;
-    text-align: start;
     transition: 0.3s;
-
 }
 
 .product-card:hover{
     border: 1px solid black;
     transform: scale(1.02);
     transition: 0.3s;
+    color: black;
 }
 
 .product-card img {
@@ -184,11 +183,32 @@ body{
 
 .product-card h3, .product-card p {
     margin: 10px 0;
+    font-family: "Times New Roman", sans-serif;
+}
+
+.product-card h3{
+    font-weight: 800;
 }
 
 .product-card a {
     text-decoration: none;
     color: #333;
+}
+
+.product-name {
+    font-size: 20px;
+    color: #151542;
+    margin: 10px 0;
+    white-space: nowrap; /* Prevents the text from wrapping to the next line */
+    overflow: hidden; /* Hides the overflow text */
+    text-overflow: ellipsis; /* Adds an ellipsis (...) to the end of the truncated text */
+    padding: 0 10px; /* Adds padding to make it look better */
+    font-weight: 500;
+}
+
+.product-price{
+    color: #333;
+    padding: 0 10px;
 }
 
 .Main-hero img{
