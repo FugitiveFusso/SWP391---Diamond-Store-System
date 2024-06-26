@@ -64,7 +64,7 @@ public class BillController extends HttpServlet {
                     request.setAttribute("listdelivery", listDelivery);
                 }
 
-                request.getRequestDispatcher("/billlist.jsp").forward(request, response);
+                request.getRequestDispatcher("/user_accountdetails_orderhistory.jsp").forward(request, response);
 
             } else if (action.equals("detailsprocess")) {//details
 

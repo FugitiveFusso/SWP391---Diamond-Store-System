@@ -44,8 +44,8 @@ button:disabled{
 }
 
 .page-number.active {
-    background-color: #666; 
-    color: #fff; 
+    background-color: #151542; 
+    color: white; 
 }
 
 .page-number:hover {

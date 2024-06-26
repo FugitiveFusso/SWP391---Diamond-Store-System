@@ -6,7 +6,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Cart Details</title>
         <link rel="stylesheet" href="css/navbaruser.css">
         <link rel="stylesheet" href="css/usercart.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
@@ -198,9 +198,9 @@
                                 <h5>Trouble with ring?</h5>
                             </div>
                             <div class="ibox-content text-center">
-                                <h5 style="display: block; text-align: justify; text-justify: inter-word; width: 100%;">Having problems when choosing ring ?</h5>
+                                <h5 style="font-size: 20px; display: block; text-align: center; text-justify: inter-word; width: 100%;">Don't know your size?</h5>
                                 <span class="small">
-                                    <a href='static_webpages/ringmeasuring.jsp' style="color: black">We are here to help you to find the best ring that fits you.</a>
+                                    <a href='static_webpages/ringmeasuring.jsp' style="color: black">Click here to find out!</a>
                                 </span>
                             </div>
                         </div>
