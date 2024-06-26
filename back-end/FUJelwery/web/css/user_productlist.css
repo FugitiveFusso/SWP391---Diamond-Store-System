@@ -177,8 +177,8 @@ body{
 }
 
 .product-card img {
-    max-width: 100%;
-    height: auto;
+    width: 275px;
+    height: 285px;
 }
 
 .product-card h3, .product-card p {

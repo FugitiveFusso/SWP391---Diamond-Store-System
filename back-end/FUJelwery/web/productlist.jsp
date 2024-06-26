@@ -105,7 +105,7 @@
                         %>
                         <div class="product-card">
                             <a href="ProductController?action=details&id=${product.ringID}">
-                                <img src="${product.ringImage}" width="300px" height="300px" alt="${product.ringName}">
+                                <img src="${product.ringImage}" alt="${product.ringName}">
                                 <h3 class="product-name">${product.ringName}</h3>
                                 <!--<p>Diamond: ${product.diamondName}</p>-->
                                 <p class="product-price">Price: ${product.totalPrice} VND</p>
