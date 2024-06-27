@@ -7,6 +7,8 @@ package com.khac.swp.fuj.controller;
 
 import com.khac.swp.fuj.category.CategoryDAO;
 import com.khac.swp.fuj.category.CategoryDTO;
+import com.khac.swp.fuj.collection.CollectionDAO;
+import com.khac.swp.fuj.collection.CollectionDTO;
 import com.khac.swp.fuj.users.UserDAO;
 import com.khac.swp.fuj.users.UserDTO;
 import java.io.IOException;
@@ -50,6 +52,9 @@ public class DashboardController extends HttpServlet {
                 CategoryDAO categoyrDao = new CategoryDAO();
                 List<CategoryDTO> caList = categoyrDao.listStatistics();
                 request.setAttribute("calist", caList);
+                CollectionDAO collectionDao = new CollectionDAO();
+                List<CollectionDTO> coList = collectionDao.listStatistics();
+                request.setAttribute("colist", coList);
                 request.getRequestDispatcher("/dashboard.jsp").forward(request, response);
 
             }

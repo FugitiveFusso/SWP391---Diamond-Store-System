@@ -1,4 +1,5 @@
 
+<%@page import="com.khac.swp.fuj.collection.CollectionDTO"%>
 <%@page import="com.khac.swp.fuj.category.CategoryDTO"%>
 <%@page import="com.khac.swp.fuj.users.UserDTO"%>
 <%@page import="java.util.List"%>
@@ -148,6 +149,41 @@
                 <tr>
                     <td>${cate.top3CategoryNames}</td>
                     <td>${cate.top3CategoryRingCounts}</td>
+                </tr>
+                <%
+                    }
+                %>    
+            </table>
+            <h1>Collection Statistics</h1>
+            <%
+                List<CollectionDTO> collList = (List<CollectionDTO>) request.getAttribute("colist");
+                int numberOfCollections = 0;
+
+
+                if (collList != null) {
+                    for (CollectionDTO collection : collList) {
+                        numberOfCollections = collection.getNumberOfCollections();
+                    }
+                }
+                request.setAttribute("numberOfCollections", numberOfCollections);
+
+            %>
+            <strong>Total Number Of Collections: ${numberOfCollections}</strong>
+
+
+            <table style="margin: 0 auto;">
+                <tr>
+                    <th>Collection Name</th>
+                    <th>Number Of Rings</th>
+                    <th>Total Collection Price</th>
+                </tr>
+                <% for (CollectionDTO coll : collList) {
+                        pageContext.setAttribute("coll", coll);
+                %>
+                <tr>
+                    <td>${coll.collectionName}</td>
+                    <td>${coll.numberOfRings}</td>
+                    <td><strong>${coll.totalCollectionPrice} VND</strong></td>
                 </tr>
                 <%
                     }

@@ -27,7 +27,7 @@ public class ManagerLoginController extends HttpServlet {
                 if (user != null) {
                     HttpSession session = request.getSession(true);
                     session.setAttribute("managersession", user);
-                    response.sendRedirect("./manageraccount.jsp");
+                    response.sendRedirect("./DashboardController");
                 } else {
                     request.setAttribute("error", "Your username or password is incorrect! Please try again");
                     RequestDispatcher rd = request.getRequestDispatcher("managerlogin.jsp");

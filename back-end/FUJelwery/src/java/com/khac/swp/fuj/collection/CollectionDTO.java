@@ -6,7 +6,9 @@ public class CollectionDTO {
     private String collectionName;
     private String collectionImage;
     private String collectionDescription;
-
+    private int numberOfCollections;
+    private int numberOfRings;
+    private String totalCollectionPrice;
     public CollectionDTO() {
     }
 
@@ -49,9 +51,35 @@ public class CollectionDTO {
         this.collectionDescription = collectionDescription;
     }
 
+    public int getNumberOfCollections() {
+        return numberOfCollections;
+    }
+
+    public void setNumberOfCollections(int numberOfCollections) {
+        this.numberOfCollections = numberOfCollections;
+    }
+
+    public int getNumberOfRings() {
+        return numberOfRings;
+    }
+
+    public void setNumberOfRings(int numberOfRings) {
+        this.numberOfRings = numberOfRings;
+    }
+
+    public String getTotalCollectionPrice() {
+        return totalCollectionPrice;
+    }
+
+    public void setTotalCollectionPrice(String totalCollectionPrice) {
+        this.totalCollectionPrice = totalCollectionPrice;
+    }
+
     @Override
     public String toString() {
-        return "CollectionDTO{" + "collectionID=" + collectionID + ", collectionName=" + collectionName + ", collectionImage=" + collectionImage + ", collectionDescription=" + collectionDescription + '}';
+        return "CollectionDTO{" + "collectionID=" + collectionID + ", collectionName=" + collectionName + ", collectionImage=" + collectionImage + ", collectionDescription=" + collectionDescription + ", numberOfCollections=" + numberOfCollections + ", numberOfRings=" + numberOfRings + ", totalCollectionPrice=" + totalCollectionPrice + '}';
     }
+
+    
 
 }

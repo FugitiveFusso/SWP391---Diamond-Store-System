@@ -154,7 +154,7 @@ public class CollectionDAO {
 
         return false;
     }
-    
+
     public CollectionDTO checkCollectionExistByName(String collectionName) {
 
         String sql = "select collectionID, collectionName, collectionImage,[description] from [Collection] where collectionName like ? and isDeleted = 'active' ";
@@ -179,5 +179,47 @@ public class CollectionDAO {
             ex.printStackTrace();
         }
         return null;
+    }
+
+    public List<CollectionDTO> listStatistics() {
+        List<CollectionDTO> list = new ArrayList<CollectionDTO>();
+        try {
+            Connection con = DBUtils.getConnection();
+            String sql = "WITH CollectionSummary AS (\n"
+                    + "    SELECT c.collectionID, c.collectionName, COUNT(r.ringID) AS NumberOfRings, SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02) AS TotalCollectionPrice\n"
+                    + "    FROM [Collection] c LEFT JOIN [Ring] r ON c.collectionID = r.collectionID AND r.isDeleted = 'active'\n"
+                    + "    LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID\n"
+                    + "    LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID\n"
+                    + "    WHERE c.isDeleted = 'active' GROUP BY c.collectionID, c.collectionName\n"
+                    + ")\n"
+                    + "\n"
+                    + "SELECT (SELECT COUNT(*) FROM [Collection] WHERE isDeleted = 'active') AS NumberOfCollections, cs.collectionName, cs.NumberOfRings, FORMAT(cs.TotalCollectionPrice, 'N0') AS TotalCollectionPrice\n"
+                    + "FROM CollectionSummary cs ORDER BY cs.NumberOfRings DESC, cs.TotalCollectionPrice DESC; ";
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+
+                    int numberOfCollections = rs.getInt("NumberOfCollections");
+                    String collectionName = rs.getString("collectionName");
+                    int numberOfRings = rs.getInt("NumberOfRings");
+                    String totalCollectionPrice = rs.getString("TotalCollectionPrice");
+
+                    CollectionDTO collection = new CollectionDTO();
+                    collection.setNumberOfCollections(numberOfCollections);
+                    collection.setCollectionName(collectionName);
+                    collection.setNumberOfRings(numberOfRings);
+                    collection.setTotalCollectionPrice(totalCollectionPrice);
+                    list.add(collection);
+                }
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return list;
     }
 }
