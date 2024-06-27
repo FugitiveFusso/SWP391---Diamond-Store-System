@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -24,6 +24,35 @@ public class UserDTO {
     public int roleid;
     public String rolename;
     public String isDeleted;
+    public int totalUsers;
+    public int totalActiveUserCount;
+    public int totalBannedUSerCount;
+
+    public int getTotalUsers() {
+        return totalUsers;
+    }
+
+    public void setTotalUsers(int totalUsers) {
+        this.totalUsers = totalUsers;
+    }
+
+    public int getTotalActiveUserCount() {
+        return totalActiveUserCount;
+    }
+
+    public void setTotalActiveUserCount(int totalActiveUserCount) {
+        this.totalActiveUserCount = totalActiveUserCount;
+    }
+
+    public int getTotalBannedUSerCount() {
+        return totalBannedUSerCount;
+    }
+
+    public void setTotalBannedUSerCount(int totalBannedUSerCount) {
+        this.totalBannedUSerCount = totalBannedUSerCount;
+    }
+    
+    
 
     public String getIsDeleted() {
         return isDeleted;
@@ -135,11 +164,7 @@ public class UserDTO {
 
     @Override
     public String toString() {
-        return "UserDTO{" + "userid=" + userid + ", username=" + username + ", password=" + password + ", firstname=" + firstname + ", lastname=" + lastname + ", phonenumber=" + phonenumber + ", email=" + email + ", address=" + address + ", point=" + point + ", status=" + status + ", roleid=" + roleid + ", rolename=" + rolename + ", isDeleted=" + isDeleted + '}';
+        return "UserDTO{" + "userid=" + userid + ", username=" + username + ", password=" + password + ", firstname=" + firstname + ", lastname=" + lastname + ", phonenumber=" + phonenumber + ", email=" + email + ", address=" + address + ", point=" + point + ", status=" + status + ", roleid=" + roleid + ", rolename=" + rolename + ", isDeleted=" + isDeleted + ", totalUsers=" + totalUsers + ", totalActiveUserCount=" + totalActiveUserCount + ", totalBannedUSerCount=" + totalBannedUSerCount + '}';
     }
-
-
-
-    
     
 }

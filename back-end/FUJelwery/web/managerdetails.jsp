@@ -56,14 +56,6 @@
 
             </div>
         </div>
-        
-        <!--        <jsp:include page="/menu.jsp" flush="true" />
-        
-                <h1>Manager Details </h1>         
-                <p> Login username: ${sessionScope.adminsession.username}</p>-->
-        
-        <!--<jsp:include page="/menu.jsp" flush="true" />-->
-
         <div class="container d-flex justify-content-center align-items-center">
             <div class="text-center">
                 <h1 style="font-size: 50px; font-weight: 700">Manager Details</h1>
@@ -141,27 +133,6 @@
                 </div>
             </div>
         </div>
-
-        <!--        <table>
-        
-                    <tr><td>User Name</td><td>${requestScope.manager.username}</td></tr>
-                    <tr><td>Password</td><td>${requestScope.manager.password}</td></tr>
-                    <tr><td>First Name</td><td></td></tr>
-                    <tr><td>Last Name</td><td></td></tr>
-                    <tr><td>Phone Number</td><td></td></tr>
-                    <tr><td>Email</td><td></td></tr>
-                    <tr><td>Address</td><td>${requestScope.manager.address}</td></tr>
-                    <tr><td>Point</td><td>${requestScope.manager.point}</td></tr>
-                </table>
-        
-                <form action="ManagerController" style="padding-top: 10px">
-                    <input type=hidden name="action" value="list">
-                    <input type=submit value="Return" ></form>
-        
-                <form action="ManagerController" style="padding-top: 10px">
-                    <input type=hidden name="id" value="${requestScope.manager.userid}">
-                    <input type=hidden name="action" value="edit">
-                    <input type=submit value="Edit" ></form>-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
                 integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
         crossorigin="anonymous"></script>

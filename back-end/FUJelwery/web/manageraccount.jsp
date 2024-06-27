@@ -38,14 +38,13 @@
                 <h1>${requestScope.manager.lastname} ${requestScope.manager.firstname}</h1>
             </header>
 
-            <div class="menu">                             
+            <div class="menu">
+                <div class="item"><a href="./DashboardController"><i class="fas fa-chart-line"></i>Dashboard</a></div>
                 <div class="item"><a href="manageraccount.jsp"><i class="fas fa-user"></i>Account</a></div>
                 <div class="item"><a href="managerlogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
 
             </div>
         </div>
-
-        <!--<jsp:include page="/menu.jsp" flush="true" />-->
 
         <div class="container d-flex justify-content-center align-items-center">
             <div class="text-center">
@@ -101,7 +100,7 @@
                                                 <h6 class="text-muted f-w-400">${sessionScope.managersession.point}</h6>
                                             </div>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                             </div>
