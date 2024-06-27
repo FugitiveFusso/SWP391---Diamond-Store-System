@@ -185,7 +185,7 @@ public class VoucherDAO {
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1,voucherName);
+            ps.setString(1, voucherName);
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -203,5 +203,46 @@ public class VoucherDAO {
             ex.printStackTrace();
         }
         return null;
+    }
+
+    public List<VoucherDTO> listStatistics() {
+        List<VoucherDTO> list = new ArrayList<VoucherDTO>();
+        try {
+            Connection con = DBUtils.getConnection();
+            String sql = "WITH VoucherUsage AS (\n"
+                    + "   SELECT v.voucherName, v.createdDate, COUNT(o.orderID) AS totalOrdersUsingVoucher\n"
+                    + "   FROM [Voucher] v LEFT JOIN [Order] o ON v.voucherID = o.voucherID WHERE v.isDeleted = 'active'\n"
+                    + "   GROUP BY v.voucherName, v.createdDate\n"
+                    + ")\n"
+                    + "SELECT vu.voucherName, vu.createdDate, vu.totalOrdersUsingVoucher, av.activeVouchersCount\n"
+                    + "FROM VoucherUsage vu CROSS JOIN (SELECT COUNT(*) AS activeVouchersCount FROM [Voucher] WHERE isDeleted = 'active') av\n"
+                    + "ORDER BY vu.totalOrdersUsingVoucher DESC, createdDate ASC OFFSET 0 ROWS FETCH NEXT 3 ROWS ONLY;";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+
+                    int totalOrdersUsingVoucher = rs.getInt("totalOrdersUsingVoucher");
+                    String vouchername = rs.getString("voucherName");
+                    String createddate = rs.getString("createdDate");
+                    int activeVouchersCount = rs.getInt("activeVouchersCount");
+
+                    VoucherDTO voucher = new VoucherDTO();
+                    voucher.setTotalOrdersUsingVoucher(totalOrdersUsingVoucher);
+                    voucher.setName(vouchername);
+                    voucher.setCreateddate(createddate);
+                    voucher.setTotalActiveVouchers(activeVouchersCount);
+                    list.add(voucher);
+                }
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return list;
     }
 }

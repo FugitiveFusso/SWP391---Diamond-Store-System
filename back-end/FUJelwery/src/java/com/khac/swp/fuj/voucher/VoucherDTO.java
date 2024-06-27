@@ -10,25 +10,9 @@ public class VoucherDTO {
     private String description;
     private String coupon;
     private int percentage;
+    private int totalOrdersUsingVoucher;
+    private int totalActiveVouchers;
 
-    public String getCreateddate() {
-        return createddate;
-    }
-
-    public void setCreateddate(String createddate) {
-        this.createddate = createddate;
-    }
-
-    public String getCreatedby() {
-        return createdby;
-    }
-
-    public void setCreatedby(String createdby) {
-        this.createdby = createdby;
-    }
-
-    
-    
     public int getId() {
         return id;
     }
@@ -51,6 +35,22 @@ public class VoucherDTO {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getCreateddate() {
+        return createddate;
+    }
+
+    public void setCreateddate(String createddate) {
+        this.createddate = createddate;
+    }
+
+    public String getCreatedby() {
+        return createdby;
+    }
+
+    public void setCreatedby(String createdby) {
+        this.createdby = createdby;
     }
 
     public String getDescription() {
@@ -77,11 +77,25 @@ public class VoucherDTO {
         this.percentage = percentage;
     }
 
-    @Override
-    public String toString() {
-        return "VoucherDTO{" + "id=" + id + ", name=" + name + ", image=" + image + ", createddate=" + createddate + ", createdby=" + createdby + ", description=" + description + ", coupon=" + coupon + ", percentage=" + percentage + '}';
+    public int getTotalOrdersUsingVoucher() {
+        return totalOrdersUsingVoucher;
     }
 
-    
-    
+    public void setTotalOrdersUsingVoucher(int totalOrdersUsingVoucher) {
+        this.totalOrdersUsingVoucher = totalOrdersUsingVoucher;
+    }
+
+    public int getTotalActiveVouchers() {
+        return totalActiveVouchers;
+    }
+
+    public void setTotalActiveVouchers(int totalActiveVouchers) {
+        this.totalActiveVouchers = totalActiveVouchers;
+    }
+
+    @Override
+    public String toString() {
+        return "VoucherDTO{" + "id=" + id + ", name=" + name + ", image=" + image + ", createddate=" + createddate + ", createdby=" + createdby + ", description=" + description + ", coupon=" + coupon + ", percentage=" + percentage + ", totalOrdersUsingVoucher=" + totalOrdersUsingVoucher + ", totalActiveVouchers=" + totalActiveVouchers + '}';
+    }
+
 }

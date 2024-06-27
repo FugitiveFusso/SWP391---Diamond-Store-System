@@ -11,6 +11,8 @@ import com.khac.swp.fuj.collection.CollectionDAO;
 import com.khac.swp.fuj.collection.CollectionDTO;
 import com.khac.swp.fuj.users.UserDAO;
 import com.khac.swp.fuj.users.UserDTO;
+import com.khac.swp.fuj.voucher.VoucherDAO;
+import com.khac.swp.fuj.voucher.VoucherDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -55,6 +57,9 @@ public class DashboardController extends HttpServlet {
                 CollectionDAO collectionDao = new CollectionDAO();
                 List<CollectionDTO> coList = collectionDao.listStatistics();
                 request.setAttribute("colist", coList);
+                VoucherDAO voucherDao = new VoucherDAO();
+                List<VoucherDTO> vouList = voucherDao.listStatistics();
+                request.setAttribute("voulist", vouList);
                 request.getRequestDispatcher("/dashboard.jsp").forward(request, response);
 
             }

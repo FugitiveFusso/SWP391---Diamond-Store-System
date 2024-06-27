@@ -37,10 +37,10 @@ ORDER BY cs.TotalCollectionPrice DESC;
 
 -- Voucher
 WITH VoucherUsage AS (
-   SELECT v.voucherName, v.createdDate, COUNT(o.orderID) AS totalOrdersUsingVoucher, SUM(CASE WHEN o.[status] = 'active' THEN 1 ELSE 0 END) AS activeOrdersCount
+   SELECT v.voucherName, v.createdDate, COUNT(o.orderID) AS totalOrdersUsingVoucher
    FROM [Voucher] v LEFT JOIN [Order] o ON v.voucherID = o.voucherID WHERE v.isDeleted = 'active'
    GROUP BY v.voucherName, v.createdDate
 )
-SELECT vu.voucherName, vu.createdDate, vu.totalOrdersUsingVoucher, vu.activeOrdersCount, av.activeVouchersCount
+SELECT vu.voucherName, vu.createdDate, vu.totalOrdersUsingVoucher, av.activeVouchersCount
 FROM VoucherUsage vu CROSS JOIN (SELECT COUNT(*) AS activeVouchersCount FROM [Voucher] WHERE isDeleted = 'active') av
-ORDER BY vu.totalOrdersUsingVoucher DESC OFFSET 0 ROWS FETCH NEXT 3 ROWS ONLY;
+ORDER BY vu.totalOrdersUsingVoucher DESC, createdDate ASC OFFSET 0 ROWS FETCH NEXT 3 ROWS ONLY;

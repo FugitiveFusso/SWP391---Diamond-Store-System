@@ -1,4 +1,5 @@
 
+<%@page import="com.khac.swp.fuj.voucher.VoucherDTO"%>
 <%@page import="com.khac.swp.fuj.collection.CollectionDTO"%>
 <%@page import="com.khac.swp.fuj.category.CategoryDTO"%>
 <%@page import="com.khac.swp.fuj.users.UserDTO"%>
@@ -159,7 +160,6 @@
                 List<CollectionDTO> collList = (List<CollectionDTO>) request.getAttribute("colist");
                 int numberOfCollections = 0;
 
-
                 if (collList != null) {
                     for (CollectionDTO collection : collList) {
                         numberOfCollections = collection.getNumberOfCollections();
@@ -169,7 +169,7 @@
 
             %>
             <strong>Total Number Of Collections: ${numberOfCollections}</strong>
-            <strong>The Collections have rings are shown below</strong>
+            <strong>THE COLLECTIONS HAVE RINGS ARE SHOWN BELOW</strong>
 
             <table style="margin: 0 auto;">
                 <tr>
@@ -184,6 +184,40 @@
                     <td>${coll.collectionName}</td>
                     <td>${coll.numberOfRings}</td>
                     <td><strong>${coll.totalCollectionPrice} VND</strong></td>
+                </tr>
+                <%
+                    }
+                %>    
+            </table>
+            <h1>Voucher Statistics</h1>
+            <%
+                List<VoucherDTO> vouList = (List<VoucherDTO>) request.getAttribute("voulist");
+                int numberOfVouchers = 0;
+
+                if (vouList != null) {
+                    for (VoucherDTO voucher : vouList) {
+                        numberOfVouchers = voucher.getTotalActiveVouchers();
+                    }
+                }
+                request.setAttribute("numberOfVouchers", numberOfVouchers);
+
+            %>
+            <strong>Total Number Of Vouchers: ${numberOfVouchers}</strong>
+            <strong>The TOP 3 MOSTLY USED Vouchers </strong>
+
+            <table style="margin: 0 auto;">
+                <tr>
+                    <th>Voucher Name</th>
+                    <th>Created Date</th>
+                    <th>Total Orders using Voucher</th>
+                </tr>
+                <% for (VoucherDTO vou : vouList) {
+                        pageContext.setAttribute("vou", vou);
+                %>
+                <tr>
+                    <td>${vou.name}</td>
+                    <td>${vou.createddate}</td>
+                    <td><strong>${vou.totalOrdersUsingVoucher}</strong></td>
                 </tr>
                 <%
                     }
