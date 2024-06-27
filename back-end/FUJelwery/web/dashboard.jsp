@@ -20,41 +20,52 @@
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <style>
-        body {
-            font-size: 16px;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-        table {
-            margin: 10px auto;
-            border-collapse: collapse;
-            width: 65%;
-            border: 1px solid #ddd;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
-        }
-        th, td {
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            text-align: center;
-        }
-        th {
-            background-color: #f4f4f4;
-            font-weight: bold;
-            color: #333;
-        }
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        tr:hover {
-            background-color: #f1f1f1;
-        }
-        h1 {
-            color: #333;
-        }
-        strong {
-            display: block;
-            margin: 10px 0;
-        }
-    </style>
+            body {
+                font-size: 16px;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            table {
+                margin: 10px auto;
+                border-collapse: separate; /* Change to separate to allow border radius */
+                border-spacing: 0; /* Reset border-spacing to ensure no gaps */
+                width: 65%;
+                border: 1px solid #ddd;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+                border-radius: 10px; /* Add border radius here */
+                overflow: hidden; /* Ensure border radius is applied */
+            }
+
+            th, td {
+                padding: 12px 15px;
+                border: 1px solid #ddd;
+                text-align: center;
+            }
+
+            th {
+                background-color: #f4f4f4;
+                font-weight: bold;
+                color: #333;
+            }
+
+            tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+
+            tr:hover {
+                background-color: #f1f1f1;
+            }
+
+            h1 {
+                color: #333;
+            }
+
+            strong {
+                display: block;
+                margin: 10px 0;
+            }
+
+        </style>
     </head>
     <body>
         <div class="menu-btn">
