@@ -186,15 +186,14 @@ public class CollectionDAO {
         try {
             Connection con = DBUtils.getConnection();
             String sql = "WITH CollectionSummary AS (\n"
-                    + "    SELECT c.collectionID, c.collectionName, COUNT(r.ringID) AS NumberOfRings, SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02) AS TotalCollectionPrice\n"
-                    + "    FROM [Collection] c LEFT JOIN [Ring] r ON c.collectionID = r.collectionID AND r.isDeleted = 'active'\n"
-                    + "    LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID\n"
-                    + "    LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID\n"
-                    + "    WHERE c.isDeleted = 'active' GROUP BY c.collectionID, c.collectionName\n"
-                    + ")\n"
+                    + "SELECT c.collectionID, c.collectionName, COUNT(r.ringID) AS NumberOfRings, SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02) AS TotalCollectionPrice\n"
+                    + "FROM [Collection] c LEFT JOIN [Ring] r ON c.collectionID = r.collectionID AND r.isDeleted = 'active'\n"
+                    + "LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID\n"
+                    + "WHERE c.isDeleted = 'active' GROUP BY c.collectionID, c.collectionName)\n"
                     + "\n"
                     + "SELECT (SELECT COUNT(*) FROM [Collection] WHERE isDeleted = 'active') AS NumberOfCollections, cs.collectionName, cs.NumberOfRings, FORMAT(cs.TotalCollectionPrice, 'N0') AS TotalCollectionPrice\n"
-                    + "FROM CollectionSummary cs ORDER BY cs.NumberOfRings DESC, cs.TotalCollectionPrice DESC; ";
+                    + "FROM CollectionSummary cs WHERE cs.NumberOfRings > 0 -- Select collections with more than 0 rings\n"
+                    + "ORDER BY cs.TotalCollectionPrice DESC;";
             PreparedStatement stmt = con.prepareStatement(sql);
 
             ResultSet rs = stmt.executeQuery();

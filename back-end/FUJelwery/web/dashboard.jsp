@@ -169,7 +169,7 @@
 
             %>
             <strong>Total Number Of Collections: ${numberOfCollections}</strong>
-
+            <strong>The Collections have rings are shown below</strong>
 
             <table style="margin: 0 auto;">
                 <tr>

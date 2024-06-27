@@ -26,12 +26,21 @@ SELECT TotalCategories, ActiveCategories, DeletedCategories, Top3CategoryNames, 
 
 -- Collection
 WITH CollectionSummary AS (
-    SELECT c.collectionID, c.collectionName, COUNT(r.ringID) AS NumberOfRings, SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02) AS TotalCollectionPrice
-    FROM [Collection] c LEFT JOIN [Ring] r ON c.collectionID = r.collectionID AND r.isDeleted = 'active'
-    LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID
-    LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID
-    WHERE c.isDeleted = 'active' GROUP BY c.collectionID, c.collectionName
-)
+SELECT c.collectionID, c.collectionName, COUNT(r.ringID) AS NumberOfRings, SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02) AS TotalCollectionPrice
+FROM [Collection] c LEFT JOIN [Ring] r ON c.collectionID = r.collectionID AND r.isDeleted = 'active'
+LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID
+WHERE c.isDeleted = 'active' GROUP BY c.collectionID, c.collectionName)
 
 SELECT (SELECT COUNT(*) FROM [Collection] WHERE isDeleted = 'active') AS NumberOfCollections, cs.collectionName, cs.NumberOfRings, FORMAT(cs.TotalCollectionPrice, 'N0') AS TotalCollectionPrice
-FROM CollectionSummary cs ORDER BY cs.NumberOfRings DESC, cs.TotalCollectionPrice DESC;
+FROM CollectionSummary cs WHERE cs.NumberOfRings > 0 -- Select collections with more than 0 rings
+ORDER BY cs.TotalCollectionPrice DESC;
+
+-- Voucher
+WITH VoucherUsage AS (
+   SELECT v.voucherName, v.createdDate, COUNT(o.orderID) AS totalOrdersUsingVoucher, SUM(CASE WHEN o.[status] = 'active' THEN 1 ELSE 0 END) AS activeOrdersCount
+   FROM [Voucher] v LEFT JOIN [Order] o ON v.voucherID = o.voucherID WHERE v.isDeleted = 'active'
+   GROUP BY v.voucherName, v.createdDate
+)
+SELECT vu.voucherName, vu.createdDate, vu.totalOrdersUsingVoucher, vu.activeOrdersCount, av.activeVouchersCount
+FROM VoucherUsage vu CROSS JOIN (SELECT COUNT(*) AS activeVouchersCount FROM [Voucher] WHERE isDeleted = 'active') av
+ORDER BY vu.totalOrdersUsingVoucher DESC OFFSET 0 ROWS FETCH NEXT 3 ROWS ONLY;
