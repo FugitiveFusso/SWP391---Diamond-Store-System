@@ -167,4 +167,54 @@ public class CategoryDAO {
         }
         return null;
     }
+
+    public List<CategoryDTO> listStatistics() {
+        List<CategoryDTO> list = new ArrayList<CategoryDTO>();
+        try {
+            Connection con = DBUtils.getConnection();
+            String sql = "SELECT TotalCategories, ActiveCategories, DeletedCategories, Top3CategoryNames, Top3CategoryRingCounts FROM\n"
+                    + "            (SELECT \n"
+                    + "            (SELECT COUNT(*) FROM [Category]) AS TotalCategories,\n"
+                    + "            (SELECT SUM(CASE WHEN isDeleted = 'active' THEN 1 ELSE 0 END) FROM [Category]) AS ActiveCategories,\n"
+                    + "            (SELECT SUM(CASE WHEN isDeleted = 'deleted' THEN 1 ELSE 0 END) FROM [Category]) AS DeletedCategories,\n"
+                    + "            STRING_AGG(c.categoryName, ', ') AS Top3CategoryNames,\n"
+                    + "            STRING_AGG(CAST(CategoryRingCounts.NumberOfRings AS VARCHAR), ', ') AS Top3CategoryRingCounts\n"
+                    + "        FROM [Category] c LEFT JOIN (\n"
+                    + "            SELECT r.categoryID, COUNT(*) AS NumberOfRings FROM [Ring] r\n"
+                    + "            GROUP BY r.categoryID) AS CategoryRingCounts ON c.categoryID = CategoryRingCounts.categoryID\n"
+                    + "        WHERE c.categoryName IN (SELECT TOP 3 categoryName FROM [Category] c JOIN [Ring] r ON c.categoryID = r.categoryID\n"
+                    + "        GROUP BY categoryName ORDER BY COUNT(*) DESC)\n"
+                    + "        GROUP BY CategoryRingCounts.categoryID) AS CombinedResults;";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+
+                    int totalCategories = rs.getInt("TotalCategories");
+                    int activeCategories = rs.getInt("ActiveCategories");
+                    int deletedCategories = rs.getInt("DeletedCategories");
+                    int top3CategoryRingCounts = rs.getInt("Top3CategoryRingCounts");
+
+                    String top3CategoryNames = rs.getString("Top3CategoryNames");
+
+                    CategoryDTO category = new CategoryDTO();
+                    category.setTotalCategories(totalCategories);
+                    category.setActiveCategories(activeCategories);
+                    category.setDeletedCategories(deletedCategories);
+                    category.setTop3CategoryRingCounts(top3CategoryRingCounts);
+                    category.setTop3CategoryNames(top3CategoryNames);
+                    list.add(category);
+                }
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return list;
+    }
+
 }

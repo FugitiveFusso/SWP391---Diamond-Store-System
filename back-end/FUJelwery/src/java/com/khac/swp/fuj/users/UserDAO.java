@@ -485,12 +485,4 @@ public class UserDAO {
         }
         return list;
     }
-    
-    public static void main(String[] args) {
-        UserDAO dao = new UserDAO();
-        List<UserDTO> a = dao.listStatistics();
-        for (UserDTO userDTO : a) {
-            System.out.println(userDTO);
-        }
-    }
 }

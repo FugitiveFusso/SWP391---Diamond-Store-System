@@ -1,4 +1,5 @@
 
+<%@page import="com.khac.swp.fuj.category.CategoryDTO"%>
 <%@page import="com.khac.swp.fuj.users.UserDTO"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -18,7 +19,42 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+        <style>
+        body {
+            font-size: 16px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        table {
+            margin: 10px auto;
+            border-collapse: collapse;
+            width: 65%;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        }
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+            color: #333;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        h1 {
+            color: #333;
+        }
+        strong {
+            display: block;
+            margin: 10px 0;
+        }
+    </style>
     </head>
     <body>
         <div class="menu-btn">
@@ -43,27 +79,70 @@
 
             </div>
         </div>
-        <table>
-            <tr><td>Role Name</td>
-                <td>Total Users</td>
-                <td>Active User Count</td>
-                <td>Banned User Count</td>
-            </tr>
+        <div style="text-align: center">
+            <h1>User Statistics</h1>
+            <table style="margin: 0 auto;">
+                <tr>
+                    <th>Role Name</th>
+                    <th>Total Users</th>
+                    <th>Active User Count</th>
+                    <th>Banned User Count</th>
+                </tr>
+                <%
+                    List<UserDTO> list = (List<UserDTO>) request.getAttribute("uslist");
+                    for (UserDTO user : list) {
+                        pageContext.setAttribute("user", user);
+                %>
+                <tr>
+                    <td>${user.rolename}</td>
+                    <td>${user.totalUsers}</td>
+                    <td>${user.totalActiveUserCount}</td>
+                    <td>${user.totalBannedUSerCount}</td>
+                </tr>
+                <%
+                    }
+                %>    
+            </table>
+
+            <h1>Category Statistics</h1>
             <%
-                List<UserDTO> list = (List<UserDTO>) request.getAttribute("uslist");
-                for (UserDTO user : list) {
-                    pageContext.setAttribute("user", user);
-            %>
-            <tr>
-                <td>${user.rolename}</td>
-                <td>${user.totalUsers}</td>
-                <td>${user.totalActiveUserCount}</td>
-                <td>${user.totalBannedUSerCount}</td>
-            </tr>
-            <%
+                List<CategoryDTO> cateList = (List<CategoryDTO>) request.getAttribute("calist");
+                int totalCategories = 0;
+                int activeCategories = 0;
+                int deletedCategories = 0;
+
+                if (cateList != null) {
+                    for (CategoryDTO category : cateList) {
+                        totalCategories = category.getTotalCategories();
+                        activeCategories = category.getActiveCategories();
+                        deletedCategories = category.getDeletedCategories();
+                    }
                 }
-            %>    
-        </table>
+                request.setAttribute("totalCategories", totalCategories);
+                request.setAttribute("activeCategories", activeCategories);
+                request.setAttribute("deletedCategories", deletedCategories);
+            %>
+            <strong>Total Categories: ${totalCategories}</strong>
+            <strong>Total Active Categories: ${activeCategories}</strong>
+            <strong>Total Deleted Categories: ${deletedCategories}</strong>
+
+            <table style="margin: 0 auto;">
+                <tr>
+                    <th>Top3 Category Names</th>
+                    <th>Top3 Category Ring Counts</th>
+                </tr>
+                <% for (CategoryDTO cate : cateList) {
+                        pageContext.setAttribute("cate", cate);
+                %>
+                <tr>
+                    <td>${cate.top3CategoryNames}</td>
+                    <td>${cate.top3CategoryRingCounts}</td>
+                </tr>
+                <%
+                    }
+                %>    
+            </table>
+        </div>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
                 integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="

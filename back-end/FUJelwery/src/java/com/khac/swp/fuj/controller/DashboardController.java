@@ -5,6 +5,8 @@
  */
 package com.khac.swp.fuj.controller;
 
+import com.khac.swp.fuj.category.CategoryDAO;
+import com.khac.swp.fuj.category.CategoryDTO;
 import com.khac.swp.fuj.users.UserDAO;
 import com.khac.swp.fuj.users.UserDTO;
 import java.io.IOException;
@@ -42,11 +44,12 @@ public class DashboardController extends HttpServlet {
                 response.sendRedirect("managerlogin.jsp");
                 return;
             } else if (action == null || action.equals("list")) {//lists
-
-                UserDAO dao = new UserDAO();
-                List<UserDTO> list = dao.listStatistics();
-                request.setAttribute("uslist", list);
-
+                UserDAO userDao = new UserDAO();
+                List<UserDTO> usList = userDao.listStatistics();
+                request.setAttribute("uslist", usList);
+                CategoryDAO categoyrDao = new CategoryDAO();
+                List<CategoryDTO> caList = categoyrDao.listStatistics();
+                request.setAttribute("calist", caList);
                 request.getRequestDispatcher("/dashboard.jsp").forward(request, response);
 
             }
