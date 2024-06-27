@@ -85,49 +85,49 @@
 
                         <div class="nav-stacks">
                             <ul class="nav nav-pills nav-stacked">
-                                <li><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
-                                <li><a href="#"> <i class="fa fa-calendar"></i> Recent Activity</a></li>
-                                <li><a href="#"> <i class="fa fa-edit"></i> Edit profile</a></li>
+                                <li><a href="user_accountdetails.jsp"> <i class="fa fa-user"></i> Profile</a></li>
+                                <li class="active"><a href='BillController?action=list&id=${sessionScope.usersession.userid}'> <i class="fa fa-calendar"></i> Recent Activity</a></li>
+                                <li><a href='HistoryController?action=list&id=${sessionScope.usersession.userid}'> <i class="fa fa-edit"></i> History</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="profile-info col-md-9">
                     <div class="panel">
-                        <div class="panel">
-                            <div class="bio-graph-heading">
-                                FUJ hope you have a great experience from using our service
-                            </div>
-                            <div class="panel-body bio-graph-info">
-                                <h1>Personal Details</h1>
-                                <div class="row">
-                                    <div class="bio-row">
-                                        <p><span>First Name </span>: ${sessionScope.usersession.lastname}</p>
-                                    </div>
-                                    <div class="bio-row">
-                                        <p><span>Last Name </span>: ${sessionScope.usersession.firstname}</p>
-                                    </div>
-                                    <div class="bio-row">
-                                        <p><span>Address </span>: ${sessionScope.usersession.address}</p>
-                                    </div>
-                                    <div class="bio-row">
-                                        <p><span>Email </span>: ${sessionScope.usersession.email}</p>
-                                    </div>
-                                    <div class="bio-row">
-                                        <p><span>Mobile </span>: ${sessionScope.usersession.phonenumber}</p>
-                                    </div>
-                                    <div class="bio-row">
-                                        <p><span>Points </span>: ${sessionScope.usersession.point}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <!--                        <div class="panel">
+                                                    <div class="bio-graph-heading">
+                                                        FUJ hope you have a great experience from using our service
+                                                    </div>
+                                                    <div class="panel-body bio-graph-info">
+                                                        <h1>Personal Details</h1>
+                                                        <div class="row">
+                                                            <div class="bio-row">
+                                                                <p><span>First Name </span>: ${sessionScope.usersession.lastname}</p>
+                                                            </div>
+                                                            <div class="bio-row">
+                                                                <p><span>Last Name </span>: ${sessionScope.usersession.firstname}</p>
+                                                            </div>
+                                                            <div class="bio-row">
+                                                                <p><span>Address </span>: ${sessionScope.usersession.address}</p>
+                                                            </div>
+                                                            <div class="bio-row">
+                                                                <p><span>Email </span>: ${sessionScope.usersession.email}</p>
+                                                            </div>
+                                                            <div class="bio-row">
+                                                                <p><span>Mobile </span>: ${sessionScope.usersession.phonenumber}</p>
+                                                            </div>
+                                                            <div class="bio-row">
+                                                                <p><span>Points </span>: ${sessionScope.usersession.point}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>-->
 
                         <div class="panel-body" style="border: none;">
-<!--                            <form action='' method="GET" id="searchbox"> 
-                                <input name="keyword" type="text" value="<%= request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
-                                <input type="submit" value="Search">
-                            </form>-->
+                            <!--                            <form action='' method="GET" id="searchbox"> 
+                                                            <input name="keyword" type="text" value="<%= request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
+                                                            <input type="submit" value="Search">
+                                                        </form>-->
 
                             <div class="row">
                                 <div class="col-md-12">
