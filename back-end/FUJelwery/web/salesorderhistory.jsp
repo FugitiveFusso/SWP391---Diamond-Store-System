@@ -24,6 +24,7 @@
                             <th>Date of Purchase</th>
                             <th>Destination</th>
                             <th>Total Price</th>
+                            <th>Status</th>
                         </tr>
                         <%
                             List<OrderDTO> list = (List<OrderDTO>) request.getAttribute("saleshistory");
@@ -38,6 +39,7 @@
                             <td>${salesorder.orderDate}</td>
                             <td>${salesorder.address}</td>
                             <td>${salesorder.totalPrice}</td>
+                            <td>${salesorder.status}</td>
                         </tr>
                         <%
                             }

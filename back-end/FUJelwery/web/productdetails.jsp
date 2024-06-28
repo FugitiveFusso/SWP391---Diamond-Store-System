@@ -80,11 +80,21 @@
             </div>
         </div>
                             
-                            
-        <% String success = (String) request.getAttribute("success"); %>
-        <% if (success != null) {%>
-        <h4 style="color: green; text-align: center"> <%= success%> </h4>
-        <% }%>
+        <% String success = (String) request.getAttribute("success");%>
+        <div class="container">
+            <% if (success != null) {%>
+            <div class="popup" id="popup">
+                <img src="images/404-tick.png">
+                <h2>Thank you!</h2>
+                <p><%= success%></p>
+                <button type="button" onclick="closePopup()">OK</button>
+            </div>
+
+        </div>
+        <% }%> 
+
+
+
         <div class="product-details">
             <div class="left-column">
                 <div class="image-section">
@@ -161,7 +171,7 @@
                         <option value="10">10</option>
                         <option value="11">11</option>
                     </select>
-                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+                    <button type="submit" class="btn btn-primary" onclick="openPopup()">Add to Cart</button>
                 </form>
                 <div class="More-Info">
                     <h2>More products related:</h2>
@@ -341,6 +351,17 @@
                 });
             }
 
+        </script>  
+        <script>
+            let popup = document.getElementById("popup");
+
+            function openPopup() {
+                popup.classList.add("open-popup");
+            }
+
+            function closePopup() {
+                popup.classList.remove("open-popup");
+            }
         </script>
     </body>
 </html>
