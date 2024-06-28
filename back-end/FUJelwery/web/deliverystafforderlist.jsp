@@ -14,9 +14,12 @@
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <script src="js/pagination.js"></script>
         <link rel="stylesheet" href="css/pagination.css">
-
-
-
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+                integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+        crossorigin="anonymous"></script>
+        <script src="js/sidenav.js"></script>
+        <script src="js/delivery_confirmation_deliverystaff.js"></script>
     </head>
     <body>
         <%--<%@ include file="/productmenu.jsp" %>--%>
@@ -43,8 +46,6 @@
             </div>
         </div>
 
-
-
         <div class="list-container">
             <div class="smaller-container">
                 <div class="list1">
@@ -57,12 +58,11 @@
                             <div class="">List of Ring</div>
                         </div>
                     </div>
-
                 </div>
                 <div class="list">
                     <form action='' method=GET id="searchbox"> 
-                        <input name=keyword type=text value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
-                        <input type=submit value=Search >
+                        <input name=keyword type=text class="search-input" value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
+                        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
                     </form>
 
                     <table>
@@ -90,17 +90,19 @@
                             <td>${deliveryorder.orderDate}</td>
                             <td>${deliveryorder.address}</td>
                             <td>${deliveryorder.totalPrice}</td>
-                            <td>${deliveryorder.status}</td>
+                            <td class="<%= "verified".equals(deliveryorder.getStatus()) ? "status-verified" : "shipping".equals(deliveryorder.getStatus()) ? "status-shipping" : "status-default"%>">
+                                ${deliveryorder.status}
+                            </td>
                             <td>
-                                <form action="DeliveryStaffOrderController" method="POST">
+                                <form id="form-shipping-${deliveryorder.orderID}" action="DeliveryStaffOrderController" method="POST">
                                     <input name="action" value="shipping" type="hidden">
                                     <input name="orderID" value="${deliveryorder.orderID}" type="hidden">
-                                    <input type="submit" value="On shipping">
+                                    <button type="button" class="btn" onclick="confirmAction('shipping', '${deliveryorder.orderID}', '${deliveryorder.status}')">On shipping</button>
                                 </form>
-                                <form action="DeliveryStaffOrderController" method="POST">
+                                <form id="form-delivered-${deliveryorder.orderID}" action="DeliveryStaffOrderController" method="POST">
                                     <input name="action" value="delivered" type="hidden">
                                     <input name="orderID" value="${deliveryorder.orderID}" type="hidden">
-                                    <input type="submit" value="Delivered">
+                                    <button type="button" class="btn" onclick="confirmAction('delivered', '${deliveryorder.orderID}', '${deliveryorder.status}')">Delivered</button>
                                 </form>
                             </td>
                         </tr>
@@ -137,11 +139,8 @@
                             }
                         %>
                     </table>
-
-                    <script src="js/pagination.js"></script>
-                    <script src="js/pagination.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
-                                                                    integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
-                    crossorigin="anonymous"></script>
-                    <script src="js/sidenav.js"></script>
-                    </body>
-                    </html>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

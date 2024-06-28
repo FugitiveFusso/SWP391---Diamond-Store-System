@@ -308,3 +308,40 @@ button{
     border: none;
     border-radius: 10px;
 }
+
+.btn {
+    padding: 8px 20px;
+    background-color: #151542;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.status-verified {
+    color: green;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.status-shipping {
+    color: red;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.status-default {
+    color: black;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.blink {
+    animation: blink 1s infinite;
+}
