@@ -223,6 +223,13 @@
                     }
                 %>    
             </table>
+            <h1>Post Statistics</h1>
+            <strong>Total Active Posts: ${requestScope.post.totalNumberOfActivePosts}</strong>
+            <strong>Total Author: ${requestScope.post.totalNumberOfAuthors}</strong>
+            <strong>Total Posts Date: ${requestScope.post.totalNumberOfPostDays}</strong>
+            <strong>Date of oldest post: ${requestScope.post.earliestPostDate}</strong>
+            <strong>Date of latest post: ${requestScope.post.latestPostDate}</strong>
+
         </div>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
