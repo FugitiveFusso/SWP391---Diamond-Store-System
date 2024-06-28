@@ -6,7 +6,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Order Delivery Management</title>
         <link rel="stylesheet" href="css/navbar.css">
         <script src="https://unpkg.com/@phosphor-icons/web"></script>
         <link rel="stylesheet" href="css/customer_list.css">
@@ -22,7 +22,6 @@
         <script src="js/delivery_confirmation_deliverystaff.js"></script>
     </head>
     <body>
-        <%--<%@ include file="/productmenu.jsp" %>--%>
 
         <div class="menu-btn">
             <div class="btn-cover">
@@ -41,7 +40,7 @@
 
             <div class="menu">               
                 <div class="item"><a href="DeliveryStaffOrderController"><i class="fas fa-layer-group"></i>Delivery Order</a></div>
-                <div class="item"><a href="DeliveryHistory"><i class="fas fa-layer-group"></i>Delivery History</a></div>
+                <div class="item"><a href="DeliveryHistory"><i class="fas fa-clock-rotate-left"></i>Delivery History</a></div>
                 <div class="item"><a href="deliverystaffaccount.jsp"><i class="fas fa-user"></i>Account</a></div>
                 <div class="item"><a href="deliverystafflogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
             </div>
@@ -52,11 +51,11 @@
                 <div class="list1">
                     <div class="list-intro-left">
                         <div class="left-icon">
-                            <i class='bx bxs-check-shield'></i>
+                            <i class='bx bxs-package'></i>
                         </div>
                         <div class="left-info">
-                            <div class="list-title">Ring List</div>
-                            <div class="">List of Ring</div>
+                            <div class="list-title">Order Delivery</div>
+                            <div class="">List of Orders for Delivery</div>
                         </div>
                     </div>
                 </div>

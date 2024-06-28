@@ -20,7 +20,7 @@
     </head>
     <body>
 
-        <div class="menu-btn">
+       <div class="menu-btn">
             <div class="btn-cover">
                 <i class="fas fa-bars"></i>
             </div>            
@@ -32,17 +32,17 @@
                     <i class="fa-solid fa-xmark"></i>
                 </div>
                 <img src="images/Screenshot (656).png">
-                <h1>${sessionScope.deliverystaffsession.lastname} ${sessionScope.deliverystaffsession.firstname}</h1>
+                <h1>${sessionScope.salessession.lastname} ${sessionScope.salessession.firstname}</h1>
             </header>
 
             <div class="menu">               
                 <div class="item"><a href="DeliveryStaffOrderController"><i class="fas fa-layer-group"></i>Delivery Order</a></div>
+                <div class="item"><a href="DeliveryHistory"><i class="fas fa-clock-rotate-left"></i>Delivery History</a></div>
                 <div class="item"><a href="deliverystaffaccount.jsp"><i class="fas fa-user"></i>Account</a></div>
                 <div class="item"><a href="deliverystafflogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
             </div>
         </div>
 
-        <!--<jsp:include page="/menu.jsp" flush="true" />-->
 
         <div class="container d-flex justify-content-center align-items-center">
             <div class="text-center">
