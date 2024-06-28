@@ -38,6 +38,7 @@
 
             <div class="menu">               
                 <div class="item"><a href="DeliveryStaffOrderController"><i class="fas fa-layer-group"></i>Delivery Order</a></div>
+                <div class="item"><a href="DeliveryHistory"><i class="fas fa-layer-group"></i>Delivery History</a></div>
                 <div class="item"><a href="deliverystaffaccount.jsp"><i class="fas fa-user"></i>Account</a></div>
                 <div class="item"><a href="deliverystafflogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
             </div>
@@ -103,35 +104,6 @@
                                     <input type="submit" value="Delivered">
                                 </form>
                             </td>
-                        </tr>
-                        <%
-                            }
-                        %>
-                    </table>
-
-                    <table>
-                        <tr>
-                            <th>Order ID</th>
-                            <th>Username</th>
-                            <th>Ring Name</th>
-                            <th>Ring Size</th>
-                            <th>Date of Purchase</th>
-                            <th>Destination</th>
-                            <th>Total Price</th>
-                        </tr>
-                        <%
-                            list = (List<OrderDTO>) request.getAttribute("deliveryhistory");
-                            for (OrderDTO deliveryorder : list) {
-                                pageContext.setAttribute("deliveryorder", deliveryorder);
-                        %>
-                        <tr>
-                            <td>${deliveryorder.orderID}</td>
-                            <td><a href="Delivery_Customer_Controller?action=details&id=${deliveryorder.userID}">${deliveryorder.userName}</a></td>
-                            <td>${deliveryorder.ringName}</td>
-                            <td>${deliveryorder.ringSize}</td>
-                            <td>${deliveryorder.orderDate}</td>
-                            <td>${deliveryorder.address}</td>
-                            <td>${deliveryorder.totalPrice}</td>
                         </tr>
                         <%
                             }

@@ -65,12 +65,10 @@ public class DeliveryStaffOrderController extends HttpServlet {
 
 
                 OrderDAO dao = new OrderDAO();
-                List<OrderDTO> list = dao.listForDelivery();
-                List<OrderDTO> listHistory = dao.deliveryHistory();
+                List<OrderDTO> list = dao.listForDelivery();                
                 request.setAttribute("deliverystafforderlist", list);
-                request.setAttribute("deliveryhistory", listHistory);
                 request.getRequestDispatcher("./deliverystafforderlist.jsp").forward(request, response);
-            } else if (action.equals("shipping")) {
+            }else if (action.equals("shipping")) {
                 Integer orderID = null;
                 try {
                     orderID = Integer.parseInt(request.getParameter("orderID"));
