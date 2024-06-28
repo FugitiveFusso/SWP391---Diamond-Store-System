@@ -5,134 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Step Progress Bar</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f0f2f5;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        h2 {
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        .progress-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 80%;
-            max-width: 600px;
-            position: relative;
-            margin-bottom: 20px;
-        }
-
-        .progress-bar {
-            position: absolute;
-            top: 27%;
-            left: 12.5%;
-            width: 75%;
-            height: 6px;
-            background-color: #e0e0e0;
-            z-index: 1;
-            transform: translateY(-50%);
-            border-radius: 3px;
-            display: none; /* Hide by default */
-        }
-
-        .progress-bar::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 100%;
-            background-color: #4caf50;
-            transition: width 0.3s ease;
-            border-radius: 3px;
-            z-index: 2;
-        }
-
-        .step {
-            width: 25%;
-            text-align: center;
-            z-index: 3;
-            position: relative;
-        }
-
-        .step::before {
-            content: '';
-            display: block;
-            width: 24px;
-            height: 24px;
-            background-color: #e0e0e0;
-            border-radius: 50%;
-            margin: 0 auto;
-            position: relative;
-            z-index: 4;
-            transition: background-color 0.3s ease;
-        }
-
-        .step-active::before {
-            background-color: #4caf50;
-        }
-
-        .step .step-counter {
-            margin-top: 8px;
-            font-size: 14px;
-            color: #666;
-        }
-
-        #status {
-            font-size: 1.5em;
-            color: #333;
-        }
-
-        .progress-bar::before {
-            width: var(--progress-width, 0);
-        }
-    </style>
-    <script>
-        var steps = ["Purchased", "Verified", "Shipping", "Delivered"];
-
-        function updateProgressBar(status) {
-            var progressBar = document.querySelector(".progress-bar");
-            var progressBarBefore = document.querySelector(".progress-bar::before");
-            var stepIndex = steps.indexOf(status) + 1;
-            var percentage = ((stepIndex - 1) / (steps.length - 1)) * 100;
-
-            if (stepIndex > 1) {
-                progressBar.style.display = "block";
-                document.documentElement.style.setProperty('--progress-width', percentage + '%');
-            } else {
-                progressBar.style.display = "block";
-            }
-
-            var stepElements = document.getElementsByClassName("step");
-            for (var i = 0; i < stepElements.length; i++) {
-                stepElements[i].classList.remove("step-active");
-                if (i < stepIndex) {
-                    stepElements[i].classList.add("step-active");
-                }
-            }
-        }
-
-        window.onload = function () {
-            // Initially set the progress bar based on the current status
-            var statusElement = document.getElementById("status");
-            var status = statusElement.innerHTML.trim();
-            if (steps.includes(status)) {
-                updateProgressBar(status);
-            } else {
-                console.log("Invalid status: " + status);
-            }
-        }
-    </script>
+    <link rel="stylesheet" href="progressbar.css">   
 </head>
 
 <body>
@@ -151,10 +24,11 @@
         <div class="step" data-step="Delivered">
             <div class="step-counter">Delivered</div>
         </div>
-    </div>
+    </div>      
 
     <br>
-    <div id="status">Verified</div> <!-- Simulate the status display -->
+    <div id="status">Delivered</div> <!-- Simulate the status display -->
+    <script src="progressbar.js"></script>
 </body>
 
 </html>
