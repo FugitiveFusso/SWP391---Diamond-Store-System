@@ -14,9 +14,7 @@
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <script src="js/pagination.js"></script>
         <link rel="stylesheet" href="css/pagination.css">
-
-
-
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </head>
     <body>
         <%--<%@ include file="/productmenu.jsp" %>--%>
@@ -74,8 +72,6 @@
             </div>
         </div>
 
-
-
         <div class="list-container">
             <div class="smaller-container">
                 <div class="list1">
@@ -94,20 +90,22 @@
                     String errorMessage = (String) session.getAttribute("errorMessage");
                     if (errorMessage != null) {
                 %>
-                <div class="error-message">
-                    <%= errorMessage%>
-                </div>
+                <script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: '<%= errorMessage %>'
+                    });
+                </script>
                 <%
                     session.removeAttribute("errorMessage"); // Optionally remove the message after displaying it
-                %>
-                <%
                     }
                 %>
 
                 <div class="list">
                     <form action='' method=GET id="searchbox"> 
-                        <input name=keyword type=text value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
-                        <input type=submit value=Search >
+                        <input name=keyword type=text class="search-input" value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
+                        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
                     </form>
 
                     <table>
@@ -135,23 +133,16 @@
                             <td>${salesorder.orderDate}</td>
                             <td>${salesorder.address}</td>
                             <td>
-                                <form action="SalesStaffOrderController" method="POST">
-                                    <input type="text" name="warrantyID" id="warrantyID_${salesorder.orderID}" placeholder="Enter Warranty ID" required>
-                                    </td>
-                                    <td>${salesorder.totalPrice}</td>
-                                    <td>
-                                        <input name="action" value="accept" type="hidden">
-                                        <input name="orderID" value="${salesorder.orderID}" type="hidden">
-                                        <input type="submit" value="Accept">
-                                </form>
+                                <input type="text" class="search" name="warrantyID" id="warrantyID_${salesorder.orderID}" placeholder="Enter Warranty ID" required>
+                            </td>
+                            <td>${salesorder.totalPrice}</td>
+                            <td>
+                                <button type="button" class="accept-btn" data-order-id="${salesorder.orderID}" data-warranty-id="warrantyID_${salesorder.orderID}">Accept</button>
                             </td>
                         </tr>
                         <%
                             }
                         %>    
-
-
-                        </td></tr>
                     </table>
 
                     <table>
@@ -180,25 +171,20 @@
                             <td>${salesorder.address}</td>
                             <td>${salesorder.warrantyName}</td>
                             <td>${salesorder.totalPrice}</td>
-                        <form action="SalesStaffOrderController" method="POST">
                             <td>
-                                <input name="action" value="received" type="hidden">
-                                <input name="orderID" value="${salesorder.orderID}" type="hidden">
-                                <input type="submit" value="Customer has received at store">
-                        </form>
-                        </td>
+                                <button type="button" class="received-btn" data-order-id="${salesorder.orderID}">Customer has received at store</button>
+                            </td>
                         </tr>
                         <%
                             }
                         %>    
-
-
-                        </td></tr>
                     </table>
-                    <script src="js/pagination.js"></script>
-                    <script src="js/pagination.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
-                                                                    integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
-                    crossorigin="anonymous"></script>
+
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js" integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw==" crossorigin="anonymous"></script>
                     <script src="js/sidenav.js"></script>
-                    </body>
-                    </html>
+                    <script src="js/order_confirmation_sales.js"></script>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
