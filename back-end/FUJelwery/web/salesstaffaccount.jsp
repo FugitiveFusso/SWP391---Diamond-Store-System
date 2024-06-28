@@ -21,8 +21,6 @@
     <body>
 
 
-        <!--<%@ include file="/salesmenu.jsp" %>-->
-
         <div class="menu-btn">
             <div class="btn-cover">
                 <i class="fas fa-bars"></i>
@@ -48,6 +46,7 @@
 
                         </div>
                     </a>
+                    <a href="warrantydetails.jsp"></a>
                 </div>
                 <div class="item"><a class="sub-btn"><i class="fas fa-tags"></i>View Product Price
                         <i class="fas fa-angle-right dropdown"></i>
@@ -68,6 +67,8 @@
                 </div>
 
                 <div class="item"><a href="CategoryController"><i class="fas fa-layer-group"></i>View Category</a></div>
+                <div class="item"><a href="SalesStaffOrderController"><i class="fas fa-receipt"></i>Track All Orders</a></div>
+                <div class="item"><a href="SalesHistory"><i class="fas fa-clock-rotate-left"></i>View Processed Orders</a></div>
 
                 <div class="item"><a href="salesstaffaccount.jsp"><i class="fas fa-user"></i>Account</a></div>
                 <div class="item"><a href="saleslogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
@@ -75,15 +76,14 @@
             </div>
         </div>
 
-        <!--Login user: ${sessionScope.salessession.username}-->
-        
+
         <div class="container d-flex justify-content-center align-items-center">
             <div class="text-center">
                 <h1 style="font-size: 50px; font-weight: 700">Sale Staff Account</h1>
                 <p>Login username: ${sessionScope.salessession.username}</p>
             </div>
         </div>
-        
+
         <div class="container">
             <div class="padding">
                 <div class="row d-flex justify-content-center">
@@ -131,7 +131,7 @@
                                                 <h6 class="text-muted f-w-400">${sessionScope.salessession.point}</h6>
                                             </div>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                             </div>
