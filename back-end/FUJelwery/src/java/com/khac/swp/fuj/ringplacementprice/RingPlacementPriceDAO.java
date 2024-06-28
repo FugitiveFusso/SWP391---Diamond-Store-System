@@ -67,7 +67,7 @@ public class RingPlacementPriceDAO {
 
     public RingPlacementPriceDTO load(int rpID) {
 
-        String sql = " select rpID, rName, material, color, FORMAT(rpPrice, 'N0') AS rpPrice from RingPlacementPrice where rpID = ?";
+        String sql = " select rpID, rName, material, color, FORMAT(rpPrice, 'N0') AS rpPrice from RingPlacementPrice where rpID = ? and isDeleted = 'active'";
 
         try {
 

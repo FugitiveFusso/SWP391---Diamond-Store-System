@@ -65,7 +65,7 @@ public class PostDAO {
 
     public PostDTO load(int postID) {
 
-        String sql = "select postID, postName, postImage, postDate, author, description, postText from Post where postID = ?";
+        String sql = "select postID, postName, postImage, postDate, author, description, postText from Post where postID = ? and isDeleted = 'active'";
 
         try {
 
@@ -192,4 +192,41 @@ public class PostDAO {
         return null;
     }
 
+    public PostDTO loadStatistics() {
+
+        String sql = "select postID, postName, postImage, postDate, author, description, postText from Post where postID = ?";
+
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                int postid = rs.getInt("postID");
+                String postname = rs.getString("postName");
+                String postimage = rs.getString("postImage");
+                String postdate = rs.getString("postDate");
+                String author = rs.getString("author");
+                String description = rs.getString("description");
+                String posttext = rs.getString("postText");
+
+                PostDTO post = new PostDTO();
+                post.setId(postid);
+                post.setName(postname);
+                post.setImage(postimage);
+                post.setDate(postdate);
+                post.setAuthor(author);
+                post.setDescription(description);
+                post.setText(posttext);
+                return post;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Query User error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    
 }

@@ -60,7 +60,7 @@ public class CollectionDAO {
 
     public CollectionDTO load(int collectionID) {
 
-        String sql = "select * from Collection where collectionID = ?";
+        String sql = "select * from Collection where collectionID = ? and isDeleted = 'active'";
 
         try {
 

@@ -157,7 +157,7 @@ public class UserDAO {
     
     public UserDTO load(int userID, String roleName) {
         
-        String sql = "select userID, userName, password, firstName, lastName, email, phoneNumber, address, point from [User] u full join [Role] r on u.roleID = r.roleID where userID = ? and roleName like ?";
+        String sql = "select userID, userName, password, firstName, lastName, email, phoneNumber, address, point from [User] u full join [Role] r on u.roleID = r.roleID where userID = ? and roleName like ? and isDeleted = 'active'";
         
         try {
             

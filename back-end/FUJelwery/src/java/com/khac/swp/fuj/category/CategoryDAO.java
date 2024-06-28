@@ -55,7 +55,7 @@ public class CategoryDAO {
 
     public CategoryDTO load(int categoryID) {
 
-        String sql = " select categoryID, categoryName, categoryImage from Category where categoryID = ? ";
+        String sql = " select categoryID, categoryName, categoryImage from Category where categoryID = ? and isDeleted = 'active' ";
 
         try {
 

@@ -9,6 +9,11 @@ public class PostDTO {
     private String author;
     private String description;
     private String text;
+    private int totalNumberOfActivePosts;
+    private int totalNumberOfAuthors;
+    private int totalNumberOfPostDays;
+    private String earliestPostDate;
+    private String latestPostDate;
 
     public String getDate() {
         return date;
@@ -66,9 +71,51 @@ public class PostDTO {
         this.description = description;
     }
 
+    public int getTotalNumberOfActivePosts() {
+        return totalNumberOfActivePosts;
+    }
+
+    public void setTotalNumberOfActivePosts(int totalNumberOfActivePosts) {
+        this.totalNumberOfActivePosts = totalNumberOfActivePosts;
+    }
+
+    public int getTotalNumberOfAuthors() {
+        return totalNumberOfAuthors;
+    }
+
+    public void setTotalNumberOfAuthors(int totalNumberOfAuthors) {
+        this.totalNumberOfAuthors = totalNumberOfAuthors;
+    }
+
+    public int getTotalNumberOfPostDays() {
+        return totalNumberOfPostDays;
+    }
+
+    public void setTotalNumberOfPostDays(int totalNumberOfPostDays) {
+        this.totalNumberOfPostDays = totalNumberOfPostDays;
+    }
+
+    public String getEarliestPostDate() {
+        return earliestPostDate;
+    }
+
+    public void setEarliestPostDate(String earliestPostDate) {
+        this.earliestPostDate = earliestPostDate;
+    }
+
+    public String getLatestPostDate() {
+        return latestPostDate;
+    }
+
+    public void setLatestPostDate(String latestPostDate) {
+        this.latestPostDate = latestPostDate;
+    }
+
     @Override
     public String toString() {
-        return "PostDTO{" + "id=" + id + ", name=" + name + ", image=" + image + ", date=" + date + ", author=" + author + ", description=" + description + ", text=" + text + '}';
+        return "PostDTO{" + "id=" + id + ", name=" + name + ", image=" + image + ", date=" + date + ", author=" + author + ", description=" + description + ", text=" + text + ", totalNumberOfActivePosts=" + totalNumberOfActivePosts + ", totalNumberOfAuthors=" + totalNumberOfAuthors + ", totalNumberOfPostDays=" + totalNumberOfPostDays + ", earliestPostDate=" + earliestPostDate + ", latestPostDate=" + latestPostDate + '}';
     }
+
+    
    
 }

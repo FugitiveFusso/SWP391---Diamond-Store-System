@@ -1,4 +1,4 @@
--- User
+-- Users
 SELECT r.roleName,
        COUNT(u.userID) AS TotalUsers,
        SUM(CASE WHEN u.[status] = 'active' THEN 1 ELSE 0 END) AS ActiveUserCount,
@@ -9,7 +9,7 @@ GROUP BY r.roleName, u.isDeleted
 HAVING u.isDeleted = 'active'
 ORDER BY r.roleName;
 
--- Category
+-- Categories
 SELECT TotalCategories, ActiveCategories, DeletedCategories, Top3CategoryNames, Top3CategoryRingCounts FROM
             (SELECT 
             (SELECT COUNT(*) FROM [Category]) AS TotalCategories,
@@ -24,7 +24,7 @@ SELECT TotalCategories, ActiveCategories, DeletedCategories, Top3CategoryNames, 
         GROUP BY categoryName ORDER BY COUNT(*) DESC)
         GROUP BY CategoryRingCounts.categoryID) AS CombinedResults;
 
--- Collection
+-- Collections
 WITH CollectionSummary AS (
 SELECT c.collectionID, c.collectionName, COUNT(r.ringID) AS NumberOfRings, SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02) AS TotalCollectionPrice
 FROM [Collection] c LEFT JOIN [Ring] r ON c.collectionID = r.collectionID AND r.isDeleted = 'active'
@@ -35,7 +35,7 @@ SELECT (SELECT COUNT(*) FROM [Collection] WHERE isDeleted = 'active') AS NumberO
 FROM CollectionSummary cs WHERE cs.NumberOfRings > 0 -- Select collections with more than 0 rings
 ORDER BY cs.TotalCollectionPrice DESC;
 
--- Voucher
+-- Vouchers
 WITH VoucherUsage AS (
    SELECT v.voucherName, v.createdDate, COUNT(o.orderID) AS totalOrdersUsingVoucher
    FROM [Voucher] v LEFT JOIN [Order] o ON v.voucherID = o.voucherID WHERE v.isDeleted = 'active'
@@ -44,3 +44,8 @@ WITH VoucherUsage AS (
 SELECT vu.voucherName, vu.createdDate, vu.totalOrdersUsingVoucher, av.activeVouchersCount
 FROM VoucherUsage vu CROSS JOIN (SELECT COUNT(*) AS activeVouchersCount FROM [Voucher] WHERE isDeleted = 'active') av
 ORDER BY vu.totalOrdersUsingVoucher DESC, createdDate ASC OFFSET 0 ROWS FETCH NEXT 3 ROWS ONLY;
+
+-- Posts
+SELECT COUNT(*) AS TotalNumberOfActivePosts, COUNT(DISTINCT Author) AS TotalNumberOfAuthors, COUNT(DISTINCT PostDate) AS TotalNumberOfPostDays,
+MIN(PostDate) AS EarliestPostDate, MAX(PostDate) AS LatestPostDate
+FROM Post WHERE isDeleted = 'active';

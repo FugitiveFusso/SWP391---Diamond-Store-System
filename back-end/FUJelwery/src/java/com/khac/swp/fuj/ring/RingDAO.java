@@ -108,7 +108,7 @@ public class RingDAO {
     public RingDTO load(int ringID) {
 
         String sql = "SELECT r.ringID, r.rpID, r.ringName, r.ringImage, r.diamondID, FORMAT(r.price , 'N0') AS ringPrice, FORMAT(((r.price + rp.rpPrice + dp.price)*1.02) , 'N0') AS totalPrice, r.collectionID, r.categoryID, rp.rName, rp.material, rp.color AS [ringColor], FORMAT(rp.rpPrice , 'N0') AS rpPrice, d.diamondName, d.diamondImage, d.origin, d.certificateID, dp.diamondSize, dp.caratWeight, dp.color AS [diamondColor], dp.clarity, dp.cut, FORMAT(dp.price , 'N0') AS [diamondShapePrice]"
-                + " FROM [Ring] r LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID WHERE r.ringID = ? ";
+                + " FROM [Ring] r LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID WHERE r.ringID = ? and r.isDeleted = 'active' ";
 
         try {
 

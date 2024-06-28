@@ -147,7 +147,7 @@ public class DiamondPriceDAO {
 
     public DiamondPriceDTO load(int dpID) {
 
-        String sql = "select dpID, diamondSize, caratWeight, color, clarity, cut, FORMAT(price, 'N0') AS price from DiamondPrice where dpID = ?";
+        String sql = "select dpID, diamondSize, caratWeight, color, clarity, cut, FORMAT(price, 'N0') AS price from DiamondPrice where dpID = ? and isDeleted = 'active'";
 
         try {
 

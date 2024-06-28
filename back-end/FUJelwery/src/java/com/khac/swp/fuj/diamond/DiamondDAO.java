@@ -81,7 +81,7 @@ public class DiamondDAO {
 
     public DiamondDTO load(int diamondID) {
 
-        String sql = "SELECT d.diamondID, d.diamondName, d.diamondImage, d.origin, d.dpID, d.certificateID, dp.diamondSize, dp.caratWeight, dp.color, dp.clarity, dp.cut, FORMAT(dp.price, 'N0') AS price FROM Diamond d LEFT JOIN DiamondPrice dp ON d.dpID = dp.dpID where diamondID = ?";
+        String sql = "SELECT d.diamondID, d.diamondName, d.diamondImage, d.origin, d.dpID, d.certificateID, dp.diamondSize, dp.caratWeight, dp.color, dp.clarity, dp.cut, FORMAT(dp.price, 'N0') AS price FROM Diamond d LEFT JOIN DiamondPrice dp ON d.dpID = dp.dpID where diamondID = ? and d.isDeleted = 'active'";
 
         try {
 

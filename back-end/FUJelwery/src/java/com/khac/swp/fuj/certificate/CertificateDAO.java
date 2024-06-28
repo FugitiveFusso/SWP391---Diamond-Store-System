@@ -58,7 +58,7 @@ public class CertificateDAO {
 
     public CertificateDTO load(int certificateID) {
 
-        String sql = "select * from Certificate where certificateID = ?";
+        String sql = "select * from Certificate where certificateID = ? and isDeleted = 'active'";
 
         try {
 

@@ -71,7 +71,7 @@ public class WarrantyDAO {
 
     public WarrantyDTO load(int warrantyID) {
 
-        String sql = "select warrantyID, warrantyName, warrantyImage, warrantyMonth, warrantyDescription, warrantyType, startDate, endDate, termsAndConditions from Warranty where warrantyID = ?";
+        String sql = "select warrantyID, warrantyName, warrantyImage, warrantyMonth, warrantyDescription, warrantyType, startDate, endDate, termsAndConditions from Warranty where warrantyID = ? and isDeleted = 'active'";
 
         try {
 

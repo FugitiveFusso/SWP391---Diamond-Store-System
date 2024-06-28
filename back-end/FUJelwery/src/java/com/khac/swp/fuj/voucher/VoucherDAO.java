@@ -67,7 +67,7 @@ public class VoucherDAO {
 
     public VoucherDTO load(int voucherID) {
 
-        String sql = "select voucherID, voucherName, voucherImage, createdDate, createdBy, description, coupon, percentage from Voucher where voucherID = ?";
+        String sql = "select voucherID, voucherName, voucherImage, createdDate, createdBy, description, coupon, percentage from Voucher where voucherID = ? and isDeleted = 'active'";
 
         try {
 
