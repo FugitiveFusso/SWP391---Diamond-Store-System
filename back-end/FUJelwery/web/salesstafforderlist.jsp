@@ -1,4 +1,4 @@
-<%@page import="com.khac.swp.fuj.order.OrderDTO"%>
+    <%@page import="com.khac.swp.fuj.order.OrderDTO"%>
 <%@page import="com.khac.swp.fuj.ring.RingDTO"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -78,11 +78,11 @@
                 <div class="list1">
                     <div class="list-intro-left">
                         <div class="left-icon">
-                            <i class='bx bxs-check-shield'></i>
+                            <i class='bx bxs-briefcase'></i>
                         </div>
                         <div class="left-info">
-                            <div class="list-title">Ring List</div>
-                            <div class="">List of Ring</div>
+                            <div class="list-title">Order List</div>
+                            <div class="">List of Orders</div>
                         </div>
                     </div>
 
