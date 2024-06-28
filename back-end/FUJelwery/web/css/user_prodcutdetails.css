@@ -1,40 +1,57 @@
 @import url('https://fonts.googleapis.com/css2?family=Gantari:ital,wght@0,100..900;1,100..900&display=swap');
 
-.popup{
+@keyframes popupAnimation {
+    0% {
+        transform: translate(-50%, -50%) scale(0.1);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes popupCloseAnimation {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(0.1);
+        opacity: 0;
+    }
+}
+
+.popup {
     width: 400px;
     background: #fff;
     border-radius: 6px;
     position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.1);
-    text-align: center;
-    padding: 0 30px 30px;
-    color: #333;
-    visibility: hidden;
-    transition: transform 0.4s, top 0.4s;
-}
-
-.open-popup{
-    visibility: visible;
     top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%) scale(1);
+    text-align: center;
+    padding: 30px;
+    color: #333;
+    visibility: visible;
+    opacity: 1;
+    animation: popupOpenAnimation 0.4s ease-out;
 }
 
-.popup img{
+.popup img {
     width: 100px;
     margin-top: -50px;
     border-radius: 50%;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-.popup h2{
+.popup h2 {
     font-size: 38px;
     font-weight: 500;
     margin: 30px 0 10px;
 }
 
-.popup button{
+.popup button {
     width: 100%;
     margin-top: 50px;
     padding: 10px 0;
@@ -54,9 +71,6 @@ body {
     background-color: #f9f9f9;
     margin: 0;
     padding: 0;
-    /*    display: flex;
-        justify-content: center;
-        align-items: center;*/
     min-height: 100vh;
 }
 

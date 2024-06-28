@@ -79,20 +79,18 @@
 
             </div>
         </div>
-                            
+
         <% String success = (String) request.getAttribute("success");%>
         <div class="container">
             <% if (success != null) {%>
-            <div class="popup" id="popup">
+            <div class="popup open-popup" id="popup">
                 <img src="images/404-tick.png">
                 <h2>Thank you!</h2>
                 <p><%= success%></p>
                 <button type="button" onclick="closePopup()">OK</button>
             </div>
-
+            <% }%> 
         </div>
-        <% }%> 
-
 
 
         <div class="product-details">
@@ -360,8 +358,15 @@
             }
 
             function closePopup() {
-                popup.classList.remove("open-popup");
+                var popup = document.getElementById('popup');
+                popup.style.animation = 'popupCloseAnimation 0.4s ease-out';
+                popup.style.transform = 'translate(-50%, -50%) scale(0.1)';
+                popup.style.opacity = '0';
+                popup.addEventListener('animationend', function () {
+                    popup.style.visibility = 'hidden';
+                }, {once: true});
             }
+
         </script>
     </body>
 </html>
