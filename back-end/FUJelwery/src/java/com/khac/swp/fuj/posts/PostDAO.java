@@ -193,40 +193,33 @@ public class PostDAO {
     }
 
     public PostDTO loadStatistics() {
-
-        String sql = "select postID, postName, postImage, postDate, author, description, postText from Post where postID = ?";
-
+        String sql = "SELECT COUNT(*) AS TotalNumberOfActivePosts, COUNT(DISTINCT Author) AS TotalNumberOfAuthors, COUNT(DISTINCT PostDate) AS TotalNumberOfPostDays,\n"
+                + "MIN(PostDate) AS EarliestPostDate, MAX(PostDate) AS LatestPostDate\n"
+                + "FROM Post WHERE isDeleted = 'active';";
         try {
-
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-
-                int postid = rs.getInt("postID");
-                String postname = rs.getString("postName");
-                String postimage = rs.getString("postImage");
-                String postdate = rs.getString("postDate");
-                String author = rs.getString("author");
-                String description = rs.getString("description");
-                String posttext = rs.getString("postText");
+                int totalNumberOfActivePosts = rs.getInt("totalNumberOfActivePosts");
+                int totalNumberOfAuthors = rs.getInt("totalNumberOfAuthors");
+                int totalNumberOfPostDays = rs.getInt("totalNumberOfPostDays");
+                String earliestPostDate = rs.getString("earliestPostDate");
+                String latestPostDate = rs.getString("latestPostDate");
 
                 PostDTO post = new PostDTO();
-                post.setId(postid);
-                post.setName(postname);
-                post.setImage(postimage);
-                post.setDate(postdate);
-                post.setAuthor(author);
-                post.setDescription(description);
-                post.setText(posttext);
+                post.setTotalNumberOfActivePosts(totalNumberOfActivePosts);
+                post.setTotalNumberOfAuthors(totalNumberOfAuthors);
+                post.setTotalNumberOfPostDays(totalNumberOfPostDays);
+                post.setEarliestPostDate(earliestPostDate);
+                post.setLatestPostDate(latestPostDate);
                 return post;
             }
         } catch (SQLException ex) {
-            System.out.println("Query User error!" + ex.getMessage());
+            System.out.println("Query Statistics error!" + ex.getMessage());
             ex.printStackTrace();
         }
         return null;
     }
-    
+
 }

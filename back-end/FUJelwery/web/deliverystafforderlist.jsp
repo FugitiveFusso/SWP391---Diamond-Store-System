@@ -111,47 +111,14 @@
                             }
                         %>
                     </table>
-
-<<<<<<< HEAD
-                    <table>
-                        <tr>
-                            <th>Order ID</th>
-                            <th>Username</th>
-                            <th>Ring Name</th>
-                            <th>Ring Size</th>
-                            <th>Date of Purchase</th>
-                            <th>Destination</th>
-                            <th>Total Price</th>
-                        </tr>
-                        <%
-                            list = (List<OrderDTO>) request.getAttribute("deliveryhistory");
-                            for (OrderDTO deliveryorder : list) {
-                                pageContext.setAttribute("deliveryorder", deliveryorder);
-                        %>
-                        <tr>
-                            <td>${deliveryorder.orderID}</td>
-                            <td><a href="Delivery_Customer_Controller?action=details&id=${deliveryorder.userID}">${deliveryorder.userName}</a></td>
-                            <td>${deliveryorder.ringName}</td>
-                            <td>${deliveryorder.ringSize}</td>
-                            <td>${deliveryorder.orderDate}</td>
-                            <td>${deliveryorder.address}</td>
-                            <td>${deliveryorder.totalPrice}</td>
-                        </tr>
-                        <%
-                            }
-                        %>
-                    </table>
                 </div>
             </div>
         </div>
+        <script src="js/pagination.js"></script>
+        <script src="js/pagination.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+                                                        integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+        crossorigin="anonymous"></script>
+        <script src="js/sidenav.js"></script>
     </body>
+
 </html>
-=======
-                    <script src="js/pagination.js"></script>
-                    <script src="js/pagination.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
-                                                                    integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
-                    crossorigin="anonymous"></script>
-                    <script src="js/sidenav.js"></script>
-                    </body>
-                    </html>
->>>>>>> d3101afcda2b2a93f65f9abe903a248294257d43
