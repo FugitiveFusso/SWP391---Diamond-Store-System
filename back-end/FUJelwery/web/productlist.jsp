@@ -115,10 +115,7 @@
                             <a href="ProductController?action=details&id=${product.ringID}">
                                 <img src="${product.ringImage}" alt="${product.ringName}">
                                 <h3 class="product-name">${product.ringName}</h3>
-                                <!--<p>Diamond: ${product.diamondName}</p>-->
-                                <p class="product-price">Price: ${product.totalPrice} VND</p>
-                                <!--<p>Category: ${product.categoryID}</p>-->
-                                <!--<p>Collection: ${product.collectionID}</p>-->
+                                <p class="product-price">Price: <strong>${product.totalPrice} VND</strong></p>                             
                             </a>
                         </div>
                         <%

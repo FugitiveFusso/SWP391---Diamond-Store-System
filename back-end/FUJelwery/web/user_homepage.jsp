@@ -9,76 +9,27 @@
         <link rel="stylesheet" href="css/user_mainpage.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw=="/>
 
-        <style>
-            /* The popup (background) */
-            .popup {
-                display: none;
-                position: fixed; 
-                z-index: 1; 
-                left: 0;
-                top: 0;
-                width: 100%; 
-                height: 100%; 
-                overflow: auto; 
-                background-color: rgba(0, 0, 0, 0.4); 
-            }
-
-            /* Popup content */
-            .popup-content {
-                background-color: #fefefe;
-                margin: 15% auto; 
-                padding: 20px;
-                border: 1px solid #888;
-                width: 80%;
-                max-width: 300px;
-                text-align: center;
-                border-radius: 5px;
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            }
-
-            /* Close button */
-            .close {
-                color: #aaa;
-                float: right;
-                font-size: 28px;
-                font-weight: bold;
-            }
-
-            .close:hover,
-            .close:focus {
-                color: black;
-                text-decoration: none;
-                cursor: pointer;
-            }
-
-            h4 {
-                color: green;
-            }
-
-        </style>
-        <script>
-            function closePopup() {
-                document.getElementById("successPopup").style.display = "none";
-            }
-        </script>
     </head>
     <body>
+
         <%
             String success = (String) session.getAttribute("success");
             if (success != null) {
                 session.removeAttribute("success");
-        %>
-        <div id="successPopup" class="popup">
-            <div class="popup-content">
-                <span class="close" onclick="closePopup()">&times;</span>
-                <h4><%= success%></h4>
-            </div>
+        %>              
+        <div class="container">
+            <div class="popup open-popup" id="popup">
+                <img src="images/404-tick.png" alt="Success Icon">
+                <h2>Thank you!</h2>
+                <p><%= success%></p>
+                <button type="button" onclick="closePopup()">OK</button>
+            </div>           
         </div>
-        <script>
-            // Display the pop-up
-            document.getElementById("successPopup").style.display = "block";
-        </script>
-        <% }%>
+        <%
+            }
+        %>
+
+
         <div class="header">
             <div class="header-top">
                 <div class="top-info-left">
@@ -158,38 +109,6 @@
                 <img src="images/hero1.jpg" height="1px" alt="" srcset="">
             </div>
 
-            <!--            <div class="trending">
-                            <div class="title">
-                                <h1>MOSTLY SEARCH</h1>
-                            </div>
-                            <div class="list">
-                                <div class="swiper">
-                                    <a href="">
-                                        <img src="images/img1.jpeg" alt="">
-                                    </a>
-                                    <h2>Diamond</h2>
-                                </div>
-                                <div class="swiper">
-                                    <a href="">
-                                        <img src="images/img1.jpeg" alt="">
-                                    </a>
-                                    <h2>Diamond</h2>
-                                </div>
-                                <div class="swiper">
-                                    <a href="">
-                                        <img src="images/img1.jpeg" alt="">
-                                    </a>
-                                    <h2>Diamond</h2>
-                                </div>
-                                <div class="swiper">
-                                    <a href="">
-                                        <img src="images/img1.jpeg" alt="">
-                                    </a>
-                                    <h2>Diamond</h2>
-                                </div>
-                            </div>-->
-
-            <!--</div>-->
         </div>
 
         <div class="guarantee-container">
@@ -319,5 +238,23 @@
                 </div>
             </div>  
         </div>
+        <script>
+            let popup = document.getElementById("popup");
+
+            function openPopup() {
+                popup.classList.add("open-popup");
+            }
+
+            function closePopup() {
+                var popup = document.getElementById('popup');
+                popup.style.animation = 'popupCloseAnimation 0.4s ease-out';
+                popup.style.transform = 'translate(-50%, -50%) scale(0.1)';
+                popup.style.opacity = '0';
+                popup.addEventListener('animationend', function () {
+                    popup.style.visibility = 'hidden';
+                }, {once: true});
+            }
+
+        </script>                   
     </body>
 </html>
