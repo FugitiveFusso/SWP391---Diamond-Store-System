@@ -38,14 +38,21 @@
                                 <li><a href='./ProductController'>Ring</a></li>
                                 <li><a href='./UserCategoryController'>Category</a></li>  
                                 <li><a href='./UserCollectionController'>Collection</a></li>  
-                                <li><a href='OrderController?action=list&id=${sessionScope.usersession.userid}'>Cart</a></li>
-                                <li><a href='BillController?action=list&id=${sessionScope.usersession.userid}'>Bill</a></li>
+
+
                             </ul>
                         </div>   
                     </li>
                     <li class="navbar-link"><a href='./UserDiamondPriceController' class="line">Diamond Price</a></li>
                     <li class="navbar-link"><a href='./UserVoucherController' class="line">Voucher</a></li>
-                    <li class="navbar-link"><a href="#" class="line">Order</a></li>
+                    <li class="navbar-link"><a href="#" class="line">Order Monitor</a>                       
+                        <div class="sub-menu-1">
+                            <ul>
+                                <li><a href='OrderController?action=list&id=${sessionScope.usersession.userid}'>Cart</a></li>
+                                <li><a href='BillController?action=list&id=${sessionScope.usersession.userid}'>Bill</a></li>
+                            </ul>
+                        </div>
+                    </li>
                     <li class="navbar-link">
                         <a href="static_webpages/certificate_edu.jsp" class="line">Education</a>
                         <div class="sub-menu-1">
@@ -62,6 +69,7 @@
                         <div class="sub-menu-1">
                             <ul>
                                 <li><a href='./userlogin?action=logout'>Logout</a></li> 
+                                <li><a href='HistoryController?action=list&id=${sessionScope.usersession.userid}'>History</a></li>
                             </ul>
                         </div>
                     </li>
