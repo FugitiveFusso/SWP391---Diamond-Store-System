@@ -41,6 +41,7 @@
 
             <div class="menu">               
                 <div class="item"><a href="DeliveryStaffOrderController"><i class="fas fa-layer-group"></i>Delivery Order</a></div>
+                <div class="item"><a href="DeliveryHistory"><i class="fas fa-layer-group"></i>Delivery History</a></div>
                 <div class="item"><a href="deliverystaffaccount.jsp"><i class="fas fa-user"></i>Account</a></div>
                 <div class="item"><a href="deliverystafflogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
             </div>
@@ -111,6 +112,7 @@
                         %>
                     </table>
 
+<<<<<<< HEAD
                     <table>
                         <tr>
                             <th>Order ID</th>
@@ -144,3 +146,12 @@
         </div>
     </body>
 </html>
+=======
+                    <script src="js/pagination.js"></script>
+                    <script src="js/pagination.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+                                                                    integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+                    crossorigin="anonymous"></script>
+                    <script src="js/sidenav.js"></script>
+                    </body>
+                    </html>
+>>>>>>> d3101afcda2b2a93f65f9abe903a248294257d43

@@ -7,7 +7,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Cart Details</title>
-        <link rel="stylesheet" href="css/navbaruser.css">
+        <link rel="stylesheet" href="css/navigation_bar.css">
         <link rel="stylesheet" href="css/usercart.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -19,45 +19,74 @@
     <body style="background-color: #f1f1f1;">
         <%--<%@ include file="/productmenu.jsp" %>--%>
 
-        <div class="menu">
-            <ul class="navbar">
-                <li class="navbar__link">
-                    <a href="#">Jewelry</a>
-                    <div class="sub-menu-1">
-                        <ul>
-                            <li><a href='./ProductController'>Ring</a></li>
-                            <li><a href='./UserCollectionController'>Collection</a></li>
-                        </ul>
-                    </div>                  
-                </li>
-                <li class="navbar__link"><a href='./UserVoucherController'>Voucher</a></li>
-                <li class="navbar__link">
-                    <a href="static_webpages/certificate_edu.jsp">Education</a>
-                    <div class="sub-menu-1">
-                        <ul>
-                            <li><a href='UserPostController'>Blog</a></li>
-                            <li><a href='static_webpages/ringmeasuring.jsp'>Ring Measuring Guide</a></li>          
-                            <li><a href='static_webpages/faqs.jsp'>Frequently Asking Questions</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <a href="user_homepage.jsp"><img src="images/Screenshot (656).png"></a>
-                <li class="navbar__link"><a href="user_aboutus.jsp">About Us</a></li>
-                <li class="navbar__link"><a href="#">Order</a></li>
-                <li class="navbar__link">
-                    <a href="#">Account</a>
-                    <div class="sub-menu-1">
-                        <ul>
-                            <li><a href='userlogin?action=logout'>Logout</a></li>          
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-        </div> 
+        <div class="header">
+            <div class="header-top">
+                <div class="top-info-left">
+                    <ul>
+                        <li>Timeless elegance and craftsmanship</li>
+                        <li style="margin-left: 30px">at FUJ Jewelry Online Shop.</li>                         
+                    </ul>
+                </div>
+                <a href="user_homepage.jsp"><img src="./images/Screenshot (656).png"></a>
+                <div class="top-info-right">
+                    <ul>
+                        <li>FUJ Jewelry Shop - <strong>(+ 84) 898876512</strong></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="header-bottom">
+                <ul class="navbar">
+                    <li class="navbar-link">
+                        <a href="#" class="line">Jewelry</a>
+                        <div class="sub-menu-1">
+                            <ul>
+                                <li><a href='./ProductController'>Ring</a></li>
+                                <li><a href='./UserCategoryController'>Category</a></li>  
+                                <li><a href='./UserCollectionController'>Collection</a></li>  
+
+
+                            </ul>
+                        </div>   
+                    </li>
+                    <li class="navbar-link"><a href='./UserDiamondPriceController' class="line">Diamond Price</a></li>
+                    <li class="navbar-link"><a href='./UserVoucherController' class="line">Voucher</a></li>
+                    <li class="navbar-link"><a href="#" class="line">Order Monitor</a>                       
+                        <div class="sub-menu-1">
+                            <ul>
+                                <li><a href='OrderController?action=list&id=${sessionScope.usersession.userid}'>Cart</a></li>
+                                <li><a href='BillController?action=list&id=${sessionScope.usersession.userid}'>Bill</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="navbar-link">
+                        <a href="static_webpages/certificate_edu.jsp" class="line">Education</a>
+                        <div class="sub-menu-1">
+                            <ul>
+                                <li><a href='./UserPostController'>Blog</a></li>
+                                <li><a href='static_webpages/ringmeasuring.jsp'>Ring Measuring Guide</a></li>          
+                                <li><a href='static_webpages/faqs.jsp'>Frequently Asking Questions</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="navbar-link"><a href="user_aboutus.jsp" class="line">About Us</a></li>                    
+                    <li class="navbar-link">
+                        <a href="user_accountdetails.jsp" class="line">Account</a>
+                        <div class="sub-menu-1">
+                            <ul>
+                                <li><a href='./userlogin?action=logout'>Logout</a></li> 
+                                <li><a href='HistoryController?action=list&id=${sessionScope.usersession.userid}'>History</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
 
         <div class="container">
             <div class="wrapper wrapper-content animated fadeInRight">
-                <div class="row">
+                <div class="row" style="margin-top: 30px;">
                     <%
                         List<OrderDTO> list = (List<OrderDTO>) request.getAttribute("cartlist");
                         int totalNumberOfThings = 0;

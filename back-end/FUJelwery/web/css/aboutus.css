@@ -6,7 +6,7 @@ body{
 .main .content {
     background: #ededed;
     position: relative;
-    margin: 0 170px 100px 170px;
+    margin: 50px 170px 100px 170px;
     display: flex;
     flex-direction: column;
     padding: 60px 80px;
