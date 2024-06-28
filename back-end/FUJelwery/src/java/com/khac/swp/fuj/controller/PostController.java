@@ -83,7 +83,7 @@ public class PostController extends HttpServlet {
                 PostDTO post = new PostDTO();
                 request.setAttribute("post", post);
                 request.setAttribute("nextaction", "insert");
-                RequestDispatcher rd = request.getRequestDispatcher("postedit.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("postinsert.jsp");
                 rd.forward(request, response);
 
             } else if (action.equals("update")) {//update
@@ -142,11 +142,11 @@ public class PostController extends HttpServlet {
 
                     request.setAttribute("post", post);
                     request.setAttribute("success", "Added Successfully!!!");
-                    RequestDispatcher rd = request.getRequestDispatcher("postedit.jsp");
+                    RequestDispatcher rd = request.getRequestDispatcher("postinsert.jsp");
                     rd.forward(request, response);
                 } else {
                     request.setAttribute("error", "Your post name is already existed!!!");
-                    RequestDispatcher rd = request.getRequestDispatcher("postedit.jsp");
+                    RequestDispatcher rd = request.getRequestDispatcher("postinsert.jsp");
                     rd.forward(request, response);
                 }
 

@@ -138,7 +138,7 @@
 
         <div class="container content">
             <form action="./PostController" method="POST" onsubmit="return validateForm()" onsubmit="return validateInput()">
-                <input type="number" name="id" value="${requestScope.post.id}"class="form-control" hidden="">                           
+                <input type="number" name="id" class="form-control" hidden="">                           
                 <div class="row content-info">
                     <div class="col-md-6 content-left">
                         <div class="info-input">
@@ -148,7 +148,7 @@
 
                         <div class="info-input">
                             <h2>Date</h2>
-                            <input type="date" name="postDate" value="${requestScope.post.date}" required="Please enter" class="form-control">
+                            <input type="date" name="postDate" required="Please enter" class="form-control">
                         </div>
 
                         <div class="info-input">
@@ -160,15 +160,15 @@
                     <div class="col-md-6 content-right">
                         <div class="info-input">                                                      
                             <h2>Post Name</h2>
-                            <input name="postName" value="${requestScope.post.name}" required="Please enter" class="form-control">
+                            <input name="postName" required="Please enter" class="form-control">
                         </div>
                         <div class="info-input">
                             <h2>Post Image</h2>
-                            <input name="postImage" value="${requestScope.post.image}" required="Please enter" class="form-control">
+                            <input name="postImage" required="Please enter" class="form-control">
                         </div>
                         <div class="info-input">
                             <h2>Script</h2>
-                            <textarea id="postText" name="postText" required="Please enter" class="form-control" style="resize: both;">${requestScope.post.text}</textarea>
+                            <textarea id="postText" name="postText" required="Please enter" class="form-control" style="resize: both;"></textarea>
                             <span id="postText-error" class="error" style="color: red"></span>
                         </div>
                     </div>
