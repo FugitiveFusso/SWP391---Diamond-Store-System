@@ -37,7 +37,6 @@ h2 {
     display: none; /* Hide by default */
 }
 
-
 .progress-bar::before {
     content: '';
     position: absolute;
@@ -68,18 +67,19 @@ h2 {
     margin: 0 auto;
     position: relative;
     z-index: 4;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
     line-height: 24px;
     font-size: 16px;
     color: #666;
     font-weight: bold;
-    text-align: center;
+    text-align: center;    
 }
 
 .step-active::before {
     content: '✓';
     background-color: #4caf50;
     color: #fff;
+    box-shadow: 0 0 0 4px rgb(27, 122, 0); /* Outer green border with a gap */
 }
 
 .step .step-counter {

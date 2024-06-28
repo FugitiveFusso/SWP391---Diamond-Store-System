@@ -10,6 +10,18 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" href="css/navbar.css">
+        <link rel="stylesheet" href="css/staff_details.css">
+        <script src="https://unpkg.com/@phosphor-icons/web"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        
     </head>
     <body>
         <div class="menu-btn">
@@ -24,19 +36,19 @@
                     <i class="fa-solid fa-xmark"></i>
                 </div>
                 <img src="images/Screenshot (656).png">
-                <h1>${sessionScope.deliverystaffsession.lastname} ${sessionScope.deliverystaffsession.firstname}</h1>
+                <h1>${sessionScope.salessession.lastname} ${sessionScope.salessession.firstname}</h1>
             </header>
 
-            <div class="menu">                             
+            <div class="menu">               
+                <div class="item"><a href="DeliveryStaffOrderController"><i class="fas fa-layer-group"></i>Delivery Order</a></div>
                 <div class="item"><a href="deliverystaffaccount.jsp"><i class="fas fa-user"></i>Account</a></div>
                 <div class="item"><a href="deliverystafflogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
-
             </div>
         </div>
 
     <div class="list-container">
         <div class="smaller-container">
-            <div class="list1">
+<!--            <div class="list1">
                 <div class="list-intro-left">
                     <div class="left-icon">
                         <i class='bx bx-diamond'></i>
@@ -54,13 +66,13 @@
                         </button>
                     </form>
                 </div>
-            </div>
+            </div>-->
 
             <!--<jsp:include page="/menu.jsp" flush="true" />-->
             <div class="container d-flex justify-content-center align-items-center">
                 <div class="text-center">
                     <h1 style="font-size: 50px; font-weight: 700">Customer Details</h1>
-                    <p>Login username: ${sessionScope.adminsession.username}</p>
+                    <p>Login username: ${sessionScope.deliverystaffsession.firstname}</p>
                 </div>
             </div>
 
@@ -114,7 +126,7 @@
                                             </div>
                                             <div class="row" style="margin-top: 20px; justify-content: center">
                                                 <div class="col-sm-4">
-                                                    <form action="CustomerController" style="padding-top: 10px">
+                                                    <form action="DeliveryStaffOrderController" style="padding-top: 10px">
                                                         <input type=hidden name="action" value="list">
                                                         <button type="submit" class="btn btn-custom">Return</button></form>
                                                 </div>
@@ -128,9 +140,9 @@
                 </div>
             </div>
 
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
-                    integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
-            crossorigin="anonymous"></script>
-            <script src="js/sidenav.js"></script>
+            <script src="js/pagination.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+                                                        integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+        crossorigin="anonymous"></script>
+        <script src="js/sidenav.js"></script>
             </body>
             </html>
