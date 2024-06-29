@@ -1,8 +1,3 @@
-<%-- 
-    Document   : salesstaff_customerdetails
-    Created on : Jun 21, 2024, 10:04:16 AM
-    Author     : Dell
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

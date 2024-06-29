@@ -56,8 +56,6 @@
             </div>
         </div>
 
-        <!--<jsp:include page="/menu.jsp" flush="true" />-->
-
         <div class="container d-flex justify-content-center align-items-center">
             <div class="text-center">
                 <h1 style="font-size: 50px; font-weight: 700">Delivery Staff Details</h1>

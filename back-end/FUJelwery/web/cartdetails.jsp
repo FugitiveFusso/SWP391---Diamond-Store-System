@@ -1,8 +1,3 @@
-<%-- 
-    Document   : cartdetails
-    Created on : Jun 13, 2024, 7:18:39 AM
-    Author     : Dell
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

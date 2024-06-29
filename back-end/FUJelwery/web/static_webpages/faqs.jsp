@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Frequently Asked Questions</title>
         <link rel="stylesheet" href="../css/faqs.css">
-         <link
+        <link
             href="https://fonts.googleapis.com/css2?family=Gantari:ital,wght@0,100..900;1,100..900&family=Inika:wght@400;700&family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:wght@100..900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Syne:wght@400..800&display=swap"
             rel="stylesheet">
 
@@ -25,7 +25,6 @@
     </head>
 
     <body>
-
         <div class="header">
             <div class="header-top">
                 <div class="top-info-left">
@@ -60,7 +59,7 @@
                         <div class="sub-menu-1">
                             <ul>
                                 <li><a href='../OrderController?action=list&id=${sessionScope.usersession.userid}'>Cart</a></li>
-                                <li><a href='../BillController?action=list&id=${sessionScope.usersession.userid}'>Bill</a></li>
+                                <li><a href='../BillController?action=list&id=${sessionScope.usersession.userid}'>Tracking Orders</a></li>
                             </ul>
                         </div>
                     </li>
@@ -79,8 +78,8 @@
                         <a href="../user_accountdetails.jsp" class="line">Account</a>
                         <div class="sub-menu-1">
                             <ul>
-                                <li><a href='../userlogin?action=logout'>Logout</a></li> 
                                 <li><a href='../HistoryController?action=list&id=${sessionScope.usersession.userid}'>History</a></li>
+                                <li><a href='../userlogin?action=logout'>Logout</a></li> 
                             </ul>
                         </div>
                     </li>

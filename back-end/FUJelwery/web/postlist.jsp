@@ -1,7 +1,6 @@
 
 <%@page import="com.khac.swp.fuj.posts.PostDTO"%>
 <%@page import="java.util.List"%>
-<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -53,8 +52,6 @@
 
             </div>
         </div>
-
-        <!--<jsp:include page="/menu.jsp" flush="true" />-->
 
 
         <div class="list-container">

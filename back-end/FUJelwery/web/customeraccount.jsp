@@ -17,9 +17,6 @@
     </head>
     <body>
 
-        
-        <%@ include file="/managermenu.jsp" %>
-
         Login user: ${sessionScope.usersession.username}
        <div class="container">
             <div class="padding">

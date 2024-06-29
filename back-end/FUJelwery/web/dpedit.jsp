@@ -38,8 +38,6 @@
         </script>
     </head>
     <body>
-        <!--<%@ include file="/salesmenu.jsp" %>-->
-
         <div class="menu-btn">
             <div class="btn-cover">
                 <i class="fas fa-bars"></i>

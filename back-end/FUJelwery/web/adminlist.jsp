@@ -20,7 +20,6 @@
     </head>
     <body>
 
-        <!--<%@ include file="/menu.jsp" %>-->
 
         <div class="menu-btn">
             <div class="btn-cover">

@@ -21,9 +21,7 @@
 
 
     </head>
-    <body>
-        <!--<jsp:include page="/menu.jsp" flush="true" />-->
-        
+    <body>        
         <div class="menu-btn">
             <div class="btn-cover">
                 <i class="fas fa-bars"></i>
@@ -53,7 +51,7 @@
                 </div>
 
                 <div class="item"><a href="PostController"><i class="fas fa-file"></i>Posts</a></div>
-                
+
                 <div class="item"><a href="adminaccount.jsp"><i class="fas fa-user"></i>Account</a></div>
                 <div class="item"><a href="adminlogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
 
@@ -178,9 +176,9 @@
 
         <script src="js/showPasswordFunc.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
-                        integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
-                crossorigin="anonymous"></script>
-                <script src="js/sidenav.js"></script>
+                integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+        crossorigin="anonymous"></script>
+        <script src="js/sidenav.js"></script>
 
     </body>
 </html>

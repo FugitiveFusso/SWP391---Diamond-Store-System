@@ -51,7 +51,7 @@
                         <div class="sub-menu-1">
                             <ul>
                                 <li><a href='OrderController?action=list&id=${sessionScope.usersession.userid}'>Cart</a></li>
-                                <li><a href='BillController?action=list&id=${sessionScope.usersession.userid}'>Bill</a></li>
+                                <li><a href='BillController?action=list&id=${sessionScope.usersession.userid}'>Tracking Orders</a></li>
                             </ul>
                         </div>
                     </li>
@@ -69,7 +69,7 @@
                     <li class="navbar-link">
                         <a href="user_accountdetails.jsp" class="line">Account</a>
                         <div class="sub-menu-1">
-                            <ul>
+                            <ul>                               
                                 <li><a href='HistoryController?action=list&id=${sessionScope.usersession.userid}'>History</a></li>
                                 <li><a href='./userlogin?action=logout'>Logout</a></li> 
                             </ul>
@@ -89,7 +89,7 @@
                     <div class="description_hero">
                         <span>Explore our exquisite collection of rings, designed to capture the essence of elegance and style. From sparkling diamonds to vibrant gemstones, our rings are crafted with precision and passion. Whether you're searching for a timeless engagement ring, a chic statement piece, or a meaningful gift, our diverse selection offers something for everyone. Let our rings adorn your moments with beauty and grace.</span>
                     </div>
-                    
+
                 </div>
                 <div class="bannerImage">
                     <img src="images/Blue_Nile_Studio.webp" id="diamondHero" style="width: 432px; height: 432px">

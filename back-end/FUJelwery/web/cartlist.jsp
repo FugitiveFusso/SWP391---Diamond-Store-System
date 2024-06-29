@@ -18,7 +18,6 @@
 
     </head>
     <body style="background-color: #f1f1f1;">
-        <%--<%@ include file="/productmenu.jsp" %>--%>
 
         <div class="header">
             <div class="header-top">
@@ -56,7 +55,7 @@
                         <div class="sub-menu-1">
                             <ul>
                                 <li><a href='OrderController?action=list&id=${sessionScope.usersession.userid}'>Cart</a></li>
-                                <li><a href='BillController?action=list&id=${sessionScope.usersession.userid}'>Bill</a></li>
+                                <li><a href='BillController?action=list&id=${sessionScope.usersession.userid}'>Tracking Orders</a></li>
                             </ul>
                         </div>
                     </li>
@@ -74,7 +73,7 @@
                     <li class="navbar-link">
                         <a href="user_accountdetails.jsp" class="line">Account</a>
                         <div class="sub-menu-1">
-                            <ul>
+                            <ul>                               
                                 <li><a href='HistoryController?action=list&id=${sessionScope.usersession.userid}'>History</a></li>
                                 <li><a href='./userlogin?action=logout'>Logout</a></li> 
                             </ul>
@@ -186,7 +185,7 @@
                                     <input name="action" value="purchase" type="hidden">
                                     <input type="hidden" name="userid" value="${sessionScope.usersession.userid}">
                                     <div class="form-group text-right">
-                                        <button type="button" id="purchaseButton"" class="btn btn-primary btn-large">
+                                        <button type="button" id="purchaseButton" class="btn btn-primary btn-large">
                                             <i class="fa fa-shopping-cart"></i> Purchase
                                         </button>
                                     </div>

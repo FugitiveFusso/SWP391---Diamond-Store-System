@@ -1,1 +1,0 @@
-<a href='CustomerController'>Customer List</a>|<a href='AdminController'>Administration List</a>|<a href='DeliveryStaffController'>Delivery Staff List</a>|<a href='SalesController'>Sales Staff List</a>|<a href='ManagerController'>Manager List</a>|<a href='PostController'>Post List</a>|<a href='adminlogin?action=logout'>Logout</a>|<a href='adminaccount.jsp'>Account</a>

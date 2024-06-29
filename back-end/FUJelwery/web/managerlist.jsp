@@ -53,8 +53,6 @@
             </div>
         </div>
 
-        <!--<jsp:include page="/menu.jsp" flush="true" />-->
-
         <div class="list-container">
             <div class="smaller-container">
                 <div class="list1">

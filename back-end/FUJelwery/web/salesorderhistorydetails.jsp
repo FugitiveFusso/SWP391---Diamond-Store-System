@@ -1,8 +1,3 @@
-<%-- 
-    Document   : salesorderdetails
-    Created on : Jun 13, 2024, 9:39:28 PM
-    Author     : Dell
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

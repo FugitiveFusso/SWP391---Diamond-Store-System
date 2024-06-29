@@ -65,7 +65,6 @@
                 return true;
             }
         </script>
-        <!--<%@ include file="/salesmenu.jsp" %>-->
 
         <div class="menu-btn">
             <div class="btn-cover">

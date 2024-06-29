@@ -1,4 +1,3 @@
-
 <%@page import="java.util.List"%>
 <%@page import="com.khac.swp.fuj.users.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -19,9 +18,6 @@
 
     </head>
     <body>
-
-
-        <!--<jsp:include page="/menu.jsp" flush="true" />-->
 
         <div class="menu-btn">
             <div class="btn-cover">

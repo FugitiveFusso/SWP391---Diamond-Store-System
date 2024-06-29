@@ -56,7 +56,6 @@
 
     </head>
     <body>
-        <!--<%@ include file="/salesmenu.jsp" %>-->
 
         <div class="menu-btn">
             <div class="btn-cover">

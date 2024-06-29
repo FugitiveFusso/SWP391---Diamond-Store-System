@@ -142,7 +142,7 @@
                                     <div class="panel">
                                         <div class="panel-body">
                                             <table class="order-history-table">
-                                                <caption>Order History</caption>
+                                                <caption>Store Received Orders</caption>
                                                 <tr>
                                                     <th>Order ID</th>
                                                     <th>Ring Name</th>
@@ -176,7 +176,7 @@
                                     <div class="panel">
                                         <div class="panel-body">
                                             <table class="delivery-history-table">
-                                                <caption>Delivery History</caption>
+                                                <caption>Delivery Orders</caption>
                                                 <tr>
                                                     <th>Order ID</th>
                                                     <th>Ring Name</th>

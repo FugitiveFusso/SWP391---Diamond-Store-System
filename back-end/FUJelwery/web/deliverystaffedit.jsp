@@ -21,9 +21,7 @@
         <script defer src="./js/inputFormat.js"></script>
 
     </head>
-    <body>
-        <!--<jsp:include page="/menu.jsp" flush="true" />-->
-        
+    <body>        
         <div class="menu-btn">
             <div class="btn-cover">
                 <i class="fas fa-bars"></i>

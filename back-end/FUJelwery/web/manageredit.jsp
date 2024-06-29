@@ -21,7 +21,6 @@
 
     </head>
     <body>
-        <!--<jsp:include page="/menu.jsp" flush="true" />-->
 
         <div class="menu-btn">
             <div class="btn-cover">

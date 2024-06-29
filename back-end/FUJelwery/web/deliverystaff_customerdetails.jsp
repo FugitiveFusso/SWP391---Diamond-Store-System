@@ -1,9 +1,3 @@
-<%-- 
-    Document   : salesstaff_customerdetails
-    Created on : Jun 21, 2024, 10:04:16 AM
-    Author     : Dell
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -67,8 +61,6 @@
                     </form>
                 </div>
             </div>-->
-
-            <!--<jsp:include page="/menu.jsp" flush="true" />-->
             <div class="container d-flex justify-content-center align-items-center">
                 <div class="text-center">
                     <h1 style="font-size: 50px; font-weight: 700">Customer Details</h1>

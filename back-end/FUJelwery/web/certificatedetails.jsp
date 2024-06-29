@@ -65,9 +65,7 @@
 
         </style>
     </head>
-    <body>
-        <!--<%@ include file="/salesmenu.jsp" %>-->
-        
+    <body>        
         <div class="menu-btn">
             <div class="btn-cover">
                 <i class="fas fa-bars"></i>

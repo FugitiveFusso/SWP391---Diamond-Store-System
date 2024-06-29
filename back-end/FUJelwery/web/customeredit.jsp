@@ -7,7 +7,6 @@
         <title>Customer Edit Page</title>
     </head>
     <body>
-        <jsp:include page="/menu.jsp" flush="true" />
 
         <h1>Customer Edit </h1>
         <p> Login user: ${sessionScope.adminsession.username}</p>

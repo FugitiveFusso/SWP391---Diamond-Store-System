@@ -18,9 +18,6 @@
     </head>
     <body>
 
-
-        <!--<%@ include file="/menu.jsp" %>-->
-
         <div class="menu-btn">
             <div class="btn-cover">
                 <i class="fas fa-bars"></i>

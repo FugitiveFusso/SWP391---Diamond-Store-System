@@ -54,7 +54,7 @@
                         <div class="sub-menu-1">
                             <ul>
                                 <li><a href='../OrderController?action=list&id=${sessionScope.usersession.userid}'>Cart</a></li>
-                                <li><a href='../BillController?action=list&id=${sessionScope.usersession.userid}'>Bill</a></li>
+                                <li><a href='../BillController?action=list&id=${sessionScope.usersession.userid}'>Tracking Orders</a></li>
                             </ul>
                         </div>
                     </li>
@@ -73,13 +73,12 @@
                         <a href="../user_accountdetails.jsp" class="line">Account</a>
                         <div class="sub-menu-1">
                             <ul>
-                                <li><a href='../userlogin?action=logout'>Logout</a></li> 
                                 <li><a href='../HistoryController?action=list&id=${sessionScope.usersession.userid}'>History</a></li>
+                                <li><a href='../userlogin?action=logout'>Logout</a></li> 
                             </ul>
                         </div>
                     </li>
                 </ul>
-
             </div>
         </div>
 

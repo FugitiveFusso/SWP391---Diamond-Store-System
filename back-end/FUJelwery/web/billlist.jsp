@@ -15,7 +15,6 @@
 
     </head>
     <body>
-        <%--<%@ include file="/productmenu.jsp" %>--%>
 
         <div class="menu">
             <ul class="navbar">

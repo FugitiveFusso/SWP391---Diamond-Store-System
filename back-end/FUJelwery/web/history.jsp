@@ -12,8 +12,6 @@
         <link rel="stylesheet" href="css/navigation_bar.css">
     </head>
     <body>
-
-
         <div class="header">
             <div class="header-top">
                 <div class="top-info-left">
@@ -50,7 +48,7 @@
                         <div class="sub-menu-1">
                             <ul>
                                 <li><a href='OrderController?action=list&id=${sessionScope.usersession.userid}'>Cart</a></li>
-                                <li><a href='BillController?action=list&id=${sessionScope.usersession.userid}'>Bill</a></li>
+                                <li><a href='BillController?action=list&id=${sessionScope.usersession.userid}'>Tracking Orders</a></li>
                             </ul>
                         </div>
                     </li>
@@ -68,7 +66,7 @@
                     <li class="navbar-link">
                         <a href="user_accountdetails.jsp" class="line">Account</a>
                         <div class="sub-menu-1">
-                            <ul>
+                            <ul>                               
                                 <li><a href='HistoryController?action=list&id=${sessionScope.usersession.userid}'>History</a></li>
                                 <li><a href='./userlogin?action=logout'>Logout</a></li> 
                             </ul>
@@ -137,7 +135,7 @@
                                     <div class="panel">
                                         <div class="panel-body">
                                             <table class="delivery-history-table">
-                                                <caption>Purchase History</caption>
+                                                <caption>Purchase Records</caption>
                                                 <tr>
                                                     <th>Order ID</th>
                                                     <th>Ring Name</th>

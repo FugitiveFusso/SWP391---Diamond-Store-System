@@ -1,5 +1,3 @@
-
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -23,7 +21,6 @@
 
     </head>
     <body>
-        <!--<jsp:include page="/menu.jsp" flush="true" />-->
         
         <div class="menu-btn">
             <div class="btn-cover">
