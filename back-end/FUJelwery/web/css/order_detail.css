@@ -1,0 +1,167 @@
+body{
+    margin: 0;
+    overflow-x: hidden;
+    background-color: #fff !important;
+    padding: 0;
+}
+
+.header-bottom{
+    margin: -16px;
+}
+
+.header-top ul li{
+    line-height: 1;
+}
+
+.container-fluid {
+    margin-top: 80px !important;
+    margin-bottom: 80px !important;
+}
+
+p {
+    font-size: 14px;
+    margin-bottom: 7px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.bold{
+    font-weight: 600;
+}
+
+.small{
+    font-size: 12px !important;
+    letter-spacing: 0.5px !important;
+}
+
+.Today{
+    color: rgb(83, 83, 83);
+}
+
+.btn-outline-primary{
+    background-color: #fff !important;
+    color:#4bb8a9 !important;
+    border:1.3px solid #4bb8a9;
+    font-size: 12px;
+    border-radius: 0.4em !important;
+}
+
+.btn-outline-primary:hover{
+    background-color:#4bb8a9  !important;
+    color:#fff !important;
+    border:1.3px solid #4bb8a9;
+}
+
+.btn-outline-primary:focus,
+.btn-outline-primary:active {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: #42A5F5 !important;
+}
+
+.btn-container {
+    display: flex;
+    gap: 10px; /* Space between buttons */
+}
+.btn a {
+    color: inherit; /* Ensure the link inherits the button's text color */
+    text-decoration: none; /* Remove underline from the link */
+}
+
+.bordered-img {
+    border: 1px solid #ccc; /* Add a light gray border */
+}
+
+.card {
+    background-color: #fff;
+    box-shadow: 2px 4px 15px 0px rgb(211, 211, 211);
+    z-index: 0;
+}
+
+.order-card {
+    max-width: 800px;
+    margin: 0 auto;
+}
+.card-header, .card-body {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.order-card img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+}
+
+small{
+    font-size: 12px !important;
+}
+
+.a {
+    justify-content: space-between !important;
+}
+
+.border-line {
+    border-right: 1px solid rgb(226, 206, 226)
+}
+
+.footer {
+    background-color: black;
+    color: #fefefe;
+    position: relative;
+    width: 100%;
+    bottom: 0;
+}
+
+.info{
+    padding-left: 100px;
+}
+
+.info img{
+    width: 80px;
+    height: 80px;
+}
+
+.info-text p{
+    color: white;
+    font-size: 16px;
+    font-family: 'Raleway', sans-serif !important; 
+}
+
+.footer-content{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 30px 0;
+}
+
+.customer-service{   
+    padding-top: 30px;
+    padding-left: 400px;
+}
+
+.customer-service-title{
+    font-family: 'Raleway', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 20px;
+    color: white;
+}
+
+.footer .footer-content a {
+    text-decoration: none;
+    color: #fefefe;
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;  
+}
+
+.policy{
+    padding-top: 30px;
+    padding-right: 100px;
+}
+
+.policy-title{
+    font-family: 'Raleway', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 20px;
+    color: white;
+}

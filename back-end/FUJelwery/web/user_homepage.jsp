@@ -84,9 +84,9 @@
                     <li class="navbar-link">
                         <a href="user_accountdetails.jsp" class="line">Account</a>
                         <div class="sub-menu-1">
-                            <ul>
-                                <li><a href='./userlogin?action=logout'>Logout</a></li> 
+                            <ul>                               
                                 <li><a href='HistoryController?action=list&id=${sessionScope.usersession.userid}'>History</a></li>
+                                <li><a href='./userlogin?action=logout'>Logout</a></li> 
                             </ul>
                         </div>
                     </li>
@@ -252,9 +252,9 @@
                 popup.style.opacity = '0';
                 popup.addEventListener('animationend', function () {
                     popup.style.visibility = 'hidden';
+                    location.reload();  // Reload the page
                 }, {once: true});
             }
-
-        </script>                   
+        </script>               
     </body>
 </html>
