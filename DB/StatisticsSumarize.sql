@@ -80,3 +80,27 @@ FROM DiamondPrice dp WHERE dp.isDeleted = 'active'
 SELECT totalDiamondsPrice, FORMAT(averagePrice, 'N0') AS averagePrice, FORMAT(highestPrice, 'N0') AS highestPrice, FORMAT(lowestPrice, 'N0') AS lowestPrice, 
 activeDiamondsPrice, deletedDiamondsPrice, allDiamondSizes, allCaratWeights, allColors, allClarities FROM DiamondStats;
 
+-- Diamonds
+WITH DiamondUsage AS (
+    SELECT
+        d.diamondID,
+        d.diamondName,
+        CASE WHEN r.ringID IS NOT NULL THEN 'Used' ELSE 'Not Used' END AS usageStatus,
+        d.isDeleted
+    FROM
+        Diamond d
+        LEFT JOIN Ring r ON d.diamondID = r.diamondID
+)
+SELECT
+    COUNT(*) AS totalDiamonds,
+    SUM(CASE WHEN isDeleted = 'active' THEN 1 ELSE 0 END) AS activeDiamonds,
+    SUM(CASE WHEN isDeleted = 'deleted' THEN 1 ELSE 0 END) AS deletedDiamonds,
+    SUM(CASE WHEN usageStatus = 'Used' THEN 1 ELSE 0 END) AS diamondsUsedInRing,
+    SUM(CASE WHEN usageStatus = 'Not Used' THEN 1 ELSE 0 END) AS diamondsNotUsedInRing,
+    ROUND(CAST(SUM(CASE WHEN usageStatus = 'Used' THEN 1 ELSE 0 END) AS FLOAT) / COUNT(*) * 100, 2) AS percentageDiamondsUsed,
+    ROUND(CAST(SUM(CASE WHEN usageStatus = 'Not Used' THEN 1 ELSE 0 END) AS FLOAT) / COUNT(*) * 100, 2) AS percentageDiamondsNotUsed,
+    STRING_AGG(CASE WHEN usageStatus = 'Not Used' AND isDeleted = 'active' THEN CAST(diamondID AS VARCHAR) ELSE NULL END, ', ') AS activeDiamondsNotUsedList,
+    STRING_AGG(CASE WHEN usageStatus = 'Used' AND isDeleted = 'active' THEN CAST(diamondID AS VARCHAR) ELSE NULL END, ', ') AS activeDiamondsUsedList
+FROM
+    DiamondUsage;
+

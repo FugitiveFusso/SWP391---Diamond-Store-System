@@ -121,7 +121,7 @@ public class DiamondDAO {
                 return diamond;
             }
         } catch (SQLException ex) {
-            System.out.println("Query User error!" + ex.getMessage());
+            System.out.println("Query Diamonds error!" + ex.getMessage());
             ex.printStackTrace();
         }
         return null;
@@ -235,6 +235,71 @@ public class DiamondDAO {
             }
         } catch (SQLException ex) {
             System.out.println("Query User error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public DiamondDTO loadStatistics() {
+
+        String sql = "WITH DiamondUsage AS (\n"
+                + "    SELECT\n"
+                + "        d.diamondID,\n"
+                + "        d.diamondName,\n"
+                + "        CASE WHEN r.ringID IS NOT NULL THEN 'Used' ELSE 'Not Used' END AS usageStatus,\n"
+                + "        d.isDeleted\n"
+                + "    FROM\n"
+                + "        Diamond d\n"
+                + "        LEFT JOIN Ring r ON d.diamondID = r.diamondID\n"
+                + ")\n"
+                + "SELECT\n"
+                + "    COUNT(*) AS totalDiamonds,\n"
+                + "    SUM(CASE WHEN isDeleted = 'active' THEN 1 ELSE 0 END) AS activeDiamonds,\n"
+                + "    SUM(CASE WHEN isDeleted = 'deleted' THEN 1 ELSE 0 END) AS deletedDiamonds,\n"
+                + "    SUM(CASE WHEN usageStatus = 'Used' THEN 1 ELSE 0 END) AS diamondsUsedInRing,\n"
+                + "    SUM(CASE WHEN usageStatus = 'Not Used' THEN 1 ELSE 0 END) AS diamondsNotUsedInRing,\n"
+                + "    ROUND(CAST(SUM(CASE WHEN usageStatus = 'Used' THEN 1 ELSE 0 END) AS FLOAT) / COUNT(*) * 100, 2) AS percentageDiamondsUsed,\n"
+                + "    ROUND(CAST(SUM(CASE WHEN usageStatus = 'Not Used' THEN 1 ELSE 0 END) AS FLOAT) / COUNT(*) * 100, 2) AS percentageDiamondsNotUsed,\n"
+                + "    STRING_AGG(CASE WHEN usageStatus = 'Not Used' AND isDeleted = 'active' THEN CAST(diamondID AS VARCHAR) ELSE NULL END, ', ') AS activeDiamondsNotUsedList,\n"
+                + "    STRING_AGG(CASE WHEN usageStatus = 'Used' AND isDeleted = 'active' THEN CAST(diamondID AS VARCHAR) ELSE NULL END, ', ') AS activeDiamondsUsedList\n"
+                + "FROM\n"
+                + "    DiamondUsage;";
+
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                int totalDiamonds = rs.getInt("totalDiamonds");
+                int activeDiamonds = rs.getInt("activeDiamonds");
+                int deletedDiamonds = rs.getInt("deletedDiamonds");
+                int diamondsUsedInRing = rs.getInt("diamondsUsedInRing");
+                int diamondsNotUsedInRing = rs.getInt("diamondsNotUsedInRing");
+
+                double percentageDiamondsUsed = rs.getDouble("percentageDiamondsUsed");
+                double percentageDiamondsNotUsed = rs.getDouble("percentageDiamondsNotUsed");
+
+                String activeDiamondsNotUsedList = rs.getString("activeDiamondsNotUsedList");
+                String activeDiamondsUsedList = rs.getString("activeDiamondsUsedList");
+
+
+                DiamondDTO diamond = new DiamondDTO();
+                diamond.setTotalDiamonds(totalDiamonds);
+                diamond.setActiveDiamonds(activeDiamonds);
+                diamond.setDeletedDiamonds(deletedDiamonds);
+                diamond.setDiamondsUsedInRing(diamondsUsedInRing);
+                diamond.setDiamondsNotUsedInRing(diamondsNotUsedInRing);
+                diamond.setPercentageDiamondsUsed(percentageDiamondsUsed);
+                diamond.setPercentageDiamondsNotUsed(percentageDiamondsNotUsed);
+                diamond.setDiamondsUsedListbyID(activeDiamondsUsedList);
+                diamond.setDiamondsNotUsedListByID(activeDiamondsNotUsedList);
+                return diamond;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Query Diamonds error!" + ex.getMessage());
             ex.printStackTrace();
         }
         return null;

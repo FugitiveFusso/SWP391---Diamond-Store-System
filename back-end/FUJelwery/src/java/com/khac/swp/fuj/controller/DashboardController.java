@@ -11,6 +11,8 @@ import com.khac.swp.fuj.certificate.CertificateDAO;
 import com.khac.swp.fuj.certificate.CertificateDTO;
 import com.khac.swp.fuj.collection.CollectionDAO;
 import com.khac.swp.fuj.collection.CollectionDTO;
+import com.khac.swp.fuj.diamond.DiamondDAO;
+import com.khac.swp.fuj.diamond.DiamondDTO;
 import com.khac.swp.fuj.diamondprice.DiamondPriceDAO;
 import com.khac.swp.fuj.diamondprice.DiamondPriceDTO;
 import com.khac.swp.fuj.posts.PostDAO;
@@ -75,6 +77,9 @@ public class DashboardController extends HttpServlet {
                 DiamondPriceDAO diamondPriceDao = new DiamondPriceDAO();
                 DiamondPriceDTO diamondPrice = diamondPriceDao.loadStatistics();
                 request.setAttribute("diamondprice", diamondPrice);
+                DiamondDAO diamondDao = new DiamondDAO();
+                DiamondDTO diamond = diamondDao.loadStatistics();
+                request.setAttribute("diamond", diamond);
                 request.getRequestDispatcher("/dashboard.jsp").forward(request, response);
 
             }

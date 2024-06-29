@@ -300,6 +300,17 @@
             <strong>All Colors: ${requestScope.diamondprice.allColors}</strong>
             <strong>All Clarities: ${requestScope.diamondprice.allClarities}</strong>
 
+            <h1>Diamond Statistics</h1>
+            <strong>Total Diamonds: ${requestScope.diamond.totalDiamonds}</strong>
+            <strong>Active Diamonds: ${requestScope.diamond.activeDiamonds}</strong>
+            <strong>Deleted Diamonds: ${requestScope.diamond.deletedDiamonds}</strong>
+            <strong>Diamonds Used In Ring: ${requestScope.diamond.diamondsUsedInRing}</strong>
+            <strong>Diamonds Unused In Ring: ${requestScope.diamond.diamondsNotUsedInRing}</strong>
+            <strong>Percentage Diamonds Used: ${requestScope.diamond.percentageDiamondsUsed}%</strong>
+            <strong>Percentage Diamonds Not Used: ${requestScope.diamond.percentageDiamondsNotUsed}%</strong>
+            <strong>Diamonds Not Used List By ID: ${requestScope.diamond.diamondsNotUsedListByID}</strong>         
+            <strong>Diamonds Used List By ID: ${requestScope.diamond.diamondsUsedListbyID}</strong>
+
         </div>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"

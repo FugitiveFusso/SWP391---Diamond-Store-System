@@ -14,6 +14,15 @@ public class DiamondDTO {
     private String clarity;
     private String cut;
     private String diamondPrice;
+    private int totalDiamonds;
+    private int activeDiamonds;
+    private int deletedDiamonds;
+    private int diamondsUsedInRing;
+    private int diamondsNotUsedInRing;
+    private double percentageDiamondsUsed;
+    private double percentageDiamondsNotUsed;
+    private String diamondsNotUsedListByID;
+    private String diamondsUsedListbyID;
 
     public int getDiamondID() {
         return diamondID;
@@ -111,6 +120,81 @@ public class DiamondDTO {
         this.diamondPrice = diamondPrice;
     }
 
-    
+    public int getTotalDiamonds() {
+        return totalDiamonds;
+    }
 
+    public void setTotalDiamonds(int totalDiamonds) {
+        this.totalDiamonds = totalDiamonds;
+    }
+
+    public int getActiveDiamonds() {
+        return activeDiamonds;
+    }
+
+    public void setActiveDiamonds(int activeDiamonds) {
+        this.activeDiamonds = activeDiamonds;
+    }
+
+    public int getDeletedDiamonds() {
+        return deletedDiamonds;
+    }
+
+    public void setDeletedDiamonds(int deletedDiamonds) {
+        this.deletedDiamonds = deletedDiamonds;
+    }
+
+    public int getDiamondsUsedInRing() {
+        return diamondsUsedInRing;
+    }
+
+    public void setDiamondsUsedInRing(int diamondsUsedInRing) {
+        this.diamondsUsedInRing = diamondsUsedInRing;
+    }
+
+    public int getDiamondsNotUsedInRing() {
+        return diamondsNotUsedInRing;
+    }
+
+    public void setDiamondsNotUsedInRing(int diamondsNotUsedInRing) {
+        this.diamondsNotUsedInRing = diamondsNotUsedInRing;
+    }
+
+    public double getPercentageDiamondsUsed() {
+        return percentageDiamondsUsed;
+    }
+
+    public void setPercentageDiamondsUsed(double percentageDiamondsUsed) {
+        this.percentageDiamondsUsed = percentageDiamondsUsed;
+    }
+
+    public double getPercentageDiamondsNotUsed() {
+        return percentageDiamondsNotUsed;
+    }
+
+    public void setPercentageDiamondsNotUsed(double percentageDiamondsNotUsed) {
+        this.percentageDiamondsNotUsed = percentageDiamondsNotUsed;
+    }
+
+    public String getDiamondsNotUsedListByID() {
+        return diamondsNotUsedListByID;
+    }
+
+    public void setDiamondsNotUsedListByID(String diamondsNotUsedListByID) {
+        this.diamondsNotUsedListByID = diamondsNotUsedListByID;
+    }
+
+    public String getDiamondsUsedListbyID() {
+        return diamondsUsedListbyID;
+    }
+
+    public void setDiamondsUsedListbyID(String diamondsUsedListbyID) {
+        this.diamondsUsedListbyID = diamondsUsedListbyID;
+    }
+
+    @Override
+    public String toString() {
+        return "DiamondDTO{" + "diamondID=" + diamondID + ", diamondName=" + diamondName + ", diamondImage=" + diamondImage + ", origin=" + origin + ", dpID=" + dpID + ", certificateID=" + certificateID + ", diamondSize=" + diamondSize + ", caratWeight=" + caratWeight + ", color=" + color + ", clarity=" + clarity + ", cut=" + cut + ", diamondPrice=" + diamondPrice + ", totalDiamonds=" + totalDiamonds + ", activeDiamonds=" + activeDiamonds + ", deletedDiamonds=" + deletedDiamonds + ", diamondsUsedInRing=" + diamondsUsedInRing + ", diamondsNotUsedInRing=" + diamondsNotUsedInRing + ", percentageDiamondsUsed=" + percentageDiamondsUsed + ", percentageDiamondsNotUsed=" + percentageDiamondsNotUsed + ", diamondsNotUsedListByID=" + diamondsNotUsedListByID + ", diamondsUsedListbyID=" + diamondsUsedListbyID + '}';
+    }
+    
 }
