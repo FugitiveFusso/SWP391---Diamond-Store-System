@@ -5,17 +5,16 @@ body{
     padding: 0;
 }
 
+.container .my-5{
+    margin-top: -48px !important;
+}
+
 .header-bottom{
     margin: -16px;
 }
 
 .header-top ul li{
     line-height: 1;
-}
-
-.container-fluid {
-    margin-top: 80px !important;
-    margin-bottom: 80px !important;
 }
 
 p {
@@ -41,17 +40,16 @@ p {
 }
 
 .btn-outline-primary{
-    background-color: #fff !important;
-    color:#4bb8a9 !important;
-    border:1.3px solid #4bb8a9;
+    background-color: #151542 !important;
+    color:#fff !important;
     font-size: 12px;
     border-radius: 0.4em !important;
 }
 
 .btn-outline-primary:hover{
-    background-color:#4bb8a9  !important;
+    background-color:#15156b  !important;
     color:#fff !important;
-    border:1.3px solid #4bb8a9;
+    text-decoration: none;
 }
 
 .btn-outline-primary:focus,
@@ -66,7 +64,7 @@ p {
     gap: 10px; /* Space between buttons */
 }
 .btn a {
-    color: inherit; /* Ensure the link inherits the button's text color */
+    color: #fff; 
     text-decoration: none; /* Remove underline from the link */
 }
 

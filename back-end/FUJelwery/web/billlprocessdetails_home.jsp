@@ -4,10 +4,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Delivery Order Details</title>
+        <title>Delivery Order Details</title>      
         <link rel="stylesheet" href="css/navigation_bar.css">
         <link rel="stylesheet" href="css/order_detail.css">
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/progressbar.css">   
+         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     </head>
 
     <body>
@@ -75,8 +76,25 @@
             </div>
         </div>
 
-        <div class="container my-5">
-            <div class="order-card card">
+        <div class="progress-container" style="margin-top: 30px;">
+            <div class="progress-bar" style="background-color: #e0e0e0;"></div>
+            <div class="step" data-step="Purchased">
+                <div class="step-counter">Purchased</div>
+            </div>
+            <div class="step" data-step="Verified">
+                <div class="step-counter">Verified</div>
+            </div>
+            <div class="step" data-step="Shipping">
+                <div class="step-counter">Shipping</div>
+            </div>
+            <div class="step" data-step="Delivered">
+                <div class="step-counter">Delivered</div>
+            </div>
+        </div>    
+        <div id="status" style="display: none">${requestScope.bill.status}</div>
+
+        <div class="container my-5" style="margin-top: 0px !important;">
+            <div class="order-card card">               
                 <div class="card-header bg-white">
                     <div class="row justify-content-between">
                         <div class="col">                            
@@ -97,6 +115,7 @@
                             <p class="text-muted"> Quantity: 1 Ring</p>
                             <h4 class="mt-3 mb-4 font-weight-bold"> ${requestScope.bill.totalPrice} <span class="small text-muted"> VND </span></h4>
                             <p class="text-muted">Tracking Status: <span class="Today"><strong>${requestScope.bill.status}</strong></span></p>  
+                            <p class="text-muted" style="font-style: italic">* After the product has been verified, you can go to our store to get the product.</p>  
                             <div class="row justify-content-center">
                                 <div class="col-auto btn-container">
                                     <button type="button" class="btn btn-outline-primary">
@@ -112,32 +131,11 @@
                     </div>
                 </div>
                 <div class="row px-3">
-                    <!-- Additional content can go here -->
+
                 </div>               
             </div>
         </div>
-        <!--        <div class="container mt-4">
-                    <div class="row">
-        
-                        <div class="col-md-6">
-                            <div class="card">
-                                <img src="${requestScope.bill.ringImage}" class="card-img-top" alt="Voucher Image" style="height: 500px; object-fit: cover;">
-                            </div>
-                        </div>
-        
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="card-title" style="font-weight: 700">${requestScope.bill.ringName}</h4>
-                                    <p class="card-text"><strong>Status</strong> ${requestScope.bill.status}</p>
-                                    <p class="card-text"><strong>Date of purchase</strong> ${requestScope.bill.orderDate}</p>
-                                    <p class="card-text"><strong>Voucher:</strong> ${requestScope.bill.voucherName}</p>
-                                    <p class="card-text"><strong>Total Price:</strong> ${requestScope.bill.totalPrice}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>-->
+
         <div class="footer">
             <div class="footer-content">
                 <div class="info">
@@ -190,6 +188,7 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="js/progressbar.js"></script>
 
     </body>
 </html>

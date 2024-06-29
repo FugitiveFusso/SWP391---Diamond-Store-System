@@ -4,9 +4,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Received Order Details</title>
+        <title>Received Order Details</title>        
         <link rel="stylesheet" href="css/navigation_bar.css">
         <link rel="stylesheet" href="css/order_detail.css">
+        <link rel="stylesheet" href="css/progressbar.css">    
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     </head>
 
@@ -75,13 +76,27 @@
             </div>
         </div>
 
-        <div class="container my-5">
+        <div class="progress-container" style="margin-top: 30px;">
+            <div class="progress-bar" style="background-color: #e0e0e0;"></div>
+            <div class="step" data-step="Purchased">
+                <div class="step-counter">Purchased</div>
+            </div>
+            <div class="step" data-step="Verified">
+                <div class="step-counter">Verified</div>
+            </div>
+            <div class="step" data-step="Shipping">
+                <div class="step-counter">Received</div>
+            </div>            
+        </div>    
+        <div id="status" style="display: none">${requestScope.bill.status}</div>
+
+        <div class="container my-5" style="margin-top: 0px !important;">
             <div class="order-card card">
                 <div class="card-header bg-white">
                     <div class="row justify-content-between">
                         <div class="col">                            
-                            <p class="text-muted"> Placed On <span class="font-weight-bold text-dark">${requestScope.bill.orderDate}</span> </p>
-                            <p class="text-muted"> Order ID <span class="font-weight-bold text-dark">${bill.orderID}</span> </p>
+                            <p class="text-muted"> Placed On: <span class="font-weight-bold text-dark">${requestScope.bill.orderDate}</span> </p>
+                            <p class="text-muted"> Order ID: <span class="font-weight-bold text-dark">${bill.orderID}</span> </p>
                         </div>
                         <div class="flex-col my-auto">
                             <h6 class="ml-auto mr-3">
@@ -94,9 +109,10 @@
                     <div class="media flex-column flex-sm-row">
                         <div class="media-body">
                             <h5 class="font-weight-bold">${requestScope.bill.ringName}</h5>
-                            <p class="text-muted"> Qt: 1 Ring</p>
+                            <p class="text-muted"> Quantity: 1 Ring</p>
                             <h4 class="mt-3 mb-4 font-weight-bold"> ${requestScope.bill.totalPrice} <span class="small text-muted"> VND </span></h4>
                             <p class="text-muted">Tracking Status: <span class="Today"><strong>${requestScope.bill.status}</strong></span></p>  
+                            <p class="text-muted" style="font-style: italic">* After the product has been verified, you can go to our store to get the product.</p>  
                             <div class="row justify-content-center">
                                 <div class="col-auto btn-container">
                                     <button type="button" class="btn btn-outline-primary">
@@ -190,6 +206,7 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="js/progressbar_store.js"></script>
 
     </body>
 </html>
