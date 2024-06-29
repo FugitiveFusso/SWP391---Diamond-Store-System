@@ -118,7 +118,7 @@
                             <td>${salesorder.ringSize}</td>
                             <td>${salesorder.orderDate}</td>
                             <td>${salesorder.address}</td>
-                            <td>${salesorder.totalPrice}</td>
+                            <td>${salesorder.totalPrice} VND</td>
                             <td class="<%= "delivered".equals(salesorder.getStatus()) ? "status-verified" : "shipping".equals(salesorder.getStatus()) ? "status-shipping" : "received at store".equals(salesorder.getStatus()) ? "status-verified" : "status-default"%>">
                                 ${salesorder.status}
                             </td>

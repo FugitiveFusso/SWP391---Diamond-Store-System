@@ -100,34 +100,6 @@
                 </div>
                 <div class="profile-info col-md-9">
                     <div class="panel">
-                        <!--                        <div class="panel">
-                                                    <div class="bio-graph-heading">
-                                                        FUJ hope you have a great experience from using our service
-                                                    </div>
-                                                    <div class="panel-body bio-graph-info">
-                                                        <h1>Personal Details</h1>
-                                                        <div class="row">
-                                                            <div class="bio-row">
-                                                                <p><span>First Name </span>: ${sessionScope.usersession.lastname}</p>
-                                                            </div>
-                                                            <div class="bio-row">
-                                                                <p><span>Last Name </span>: ${sessionScope.usersession.firstname}</p>
-                                                            </div>
-                                                            <div class="bio-row">
-                                                                <p><span>Address </span>: ${sessionScope.usersession.address}</p>
-                                                            </div>
-                                                            <div class="bio-row">
-                                                                <p><span>Email </span>: ${sessionScope.usersession.email}</p>
-                                                            </div>
-                                                            <div class="bio-row">
-                                                                <p><span>Mobile </span>: ${sessionScope.usersession.phonenumber}</p>
-                                                            </div>
-                                                            <div class="bio-row">
-                                                                <p><span>Points </span>: ${sessionScope.usersession.point}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>-->
 
                         <div class="panel-body" style="border: none;">
                             <div class="row">

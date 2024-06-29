@@ -138,7 +138,7 @@
                                 <td>
                                     <input type="text" class="search" name="warrantyID" id="warrantyID_${salesorder.orderID}" placeholder="Enter Warranty ID" required>
                                 </td>
-                                <td>${salesorder.totalPrice}</td>
+                                <td>${salesorder.totalPrice} VND</td>
                                 <td>
                                     <button type="button" class="accept-btn" data-order-id="${salesorder.orderID}" data-warranty-id="warrantyID_${salesorder.orderID}">Accept</button>
                                 </td>
@@ -192,7 +192,7 @@
                                 <td>${salesorder.orderDate}</td>
                                 <td>${salesorder.address}</td>
                                 <td>${salesorder.warrantyName}</td>
-                                <td>${salesorder.totalPrice}</td>
+                                <td>${salesorder.totalPrice} VND</td>
                                 <td>
                                     <button type="button" class="received-btn" data-order-id="${salesorder.orderID}">Customer has received at store</button>
                                 </td>

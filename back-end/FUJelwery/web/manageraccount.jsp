@@ -35,7 +35,7 @@
                     <i class="fa-solid fa-xmark"></i>
                 </div>
                 <img src="images/Screenshot (656).png">
-                <h1>${requestScope.manager.lastname} ${requestScope.manager.firstname}</h1>
+                <h1>${sessionScope.managersession.lastname} ${sessionScope.managersession.firstname}</h1>
             </header>
 
             <div class="menu">
