@@ -83,7 +83,7 @@
                     <div class="panel">
                         <div class="user-heading round">
                             <a href="#">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="">
+                                <img src="images/man-user-circle-icon.webp" alt="">
                             </a>
                             <h1>${sessionScope.usersession.firstname} ${sessionScope.usersession.lastname}</h1>
                             <p>${sessionScope.usersession.email}</p>

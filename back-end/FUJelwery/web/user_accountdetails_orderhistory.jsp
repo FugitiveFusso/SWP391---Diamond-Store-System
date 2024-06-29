@@ -50,7 +50,7 @@
                         <div class="sub-menu-1">
                             <ul>
                                 <li><a href='OrderController?action=list&id=${sessionScope.usersession.userid}'>Cart</a></li>
-                                <li><a href='BillController?action=list&id=${sessionScope.usersession.userid}'>Bill</a></li>
+                                <li><a href='BillController?action=list&id=${sessionScope.usersession.userid}'>Tracking Orders</a></li>
                             </ul>
                         </div>
                     </li>
@@ -85,7 +85,7 @@
                     <div class="panel">
                         <div class="user-heading round">
                             <a href="#">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="">
+                                <img src="images/man-user-circle-icon.webp" alt="">
                             </a>
                             <h1>${sessionScope.usersession.firstname} ${sessionScope.usersession.lastname}</h1>
                             <p>${sessionScope.usersession.email}</p>
