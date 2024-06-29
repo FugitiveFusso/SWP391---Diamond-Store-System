@@ -50,12 +50,13 @@
                 <div class="list1">
                     <div class="list-intro-left">
                         <div class="left-icon">
-                            <i class='bx bxs-objects-vertical-bottom' ></i>
+                            <i class='bx bxs-objects-vertical-bottom'></i>
                         </div>
                         <div class="left-info">
                             <div class="list-title">Delivery Order History</div>
                             <div class="">List of Delivery Order History</div>
                         </div>
+
                     </div>
                 </div>
                 <div class="list">
@@ -63,37 +64,46 @@
                         <input name=keyword type=text class="search-input" value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
                         <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
                     </form>
-
-                    <table>
-                        <tr>
-                            <th>Order ID</th>
-                            <th>Username</th>
-                            <th>Ring Name</th>
-                            <th>Ring Size</th>
-                            <th>Date of Purchase</th>
-                            <th>Destination</th>
-                            <th>Total Price</th>
-                        </tr>
-                        <%
-                            List<OrderDTO> list = (List<OrderDTO>) request.getAttribute("deliveryhistory");
-                            for (OrderDTO deliveryorder : list) {
-                                pageContext.setAttribute("deliveryorder", deliveryorder);
-                        %>
-                        <tr>
-                            <td><a href="DeliveryHistory?action=historydetails&id=${deliveryorder.orderID}">${deliveryorder.orderID}</td>
-                            <td><a href="Delivery_Customer_Controller?action=details&id=${deliveryorder.userID}">${deliveryorder.userName}</a></td>
-                            <td>${deliveryorder.ringName}</td>
-                            <td>${deliveryorder.ringSize}</td>
-                            <td>${deliveryorder.orderDate}</td>
-                            <td>${deliveryorder.address}</td>
-                            <td>${deliveryorder.totalPrice}</td>
-                        </tr>
-                        <%
-                            }
-                        %>
-                    </table>
+                    <table id="pagination">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Username</th>
+                                <th>Ring Name</th>
+                                <th>Ring Size</th>
+                                <th>Date of Purchase</th>
+                                <th>Destination</th>
+                                <th>Total Price</th>                    
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
+                                List<OrderDTO> list = (List<OrderDTO>) request.getAttribute("deliveryhistory");
+                                for (OrderDTO deliveryorder : list) {
+                                    pageContext.setAttribute("deliveryorder", deliveryorder);
+                            %>
+                            <tr>
+                                <td><a href="DeliveryHistory?action=historydetails&id=${deliveryorder.orderID}">${deliveryorder.orderID}</td>
+                                <td><a href="Delivery_Customer_Controller?action=details&id=${deliveryorder.userID}">${deliveryorder.userName}</a></td>
+                                <td>${deliveryorder.ringName}</td>
+                                <td>${deliveryorder.ringSize}</td>
+                                <td>${deliveryorder.orderDate}</td>
+                                <td>${deliveryorder.address}</td>
+                                <td>${deliveryorder.totalPrice}</td>
+                            </tr>
+                            <%
+                                }
+                            %>    
+                        </tbody>
+                    </table>    
+                    <div id="paginationControls" class="pagination-controls">
+                        <button id="prevButton" class="pagination-button"><i class="fas fa-chevron-left"></i></button>
+                        <div id="pageNumbers"></div>
+                        <button id="nextButton" class="pagination-button"><i class="fas fa-chevron-right"></i></button>
+                    </div>
                 </div>
             </div>
         </div>
+
     </body>
 </html>

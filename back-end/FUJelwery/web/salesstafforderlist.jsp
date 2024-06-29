@@ -1,4 +1,4 @@
-    <%@page import="com.khac.swp.fuj.order.OrderDTO"%>
+<%@page import="com.khac.swp.fuj.order.OrderDTO"%>
 <%@page import="com.khac.swp.fuj.ring.RingDTO"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -73,6 +73,7 @@
             </div>
         </div>
 
+
         <div class="list-container">
             <div class="smaller-container">
                 <div class="list1">
@@ -85,107 +86,133 @@
                             <div class="">List of Orders</div>
                         </div>
                     </div>
-
                 </div>
                 <%
                     String errorMessage = (String) session.getAttribute("errorMessage");
-                    if (errorMessage != null) {
+                    if (errorMessage
+                            != null) {
                 %>
                 <script>
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
-                        text: '<%= errorMessage %>'
+                        text: '<%= errorMessage%>'
                     });
                 </script>
                 <%
-                    session.removeAttribute("errorMessage"); // Optionally remove the message after displaying it
+                        session.removeAttribute("errorMessage"); // Optionally remove the message after displaying it
                     }
                 %>
+                <div class="list">
+                    <form action='' method=GET id="searchbox"> 
+                        <input name=keyword type=text class="search-input" value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
+                        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+                    </form>
+                    <table id="pagination">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Username</th>
+                                <th>Ring Name</th>
+                                <th>Ring Size</th>
+                                <th>Date of Purchase</th>
+                                <th>Destination</th>
+                                <th>Warranty ID</th>
+                                <th>Price</th>
+                                <th>Accept</th>                   
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
+                                List<OrderDTO> list = (List<OrderDTO>) request.getAttribute("salesorderlist");
+                                for (OrderDTO salesorder : list) {
+                                    pageContext.setAttribute("salesorder", salesorder);
+                            %>
+                            <tr>
+                                <td>${salesorder.orderID}</td>
+                                <td><a href="Staff_Customer_Controller?action=details&id=${salesorder.userID}">${salesorder.userName}</td>
+                                <td>${salesorder.ringName}</td>
+                                <td>${salesorder.ringSize}</td>
+                                <td>${salesorder.orderDate}</td>
+                                <td>${salesorder.address}</td>
+                                <td>
+                                    <input type="text" class="search" name="warrantyID" id="warrantyID_${salesorder.orderID}" placeholder="Enter Warranty ID" required>
+                                </td>
+                                <td>${salesorder.totalPrice}</td>
+                                <td>
+                                    <button type="button" class="accept-btn" data-order-id="${salesorder.orderID}" data-warranty-id="warrantyID_${salesorder.orderID}">Accept</button>
+                                </td>
+                            </tr>
+                            <%
+                                }
+                            %>    
+                        </tbody>
+                    </table>    
+                    <div id="paginationControls" class="pagination-controls">
+                        <button id="prevButton" class="pagination-button"><i class="fas fa-chevron-left"></i></button>
+                        <div id="pageNumbers"></div>
+                        <button id="nextButton" class="pagination-button"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+
+
+
+
 
                 <div class="list">
                     <form action='' method=GET id="searchbox"> 
                         <input name=keyword type=text class="search-input" value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
                         <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
                     </form>
-
-                    <table>
-                        <tr>
-                            <th>Order ID</th>
-                            <th>Username</th>
-                            <th>Ring Name</th>
-                            <th>Ring Size</th>
-                            <th>Date of Purchase</th>
-                            <th>Destination</th>
-                            <th>Warranty ID</th>
-                            <th>Price</th>
-                            <th>Accept</th>
-                        </tr>
-                        <%
-                            List<OrderDTO> list = (List<OrderDTO>) request.getAttribute("salesorderlist");
-                            for (OrderDTO salesorder : list) {
-                                pageContext.setAttribute("salesorder", salesorder);
-                        %>
-                        <tr>
-                            <td>${salesorder.orderID}</td>
-                            <td><a href="Staff_Customer_Controller?action=details&id=${salesorder.userID}">${salesorder.userName}</td>
-                            <td>${salesorder.ringName}</td>
-                            <td>${salesorder.ringSize}</td>
-                            <td>${salesorder.orderDate}</td>
-                            <td>${salesorder.address}</td>
-                            <td>
-                                <input type="text" class="search" name="warrantyID" id="warrantyID_${salesorder.orderID}" placeholder="Enter Warranty ID" required>
-                            </td>
-                            <td>${salesorder.totalPrice}</td>
-                            <td>
-                                <button type="button" class="accept-btn" data-order-id="${salesorder.orderID}" data-warranty-id="warrantyID_${salesorder.orderID}">Accept</button>
-                            </td>
-                        </tr>
-                        <%
-                            }
-                        %>    
-                    </table>
-
-                    <table>
-                        <tr>
-                            <th>Order ID</th>
-                            <th>Username</th>
-                            <th>Ring Name</th>
-                            <th>Ring Size</th>
-                            <th>Date of Purchase</th>
-                            <th>Destination</th>
-                            <th>Warranty</th>
-                            <th>Price</th>
-                            <th>Received ?</th>
-                        </tr>
-                        <%
-                            list = (List<OrderDTO>) request.getAttribute("receiveatstore");
-                            for (OrderDTO salesorder : list) {
-                                pageContext.setAttribute("salesorder", salesorder);
-                        %>
-                        <tr>
-                            <td>${salesorder.orderID}</td>
-                            <td><a href="Staff_Customer_Controller?action=details&id=${salesorder.userID}">${salesorder.userName}</td>
-                            <td>${salesorder.ringName}</td>
-                            <td>${salesorder.ringSize}</td>
-                            <td>${salesorder.orderDate}</td>
-                            <td>${salesorder.address}</td>
-                            <td>${salesorder.warrantyName}</td>
-                            <td>${salesorder.totalPrice}</td>
-                            <td>
-                                <button type="button" class="received-btn" data-order-id="${salesorder.orderID}">Customer has received at store</button>
-                            </td>
-                        </tr>
-                        <%
-                            }
-                        %>    
-                    </table>
-
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js" integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw==" crossorigin="anonymous"></script>
-                    <script src="js/sidenav.js"></script>
-                    <script src="js/order_confirmation_sales.js"></script>
+                    <table id="pagination1">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Username</th>
+                                <th>Ring Name</th>
+                                <th>Ring Size</th>
+                                <th>Date of Purchase</th>
+                                <th>Destination</th>
+                                <th>Warranty</th>
+                                <th>Price</th>
+                                <th>Received ?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
+                                list = (List<OrderDTO>) request.getAttribute("receiveatstore");
+                                for (OrderDTO salesorder : list) {
+                                    pageContext.setAttribute("salesorder", salesorder);
+                            %>
+                            <tr>
+                                <td>${salesorder.orderID}</td>
+                                <td><a href="Staff_Customer_Controller?action=details&id=${salesorder.userID}">${salesorder.userName}</td>
+                                <td>${salesorder.ringName}</td>
+                                <td>${salesorder.ringSize}</td>
+                                <td>${salesorder.orderDate}</td>
+                                <td>${salesorder.address}</td>
+                                <td>${salesorder.warrantyName}</td>
+                                <td>${salesorder.totalPrice}</td>
+                                <td>
+                                    <button type="button" class="received-btn" data-order-id="${salesorder.orderID}">Customer has received at store</button>
+                                </td>
+                            </tr>
+                            <%
+                                }
+                            %>    
+                        </tbody>
+                    </table>    
+                    <div id="paginationControls1" class="pagination-controls">
+                        <button id="prevButton1" class="pagination-button"><i class="fas fa-chevron-left"></i></button>
+                        <div id="pageNumbers1"></div>
+                        <button id="nextButton1" class="pagination-button"><i class="fas fa-chevron-right"></i></button>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js" integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw==" crossorigin="anonymous"></script>
+        <script src="js/sidenav.js"></script>
+        <script src="js/order_confirmation_sales.js"></script>
     </body>
 </html>

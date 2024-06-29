@@ -72,45 +72,46 @@
 
             </div>
         </div>
+
+
         <div class="list-container">
             <div class="smaller-container">
                 <div class="list1">
                     <div class="list-intro-left">
                         <div class="left-icon">
-                            <i class='bx bx-history' ></i>
+                            <i class='bx bx-history'></i>
                         </div>
                         <div class="left-info">
                             <div class="list-title">Order History List</div>
                             <div class="">History of Orders</div>
                         </div>
                     </div>
-
                 </div>
-
-
                 <div class="list">
                     <form action='' method=GET id="searchbox"> 
                         <input name=keyword type=text class="search-input" value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
                         <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
                     </form>
-
-                    <table>
-                        <tr>
-                            <th>Order ID</th>
-                            <th>Username</th>
-                            <th>Ring Name</th>
-                            <th>Ring Size</th>
-                            <th>Date of Purchase</th>
-                            <th>Destination</th>
-                            <th>Total Price</th>
-                            <th>Status</th>
-                        </tr>
+                    <table id="pagination">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Username</th>
+                                <th>Ring Name</th>
+                                <th>Ring Size</th>
+                                <th>Date of Purchase</th>
+                                <th>Destination</th>
+                                <th>Total Price</th>
+                                <th>Status</th>                           
+                            </tr>
+                        </thead>
+                        <tbody>
                         <%
                             List<OrderDTO> list = (List<OrderDTO>) request.getAttribute("saleshistory");
                             for (OrderDTO salesorder : list) {
                                 pageContext.setAttribute("salesorder", salesorder);
                         %>
-                        <tr>
+                            <tr>
                             <td><a href="SalesHistory?action=historydetails&id=${salesorder.orderID}">${salesorder.orderID}</td>
                             <td><a href="Staff_Customer_Controller?action=details&id=${salesorder.userID}">${salesorder.userName}</a></td>
                             <td>${salesorder.ringName}</td>
@@ -118,19 +119,31 @@
                             <td>${salesorder.orderDate}</td>
                             <td>${salesorder.address}</td>
                             <td>${salesorder.totalPrice}</td>
-                            <td>${salesorder.status}</td>
-                        </tr>
-                        <%
-                            }
-                        %>
-                    </table>
-
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js" integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw==" crossorigin="anonymous"></script>
-                    <script src="js/sidenav.js"></script>
-                    <script src="js/order_confirmation_sales.js"></script>
+                            <td class="<%= "delivered".equals(salesorder.getStatus()) ? "status-verified" : "shipping".equals(salesorder.getStatus()) ? "status-shipping" : "received at store".equals(salesorder.getStatus()) ? "status-verified" : "status-default"%>">
+                                ${salesorder.status}
+                            </td>
+                            </tr>
+                            <%
+                                }
+                            %>    
+                        </tbody>
+                    </table>    
+                    <div id="paginationControls" class="pagination-controls">
+                        <button id="prevButton" class="pagination-button"><i class="fas fa-chevron-left"></i></button>
+                        <div id="pageNumbers"></div>
+                        <button id="nextButton" class="pagination-button"><i class="fas fa-chevron-right"></i></button>
+                    </div>
                 </div>
             </div>
         </div>
+
+
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js" integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw==" crossorigin="anonymous"></script>
+        <script src="js/sidenav.js"></script>
+        <script src="js/order_confirmation_sales.js"></script>
+        <script src="js/pagination.js"></script>
 
     </body>
 </html>

@@ -64,59 +64,67 @@
                         <input name=keyword type=text class="search-input" value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
                         <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
                     </form>
-
-                    <table>
-                        <tr>
-                            <th>Order ID</th>
-                            <th>Username</th>
-                            <th>Ring Name</th>
-                            <th>Ring Size</th>
-                            <th>Date of Purchase</th>
-                            <th>Destination</th>
-                            <th>Total Price</th>
-                            <th>Status</th>
-                            <th>Delivery Status</th>
-                        </tr>
-                        <%
-                            List<OrderDTO> list = (List<OrderDTO>) request.getAttribute("deliverystafforderlist");
-                            for (OrderDTO deliveryorder : list) {
-                                pageContext.setAttribute("deliveryorder", deliveryorder);
-                        %>
-                        <tr>
-                            <td>${deliveryorder.orderID}</td>
-                            <td><a href="Delivery_Customer_Controller?action=details&id=${deliveryorder.userID}">${deliveryorder.userName}</a></td>
-                            <td>${deliveryorder.ringName}</td>
-                            <td>${deliveryorder.ringSize}</td>
-                            <td>${deliveryorder.orderDate}</td>
-                            <td>${deliveryorder.address}</td>
-                            <td>${deliveryorder.totalPrice}</td>
-                            <td class="<%= "verified".equals(deliveryorder.getStatus()) ? "status-verified" : "shipping".equals(deliveryorder.getStatus()) ? "status-shipping" : "status-default"%>">
-                                ${deliveryorder.status}
-                            </td>
-                            <td>
-                                <form id="form-shipping-${deliveryorder.orderID}" action="DeliveryStaffOrderController" method="POST">
-                                    <input name="action" value="shipping" type="hidden">
-                                    <input name="orderID" value="${deliveryorder.orderID}" type="hidden">
-                                    <button type="button" class="btn" onclick="confirmAction('shipping', '${deliveryorder.orderID}', '${deliveryorder.status}')">On shipping</button>
-                                </form>
-                                <form id="form-delivered-${deliveryorder.orderID}" action="DeliveryStaffOrderController" method="POST">
-                                    <input name="action" value="delivered" type="hidden">
-                                    <input name="orderID" value="${deliveryorder.orderID}" type="hidden">
-                                    <button type="button" class="btn" onclick="confirmAction('delivered', '${deliveryorder.orderID}', '${deliveryorder.status}')">Delivered</button>
-                                </form>
-                            </td>
-                        </tr>
-                        <%
-                            }
-                        %>
-                    </table>
+                    <table id="pagination">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Username</th>
+                                <th>Ring Name</th>
+                                <th>Ring Size</th>
+                                <th>Date of Purchase</th>
+                                <th>Destination</th>
+                                <th>Total Price</th>
+                                <th>Status</th>
+                                <th>Delivery Status</th>                      
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
+                                List<OrderDTO> list = (List<OrderDTO>) request.getAttribute("deliverystafforderlist");
+                                for (OrderDTO deliveryorder : list) {
+                                    pageContext.setAttribute("deliveryorder", deliveryorder);
+                            %>
+                            <tr>
+                                <td>${deliveryorder.orderID}</td>
+                                <td><a href="Delivery_Customer_Controller?action=details&id=${deliveryorder.userID}">${deliveryorder.userName}</a></td>
+                                <td>${deliveryorder.ringName}</td>
+                                <td>${deliveryorder.ringSize}</td>
+                                <td>${deliveryorder.orderDate}</td>
+                                <td>${deliveryorder.address}</td>
+                                <td>${deliveryorder.totalPrice}</td>
+                                <td class="<%= "verified".equals(deliveryorder.getStatus()) ? "status-verified" : "shipping".equals(deliveryorder.getStatus()) ? "status-shipping" : "status-default"%>">
+                                    ${deliveryorder.status}
+                                </td>
+                                <td>
+                                    <form id="form-shipping-${deliveryorder.orderID}" action="DeliveryStaffOrderController" method="POST">
+                                        <input name="action" value="shipping" type="hidden">
+                                        <input name="orderID" value="${deliveryorder.orderID}" type="hidden">
+                                        <button type="button" class="btn" onclick="confirmAction('shipping', '${deliveryorder.orderID}', '${deliveryorder.status}')">On shipping</button>
+                                    </form>
+                                    <form id="form-delivered-${deliveryorder.orderID}" action="DeliveryStaffOrderController" method="POST">
+                                        <input name="action" value="delivered" type="hidden">
+                                        <input name="orderID" value="${deliveryorder.orderID}" type="hidden">
+                                        <button type="button" class="btn" onclick="confirmAction('delivered', '${deliveryorder.orderID}', '${deliveryorder.status}')">Delivered</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <%
+                                }
+                            %>    
+                        </tbody>
+                    </table>    
+                    <div id="paginationControls" class="pagination-controls">
+                        <button id="prevButton" class="pagination-button"><i class="fas fa-chevron-left"></i></button>
+                        <div id="pageNumbers"></div>
+                        <button id="nextButton" class="pagination-button"><i class="fas fa-chevron-right"></i></button>
+                    </div>
                 </div>
             </div>
         </div>
+
+
         <script src="js/pagination.js"></script>
-        <script src="js/pagination.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
-                                                        integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
-        crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js" integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw==" crossorigin="anonymous"></script>
         <script src="js/sidenav.js"></script>
     </body>
 

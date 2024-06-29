@@ -1,13 +1,18 @@
 document.addEventListener('DOMContentLoaded', function() {
+    setupPagination('pagination', 'paginationControls', 'prevButton', 'nextButton', 'pageNumbers');
+    setupPagination('pagination1', 'paginationControls1', 'prevButton1', 'nextButton1', 'pageNumbers1');
+});
+
+function setupPagination(tableId, controlsId, prevButtonId, nextButtonId, pageNumbersId) {
     const rowsPerPage = 10;
-    const table = document.getElementById('pagination').getElementsByTagName('tbody')[0];
+    const table = document.getElementById(tableId).getElementsByTagName('tbody')[0];
     const rows = table.getElementsByTagName('tr');
     const rowsCount = rows.length;
     const pageCount = Math.ceil(rowsCount / rowsPerPage);
-    const paginationControls = document.getElementById('paginationControls');
-    const prevButton = document.getElementById('prevButton');
-    const nextButton = document.getElementById('nextButton');
-    const pageNumbers = document.getElementById('pageNumbers');
+    const paginationControls = document.getElementById(controlsId);
+    const prevButton = document.getElementById(prevButtonId);
+    const nextButton = document.getElementById(nextButtonId);
+    const pageNumbers = document.getElementById(pageNumbersId);
     let currentPage = 1;
 
     function showPage(pageNumber) {
@@ -52,4 +57,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     showPage(1);
-});
+}
