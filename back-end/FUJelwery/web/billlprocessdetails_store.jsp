@@ -1,15 +1,10 @@
-<%-- 
-    Document   : billdetails
-    Created on : Jun 13, 2024, 9:39:28 PM
-    Author     : Dell
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Received Order Details</title>
         <link rel="stylesheet" href="css/navigation_bar.css">
         <link rel="stylesheet" href="css/order_detail.css">
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">

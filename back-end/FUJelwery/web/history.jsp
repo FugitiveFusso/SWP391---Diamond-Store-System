@@ -1,9 +1,3 @@
-<%-- 
-    Document   : history
-    Created on : Jun 26, 2024, 10:52:55 AM
-    Author     : Dell
---%>
-
 <%@page import="com.khac.swp.fuj.order.OrderDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.List"%>
@@ -12,7 +6,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>History</title>
+        <title>History Of Purchase</title>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="css/user_accountdetails.css">
         <link rel="stylesheet" href="css/navigation_bar.css">

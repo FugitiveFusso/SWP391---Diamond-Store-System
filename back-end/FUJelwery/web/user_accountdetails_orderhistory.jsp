@@ -157,11 +157,11 @@
                                                         pageContext.setAttribute("bill", bill);
                                                 %>
                                                 <tr>
-                                                    <td><a href="BillController?action=detailsprocess&id=${bill.orderID}">${bill.orderID}</a></td>
+                                                    <td><a href="BillController?action=detailsprocess_store&id=${bill.orderID}">${bill.orderID}</a></td>
                                                     <td><a href="ProductController?action=details&id=${bill.ringID}">${bill.ringName}</a></td>
                                                     <td>${bill.ringSize}</td>
                                                     <td>${bill.orderDate}</td>
-                                                    <td>${bill.totalPrice}</td>
+                                                    <td style="font-weight: bolder">${bill.totalPrice}</td>
                                                     <td>${bill.status}</td>
                                                 </tr>
                                                 <% } %>
@@ -191,11 +191,11 @@
                                                         pageContext.setAttribute("bill", bill);
                                                 %>
                                                 <tr>
-                                                    <td><a href="BillController?action=detailsprocess&id=${bill.orderID}">${bill.orderID}</a></td>
+                                                    <td><a href="BillController?action=detailsprocess_home&id=${bill.orderID}">${bill.orderID}</a></td>
                                                     <td><a href="ProductController?action=details&id=${bill.ringID}">${bill.ringName}</a></td>
                                                     <td>${bill.ringSize}</td>
                                                     <td>${bill.orderDate}</td>
-                                                    <td>${bill.totalPrice}</td>
+                                                    <td style="font-weight: bolder">${bill.totalPrice}</td>
                                                     <td>${bill.status}</td>
                                                 </tr>
                                                 <% }%>

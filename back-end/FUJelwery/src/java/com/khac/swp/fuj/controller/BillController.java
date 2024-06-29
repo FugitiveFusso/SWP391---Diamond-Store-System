@@ -66,7 +66,7 @@ public class BillController extends HttpServlet {
 
                 request.getRequestDispatcher("/user_accountdetails_orderhistory.jsp").forward(request, response);
 
-            } else if (action.equals("detailsprocess")) {//details
+            } else if (action.equals("detailsprocess_store")) {//details
 
                 Integer id = null;
                 try {
@@ -81,7 +81,24 @@ public class BillController extends HttpServlet {
                 }
 
                 request.setAttribute("bill", bill);//object
-                request.getRequestDispatcher("/billlprocessdetails.jsp").forward(request, response);
+                request.getRequestDispatcher("/billlprocessdetails_store.jsp").forward(request, response);
+
+            } else if (action.equals("detailsprocess_home")) {//details
+
+                Integer id = null;
+                try {
+                    id = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+
+                OrderDTO bill = null;
+                if (id != null) {
+                    bill = orderDAO.loadBillProcessDetails(id);
+                }
+
+                request.setAttribute("bill", bill);//object
+                request.getRequestDispatcher("/billlprocessdetails_home.jsp").forward(request, response);
 
             }
         }
