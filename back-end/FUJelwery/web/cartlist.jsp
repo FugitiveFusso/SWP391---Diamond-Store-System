@@ -9,6 +9,7 @@
         <title>Cart Details</title>
         <link rel="stylesheet" href="css/navigation_bar.css">
         <link rel="stylesheet" href="css/usercart.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -173,7 +174,7 @@
                         <div class="ibox-content">       
                             <!-- Purchase Method Form -->
                             <div class="purchase">
-                                <form action="OrderController" method="POST" class="mt-3">
+                                <form id="purchaseForm" action="OrderController" method="POST" class="mt-3">
                                     <div class="form-group">
                                         <label for="purchaseMethod">Select your preferred payment method:</label>
                                         <select name="purchaseMethod" id="purchaseMethod" required class="form-control">
@@ -185,7 +186,7 @@
                                     <input name="action" value="purchase" type="hidden">
                                     <input type="hidden" name="userid" value="${sessionScope.usersession.userid}">
                                     <div class="form-group text-right">
-                                        <button type="submit" class="btn btn-primary btn-large">
+                                        <button type="button" id="purchaseButton"" class="btn btn-primary btn-large">
                                             <i class="fa fa-shopping-cart"></i> Purchase
                                         </button>
                                     </div>
@@ -292,7 +293,36 @@
 
 
         <script src="js/productlist_pagination.js"></script>
+        <script>
+                                                                document.getElementById('purchaseButton').addEventListener('click', function (event) {
+                                                                    event.preventDefault();
+                                                                    const purchaseMethod = document.getElementById('purchaseMethod').value;
 
+                                                                    if (!purchaseMethod) {
+                                                                        Swal.fire({
+                                                                            title: 'Error',
+                                                                            text: 'Please select a payment method.',
+                                                                            icon: 'error',
+                                                                            confirmButtonText: 'OK'
+                                                                        });
+                                                                        return;
+                                                                    }
+
+                                                                    Swal.fire({
+                                                                        title: 'Are you sure?',
+                                                                        text: "Do you want to proceed with the purchase?",
+                                                                        icon: 'warning',
+                                                                        showCancelButton: true,
+                                                                        confirmButtonColor: '#3085d6',
+                                                                        cancelButtonColor: '#d33',
+                                                                        confirmButtonText: 'Yes, purchase it!'
+                                                                    }).then((result) => {
+                                                                        if (result.isConfirmed) {
+                                                                            document.getElementById('purchaseForm').submit();
+                                                                        }
+                                                                    });
+                                                                });
+        </script>
 
     </body>
 </html>
