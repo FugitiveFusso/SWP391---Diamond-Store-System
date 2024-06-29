@@ -6,7 +6,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>User Order History</title>
+        <title>User Order Tracking</title>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="css/user_accountdetails.css">
         <link rel="stylesheet" href="css/navigation_bar.css">
@@ -161,7 +161,7 @@
                                                     <td><a href="ProductController?action=details&id=${bill.ringID}">${bill.ringName}</a></td>
                                                     <td>${bill.ringSize}</td>
                                                     <td>${bill.orderDate}</td>
-                                                    <td style="font-weight: bolder">${bill.totalPrice}</td>
+                                                    <td style="font-weight: bolder">${bill.totalPrice} VND</td>
                                                     <td>${bill.status}</td>
                                                 </tr>
                                                 <% } %>
@@ -195,7 +195,7 @@
                                                     <td><a href="ProductController?action=details&id=${bill.ringID}">${bill.ringName}</a></td>
                                                     <td>${bill.ringSize}</td>
                                                     <td>${bill.orderDate}</td>
-                                                    <td style="font-weight: bolder">${bill.totalPrice}</td>
+                                                    <td style="font-weight: bolder">${bill.totalPrice} VND</td>
                                                     <td>${bill.status}</td>
                                                 </tr>
                                                 <% }%>

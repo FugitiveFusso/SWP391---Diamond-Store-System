@@ -153,7 +153,7 @@
                                                     <td><a href="ProductController?action=details&id=${bill.ringID}">${bill.ringName}</td>
                                                     <td>${bill.ringSize}</td>
                                                     <td>${bill.orderDate}</td>
-                                                    <td>${bill.totalPrice}</td>
+                                                    <td>${bill.totalPrice} VND</td>
                                                 </tr>
                                                 <% }%>
                                             </table>
