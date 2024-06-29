@@ -66,4 +66,17 @@ ROUND((CAST(s.usedCertificates AS FLOAT) / s.totalCertificates) * 100, 2) AS use
 ROUND((CAST(s.unusedCertificates AS FLOAT) / s.totalCertificates) * 100, 2) AS unusedPercentage, u.certificateID, u.description
 FROM CertificateStats s LEFT JOIN UnusedCertificates u ON 1=1;
 
+-- DiamondPrices
+WITH DiamondStats AS (
+SELECT COUNT(dp.dpID) AS totalDiamondsPrice, AVG(dp.price) AS averagePrice, MAX(dp.price) AS highestPrice, MIN(dp.price) AS lowestPrice,
+SUM(CASE WHEN dp.isDeleted = 'active' THEN 1 ELSE 0 END) AS activeDiamondsPrice,
+SUM(CASE WHEN dp.isDeleted = 'deleted' THEN 1 ELSE 0 END) AS deletedDiamondsPrice,
+STUFF(( SELECT DISTINCT ', ' + CAST(dp_inner.diamondSize AS VARCHAR) FROM DiamondPrice dp_inner WHERE dp_inner.isDeleted = 'active'FOR XML PATH('')), 1, 2, '') AS allDiamondSizes,
+STUFF((SELECT DISTINCT ', ' + CAST(dp_inner.caratWeight AS VARCHAR) FROM DiamondPrice dp_inner WHERE dp_inner.isDeleted = 'active' FOR XML PATH('')), 1, 2, '') AS allCaratWeights,
+STUFF((SELECT DISTINCT ', ' + dp_inner.color FROM DiamondPrice dp_inner WHERE dp_inner.isDeleted = 'active' FOR XML PATH('')), 1, 2, '') AS allColors,
+STUFF((SELECT DISTINCT ', ' + dp_inner.clarity FROM DiamondPrice dp_inner WHERE dp_inner.isDeleted = 'active' FOR XML PATH('')), 1, 2, '') AS allClarities
+FROM DiamondPrice dp WHERE dp.isDeleted = 'active'
+)
+SELECT totalDiamondsPrice, FORMAT(averagePrice, 'N0') AS averagePrice, FORMAT(highestPrice, 'N0') AS highestPrice, FORMAT(lowestPrice, 'N0') AS lowestPrice, 
+activeDiamondsPrice, deletedDiamondsPrice, allDiamondSizes, allCaratWeights, allColors, allClarities FROM DiamondStats;
 

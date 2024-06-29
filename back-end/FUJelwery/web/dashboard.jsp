@@ -231,6 +231,7 @@
             <strong>Date of oldest post: ${requestScope.post.earliestPostDate}</strong>
             <strong>Date of latest post: ${requestScope.post.latestPostDate}</strong>
             <h1>Certificate Statistics</h1>
+
             <%
                 List<CertificateDTO> certList = (List<CertificateDTO>) request.getAttribute("certlist");
                 int totalCertificates = 0;
@@ -286,6 +287,18 @@
                     }
                 %>    
             </table>
+
+            <h1>Diamond Price Statistics</h1>
+            <strong>Total Diamond Price: ${requestScope.diamondprice.totalDiamondsPrice}</strong>
+            <strong>Average Price: ${requestScope.diamondprice.averagePrice}VND</strong>
+            <strong>Highest Price: ${requestScope.diamondprice.highestPrice}VND</strong>
+            <strong>Lowest Price: ${requestScope.diamondprice.lowestPrice}VND</strong>
+            <strong>Active Diamond Price: ${requestScope.diamondprice.activeDiamondsPrice}</strong>
+            <strong>Delete Diamond Price: ${requestScope.diamondprice.deletedDiamondsPrice}</strong>
+            <strong>All Diamond Sizes: ${requestScope.diamondprice.allDiamondSizes}</strong>
+            <strong>All Carat Weights: ${requestScope.diamondprice.allCaratWeights}</strong>         
+            <strong>All Colors: ${requestScope.diamondprice.allColors}</strong>
+            <strong>All Clarities: ${requestScope.diamondprice.allClarities}</strong>
 
         </div>
 
