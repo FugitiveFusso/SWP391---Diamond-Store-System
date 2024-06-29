@@ -124,7 +124,7 @@ public class CategoryDAO {
     }
 
     public boolean delete(int id) {
-        String sql = "UPDATE [Category] SET isDeleted = 'delete' WHERE categoryID = ? ";
+        String sql = "UPDATE [Category] SET isDeleted = 'deleted' WHERE categoryID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();

@@ -136,7 +136,7 @@ public class CollectionDAO {
     Delete student 
      */
     public boolean delete(int id) {
-        String sql = "UPDATE [Collection] SET isDeleted = 'delete' WHERE collectionID = ? ";
+        String sql = "UPDATE [Collection] SET isDeleted = 'deleted' WHERE collectionID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();

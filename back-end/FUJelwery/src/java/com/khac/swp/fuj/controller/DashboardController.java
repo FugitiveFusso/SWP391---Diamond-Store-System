@@ -7,6 +7,8 @@ package com.khac.swp.fuj.controller;
 
 import com.khac.swp.fuj.category.CategoryDAO;
 import com.khac.swp.fuj.category.CategoryDTO;
+import com.khac.swp.fuj.certificate.CertificateDAO;
+import com.khac.swp.fuj.certificate.CertificateDTO;
 import com.khac.swp.fuj.collection.CollectionDAO;
 import com.khac.swp.fuj.collection.CollectionDTO;
 import com.khac.swp.fuj.posts.PostDAO;
@@ -65,6 +67,9 @@ public class DashboardController extends HttpServlet {
                 PostDAO postDao = new PostDAO();
                 PostDTO post = postDao.loadStatistics();
                 request.setAttribute("post", post);
+                CertificateDAO certificateDao = new CertificateDAO();
+                List<CertificateDTO> certList = certificateDao.listStatistics();
+                request.setAttribute("certlist", certList);
                 request.getRequestDispatcher("/dashboard.jsp").forward(request, response);
 
             }

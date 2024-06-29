@@ -149,7 +149,7 @@ public class PostDAO {
     }
 
     public boolean delete(int id) {
-        String sql = "UPDATE [Post] set isDeleted = 'delete' WHERE postID = ? ";
+        String sql = "UPDATE [Post] set isDeleted = 'deleted' WHERE postID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();

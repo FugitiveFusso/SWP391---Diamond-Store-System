@@ -254,7 +254,7 @@ public class UserDAO {
     Delete student 
      */
     public boolean delete(int id) {
-        String sql = "UPDATE [User] set isDeleted = 'delete' where userID = ? ";
+        String sql = "UPDATE [User] set isDeleted = 'deleted' where userID = ? ";
         try {
             
             Connection conn = DBUtils.getConnection();

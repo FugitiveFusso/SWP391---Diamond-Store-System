@@ -161,11 +161,8 @@ public class WarrantyDAO {
         return false;
     }
 
-    /*
-    Delete student 
-     */
     public boolean delete(int id) {
-        String sql = "UPDATE [Warranty] set isDeleted = 'delete' WHERE warrantyID = ? ";
+        String sql = "UPDATE [Warranty] set isDeleted = 'deleted' WHERE warrantyID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();

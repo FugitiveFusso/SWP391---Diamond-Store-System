@@ -144,7 +144,7 @@ public class RingPlacementPriceDAO {
     }
 
     public boolean delete(int id) {
-        String sql = "Update [RingPlacementPrice] set isDeleted = 'delete' WHERE rpID = ? ";
+        String sql = "Update [RingPlacementPrice] set isDeleted = 'deleted' WHERE rpID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();

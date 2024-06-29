@@ -232,7 +232,7 @@ public class RingDAO {
     }
 
     public boolean delete(int id) {
-        String sql = "UPDATE [Ring] SET isDeleted = 'delete' WHERE ringID = ? ";
+        String sql = "UPDATE [Ring] SET isDeleted = 'deleted' WHERE ringID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();

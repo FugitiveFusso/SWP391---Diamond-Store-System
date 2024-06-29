@@ -174,7 +174,7 @@ public class DiamondDAO {
     }
 
     public boolean delete(int id) {
-        String sql = "UPDATE [Diamond] SET isDeleted = 'delete' WHERE diamondID = ? ";
+        String sql = "UPDATE [Diamond] SET isDeleted = 'deleted' WHERE diamondID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();

@@ -127,7 +127,7 @@ public class CertificateDAO {
     }
 
     public boolean delete(int id) {
-        String sql = "UPDATE [Certificate] set isDeleted = 'delete' WHERE certificateID = ? ";
+        String sql = "UPDATE [Certificate] set isDeleted = 'deleted' WHERE certificateID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -145,6 +145,7 @@ public class CertificateDAO {
 
         return false;
     }
+
     public CertificateDTO checkCertificateExistByDescription(String description) {
 
         String sql = "select certificateID, certificateImage, [description] from [Certificate] where [description] like ? and isDeleted = 'active' ";
@@ -168,5 +169,63 @@ public class CertificateDAO {
             ex.printStackTrace();
         }
         return null;
+    }
+
+    public List<CertificateDTO> listStatistics() {
+        List<CertificateDTO> list = new ArrayList<CertificateDTO>();
+        try {
+            Connection con = DBUtils.getConnection();
+            String sql = "WITH CertificateStats AS (\n"
+                    + "SELECT COUNT(c.certificateID) AS totalCertificates, \n"
+                    + "SUM(CASE WHEN c.isDeleted = 'active' THEN 1 ELSE 0 END) AS activeCertificates,\n"
+                    + "SUM(CASE WHEN c.isDeleted = 'deleted' THEN 1 ELSE 0 END) AS deletedCertificates,\n"
+                    + "COUNT(DISTINCT CASE WHEN d.certificateID IS NOT NULL THEN c.certificateID END) AS usedCertificates,\n"
+                    + "COUNT(DISTINCT CASE WHEN d.certificateID IS NULL THEN c.certificateID END) AS unusedCertificates\n"
+                    + "FROM Certificate c LEFT JOIN Diamond d ON c.certificateID = d.certificateID),\n"
+                    + "UnusedCertificates AS (\n"
+                    + "SELECT c.certificateID, c.description FROM Certificate c LEFT JOIN Diamond d ON c.certificateID = d.certificateID\n"
+                    + "WHERE d.certificateID IS NULL and c.isDeleted = 'active')\n"
+                    + "SELECT s.totalCertificates, s.activeCertificates, s.deletedCertificates, s.usedCertificates, s.unusedCertificates,\n"
+                    + "ROUND((CAST(s.usedCertificates AS FLOAT) / s.totalCertificates) * 100, 2) AS usedPercentage,\n"
+                    + "ROUND((CAST(s.unusedCertificates AS FLOAT) / s.totalCertificates) * 100, 2) AS unusedPercentage, u.certificateID, u.description\n"
+                    + "FROM CertificateStats s LEFT JOIN UnusedCertificates u ON 1=1;\n"
+                    + "";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+
+                    int certificateID = rs.getInt("certificateID");
+                    int totalCertificates = rs.getInt("totalCertificates");
+                    int activeCertificates = rs.getInt("activeCertificates");
+                    int deletedCertificates = rs.getInt("deletedCertificates");
+                    int usedCertificates = rs.getInt("usedCertificates");
+                    int unusedCertificates = rs.getInt("unusedCertificates");
+                    double usedPercentage = rs.getDouble("usedPercentage");
+                    double unusedPercentage = rs.getDouble("unusedPercentage");
+                    String certificateDescription = rs.getString("description");
+
+                    CertificateDTO certificate = new CertificateDTO();
+                    certificate.setCertificateID(certificateID);
+                    certificate.setTotalCertificates(totalCertificates);
+                    certificate.setActiveCertificates(activeCertificates);
+                    certificate.setDeletedCertificates(deletedCertificates);
+                    certificate.setUsedCertificates(usedCertificates);
+                    certificate.setUnusedCertificates(unusedCertificates);
+                    certificate.setUsedPercentage(usedPercentage);
+                    certificate.setUnusedPercentage(unusedPercentage);
+                    certificate.setCertificateDescription(certificateDescription);
+                    list.add(certificate);
+                }
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return list;
     }
 }

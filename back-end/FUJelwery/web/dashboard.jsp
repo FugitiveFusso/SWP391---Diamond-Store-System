@@ -1,4 +1,5 @@
 
+<%@page import="com.khac.swp.fuj.certificate.CertificateDTO"%>
 <%@page import="com.khac.swp.fuj.voucher.VoucherDTO"%>
 <%@page import="com.khac.swp.fuj.collection.CollectionDTO"%>
 <%@page import="com.khac.swp.fuj.category.CategoryDTO"%>
@@ -9,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Dashboard</title>
+        <title>Management Dashboard</title>
         <link rel="stylesheet" href="css/navbar.css">
         <script src="https://unpkg.com/@phosphor-icons/web"></script>
         <link rel="stylesheet" href="css/staff_details.css">
@@ -229,6 +230,62 @@
             <strong>Total Posts Date: ${requestScope.post.totalNumberOfPostDays}</strong>
             <strong>Date of oldest post: ${requestScope.post.earliestPostDate}</strong>
             <strong>Date of latest post: ${requestScope.post.latestPostDate}</strong>
+            <h1>Certificate Statistics</h1>
+            <%
+                List<CertificateDTO> certList = (List<CertificateDTO>) request.getAttribute("certlist");
+                int totalCertificates = 0;
+                int activeCertificates = 0;
+                int deletedCertificates = 0;
+                int usedCertificates = 0;
+                int unusedCertificates = 0;
+                double usedPercentage = 0.0;
+                double unusedPercentage = 0.0;
+
+                if (certList != null) {
+                    for (CertificateDTO certificate : certList) {
+                        totalCertificates = certificate.getTotalCertificates();
+                        activeCertificates = certificate.getActiveCertificates();
+                        deletedCertificates = certificate.getDeletedCertificates();
+                        usedCertificates = certificate.getUsedCertificates();
+                        unusedCertificates = certificate.getUnusedCertificates();
+                        usedPercentage = certificate.getUsedPercentage();
+                        unusedPercentage = certificate.getUnusedPercentage();
+                    }
+                }
+                request.setAttribute("totalCertificates", totalCertificates);
+                request.setAttribute("activeCertificates", activeCertificates);
+                request.setAttribute("deletedCertificates", deletedCertificates);
+                request.setAttribute("usedCertificates", usedCertificates);
+                request.setAttribute("unusedCertificates", unusedCertificates);
+                request.setAttribute("usedPercentage", usedPercentage);
+                request.setAttribute("unusedPercentage", unusedPercentage);
+
+            %>
+            <strong>Total Certificates: ${totalCertificates}</strong>
+            <strong>Total Active Certificates: ${activeCertificates}</strong>
+            <strong>Total Deleted Certificates: ${deletedCertificates}</strong>
+            <strong>Total Used Certificates: ${usedCertificates}</strong>
+            <strong>Total Unused Certificates: ${unusedCertificates}</strong>
+            <strong>Total Used Percentage: ${usedPercentage}%</strong>
+            <strong>Total Unused Percentage: ${unusedPercentage}%</strong>
+            <strong>The Unused Certificates are below </strong>
+
+            <table style="margin: 0 auto;">
+                <tr>
+                    <th>Certificate ID</th>
+                    <th>Description</th>
+                </tr>
+                <% for (CertificateDTO certificate : certList) {
+                        pageContext.setAttribute("certificate", certificate);
+                %>
+                <tr>
+                    <td>${certificate.certificateID}</td>
+                    <td>${certificate.certificateDescription}</td>
+                </tr>
+                <%
+                    }
+                %>    
+            </table>
 
         </div>
 

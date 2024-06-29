@@ -49,3 +49,21 @@ ORDER BY vu.totalOrdersUsingVoucher DESC, createdDate ASC OFFSET 0 ROWS FETCH NE
 SELECT COUNT(*) AS TotalNumberOfActivePosts, COUNT(DISTINCT Author) AS TotalNumberOfAuthors, COUNT(DISTINCT PostDate) AS TotalNumberOfPostDays,
 MIN(PostDate) AS EarliestPostDate, MAX(PostDate) AS LatestPostDate
 FROM Post WHERE isDeleted = 'active';
+
+-- Certificates
+WITH CertificateStats AS (
+SELECT COUNT(c.certificateID) AS totalCertificates, 
+SUM(CASE WHEN c.isDeleted = 'active' THEN 1 ELSE 0 END) AS activeCertificates,
+SUM(CASE WHEN c.isDeleted = 'deleted' THEN 1 ELSE 0 END) AS deletedCertificates,
+COUNT(DISTINCT CASE WHEN d.certificateID IS NOT NULL THEN c.certificateID END) AS usedCertificates,
+COUNT(DISTINCT CASE WHEN d.certificateID IS NULL THEN c.certificateID END) AS unusedCertificates
+FROM Certificate c LEFT JOIN Diamond d ON c.certificateID = d.certificateID),
+UnusedCertificates AS (
+SELECT c.certificateID, c.description FROM Certificate c LEFT JOIN Diamond d ON c.certificateID = d.certificateID
+WHERE d.certificateID IS NULL and c.isDeleted = 'active')
+SELECT s.totalCertificates, s.activeCertificates, s.deletedCertificates, s.usedCertificates, s.unusedCertificates,
+ROUND((CAST(s.usedCertificates AS FLOAT) / s.totalCertificates) * 100, 2) AS usedPercentage,
+ROUND((CAST(s.unusedCertificates AS FLOAT) / s.totalCertificates) * 100, 2) AS unusedPercentage, u.certificateID, u.description
+FROM CertificateStats s LEFT JOIN UnusedCertificates u ON 1=1;
+
+

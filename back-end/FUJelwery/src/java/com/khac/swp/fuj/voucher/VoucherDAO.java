@@ -158,7 +158,7 @@ public class VoucherDAO {
     Delete student 
      */
     public boolean delete(int id) {
-        String sql = "Update [Voucher] set isDeleted = 'delete' WHERE voucherID = ? ";
+        String sql = "Update [Voucher] set isDeleted = 'deleted' WHERE voucherID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();

@@ -232,7 +232,7 @@ public class DiamondPriceDAO {
     }
 
     public boolean delete(int id) {
-        String sql = "UPDATE [DiamondPrice] SET isDeleted = 'delete' WHERE dpID = ? ";
+        String sql = "UPDATE [DiamondPrice] SET isDeleted = 'deleted' WHERE dpID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();
