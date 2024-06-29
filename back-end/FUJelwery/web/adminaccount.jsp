@@ -53,8 +53,6 @@
 
             </div>
         </div>
-
-        <!--<jsp:include page="/menu.jsp" flush="true" />-->
         
         <div class="container d-flex justify-content-center align-items-center">
             <div class="text-center">

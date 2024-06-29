@@ -114,7 +114,7 @@
                             <tr>
                             <td><a href="SalesHistory?action=historydetails&id=${salesorder.orderID}">${salesorder.orderID}</td>
                             <td><a href="Staff_Customer_Controller?action=details&id=${salesorder.userID}">${salesorder.userName}</a></td>
-                            <td>${salesorder.ringName}</td>
+                            <td><a href="RingController?action=details&id=${salesorder.ringID}">${salesorder.ringName}</td>
                             <td>${salesorder.ringSize}</td>
                             <td>${salesorder.orderDate}</td>
                             <td>${salesorder.address}</td>
