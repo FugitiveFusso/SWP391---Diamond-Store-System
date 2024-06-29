@@ -89,7 +89,7 @@
                                 <td>${deliveryorder.ringSize}</td>
                                 <td>${deliveryorder.orderDate}</td>
                                 <td>${deliveryorder.address}</td>
-                                <td>${deliveryorder.totalPrice}</td>
+                                <td>${deliveryorder.totalPrice} VND</td>
                             </tr>
                             <%
                                 }

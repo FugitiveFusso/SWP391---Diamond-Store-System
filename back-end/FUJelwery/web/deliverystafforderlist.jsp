@@ -91,7 +91,7 @@
                                 <td>${deliveryorder.ringSize}</td>
                                 <td>${deliveryorder.orderDate}</td>
                                 <td>${deliveryorder.address}</td>
-                                <td>${deliveryorder.totalPrice}</td>
+                                <td>${deliveryorder.totalPrice} VND</td>
                                 <td class="<%= "verified".equals(deliveryorder.getStatus()) ? "status-verified" : "shipping".equals(deliveryorder.getStatus()) ? "status-shipping" : "status-default"%>">
                                     ${deliveryorder.status}
                                 </td>
