@@ -73,7 +73,7 @@
                         <p><strong>Product Name:</strong> ${requestScope.deliveryorder.ringName}</p>
                         <p><strong>Date of Purchase:</strong> ${requestScope.deliveryorder.orderDate}</p>
                         <p><strong>Voucher:</strong> ${requestScope.deliveryorder.voucherName}</p>
-                        <p class="price"><strong>Total Price:</strong> ${requestScope.deliveryorder.totalPrice}</p>
+                        <p class="price">Total Price: ${requestScope.deliveryorder.totalPrice}</p>
                     </div>
                     <div class="action-buttons">
                         <button id="toggle-warranty-btn" class="toggle-btn" onclick="toggleSection('warranty', 'toggle-warranty-btn')">+ Warranty</button>
