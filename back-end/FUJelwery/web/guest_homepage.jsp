@@ -44,7 +44,7 @@
                     </li>
                     <li class="navbar-link"><a href='./GuestDiamondPriceController' class="line">Diamond Price</a></li>
                     <li class="navbar-link"><a href='./GuestVoucherController' class="line">Voucher</a></li>
-                    <li class="navbar-link"><a href="#" class="line">Order Monitor</a>                       
+                    <li class="navbar-link"><a href="#" class="line trigger-popup">Order Monitor</a>                       
                         <div class="sub-menu-1">
                             <ul>
                                 <li><a href='#' class="trigger-popup">Cart</a></li>
