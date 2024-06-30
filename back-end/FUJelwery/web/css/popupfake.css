@@ -9,8 +9,8 @@
     justify-content: center;
     align-items: center;
     position: fixed;  /* Ensure the pop-up is fixed on the viewport */
-    top: 0;
-    left: 0;
+    top: 50%;
+    left: 50%;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);

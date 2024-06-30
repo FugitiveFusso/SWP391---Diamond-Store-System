@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <link rel="stylesheet" type="text/css" href="css/navigation_bar.css">
-        <link rel="stylesheet" href="css/popup_fake.css">
+        <link rel="stylesheet" href="css/popupfake.css">
 
     </head>
     <body>

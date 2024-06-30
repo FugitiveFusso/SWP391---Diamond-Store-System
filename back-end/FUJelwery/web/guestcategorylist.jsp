@@ -12,6 +12,7 @@
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <link rel="stylesheet" href="css/pagination.css">
         <link rel="stylesheet" href="css/user_collectionlist.css">
+        <link rel="stylesheet" href="css/popup_fake.css">
     </head>
     <body>
         <div class="header">
@@ -49,8 +50,8 @@
                     <li class="navbar-link"><a href="#" class="line">Order Monitor</a>                       
                         <div class="sub-menu-1">
                             <ul>
-                                <li><a href='#'>Cart</a></li>
-                                <li><a href='#'>Tracking Orders</a></li>
+                                <li><a href='#' class="trigger-popup">Cart</a></li>
+                                <li><a href='#' class="trigger-popup">Tracking Orders</a></li>
                             </ul>
                         </div>
                     </li>
@@ -76,6 +77,17 @@
                     </li>
                 </ul>
 
+            </div>
+        </div>
+        
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <h2>Please register or sign in to continue.</h2>
+                <p>Don't worry, it's painless. A click of the mouse, a few key taps, and you'll enjoy free, unlimited access to our website, plus other exclusive benefits.</p>
+                <div class="popup-buttons">
+                    <a href="register.jsp" class="popup-button">To continue,<br>CREATE A FREE ACCOUNT →</a>
+                    <a href="userlogin.jsp" class="popup-button">Already registered?<br>LOG IN →</a>
+                </div>
             </div>
         </div>
 
@@ -236,6 +248,28 @@
                                 header.parentElement.style.height = (header.offsetHeight + content.offsetHeight) + "px";
                             }
                         }
+        </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var popup = document.getElementById('popup');
+                var triggers = document.querySelectorAll('.trigger-popup');
+
+                triggers.forEach(function (trigger) {
+                    trigger.addEventListener('click', function (event) {
+                        event.preventDefault();  // Prevent the default link behavior
+                        popup.style.display = 'flex';
+                        document.body.classList.add('no-scroll');
+                    });
+                });
+
+                // Close the pop-up when clicking outside of it
+                window.addEventListener('click', function (event) {
+                    if (event.target == popup) {
+                        popup.style.display = 'none';
+                        document.body.classList.remove('no-scroll');
+                    }
+                });
+            });
         </script>
     </body>
 </html>

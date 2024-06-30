@@ -12,10 +12,11 @@
             href="https://fonts.googleapis.com/css2?family=Gantari:ital,wght@0,100..900;1,100..900&family=Inika:wght@400;700&family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:wght@100..900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Syne:wght@400..800&display=swap"
             rel="stylesheet">
         <link rel="stylesheet" href="../css/navigation_bar.css">
+        <link rel="stylesheet" href="../css/popup_fake.css">
 
     </head>
     <body>
-         <div class="header">
+        <div class="header">
             <div class="header-top">
                 <div class="top-info-left">
                     <ul>
@@ -48,8 +49,8 @@
                     <li class="navbar-link"><a href="#" class="line">Order Monitor</a>                       
                         <div class="sub-menu-1">
                             <ul>
-                                <li><a href='#'>Cart</a></li>
-                                <li><a href='#'>Tracking Orders</a></li>
+                                <li><a href='#' class="trigger-popup">Cart</a></li>
+                                <li><a href='#' class="trigger-popup">Tracking Orders</a></li>
                             </ul>
                         </div>
                     </li>
@@ -75,6 +76,17 @@
                     </li>
                 </ul>
 
+            </div>
+        </div>
+        
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <h2>Please register or sign in to continue.</h2>
+                <p>Don't worry, it's painless. A click of the mouse, a few key taps, and you'll enjoy free, unlimited access to our website, plus other exclusive benefits.</p>
+                <div class="popup-buttons">
+                    <a href="register.jsp" class="popup-button">To continue,<br>CREATE A FREE ACCOUNT →</a>
+                    <a href="userlogin.jsp" class="popup-button">Already registered?<br>LOG IN →</a>
+                </div>
             </div>
         </div>
 
@@ -206,5 +218,27 @@
             </div>
 
         </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var popup = document.getElementById('popup');
+                var triggers = document.querySelectorAll('.trigger-popup');
+
+                triggers.forEach(function (trigger) {
+                    trigger.addEventListener('click', function (event) {
+                        event.preventDefault();  // Prevent the default link behavior
+                        popup.style.display = 'flex';
+                        document.body.classList.add('no-scroll');
+                    });
+                });
+
+                // Close the pop-up when clicking outside of it
+                window.addEventListener('click', function (event) {
+                    if (event.target == popup) {
+                        popup.style.display = 'none';
+                        document.body.classList.remove('no-scroll');
+                    }
+                });
+            });
+        </script>
     </body>
 </html>
