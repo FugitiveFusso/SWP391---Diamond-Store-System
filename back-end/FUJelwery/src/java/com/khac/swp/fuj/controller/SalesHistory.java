@@ -58,7 +58,7 @@ public class SalesHistory extends HttpServlet {
 
 
                 OrderDAO dao = new OrderDAO();
-                List<OrderDTO> list = dao.salesHistory();                
+                List<OrderDTO> list = dao.salesHistory(keyword);                
                 request.setAttribute("saleshistory", list);
                 request.getRequestDispatcher("./salesorderhistory.jsp").forward(request, response);
                 

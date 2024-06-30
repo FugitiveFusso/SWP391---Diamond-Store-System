@@ -47,12 +47,17 @@ public class SalesStaffOrderController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String action = request.getParameter("action");
-            String keyword = request.getParameter("keyword");
+            String keyword_a = request.getParameter("keyword_a");
+            String keyword_b = request.getParameter("keyword_b");
+
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDate localDate = LocalDate.now();
             String purchasedDate = localDate.format(formatter);
-            if (keyword == null) {
-                keyword = "";
+            if (keyword_a == null) {
+                keyword_a = "";
+            }
+            if (keyword_b == null) {
+                keyword_b = "";
             }
             String sortCol = request.getParameter("colSort");
 
@@ -64,9 +69,9 @@ public class SalesStaffOrderController extends HttpServlet {
             } else if (action == null || action.equals("list")) {//lists
 
                 OrderDAO dao = new OrderDAO();
-                List<OrderDTO> list = dao.listForSales();
+                List<OrderDTO> list = dao.listForSales(keyword_a);
                 request.setAttribute("salesorderlist", list);
-                List<OrderDTO> receiveAtStore = dao.receivedAtStore();
+                List<OrderDTO> receiveAtStore = dao.receivedAtStore(keyword_b);
                 request.setAttribute("receiveatstore", receiveAtStore);
                 request.getRequestDispatcher("/salesstafforderlist.jsp").forward(request, response);
 
@@ -128,9 +133,9 @@ public class SalesStaffOrderController extends HttpServlet {
                 }
 
                 try {
-                    List<OrderDTO> list = orderDAO.listForSales();
+                    List<OrderDTO> list = orderDAO.listForSales(keyword_a);
                     request.setAttribute("salesorderlist", list);
-                    List<OrderDTO> receiveAtStore = orderDAO.receivedAtStore();
+                    List<OrderDTO> receiveAtStore = orderDAO.receivedAtStore(keyword_b);
                     request.setAttribute("receiveatstore", receiveAtStore);
                     request.getRequestDispatcher("/salesstafforderlist.jsp").forward(request, response);
                 } catch (Exception e) {
@@ -161,9 +166,9 @@ public class SalesStaffOrderController extends HttpServlet {
                 }
 
                 try {
-                    List<OrderDTO> list = orderDAO.listForSales();
+                    List<OrderDTO> list = orderDAO.listForSales(keyword_a);
                     request.setAttribute("salesorderlist", list);
-                    List<OrderDTO> receiveAtStore = orderDAO.receivedAtStore();
+                    List<OrderDTO> receiveAtStore = orderDAO.receivedAtStore(keyword_b);
                     request.setAttribute("receiveatstore", receiveAtStore);
                     request.getRequestDispatcher("/salesstafforderlist.jsp").forward(request, response);
                 } catch (Exception e) {

@@ -105,7 +105,7 @@
                 %>
                 <div class="list">
                     <form action='' method=GET id="searchbox"> 
-                        <input name=keyword type=text class="search-input" value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
+                        <input name=keyword_a type=text class="search-input" value="<%=request.getParameter("keyword_a") != null ? request.getParameter("keyword_a") : ""%>">
                         <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
                     </form>
                     <table id="pagination">
@@ -161,7 +161,7 @@
 
                 <div class="list">
                     <form action='' method=GET id="searchbox"> 
-                        <input name=keyword type=text class="search-input" value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
+                        <input name=keyword_b type=text class="search-input" value="<%=request.getParameter("keyword_b") != null ? request.getParameter("keyword_b") : ""%>">
                         <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
                     </form>
                     <table id="pagination1">
