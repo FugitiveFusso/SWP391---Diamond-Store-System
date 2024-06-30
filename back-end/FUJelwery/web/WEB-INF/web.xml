@@ -84,6 +84,10 @@
         <servlet-name>GuestVoucherController</servlet-name>
         <servlet-class>com.khac.swp.fuj.controller.GuestVoucherController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GuestProductController</servlet-name>
+        <servlet-class>com.khac.swp.fuj.controller.GuestProductController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AdminLoginController</servlet-name>
         <url-pattern>/adminlogin</url-pattern>
@@ -167,6 +171,10 @@
     <servlet-mapping>
         <servlet-name>GuestVoucherController</servlet-name>
         <url-pattern>/GuestVoucherController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GuestProductController</servlet-name>
+        <url-pattern>/GuestProductController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
