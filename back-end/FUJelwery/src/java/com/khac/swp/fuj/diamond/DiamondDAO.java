@@ -242,28 +242,46 @@ public class DiamondDAO {
 
     public DiamondDTO loadStatistics() {
 
-        String sql = "WITH DiamondUsage AS (\n"
-                + "    SELECT\n"
-                + "        d.diamondID,\n"
-                + "        d.diamondName,\n"
-                + "        CASE WHEN r.ringID IS NOT NULL THEN 'Used' ELSE 'Not Used' END AS usageStatus,\n"
-                + "        d.isDeleted\n"
-                + "    FROM\n"
-                + "        Diamond d\n"
-                + "        LEFT JOIN Ring r ON d.diamondID = r.diamondID\n"
-                + ")\n"
+        String sql = "WITH OriginCounts AS (\n"
+                + "SELECT origin, COUNT(*) AS originCount FROM Diamond GROUP BY origin),\n"
+                + "TopOrigins AS (\n"
+                + "SELECT origin, originCount FROM (\n"
+                + "SELECT origin, originCount, ROW_NUMBER() OVER (ORDER BY originCount DESC) AS rowNum FROM OriginCounts) ranked WHERE rowNum <= 5),\n"
+                + "DiamondUsage AS (\n"
+                + "SELECT d.diamondID, d.diamondName, CASE WHEN r.ringID IS NOT NULL THEN 'Used' ELSE 'Not Used' END AS usageStatus, d.isDeleted\n"
+                + "FROM Diamond d LEFT JOIN Ring r ON d.diamondID = r.diamondID),\n"
+                + "Summary AS (\n"
+                + "SELECT COUNT(*) AS totalDiamonds, SUM(CASE WHEN isDeleted = 'active' THEN 1 ELSE 0 END) AS activeDiamonds,\n"
+                + "SUM(CASE WHEN isDeleted = 'deleted' THEN 1 ELSE 0 END) AS deletedDiamonds,\n"
+                + "SUM(CASE WHEN usageStatus = 'Used' THEN 1 ELSE 0 END) AS diamondsUsedInRing,\n"
+                + "SUM(CASE WHEN usageStatus = 'Not Used' THEN 1 ELSE 0 END) AS diamondsNotUsedInRing,\n"
+                + "ROUND(CAST(SUM(CASE WHEN usageStatus = 'Used' THEN 1 ELSE 0 END) AS FLOAT) / COUNT(*) * 100, 2) AS percentageDiamondsUsed,\n"
+                + "ROUND(CAST(SUM(CASE WHEN usageStatus = 'Not Used' THEN 1 ELSE 0 END) AS FLOAT) / COUNT(*) * 100, 2) AS percentageDiamondsNotUsed,\n"
+                + "STRING_AGG(CASE WHEN usageStatus = 'Not Used' AND isDeleted = 'active' THEN CAST(diamondID AS VARCHAR) ELSE NULL END, ', ') AS activeDiamondsNotUsedList,\n"
+                + "STRING_AGG(CASE WHEN usageStatus = 'Used' AND isDeleted = 'active' THEN CAST(diamondID AS VARCHAR) ELSE NULL END, ', ') AS activeDiamondsUsedList\n"
+                + "FROM DiamondUsage)\n"
                 + "SELECT\n"
-                + "    COUNT(*) AS totalDiamonds,\n"
-                + "    SUM(CASE WHEN isDeleted = 'active' THEN 1 ELSE 0 END) AS activeDiamonds,\n"
-                + "    SUM(CASE WHEN isDeleted = 'deleted' THEN 1 ELSE 0 END) AS deletedDiamonds,\n"
-                + "    SUM(CASE WHEN usageStatus = 'Used' THEN 1 ELSE 0 END) AS diamondsUsedInRing,\n"
-                + "    SUM(CASE WHEN usageStatus = 'Not Used' THEN 1 ELSE 0 END) AS diamondsNotUsedInRing,\n"
-                + "    ROUND(CAST(SUM(CASE WHEN usageStatus = 'Used' THEN 1 ELSE 0 END) AS FLOAT) / COUNT(*) * 100, 2) AS percentageDiamondsUsed,\n"
-                + "    ROUND(CAST(SUM(CASE WHEN usageStatus = 'Not Used' THEN 1 ELSE 0 END) AS FLOAT) / COUNT(*) * 100, 2) AS percentageDiamondsNotUsed,\n"
-                + "    STRING_AGG(CASE WHEN usageStatus = 'Not Used' AND isDeleted = 'active' THEN CAST(diamondID AS VARCHAR) ELSE NULL END, ', ') AS activeDiamondsNotUsedList,\n"
-                + "    STRING_AGG(CASE WHEN usageStatus = 'Used' AND isDeleted = 'active' THEN CAST(diamondID AS VARCHAR) ELSE NULL END, ', ') AS activeDiamondsUsedList\n"
-                + "FROM\n"
-                + "    DiamondUsage;";
+                + "    s.totalDiamonds,\n"
+                + "    s.activeDiamonds,\n"
+                + "    s.deletedDiamonds,\n"
+                + "    s.diamondsUsedInRing,\n"
+                + "    s.diamondsNotUsedInRing,\n"
+                + "    s.percentageDiamondsUsed,\n"
+                + "    s.percentageDiamondsNotUsed,\n"
+                + "    s.activeDiamondsNotUsedList,\n"
+                + "    s.activeDiamondsUsedList,\n"
+                + "        STRING_AGG(CAST(t.origin AS VARCHAR) + ' - ' + CAST(t.originCount AS VARCHAR), ' diamonds, ') AS topOrigins\n"
+                + "FROM Summary s CROSS JOIN TopOrigins t\n"
+                + "GROUP BY\n"
+                + "    s.totalDiamonds,\n"
+                + "    s.activeDiamonds,\n"
+                + "    s.deletedDiamonds,\n"
+                + "    s.diamondsUsedInRing,\n"
+                + "    s.diamondsNotUsedInRing,\n"
+                + "    s.percentageDiamondsUsed,\n"
+                + "    s.percentageDiamondsNotUsed,\n"
+                + "    s.activeDiamondsNotUsedList,\n"
+                + "    s.activeDiamondsUsedList;";
 
         try {
 
@@ -284,7 +302,7 @@ public class DiamondDAO {
 
                 String activeDiamondsNotUsedList = rs.getString("activeDiamondsNotUsedList");
                 String activeDiamondsUsedList = rs.getString("activeDiamondsUsedList");
-
+                String topOrigins = rs.getString("topOrigins");
 
                 DiamondDTO diamond = new DiamondDTO();
                 diamond.setTotalDiamonds(totalDiamonds);
@@ -296,6 +314,8 @@ public class DiamondDAO {
                 diamond.setPercentageDiamondsNotUsed(percentageDiamondsNotUsed);
                 diamond.setDiamondsUsedListbyID(activeDiamondsUsedList);
                 diamond.setDiamondsNotUsedListByID(activeDiamondsNotUsedList);
+                diamond.setTopOrigins(topOrigins);
+                
                 return diamond;
             }
         } catch (SQLException ex) {

@@ -81,26 +81,43 @@ SELECT totalDiamondsPrice, FORMAT(averagePrice, 'N0') AS averagePrice, FORMAT(hi
 activeDiamondsPrice, deletedDiamondsPrice, allDiamondSizes, allCaratWeights, allColors, allClarities FROM DiamondStats;
 
 -- Diamonds
-WITH DiamondUsage AS (
-    SELECT
-        d.diamondID,
-        d.diamondName,
-        CASE WHEN r.ringID IS NOT NULL THEN 'Used' ELSE 'Not Used' END AS usageStatus,
-        d.isDeleted
-    FROM
-        Diamond d
-        LEFT JOIN Ring r ON d.diamondID = r.diamondID
-)
+WITH OriginCounts AS (
+SELECT origin, COUNT(*) AS originCount FROM Diamond GROUP BY origin),
+TopOrigins AS (
+SELECT origin, originCount FROM (
+SELECT origin, originCount, ROW_NUMBER() OVER (ORDER BY originCount DESC) AS rowNum FROM OriginCounts) ranked WHERE rowNum <= 5),
+DiamondUsage AS (
+SELECT d.diamondID, d.diamondName, CASE WHEN r.ringID IS NOT NULL THEN 'Used' ELSE 'Not Used' END AS usageStatus, d.isDeleted
+FROM Diamond d LEFT JOIN Ring r ON d.diamondID = r.diamondID),
+Summary AS (
+SELECT COUNT(*) AS totalDiamonds, SUM(CASE WHEN isDeleted = 'active' THEN 1 ELSE 0 END) AS activeDiamonds,
+SUM(CASE WHEN isDeleted = 'deleted' THEN 1 ELSE 0 END) AS deletedDiamonds,
+SUM(CASE WHEN usageStatus = 'Used' THEN 1 ELSE 0 END) AS diamondsUsedInRing,
+SUM(CASE WHEN usageStatus = 'Not Used' THEN 1 ELSE 0 END) AS diamondsNotUsedInRing,
+ROUND(CAST(SUM(CASE WHEN usageStatus = 'Used' THEN 1 ELSE 0 END) AS FLOAT) / COUNT(*) * 100, 2) AS percentageDiamondsUsed,
+ROUND(CAST(SUM(CASE WHEN usageStatus = 'Not Used' THEN 1 ELSE 0 END) AS FLOAT) / COUNT(*) * 100, 2) AS percentageDiamondsNotUsed,
+STRING_AGG(CASE WHEN usageStatus = 'Not Used' AND isDeleted = 'active' THEN CAST(diamondID AS VARCHAR) ELSE NULL END, ', ') AS activeDiamondsNotUsedList,
+STRING_AGG(CASE WHEN usageStatus = 'Used' AND isDeleted = 'active' THEN CAST(diamondID AS VARCHAR) ELSE NULL END, ', ') AS activeDiamondsUsedList
+FROM DiamondUsage)
 SELECT
-    COUNT(*) AS totalDiamonds,
-    SUM(CASE WHEN isDeleted = 'active' THEN 1 ELSE 0 END) AS activeDiamonds,
-    SUM(CASE WHEN isDeleted = 'deleted' THEN 1 ELSE 0 END) AS deletedDiamonds,
-    SUM(CASE WHEN usageStatus = 'Used' THEN 1 ELSE 0 END) AS diamondsUsedInRing,
-    SUM(CASE WHEN usageStatus = 'Not Used' THEN 1 ELSE 0 END) AS diamondsNotUsedInRing,
-    ROUND(CAST(SUM(CASE WHEN usageStatus = 'Used' THEN 1 ELSE 0 END) AS FLOAT) / COUNT(*) * 100, 2) AS percentageDiamondsUsed,
-    ROUND(CAST(SUM(CASE WHEN usageStatus = 'Not Used' THEN 1 ELSE 0 END) AS FLOAT) / COUNT(*) * 100, 2) AS percentageDiamondsNotUsed,
-    STRING_AGG(CASE WHEN usageStatus = 'Not Used' AND isDeleted = 'active' THEN CAST(diamondID AS VARCHAR) ELSE NULL END, ', ') AS activeDiamondsNotUsedList,
-    STRING_AGG(CASE WHEN usageStatus = 'Used' AND isDeleted = 'active' THEN CAST(diamondID AS VARCHAR) ELSE NULL END, ', ') AS activeDiamondsUsedList
-FROM
-    DiamondUsage;
-
+    s.totalDiamonds,
+    s.activeDiamonds,
+    s.deletedDiamonds,
+    s.diamondsUsedInRing,
+    s.diamondsNotUsedInRing,
+    s.percentageDiamondsUsed,
+    s.percentageDiamondsNotUsed,
+    s.activeDiamondsNotUsedList,
+    s.activeDiamondsUsedList,
+    STRING_AGG(CAST(t.origin AS VARCHAR) + ' - ' + CAST(t.originCount AS VARCHAR), ' diamonds, ') AS topOrigins
+FROM Summary s CROSS JOIN TopOrigins t
+GROUP BY
+    s.totalDiamonds,
+    s.activeDiamonds,
+    s.deletedDiamonds,
+    s.diamondsUsedInRing,
+    s.diamondsNotUsedInRing,
+    s.percentageDiamondsUsed,
+    s.percentageDiamondsNotUsed,
+    s.activeDiamondsNotUsedList,
+    s.activeDiamondsUsedList;

@@ -310,6 +310,7 @@
             <strong>Percentage Diamonds Not Used: ${requestScope.diamond.percentageDiamondsNotUsed}%</strong>
             <strong>Diamonds Not Used List By ID: ${requestScope.diamond.diamondsNotUsedListByID}</strong>         
             <strong>Diamonds Used List By ID: ${requestScope.diamond.diamondsUsedListbyID}</strong>
+            <strong>Top Diamonds's Origin: ${requestScope.diamond.topOrigins}</strong>
 
         </div>
 
