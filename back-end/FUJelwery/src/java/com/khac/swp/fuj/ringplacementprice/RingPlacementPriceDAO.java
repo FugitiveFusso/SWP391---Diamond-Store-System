@@ -93,7 +93,7 @@ public class RingPlacementPriceDAO {
                 return rp;
             }
         } catch (SQLException ex) {
-            System.out.println("Query DiamonPrice error!" + ex.getMessage());
+            System.out.println("Query RP Price error!" + ex.getMessage());
             ex.printStackTrace();
         }
         return null;
@@ -188,9 +188,98 @@ public class RingPlacementPriceDAO {
                 return rp;
             }
         } catch (SQLException ex) {
-            System.out.println("Query DiamonPrice error!" + ex.getMessage());
+            System.out.println("Query RP Price error!" + ex.getMessage());
             ex.printStackTrace();
         }
         return null;
+    }
+
+    public RingPlacementPriceDTO loadStatisticsA() {
+
+        String sql = "SELECT COUNT(*) AS TotalRingPlacements, FORMAT(AVG(rpPrice), 'N0') AS AveragePrice FROM [RingPlacementPrice] WHERE isDeleted = 'active'; ";
+
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                int totalRingPlacements = rs.getInt("TotalRingPlacements");
+                String averagePrice = rs.getString("AveragePrice");
+
+                RingPlacementPriceDTO rp = new RingPlacementPriceDTO();
+                rp.setTotalRp(totalRingPlacements);
+                rp.setAveragePrice(averagePrice);
+                return rp;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Query RP Price error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<RingPlacementPriceDTO> getStatisticsA() {
+        List<RingPlacementPriceDTO> list = new ArrayList<RingPlacementPriceDTO>();
+        try {
+            Connection con = DBUtils.getConnection();
+            String sql = " SELECT material, COUNT(*) AS RingPlacementsByMaterial, FORMAT(SUM(rpPrice), 'N0') AS TotalMaterialPrice FROM [RingPlacementPrice] WHERE isDeleted = 'active' GROUP BY material; ";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    int ringPlacementsByMaterial = rs.getInt("RingPlacementsByMaterial");
+                    String totalMaterialPrice = rs.getString("TotalMaterialPrice");
+                    String material = rs.getString("material");
+
+                    RingPlacementPriceDTO rp = new RingPlacementPriceDTO();
+                    rp.setRingPlacementsByMaterial(ringPlacementsByMaterial);
+                    rp.setTotalMaterialPrice(totalMaterialPrice);
+                    rp.setMaterial(material);
+
+                    list.add(rp);
+                }
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return list;
+    }
+
+    public List<RingPlacementPriceDTO> getStatisticsB() {
+        List<RingPlacementPriceDTO> list = new ArrayList<RingPlacementPriceDTO>();
+        try {
+            Connection con = DBUtils.getConnection();
+            String sql = " SELECT color, COUNT(*) AS RingPlacementsByColor FROM [RingPlacementPrice] WHERE isDeleted = 'active' GROUP BY color; ";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    int ringPlacementsByColor = rs.getInt("RingPlacementsByColor");
+                    String color = rs.getString("color");
+
+                    RingPlacementPriceDTO rp = new RingPlacementPriceDTO();
+                    rp.setRingPlacementsByColor(ringPlacementsByColor);
+                    rp.setColor(color);
+
+                    list.add(rp);
+                }
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return list;
     }
 }

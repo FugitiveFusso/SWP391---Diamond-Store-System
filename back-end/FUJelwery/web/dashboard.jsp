@@ -1,4 +1,5 @@
 
+<%@page import="com.khac.swp.fuj.ringplacementprice.RingPlacementPriceDTO"%>
 <%@page import="com.khac.swp.fuj.certificate.CertificateDTO"%>
 <%@page import="com.khac.swp.fuj.voucher.VoucherDTO"%>
 <%@page import="com.khac.swp.fuj.collection.CollectionDTO"%>
@@ -94,6 +95,7 @@
             </div>
         </div>
         <div style="text-align: center">
+
             <h1>User Statistics</h1>
             <table style="margin: 0 auto;">
                 <tr>
@@ -156,6 +158,7 @@
                     }
                 %>    
             </table>
+
             <h1>Collection Statistics</h1>
             <%
                 List<CollectionDTO> collList = (List<CollectionDTO>) request.getAttribute("colist");
@@ -190,6 +193,7 @@
                     }
                 %>    
             </table>
+
             <h1>Voucher Statistics</h1>
             <%
                 List<VoucherDTO> vouList = (List<VoucherDTO>) request.getAttribute("voulist");
@@ -224,6 +228,7 @@
                     }
                 %>    
             </table>
+
             <h1>Post Statistics</h1>
             <strong>Total Active Posts: ${requestScope.post.totalNumberOfActivePosts}</strong>
             <strong>Total Author: ${requestScope.post.totalNumberOfAuthors}</strong>
@@ -312,6 +317,48 @@
             <strong>Diamonds Used List By ID: ${requestScope.diamond.diamondsUsedListbyID}</strong>
             <strong>Top Diamonds's Origin: ${requestScope.diamond.topOrigins}</strong>
 
+            <h1>Ring Placement Price Statistics</h1>
+            <strong>Total Ring Placements: ${requestScope.rppa.totalRp}</strong>
+            <strong>Average Price: ${requestScope.rppa.averagePrice} VND</strong>
+            <table style="margin: 0 auto;">
+                <tr>
+                    <th>Material</th>
+                    <th>Ring Placement By Material</th>
+                    <th>Total Price of Ring Placement By Material</th>
+                </tr>
+                <%
+                    List<RingPlacementPriceDTO> rppListA = (List<RingPlacementPriceDTO>) request.getAttribute("rpplista");
+                    for (RingPlacementPriceDTO rpplista : rppListA) {
+                        pageContext.setAttribute("rpplista", rpplista);
+                %>
+                <tr>
+                    <td>${rpplista.material}</td>
+                    <td>${rpplista.ringPlacementsByMaterial}</td>
+                    <td>${rpplista.totalMaterialPrice}</td>
+                </tr>
+                <%
+                    }
+                %>    
+            </table>
+            <br>
+            <table style="margin: 0 auto;">
+                <tr>
+                    <th>Color</th>
+                    <th>Ring Placement By Color</th>
+                </tr>
+                <%
+                    List<RingPlacementPriceDTO> rppListB = (List<RingPlacementPriceDTO>) request.getAttribute("rpplistb");
+                    for (RingPlacementPriceDTO rpplistb : rppListB) {
+                        pageContext.setAttribute("rpplistb", rpplistb);
+                %>
+                <tr>
+                    <td>${rpplistb.color}</td>
+                    <td>${rpplistb.ringPlacementsByColor}</td>
+                </tr>
+                <%
+                    }
+                %>    
+            </table>
         </div>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"

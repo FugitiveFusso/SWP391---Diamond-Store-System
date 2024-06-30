@@ -121,3 +121,8 @@ GROUP BY
     s.percentageDiamondsNotUsed,
     s.activeDiamondsNotUsedList,
     s.activeDiamondsUsedList;
+
+-- RingPlacementsPrices
+SELECT COUNT(*) AS TotalRingPlacements, FORMAT(AVG(rpPrice), 'N0') AS AveragePrice FROM [RingPlacementPrice] WHERE isDeleted = 'active';
+SELECT material, COUNT(*) AS RingPlacementsByMaterial, FORMAT(SUM(rpPrice), 'N0') AS TotalMaterialPrice FROM [RingPlacementPrice] WHERE isDeleted = 'active' GROUP BY material;
+SELECT color, COUNT(*) AS RingPlacementsByColor FROM [RingPlacementPrice] WHERE isDeleted = 'active' GROUP BY color;

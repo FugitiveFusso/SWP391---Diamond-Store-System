@@ -17,6 +17,8 @@ import com.khac.swp.fuj.diamondprice.DiamondPriceDAO;
 import com.khac.swp.fuj.diamondprice.DiamondPriceDTO;
 import com.khac.swp.fuj.posts.PostDAO;
 import com.khac.swp.fuj.posts.PostDTO;
+import com.khac.swp.fuj.ringplacementprice.RingPlacementPriceDAO;
+import com.khac.swp.fuj.ringplacementprice.RingPlacementPriceDTO;
 import com.khac.swp.fuj.users.UserDAO;
 import com.khac.swp.fuj.users.UserDTO;
 import com.khac.swp.fuj.voucher.VoucherDAO;
@@ -56,30 +58,49 @@ public class DashboardController extends HttpServlet {
                 response.sendRedirect("managerlogin.jsp");
                 return;
             } else if (action == null || action.equals("list")) {//lists
+                //Users
                 UserDAO userDao = new UserDAO();
                 List<UserDTO> usList = userDao.listStatistics();
                 request.setAttribute("uslist", usList);
+                //Categories
                 CategoryDAO categoyrDao = new CategoryDAO();
                 List<CategoryDTO> caList = categoyrDao.listStatistics();
                 request.setAttribute("calist", caList);
+                //Collections
                 CollectionDAO collectionDao = new CollectionDAO();
                 List<CollectionDTO> coList = collectionDao.listStatistics();
                 request.setAttribute("colist", coList);
+                //Vouchers
                 VoucherDAO voucherDao = new VoucherDAO();
                 List<VoucherDTO> vouList = voucherDao.listStatistics();
                 request.setAttribute("voulist", vouList);
+                //Posts
                 PostDAO postDao = new PostDAO();
                 PostDTO post = postDao.loadStatistics();
                 request.setAttribute("post", post);
+                //Certificates
                 CertificateDAO certificateDao = new CertificateDAO();
                 List<CertificateDTO> certList = certificateDao.listStatistics();
                 request.setAttribute("certlist", certList);
+                //DiamondPrices
                 DiamondPriceDAO diamondPriceDao = new DiamondPriceDAO();
                 DiamondPriceDTO diamondPrice = diamondPriceDao.loadStatistics();
                 request.setAttribute("diamondprice", diamondPrice);
+                //Diamonds
                 DiamondDAO diamondDao = new DiamondDAO();
                 DiamondDTO diamond = diamondDao.loadStatistics();
                 request.setAttribute("diamond", diamond);
+                //RPPs1
+                RingPlacementPriceDAO ringPlacementPriceDao = new RingPlacementPriceDAO();
+                RingPlacementPriceDTO rppa = ringPlacementPriceDao.loadStatisticsA();
+                request.setAttribute("rppa", rppa);
+                //RPPs2
+                List<RingPlacementPriceDTO> rppListA = ringPlacementPriceDao.getStatisticsA();
+                request.setAttribute("rpplista", rppListA);
+                //RPPs3
+                List<RingPlacementPriceDTO> rppListB = ringPlacementPriceDao.getStatisticsB();
+                request.setAttribute("rpplistb", rppListB);
+
                 request.getRequestDispatcher("/dashboard.jsp").forward(request, response);
 
             }
