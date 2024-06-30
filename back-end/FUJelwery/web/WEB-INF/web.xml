@@ -150,6 +150,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>userlogin.jsp</welcome-file>
+        <welcome-file>guest_homepage.jsp</welcome-file>
     </welcome-file-list>
 </web-app>
