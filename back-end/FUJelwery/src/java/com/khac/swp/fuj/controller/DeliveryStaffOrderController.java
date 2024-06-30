@@ -65,7 +65,7 @@ public class DeliveryStaffOrderController extends HttpServlet {
 
 
                 OrderDAO dao = new OrderDAO();
-                List<OrderDTO> list = dao.listForDelivery();                
+                List<OrderDTO> list = dao.listForDelivery(keyword);                
                 request.setAttribute("deliverystafforderlist", list);
                 request.getRequestDispatcher("./deliverystafforderlist.jsp").forward(request, response);
             }else if (action.equals("shipping")) {
@@ -91,9 +91,9 @@ public class DeliveryStaffOrderController extends HttpServlet {
                 }
 
                 try {
-                    List<OrderDTO> list = orderDAO.listForDelivery();
+                    List<OrderDTO> list = orderDAO.listForDelivery(keyword);
                     request.setAttribute("deliverystafforderlist", list);
-                    List<OrderDTO> listHistory = orderDAO.deliveryHistory();
+                    List<OrderDTO> listHistory = orderDAO.deliveryHistory(keyword);
                     request.setAttribute("deliveryhistory", listHistory);
                     request.getRequestDispatcher("/deliverystafforderlist.jsp").forward(request, response);
                 } catch (Exception e) {
@@ -124,9 +124,9 @@ public class DeliveryStaffOrderController extends HttpServlet {
                 }
 
                 try {
-                    List<OrderDTO> list = orderDAO.listForDelivery();
+                    List<OrderDTO> list = orderDAO.listForDelivery(keyword);
                     request.setAttribute("deliverystafforderlist", list);
-                    List<OrderDTO> listHistory = orderDAO.deliveryHistory();
+                    List<OrderDTO> listHistory = orderDAO.deliveryHistory(keyword);
                     request.setAttribute("deliveryhistory", listHistory);
                     request.getRequestDispatcher("/deliverystafforderlist.jsp").forward(request, response);
                 } catch (Exception e) {

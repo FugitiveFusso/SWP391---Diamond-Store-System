@@ -58,7 +58,7 @@ public class DeliveryHistory extends HttpServlet {
 
 
                 OrderDAO dao = new OrderDAO();
-                List<OrderDTO> list = dao.deliveryHistory();                
+                List<OrderDTO> list = dao.deliveryHistory(keyword);                
                 request.setAttribute("deliveryhistory", list);
                 request.getRequestDispatcher("./deliveryorderhistory.jsp").forward(request, response);
             } else if(action.equals("historydetails")){

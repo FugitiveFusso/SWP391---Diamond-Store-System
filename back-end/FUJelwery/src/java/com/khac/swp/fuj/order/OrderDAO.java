@@ -406,16 +406,27 @@ public class OrderDAO {
         return list;
     }
 
-    public List<OrderDTO> listForDelivery() {
+    public List<OrderDTO> listForDelivery(String keyword) {
         List<OrderDTO> list = new ArrayList<OrderDTO>();
         try {
 
             Connection con = DBUtils.getConnection();
 
-            String sql = "select o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, COALESCE(v.voucherID, 0) AS [voucherID], COALESCE(v.voucherName,'n/a') AS [voucherName], COALESCE(o.warrantyID, 0) AS [warrantyID], COALESCE(w.warrantyName, 'n/a') AS [warrantyName], o.ringSize, FORMAT(SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * ((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0' ) AS [totalPrice], o.status from [Order] o left join [User] u ON o.userID = u.userID left join [Ring] r ON o.ringID = r.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID  left join [Voucher] v ON o.voucherID = v.voucherID LEFT JOIN [Warranty] w ON o.warrantyID = w.warrantyID group by o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, v.percentage, o.warrantyID, o.ringSize, o.status, o.purchaseMethod, w.warrantyName HAVING o.status IN ('shipping', 'verified') OR (o.purchaseMethod = 'Door-to-door delivery service' AND o.status <> 'delivered'); ";
+            String sql = "select o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, COALESCE(v.voucherID, 0) AS [voucherID], COALESCE(v.voucherName,'n/a') AS [voucherName], COALESCE(o.warrantyID, 0) AS [warrantyID], COALESCE(w.warrantyName, 'n/a') AS [warrantyName], o.ringSize, FORMAT(SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * ((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0' ) AS [totalPrice], o.status from [Order] o left join [User] u ON o.userID = u.userID left join [Ring] r ON o.ringID = r.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID  left join [Voucher] v ON o.voucherID = v.voucherID LEFT JOIN [Warranty] w ON o.warrantyID = w.warrantyID group by o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, v.percentage, o.warrantyID, o.ringSize, o.status, o.purchaseMethod, w.warrantyName HAVING (o.status IN ('shipping', 'verified') OR (o.purchaseMethod = 'Door-to-door delivery service' AND o.status <> 'delivered')) ";
+
+            if (keyword != null && !keyword.isEmpty()) {
+                sql += " AND (u.userName LIKE ? OR r.ringName LIKE ? OR o.orderDate LIKE ? OR u.address LIKE ?)";
+            }
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
+            if (keyword != null && !keyword.isEmpty()) {
+                ps.setString(1, "%" + keyword + "%");
+                ps.setString(2, "%" + keyword + "%");
+                ps.setString(3, "%" + keyword + "%");
+                ps.setString(4, "%" + keyword + "%");
+
+            }
 
             ResultSet rs = ps.executeQuery();
             if (rs != null) {
@@ -464,7 +475,7 @@ public class OrderDAO {
         return list;
     }
 
-    public List<OrderDTO> deliveryHistory() {
+    public List<OrderDTO> deliveryHistory(String keyword) {
         List<OrderDTO> list = new ArrayList<OrderDTO>();
         try {
 
@@ -472,8 +483,19 @@ public class OrderDAO {
 
             String sql = "select o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, COALESCE(v.voucherID, 0) AS [voucherID], COALESCE(v.voucherName,'n/a') AS [voucherName], COALESCE(o.warrantyID, 0) AS [warrantyID], COALESCE(w.warrantyName, 'n/a') AS [warrantyName], o.ringSize, FORMAT(SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * ((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0' ) AS [totalPrice], o.status from [Order] o left join [User] u ON o.userID = u.userID left join [Ring] r ON o.ringID = r.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID  left join [Voucher] v ON o.voucherID = v.voucherID LEFT JOIN [Warranty] w ON o.warrantyID = w.warrantyID group by o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, v.percentage, o.warrantyID, o.ringSize, o.status, o.purchaseMethod, w.warrantyName HAVING o.status = 'delivered'  ";
 
+            if (keyword != null && !keyword.isEmpty()) {
+                sql += " AND (u.userName LIKE ? OR r.ringName LIKE ? OR o.orderDate LIKE ? OR u.address LIKE ?)";
+            }
+
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
+            if (keyword != null && !keyword.isEmpty()) {
+                ps.setString(1, "%" + keyword + "%");
+                ps.setString(2, "%" + keyword + "%");
+                ps.setString(3, "%" + keyword + "%");
+                ps.setString(4, "%" + keyword + "%");
+
+            }
 
             ResultSet rs = ps.executeQuery();
             if (rs != null) {
