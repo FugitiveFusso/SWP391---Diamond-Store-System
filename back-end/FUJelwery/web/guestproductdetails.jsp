@@ -55,12 +55,12 @@
                         </div>
                     </li>
                     <li class="navbar-link">
-                        <a href="guest_guest_guest_static_webpages/certificate_edu.jsp" class="line">Education</a>
+                        <a href="guest_static_webpages/certificate_edu.jsp" class="line">Education</a>
                         <div class="sub-menu-1">
                             <ul>
                                 <li><a href='./GuestPostController'>Blog</a></li>
-                                <li><a href='guest_guest_guest_static_webpages/ringmeasuring.jsp'>Ring Measuring Guide</a></li>          
-                                <li><a href='guest_guest_guest_static_webpages/faqs.jsp'>Frequently Asking Questions</a></li>
+                                <li><a href='guest_static_webpages/ringmeasuring.jsp'>Ring Measuring Guide</a></li>          
+                                <li><a href='guest_static_webpages/faqs.jsp'>Frequently Asking Questions</a></li>
                             </ul>
                         </div>
                     </li>
