@@ -17,8 +17,7 @@
 
     </head>
     <body>
-
-               <div class="header">
+        <div class="header">
             <div class="header-top">
                 <div class="top-info-left">
                     <ul>
@@ -26,7 +25,7 @@
                         <li style="margin-left: 30px">at FUJ Jewelry Online Shop.</li>                         
                     </ul>
                 </div>
-                <a href="user_homepage.jsp"><img src="./images/Screenshot (656).png"></a>
+                <a href="guest_homepage.jsp"><img src="./images/Screenshot (656).png"></a>
                 <div class="top-info-right">
                     <ul>
                         <li>FUJ Jewelry Shop - <strong>(+ 84) 898876512</strong></li>
@@ -40,41 +39,41 @@
                         <a href="#" class="line">Jewelry</a>
                         <div class="sub-menu-1">
                             <ul>
-                                <li><a href='./ProductController'>Ring</a></li>
-                                <li><a href='./UserCategoryController'>Category</a></li>  
-                                <li><a href='./UserCollectionController'>Collection</a></li>  
+                                <li><a href='./GuestProductController'>Ring</a></li>
+                                <li><a href='./GuestCategoryController'>Category</a></li>  
+                                <li><a href='./GuestCollectionController'>Collection</a></li>  
 
 
                             </ul>
                         </div>   
                     </li>
-                    <li class="navbar-link"><a href='./UserDiamondPriceController' class="line">Diamond Price</a></li>
-                    <li class="navbar-link"><a href='./UserVoucherController' class="line">Voucher</a></li>
+                    <li class="navbar-link"><a href='./GuestDiamondPriceController' class="line">Diamond Price</a></li>
+                    <li class="navbar-link"><a href='./GuestVoucherController' class="line">Voucher</a></li>
                     <li class="navbar-link"><a href="#" class="line">Order Monitor</a>                       
                         <div class="sub-menu-1">
                             <ul>
-                                <li><a href='OrderController?action=list&id=${sessionScope.usersession.userid}'>Cart</a></li>
-                                <li><a href='BillController?action=list&id=${sessionScope.usersession.userid}'>Tracking Orders</a></li>
+                                <li><a href='#'>Cart</a></li>
+                                <li><a href='#'>Tracking Orders</a></li>
                             </ul>
                         </div>
                     </li>
                     <li class="navbar-link">
-                        <a href="static_webpages/certificate_edu.jsp" class="line">Education</a>
+                        <a href="guest_static_webpages/certificate_edu.jsp" class="line">Education</a>
                         <div class="sub-menu-1">
                             <ul>
-                                <li><a href='./UserPostController'>Blog</a></li>
-                                <li><a href='static_webpages/ringmeasuring.jsp'>Ring Measuring Guide</a></li>          
-                                <li><a href='static_webpages/faqs.jsp'>Frequently Asking Questions</a></li>
+                                <li><a href='./GuestPostController'>Blog</a></li>
+                                <li><a href='guest_static_webpages/ringmeasuring.jsp'>Ring Measuring Guide</a></li>          
+                                <li><a href='guest_static_webpages/faqs.jsp'>Frequently Asking Questions</a></li>
                             </ul>
                         </div>
                     </li>
-                    <li class="navbar-link"><a href="user_aboutus.jsp" class="line">About Us</a></li>                    
+                    <li class="navbar-link"><a href="guest_aboutus.jsp" class="line">About Us</a></li>                    
                     <li class="navbar-link">
-                        <a href="user_accountdetails.jsp" class="line">Account</a>
+                        <a href="#" class="line">Account</a>
                         <div class="sub-menu-1">
                             <ul>                               
-                                <li><a href='HistoryController?action=list&id=${sessionScope.usersession.userid}'>History</a></li>
-                                <li><a href='./userlogin?action=logout'>Logout</a></li> 
+                                <li><a href='userlogin.jsp'>Sign in</a></li>
+                                <li><a href='register.jsp'>Sign up </a></li> 
                             </ul>
                         </div>
                     </li>
@@ -106,9 +105,9 @@
         <div class="main">           
             <div class="content">    
                 <form action='' method=GET id="searchbox">
-                        <input name="keyword" type="text" class="search-input" value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
-                        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
-                    </form>
+                    <input name="keyword" type="text" class="search-input" value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
+                    <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+                </form>
                 <table id="pagination">
                     <tbody>
                         <%

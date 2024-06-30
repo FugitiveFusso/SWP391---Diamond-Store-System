@@ -92,6 +92,10 @@
         <servlet-name>GuestCollectionController</servlet-name>
         <servlet-class>com.khac.swp.fuj.controller.GuestCollectionController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GuestCategoryController</servlet-name>
+        <servlet-class>com.khac.swp.fuj.controller.GuestCategoryController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AdminLoginController</servlet-name>
         <url-pattern>/adminlogin</url-pattern>
@@ -183,6 +187,10 @@
     <servlet-mapping>
         <servlet-name>GuestCollectionController</servlet-name>
         <url-pattern>/GuestCollectionController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GuestCategoryController</servlet-name>
+        <url-pattern>/GuestCategoryController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

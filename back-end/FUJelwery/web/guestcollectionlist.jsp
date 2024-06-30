@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="css/user_collectionlist.css">
     </head>
     <body>
- <div class="header">
+        <div class="header">
             <div class="header-top">
                 <div class="top-info-left">
                     <ul>
