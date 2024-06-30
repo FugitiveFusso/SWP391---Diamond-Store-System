@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const products = document.querySelectorAll('.product-card');
-    const productsPerPage = 6
+    const productsPerPage = 9;
     let currentPage = 1;
     const totalPages = Math.ceil(products.length / productsPerPage);
 
@@ -20,18 +20,54 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function updatePageNumbers() {
         pageNumbersContainer.innerHTML = '';
-        for (let i = 1; i <= totalPages; i++) {
+        
+        if (totalPages <= 1) return;
+
+        const maxPagesToShow = 5;
+        const ellipsis = '...';
+
+        const createPageButton = (page) => {
             const pageButton = document.createElement('button');
-            pageButton.textContent = i;
+            pageButton.textContent = page;
             pageButton.classList.add('page-number-button');
-            if (i === currentPage) {
+            if (page === currentPage) {
                 pageButton.classList.add('active');
             }
             pageButton.addEventListener('click', () => {
-                currentPage = i;
+                currentPage = page;
                 showPage(currentPage);
             });
             pageNumbersContainer.appendChild(pageButton);
+        };
+
+        if (totalPages <= maxPagesToShow) {
+            for (let i = 1; i <= totalPages; i++) {
+                createPageButton(i);
+            }
+        } else {
+            createPageButton(1);
+            if (currentPage > 3) {
+                pageNumbersContainer.appendChild(document.createTextNode(ellipsis));
+            }
+
+            let startPage = Math.max(2, currentPage - 2);
+            let endPage = Math.min(totalPages - 1, currentPage + 2);
+
+            if (currentPage === 1) {
+                endPage = Math.min(3, totalPages - 2);
+            }
+            if (currentPage === totalPages) {
+                startPage = Math.max(2, totalPages - 2);
+            }
+
+            for (let i = startPage; i <= endPage; i++) {
+                createPageButton(i);
+            }
+
+            if (currentPage < totalPages - 2) {
+                pageNumbersContainer.appendChild(document.createTextNode(ellipsis));
+            }
+            createPageButton(totalPages);
         }
     }
 

@@ -28,18 +28,55 @@ function setupPagination(tableId, controlsId, prevButtonId, nextButtonId, pageNu
 
     function updatePaginationControls() {
         pageNumbers.innerHTML = '';
-        for (let i = 1; i <= pageCount; i++) {
+
+        const createPageButton = (page) => {
             let pageNumberElement = document.createElement('span');
-            pageNumberElement.textContent = i;
+            pageNumberElement.textContent = page;
             pageNumberElement.className = 'page-number';
-            if (i === currentPage) {
+            if (page === currentPage) {
                 pageNumberElement.classList.add('active');
             }
             pageNumberElement.addEventListener('click', function() {
-                showPage(i);
+                showPage(page);
             });
             pageNumbers.appendChild(pageNumberElement);
+        };
+
+        const ellipsis = document.createElement('span');
+        ellipsis.textContent = '...';
+
+        if (pageCount <= 7) {
+            for (let i = 1; i <= pageCount; i++) {
+                createPageButton(i);
+            }
+        } else {
+            createPageButton(1);
+
+            if (currentPage > 4) {
+                pageNumbers.appendChild(ellipsis.cloneNode(true));
+            }
+
+            let startPage = Math.max(2, currentPage - 2);
+            let endPage = Math.min(pageCount - 1, currentPage + 2);
+
+            if (currentPage <= 3) {
+                endPage = Math.min(5, pageCount - 1);
+            }
+            if (currentPage >= pageCount - 2) {
+                startPage = Math.max(2, pageCount - 4);
+            }
+
+            for (let i = startPage; i <= endPage; i++) {
+                createPageButton(i);
+            }
+
+            if (currentPage < pageCount - 3) {
+                pageNumbers.appendChild(ellipsis.cloneNode(true));
+            }
+
+            createPageButton(pageCount);
         }
+
         prevButton.disabled = currentPage === 1;
         nextButton.disabled = currentPage === pageCount;
     }

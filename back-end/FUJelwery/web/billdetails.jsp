@@ -76,48 +76,106 @@
             </div>
         </div>
 
-        <div class="order-details">
-            <div class="order-header">
-                <h2>Bill Details</h2>
-            </div>
-            <div class="order-content">
-                <div class="product-section">
-                    <div class="order-item">
-                        <img src="${requestScope.bill.ringImage}" alt="Product Image" class="product-image">
-                        <div class="item-details">
-                            <h4 class="card-title">${requestScope.bill.ringName}</h4>
-                            <p class="card-text"><strong>Date of purchase:</strong> ${requestScope.bill.orderDate}</p>
-                            <p class="card-text"><strong>Voucher:</strong> ${requestScope.bill.voucherName}</p>
-                            <p class="card-text"><strong>Total Price:</strong> ${requestScope.bill.totalPrice}</p>
+        <!--        <div class="order-details">
+                    <div class="order-header">
+                        <h2>Bill Details</h2>
+                    </div>
+                    <div class="order-content">
+                        <div class="product-section">
+                            <div class="order-item">
+                                <img src="${requestScope.bill.ringImage}" alt="Product Image" class="product-image">
+                                <div class="item-details">
+                                    <h4 class="card-title">${requestScope.bill.ringName}</h4>
+                                    <p class="card-text"><strong>Date of purchase:</strong> ${requestScope.bill.orderDate}</p>
+                                    <p class="card-text"><strong>Voucher:</strong> ${requestScope.bill.voucherName}</p>
+                                    <p class="card-text"><strong>Total Price:</strong> ${requestScope.bill.totalPrice}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="details-section">
+                            <div class="order-item">
+                                <div class="toggle-details">
+                                    <button class="toggle-button" onclick="toggleDetails(this, 'warranty')">+ Warranty</button>
+                                </div>
+                                <div class="item-details hidden warranty">
+                                    <img src="${requestScope.bill.warrantyImage}" alt="Warranty Image" class="warranty-image">
+                                    <p class="image-caption">Warranty Image</p>
+                                    <p class="card-text"><strong>Warranty Name:</strong> ${requestScope.bill.warrantyName}</p>
+                                    <p class="card-text"><strong>Month in effect:</strong> ${requestScope.bill.warrantyMonth}</p>
+                                    <p class="card-text"><strong>Description:</strong> ${requestScope.bill.warrantyDescription}</p>
+                                    <p class="card-text"><strong>Warranty Type:</strong> ${requestScope.bill.warrantyType}</p>
+                                    <p class="card-text"><strong>Start Date:</strong> ${requestScope.bill.warrantyStartDate}</p>
+                                    <p class="card-text"><strong>End Date:</strong> ${requestScope.bill.warrantyEndDate}</p>
+                                    <p class="card-text"><strong>Terms and Conditions:</strong> ${requestScope.bill.warrantyTerms}</p>
+                                </div>
+                            </div>
+                            <div class="order-item">
+                                <div class="toggle-details">
+                                    <button class="toggle-button" onclick="toggleDetails(this, 'certificate')">+ Certificate</button>
+                                </div>
+                                <div class="item-details hidden certificate">
+                                    <img src="${requestScope.bill.certificateImage}" alt="Certificate Image" class="certificate-image">
+                                    <p class="image-caption">Certificate Image</p>
+                                    <p class="card-text"><strong>Name: </strong> ${requestScope.bill.certificateName}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                </div>-->
+
+        <div class="container">
+            <div class="bill-details-container">
+                <div class="image-column">
+                    <img src="${requestScope.bill.ringImage}" alt="Product Image" class="product-image">
                 </div>
-                <div class="details-section">
-                    <div class="order-item">
-                        <div class="toggle-details">
-                            <button class="toggle-button" onclick="toggleDetails(this, 'warranty')">+ Warranty</button>
-                        </div>
-                        <div class="item-details hidden warranty">
-                            <img src="${requestScope.bill.warrantyImage}" alt="Warranty Image" class="warranty-image">
-                            <p class="image-caption">Warranty Image</p>
-                            <p class="card-text"><strong>Warranty Name:</strong> ${requestScope.bill.warrantyName}</p>
-                            <p class="card-text"><strong>Month in effect:</strong> ${requestScope.bill.warrantyMonth}</p>
-                            <p class="card-text"><strong>Description:</strong> ${requestScope.bill.warrantyDescription}</p>
-                            <p class="card-text"><strong>Warranty Type:</strong> ${requestScope.bill.warrantyType}</p>
-                            <p class="card-text"><strong>Start Date:</strong> ${requestScope.bill.warrantyStartDate}</p>
-                            <p class="card-text"><strong>End Date:</strong> ${requestScope.bill.warrantyEndDate}</p>
-                            <p class="card-text"><strong>Terms and Conditions:</strong> ${requestScope.bill.warrantyTerms}</p>
-                        </div>
+                <div class="details-column">
+                    <h3>Bill Details</h3>
+                    <div class="product-details">
+                        <p><strong>Product Name:</strong> ${requestScope.bill.ringName}</p>
+                        <p><strong>Date of Purchase:</strong> ${requestScope.bill.orderDate}</p>
+                        <p><strong>Voucher:</strong> ${requestScope.bill.voucherName}</p>
+                        <p class="price"><strong>Total Price:</strong> ${requestScope.bill.totalPrice}</p>
                     </div>
-                    <div class="order-item">
-                        <div class="toggle-details">
-                            <button class="toggle-button" onclick="toggleDetails(this, 'certificate')">+ Certificate</button>
-                        </div>
-                        <div class="item-details hidden certificate">
-                            <img src="${requestScope.bill.certificateImage}" alt="Certificate Image" class="certificate-image">
-                            <p class="image-caption">Certificate Image</p>
-                            <p class="card-text"><strong>Name: </strong> ${requestScope.bill.certificateName}</p>
-                        </div>
+                    <div class="action-buttons">
+                        <button id="toggle-warranty-btn" class="toggle-btn" onclick="toggleSection('warranty', 'toggle-warranty-btn')">+ Warranty</button>
+                        <button id="toggle-certificate-btn" class="toggle-btn" onclick="toggleSection('certificate', 'toggle-certificate-btn')">+ Certificate</button>
+                    </div>
+                    <div id="warranty" class="warranty hidden">
+                        <img src="${requestScope.bill.warrantyImage}" alt="Warranty Image" class="warranty-image" style="width: 60%;">
+                        <h4>Warranty Details</h4>
+                        <p><strong>Warranty Name:</strong> ${requestScope.bill.warrantyName}</p>
+                        <p><strong>Month in effect:</strong> ${requestScope.bill.warrantyMonth}</p>
+                        <p><strong>Description:</strong> ${requestScope.bill.warrantyDescription}</p>
+                        <p><strong>Warranty Type:</strong> ${requestScope.bill.warrantyType}</p>
+                        <p><strong>Start Date:</strong> ${requestScope.bill.warrantyStartDate}</p>
+                        <p><strong>End Date:</strong> ${requestScope.bill.warrantyEndDate}</p>
+                        <p><strong>Terms and Conditions:</strong> ${requestScope.bill.warrantyTerms}</p>
+                        <!--                        <p><strong>Status:</strong> Active</p>
+                                                <p><strong>Expiry Date:</strong> 30/06/2025</p>
+                                                <p><strong>Coverage:</strong> Manufacturing defects, accidental damage</p>-->
+                    </div>
+                    <div id="certificate" class="certificate hidden">
+                        <img src="${requestScope.bill.certificateImage}" alt="Certificate Image" class="certificate-image" style="width: 60%;">
+                        <h4>Certificate Details</h4>
+                        <p class="image-caption">Certificate Image</p>
+                        <p><strong>Name: </strong> ${requestScope.bill.certificateName}</p> 
+                        <!--                        <p><strong>Certificate Name:</strong> 0.70 Carat Round Cut Diamond Certificate</p>
+                                                <p><strong>GIA Report Number:</strong> 2194313787</p>
+                                                <p><strong>Measurements:</strong> 5.57 - 5.59 x 3.53 mm</p>
+                                                <p><strong>Grading Results:</strong></p>
+                                                <ul>
+                                                    <li>Carat Weight: 0.70 carat</li>
+                                                    <li>Color Grade: G</li>
+                                                    <li>Clarity Grade: SI1</li>
+                                                    <li>Cut Grade: Very Good</li>
+                                                </ul>
+                                                <p><strong>Additional Grading Information:</strong></p>
+                                                <ul>
+                                                    <li>Polish: Excellent</li>
+                                                    <li>Symmetry: Very Good</li>
+                                                    <li>Fluorescence: None</li>
+                                                    <li>Clarity Characteristics: Feather</li>
+                                                </ul>-->
                     </div>
                 </div>
             </div>
