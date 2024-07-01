@@ -359,6 +359,32 @@
                     }
                 %>    
             </table>
+
+            <h1>Warranty Statistics</h1>
+            <strong>Total Warranties: ${requestScope.warranty.totalWarranties}</strong>
+            <strong>Used Active Warranties: ${requestScope.warranty.usedActiveWarranties}</strong>
+            <strong>Unused Active Warranties: ${requestScope.warranty.unusedActiveWarranties}</strong>
+            <strong>Percentage Used Active: ${requestScope.warranty.percentageUsedActive}</strong>
+            <strong>Percentage Unused Active: ${requestScope.warranty.percentageUnusedActive}</strong>
+            <strong>Manufacturer Warranties: ${requestScope.warranty.manufacturerWarranties}</strong>
+            
+            <strong>Extended Warranties: ${requestScope.warranty.extendedWarranties}</strong>
+            <strong>Limited Warranties: ${requestScope.warranty.limitedWarranties}</strong>
+            <strong>Lifetime Warranties: ${requestScope.warranty.lifetimeWarranties}</strong>
+            <strong>Retailer Warranties: ${requestScope.warranty.retailerWarranties}</strong>
+            <strong>Earliest Start Date: ${requestScope.warranty.earliestStartDate}</strong>
+            <strong>Latest Start Date: ${requestScope.warranty.latestStartDate}</strong>
+            <strong>Average Warranty Duration Months: ${requestScope.warranty.avgWarrantyDurationMonths} months</strong>
+            <strong>Active Warranties: ${requestScope.warranty.activeWarranties}</strong>
+            <strong>Deleted Warranties: ${requestScope.warranty.deletedWarranties}</strong>
+            <strong>Earliest End Date: ${requestScope.warranty.earliestEndDate}</strong>
+            <strong>Latest End Date: ${requestScope.warranty.latestEndDate}</strong>
+            <strong>Percentage Manufacturer Warranties: ${requestScope.warranty.percentageManufacturerWarranties}</strong>
+            <strong>Percentage Extended Warranties: ${requestScope.warranty.percentageExtendedWarranties}</strong>
+            <strong>Percentage Limited Warranties: ${requestScope.warranty.percentageLimitedWarranties}</strong>
+            <strong>Percentage Lifetime Warranties: ${requestScope.warranty.percentageLifetimeWarranties}</strong>
+            <strong>Percentage Retailer Warranties: ${requestScope.warranty.percentageRetailerWarranties}</strong>
+            <strong>Unused Active Warranty List By Ids: ${requestScope.warranty.unusedActiveWarrantyIds}</strong>
         </div>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"

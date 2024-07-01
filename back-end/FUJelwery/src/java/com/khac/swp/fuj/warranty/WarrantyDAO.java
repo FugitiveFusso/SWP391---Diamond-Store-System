@@ -180,7 +180,7 @@ public class WarrantyDAO {
 
         return false;
     }
-    
+
     public WarrantyDTO checkWarrantyExistByName(String warrantyName) {
 
         String sql = "select warrantyName, warrantyImage, warrantyMonth, warrantyDescription, warrantyType, startDate, endDate, termsAndConditions from Warranty where warrantyName like ? and isDeleted = 'active'";
@@ -203,6 +203,142 @@ public class WarrantyDAO {
                 warranty.setStartdate(rs.getString("startDate"));
                 warranty.setEnddate(rs.getString("endDate"));
                 warranty.setTermsandconditions(rs.getString("termsAndConditions"));
+                return warranty;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Query User error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public WarrantyDTO loadStatistics() {
+
+        String sql = "WITH ActiveWarrantyStats AS (\n"
+                + "    SELECT \n"
+                + "        COUNT(*) AS totalWarranties,\n"
+                + "        SUM(CASE WHEN usageCount > 0 THEN 1 ELSE 0 END) AS usedActiveWarranties,\n"
+                + "        SUM(CASE WHEN usageCount = 0 THEN 1 ELSE 0 END) AS unusedActiveWarranties,\n"
+                + "        FORMAT(SUM(CASE WHEN usageCount > 0 THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 'N2') AS percentageUsedActive,\n"
+                + "        FORMAT(SUM(CASE WHEN usageCount = 0 THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 'N2') AS percentageUnusedActive,\n"
+                + "        COUNT(CASE WHEN warrantyType = 'Manufacturer Warranty' THEN 1 END) AS manufacturerWarranties,\n"
+                + "        COUNT(CASE WHEN warrantyType = 'Extended Warranty' THEN 1 END) AS extendedWarranties,\n"
+                + "        COUNT(CASE WHEN warrantyType = 'Limited Warranty' THEN 1 END) AS limitedWarranties,\n"
+                + "        COUNT(CASE WHEN warrantyType = 'Lifetime Warranty' THEN 1 END) AS lifetimeWarranties,\n"
+                + "        COUNT(CASE WHEN warrantyType = 'Retailer Warranty' THEN 1 END) AS retailerWarranties,\n"
+                + "        MIN(startDate) AS earliestStartDate,\n"
+                + "        MAX(startDate) AS latestStartDate,\n"
+                + "        AVG(warrantyMonth) AS avgWarrantyDurationMonths,\n"
+                + "        COUNT(CASE WHEN isDeleted = 'active' THEN 1 END) AS activeWarranties,\n"
+                + "        COUNT(CASE WHEN isDeleted = 'deleted' THEN 1 END) AS deletedWarranties,\n"
+                + "        MIN(endDate) AS earliestEndDate,\n"
+                + "        MAX(endDate) AS latestEndDate,\n"
+                + "        STUFF((\n"
+                + "            SELECT ', ' + CAST(warrantyID AS VARCHAR(10))\n"
+                + "            FROM Warranty\n"
+                + "            WHERE isDeleted = 'active'\n"
+                + "            AND NOT EXISTS (\n"
+                + "                SELECT 1 FROM [Order] WHERE [Order].warrantyID = Warranty.warrantyID\n"
+                + "            )\n"
+                + "            FOR XML PATH('')\n"
+                + "        ), 1, 2, '') AS UnusedActiveWarrantyIds\n"
+                + "    FROM (\n"
+                + "        SELECT \n"
+                + "            w.*, \n"
+                + "            COUNT(o.orderID) OVER (PARTITION BY w.warrantyID) AS usageCount \n"
+                + "        FROM \n"
+                + "            Warranty w\n"
+                + "        LEFT JOIN \n"
+                + "            [Order] o ON w.warrantyID = o.warrantyID\n"
+                + "        WHERE \n"
+                + "            w.isDeleted = 'active'\n"
+                + "    ) AS ActiveWarrantyUsage\n"
+                + ")\n"
+                + "\n"
+                + "SELECT \n"
+                + "    totalWarranties,\n"
+                + "    usedActiveWarranties,\n"
+                + "    unusedActiveWarranties,\n"
+                + "    percentageUsedActive + '%' AS percentageUsedActive,\n"
+                + "    percentageUnusedActive + '%' AS percentageUnusedActive,\n"
+                + "    manufacturerWarranties,\n"
+                + "    extendedWarranties,\n"
+                + "    limitedWarranties,\n"
+                + "    lifetimeWarranties,\n"
+                + "    retailerWarranties,\n"
+                + "    earliestStartDate,\n"
+                + "    latestStartDate,\n"
+                + "    avgWarrantyDurationMonths,\n"
+                + "    activeWarranties,\n"
+                + "    deletedWarranties,\n"
+                + "    earliestEndDate,\n"
+                + "    latestEndDate,\n"
+                + "    FORMAT(manufacturerWarranties * 100.0 / totalWarranties, 'N2') + '%' AS percentageManufacturerWarranties,\n"
+                + "    FORMAT(extendedWarranties * 100.0 / totalWarranties, 'N2') + '%' AS percentageExtendedWarranties,\n"
+                + "    FORMAT(limitedWarranties * 100.0 / totalWarranties, 'N2') + '%' AS percentageLimitedWarranties,\n"
+                + "    FORMAT(lifetimeWarranties * 100.0 / totalWarranties, 'N2') + '%' AS percentageLifetimeWarranties,\n"
+                + "    FORMAT(retailerWarranties * 100.0 / totalWarranties, 'N2') + '%' AS percentageRetailerWarranties,\n"
+                + "    UnusedActiveWarrantyIds\n"
+                + "FROM \n"
+                + "    ActiveWarrantyStats;";
+
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                int totalWarranties = rs.getInt("totalWarranties");
+                int usedActiveWarranties = rs.getInt("usedActiveWarranties");
+                int unusedActiveWarranties = rs.getInt("unusedActiveWarranties");
+                String percentageUsedActive = rs.getString("percentageUsedActive");
+                String percentageUnusedActive = rs.getString("percentageUnusedActive");
+                int retailerWarranties = rs.getInt("retailerWarranties");
+                int manufacturerWarranties = rs.getInt("manufacturerWarranties");
+                int extendedWarranties = rs.getInt("extendedWarranties");
+                int limitedWarranties = rs.getInt("limitedWarranties");
+                int lifetimeWarranties = rs.getInt("lifetimeWarranties");
+                String earliestStartDate = rs.getString("earliestStartDate");
+                String latestStartDate = rs.getString("latestStartDate");
+                int avgWarrantyDurationMonths = rs.getInt("avgWarrantyDurationMonths");
+                int activeWarranties = rs.getInt("activeWarranties");
+                int deletedWarranties = rs.getInt("deletedWarranties");
+                String earliestEndDate = rs.getString("earliestEndDate");
+                String latestEndDate = rs.getString("latestEndDate");
+                String unusedActiveWarrantyIds = rs.getString("UnusedActiveWarrantyIds");
+                String percentageManufacturerWarranties = rs.getString("percentageManufacturerWarranties");
+                String percentageExtendedWarranties = rs.getString("percentageExtendedWarranties");
+                String percentageLimitedWarranties = rs.getString("percentageLimitedWarranties");
+                String percentageLifetimeWarranties = rs.getString("percentageLifetimeWarranties");
+                String percentageRetailerWarranties = rs.getString("percentageRetailerWarranties");
+                
+                WarrantyDTO warranty = new WarrantyDTO();
+                warranty.setTotalWarranties(totalWarranties);
+                warranty.setUsedActiveWarranties(usedActiveWarranties);
+                warranty.setUnusedActiveWarranties(unusedActiveWarranties);
+                warranty.setPercentageUsedActive(percentageUsedActive);
+                warranty.setPercentageUnusedActive(percentageUnusedActive);
+                warranty.setManufacturerWarranties(manufacturerWarranties);
+                warranty.setExtendedWarranties(extendedWarranties);
+                warranty.setLimitedWarranties(limitedWarranties);
+                warranty.setLifetimeWarranties(lifetimeWarranties);
+                warranty.setRetailerWarranties(retailerWarranties);
+                warranty.setEarliestStartDate(earliestStartDate);
+                warranty.setLatestStartDate(latestStartDate);
+                warranty.setEarliestEndDate(earliestEndDate);
+                warranty.setLatestEndDate(latestEndDate);
+                warranty.setAvgWarrantyDurationMonths(avgWarrantyDurationMonths);
+                warranty.setActiveWarranties(activeWarranties);
+                warranty.setDeletedWarranties(deletedWarranties);
+                warranty.setUnusedActiveWarrantyIds(unusedActiveWarrantyIds);
+                warranty.setPercentageManufacturerWarranties(percentageManufacturerWarranties);
+                warranty.setPercentageExtendedWarranties(percentageExtendedWarranties);
+                warranty.setPercentageLimitedWarranties(percentageLimitedWarranties);
+                warranty.setPercentageLifetimeWarranties(percentageLifetimeWarranties);
+                warranty.setPercentageRetailerWarranties(percentageRetailerWarranties);
+
                 return warranty;
             }
         } catch (SQLException ex) {

@@ -135,7 +135,6 @@ WITH ActiveWarrantyStats AS (
         SUM(CASE WHEN usageCount = 0 THEN 1 ELSE 0 END) AS unusedActiveWarranties,
         FORMAT(SUM(CASE WHEN usageCount > 0 THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 'N2') AS percentageUsedActive,
         FORMAT(SUM(CASE WHEN usageCount = 0 THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 'N2') AS percentageUnusedActive,
-        STRING_AGG(CAST(warrantyID AS varchar), ', ') AS unusedActiveWarrantyIDs,
         COUNT(CASE WHEN warrantyType = 'Manufacturer Warranty' THEN 1 END) AS manufacturerWarranties,
         COUNT(CASE WHEN warrantyType = 'Extended Warranty' THEN 1 END) AS extendedWarranties,
         COUNT(CASE WHEN warrantyType = 'Limited Warranty' THEN 1 END) AS limitedWarranties,
@@ -147,7 +146,16 @@ WITH ActiveWarrantyStats AS (
         COUNT(CASE WHEN isDeleted = 'active' THEN 1 END) AS activeWarranties,
         COUNT(CASE WHEN isDeleted = 'deleted' THEN 1 END) AS deletedWarranties,
         MIN(endDate) AS earliestEndDate,
-        MAX(endDate) AS latestEndDate
+        MAX(endDate) AS latestEndDate,
+        STUFF((
+            SELECT ', ' + CAST(warrantyID AS VARCHAR(10))
+            FROM Warranty
+            WHERE isDeleted = 'active'
+            AND NOT EXISTS (
+                SELECT 1 FROM [Order] WHERE [Order].warrantyID = Warranty.warrantyID
+            )
+            FOR XML PATH('')
+        ), 1, 2, '') AS UnusedActiveWarrantyIds
     FROM (
         SELECT 
             w.*, 
@@ -160,31 +168,33 @@ WITH ActiveWarrantyStats AS (
             w.isDeleted = 'active'
     ) AS ActiveWarrantyUsage
 )
+
 SELECT 
-    aws.totalWarranties,
-    aws.usedActiveWarranties,
-    aws.unusedActiveWarranties,
-    aws.percentageUsedActive + '%' AS percentageUsedActive,
-    aws.percentageUnusedActive + '%' AS percentageUnusedActive,
-    aws.unusedActiveWarrantyIDs,
-    aws.manufacturerWarranties,
-    aws.extendedWarranties,
-    aws.limitedWarranties,
-    aws.lifetimeWarranties,
-    aws.retailerWarranties,
-    aws.earliestStartDate,
-    aws.latestStartDate,
-    aws.avgWarrantyDurationMonths,
-    aws.activeWarranties,
-    aws.deletedWarranties,
-    aws.earliestEndDate,
-    aws.latestEndDate,
-    FORMAT(aws.manufacturerWarranties * 100.0 / aws.totalWarranties, 'N2') + '%' AS percentageManufacturerWarranties,
-    FORMAT(aws.extendedWarranties * 100.0 / aws.totalWarranties, 'N2') + '%' AS percentageExtendedWarranties,
-    FORMAT(aws.limitedWarranties * 100.0 / aws.totalWarranties, 'N2') + '%' AS percentageLimitedWarranties,
-    FORMAT(aws.lifetimeWarranties * 100.0 / aws.totalWarranties, 'N2') + '%' AS percentageLifetimeWarranties,
-    FORMAT(aws.retailerWarranties * 100.0 / aws.totalWarranties, 'N2') + '%' AS percentageRetailerWarranties
+    totalWarranties,
+    usedActiveWarranties,
+    unusedActiveWarranties,
+    percentageUsedActive + '%' AS percentageUsedActive,
+    percentageUnusedActive + '%' AS percentageUnusedActive,
+    manufacturerWarranties,
+    extendedWarranties,
+    limitedWarranties,
+    lifetimeWarranties,
+    retailerWarranties,
+    earliestStartDate,
+    latestStartDate,
+    avgWarrantyDurationMonths,
+    activeWarranties,
+    deletedWarranties,
+    earliestEndDate,
+    latestEndDate,
+    FORMAT(manufacturerWarranties * 100.0 / totalWarranties, 'N2') + '%' AS percentageManufacturerWarranties,
+    FORMAT(extendedWarranties * 100.0 / totalWarranties, 'N2') + '%' AS percentageExtendedWarranties,
+    FORMAT(limitedWarranties * 100.0 / totalWarranties, 'N2') + '%' AS percentageLimitedWarranties,
+    FORMAT(lifetimeWarranties * 100.0 / totalWarranties, 'N2') + '%' AS percentageLifetimeWarranties,
+    FORMAT(retailerWarranties * 100.0 / totalWarranties, 'N2') + '%' AS percentageRetailerWarranties,
+    UnusedActiveWarrantyIds
 FROM 
-    ActiveWarrantyStats aws;
+    ActiveWarrantyStats;
+
 
 

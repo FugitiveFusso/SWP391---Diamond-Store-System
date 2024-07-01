@@ -23,6 +23,8 @@ import com.khac.swp.fuj.users.UserDAO;
 import com.khac.swp.fuj.users.UserDTO;
 import com.khac.swp.fuj.voucher.VoucherDAO;
 import com.khac.swp.fuj.voucher.VoucherDTO;
+import com.khac.swp.fuj.warranty.WarrantyDAO;
+import com.khac.swp.fuj.warranty.WarrantyDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -100,7 +102,11 @@ public class DashboardController extends HttpServlet {
                 //RPPs3
                 List<RingPlacementPriceDTO> rppListB = ringPlacementPriceDao.getStatisticsB();
                 request.setAttribute("rpplistb", rppListB);
-
+                //Warranties
+                WarrantyDAO warrantyDao = new WarrantyDAO();
+                WarrantyDTO warranty = warrantyDao.loadStatistics();
+                request.setAttribute("warranty", warranty);
+                
                 request.getRequestDispatcher("/dashboard.jsp").forward(request, response);
 
             }
