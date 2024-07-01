@@ -20,10 +20,10 @@ Highcharts.mapChart('map-chart', {
   series: [{
     data: [
       { 'code': 'US', 'value': 1000 },
-      { 'code': 'FR', 'value': 900 },
-      { 'code': 'DE', 'value': 800 },
-      { 'code': 'ES', 'value': 700 },
-      { 'code': 'GB', 'value': 600 }
+      { 'code': 'SZ', 'value': 900 },
+      { 'code': 'IN', 'value': 800 },
+      { 'code': 'ML', 'value': 700 },
+      { 'code': 'MZ', 'value': 600 }
     ],
     mapData: Highcharts.maps['custom/world'],
     joinBy: ['iso-a2', 'code'],
@@ -211,7 +211,7 @@ areaChart.render();
 
 // DEGREE USAGE PIE CHART
 const degreePieChartOptions = {
-  series: [70, 30],
+  series: [95.24, 4.76],
   chart: {
     type: 'pie',
     background: 'transparent',
@@ -238,7 +238,7 @@ degreePieChart.render();
 
 // DIAMOND USAGE PIE CHART
 const diamondPieChartOptions = {
-  series: [60, 40],
+  series: [53.33, 46.67],
   chart: {
     type: 'pie',
     background: 'transparent',
@@ -262,3 +262,20 @@ const diamondPieChart = new ApexCharts(
   diamondPieChartOptions
 );
 diamondPieChart.render();
+
+$(document).ready(function () {
+  $('.menu-btn').click(function () {
+    $('.side-bar').addClass('active');
+    $('.menu-btn').css("visibility", "hidden");
+  });
+
+  $('.close-btn').click(function () {
+    $('.side-bar').removeClass('active');
+    $('.menu-btn').css("visibility", "visible");
+  });
+
+  $('.sub-btn').click(function () {
+    $(this).closest('.charts-card').find('.table-container').slideToggle();
+    $(this).find('.dropdown').toggleClass('rotate');
+  });
+});
