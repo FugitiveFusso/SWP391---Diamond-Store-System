@@ -12,7 +12,7 @@ ORDER BY r.roleName;
 SELECT u.firstName + ' ' + u.lastName as fullName, r.roleName
 FROM [User] u
 JOIN [Role] r ON u.roleID = r.roleID
-WHERE r.roleName != 'Customer';
+WHERE r.roleName != 'Customer' and u.isDeleted = 'active';
 
 -- Categories
 SELECT TotalCategories, ActiveCategories, DeletedCategories, Top3CategoryNames, Top3CategoryRingCounts FROM
