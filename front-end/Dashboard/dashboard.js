@@ -1,134 +1,91 @@
-// SIDEBAR TOGGLE
-
-let sidebarOpen = false;
-const sidebar = document.getElementById('sidebar');
-
-function openSidebar() {
-  if (!sidebarOpen) {
-    sidebar.classList.add('sidebar-responsive');
-    sidebarOpen = true;
-  }
-}
-
-function closeSidebar() {
-  if (sidebarOpen) {
-    sidebar.classList.remove('sidebar-responsive');
-    sidebarOpen = false;
-  }
-}
 
 // ---------- CHARTS ----------
 
-// BAR CHART
-const barChartOptions = {
-  series: [
-    {
-      data: [10, 8, 6, 4, 2],
-      name: 'Products',
+Highcharts.mapChart('map-chart', {
+  chart: {
+    map: 'custom/world'
+  },
+  title: {
+    text: 'Top 5 Countries with Most Diamonds Sold'
+  },
+  mapNavigation: {
+    enabled: true,
+    buttonOptions: {
+      verticalAlign: 'bottom'
+    }
+  },
+  colorAxis: {
+    min: 0
+  },
+  series: [{
+    data: [
+      { 'code': 'US', 'value': 1000 },
+      { 'code': 'FR', 'value': 900 },
+      { 'code': 'DE', 'value': 800 },
+      { 'code': 'ES', 'value': 700 },
+      { 'code': 'GB', 'value': 600 }
+    ],
+    mapData: Highcharts.maps['custom/world'],
+    joinBy: ['iso-a2', 'code'],
+    name: 'Diamonds Sold',
+    states: {
+      hover: {
+        color: '#a4edba'
+      }
     },
-  ],
+    dataLabels: {
+      enabled: true,
+      format: '{point.name}'
+    }
+  }]
+});
+
+// Bar Chart
+var optionsBar = {
+  series: [{
+    data: [500, 400, 300, 200, 100] // Example data, replace with actual data
+  }],
   chart: {
     type: 'bar',
-    background: 'transparent',
-    height: 350,
-    toolbar: {
-      show: false,
-    },
+    height: 350
   },
-  colors: ['#2962ff', '#d50000', '#2e7d32', '#ff6d00', '#583cb3'],
   plotOptions: {
     bar: {
-      distributed: true,
-      borderRadius: 4,
-      horizontal: false,
-      columnWidth: '40%',
-    },
+      horizontal: true,
+      colors: {
+        ranges: [{
+          from: 0,
+          to: 1000,
+          color: '#007bff' // Color for the bars
+        }]
+      }
+    }
   },
   dataLabels: {
-    enabled: false,
-  },
-  fill: {
-    opacity: 1,
-  },
-  grid: {
-    borderColor: '#55596e',
-    yaxis: {
-      lines: {
-        show: true,
-      },
-    },
-    xaxis: {
-      lines: {
-        show: true,
-      },
-    },
-  },
-  legend: {
-    labels: {
-      colors: '#f5f7ff',
-    },
-    show: true,
-    position: 'top',
-  },
-  stroke: {
-    colors: ['transparent'],
-    show: true,
-    width: 2,
-  },
-  tooltip: {
-    shared: true,
-    intersect: false,
-    theme: 'dark',
-  },
-  xaxis: {
-    categories: ['Laptop', 'Phone', 'Monitor', 'Headphones', 'Camera'],
-    title: {
-      style: {
-        color: '#f5f7ff',
-      },
-    },
-    axisBorder: {
-      show: true,
-      color: '#55596e',
-    },
-    axisTicks: {
-      show: true,
-      color: '#55596e',
-    },
-    labels: {
-      style: {
-        colors: '#f5f7ff',
-      },
-    },
+    enabled: false
   },
   yaxis: {
-    title: {
-      text: 'Count',
-      style: {
-        color: '#f5f7ff',
-      },
-    },
-    axisBorder: {
-      color: '#55596e',
-      show: true,
-    },
-    axisTicks: {
-      color: '#55596e',
-      show: true,
-    },
     labels: {
       style: {
-        colors: '#f5f7ff',
-      },
-    },
+        colors: ['#fff', '#fff', '#fff', '#fff', '#fff'], // Colors for each label
+        fontSize: '14px'
+      }
+    }
   },
+  xaxis: {
+    categories: ['Product 1', 'Product 2', 'Product 3', 'Product 4', 'Product 5'], // Example categories, replace with actual data
+    labels: {
+      style: {
+        colors: ['#fff', '#fff', '#fff', '#fff', '#fff'], // Colors for each label
+        fontSize: '14px'
+      }
+    }
+  }
 };
 
-const barChart = new ApexCharts(
-  document.querySelector('#bar-chart'),
-  barChartOptions
-);
-barChart.render();
+var chartBar = new ApexCharts(document.querySelector("#bar-chart"), optionsBar);
+chartBar.render();
+
 
 // AREA CHART
 const areaChartOptions = {

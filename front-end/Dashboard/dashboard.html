@@ -70,20 +70,27 @@
 
         <div class="pie-chart">
           <div class="charts-card">
-            <h2 class="chart-title">Degree Usage</h2>
+            <h2 class="chart-title">Certificate Usage</h2>
             <div id="degree-pie-chart"></div>
           </div>
 
           <div class="charts-card">
-            <h2 class="chart-title">Diamond Usage</h2>
+            <h2 class="chart-title">Warranty Usage</h2>
             <div id="diamond-pie-chart"></div>
           </div>
         </div>
       </div>
 
-      <div class="charts-card" style="margin-top: 20px;">
-        <h2 class="chart-title">Top 5 Products</h2>
-        <div id="bar-chart"></div>
+      <div class="charts-row">
+        <div class="charts-card" style="flex: 1;">
+          <h2 class="chart-title">Top 5 Countries with Most Diamonds Sold</h2>
+          <div id="map-chart"></div>
+        </div>
+
+        <div class="charts-card" style="flex: 1;">
+          <h2 class="chart-title">Top 5 Products</h2>
+          <div id="bar-chart"></div>
+        </div>
       </div>
 
       <div class="charts-row">
@@ -204,6 +211,11 @@
   </div>
 
   <!-- Scripts -->
+  <!-- Highcharts -->
+  <script src="https://code.highcharts.com/maps/highmaps.js"></script>
+  <script src="https://code.highcharts.com/maps/modules/data.js"></script>
+  <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/mapdata/custom/world.js"></script>
   <!-- ApexCharts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
   <!-- Custom JS -->
