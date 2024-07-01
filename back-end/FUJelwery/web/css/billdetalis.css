@@ -2,6 +2,8 @@ body {
   height: 100vh;
   margin: 0;
   background-color: #fefefe;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 15px;
 }
 
 .container {
@@ -108,7 +110,6 @@ body {
 .info-text p{
     color: white;
     font-size: 16px;
-    font-family: 'Raleway', sans-serif !important; 
 }
 
 .footer-content{

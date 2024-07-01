@@ -251,3 +251,57 @@ const areaChart = new ApexCharts(
   areaChartOptions
 );
 areaChart.render();
+
+// DEGREE USAGE PIE CHART
+const degreePieChartOptions = {
+  series: [70, 30],
+  chart: {
+    type: 'pie',
+    background: 'transparent',
+    height: 180,
+  },
+  labels: ['Used', 'Not Used'],
+  legend: {
+    labels: {
+      colors: '#f5f7ff',
+    },
+    show: true,
+    position: 'bottom',
+  },
+  tooltip: {
+    theme: 'dark',
+  },
+};
+
+const degreePieChart = new ApexCharts(
+  document.querySelector('#degree-pie-chart'),
+  degreePieChartOptions
+);
+degreePieChart.render();
+
+// DIAMOND USAGE PIE CHART
+const diamondPieChartOptions = {
+  series: [60, 40],
+  chart: {
+    type: 'pie',
+    background: 'transparent',
+    height: 180,
+  },
+  labels: ['Used', 'Not Used'],
+  legend: {
+    labels: {
+      colors: '#f5f7ff',
+    },
+    show: true,
+    position: 'bottom',
+  },
+  tooltip: {
+    theme: 'dark',
+  },
+};
+
+const diamondPieChart = new ApexCharts(
+  document.querySelector('#diamond-pie-chart'),
+  diamondPieChartOptions
+);
+diamondPieChart.render();

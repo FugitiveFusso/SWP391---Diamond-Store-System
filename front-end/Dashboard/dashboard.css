@@ -78,29 +78,40 @@ body {
 }
 
 .charts {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
   gap: 20px;
   margin-top: 40px;
 }
 
+.area-chart {
+  flex: 3;
+}
+
+.pie-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+}
+
 .charts-card {
-  background-color: #263043;
-  padding: 25px;
-  box-sizing: border-box;
-  border-radius: 5px;
-  box-shadow: 0 6px 7px -4px rgba(0, 0, 0, 0.2);
-  text-align: center;
+  background: #273147;
+  border-radius: 10px;
+  padding: 20px;
 }
 
 .chart-title {
+  font-weight: 600;
   margin-bottom: 20px;
+  color: #fff;
 }
-
 
 .charts-row {
   display: flex;
+  justify-content: space-between;
   gap: 20px;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 
@@ -132,6 +143,40 @@ tr {
   background-color: white;
 }
 
+.staff-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.staff-member {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  width: 200px;
+}
+
+.staff-photo {
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.staff-member h3 {
+  font-size: 1.2em;
+  margin: 10px 0 5px;
+}
+
+.staff-member p {
+  color: #555;
+  font-size: 0.9em;
+  margin: 0;
+}
 
 @media screen and (max-width: 992px) {
   .grid-container {
