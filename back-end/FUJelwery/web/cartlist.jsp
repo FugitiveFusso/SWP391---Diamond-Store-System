@@ -126,12 +126,13 @@
                                                         </a>
                                                     </h4>                                                                                                      
                                                     <div class="m-t-sm">  
-                                                        <form action="OrderController" method="POST" class="text-muted" id="deleteForm">
+                                                        <form action="OrderController" method="POST" class="text-muted" id="deleteForm-${order.orderID}">
                                                             <input name="action" value="delete" type="hidden">
                                                             <input name="id" value="${order.orderID}" type="hidden">
                                                             <i class="fa fa-trash"></i>
-                                                            <a href="#" onclick="document.getElementById('deleteForm').submit(); return false;">Remove item</a>
+                                                            <a href="#" onclick="confirmDelete(${order.orderID}); return false;">Remove item</a>
                                                         </form>
+
                                                     </div>
                                                 </td>
                                                 <td>
@@ -322,6 +323,24 @@
                                                                     });
                                                                 });
         </script>
+        <script>
+            function confirmDelete(orderID) {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById('deleteForm-' + orderID).submit();
+                    }
+                })
+            }
+        </script>
+
 
     </body>
 </html>
