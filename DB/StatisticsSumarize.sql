@@ -126,3 +126,65 @@ GROUP BY
 SELECT COUNT(*) AS TotalRingPlacements, FORMAT(AVG(rpPrice), 'N0') AS AveragePrice FROM [RingPlacementPrice] WHERE isDeleted = 'active';
 SELECT material, COUNT(*) AS RingPlacementsByMaterial, FORMAT(SUM(rpPrice), 'N0') AS TotalMaterialPrice FROM [RingPlacementPrice] WHERE isDeleted = 'active' GROUP BY material;
 SELECT color, COUNT(*) AS RingPlacementsByColor FROM [RingPlacementPrice] WHERE isDeleted = 'active' GROUP BY color;
+
+-- Warranties
+WITH ActiveWarrantyStats AS (
+    SELECT 
+        COUNT(*) AS totalWarranties,
+        SUM(CASE WHEN usageCount > 0 THEN 1 ELSE 0 END) AS usedActiveWarranties,
+        SUM(CASE WHEN usageCount = 0 THEN 1 ELSE 0 END) AS unusedActiveWarranties,
+        FORMAT(SUM(CASE WHEN usageCount > 0 THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 'N2') AS percentageUsedActive,
+        FORMAT(SUM(CASE WHEN usageCount = 0 THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 'N2') AS percentageUnusedActive,
+        STRING_AGG(CAST(warrantyID AS varchar), ', ') AS unusedActiveWarrantyIDs,
+        COUNT(CASE WHEN warrantyType = 'Manufacturer Warranty' THEN 1 END) AS manufacturerWarranties,
+        COUNT(CASE WHEN warrantyType = 'Extended Warranty' THEN 1 END) AS extendedWarranties,
+        COUNT(CASE WHEN warrantyType = 'Limited Warranty' THEN 1 END) AS limitedWarranties,
+        COUNT(CASE WHEN warrantyType = 'Lifetime Warranty' THEN 1 END) AS lifetimeWarranties,
+        COUNT(CASE WHEN warrantyType = 'Retailer Warranty' THEN 1 END) AS retailerWarranties,
+        MIN(startDate) AS earliestStartDate,
+        MAX(startDate) AS latestStartDate,
+        AVG(warrantyMonth) AS avgWarrantyDurationMonths,
+        COUNT(CASE WHEN isDeleted = 'active' THEN 1 END) AS activeWarranties,
+        COUNT(CASE WHEN isDeleted = 'deleted' THEN 1 END) AS deletedWarranties,
+        MIN(endDate) AS earliestEndDate,
+        MAX(endDate) AS latestEndDate
+    FROM (
+        SELECT 
+            w.*, 
+            COUNT(o.orderID) OVER (PARTITION BY w.warrantyID) AS usageCount 
+        FROM 
+            Warranty w
+        LEFT JOIN 
+            [Order] o ON w.warrantyID = o.warrantyID
+        WHERE 
+            w.isDeleted = 'active'
+    ) AS ActiveWarrantyUsage
+)
+SELECT 
+    aws.totalWarranties,
+    aws.usedActiveWarranties,
+    aws.unusedActiveWarranties,
+    aws.percentageUsedActive + '%' AS percentageUsedActive,
+    aws.percentageUnusedActive + '%' AS percentageUnusedActive,
+    aws.unusedActiveWarrantyIDs,
+    aws.manufacturerWarranties,
+    aws.extendedWarranties,
+    aws.limitedWarranties,
+    aws.lifetimeWarranties,
+    aws.retailerWarranties,
+    aws.earliestStartDate,
+    aws.latestStartDate,
+    aws.avgWarrantyDurationMonths,
+    aws.activeWarranties,
+    aws.deletedWarranties,
+    aws.earliestEndDate,
+    aws.latestEndDate,
+    FORMAT(aws.manufacturerWarranties * 100.0 / aws.totalWarranties, 'N2') + '%' AS percentageManufacturerWarranties,
+    FORMAT(aws.extendedWarranties * 100.0 / aws.totalWarranties, 'N2') + '%' AS percentageExtendedWarranties,
+    FORMAT(aws.limitedWarranties * 100.0 / aws.totalWarranties, 'N2') + '%' AS percentageLimitedWarranties,
+    FORMAT(aws.lifetimeWarranties * 100.0 / aws.totalWarranties, 'N2') + '%' AS percentageLifetimeWarranties,
+    FORMAT(aws.retailerWarranties * 100.0 / aws.totalWarranties, 'N2') + '%' AS percentageRetailerWarranties
+FROM 
+    ActiveWarrantyStats aws;
+
+
