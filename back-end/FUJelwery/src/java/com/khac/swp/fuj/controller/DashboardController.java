@@ -64,6 +64,9 @@ public class DashboardController extends HttpServlet {
                 UserDAO userDao = new UserDAO();
                 List<UserDTO> usList = userDao.listStatistics();
                 request.setAttribute("uslist", usList);
+                //Staffs
+                List<UserDTO> usListStaff = userDao.listStaff();
+                request.setAttribute("usliststaff", usListStaff);
                 //Categories
                 CategoryDAO categoyrDao = new CategoryDAO();
                 List<CategoryDTO> caList = categoyrDao.listStatistics();

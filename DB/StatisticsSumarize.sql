@@ -8,6 +8,11 @@ LEFT JOIN [User] u ON r.roleID = u.roleID
 GROUP BY r.roleName, u.isDeleted
 HAVING u.isDeleted = 'active'
 ORDER BY r.roleName;
+-- listStaffs
+SELECT u.firstName + ' ' + u.lastName as fullName, r.roleName
+FROM [User] u
+JOIN [Role] r ON u.roleID = r.roleID
+WHERE r.roleName != 'Customer' and u.isDeleted = 'active';
 
 -- Categories
 SELECT TotalCategories, ActiveCategories, DeletedCategories, Top3CategoryNames, Top3CategoryRingCounts FROM
