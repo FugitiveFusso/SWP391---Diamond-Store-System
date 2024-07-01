@@ -115,7 +115,6 @@
                             <p class="text-muted"> Quantity: 1 Ring</p>
                             <h4 class="mt-3 mb-4 font-weight-bold"> ${requestScope.bill.totalPrice} <span class="small text-muted"> VND </span></h4>
                             <p class="text-muted">Tracking Status: <span class="Today"><strong>${requestScope.bill.status}</strong></span></p>  
-                            <p class="text-muted" style="font-style: italic">* After the product has been verified, you can go to our store to get the product.</p>  
                             <div class="row justify-content-center">
                                 <div class="col-auto btn-container">
                                     <button type="button" class="btn btn-outline-primary">
