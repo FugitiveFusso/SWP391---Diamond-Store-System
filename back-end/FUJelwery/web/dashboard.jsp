@@ -119,6 +119,27 @@
                     }
                 %>    
             </table>
+            <br>
+            <h3>List Of Staffs</h3>
+            <table style="margin: 0 auto;">
+                <tr>
+                    <th>Full Name</th>
+                    <th>Role Name</th>
+                </tr>
+                <%
+                    List<UserDTO> listStaff = (List<UserDTO>) request.getAttribute("usliststaff");
+                    for (UserDTO usListStaff : listStaff) {
+                        pageContext.setAttribute("usliststaff", usListStaff);
+                %>
+                <tr>
+                    <td>${usliststaff.fullName}</td>
+                    <td>${usliststaff.rolename}</td>
+
+                </tr>
+                <%
+                    }
+                %>    
+            </table>
 
             <h1>Category Statistics</h1>
             <%
@@ -367,7 +388,7 @@
             <strong>Percentage Used Active: ${requestScope.warranty.percentageUsedActive}</strong>
             <strong>Percentage Unused Active: ${requestScope.warranty.percentageUnusedActive}</strong>
             <strong>Manufacturer Warranties: ${requestScope.warranty.manufacturerWarranties}</strong>
-            
+
             <strong>Extended Warranties: ${requestScope.warranty.extendedWarranties}</strong>
             <strong>Limited Warranties: ${requestScope.warranty.limitedWarranties}</strong>
             <strong>Lifetime Warranties: ${requestScope.warranty.lifetimeWarranties}</strong>

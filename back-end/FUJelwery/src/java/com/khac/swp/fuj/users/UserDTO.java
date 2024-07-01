@@ -12,6 +12,7 @@ package com.khac.swp.fuj.users;
 public class UserDTO {
 
     public int userid;
+    public String fullName;
     public String username;
     public String password;
     public String firstname;
@@ -162,9 +163,17 @@ public class UserDTO {
         this.rolename = rolename;
     }
 
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
     @Override
     public String toString() {
-        return "UserDTO{" + "userid=" + userid + ", username=" + username + ", password=" + password + ", firstname=" + firstname + ", lastname=" + lastname + ", phonenumber=" + phonenumber + ", email=" + email + ", address=" + address + ", point=" + point + ", status=" + status + ", roleid=" + roleid + ", rolename=" + rolename + ", isDeleted=" + isDeleted + ", totalUsers=" + totalUsers + ", totalActiveUserCount=" + totalActiveUserCount + ", totalBannedUSerCount=" + totalBannedUSerCount + '}';
+        return "UserDTO{" + "userid=" + userid + ", fullName=" + fullName + ", username=" + username + ", password=" + password + ", firstname=" + firstname + ", lastname=" + lastname + ", phonenumber=" + phonenumber + ", email=" + email + ", address=" + address + ", point=" + point + ", status=" + status + ", roleid=" + roleid + ", rolename=" + rolename + ", isDeleted=" + isDeleted + ", totalUsers=" + totalUsers + ", totalActiveUserCount=" + totalActiveUserCount + ", totalBannedUSerCount=" + totalBannedUSerCount + '}';
     }
     
 }
