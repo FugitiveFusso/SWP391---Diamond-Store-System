@@ -366,7 +366,7 @@
                 <tr>
                     <td>${rpplista.material}</td>
                     <td>${rpplista.ringPlacementsByMaterial}</td>
-                    <td>${rpplista.totalMaterialPrice}</td>
+                    <td><strong>${rpplista.totalMaterialPrice} VND</strong></td>
                 </tr>
                 <%
                     }
@@ -437,7 +437,7 @@
 <!--                    <td>${ringlisthighest.ringID}</td>-->
                     <td><a href="DashboardController?action=ringdetails&id=${ringlisthighest.ringID}">${ringlisthighest.ringName}</td>
                     <td><img src=${ringlisthighest.ringImage} width="100px" height="100px"></td>
-                    <td>${ringlisthighest.totalPrice} VND</td>
+                    <td><strong> ${ringlisthighest.totalPrice} VND</strong></td>
                 </tr>
                 <%
                     }
@@ -462,7 +462,7 @@
 <!--                    <td>${ringlistlowest.ringID}</td>-->
                     <td><a href="DashboardController?action=ringdetails&id=${ringlistlowest.ringID}">${ringlistlowest.ringName}</td>
                     <td><img src=${ringlistlowest.ringImage} width="100px" height="100px"></td>
-                    <td>${ringlistlowest.totalPrice} VND</td>
+                    <td><strong>${ringlistlowest.totalPrice} VND</strong></td>
                 </tr>
                 <%
                     }
@@ -495,7 +495,7 @@
                     <td><a href="DashboardController?action=ringdetails&id=${topsales.ringID}">${topsales.ringName}</td>
                     <td><img src=${topsales.ringImage} width="100px" height="100px"></td>
                     <td>${topsales.purchaseCount}</td>
-                    <td>${topsales.totalPrice} VND</td>
+                    <td><strong>${topsales.totalPrice} VND</strong></td>
                 </tr>
                 <%
                     }
