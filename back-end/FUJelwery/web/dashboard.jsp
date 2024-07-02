@@ -435,7 +435,7 @@
                 %>
                 <tr>
                     <td>${ringlisthighest.ringID}</td>
-                    <td>${ringlisthighest.ringName}</td>
+                    <td><a href="DashboardController?action=ringdetails&id=${ringlisthighest.ringID}">${ringlisthighest.ringName}</td>
                     <td><img src=${ringlisthighest.ringImage} width="100px" height="100px"></td>
                     <td>${ringlisthighest.totalPrice} VND</td>
                 </tr>
@@ -460,7 +460,7 @@
                 %>
                 <tr>
                     <td>${ringlistlowest.ringID}</td>
-                    <td>${ringlistlowest.ringName}</td>
+                    <td><a href="DashboardController?action=ringdetails&id=${ringlistlowest.ringID}">${ringlistlowest.ringName}</td>
                     <td><img src=${ringlistlowest.ringImage} width="100px" height="100px"></td>
                     <td>${ringlistlowest.totalPrice} VND</td>
                 </tr>
@@ -492,7 +492,7 @@
                     <td>${topsales.orderMonth}</td>
                     <td>${topsales.monthName}</td>
                     <td>${topsales.ringID}</td>
-                    <td>${topsales.ringName}</td>
+                    <td><a href="DashboardController?action=ringdetails&id=${topsales.ringID}">${topsales.ringName}</td>
                     <td><img src=${topsales.ringImage} width="100px" height="100px"></td>
                     <td>${topsales.purchaseCount}</td>
                     <td>${topsales.totalPrice} VND</td>
