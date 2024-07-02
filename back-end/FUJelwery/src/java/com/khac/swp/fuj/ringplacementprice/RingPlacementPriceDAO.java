@@ -225,7 +225,23 @@ public class RingPlacementPriceDAO {
         List<RingPlacementPriceDTO> list = new ArrayList<RingPlacementPriceDTO>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = " SELECT material, COUNT(*) AS RingPlacementsByMaterial, FORMAT(SUM(rpPrice), 'N0') AS TotalMaterialPrice FROM [RingPlacementPrice] WHERE isDeleted = 'active' GROUP BY material; ";
+            String sql = " WITH MaterialCounts AS (\n"
+                    + "    SELECT \n"
+                    + "        material, \n"
+                    + "        COUNT(*) AS RingPlacementsByMaterial, \n"
+                    + "        FORMAT(SUM(rpPrice), 'N0') AS TotalMaterialPrice,\n"
+                    + "        ROW_NUMBER() OVER (ORDER BY COUNT(*) DESC) AS rowNum\n"
+                    + "    FROM [RingPlacementPrice] \n"
+                    + "    WHERE isDeleted = 'active' \n"
+                    + "    GROUP BY material\n"
+                    + ")\n"
+                    + "SELECT \n"
+                    + "    material, \n"
+                    + "    RingPlacementsByMaterial, \n"
+                    + "    TotalMaterialPrice\n"
+                    + "FROM MaterialCounts\n"
+                    + "WHERE rowNum <= 5\n"
+                    + "ORDER BY RingPlacementsByMaterial DESC; ";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
@@ -257,7 +273,21 @@ public class RingPlacementPriceDAO {
         List<RingPlacementPriceDTO> list = new ArrayList<RingPlacementPriceDTO>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = " SELECT color, COUNT(*) AS RingPlacementsByColor FROM [RingPlacementPrice] WHERE isDeleted = 'active' GROUP BY color; ";
+            String sql = " WITH ColorCounts AS (\n"
+                    + "    SELECT \n"
+                    + "        color, \n"
+                    + "        COUNT(*) AS RingPlacementsByColor, \n"
+                    + "        ROW_NUMBER() OVER (ORDER BY COUNT(*) DESC) AS rowNum\n"
+                    + "    FROM [RingPlacementPrice] \n"
+                    + "    WHERE isDeleted = 'active' \n"
+                    + "    GROUP BY color\n"
+                    + ")\n"
+                    + "SELECT \n"
+                    + "    color, \n"
+                    + "    RingPlacementsByColor\n"
+                    + "FROM ColorCounts\n"
+                    + "WHERE rowNum <= 5\n"
+                    + "ORDER BY RingPlacementsByColor DESC; ";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
