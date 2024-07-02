@@ -194,6 +194,48 @@ public class UserDAO {
         return null;
     }
 
+    public UserDTO load_Normal(int userID) {
+
+        String sql = "select userID, userName, password, firstName, lastName, email, phoneNumber, address, roleName from [User] u full join [Role] r on u.roleID = r.roleID where userID = ? and isDeleted = 'active' ";
+
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, userID);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                int customerid = rs.getInt("userID");
+                String password = rs.getString("password");
+                String customername = rs.getString("userName");
+                String firstname = rs.getString("firstName");
+                String lastname = rs.getString("lastName");
+                String email = rs.getString("email");
+                String phonenumber = rs.getString("phoneNumber");
+                String address = rs.getString("address");
+                String roleName = rs.getString("roleName");
+
+                UserDTO user = new UserDTO();
+                user.setUserid(customerid);
+                user.setUsername(customername);
+                user.setRolename(roleName);
+                user.setPassword(password);
+                user.setFirstname(firstname);
+                user.setLastname(lastname);
+                user.setEmail(email);
+                user.setPhonenumber(phonenumber);
+                user.setAddress(address);
+                return user;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Query User error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
     public Integer insert(UserDTO user) {
         String sql = "INSERT INTO [User] (userName, password, firstName, lastName, phoneNumber, email, address, point, status, roleID, isDeleted) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'active', ?, 'active' )";
         try {
@@ -486,7 +528,7 @@ public class UserDAO {
         List<UserDTO> list = new ArrayList<UserDTO>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = "SELECT u.firstName + ' ' + u.lastName as fullName, r.roleName\n"
+            String sql = "SELECT u.firstName + ' ' + u.lastName as fullName, r.roleName, u.userID\n"
                     + "FROM [User] u\n"
                     + "JOIN [Role] r ON u.roleID = r.roleID\n"
                     + "WHERE r.roleName != 'Customer' and u.isDeleted = 'active';";
@@ -498,9 +540,11 @@ public class UserDAO {
 
                     String rolename = rs.getString("roleName");
                     String fullName = rs.getString("fullName");
+                    int userID = rs.getInt("userID");
                     UserDTO user = new UserDTO();
                     user.setFullName(fullName);
                     user.setRolename(rolename);
+                    user.setUserid(userID);
                     list.add(user);
                 }
             }

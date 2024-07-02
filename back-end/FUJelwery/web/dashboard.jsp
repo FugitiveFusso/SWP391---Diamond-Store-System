@@ -69,6 +69,46 @@
                 display: block;
                 margin: 10px 0;
             }
+            /* Basic Link Styling */
+            a {
+                color: #007bff; /* Link color */
+                text-decoration: none; /* Remove underline */
+                transition: color 0.3s ease; /* Smooth color transition */
+            }
+
+            /* Hover Effect */
+            a:hover {
+                text-decoration: none; /* Remove underline */
+                color: #0056b3; /* Darker color on hover */
+            }
+
+            /* Visited Link */
+            a:visited {
+                text-decoration: none; /* Remove underline */
+                color: #6610f2; /* Color for visited links */
+            }
+
+            /* Underline on Focus (Optional) */
+            a:focus {
+                text-decoration: none; /* Remove underline */
+            }
+
+            /* Remove Link Styling for Button-like Links */
+            a.button-like {
+                display: inline-block;
+                padding: 0.5em 1em;
+                background-color: #007bff;
+                color: white;
+                text-decoration: none;
+                border-radius: 4px;
+                transition: background-color 0.3s ease;
+            }
+
+            a.button-like:hover {
+                text-decoration: none; /* Remove underline */
+                background-color: #0056b3;
+            }
+
 
         </style>
     </head>
@@ -133,7 +173,7 @@
                         pageContext.setAttribute("usliststaff", usListStaff);
                 %>
                 <tr>
-                    <td>${usliststaff.fullName}</td>
+                    <td><a href="DashboardController?action=userdetails&id=${usliststaff.userid}">${usliststaff.fullName}</td>
                     <td>${usliststaff.rolename}</td>
 
                 </tr>

@@ -30,6 +30,7 @@ import com.khac.swp.fuj.warranty.WarrantyDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -56,6 +57,7 @@ public class DashboardController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            UserDAO userDAO = new UserDAO();
             String action = request.getParameter("action");
             HttpSession session = request.getSession(false);
             if (session == null || session.getAttribute("managersession") == null) {
@@ -121,9 +123,23 @@ public class DashboardController extends HttpServlet {
                 //Top5Sales
                 List<RingDTO> ringListTopSales = ringDao.listTopSales();
                 request.setAttribute("ringlisttopsales", ringListTopSales);
-                
+
                 request.getRequestDispatcher("/dashboard.jsp").forward(request, response);
 
+            } else if (action.equals("userdetails")) {
+                Integer id = null;
+                try {
+                    id = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+                UserDTO user = null;
+                if (id != null) {
+                    user = userDAO.load_Normal(id);
+                }
+                request.setAttribute("user", user);//object
+                RequestDispatcher rd = request.getRequestDispatcher("manager_userdetails.jsp");
+                rd.forward(request, response);
             }
         }
     }
