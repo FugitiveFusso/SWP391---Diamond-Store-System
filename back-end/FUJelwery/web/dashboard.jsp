@@ -1,4 +1,5 @@
 
+<%@page import="com.khac.swp.fuj.ring.RingDTO"%>
 <%@page import="com.khac.swp.fuj.ringplacementprice.RingPlacementPriceDTO"%>
 <%@page import="com.khac.swp.fuj.certificate.CertificateDTO"%>
 <%@page import="com.khac.swp.fuj.voucher.VoucherDTO"%>
@@ -406,6 +407,83 @@
             <strong>Percentage Lifetime Warranties: ${requestScope.warranty.percentageLifetimeWarranties}</strong>
             <strong>Percentage Retailer Warranties: ${requestScope.warranty.percentageRetailerWarranties}</strong>
             <strong>Unused Active Warranty List By Ids: ${requestScope.warranty.unusedActiveWarrantyIds}</strong>
+
+            <h1>Ring Statistics</h1>
+            <h3>Top 5 Highest</h3>
+
+            <table style="margin: 0 auto;">
+                <tr>
+                    <th>Ring ID</th>
+                    <th>Ring Name</th>
+                    <th>Ring Image</th>
+                    <th>Price</th>
+                </tr>
+                <%
+                    List<RingDTO> ringHighest = (List<RingDTO>) request.getAttribute("ringlisthighest");
+                    for (RingDTO ringlisthighest : ringHighest) {
+                        pageContext.setAttribute("ringlisthighest", ringlisthighest);
+                %>
+                <tr>
+                    <td>${ringlisthighest.ringID}</td>
+                    <td>${ringlisthighest.ringName}</td>
+                    <td><img src=${ringlisthighest.ringImage} width="100px" height="100px"></td>
+                    <td>${ringlisthighest.totalPrice} VND</td>
+                </tr>
+                <%
+                    }
+                %>    
+            </table>
+            <br>
+            <h3>Top 5 Lowest</h3>
+
+            <table style="margin: 0 auto;">
+                <tr>
+                    <th>Ring ID</th>
+                    <th>Ring Name</th>
+                    <th>Ring Image</th>
+                    <th>Price</th>
+                </tr>
+                <%
+                    List<RingDTO> ringLowest = (List<RingDTO>) request.getAttribute("ringlistlowest");
+                    for (RingDTO ringlistlowest : ringLowest) {
+                        pageContext.setAttribute("ringlistlowest", ringlistlowest);
+                %>
+                <tr>
+                    <td>${ringlistlowest.ringID}</td>
+                    <td>${ringlistlowest.ringName}</td>
+                    <td><img src=${ringlistlowest.ringImage} width="100px" height="100px"></td>
+                    <td>${ringlistlowest.totalPrice} VND</td>
+                </tr>
+                <%
+                    }
+                %>    
+            </table>
+            <br>
+            <h3>Top 5 Sales</h3>
+            <table style="margin: 0 auto;">
+                <tr>
+                    <th>Ring ID</th>
+                    <th>Ring Name</th>
+                    <th>Ring Image</th>
+                    <th>Number of Purchased Ring</th>
+                    <th>Price</th>
+                </tr>
+                <%
+                    List<RingDTO> ringListTopSales = (List<RingDTO>) request.getAttribute("ringlisttopsales");
+                    for (RingDTO ringlisttopsales : ringListTopSales) {
+                        pageContext.setAttribute("topsales", ringlisttopsales);
+                %>
+                <tr>
+                    <td>${topsales.ringID}</td>
+                    <td>${topsales.ringName}</td>
+                    <td><img src=${topsales.ringImage} width="100px" height="100px"></td>
+                    <td>${topsales.purchaseCount}</td>
+                    <td>${topsales.totalPrice} VND</td>
+                </tr>
+                <%
+                    }
+                %>    
+            </table>
         </div>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"

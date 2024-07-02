@@ -201,5 +201,72 @@ SELECT
 FROM 
     ActiveWarrantyStats;
 
+-- Rings
+
+-- Highest
+WITH RingPrices AS (
+    SELECT 
+        r.ringID, 
+        r.ringName, 
+        r.ringImage, 
+        FORMAT(((r.price + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02), 'N0') AS totalPrice,
+        ROW_NUMBER() OVER (ORDER BY ((r.price + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02) DESC) AS RankHighest
+    FROM [Ring] r
+    LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID
+    LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID
+    LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID
+    WHERE r.isDeleted = 'active'
+)
+SELECT 
+    ringID, 
+    ringName, 
+    ringImage, 
+    totalPrice
+FROM RingPrices
+WHERE RankHighest <= 5
+ORDER BY RankHighest ASC;
+-- Lowest
+WITH RingPrices AS (
+    SELECT 
+        r.ringID, 
+        r.ringName, 
+        r.ringImage, 
+        FORMAT(((r.price + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02), 'N0') AS totalPrice,
+        ROW_NUMBER() OVER (ORDER BY ((r.price + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02) ASC) AS RankLowest
+    FROM [Ring] r
+    LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID
+    LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID
+    LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID
+    WHERE r.isDeleted = 'active'
+)
+SELECT 
+    ringID, 
+    ringName, 
+    ringImage, 
+    totalPrice
+FROM RingPrices
+WHERE RankLowest <= 5
+ORDER BY RankLowest ASC;
+
+-- Top5Sales
+WITH Top5MostBoughtRings AS (
+    SELECT TOP 5 r.ringID, r.ringName, r.ringImage, COUNT(o.orderID) AS PurchaseCount, FORMAT(((r.price + rp.rpPrice + dp.price) * 1.02), 'N0') AS priceOfEachRings
+    FROM [Order] o
+    LEFT JOIN [Ring] r ON o.ringID = r.ringID
+    LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID
+    LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID
+    LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID
+    WHERE r.isDeleted = 'active'
+    GROUP BY r.ringID, r.ringName, r.price, rp.rpPrice, dp.price, r.ringImage
+    ORDER BY PurchaseCount DESC
+)
+
+SELECT
+    ringID,
+    ringName,
+	ringImage,
+    PurchaseCount,
+    priceOfEachRings
+FROM Top5MostBoughtRings;
 
 

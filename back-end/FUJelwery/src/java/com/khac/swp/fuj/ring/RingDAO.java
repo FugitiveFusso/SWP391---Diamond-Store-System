@@ -601,4 +601,172 @@ public class RingDAO {
         }
         return list;
     }
+
+    public List<RingDTO> listHighest() {
+        List<RingDTO> list = new ArrayList<RingDTO>();
+        try {
+            Connection con = DBUtils.getConnection();
+            String sql = "WITH RingPrices AS (\n"
+                    + "    SELECT \n"
+                    + "        r.ringID, \n"
+                    + "        r.ringName, \n"
+                    + "        r.ringImage, \n"
+                    + "        FORMAT(((r.price + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02), 'N0') AS totalPrice,\n"
+                    + "        ROW_NUMBER() OVER (ORDER BY ((r.price + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02) DESC) AS RankHighest\n"
+                    + "    FROM [Ring] r\n"
+                    + "    LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID\n"
+                    + "    LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID\n"
+                    + "    LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID\n"
+                    + "    WHERE r.isDeleted = 'active'\n"
+                    + ")\n"
+                    + "SELECT \n"
+                    + "    ringID, \n"
+                    + "    ringName, \n"
+                    + "    ringImage, \n"
+                    + "    totalPrice\n"
+                    + "FROM RingPrices\n"
+                    + "WHERE RankHighest <= 5\n"
+                    + "ORDER BY RankHighest ASC; ";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+
+                    int ringID = rs.getInt("ringID");
+                    String ringName = rs.getString("ringName");
+                    String ringImage = rs.getString("ringImage");
+                    String totalPrice = rs.getString("totalPrice");
+
+                    RingDTO ring = new RingDTO();
+
+                    ring.setRingID(ringID);
+                    ring.setRingName(ringName);
+                    ring.setRingImage(ringImage);
+                    ring.setTotalPrice(totalPrice);
+
+                    list.add(ring);
+                }
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return list;
+    }
+
+    public List<RingDTO> listLowest() {
+        List<RingDTO> list = new ArrayList<RingDTO>();
+        try {
+            Connection con = DBUtils.getConnection();
+            String sql = "WITH RingPrices AS (\n"
+                    + "    SELECT \n"
+                    + "        r.ringID, \n"
+                    + "        r.ringName, \n"
+                    + "        r.ringImage, \n"
+                    + "        FORMAT(((r.price + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02), 'N0') AS totalPrice,\n"
+                    + "        ROW_NUMBER() OVER (ORDER BY ((r.price + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02) ASC) AS RankLowest\n"
+                    + "    FROM [Ring] r\n"
+                    + "    LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID\n"
+                    + "    LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID\n"
+                    + "    LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID\n"
+                    + "    WHERE r.isDeleted = 'active'\n"
+                    + ")\n"
+                    + "SELECT \n"
+                    + "    ringID, \n"
+                    + "    ringName, \n"
+                    + "    ringImage, \n"
+                    + "    totalPrice\n"
+                    + "FROM RingPrices\n"
+                    + "WHERE RankLowest <= 5\n"
+                    + "ORDER BY RankLowest ASC;";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+
+                    int ringID = rs.getInt("ringID");
+                    String ringName = rs.getString("ringName");
+                    String ringImage = rs.getString("ringImage");
+                    String totalPrice = rs.getString("totalPrice");
+
+                    RingDTO ring = new RingDTO();
+
+                    ring.setRingID(ringID);
+                    ring.setRingName(ringName);
+                    ring.setRingImage(ringImage);
+                    ring.setTotalPrice(totalPrice);
+
+                    list.add(ring);
+                }
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return list;
+    }
+
+    public List<RingDTO> listTopSales() {
+        List<RingDTO> list = new ArrayList<RingDTO>();
+        try {
+            Connection con = DBUtils.getConnection();
+            String sql = "WITH Top5MostBoughtRings AS (\n"
+                    + "    SELECT TOP 5 r.ringID, r.ringName, r.ringImage, COUNT(o.orderID) AS PurchaseCount, FORMAT(((r.price + rp.rpPrice + dp.price) * 1.02), 'N0') AS priceOfEachRings\n"
+                    + "    FROM [Order] o\n"
+                    + "    LEFT JOIN [Ring] r ON o.ringID = r.ringID\n"
+                    + "    LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID\n"
+                    + "    LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID\n"
+                    + "    LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID\n"
+                    + "    WHERE r.isDeleted = 'active'\n"
+                    + "    GROUP BY r.ringID, r.ringName, r.price, rp.rpPrice, dp.price, r.ringImage\n"
+                    + "    ORDER BY PurchaseCount DESC\n"
+                    + ")\n"
+                    + "\n"
+                    + "SELECT\n"
+                    + "    ringID,\n"
+                    + "    ringName,\n"
+                    + "	ringImage,\n"
+                    + "    PurchaseCount,\n"
+                    + "    priceOfEachRings\n"
+                    + "FROM Top5MostBoughtRings;";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+
+                    int ringID = rs.getInt("ringID");
+                    String ringName = rs.getString("ringName");
+                    String ringImage = rs.getString("ringImage");
+                    int purchaseCount = rs.getInt("PurchaseCount");
+                    String totalPrice = rs.getString("priceOfEachRings");
+
+                    RingDTO ring = new RingDTO();
+
+                    ring.setRingID(ringID);
+                    ring.setRingName(ringName);
+                    ring.setRingImage(ringImage);
+                    ring.setPurchaseCount(purchaseCount);
+                    ring.setTotalPrice(totalPrice);
+
+                    list.add(ring);
+                }
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return list;
+    }
 }

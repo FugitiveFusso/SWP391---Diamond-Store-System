@@ -17,6 +17,8 @@ import com.khac.swp.fuj.diamondprice.DiamondPriceDAO;
 import com.khac.swp.fuj.diamondprice.DiamondPriceDTO;
 import com.khac.swp.fuj.posts.PostDAO;
 import com.khac.swp.fuj.posts.PostDTO;
+import com.khac.swp.fuj.ring.RingDAO;
+import com.khac.swp.fuj.ring.RingDTO;
 import com.khac.swp.fuj.ringplacementprice.RingPlacementPriceDAO;
 import com.khac.swp.fuj.ringplacementprice.RingPlacementPriceDTO;
 import com.khac.swp.fuj.users.UserDAO;
@@ -109,6 +111,16 @@ public class DashboardController extends HttpServlet {
                 WarrantyDAO warrantyDao = new WarrantyDAO();
                 WarrantyDTO warranty = warrantyDao.loadStatistics();
                 request.setAttribute("warranty", warranty);
+                //Top5Highest
+                RingDAO ringDao = new RingDAO();
+                List<RingDTO> ringListHighest = ringDao.listHighest();
+                request.setAttribute("ringlisthighest", ringListHighest);
+                //Top5Lowest
+                List<RingDTO> ringListLowest = ringDao.listLowest();
+                request.setAttribute("ringlistlowest", ringListLowest);
+                //Top5Sales
+                List<RingDTO> ringListTopSales = ringDao.listTopSales();
+                request.setAttribute("ringlisttopsales", ringListTopSales);
                 
                 request.getRequestDispatcher("/dashboard.jsp").forward(request, response);
 
