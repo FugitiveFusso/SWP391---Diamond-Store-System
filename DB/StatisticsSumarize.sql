@@ -141,8 +141,39 @@ ORDER BY
 
 -- RingPlacementsPrices
 SELECT COUNT(*) AS TotalRingPlacements, FORMAT(AVG(rpPrice), 'N0') AS AveragePrice FROM [RingPlacementPrice] WHERE isDeleted = 'active';
-SELECT material, COUNT(*) AS RingPlacementsByMaterial, FORMAT(SUM(rpPrice), 'N0') AS TotalMaterialPrice FROM [RingPlacementPrice] WHERE isDeleted = 'active' GROUP BY material;
-SELECT color, COUNT(*) AS RingPlacementsByColor FROM [RingPlacementPrice] WHERE isDeleted = 'active' GROUP BY color;
+WITH MaterialCounts AS (
+    SELECT 
+        material, 
+        COUNT(*) AS RingPlacementsByMaterial, 
+        FORMAT(SUM(rpPrice), 'N0') AS TotalMaterialPrice,
+        ROW_NUMBER() OVER (ORDER BY COUNT(*) DESC) AS rowNum
+    FROM [RingPlacementPrice] 
+    WHERE isDeleted = 'active' 
+    GROUP BY material
+)
+SELECT 
+    material, 
+    RingPlacementsByMaterial, 
+    TotalMaterialPrice
+FROM MaterialCounts
+WHERE rowNum <= 5
+ORDER BY RingPlacementsByMaterial DESC;
+
+WITH ColorCounts AS (
+    SELECT 
+        color, 
+        COUNT(*) AS RingPlacementsByColor, 
+        ROW_NUMBER() OVER (ORDER BY COUNT(*) DESC) AS rowNum
+    FROM [RingPlacementPrice] 
+    WHERE isDeleted = 'active' 
+    GROUP BY color
+)
+SELECT 
+    color, 
+    RingPlacementsByColor
+FROM ColorCounts
+WHERE rowNum <= 5
+ORDER BY RingPlacementsByColor DESC;
 
 -- Warranties
 WITH ActiveWarrantyStats AS (
