@@ -103,8 +103,8 @@ public class DashboardController extends HttpServlet {
                 request.setAttribute("diamondprice", diamondPrice);
                 //Diamonds
                 DiamondDAO diamondDao = new DiamondDAO();
-                DiamondDTO diamond = diamondDao.loadStatistics();
-                request.setAttribute("diamond", diamond);
+                List<DiamondDTO> diaList = diamondDao.listStatistics();
+                request.setAttribute("dialist", diaList);
                 //RPPs1
                 RingPlacementPriceDAO ringPlacementPriceDao = new RingPlacementPriceDAO();
                 RingPlacementPriceDTO rppa = ringPlacementPriceDao.loadStatisticsA();

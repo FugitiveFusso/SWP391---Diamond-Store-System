@@ -23,7 +23,8 @@ public class DiamondDTO {
     private double percentageDiamondsNotUsed;
     private String diamondsNotUsedListByID;
     private String diamondsUsedListbyID;
-    private String topOrigins;
+    private String country;
+    private int diamondCount;
 
     public int getDiamondID() {
         return diamondID;
@@ -193,17 +194,25 @@ public class DiamondDTO {
         this.diamondsUsedListbyID = diamondsUsedListbyID;
     }
 
-    public String getTopOrigins() {
-        return topOrigins;
+    public String getCountry() {
+        return country;
     }
 
-    public void setTopOrigins(String topOrigins) {
-        this.topOrigins = topOrigins;
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public int getDiamondCount() {
+        return diamondCount;
+    }
+
+    public void setDiamondCount(int diamondCount) {
+        this.diamondCount = diamondCount;
     }
 
     @Override
     public String toString() {
-        return "DiamondDTO{" + "diamondID=" + diamondID + ", diamondName=" + diamondName + ", diamondImage=" + diamondImage + ", origin=" + origin + ", dpID=" + dpID + ", certificateID=" + certificateID + ", diamondSize=" + diamondSize + ", caratWeight=" + caratWeight + ", color=" + color + ", clarity=" + clarity + ", cut=" + cut + ", diamondPrice=" + diamondPrice + ", totalDiamonds=" + totalDiamonds + ", activeDiamonds=" + activeDiamonds + ", deletedDiamonds=" + deletedDiamonds + ", diamondsUsedInRing=" + diamondsUsedInRing + ", diamondsNotUsedInRing=" + diamondsNotUsedInRing + ", percentageDiamondsUsed=" + percentageDiamondsUsed + ", percentageDiamondsNotUsed=" + percentageDiamondsNotUsed + ", diamondsNotUsedListByID=" + diamondsNotUsedListByID + ", diamondsUsedListbyID=" + diamondsUsedListbyID + ", topOrigins=" + topOrigins + '}';
-    }
+        return "DiamondDTO{" + "diamondID=" + diamondID + ", diamondName=" + diamondName + ", diamondImage=" + diamondImage + ", origin=" + origin + ", dpID=" + dpID + ", certificateID=" + certificateID + ", diamondSize=" + diamondSize + ", caratWeight=" + caratWeight + ", color=" + color + ", clarity=" + clarity + ", cut=" + cut + ", diamondPrice=" + diamondPrice + ", totalDiamonds=" + totalDiamonds + ", activeDiamonds=" + activeDiamonds + ", deletedDiamonds=" + deletedDiamonds + ", diamondsUsedInRing=" + diamondsUsedInRing + ", diamondsNotUsedInRing=" + diamondsNotUsedInRing + ", percentageDiamondsUsed=" + percentageDiamondsUsed + ", percentageDiamondsNotUsed=" + percentageDiamondsNotUsed + ", diamondsNotUsedListByID=" + diamondsNotUsedListByID + ", diamondsUsedListbyID=" + diamondsUsedListbyID + ", country=" + country + ", diamondCount=" + diamondCount + '}';
+    }    
     
 }

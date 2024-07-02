@@ -1,4 +1,5 @@
 
+<%@page import="com.khac.swp.fuj.diamond.DiamondDTO"%>
 <%@page import="com.khac.swp.fuj.ring.RingDTO"%>
 <%@page import="com.khac.swp.fuj.ringplacementprice.RingPlacementPriceDTO"%>
 <%@page import="com.khac.swp.fuj.certificate.CertificateDTO"%>
@@ -338,16 +339,66 @@
             <strong>All Clarities: ${requestScope.diamondprice.allClarities}</strong>
 
             <h1>Diamond Statistics</h1>
-            <strong>Total Diamonds: ${requestScope.diamond.totalDiamonds}</strong>
-            <strong>Active Diamonds: ${requestScope.diamond.activeDiamonds}</strong>
-            <strong>Deleted Diamonds: ${requestScope.diamond.deletedDiamonds}</strong>
-            <strong>Diamonds Used In Ring: ${requestScope.diamond.diamondsUsedInRing}</strong>
-            <strong>Diamonds Unused In Ring: ${requestScope.diamond.diamondsNotUsedInRing}</strong>
-            <strong>Percentage Diamonds Used: ${requestScope.diamond.percentageDiamondsUsed}%</strong>
-            <strong>Percentage Diamonds Not Used: ${requestScope.diamond.percentageDiamondsNotUsed}%</strong>
-            <strong>Diamonds Not Used List By ID: ${requestScope.diamond.diamondsNotUsedListByID}</strong>         
-            <strong>Diamonds Used List By ID: ${requestScope.diamond.diamondsUsedListbyID}</strong>
-            <strong>Top Diamonds's Origin: ${requestScope.diamond.topOrigins}</strong>
+            <%
+                List<DiamondDTO> diaList = (List<DiamondDTO>) request.getAttribute("dialist");
+                int totalDiamonds = 0;
+                int activeDiamonds = 0;
+                int deletedDiamonds = 0;
+                int diamondsUsedInRing = 0;
+                int diamondsNotUsedInRing = 0;
+                double percentageDiamondsUsed = 0.0;
+                double percentageDiamondsNotUsed = 0.0;
+                String diamondsNotUsedListByID = "";
+                String diamondsUsedListbyID = "";
+                if (diaList != null) {
+                    for (DiamondDTO diamond : diaList) {
+                        totalDiamonds = diamond.getTotalDiamonds();
+                        activeDiamonds = diamond.getActiveDiamonds();
+                        deletedDiamonds = diamond.getDeletedDiamonds();
+                        diamondsUsedInRing = diamond.getDiamondsUsedInRing();
+                        diamondsNotUsedInRing = diamond.getDiamondsNotUsedInRing();
+                        percentageDiamondsUsed = diamond.getPercentageDiamondsUsed();
+                        percentageDiamondsNotUsed = diamond.getPercentageDiamondsNotUsed();
+                        diamondsNotUsedListByID = diamond.getDiamondsNotUsedListByID();
+                        diamondsUsedListbyID = diamond.getDiamondsUsedListbyID();
+                    }
+                }
+                request.setAttribute("totalDiamonds", totalDiamonds);
+                request.setAttribute("activeDiamonds", activeDiamonds);
+                request.setAttribute("deletedDiamonds", deletedDiamonds);
+                request.setAttribute("diamondsUsedInRing", diamondsUsedInRing);
+                request.setAttribute("diamondsNotUsedInRing", diamondsNotUsedInRing);
+                request.setAttribute("percentageDiamondsUsed", percentageDiamondsUsed);
+                request.setAttribute("percentageDiamondsNotUsed", percentageDiamondsNotUsed);
+                request.setAttribute("diamondsNotUsedListByID", diamondsNotUsedListByID);
+                request.setAttribute("diamondsUsedListbyID", diamondsUsedListbyID);
+            %>
+            <strong>Total Diamonds: ${totalDiamonds}</strong>
+            <strong>Active Diamonds: ${activeCategories}</strong>
+            <strong>Deleted Diamonds: ${deletedCategories}</strong>
+            <strong>Diamonds Used In Ring: ${diamondsUsedInRing}</strong>
+            <strong>Diamonds Unused In Ring: ${diamondsNotUsedInRing}</strong>
+            <strong>Percentage Diamonds Used: ${percentageDiamondsUsed}%</strong>
+            <strong>Percentage Diamonds Not Used: ${percentageDiamondsNotUsed}%</strong>
+            <strong>Diamonds Not Used List By ID: ${diamondsNotUsedListByID}</strong>
+            <strong>Diamonds Used List By ID: ${diamondsUsedListbyID}</strong>
+
+            <table style="margin: 0 auto;">
+                <tr>
+                    <th>Country</th>
+                    <th>Ring Count</th>
+                </tr>
+                <% for (DiamondDTO diamond : diaList) {
+                        pageContext.setAttribute("diamond", diamond);
+                %>
+                <tr>
+                    <td>${diamond.country}</td>
+                    <td>${diamond.diamondCount}</td>
+                </tr>
+                <%
+                    }
+                %>    
+            </table>
 
             <h1>Ring Placement Price Statistics</h1>
             <strong>Total Ring Placements: ${requestScope.rppa.totalRp}</strong>
@@ -423,7 +474,7 @@
 
             <table style="margin: 0 auto;">
                 <tr>
-<!--                    <th>Ring ID</th>-->
+                    <!--                    <th>Ring ID</th>-->
                     <th>Ring Name</th>
                     <th>Ring Image</th>
                     <th>Price</th>
@@ -448,7 +499,7 @@
 
             <table style="margin: 0 auto;">
                 <tr>
-<!--                    <th>Ring ID</th>-->
+                    <!--                    <th>Ring ID</th>-->
                     <th>Ring Name</th>
                     <th>Ring Image</th>
                     <th>Price</th>
@@ -475,7 +526,7 @@
                     <th>Order Year</th>
                     <th>Order Month</th>
                     <th>Month Name</th>
-<!--                    <th>Ring ID</th>-->
+                    <!--                    <th>Ring ID</th>-->
                     <th>Ring Name</th>
                     <th>Ring Image</th>
                     <th>Number of Purchased Ring</th>
