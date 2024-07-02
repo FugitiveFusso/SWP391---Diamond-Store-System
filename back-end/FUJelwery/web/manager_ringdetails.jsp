@@ -112,21 +112,21 @@
                         <div class="card-body">    
                             <h6 class="card-subtitle mb-2 text-muted" >Ring ID: ${requestScope.ring.ringID}</h6>
                             <h4 class="card-title" style="font-weight: 700">${requestScope.ring.ringName}</h4>
-                            <p class="card-text"><strong>Price:</strong> ${requestScope.ring.price}</p>
+                            <p class="card-text"><strong>Price:</strong> ${requestScope.ring.price} VND</p>
                             <p class="card-text"><strong>Category:</strong> ${requestScope.ring.categoryID}</p>
                             <p class="card-text"><strong>Collection:</strong> ${requestScope.ring.collectionID}</p>
                             <p class="card-text"><strong>Ring Placement Name:</strong> ${requestScope.ring.ringPlacementName}</p>
                             <p class="card-text"><strong>Material:</strong> ${requestScope.ring.material}</p>
                             <p class="card-text"><strong>Ring Placement Color:</strong> ${requestScope.ring.ringColor}</p>
-                            <p class="card-text"><strong>Ring Placement Price:</strong> ${requestScope.ring.rpPrice}</p>
+                            <p class="card-text"><strong>Ring Placement Price:</strong> ${requestScope.ring.rpPrice} VND</p>
                             <p class="card-text"><strong>Diamond Name:</strong> ${requestScope.ring.diamondName}</p>
                             <p class="card-text"><strong>Diamond Size:</strong> ${requestScope.ring.diamondSize}</p>
                             <p class="card-text"><strong>Carat Weight:</strong> ${requestScope.ring.caratWeight}</p>
                             <p class="card-text"><strong>Color:</strong> ${requestScope.ring.color}</p>
                             <p class="card-text"><strong>Clarity:</strong> ${requestScope.ring.clarity}</p>
                             <p class="card-text"><strong>Cut:</strong> ${requestScope.ring.cut}</p>
-                            <p class="card-text"><strong>Diamond Price:</strong> ${requestScope.ring.diamondPrice}</p>
-                            <p class="card-text"><strong>Total Price:</strong> ${requestScope.ring.totalPrice}</p>
+                            <p class="card-text"><strong>Diamond Price:</strong> ${requestScope.ring.diamondPrice} VND</p>
+                            <p class="card-text"><strong>Total Price:</strong> ${requestScope.ring.totalPrice} VND</p>
                             <div class="d-flex flex-column align-items-center" role="group" aria-label="Voucher Actions">
                                 <div class="button-top mb-2">
                                     <form action="DashboardController" method="post" style="display:inline-block; margin-right: 10px;">
