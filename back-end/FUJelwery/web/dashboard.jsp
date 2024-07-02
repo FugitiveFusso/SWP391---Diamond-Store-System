@@ -132,7 +132,7 @@
                 %>    
             </table>
             <br>
-            <h3>List Of Staffs</h3>
+            <h4>List Of Staffs</h4>
             <table style="margin: 0 auto;">
                 <tr>
                     <th>Full Name</th>
@@ -206,7 +206,7 @@
 
             %>
             <strong>Total Number Of Collections: ${numberOfCollections}</strong>
-            <strong>THE COLLECTIONS HAVE RINGS ARE SHOWN BELOW</strong>
+            <h4>The Top 5 Collections are shown below</h4>
 
             <table style="margin: 0 auto;">
                 <tr>
@@ -241,7 +241,7 @@
 
             %>
             <strong>Total Number Of Vouchers: ${numberOfVouchers}</strong>
-            <strong>The TOP 3 MOSTLY USED Vouchers </strong>
+            <h4>The Top 3 mostly used Vouchers </h4>
 
             <table style="margin: 0 auto;">
                 <tr>
@@ -383,6 +383,7 @@
             <strong>Diamonds Not Used List By ID: ${diamondsNotUsedListByID}</strong>
             <strong>Diamonds Used List By ID: ${diamondsUsedListbyID}</strong>
 
+            <h4>The Top 5 Countries that Shop have Diamonds from</h4>
             <table style="margin: 0 auto;">
                 <tr>
                     <th>Country</th>
@@ -403,6 +404,8 @@
             <h1>Ring Placement Price Statistics</h1>
             <strong>Total Ring Placements: ${requestScope.rppa.totalRp}</strong>
             <strong>Average Price: ${requestScope.rppa.averagePrice} VND</strong>
+
+            <h4>The Top 5 Ring Placement By Material</h4>
             <table style="margin: 0 auto;">
                 <tr>
                     <th>Material</th>
@@ -424,6 +427,7 @@
                 %>    
             </table>
             <br>
+            <h4>The Top 5 Ring Placement By Color</h4>
             <table style="margin: 0 auto;">
                 <tr>
                     <th>Color</th>
@@ -470,7 +474,7 @@
             <strong>Unused Active Warranty List By Ids: ${requestScope.warranty.unusedActiveWarrantyIds}</strong>
 
             <h1>Ring Statistics</h1>
-            <h3>Top 5 Highest</h3>
+            <h4>Top 5 Rings have highest price</h4>
 
             <table style="margin: 0 auto;">
                 <tr>
@@ -495,7 +499,7 @@
                 %>    
             </table>
             <br>
-            <h3>Top 5 Lowest</h3>
+            <h4>Top 5 Rings that have lowest price</h4>
 
             <table style="margin: 0 auto;">
                 <tr>
@@ -520,7 +524,7 @@
                 %>    
             </table>
             <br>
-            <h3>Top 5 Sales From Each Month (Latest to Earliest)</h3>
+            <h4>Top 5 Sales From Each Month (Latest to Earliest)</h4>
             <table style="margin: 0 auto;">
                 <tr>
                     <th>Order Year</th>
