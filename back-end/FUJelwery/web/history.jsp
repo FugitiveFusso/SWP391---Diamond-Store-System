@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="css/user_accountdetails.css">
         <link rel="stylesheet" href="css/navigation_bar.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link rel="stylesheet" href="css/pagination.css">
 
     </head>
     <body>
@@ -110,27 +111,36 @@
                                         <div class="panel-body">
                                             <table class="delivery-history-table">
                                                 <caption>Purchase Records</caption>
-                                                <tr>
-                                                    <th>Order ID</th>
-                                                    <th>Ring Name</th>
-                                                    <th>Ring Size</th>
-                                                    <th>Date Purchased</th>
-                                                    <th>Price</th>
-                                                </tr>
-                                                <%
-                                                    List<OrderDTO> listForPastPurchase = (List<OrderDTO>) request.getAttribute("listpastpurchase");
-                                                    for (OrderDTO bill : listForPastPurchase) {
-                                                        pageContext.setAttribute("bill", bill);
-                                                %>
-                                                <tr>
-                                                    <td><a href="HistoryController?action=details&id=${bill.orderID}">${bill.orderID}</td>
-                                                    <td><a href="ProductController?action=details&id=${bill.ringID}">${bill.ringName}</td>
-                                                    <td>${bill.ringSize}</td>
-                                                    <td>${bill.orderDate}</td>
-                                                    <td>${bill.totalPrice} VND</td>
-                                                </tr>
-                                                <% }%>
+                                                <thead>
+                                                    <tr>
+                                                        <th>Order ID</th>
+                                                        <th>Ring Name</th>
+                                                        <th>Ring Size</th>
+                                                        <th>Date Purchased</th>
+                                                        <th>Price</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="purchase-records-body">
+                                                    <%
+                                                        List<OrderDTO> listForPastPurchase = (List<OrderDTO>) request.getAttribute("listpastpurchase");
+                                                        for (OrderDTO bill : listForPastPurchase) {
+                                                            pageContext.setAttribute("bill", bill);
+                                                    %>
+                                                    <tr>
+                                                        <td><a href="HistoryController?action=details&id=${bill.orderID}">${bill.orderID}</a></td>
+                                                        <td><a href="ProductController?action=details&id=${bill.ringID}">${bill.ringName}</a></td>
+                                                        <td>${bill.ringSize}</td>
+                                                        <td>${bill.orderDate}</td>
+                                                        <td>${bill.totalPrice} VND</td>
+                                                    </tr>
+                                                    <% }%>
+                                                </tbody>
                                             </table>
+                                                <div id="paginationControls" class="pagination-controls"  style="margin: 0px;">
+                                                <button id="prevButton" class="pagination-button"><i class="fas fa-chevron-left"></i></button>
+                                                <div id="pageNumbers"></div>
+                                                <button id="nextButton" class="pagination-button"><i class="fas fa-chevron-right"></i></button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -192,5 +202,8 @@
                 </div>
             </div>  
         </div>
+
+
+        <script src="js/history_pagination.js"></script>
     </body>
 </html>
