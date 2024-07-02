@@ -15,8 +15,8 @@ JOIN [Role] r ON u.roleID = r.roleID
 WHERE r.roleName != 'Customer' and u.isDeleted = 'active';
 
 -- Categories
-SELECT TotalCategories, ActiveCategories, DeletedCategories, Top3CategoryNames, Top3CategoryRingCounts FROM
-            (SELECT 
+SELECT categoryID, TotalCategories, ActiveCategories, DeletedCategories, Top3CategoryNames, Top3CategoryRingCounts FROM
+            (SELECT c.categoryID,
             (SELECT COUNT(*) FROM [Category]) AS TotalCategories,
             (SELECT SUM(CASE WHEN isDeleted = 'active' THEN 1 ELSE 0 END) FROM [Category]) AS ActiveCategories,
             (SELECT SUM(CASE WHEN isDeleted = 'deleted' THEN 1 ELSE 0 END) FROM [Category]) AS DeletedCategories,
@@ -26,8 +26,8 @@ SELECT TotalCategories, ActiveCategories, DeletedCategories, Top3CategoryNames, 
             SELECT r.categoryID, COUNT(*) AS NumberOfRings FROM [Ring] r
             GROUP BY r.categoryID) AS CategoryRingCounts ON c.categoryID = CategoryRingCounts.categoryID
         WHERE c.categoryName IN (SELECT TOP 3 categoryName FROM [Category] c JOIN [Ring] r ON c.categoryID = r.categoryID
-        GROUP BY categoryName ORDER BY COUNT(*) DESC)
-        GROUP BY CategoryRingCounts.categoryID) AS CombinedResults;
+        GROUP BY categoryName, c.categoryID ORDER BY COUNT(*) DESC)
+        GROUP BY CategoryRingCounts.categoryID, c.categoryID) AS CombinedResults;
 
 -- Collections
 WITH CollectionSummary AS (
@@ -36,7 +36,7 @@ FROM [Collection] c LEFT JOIN [Ring] r ON c.collectionID = r.collectionID AND r.
 LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID
 WHERE c.isDeleted = 'active' GROUP BY c.collectionID, c.collectionName)
 
-SELECT (SELECT COUNT(*) FROM [Collection] WHERE isDeleted = 'active') AS NumberOfCollections, cs.collectionName, cs.NumberOfRings, FORMAT(cs.TotalCollectionPrice, 'N0') AS TotalCollectionPrice
+SELECT cs.collectionID, (SELECT COUNT(*) FROM [Collection] WHERE isDeleted = 'active') AS NumberOfCollections, cs.collectionName, cs.NumberOfRings, FORMAT(cs.TotalCollectionPrice, 'N0') AS TotalCollectionPrice
 FROM CollectionSummary cs WHERE cs.NumberOfRings > 0 -- Select collections with more than 0 rings
 ORDER BY cs.TotalCollectionPrice DESC;
 

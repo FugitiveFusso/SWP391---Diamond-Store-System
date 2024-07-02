@@ -183,7 +183,7 @@
                         pageContext.setAttribute("cate", cate);
                 %>
                 <tr>
-                    <td>${cate.top3CategoryNames}</td>
+                    <td><a href="DashboardController?action=categorydetails&id=${cate.categoryID}">${cate.top3CategoryNames}</td>
                     <td>${cate.top3CategoryRingCounts}</td>
                 </tr>
                 <%
@@ -423,7 +423,7 @@
 
             <table style="margin: 0 auto;">
                 <tr>
-                    <th>Ring ID</th>
+<!--                    <th>Ring ID</th>-->
                     <th>Ring Name</th>
                     <th>Ring Image</th>
                     <th>Price</th>
@@ -434,7 +434,7 @@
                         pageContext.setAttribute("ringlisthighest", ringlisthighest);
                 %>
                 <tr>
-                    <td>${ringlisthighest.ringID}</td>
+<!--                    <td>${ringlisthighest.ringID}</td>-->
                     <td><a href="DashboardController?action=ringdetails&id=${ringlisthighest.ringID}">${ringlisthighest.ringName}</td>
                     <td><img src=${ringlisthighest.ringImage} width="100px" height="100px"></td>
                     <td>${ringlisthighest.totalPrice} VND</td>
@@ -448,7 +448,7 @@
 
             <table style="margin: 0 auto;">
                 <tr>
-                    <th>Ring ID</th>
+<!--                    <th>Ring ID</th>-->
                     <th>Ring Name</th>
                     <th>Ring Image</th>
                     <th>Price</th>
@@ -459,7 +459,7 @@
                         pageContext.setAttribute("ringlistlowest", ringlistlowest);
                 %>
                 <tr>
-                    <td>${ringlistlowest.ringID}</td>
+<!--                    <td>${ringlistlowest.ringID}</td>-->
                     <td><a href="DashboardController?action=ringdetails&id=${ringlistlowest.ringID}">${ringlistlowest.ringName}</td>
                     <td><img src=${ringlistlowest.ringImage} width="100px" height="100px"></td>
                     <td>${ringlistlowest.totalPrice} VND</td>
@@ -475,7 +475,7 @@
                     <th>Order Year</th>
                     <th>Order Month</th>
                     <th>Month Name</th>
-                    <th>Ring ID</th>
+<!--                    <th>Ring ID</th>-->
                     <th>Ring Name</th>
                     <th>Ring Image</th>
                     <th>Number of Purchased Ring</th>
@@ -491,7 +491,7 @@
                     <td>${topsales.orderYear}</td>
                     <td>${topsales.orderMonth}</td>
                     <td>${topsales.monthName}</td>
-                    <td>${topsales.ringID}</td>
+<!--                    <td>${topsales.ringID}</td>-->
                     <td><a href="DashboardController?action=ringdetails&id=${topsales.ringID}">${topsales.ringName}</td>
                     <td><img src=${topsales.ringImage} width="100px" height="100px"></td>
                     <td>${topsales.purchaseCount}</td>

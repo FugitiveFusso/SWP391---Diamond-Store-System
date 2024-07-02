@@ -61,6 +61,7 @@ public class DashboardController extends HttpServlet {
             RingDAO ringDAO = new RingDAO();
             VoucherDAO voucherDAO = new VoucherDAO();
             CollectionDAO collectionDAO = new CollectionDAO();
+            CategoryDAO categoryDAO = new CategoryDAO();
             String action = request.getParameter("action");
             HttpSession session = request.getSession(false);
             if (session == null || session.getAttribute("managersession") == null) {
@@ -193,6 +194,27 @@ public class DashboardController extends HttpServlet {
                 request.setAttribute("collection", collection);//object
                 RequestDispatcher rd = request.getRequestDispatcher("manager_collectiondetails.jsp");
                 rd.forward(request, response);
+            } else if (action.equals("categorydetails")) {//details
+
+                Integer id = null;
+                try {
+                    id = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+
+                CategoryDTO category = null;
+                if (id != null) {
+                    RingDAO dao_1 = new RingDAO();
+                    List<RingDTO> ring_1 = dao_1.listByCategory(id);
+                    request.setAttribute("ringclist", ring_1);
+                    category = categoryDAO.load(id);
+                }
+
+                request.setAttribute("category", category);//object
+                RequestDispatcher rd = request.getRequestDispatcher("manager_categorydetails.jsp");
+                rd.forward(request, response);
+
             }
 
         }

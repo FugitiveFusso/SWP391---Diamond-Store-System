@@ -140,11 +140,11 @@
                                         <input name="id" value="${ring.collectionID}" type="hidden">
                                         <button type="submit" class="btn btn-primary">Collection</button>
                                     </form>
-<!--                                    <form action="CategoryController" method="POST" style="display:inline-block;">
-                                        <input name="action" value="details" type="hidden">
+                                    <form action="DashboardController" method="POST" style="display:inline-block;">
+                                        <input name="action" value="categorydetails" type="hidden">
                                         <input name="id" value="${ring.categoryID}" type="hidden">
                                         <button type="submit" class="btn btn-primary">Category</button>
-                                    </form>-->
+                                    </form>
                                 </div>
                             </div>
                         </div>
