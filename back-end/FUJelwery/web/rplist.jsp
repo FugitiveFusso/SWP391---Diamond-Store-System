@@ -123,7 +123,7 @@
                                 <td>${rp.name}</td>    
                                 <td>${rp.material}</td>  
                                 <td>${rp.color}</td>  
-                                <td>${rp.price}</td>  
+                                <td>${rp.price} VND</td>  
 
                                 <td>
                                     <form id="deleteForm" action="RingPlacementPriceController" method="POST" class="input">

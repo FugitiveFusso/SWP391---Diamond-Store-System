@@ -191,7 +191,7 @@ public class CollectionDAO {
                     + "LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID\n"
                     + "WHERE c.isDeleted = 'active' GROUP BY c.collectionID, c.collectionName)\n"
                     + "\n"
-                    + "SELECT (SELECT COUNT(*) FROM [Collection] WHERE isDeleted = 'active') AS NumberOfCollections, cs.collectionName, cs.NumberOfRings, FORMAT(cs.TotalCollectionPrice, 'N0') AS TotalCollectionPrice\n"
+                    + "SELECT cs.collectionID, (SELECT COUNT(*) FROM [Collection] WHERE isDeleted = 'active') AS NumberOfCollections, cs.collectionName, cs.NumberOfRings, FORMAT(cs.TotalCollectionPrice, 'N0') AS TotalCollectionPrice\n"
                     + "FROM CollectionSummary cs WHERE cs.NumberOfRings > 0 -- Select collections with more than 0 rings\n"
                     + "ORDER BY cs.TotalCollectionPrice DESC;";
             PreparedStatement stmt = con.prepareStatement(sql);
@@ -200,12 +200,14 @@ public class CollectionDAO {
             if (rs != null) {
                 while (rs.next()) {
 
+                    int id = rs.getInt("collectionID");
                     int numberOfCollections = rs.getInt("NumberOfCollections");
                     String collectionName = rs.getString("collectionName");
                     int numberOfRings = rs.getInt("NumberOfRings");
                     String totalCollectionPrice = rs.getString("TotalCollectionPrice");
 
                     CollectionDTO collection = new CollectionDTO();
+                    collection.setCollectionID(id);
                     collection.setNumberOfCollections(numberOfCollections);
                     collection.setCollectionName(collectionName);
                     collection.setNumberOfRings(numberOfRings);

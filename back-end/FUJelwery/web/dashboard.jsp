@@ -217,7 +217,7 @@
                         pageContext.setAttribute("coll", coll);
                 %>
                 <tr>
-                    <td>${coll.collectionName}</td>
+                    <td><a href="DashboardController?action=collectiondetails&id=${coll.collectionID}">${coll.collectionName}</td>
                     <td>${coll.numberOfRings}</td>
                     <td><strong>${coll.totalCollectionPrice} VND</strong></td>
                 </tr>

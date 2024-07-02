@@ -128,7 +128,7 @@
 
                             <p class="card-text"><strong>Material: </strong> ${requestScope.rp.material}</p>
                             <p class="card-text"><strong>Color: </strong> ${requestScope.rp.color}</p>
-                            <p class="card-text"><strong>Price: </strong> ${requestScope.rp.price}</p>
+                            <p class="card-text"><strong>Price: </strong> ${requestScope.rp.price} VND</p>
 
                             <div class="btn-group" role="group" aria-label="Voucher Actions">
                                 <form action="RingPlacementPriceController" method="post" class="mr-2">

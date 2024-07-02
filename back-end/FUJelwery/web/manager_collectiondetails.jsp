@@ -1,5 +1,3 @@
-
-<%@page import="com.khac.swp.fuj.ring.RingDTO"%>
 <%@page import="com.khac.swp.fuj.ring.RingDTO"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -7,12 +5,18 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Category Management Page</title>
+        <title>Collection Details</title>
         <link rel="stylesheet" href="css/navbar_admin.css">
         <script src="https://unpkg.com/@phosphor-icons/web"></script>
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/staff_details.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <script src="js/pagination.js"></script>
         <link rel="stylesheet" href="css/pagination.css">
         <link rel="stylesheet" href="css/collection_detail.css">
@@ -69,10 +73,9 @@
 
 
         </style>
-
     </head>
     <body>
-    <div class="menu-btn">
+        <div class="menu-btn">
             <div class="btn-cover">
                 <i class="fas fa-bars"></i>
             </div>            
@@ -84,52 +87,19 @@
                     <i class="fa-solid fa-xmark"></i>
                 </div>
                 <img src="images/Screenshot (656).png">
-                <h1>${sessionScope.salessession.lastname} ${sessionScope.salessession.firstname}</h1>
+                <h1>${sessionScope.managersession.lastname} ${sessionScope.managersession.firstname}</h1>
             </header>
 
-            <div class="menu">               
-                <div class="item"><a class="sub-btn"><i class="fas fa-ring"></i>View Product
-                        <i class="fas fa-angle-right dropdown"></i>
-                        <div class="sub-menu">
-                            <a href="DiamondController" class="sub-item">Diamond List</a>
-                            <a href="RingController" class="sub-item">Ring List</a>
-                            <a href="CollectionController" class="sub-item">Collection List</a>
-
-                        </div>
-                    </a>
-                    <a href="warrantydetails.jsp"></a>
-                </div>
-                <div class="item"><a class="sub-btn"><i class="fas fa-tags"></i>View Product Price
-                        <i class="fas fa-angle-right dropdown"></i>
-                        <div class="sub-menu">
-                            <a href="DiamondPriceController" class="sub-item">Diamond Price List</a>
-                            <a href="RingPlacementPriceController" class="sub-item">Ring Price List</a>                                                    
-                        </div>
-                    </a>
-                </div>
-                <div class="item"><a class="sub-btn"><i class="fas fa-folder"></i>View Document
-                        <i class="fas fa-angle-right dropdown"></i>
-                        <div class="sub-menu">
-                            <a href="VoucherController" class="sub-item">Voucher List</a>
-                            <a href="WarrantyController" class="sub-item">Warranty List</a> 
-                            <a href="CertificateController" class="sub-item">Certificate List</a>  
-                        </div>
-                    </a>
-                </div>
-
-                <div class="item"><a href="CategoryController"><i class="fas fa-layer-group"></i>View Category</a></div>
-                <div class="item"><a href="SalesStaffOrderController"><i class="fas fa-receipt"></i>Track All Orders</a></div>
-                <div class="item"><a href="SalesHistory"><i class="fas fa-clock-rotate-left"></i>View Processed Orders</a></div>
-
-                <div class="item"><a href="salesstaffaccount.jsp"><i class="fas fa-user"></i>Account</a></div>
-                <div class="item"><a href="saleslogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
+            <div class="menu">
+                <div class="item"><a href="./DashboardController"><i class="fas fa-chart-line"></i>Dashboard</a></div>
+                <div class="item"><a href="manageraccount.jsp"><i class="fas fa-user"></i>Account</a></div>
+                <div class="item"><a href="managerlogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
 
             </div>
         </div>
-
         <div class="post-title">
-            <h1>Category Details </h1>         
-            <p> Login username: ${sessionScope.salessession.username}</p>
+            <h1>Collection Details </h1>         
+            <p> Login username: ${sessionScope.managersession.username}</p>
         </div>
 
         <div class="container">
@@ -138,21 +108,17 @@
                     <div class="card">
                         <!-- Left Column: Image -->
                         <div class="card-image-container">
-                            <img src="${requestScope.category.image}" class="card-img-left" alt="Category Image" style="width: 260px; height: 350px;">
+                            <img src="${requestScope.collection.collectionImage}" class="card-img-left" alt="Voucher Image" style="width: 260px; height: 350px;">
                         </div>
                         <!-- Right Column: Information -->
                         <div class="card-body">
-                            <h6 class="card-subtitle mb-2 text-muted">Category ID: ${requestScope.category.categoryID}</h6>
-                            <h4 class="card-title" style="font-weight: 700">${requestScope.category.categoryName}</h4>
+                            <h6 class="card-subtitle mb-2 text-muted">Collection ID: ${requestScope.collection.collectionID}</h6>
+                            <h4 class="card-title" style="font-weight: 700">${requestScope.collection.collectionName}</h4>
+                            <p class="card-text"><strong>Description: </strong> ${requestScope.collection.collectionDescription}</p>
                             <div class="btn-group d-flex justify-content-center align-items-center" role="group" aria-label="Voucher Actions">
-                                <form action="CategoryController" method="post" class="mr-2">
+                                <form action="DashboardController" method="post" class="mr-2">
                                     <input type="hidden" name="action" value="list">
                                     <button type="submit" class="btn btn-primary">Return</button>
-                                </form>
-                                <form action="CategoryController" method="post">
-                                    <input type="hidden" name="id" value="${requestScope.category.categoryID}">
-                                    <input type="hidden" name="action" value="edit">
-                                    <button type="submit" class="btn btn-secondary">Edit</button>
                                 </form>
                             </div>
                         </div>
@@ -179,11 +145,11 @@
                     %>
                     <tr>
                         <td>
-                            <a href="RingController?action=details&id=${ring.ringID}">   ${ring.ringID}</td>
+                            <a href="DashboardController?action=ringdetails&id=${ring.ringID}">   ${ring.ringID}</td>
                         <td>${ring.ringName}</td>
                         <td><img src=${ring.ringImage} width="300px" height="300px"></td>
                         <td>${ring.diamondName}</td>
-                        <td>${ring.totalPrice} VND</td>
+                        <td>${ring.totalPrice}</td>
                     </tr>
                     <%
                         }
@@ -199,10 +165,10 @@
     </div>
 </div>
 </div>
+
 <script src="js/pagination.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
                                                 integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
 crossorigin="anonymous"></script>
 <script src="js/sidenav.js"></script>
-
 </body>
 </html>

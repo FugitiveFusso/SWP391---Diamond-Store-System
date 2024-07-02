@@ -134,18 +134,18 @@
                                         <button type="submit" class="btn btn-primary">Return</button>
                                     </form>
                                 </div>
-<!--                                <div class="button-down mt-2">
-                                    <form action="CollectionController" method="POST" style="display:inline-block; margin-right: 10px;">
-                                        <input name="action" value="details" type="hidden">
+                                <div class="button-down mt-2">
+                                    <form action="DashboardController" method="POST" style="display:inline-block; margin-right: 10px;">
+                                        <input name="action" value="collectiondetails" type="hidden">
                                         <input name="id" value="${ring.collectionID}" type="hidden">
                                         <button type="submit" class="btn btn-primary">Collection</button>
                                     </form>
-                                    <form action="CategoryController" method="POST" style="display:inline-block;">
+<!--                                    <form action="CategoryController" method="POST" style="display:inline-block;">
                                         <input name="action" value="details" type="hidden">
                                         <input name="id" value="${ring.categoryID}" type="hidden">
                                         <button type="submit" class="btn btn-primary">Category</button>
-                                    </form>
-                                </div>-->
+                                    </form>-->
+                                </div>
                             </div>
                         </div>
                     </div>

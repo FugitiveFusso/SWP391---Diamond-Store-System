@@ -145,7 +145,7 @@
                                 <td>${diamond.cut}</td>
                                 <td>${diamond.color}</td>
                                 <td>${diamond.clarity}</td>
-                                <td>${diamond.diamondPrice}</td>
+                                <td>${diamond.diamondPrice} VND</td>
                                 <td>
                                     <form id="deleteForm" action="DiamondController" method="POST" class="input">
                                         <input name="action" value="delete" type="hidden">

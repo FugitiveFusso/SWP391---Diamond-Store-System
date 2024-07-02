@@ -148,7 +148,7 @@
                             <p class="card-text"><strong>Color:</strong> ${requestScope.diamond.color}</p>
                             <p class="card-text"><strong>Clarity:</strong> ${requestScope.diamond.clarity}</p>
                             <p class="card-text"><strong>Certificate:</strong> ${requestScope.diamond.certificateID}</p>
-                            <p class="card-text"><strong>Price:</strong> ${requestScope.diamond.diamondPrice}</p>
+                            <p class="card-text"><strong>Price:</strong> ${requestScope.diamond.diamondPrice} VND</p>
                             <div class="btn-group" role="group" aria-label="Voucher Actions">
                                 <form action="DiamondController" method="post" class="mr-2">
                                     <input type="hidden" name="action" value="list">

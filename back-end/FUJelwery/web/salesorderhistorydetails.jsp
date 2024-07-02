@@ -76,7 +76,7 @@
         </div>
         <div class="container d-flex justify-content-center align-items-center">
             <div class="text-center">
-                <h1 style="font-size: 50px; font-weight: 700">Customer Details</h1>
+                <h1 style="font-size: 50px; font-weight: 700">Order Details</h1>
                 <p>Login username: ${sessionScope.salessession.username} </p>
             </div>
         </div>
@@ -92,7 +92,7 @@
                                 <p><strong>Product Name:</strong> ${requestScope.salesorder.ringName}</p>
                                 <p><strong>Date of Purchase:</strong> ${requestScope.salesorder.orderDate}</p>
                                 <p><strong>Voucher:</strong> ${requestScope.salesorder.voucherName}</p>
-                                <p class="price">Total Price: ${requestScope.salesorder.totalPrice}</p>
+                                <p class="price">Total Price: ${requestScope.salesorder.totalPrice} VND</p>
                             </div>
                             <div class="action-buttons">
                                 <button id="toggle-warranty-btn" class="toggle-btn" onclick="toggleSection('warranty', 'toggle-warranty-btn')">+ Warranty</button>

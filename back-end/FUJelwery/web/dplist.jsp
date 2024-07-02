@@ -130,7 +130,7 @@
                                 <td>${dp.color}</td>  
                                 <td>${dp.clarity}</td>  
                                 <td>${dp.cut}</td>  
-                                <td>${dp.price}</td>  
+                                <td>${dp.price} VND</td>  
 
                                 <td>
                                     <form id="deleteForm" action="DiamondPriceController" method="POST" class="input">

@@ -139,7 +139,7 @@
                                 <td>${ring.ringName}</td>
                                 <td><img src=${ring.ringImage} width="300px" height="300px" style="border-radius: 20px;"></td>
                                 <td>${ring.diamondName}</td>
-                                <td>${ring.totalPrice}</td>
+                                <td>${ring.totalPrice} VND</td>
                                 <td>${ring.categoryID}</td>
                                 <td>${ring.collectionID}</td>
                                 <td>

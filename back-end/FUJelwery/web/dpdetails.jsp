@@ -129,7 +129,7 @@
                             <p class="card-text"><strong>Color: </strong> ${requestScope.dp.color}</p>
                             <p class="card-text"><strong>Clarity: </strong> ${requestScope.dp.clarity}</p>
                             <p class="card-text"><strong>Cut: </strong> ${requestScope.dp.cut}</p>
-                            <p class="card-text"><strong>Price: </strong> ${requestScope.dp.price}</p>
+                            <p class="card-text"><strong>Price: </strong> ${requestScope.dp.price} VND</p>
                             <div class="btn-group" role="group" aria-label="Voucher Actions">
                                 <form action="DiamondPriceController" method="post" class="mr-2">
                                     <input type="hidden" name="action" value="list">
