@@ -317,7 +317,7 @@
                         pageContext.setAttribute("certificate", certificate);
                 %>
                 <tr>
-                    <td>${certificate.certificateID}</td>
+                    <td><a href="DashboardController?action=certificatedetails&id=${certificate.certificateID}">${certificate.certificateID}</td>
                     <td>${certificate.certificateDescription}</td>
                 </tr>
                 <%
