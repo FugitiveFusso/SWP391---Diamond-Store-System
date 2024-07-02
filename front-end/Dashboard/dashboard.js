@@ -102,7 +102,8 @@ const areaChartOptions = {
   chart: {
     type: 'area',
     background: 'transparent',
-    height: 350,
+    height: 250,  // Reduced height
+    width: 900,
     stacked: false,
     toolbar: {
       show: false,
@@ -215,7 +216,7 @@ const degreePieChartOptions = {
   chart: {
     type: 'pie',
     background: 'transparent',
-    height: 180,
+    height: 130,  // Reduced height
   },
   labels: ['Used', 'Not Used'],
   legend: {
@@ -242,7 +243,7 @@ const diamondPieChartOptions = {
   chart: {
     type: 'pie',
     background: 'transparent',
-    height: 180,
+    height: 130,  // Reduced height
   },
   labels: ['Used', 'Not Used'],
   legend: {
@@ -279,3 +280,4 @@ $(document).ready(function () {
     $(this).find('.dropdown').toggleClass('rotate');
   });
 });
+
