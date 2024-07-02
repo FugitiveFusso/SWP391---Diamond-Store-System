@@ -252,7 +252,7 @@
                         pageContext.setAttribute("vou", vou);
                 %>
                 <tr>
-                    <td>${vou.name}</td>
+                    <td><a href="DashboardController?action=voucherdetails&id=${vou.id}">${vou.name}</td>
                     <td>${vou.createddate}</td>
                     <td><strong>${vou.totalOrdersUsingVoucher}</strong></td>
                 </tr>

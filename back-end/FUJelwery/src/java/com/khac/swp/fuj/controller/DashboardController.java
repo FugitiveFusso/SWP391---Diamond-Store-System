@@ -59,6 +59,7 @@ public class DashboardController extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             UserDAO userDAO = new UserDAO();
             RingDAO ringDAO = new RingDAO();
+            VoucherDAO voucherDAO = new VoucherDAO();
             String action = request.getParameter("action");
             HttpSession session = request.getSession(false);
             if (session == null || session.getAttribute("managersession") == null) {
@@ -156,6 +157,22 @@ public class DashboardController extends HttpServlet {
 
                 request.setAttribute("ring", ring);//object
                 request.getRequestDispatcher("manager_ringdetails.jsp").forward(request, response);
+            } else if (action.equals("voucherdetails")) {
+                Integer id = null;
+                try {
+                    id = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+
+                VoucherDTO voucher = null;
+                if (id != null) {
+                    voucher = voucherDAO.load(id);
+                }
+
+                request.setAttribute("voucher", voucher);//object
+                RequestDispatcher rd = request.getRequestDispatcher("manager_voucherdetails.jsp");
+                rd.forward(request, response);
             }
 
         }
