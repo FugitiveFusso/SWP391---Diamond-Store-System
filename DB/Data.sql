@@ -670,5 +670,10 @@ INSERT INTO [Order] (orderID, userID, orderDate, ringID, voucherID, warrantyID, 
 (22, 8, '30/06/2024', 5, NULL, 14, 11, 'Door-to-door delivery service', 'verified'),
 (23, 6, '01/07/2024', 4, NULL, 15, 11, 'Door-to-door delivery service', 'shipping'),
 (24, 10, '01/07/2024', 9, 4, 16, 11, 'Door-to-door delivery service', 'verified'),
-(25, 10, '02/07/2024', 7, NULL, 17, 11, 'Received at store', 'verified'),
-(26, 7, '02/07/2024', 4, 1, NULL, 11, 'Received at store', 'purchased');
+(25, 10, '01/07/2024', 10, 1, 17, 11, 'Received at store', 'verified'),
+(26, 10, '01/07/2024', 11, 1, 18, 11, 'Received at store', 'purchased'),
+(27, 8, '02/07/2024', 10, 2, 19, 11, 'Door-to-door delivery service', 'delivered'),
+(28, 7, '02/07/2024', 11, 2, 20, 11, 'Door-to-door delivery service', 'shipping'),
+(29, 6, '02/07/2024', 12, 3, 21, 11, 'Door-to-door delivery service', 'verified'),
+(30, 5, '02/07/2024', 5, 4, 22, 11, 'Received at store', 'verified'),
+(31, 8, '02/07/2024', 6, 1, NULL, 11, 'Received at store', 'purchased');
