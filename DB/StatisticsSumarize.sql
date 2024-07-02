@@ -249,24 +249,41 @@ WHERE RankLowest <= 5
 ORDER BY RankLowest ASC;
 
 -- Top5Sales
-WITH Top5MostBoughtRings AS (
-    SELECT TOP 5 r.ringID, r.ringName, r.ringImage, COUNT(o.orderID) AS PurchaseCount, FORMAT(((r.price + rp.rpPrice + dp.price) * 1.02), 'N0') AS priceOfEachRings
+WITH TopRankedRings AS (
+    SELECT
+        r.ringID,
+        r.ringName,
+        r.ringImage,
+        COUNT(o.orderID) AS PurchaseCount,
+        FORMAT(((r.price + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02), 'N0') AS priceOfEachRings,
+        YEAR(TRY_CONVERT(datetime, o.orderDate, 105)) AS OrderYear,
+        MONTH(TRY_CONVERT(datetime, o.orderDate, 105)) AS OrderMonth,
+        DATENAME(MONTH, TRY_CONVERT(datetime, o.orderDate, 105)) AS MonthName,
+        ROW_NUMBER() OVER (PARTITION BY YEAR(TRY_CONVERT(datetime, o.orderDate, 105)), MONTH(TRY_CONVERT(datetime, o.orderDate, 105))
+                           ORDER BY COUNT(o.orderID) DESC) AS RowNum
     FROM [Order] o
     LEFT JOIN [Ring] r ON o.ringID = r.ringID
     LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID
     LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID
     LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID
     WHERE r.isDeleted = 'active'
-    GROUP BY r.ringID, r.ringName, r.price, rp.rpPrice, dp.price, r.ringImage
-    ORDER BY PurchaseCount DESC
+      AND o.status IN ('verified', 'shipping', 'purchased', 'delivered', 'received at store')
+      AND TRY_CONVERT(datetime, o.orderDate, 105) IS NOT NULL
+    GROUP BY r.ringID, r.ringName, r.ringImage, YEAR(TRY_CONVERT(datetime, o.orderDate, 105)), 
+             MONTH(TRY_CONVERT(datetime, o.orderDate, 105)), DATENAME(MONTH, TRY_CONVERT(datetime, o.orderDate, 105)),
+             r.price, rp.rpPrice, dp.price
 )
-
 SELECT
     ringID,
     ringName,
-	ringImage,
+    ringImage,
     PurchaseCount,
-    priceOfEachRings
-FROM Top5MostBoughtRings;
+    priceOfEachRings,
+    OrderYear,
+    OrderMonth,
+    MonthName
+FROM TopRankedRings
+WHERE RowNum <= 5
+ORDER BY OrderYear DESC, OrderMonth DESC, RowNum;
 
 

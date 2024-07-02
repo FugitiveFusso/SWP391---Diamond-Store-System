@@ -718,25 +718,42 @@ public class RingDAO {
         List<RingDTO> list = new ArrayList<RingDTO>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = "WITH Top5MostBoughtRings AS (\n"
-                    + "    SELECT TOP 5 r.ringID, r.ringName, r.ringImage, COUNT(o.orderID) AS PurchaseCount, FORMAT(((r.price + rp.rpPrice + dp.price) * 1.02), 'N0') AS priceOfEachRings\n"
+            String sql = "WITH TopRankedRings AS (\n"
+                    + "    SELECT\n"
+                    + "        r.ringID,\n"
+                    + "        r.ringName,\n"
+                    + "        r.ringImage,\n"
+                    + "        COUNT(o.orderID) AS PurchaseCount,\n"
+                    + "        FORMAT(((r.price + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02), 'N0') AS priceOfEachRings,\n"
+                    + "        YEAR(TRY_CONVERT(datetime, o.orderDate, 105)) AS OrderYear,\n"
+                    + "        MONTH(TRY_CONVERT(datetime, o.orderDate, 105)) AS OrderMonth,\n"
+                    + "        DATENAME(MONTH, TRY_CONVERT(datetime, o.orderDate, 105)) AS MonthName,\n"
+                    + "        ROW_NUMBER() OVER (PARTITION BY YEAR(TRY_CONVERT(datetime, o.orderDate, 105)), MONTH(TRY_CONVERT(datetime, o.orderDate, 105))\n"
+                    + "                           ORDER BY COUNT(o.orderID) DESC) AS RowNum\n"
                     + "    FROM [Order] o\n"
                     + "    LEFT JOIN [Ring] r ON o.ringID = r.ringID\n"
                     + "    LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID\n"
                     + "    LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID\n"
                     + "    LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID\n"
                     + "    WHERE r.isDeleted = 'active'\n"
-                    + "    GROUP BY r.ringID, r.ringName, r.price, rp.rpPrice, dp.price, r.ringImage\n"
-                    + "    ORDER BY PurchaseCount DESC\n"
+                    + "      AND o.status IN ('verified', 'shipping', 'purchased', 'delivered', 'received at store')\n"
+                    + "      AND TRY_CONVERT(datetime, o.orderDate, 105) IS NOT NULL\n"
+                    + "    GROUP BY r.ringID, r.ringName, r.ringImage, YEAR(TRY_CONVERT(datetime, o.orderDate, 105)), \n"
+                    + "             MONTH(TRY_CONVERT(datetime, o.orderDate, 105)), DATENAME(MONTH, TRY_CONVERT(datetime, o.orderDate, 105)),\n"
+                    + "             r.price, rp.rpPrice, dp.price\n"
                     + ")\n"
-                    + "\n"
                     + "SELECT\n"
                     + "    ringID,\n"
                     + "    ringName,\n"
-                    + "	ringImage,\n"
+                    + "    ringImage,\n"
                     + "    PurchaseCount,\n"
-                    + "    priceOfEachRings\n"
-                    + "FROM Top5MostBoughtRings;";
+                    + "    priceOfEachRings,\n"
+                    + "    OrderYear,\n"
+                    + "    OrderMonth,\n"
+                    + "    MonthName\n"
+                    + "FROM TopRankedRings\n"
+                    + "WHERE RowNum <= 5\n"
+                    + "ORDER BY OrderYear DESC, OrderMonth DESC, RowNum;";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
@@ -749,6 +766,9 @@ public class RingDAO {
                     String ringImage = rs.getString("ringImage");
                     int purchaseCount = rs.getInt("PurchaseCount");
                     String totalPrice = rs.getString("priceOfEachRings");
+                    int orderYear = rs.getInt("OrderYear");
+                    int orderMonth = rs.getInt("OrderMonth");
+                    String monthName = rs.getString("MonthName");
 
                     RingDTO ring = new RingDTO();
 
@@ -757,7 +777,10 @@ public class RingDAO {
                     ring.setRingImage(ringImage);
                     ring.setPurchaseCount(purchaseCount);
                     ring.setTotalPrice(totalPrice);
-
+                    
+                    ring.setOrderYear(orderYear);
+                    ring.setOrderMonth(orderMonth);
+                    ring.setMonthName(monthName);
                     list.add(ring);
                 }
             }

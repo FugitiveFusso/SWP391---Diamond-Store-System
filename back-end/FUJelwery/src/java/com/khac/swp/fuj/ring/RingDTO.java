@@ -26,6 +26,9 @@ public class RingDTO {
     private String diamondPrice;
     private String totalPrice;
     private int purchaseCount;
+    private int orderYear;
+    private int orderMonth;
+    private String monthName;
 
     public int getRingID() {
         return ringID;
@@ -219,9 +222,33 @@ public class RingDTO {
         this.purchaseCount = purchaseCount;
     }
 
+    public int getOrderYear() {
+        return orderYear;
+    }
+
+    public void setOrderYear(int orderYear) {
+        this.orderYear = orderYear;
+    }
+
+    public int getOrderMonth() {
+        return orderMonth;
+    }
+
+    public void setOrderMonth(int orderMonth) {
+        this.orderMonth = orderMonth;
+    }
+
+    public String getMonthName() {
+        return monthName;
+    }
+
+    public void setMonthName(String monthName) {
+        this.monthName = monthName;
+    }
+
     @Override
     public String toString() {
-        return "RingDTO{" + "ringID=" + ringID + ", rpID=" + rpID + ", ringName=" + ringName + ", ringImage=" + ringImage + ", diamondID=" + diamondID + ", price=" + price + ", categoryID=" + categoryID + ", collectionID=" + collectionID + ", ringPlacementName=" + ringPlacementName + ", material=" + material + ", ringColor=" + ringColor + ", rpPrice=" + rpPrice + ", diamondName=" + diamondName + ", diamondImage=" + diamondImage + ", origin=" + origin + ", certificateID=" + certificateID + ", diamondSize=" + diamondSize + ", caratWeight=" + caratWeight + ", cut=" + cut + ", color=" + color + ", clarity=" + clarity + ", diamondPrice=" + diamondPrice + ", totalPrice=" + totalPrice + ", purchaseCount=" + purchaseCount + '}';
+        return "RingDTO{" + "ringID=" + ringID + ", rpID=" + rpID + ", ringName=" + ringName + ", ringImage=" + ringImage + ", diamondID=" + diamondID + ", price=" + price + ", categoryID=" + categoryID + ", collectionID=" + collectionID + ", ringPlacementName=" + ringPlacementName + ", material=" + material + ", ringColor=" + ringColor + ", rpPrice=" + rpPrice + ", diamondName=" + diamondName + ", diamondImage=" + diamondImage + ", origin=" + origin + ", certificateID=" + certificateID + ", diamondSize=" + diamondSize + ", caratWeight=" + caratWeight + ", cut=" + cut + ", color=" + color + ", clarity=" + clarity + ", diamondPrice=" + diamondPrice + ", totalPrice=" + totalPrice + ", purchaseCount=" + purchaseCount + ", orderYear=" + orderYear + ", orderMonth=" + orderMonth + ", monthName=" + monthName + '}';
     }
 
 }

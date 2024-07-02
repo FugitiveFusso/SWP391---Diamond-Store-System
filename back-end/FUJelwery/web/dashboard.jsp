@@ -459,14 +459,18 @@
                 %>    
             </table>
             <br>
-            <h3>Top 5 Sales</h3>
+            <h3>Top 5 Sales From Each Month (Latest to Earliest)</h3>
             <table style="margin: 0 auto;">
                 <tr>
+                    <th>Order Year</th>
+                    <th>Order Month</th>
+                    <th>Month Name</th>
                     <th>Ring ID</th>
                     <th>Ring Name</th>
                     <th>Ring Image</th>
                     <th>Number of Purchased Ring</th>
                     <th>Price</th>
+
                 </tr>
                 <%
                     List<RingDTO> ringListTopSales = (List<RingDTO>) request.getAttribute("ringlisttopsales");
@@ -474,6 +478,9 @@
                         pageContext.setAttribute("topsales", ringlisttopsales);
                 %>
                 <tr>
+                    <td>${topsales.orderYear}</td>
+                    <td>${topsales.orderMonth}</td>
+                    <td>${topsales.monthName}</td>
                     <td>${topsales.ringID}</td>
                     <td>${topsales.ringName}</td>
                     <td><img src=${topsales.ringImage} width="100px" height="100px"></td>
