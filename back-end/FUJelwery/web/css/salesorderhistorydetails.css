@@ -1,88 +1,97 @@
 body {
-  height: 100vh;
-  margin: 0;
-  background-color: #fefefe;
+    height: 100vh;
+    margin: 0;
+    background-color: #fefefe;
+}
+.container {
+    width: 80%;
+    max-width: 1200px;
+    background-color: #fff;
+    /*box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/
+    border-radius: 10px;
+    padding: 20px;
+    margin: 30px auto;
 }
 
-.container {
-  width: 80%;
-  max-width: 1200px;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  padding: 20px;
-  margin: 30px auto;
+.container1 {
+    width: 80%;
+    max-width: 1200px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 30px auto;
 }
 
 .bill-details-container {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 
 .image-column {
-  flex: 1;
-  text-align: center;
+    flex: 1;
+    text-align: center;
 }
 
 .image-column img {
-  max-width: 100%;
-  border-radius: 10px;
+    max-width: 100%;
+    border-radius: 10px;
 }
 
 .details-column {
-  flex: 2;
-  padding: 20px;
+    flex: 2;
+    padding: 20px;
 }
 
 .details-column h3 {
-  font-size: 1.5em;
-  margin-bottom: 10px;
+    font-size: 1.5em;
+    margin-bottom: 10px;
 }
 
 .details-column p {
-  font-size: 1em;
-  margin: 20px 0;
+    font-size: 1em;
+    margin: 20px 0;
 }
 
 .details-column .price {
-  font-weight: bold;
-  font-size: 20px;
-  color: red;
+    font-weight: bold;
+    font-size: 20px;
+    color: red;
 }
 
 .warranty, .certificate {
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 1px solid #ddd;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
 }
 
 .warranty h4, .certificate h4 {
-  font-size: 1.2em;
-  margin-bottom: 10px;
+    font-size: 1.2em;
+    margin-bottom: 10px;
 }
 
 .hidden {
-  display: none;
+    display: none;
 }
 
 .action-buttons {
-  display: flex;
-  justify-content: flex-start;
-  margin-top: 20px;
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 20px;
 }
 
 .action-buttons .toggle-btn {
-  margin-right: 10px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1em;
-  background-color: #151542;
-  color: #fff;
-  transition: background-color 0.3s ease;
+    margin-right: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    background-color: #151542;
+    color: #fff;
+    transition: background-color 0.3s ease;
 }
 
 .action-buttons .toggle-btn.active {
-  background-color: #dc3545;
+    background-color: #dc3545;
 }

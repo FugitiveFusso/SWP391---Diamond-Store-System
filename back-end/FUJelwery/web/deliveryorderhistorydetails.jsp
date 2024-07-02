@@ -61,7 +61,7 @@
             </div>
         </div>
 
-        <div class="container">
+        <div class="container1">
             <div class="bill-details-container">
                 <div class="image-column">
                     <img src="${requestScope.deliveryorder.ringImage}" alt="Product Image" class="product-image">

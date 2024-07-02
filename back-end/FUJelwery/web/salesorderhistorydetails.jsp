@@ -5,7 +5,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>History Order Details</title>
-        <link rel="stylesheet" href="css/salesorderhistorydetails.css">
         <link rel="stylesheet" href="css/navbar_admin.css">
         <link rel="stylesheet" href="css/staff_details.css">
         <script src="https://unpkg.com/@phosphor-icons/web"></script>
@@ -17,6 +16,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="css/salesorderhistorydetails.css">
 
     </head>
     <body>
@@ -81,7 +81,7 @@
             </div>
         </div>
 
-                <div class="container">
+                <div class="container1">
                     <div class="bill-details-container">
                         <div class="image-column">
                             <img src="${requestScope.salesorder.ringImage}" alt="Product Image" class="product-image">
