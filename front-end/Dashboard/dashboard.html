@@ -15,6 +15,7 @@
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -81,238 +82,333 @@
         </div>
       </div>
 
-      <div class="charts-row">
-        <div class="charts-card" style="flex: 1;">
-          <h2 class="chart-title">Top 5 Countries</h2>
+      <div class="merged-charts-container">
+        <div class="chart-card" id="map-chart-container">
+          <h2 class="chart-title">Top 5 Countries with Most Diamonds Originated</h2>
           <div id="map-chart"></div>
         </div>
-
-        <div class="charts-card" style="flex: 1;">
-          <h2 class="chart-title">Top 5 Best-selling Products</h2>
+        <div class="chart-card" id="bar-chart-container">
+          <h2 class="chart-title">125.7k Views from 60 countries</h2>
           <div id="bar-chart"></div>
         </div>
       </div>
 
       <!-- New Tables Section -->
       <div class="charts-row">
-        <div class="charts-card" id="highest-price-table">
-          <h2 class="chart-title">Top 5 Rings with Highest Price</h2>
+        <div class="x_content" style="display: block;">
           <div class="table-container">
-            <table>
-              <tr>
-                <th>Ring</th>
-                <th>Price</th>
-              </tr>
-              <tr>
-                <td><img src="https://i5.walmartimages.com/seo/Women-s-ring-zircon-sparkling-diamond-ring-with-beautiful-romantic-jewelry-gift-Zirconia-Decorative-Flower-Ring_7489d8b4-1869-4524-916f-e3eebe30c7af.7597fda62aebae63fa30bd620ad12cb7.jpeg" alt="Diamond Platinum Ring"> Diamond Platinum Ring</td>
-                <td>150,858,000 VND</td>
-              </tr>
-              <tr>
-                <td><img src="https://i5.walmartimages.com/seo/Women-s-ring-zircon-sparkling-diamond-ring-with-beautiful-romantic-jewelry-gift-Zirconia-Decorative-Flower-Ring_7489d8b4-1869-4524-916f-e3eebe30c7af.7597fda62aebae63fa30bd620ad12cb7.jpeg" alt="Gold Ruby Ring"> Gold Ruby Ring</td>
-                <td>141,984,000 VND</td>
-              </tr>
-              <tr>
-                <td><img src="https://i5.walmartimages.com/seo/Women-s-ring-zircon-sparkling-diamond-ring-with-beautiful-romantic-jewelry-gift-Zirconia-Decorative-Flower-Ring_7489d8b4-1869-4524-916f-e3eebe30c7af.7597fda62aebae63fa30bd620ad12cb7.jpeg" alt="Emerald Silver Ring"> Emerald Silver Ring</td>
-                <td>139,944,000 VND</td>
-              </tr>
-              <tr>
-                <td><img src="https://i5.walmartimages.com/seo/Women-s-ring-zircon-sparkling-diamond-ring-with-beautiful-romantic-jewelry-gift-Zirconia-Decorative-Flower-Ring_7489d8b4-1869-4524-916f-e3eebe30c7af.7597fda62aebae63fa30bd620ad12cb7.jpeg" alt="Sapphire Gold Ring"> Sapphire Gold Ring</td>
-                <td>136,476,000 VND</td>
-              </tr>
-              <tr>
-                <td><img src="https://i5.walmartimages.com/seo/Women-s-ring-zircon-sparkling-diamond-ring-with-beautiful-romantic-jewelry-gift-Zirconia-Decorative-Flower-Ring_7489d8b4-1869-4524-916f-e3eebe30c7af.7597fda62aebae63fa30bd620ad12cb7.jpeg" alt="Pearl Platinum Ring"> Pearl Platinum Ring</td>
-                <td>132,396,000 VND</td>
-              </tr>
-            </table>
+            <div class="x_title">
+              <h2>Top 5 Rings with Highest Price</h2>
+              <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </div>
+            <div class="collapse-content">
+              <table>
+                <tr>
+                  <th>Ring</th>
+                  <th>Price</th>
+                </tr>
+                <tr>
+                  <td class="flex-row">
+                    <img src="https://i5.walmartimages.com/seo/Women-s-ring-zircon-sparkling-diamond-ring-with-beautiful-romantic-jewelry-gift-Zirconia-Decorative-Flower-Ring_7489d8b4-1869-4524-916f-e3eebe30c7af.7597fda62aebae63fa30bd620ad12cb7.jpeg"
+                      alt="Diamond Platinum Ring" class="smaller-size">
+                    Diamond Platinum Ring
+                  </td>
+                  <td>150,858,000 VND</td>
+                </tr>
+                <tr>
+                  <td class="flex-row">
+                    <img src="https://i5.walmartimages.com/seo/Women-s-ring-zircon-sparkling-diamond-ring-with-beautiful-romantic-jewelry-gift-Zirconia-Decorative-Flower-Ring_7489d8b4-1869-4524-916f-e3eebe30c7af.7597fda62aebae63fa30bd620ad12cb7.jpeg"
+                      alt="Gold Ruby Ring" class="smaller-size">
+                    Gold Ruby Ring
+                  </td>
+                  <td>141,984,000 VND</td>
+                </tr>
+                <tr>
+                  <td class="flex-row">
+                    <img src="https://i5.walmartimages.com/seo/Women-s-ring-zircon-sparkling-diamond-ring-with-beautiful-romantic-jewelry-gift-Zirconia-Decorative-Flower-Ring_7489d8b4-1869-4524-916f-e3eebe30c7af.7597fda62aebae63fa30bd620ad12cb7.jpeg"
+                      alt="Emerald Silver Ring" class="smaller-size">
+                    Emerald Silver Ring
+                  </td>
+                  <td>139,944,000 VND</td>
+                </tr>
+                <tr>
+                  <td class="flex-row">
+                    <img src="https://i5.walmartimages.com/seo/Women-s-ring-zircon-sparkling-diamond-ring-with-beautiful-romantic-jewelry-gift-Zirconia-Decorative-Flower-Ring_7489d8b4-1869-4524-916f-e3eebe30c7af.7597fda62aebae63fa30bd620ad12cb7.jpeg"
+                      alt="Sapphire Gold Ring" class="smaller-size">
+                    Sapphire Gold Ring
+                  </td>
+                  <td>136,476,000 VND</td>
+                </tr>
+                <tr>
+                  <td class="flex-row">
+                    <img src="https://i5.walmartimages.com/seo/Women-s-ring-zircon-sparkling-diamond-ring-with-beautiful-romantic-jewelry-gift-Zirconia-Decorative-Flower-Ring_7489d8b4-1869-4524-916f-e3eebe30c7af.7597fda62aebae63fa30bd620ad12cb7.jpeg"
+                      alt="Pearl Platinum Ring" class="smaller-size">
+                    Pearl Platinum Ring
+                  </td>
+                  <td>132,396,000 VND</td>
+                </tr>
+              </table>
+            </div>
           </div>
         </div>
-
-        <div class="charts-card" id="lowest-price-table">
-          <h2 class="chart-title">Top 5 Rings with Lowest Price</h2>
+      
+        <div class="x_content" style="display: block;">
           <div class="table-container">
-            <table>
-              <tr>
-                <th>Ring</th>
-                <th>Price</th>
-              </tr>
-              <tr>
-                <td><img src="https://www.berrysjewellers.co.uk/cdn/shop/products/1620389070-28905700.jpg" alt="Silver Ring"> Silver Ring</td>
-                <td>40,800,000 VND</td>
-              </tr>
-              <tr>
-                <td><img src="https://www.berrysjewellers.co.uk/cdn/shop/products/1620389070-28905700.jpg" alt="Copper Ring"> Copper Ring</td>
-                <td>47,124,000 VND</td>
-              </tr>
-              <tr>
-                <td><img src="https://www.berrysjewellers.co.uk/cdn/shop/products/1620389070-28905700.jpg" alt="Bronze Ring"> Bronze Ring</td>
-                <td>52,632,000 VND</td>
-              </tr>
-              <tr>
-                <td><img src="https://www.berrysjewellers.co.uk/cdn/shop/products/1620389070-28905700.jpg" alt="Titanium Ring"> Titanium Ring</td>
-                <td>53,856,000 VND</td>
-              </tr>
-              <tr>
-                <td><img src="https://www.berrysjewellers.co.uk/cdn/shop/products/1620389070-28905700.jpg" alt="Stainless Steel Ring"> Stainless Steel Ring</td>
-                <td>55,590,000 VND</td>
-              </tr>
-            </table>
+            <div class="x_title">
+              <h2>Top 5 Rings with Lowest Price</h2>
+              <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </div>
+            <div class="collapse-content">
+              <table>
+                <tr>
+                  <th>Ring</th>
+                  <th>Price</th>
+                </tr>
+                <tr>
+                  <td class="flex-row">
+                    <img src="https://www.berrysjewellers.co.uk/cdn/shop/products/1620389070-28905700.jpg" alt="Silver Ring" class="smaller-size">
+                    Silver Ring
+                  </td>
+                  <td>40,800,000 VND</td>
+                </tr>
+                <tr>
+                  <td class="flex-row">
+                    <img src="https://www.berrysjewellers.co.uk/cdn/shop/products/1620389070-28905700.jpg" alt="Copper Ring" class="smaller-size">
+                    Copper Ring
+                  </td>
+                  <td>47,124,000 VND</td>
+                </tr>
+                <tr>
+                  <td class="flex-row">
+                    <img src="https://www.berrysjewellers.co.uk/cdn/shop/products/1620389070-28905700.jpg" alt="Bronze Ring" class="smaller-size">
+                    Bronze Ring
+                  </td>
+                  <td>52,632,000 VND</td>
+                </tr>
+                <tr>
+                  <td class="flex-row">
+                    <img src="https://www.berrysjewellers.co.uk/cdn/shop/products/1620389070-28905700.jpg" alt="Titanium Ring" class="smaller-size">
+                    Titanium Ring
+                  </td>
+                  <td>53,856,000 VND</td>
+                </tr>
+                <tr>
+                  <td class="flex-row">
+                    <img src="https://www.berrysjewellers.co.uk/cdn/shop/products/1620389070-28905700.jpg" alt="Stainless Steel Ring" class="smaller-size">
+                    Stainless Steel Ring
+                  </td>
+                  <td>55,590,000 VND</td>
+                </tr>
+              </table>
+            </div>
           </div>
         </div>
-
-        <div class="charts-card" id="monthly-sales-table">
-          <h2 class="chart-title">Top 5 Ring Sales From Each Month</h2>
+      
+        <div class="x_content" style="display: block;">
           <div class="table-container">
-            <table>
-              <tr>
-                <th>Month</th>
-                <th>Ring</th>
-                <th>Sales</th>
-              </tr>
-              <tr>
-                <td>July</td>
-                <td><img src="https://www.jbrjeweler.com/cdn/shop/files/0-75-ct-oval-diamond-cluster-rose-gold-moissanite-engagement-ring-jbr-jeweler-3-27531093639359.jpg" alt="Diamond Platinum Ring"> Diamond Platinum Ring</td>
-                <td>2</td>
-              </tr>
-              <tr>
-                <td>July</td>
-                <td><img src="https://www.jbrjeweler.com/cdn/shop/files/0-75-ct-oval-diamond-cluster-rose-gold-moissanite-engagement-ring-jbr-jeweler-3-27531093639359.jpg" alt="Gold Ruby Ring"> Gold Ruby Ring</td>
-                <td>2</td>
-              </tr>
-              <tr>
-                <td>July</td>
-                <td><img src="https://www.jbrjeweler.com/cdn/shop/files/0-75-ct-oval-diamond-cluster-rose-gold-moissanite-engagement-ring-jbr-jeweler-3-27531093639359.jpg" alt="Emerald Silver Ring"> Emerald Silver Ring</td>
-                <td>1</td>
-              </tr>
-              <tr>
-                <td>July</td>
-                <td><img src="https://www.jbrjeweler.com/cdn/shop/files/0-75-ct-oval-diamond-cluster-rose-gold-moissanite-engagement-ring-jbr-jeweler-3-27531093639359.jpg" alt="Sapphire Gold Ring"> Sapphire Gold Ring</td>
-                <td>1</td>
-              </tr>
-              <tr>
-                <td>July</td>
-                <td><img src="https://www.jbrjeweler.com/cdn/shop/files/0-75-ct-oval-diamond-cluster-rose-gold-moissanite-engagement-ring-jbr-jeweler-3-27531093639359.jpg" alt="Pearl Platinum Ring"> Pearl Platinum Ring</td>
-                <td>1</td>
-              </tr>
-              <tr>
-                <td>June</td>
-                <td><img src="https://www.jbrjeweler.com/cdn/shop/files/0-75-ct-oval-diamond-cluster-rose-gold-moissanite-engagement-ring-jbr-jeweler-3-27531093639359.jpg" alt="Diamond Platinum Ring"> Diamond Platinum Ring</td>
-                <td>4</td>
-              </tr>
-              <tr>
-                <td>June</td>
-                <td><img src="https://www.jbrjeweler.com/cdn/shop/files/0-75-ct-oval-diamond-cluster-rose-gold-moissanite-engagement-ring-jbr-jeweler-3-27531093639359.jpg" alt="Gold Ruby Ring"> Gold Ruby Ring</td>
-                <td>2</td>
-              </tr>
-              <tr>
-                <td>June</td>
-                <td><img src="https://www.jbrjeweler.com/cdn/shop/files/0-75-ct-oval-diamond-cluster-rose-gold-moissanite-engagement-ring-jbr-jeweler-3-27531093639359.jpg" alt="Emerald Silver Ring"> Emerald Silver Ring</td>
-                <td>2</td>
-              </tr>
-              <tr>
-                <td>June</td>
-                <td><img src="https://www.jbrjeweler.com/cdn/shop/files/0-75-ct-oval-diamond-cluster-rose-gold-moissanite-engagement-ring-jbr-jeweler-3-27531093639359.jpg" alt="Sapphire Gold Ring"> Sapphire Gold Ring</td>
-                <td>2</td>
-              </tr>
-              <tr>
-                <td>June</td>
-                <td><img src="https://www.jbrjeweler.com/cdn/shop/files/0-75-ct-oval-diamond-cluster-rose-gold-moissanite-engagement-ring-jbr-jeweler-3-27531093639359.jpg" alt="Pearl Platinum Ring"> Pearl Platinum Ring</td>
-                <td>2</td>
-              </tr>
-            </table>
+            <div class="x_title">
+              <h2>Top 5 Ring Sales From Each Month</h2>
+              <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </div>
+            <div class="collapse-content">
+              <table>
+                <tr>
+                  <th>Month</th>
+                  <th>Ring</th>
+                  <th>Sales</th>
+                </tr>
+                <tr>
+                  <td>July</td>
+                  <td class="flex-row">
+                    <img src="https://www.berrysjewellers.co.uk/cdn/shop/products/1620389070-28905700.jpg" alt="Silver Ring" class="smaller-size">
+                    Silver Ring
+                  </td>
+                  <td>40,800,000 VND</td>
+                </tr>
+                <tr>
+                  <td>July</td>
+                  <td class="flex-row">
+                    <img src="https://www.berrysjewellers.co.uk/cdn/shop/products/1620389070-28905700.jpg" alt="Bronze Ring" class="smaller-size">
+                    Bronze Ring
+                  </td>
+                  <td>47,124,000 VND</td>
+                </tr>
+                <tr>
+                  <td>July</td>
+                  <td class="flex-row">
+                    <img src="https://www.berrysjewellers.co.uk/cdn/shop/products/1620389070-28905700.jpg" alt="Bronze Ring" class="smaller-size">
+                    Bronze Ring
+                  </td>
+                  <td>52,632,000 VND</td>
+                </tr>
+                <tr>
+                  <td>July</td>
+                  <td class="flex-row">
+                    <img src="https://www.berrysjewellers.co.uk/cdn/shop/products/1620389070-28905700.jpg" alt="Titanium Ring" class="smaller-size">
+                    Titanium Ring
+                  </td>
+                  <td>53,856,000 VND</td>
+                </tr>
+                <tr>
+                  <td>July</td>
+                  <td class="flex-row">
+                    <img src="https://www.berrysjewellers.co.uk/cdn/shop/products/1620389070-28905700.jpg" alt="Stainless Steel Ring" class="smaller-size">
+                    Stainless Steel Ring
+                  </td>
+                  <td>55,590,000 VND</td>
+                </tr>
+                <tr>
+                  <td>June</td>
+                  <td class="flex-row">
+                    <img src="https://www.berrysjewellers.co.uk/cdn/shop/products/1620389070-28905700.jpg" alt="Stainless Steel Ring" class="smaller-size">
+                    Stainless Steel Ring
+                  </td>
+                  <td>55,590,000 VND</td>
+                </tr>
+                <tr>
+                  <td>June</td>
+                  <td class="flex-row">
+                    <img src="https://www.berrysjewellers.co.uk/cdn/shop/products/1620389070-28905700.jpg" alt="Stainless Steel Ring" class="smaller-size">
+                    Stainless Steel Ring
+                  </td>
+                  <td>55,590,000 VND</td>
+                </tr>
+                <tr>
+                  <td>June</td>
+                  <td class="flex-row">
+                    <img src="https://www.berrysjewellers.co.uk/cdn/shop/products/1620389070-28905700.jpg" alt="Stainless Steel Ring" class="smaller-size">
+                    Stainless Steel Ring
+                  </td>
+                  <td>55,590,000 VND</td>
+                </tr>
+                <tr>
+                  <td>June</td>
+                  <td class="flex-row">
+                    <img src="https://www.berrysjewellers.co.uk/cdn/shop/products/1620389070-28905700.jpg" alt="Stainless Steel Ring" class="smaller-size">
+                    Stainless Steel Ring
+                  </td>
+                  <td>55,590,000 VND</td>
+                </tr>
+                <tr>
+                  <td>June</td>
+                  <td class="flex-row">
+                    <img src="https://www.berrysjewellers.co.uk/cdn/shop/products/1620389070-28905700.jpg" alt="Stainless Steel Ring" class="smaller-size">
+                    Stainless Steel Ring
+                  </td>
+                  <td>55,590,000 VND</td>
+                </tr>
+              </table>
+            </div>
           </div>
         </div>
-      </div>
+      </div>          
       <!-- End New Tables Section -->
 
       <div class="charts-row">
-        <div class="charts-card" id="diamonds-table">
-          <h2 class="chart-title">Top 5 Ring Placements</h2>
+        <div class="x_content" style="display: block;">
           <div class="table-container">
-            <table>
-              <tr>
-                <th>Material</th>
-                <th>Ring Placement By Material</th>
-              </tr>
-              <tr>
-                <td><img src="https://via.placeholder.com/50" alt="Gold"> Gold</td>
-                <td>4</td>
-              </tr>
-              <tr>
-                <td><img src="https://via.placeholder.com/50" alt="Gold, Copper"> Gold, Copper</td>
-                <td>2</td>
-              </tr>
-              <tr>
-                <td><img src="https://via.placeholder.com/50" alt="Gold, Silver"> Gold, Silver</td>
-                <td>2</td>
-              </tr>
-              <tr>
-                <td><img src="https://via.placeholder.com/50" alt="Silver"> Silver</td>
-                <td>1</td>
-              </tr>
-              <tr>
-                <td><img src="https://via.placeholder.com/50" alt="Titanium"> Titanium</td>
-                <td>1</td>
-              </tr>
-            </table>
+            <div class="x_title">
+              <h2>Top 5 Ring Placements</h2>
+              <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </div>
+            <div class="collapse-content">
+              <table>
+                <tr>
+                  <th>Material</th>
+                  <th>Ring Placement By Material</th>
+                </tr>
+                <tr>
+                  <td class="flex-row"><img src="https://via.placeholder.com/50" alt="Gold"> Gold</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td class="flex-row"><img src="https://via.placeholder.com/50" alt="Gold, Copper"> Gold, Copper</td>
+                  <td>2</td>
+                </tr>
+                <tr>
+                  <td class="flex-row"><img src="https://via.placeholder.com/50" alt="Gold, Silver"> Gold, Silver</td>
+                  <td>2</td>
+                </tr>
+                <tr>
+                  <td class="flex-row"><img src="https://via.placeholder.com/50" alt="Silver"> Silver</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td class="flex-row"><img src="https://via.placeholder.com/50" alt="Titanium"> Titanium</td>
+                  <td>1</td>
+                </tr>
+              </table>
+            </div>
           </div>
         </div>
-
-        <div class="charts-card" id="coupons-table">
-          <h2 class="chart-title">Top 3 Most Used Vouchers</h2>
+      
+        <div class="x_content" style="display: block;">
           <div class="table-container">
-            <table>
-              <tr>
-                <th>Coupon</th>
-                <th>Usage</th>
-              </tr>
-              <tr>
-                <td><img src="https://via.placeholder.com/50" alt="SPRING BLOOM"> SPRING BLOOM</td>
-                <td>12</td>
-              </tr>
-              <tr>
-                <td><img src="https://via.placeholder.com/50" alt="WINTER HOLIDAY SALE"> WINTER HOLIDAY SALE</td>
-                <td>4</td>
-              </tr>
-              <tr>
-                <td><img src="https://via.placeholder.com/50" alt="SUMMER FESTIVAL"> SUMMER FESTIVAL</td>
-                <td>1</td>
-              </tr>
-            </table>
+            <div class="x_title">
+              <h2>Top 3 Most Used Vouchers</h2>
+              <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </div>
+            <div class="collapse-content">
+              <table>
+                <tr>
+                  <th>Coupon</th>
+                  <th>Usage</th>
+                </tr>
+                <tr>
+                  <td class="flex-row"><img src="https://via.placeholder.com/50" alt="SPRING BLOOM"> SPRING BLOOM</td>
+                  <td>12</td>
+                </tr>
+                <tr>
+                  <td class="flex-row"><img src="https://via.placeholder.com/50" alt="WINTER HOLIDAY SALE"> WINTER HOLIDAY SALE</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td class="flex-row"><img src="https://via.placeholder.com/50" alt="SUMMER FESTIVAL"> SUMMER FESTIVAL</td>
+                  <td>1</td>
+                </tr>
+              </table>
+            </div>
           </div>
         </div>
-
-        <div class="charts-card" id="diamond-types-table">
-          <h2 class="chart-title">All Warranty Types</h2>
+      
+        <div class="x_content" style="display: block;">
           <div class="table-container">
-            <table>
-              <tr>
-                <th>Type</th>
-                <th>Usage</th>
-              </tr>
-              <tr>
-                <td><img src="https://via.placeholder.com/50" alt="Limited Warranties"> Limited Warranties</td>
-                <td>12</td>
-              </tr>
-              <tr>
-                <td><img src="https://via.placeholder.com/50" alt="Manufacturer Warranties"> Manufacturer Warranties</td>
-                <td>10</td>
-              </tr>
-              <tr>
-                <td><img src="https://via.placeholder.com/50" alt="Extended Warranties"> Extended Warranties</td>
-                <td>7</td>
-              </tr>
-              <tr>
-                <td><img src="https://via.placeholder.com/50" alt="Lifetime Warranties"> Lifetime Warranties</td>
-                <td>1</td>
-              </tr>
-              <tr>
-                <td><img src="https://via.placeholder.com/50" alt="Retailer Warranties"> Retailer Warranties</td>
-                <td>0</td>
-              </tr>
-            </table>
+            <div class="x_title">
+              <h2>All Warranty Types</h2>
+              <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </div>
+            <div class="collapse-content">
+              <table>
+                <tr>
+                  <th>Type</th>
+                  <th>Usage</th>
+                </tr>
+                <tr>
+                  <td class="flex-row"><img src="https://via.placeholder.com/50" alt="Limited Warranties"> Limited Warranties</td>
+                  <td>12</td>
+                </tr>
+                <tr>
+                  <td class="flex-row"><img src="https://via.placeholder.com/50" alt="Manufacturer Warranties"> Manufacturer Warranties</td>
+                  <td>10</td>
+                </tr>
+                <tr>
+                  <td class="flex-row"><img src="https://via.placeholder.com/50" alt="Extended Warranties"> Extended Warranties</td>
+                  <td>7</td>
+                </tr>
+                <tr>
+                  <td class="flex-row"><img src="https://via.placeholder.com/50" alt="Lifetime Warranties"> Lifetime Warranties</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td class="flex-row"><img src="https://via.placeholder.com/50" alt="Retailer Warranties"> Retailer Warranties</td>
+                  <td>0</td>
+                </tr>
+              </table>
+            </div>
           </div>
         </div>
       </div>
+      
 
       <div class="charts-card" style="margin-top: 20px;">
         <h2 class="chart-title">FUJ Staffs</h2>

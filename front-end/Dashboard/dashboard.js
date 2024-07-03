@@ -3,7 +3,9 @@
 
 Highcharts.mapChart('map-chart', {
   chart: {
-    map: 'custom/world'
+    map: 'custom/world',
+    width: 400, // Adjusted width
+    height: 300 // Adjusted height (if needed)
   },
   title: {
     text: 'Top 5 Countries with Most Diamonds Sold'
@@ -47,7 +49,8 @@ var optionsBar = {
   }],
   chart: {
     type: 'bar',
-    height: 350
+    height: 200, // Adjusted height
+    width: 300   // Adjusted width
   },
   plotOptions: {
     bar: {
@@ -73,7 +76,7 @@ var optionsBar = {
     }
   },
   xaxis: {
-    categories: ['Product 1', 'Product 2', 'Product 3', 'Product 4', 'Product 5'], // Example categories, replace with actual data
+    categories: ['United States', 'Swaziland', 'India', 'Mali', 'Mozambique'], // Example categories, replace with actual data
     labels: {
       style: {
         colors: ['#fff', '#fff', '#fff', '#fff', '#fff'], // Colors for each label
@@ -264,20 +267,13 @@ const diamondPieChart = new ApexCharts(
 );
 diamondPieChart.render();
 
-$(document).ready(function () {
-  $('.menu-btn').click(function () {
-    $('.side-bar').addClass('active');
-    $('.menu-btn').css("visibility", "hidden");
-  });
-
-  $('.close-btn').click(function () {
-    $('.side-bar').removeClass('active');
-    $('.menu-btn').css("visibility", "visible");
-  });
-
-  $('.sub-btn').click(function () {
-    $(this).closest('.charts-card').find('.table-container').slideToggle();
-    $(this).find('.dropdown').toggleClass('rotate');
+document.querySelectorAll('.collapse-link').forEach(link => {
+  link.addEventListener('click', function () {
+    const collapseContent = this.closest('.x_title').nextElementSibling;
+    collapseContent.classList.toggle('show');
+    const icon = this.querySelector('i');
+    icon.classList.toggle('fa-chevron-up');
+    icon.classList.toggle('fa-chevron-down');
   });
 });
 

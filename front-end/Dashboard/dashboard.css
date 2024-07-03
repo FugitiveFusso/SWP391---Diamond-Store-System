@@ -1,10 +1,3 @@
-.smaller-size {
-  transform: scale(0.3);
-  /* Scale down the size to 80% */
-  transform-origin: top left;
-  /* Keep the top left corner as the reference point */
-}
-
 body {
   margin: 0;
   padding: 0;
@@ -20,14 +13,38 @@ body {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto;
-  grid-template-areas:
-    'main';
+  grid-template-areas: 'main';
   max-width: 1200px;
   width: 100%;
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
   margin-top: 50px;
+}
+
+.merged-charts-container {
+  display: flex;
+  justify-content: space-between;
+  width: 860px;
+  height: auto;
+  background-color: #273147;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+#map-chart-container {
+  width: 700px;
+  height: 350px;
+}
+
+#bar-chart-container {
+  width: 600px;
+  height: 300px;
+}
+
+.chart-title {
+  color: #f5f7ff;
 }
 
 .main-container {
@@ -123,7 +140,6 @@ body {
   width: 200px;
   height: 130px;
   text-align: center;
-  
 }
 
 .charts-card1.area-chart {
@@ -131,9 +147,12 @@ body {
   height: 300px;
 }
 
-#area-chart, #degree-pie-chart, #diamond-pie-chart {
+#area-chart,
+#degree-pie-chart,
+#diamond-pie-chart {
   width: 100%;
-  height: calc(100% - 30px); /* Adjust height to fit within card */
+  height: calc(100% - 30px);
+  /* Adjust height to fit within card */
 }
 
 .charts-card {
@@ -156,47 +175,76 @@ body {
   margin-top: 20px;
 }
 
+.smaller-size {
+  transform: scale(0.9);
+  transform-origin: top center;
+}
 
 .table-container {
-  overflow-x: auto;
+  padding: 10px;
+  background-color: #273147;
+  border-radius: 5px;
+  color: white;
+  width: 300px; /* Increased the width */
+}
+
+.x_title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.x_title a i {
+  margin-top: 10px;
+}
+
+.table-container .x_title h2 {
+  font-size: 15px;
 }
 
 .table-container table {
   width: 100%;
   border-collapse: collapse;
-  margin: 20px 0;
 }
 
-.table-container td img {
-  vertical-align: middle;
-  margin-right: 10px;
-  width: 50px;
-}
-
-table,
-th,
-td {
+.table-container table th,
+.table-container table td {
   border: 1px solid #ddd;
-}
-
-td {
-  font-size: 10px;
-}
-
-th,
-td {
   padding: 8px;
   text-align: left;
+  font-size: 12px; /* Make text smaller */
+  vertical-align: middle; /* Ensure vertical alignment */
 }
 
-th {
-  background-color: #4CAF50;
+.table-container table th {
+  background-color: #2a3f54;
   color: white;
 }
 
-tr {
-  background-color: white;
+.collapse-content {
+  display: none;
+  padding: 15px;
+  background-color: #273147;
+  border-radius: 5px;
+  color: white;
 }
+
+.table-container table img {
+  width: 50px; /* Reduce image size */
+  height: auto;
+  margin-right: 10px; /* Add space between image and text */
+}
+
+.collapse-content.show {
+  display: block;
+  background-color: #273147;
+  color: white;
+}
+
+/* Flexbox for aligning image and text */
+.table-container .flex-row {
+  display: flex;
+}
+
 
 .staff-container {
   display: flex;
@@ -259,4 +307,23 @@ tr {
   .main-title {
     font-size: 1.5rem;
   }
+}
+
+.collapse-content {
+  display: none;
+  /* Initially hide the table content */
+}
+
+.dropdown-toggle {
+  cursor: pointer;
+}
+
+.dropdown-toggle:hover .collapse-content {
+  display: block;
+  /* Show the table content on hover */
+}
+
+table img {
+  width: 100px;
+  height: auto;
 }
