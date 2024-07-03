@@ -92,7 +92,6 @@
                         <p><strong>UserID:</strong> ${requestScope.salesorder.userID}</p>
                         <p><strong>Product Name:</strong> ${requestScope.salesorder.ringName}</p>
                         <p><strong>Ring Size:</strong> ${requestScope.salesorder.ringSize}</p>
-
                         <p><strong>Date of Purchase:</strong> ${requestScope.salesorder.orderDate}</p>
                         <p><strong>Voucher:</strong> ${requestScope.salesorder.voucherName}</p>
                         <p><strong>Destination:</strong> ${requestScope.salesorder.address}</p>
