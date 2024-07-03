@@ -43,7 +43,7 @@
         </div>
                     <div class="container d-flex justify-content-center align-items-center">
             <div class="text-center">
-                <h1 style="font-size: 50px; font-weight: 700">Staff Details</h1>
+                <h1 style="font-size: 50px; font-weight: 700">User Details</h1>
                 <p>Login username: ${sessionScope.managersession.username}</p>
             </div>
         </div>
@@ -85,9 +85,13 @@
                                                 <p class="m-b-10 f-w-600">Phone Number</p>
                                                 <h6 class="text-muted f-w-400">${requestScope.user.phonenumber}</h6>
                                             </div>
-                                            <div class="col-sm-12">
+                                            <div class="col-sm-6">
                                                 <p class="m-b-10 f-w-600">Address</p>
                                                 <h6 class="text-muted f-w-400">${requestScope.user.address}</h6>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <p class="m-b-10 f-w-600">Point</p>
+                                                <h6 class="text-muted f-w-400">${requestScope.user.point}</h6>
                                             </div>
                                         </div>
                                         <div class="row" style="margin-top: 20px; justify-content: center">

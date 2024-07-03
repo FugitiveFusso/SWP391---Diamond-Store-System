@@ -65,6 +65,7 @@ public class DashboardController extends HttpServlet {
             CollectionDAO collectionDAO = new CollectionDAO();
             CategoryDAO categoryDAO = new CategoryDAO();
             CertificateDAO certificateDAO = new CertificateDAO();
+            OrderDAO orderDAO = new OrderDAO();
 
             String action = request.getParameter("action");
             HttpSession session = request.getSession(false);
@@ -255,6 +256,21 @@ public class DashboardController extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("manager_certificatedetails.jsp");
                 rd.forward(request, response);
 
+            }if(action.equals("orderdetails")){
+                Integer id = null;
+                try {
+                    id = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+
+                OrderDTO saleshistory = null;
+                if (id != null) {
+                    saleshistory = orderDAO.loadBillDetail(id);
+                }
+
+                request.setAttribute("salesorder", saleshistory);//object
+                request.getRequestDispatcher("/manager_orderdetails.jsp").forward(request, response);
             }
 
         }

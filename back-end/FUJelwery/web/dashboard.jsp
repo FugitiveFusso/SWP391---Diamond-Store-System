@@ -80,6 +80,13 @@
                 padding: 1px 20px;
                 line-height: 48px;
             }
+            .positive {
+                color: green;
+            }
+
+            .negative {
+                color: red;
+            }
 
 
         </style>
@@ -648,8 +655,8 @@
                         pageContext.setAttribute("listd", listd);
                 %>
                 <tr>
-                    <td>${listd.orderID}</td>
-                    <td>${listd.userID}</td>
+                    <td><a href="DashboardController?action=orderdetails&id=${listd.orderID}">${listd.orderID}</td>
+                    <td><a href="DashboardController?action=userdetails&id=${listd.userID}">${listd.userID}</td>
                     <td>${listd.orderDate}</td>
                     <td><a href="DashboardController?action=ringdetails&id=${listd.ringID}">${listd.ringID}</td>
                 </tr>
@@ -675,9 +682,9 @@
                 <tr>
                     <td>${liste.year}</td>
                     <td>${liste.currentWeek}</td>
-                    <td>${liste.currentWeekRevenue}</td>
-                    <td>${liste.previousWeekRevenue}</td>
-                    <td>${liste.percentageChange}%</td>
+                    <td>${liste.currentWeekRevenue} VND</td>
+                    <td>${liste.previousWeekRevenue} VND</td>
+                    <td class="${liste.percentageChange > 0 ? 'positive' : 'negative'}">${liste.percentageChange}%</td>
                 </tr>
                 <%
                     }
@@ -703,9 +710,9 @@
                     <td>${listf.year}</td>
                     <td>${listf.monthNumber}</td>
                     <td>${listf.monthName}</td>
-                    <td>${listf.currentMonthRevenue}</td>
-                    <td>${listf.previousMonthRevenue}</td>
-                    <td>${listf.percentageChange}%</td>
+                    <td>${listf.currentMonthRevenue} VND</td>
+                    <td>${listf.previousMonthRevenue} VND</td>
+                    <td class="${listf.percentageChange > 0 ? 'positive' : 'negative'}">${listf.percentageChange}%</td>
                 </tr>
                 <%
                     }

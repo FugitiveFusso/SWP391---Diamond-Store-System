@@ -196,7 +196,7 @@ public class UserDAO {
 
     public UserDTO load_Normal(int userID) {
 
-        String sql = "select userID, userName, password, firstName, lastName, email, phoneNumber, address, roleName from [User] u full join [Role] r on u.roleID = r.roleID where userID = ? and isDeleted = 'active' ";
+        String sql = "select userID, userName, password, firstName, lastName, email, phoneNumber, address, roleName, point from [User] u full join [Role] r on u.roleID = r.roleID where userID = ? and isDeleted = 'active' ";
 
         try {
 
@@ -216,6 +216,7 @@ public class UserDAO {
                 String phonenumber = rs.getString("phoneNumber");
                 String address = rs.getString("address");
                 String roleName = rs.getString("roleName");
+                int point = rs.getInt("point");
 
                 UserDTO user = new UserDTO();
                 user.setUserid(customerid);
@@ -227,6 +228,7 @@ public class UserDAO {
                 user.setEmail(email);
                 user.setPhonenumber(phonenumber);
                 user.setAddress(address);
+                user.setPoint(point);
                 return user;
             }
         } catch (SQLException ex) {
