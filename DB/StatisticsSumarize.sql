@@ -362,4 +362,112 @@ FROM TopRankedRings
 WHERE RowNum <= 5
 ORDER BY OrderYear DESC, OrderMonth DESC, RowNum;
 
+-- Order
+-- Number of Orders for Home Delivery/Store Pickup
+SELECT 
+    DATENAME(MONTH, CONVERT(date, orderDate, 103)) AS MonthName,
+    DATEPART(YEAR, CONVERT(date, orderDate, 103)) AS Year,
+    purchaseMethod,
+    COUNT(orderID) AS OrderCount
+FROM [Order]
+WHERE [status] IN ('purchased', 'verified', 'shipping', 'delivered', 'received at store')
+    AND purchaseMethod IN ('Door-to-door delivery service', 'Received at store')
+GROUP BY DATENAME(MONTH, CONVERT(date, orderDate, 103)), DATEPART(YEAR, CONVERT(date, orderDate, 103)), DATEPART(MONTH, CONVERT(date, orderDate, 103)), purchaseMethod
+ORDER BY Year, DATEPART(MONTH, CONVERT(date, orderDate, 103)), purchaseMethod;
+-- Number of orders in a week/month by order date
+SELECT 
+    DATENAME(MONTH, CONVERT(date, orderDate, 103)) AS MonthName,
+    DATEPART(MONTH, CONVERT(date, orderDate, 103)) AS MonthNumber,
+    DATEPART(YEAR, CONVERT(date, orderDate, 103)) AS Year,
+    COUNT(orderID) AS OrderCount
+FROM [Order]
+GROUP BY DATENAME(MONTH, CONVERT(date, orderDate, 103)), DATEPART(MONTH, CONVERT(date, orderDate, 103)), DATEPART(YEAR, CONVERT(date, orderDate, 103))
+ORDER BY Year, MonthNumber;
+
+SELECT 
+    DATEPART(WEEK, CONVERT(date, orderDate, 103)) AS WeekNumber,
+    DATEPART(YEAR, CONVERT(date, orderDate, 103)) AS Year,
+    COUNT(orderID) AS OrderCount
+FROM [Order]
+WHERE [status] IN ('purchased', 'verified', 'shipping', 'delivered', 'received at store')
+GROUP BY DATEPART(WEEK, CONVERT(date, orderDate, 103)), DATEPART(YEAR, CONVERT(date, orderDate, 103))
+ORDER BY Year, WeekNumber;
+
+--  List of weekly transactions similar to history (list table)
+SELECT 
+    orderID,
+    userID,
+    CONVERT(date, orderDate, 103) AS OrderDate,
+    ringID,
+    CASE WHEN voucherID IS NULL THEN 'N/A' ELSE CAST(voucherID AS varchar(255)) END AS voucherID
+FROM [Order]
+WHERE [status] IN ('purchased', 'verified', 'shipping', 'delivered', 'received at store')
+    AND DATEDIFF(DAY, CONVERT(date, orderDate, 103), GETDATE()) <= 7
+ORDER BY OrderDate;
+-- Revenue for Week and Month
+WITH WeeklyRevenue AS (
+    SELECT 
+        DATEPART(YEAR, CONVERT(date, orderDate, 103)) AS Year,
+        DATEPART(WEEK, CONVERT(date, orderDate, 103)) AS WeekNumber,
+        FORMAT(SUM((r.price + rp.rpPrice + dp.price) * 1.02), 'N0') AS TotalRevenue
+    FROM [Order] o
+    JOIN [Ring] r ON o.ringID = r.ringID
+    JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID
+    JOIN [Diamond] d ON d.diamondID = r.diamondID
+    JOIN [DiamondPrice] dp ON d.dpID = dp.dpID
+    WHERE o.[status] IN ('purchased', 'verified', 'shipping', 'delivered', 'received at store')
+    GROUP BY DATEPART(YEAR, CONVERT(date, orderDate, 103)), DATEPART(WEEK, CONVERT(date, orderDate, 103))
+)
+SELECT 
+    CurrentWeek.Year AS Year,
+    CurrentWeek.WeekNumber AS CurrentWeek,
+    CurrentWeek.TotalRevenue AS CurrentWeekRevenue,
+    ISNULL(PreviousWeek.TotalRevenue, 'N/A') AS PreviousWeekRevenue,
+    CASE 
+        WHEN PreviousWeek.TotalRevenue IS NULL THEN NULL
+        ELSE FORMAT(((CAST(REPLACE(CurrentWeek.TotalRevenue, ',', '') AS decimal(18,2)) - CAST(REPLACE(PreviousWeek.TotalRevenue, ',', '') AS decimal(18,2))) / CAST(REPLACE(PreviousWeek.TotalRevenue, ',', '') AS decimal(18,2))) * 100, 'N2')
+    END AS PercentageChange
+FROM WeeklyRevenue AS CurrentWeek
+LEFT JOIN WeeklyRevenue AS PreviousWeek ON CurrentWeek.Year = PreviousWeek.Year
+    AND CurrentWeek.WeekNumber = PreviousWeek.WeekNumber + 1
+WHERE CurrentWeek.Year = YEAR(GETDATE())
+    AND CurrentWeek.WeekNumber = DATEPART(WEEK, GETDATE());
+WITH MonthlyRevenue AS (
+    SELECT 
+        DATEPART(YEAR, CONVERT(date, orderDate, 103)) AS Year,
+        DATEPART(MONTH, CONVERT(date, orderDate, 103)) AS MonthNumber,
+        DATENAME(MONTH, DATEFROMPARTS(YEAR(GETDATE()), DATEPART(MONTH, CONVERT(date, orderDate, 103)), 1)) AS MonthName,
+        FORMAT(SUM((r.price + rp.rpPrice + dp.price) * 1.02), 'N0') AS TotalRevenue
+    FROM [Order] o
+    JOIN [Ring] r ON o.ringID = r.ringID
+    JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID
+    JOIN [Diamond] d ON d.diamondID = r.diamondID
+    JOIN [DiamondPrice] dp ON d.dpID = dp.dpID
+    WHERE o.[status] IN ('purchased', 'verified', 'shipping', 'delivered', 'received at store')
+    GROUP BY DATEPART(YEAR, CONVERT(date, orderDate, 103)), DATEPART(MONTH, CONVERT(date, orderDate, 103))
+)
+SELECT 
+    CurrentMonth.Year,
+    CurrentMonth.MonthNumber AS MonthNumber,
+    CurrentMonth.MonthName AS MonthName,
+    CurrentMonth.TotalRevenue AS CurrentMonthRevenue,
+    ISNULL(PreviousMonth.TotalRevenue, 'N/A') AS PreviousMonthRevenue,
+    CASE 
+        WHEN PreviousMonth.TotalRevenue IS NULL THEN NULL
+        ELSE FORMAT(((CAST(REPLACE(CurrentMonth.TotalRevenue, ',', '') AS decimal(18,2)) - CAST(REPLACE(PreviousMonth.TotalRevenue, ',', '') AS decimal(18,2))) / CAST(REPLACE(PreviousMonth.TotalRevenue, ',', '') AS decimal(18,2))) * 100, 'N2')
+    END AS PercentageChange
+FROM (
+    SELECT 
+        Year,
+        MonthNumber,
+        MonthName,
+        TotalRevenue
+    FROM MonthlyRevenue
+    WHERE Year = YEAR(GETDATE())
+        AND MonthNumber = MONTH(GETDATE())
+) AS CurrentMonth
+LEFT JOIN MonthlyRevenue AS PreviousMonth ON CurrentMonth.Year = PreviousMonth.Year
+    AND CurrentMonth.MonthNumber = PreviousMonth.MonthNumber + 1;
+
+
 

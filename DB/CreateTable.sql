@@ -126,14 +126,6 @@ CREATE TABLE [Order](
 	[status] varchar(255)
 );
 
-CREATE TABLE [Bill](
-	billID int NOT NULL primary key,
-	userID int NOT NULL foreign key REFERENCES [User](userID),
-	orderID int NOT NULL foreign key REFERENCES [Order](orderID),
-	certificateID int NOT NULL foreign key REFERENCES [Certificate](certificateID),
-	warrantyID int NOT NULL foreign key REFERENCES [Warranty](warrantyID),
-);
-
 CREATE TABLE [Post](
 	postID int IDENTITY(1,1) NOT NULL primary key,
 	postName varchar(8000) NOT NULL,
