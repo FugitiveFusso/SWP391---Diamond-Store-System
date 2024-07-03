@@ -1109,4 +1109,322 @@ public class OrderDAO {
         return false;
     }
 
+    public List<OrderDTO> listStatisticA() {
+        List<OrderDTO> list = new ArrayList<OrderDTO>();
+        try {
+
+            Connection con = DBUtils.getConnection();
+            String sql = "SELECT \n"
+                    + "    DATENAME(MONTH, CONVERT(date, orderDate, 103)) AS MonthName,\n"
+                    + "    DATEPART(YEAR, CONVERT(date, orderDate, 103)) AS Year,\n"
+                    + "    purchaseMethod,\n"
+                    + "    COUNT(orderID) AS OrderCount\n"
+                    + "FROM [Order]\n"
+                    + "WHERE [status] IN ('purchased', 'verified', 'shipping', 'delivered', 'received at store')\n"
+                    + "    AND purchaseMethod IN ('Door-to-door delivery service', 'Received at store')\n"
+                    + "GROUP BY DATENAME(MONTH, CONVERT(date, orderDate, 103)), DATEPART(YEAR, CONVERT(date, orderDate, 103)), DATEPART(MONTH, CONVERT(date, orderDate, 103)), purchaseMethod\n"
+                    + "ORDER BY Year, DATEPART(MONTH, CONVERT(date, orderDate, 103)), purchaseMethod; ";
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+
+                    String monthName = rs.getString("MonthName");
+                    int year = rs.getInt("Year");
+                    String purchaseMethod = rs.getString("purchaseMethod");
+                    int orderCount = rs.getInt("OrderCOunt");
+
+                    OrderDTO order = new OrderDTO();
+
+                    order.setMonthName(monthName);
+                    order.setYear(year);
+                    order.setPurchaseMethod(purchaseMethod);
+                    order.setOrderCount(orderCount);
+                    list.add(order);
+                }
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return list;
+    }
+
+    public List<OrderDTO> listStatisticB() {
+        List<OrderDTO> list = new ArrayList<OrderDTO>();
+        try {
+
+            Connection con = DBUtils.getConnection();
+            String sql = "SELECT \n"
+                    + "    DATENAME(MONTH, CONVERT(date, orderDate, 103)) AS MonthName,\n"
+                    + "    DATEPART(MONTH, CONVERT(date, orderDate, 103)) AS MonthNumber,\n"
+                    + "    DATEPART(YEAR, CONVERT(date, orderDate, 103)) AS Year,\n"
+                    + "    COUNT(orderID) AS OrderCount\n"
+                    + "FROM [Order]\n"
+                    + "GROUP BY DATENAME(MONTH, CONVERT(date, orderDate, 103)), DATEPART(MONTH, CONVERT(date, orderDate, 103)), DATEPART(YEAR, CONVERT(date, orderDate, 103))\n"
+                    + "ORDER BY Year, MonthNumber; ";
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+
+                    String monthName = rs.getString("MonthName");
+                    int monthNumber = rs.getInt("MonthNumber");
+                    int year = rs.getInt("Year");
+                    int orderCount = rs.getInt("OrderCOunt");
+
+                    OrderDTO order = new OrderDTO();
+
+                    order.setMonthName(monthName);
+                    order.setYear(year);
+                    order.setMonthNumber(monthNumber);
+                    order.setOrderCount(orderCount);
+                    list.add(order);
+                }
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return list;
+    }
+
+    public List<OrderDTO> listStatisticC() {
+        List<OrderDTO> list = new ArrayList<OrderDTO>();
+        try {
+
+            Connection con = DBUtils.getConnection();
+            String sql = "SELECT \n"
+                    + "    DATEPART(WEEK, CONVERT(date, orderDate, 103)) AS WeekNumber,\n"
+                    + "    DATEPART(YEAR, CONVERT(date, orderDate, 103)) AS Year,\n"
+                    + "    COUNT(orderID) AS OrderCount\n"
+                    + "FROM [Order]\n"
+                    + "WHERE [status] IN ('purchased', 'verified', 'shipping', 'delivered', 'received at store')\n"
+                    + "GROUP BY DATEPART(WEEK, CONVERT(date, orderDate, 103)), DATEPART(YEAR, CONVERT(date, orderDate, 103))\n"
+                    + "ORDER BY Year, WeekNumber; ";
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+
+                    int weekNumber = rs.getInt("WeekNumber");
+                    int year = rs.getInt("Year");
+                    int orderCount = rs.getInt("OrderCount");
+
+                    OrderDTO order = new OrderDTO();
+
+                    order.setWeekNumber(weekNumber);
+                    order.setYear(year);
+                    order.setOrderCount(orderCount);
+                    list.add(order);
+                }
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return list;
+    }
+
+    public List<OrderDTO> listStatisticD() {
+        List<OrderDTO> list = new ArrayList<OrderDTO>();
+        try {
+
+            Connection con = DBUtils.getConnection();
+            String sql = "SELECT \n"
+                    + "    orderID,\n"
+                    + "    userID,\n"
+                    + "    CONVERT(date, orderDate, 103) AS OrderDate,\n"
+                    + "    ringID	FROM [Order]\n"
+                    + "WHERE [status] IN ('delivered', 'received at store')\n"
+                    + "    AND DATEDIFF(DAY, CONVERT(date, orderDate, 103), GETDATE()) <= 7\n"
+                    + "ORDER BY OrderDate;";
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+
+                    int orderID = rs.getInt("orderID");
+                    int userID1 = rs.getInt("userID");
+                    String orderDate = rs.getString("orderDate");
+                    int ringID = rs.getInt("ringID");
+
+                    OrderDTO order = new OrderDTO();
+
+                    order.setOrderID(orderID);
+                    order.setUserID(userID1);
+                    order.setOrderDate(orderDate);
+                    order.setRingID(ringID);
+
+                    list.add(order);
+                }
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return list;
+    }
+
+    public List<OrderDTO> listStatisticE() {
+        List<OrderDTO> list = new ArrayList<OrderDTO>();
+        try {
+
+            Connection con = DBUtils.getConnection();
+            String sql = "WITH WeeklyRevenue AS (\n"
+                    + "    SELECT \n"
+                    + "        DATEPART(YEAR, CONVERT(date, orderDate, 103)) AS Year,\n"
+                    + "        DATEPART(WEEK, CONVERT(date, orderDate, 103)) AS WeekNumber,\n"
+                    + "        FORMAT(SUM((r.price + rp.rpPrice + dp.price) * 1.02), 'N0') AS TotalRevenue\n"
+                    + "    FROM [Order] o\n"
+                    + "    JOIN [Ring] r ON o.ringID = r.ringID\n"
+                    + "    JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID\n"
+                    + "    JOIN [Diamond] d ON d.diamondID = r.diamondID\n"
+                    + "    JOIN [DiamondPrice] dp ON d.dpID = dp.dpID\n"
+                    + "    WHERE o.[status] IN ('delivered', 'received at store')\n"
+                    + "    GROUP BY DATEPART(YEAR, CONVERT(date, orderDate, 103)), DATEPART(WEEK, CONVERT(date, orderDate, 103))\n"
+                    + ")\n"
+                    + "SELECT \n"
+                    + "    CurrentWeek.Year AS Year,\n"
+                    + "    CurrentWeek.WeekNumber AS CurrentWeek,\n"
+                    + "    CurrentWeek.TotalRevenue AS CurrentWeekRevenue,\n"
+                    + "    ISNULL(PreviousWeek.TotalRevenue, 'N/A') AS PreviousWeekRevenue,\n"
+                    + "    CASE \n"
+                    + "        WHEN PreviousWeek.TotalRevenue IS NULL THEN NULL\n"
+                    + "        ELSE FORMAT(((CAST(REPLACE(CurrentWeek.TotalRevenue, ',', '') AS decimal(18,2)) - CAST(REPLACE(PreviousWeek.TotalRevenue, ',', '') AS decimal(18,2))) / CAST(REPLACE(PreviousWeek.TotalRevenue, ',', '') AS decimal(18,2))) * 100, 'N2')\n"
+                    + "    END AS PercentageChange\n"
+                    + "FROM WeeklyRevenue AS CurrentWeek\n"
+                    + "LEFT JOIN WeeklyRevenue AS PreviousWeek ON CurrentWeek.Year = PreviousWeek.Year\n"
+                    + "    AND CurrentWeek.WeekNumber = PreviousWeek.WeekNumber + 1\n"
+                    + "WHERE CurrentWeek.Year = YEAR(GETDATE())\n"
+                    + "    AND CurrentWeek.WeekNumber = DATEPART(WEEK, GETDATE());";
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+
+                    int currentWeek = rs.getInt("CurrentWeek");
+                    int year = rs.getInt("Year");
+                    String currentWeekRevenue = rs.getString("CurrentWeekRevenue");
+                    String previousWeekRevenue = rs.getString("PreviousWeekRevenue");
+                    double percentageChange = rs.getDouble("PercentageChange");
+
+                    OrderDTO order = new OrderDTO();
+
+                    order.setCurrentWeekRevenue(currentWeekRevenue);
+                    order.setYear(year);
+                    order.setCurrentWeek(currentWeek);
+                    order.setPreviousWeekRevenue(previousWeekRevenue);
+                    order.setPercentageChange(percentageChange);
+                    list.add(order);
+                }
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return list;
+    }
+
+    public List<OrderDTO> listStatisticF() {
+        List<OrderDTO> list = new ArrayList<OrderDTO>();
+        try {
+
+            Connection con = DBUtils.getConnection();
+            String sql = "WITH MonthlyRevenue AS (\n"
+                    + "    SELECT \n"
+                    + "        DATEPART(YEAR, CONVERT(date, orderDate, 103)) AS Year,\n"
+                    + "        DATEPART(MONTH, CONVERT(date, orderDate, 103)) AS MonthNumber,\n"
+                    + "        DATENAME(MONTH, DATEFROMPARTS(YEAR(GETDATE()), DATEPART(MONTH, CONVERT(date, orderDate, 103)), 1)) AS MonthName,\n"
+                    + "        FORMAT(SUM((r.price + rp.rpPrice + dp.price) * 1.02), 'N0') AS TotalRevenue\n"
+                    + "    FROM [Order] o\n"
+                    + "    JOIN [Ring] r ON o.ringID = r.ringID\n"
+                    + "    JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID\n"
+                    + "    JOIN [Diamond] d ON d.diamondID = r.diamondID\n"
+                    + "    JOIN [DiamondPrice] dp ON d.dpID = dp.dpID\n"
+                    + "    WHERE o.[status] IN ('delivered', 'received at store')\n"
+                    + "    GROUP BY DATEPART(YEAR, CONVERT(date, orderDate, 103)), DATEPART(MONTH, CONVERT(date, orderDate, 103))\n"
+                    + ")\n"
+                    + "SELECT \n"
+                    + "    CurrentMonth.Year,\n"
+                    + "    CurrentMonth.MonthNumber AS MonthNumber,\n"
+                    + "    CurrentMonth.MonthName AS MonthName,\n"
+                    + "    CurrentMonth.TotalRevenue AS CurrentMonthRevenue,\n"
+                    + "    ISNULL(PreviousMonth.TotalRevenue, 'N/A') AS PreviousMonthRevenue,\n"
+                    + "    CASE \n"
+                    + "        WHEN PreviousMonth.TotalRevenue IS NULL THEN NULL\n"
+                    + "        ELSE FORMAT(((CAST(REPLACE(CurrentMonth.TotalRevenue, ',', '') AS decimal(18,2)) - CAST(REPLACE(PreviousMonth.TotalRevenue, ',', '') AS decimal(18,2))) / CAST(REPLACE(PreviousMonth.TotalRevenue, ',', '') AS decimal(18,2))) * 100, 'N2')\n"
+                    + "    END AS PercentageChange\n"
+                    + "FROM (\n"
+                    + "    SELECT \n"
+                    + "        Year,\n"
+                    + "        MonthNumber,\n"
+                    + "        MonthName,\n"
+                    + "        TotalRevenue\n"
+                    + "    FROM MonthlyRevenue\n"
+                    + "    WHERE Year = YEAR(GETDATE())\n"
+                    + "        AND MonthNumber = MONTH(GETDATE())\n"
+                    + ") AS CurrentMonth\n"
+                    + "LEFT JOIN MonthlyRevenue AS PreviousMonth ON CurrentMonth.Year = PreviousMonth.Year\n"
+                    + "    AND CurrentMonth.MonthNumber = PreviousMonth.MonthNumber + 1;";
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+
+                    int monthNumber = rs.getInt("MonthNumber");
+                    int year = rs.getInt("Year");
+                    String monthName = rs.getString("MonthName");
+                    String currentMonthRevenue = rs.getString("CurrentMonthRevenue");
+                    String previousMonthRevenue = rs.getString("PreviousMonthRevenue");
+                    double percentageChange = rs.getDouble("PercentageChange");
+
+                    OrderDTO order = new OrderDTO();
+
+                    order.setCurrentMonthRevenue(currentMonthRevenue);
+                    order.setYear(year);
+                    order.setMonthNumber(monthNumber);
+                    order.setPreviousMonthRevenue(previousMonthRevenue);
+                    order.setPercentageChange(percentageChange);
+                    order.setMonthName(monthName);
+                    list.add(order);
+                }
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return list;
+    }
+
 }

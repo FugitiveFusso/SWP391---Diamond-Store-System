@@ -1,4 +1,5 @@
 
+<%@page import="com.khac.swp.fuj.order.OrderDTO"%>
 <%@page import="com.khac.swp.fuj.diamond.DiamondDTO"%>
 <%@page import="com.khac.swp.fuj.ring.RingDTO"%>
 <%@page import="com.khac.swp.fuj.ringplacementprice.RingPlacementPriceDTO"%>
@@ -551,6 +552,160 @@
                     <td><img src=${topsales.ringImage} width="100px" height="100px"></td>
                     <td>${topsales.purchaseCount}</td>
                     <td><strong>${topsales.totalPrice} VND</strong></td>
+                </tr>
+                <%
+                    }
+                %>    
+            </table>
+
+            <h1>Order Statistics</h1>
+            <h4>Number of Orders for Home Delivery/Store Pickup</h4>
+
+            <table style="margin: 0 auto;">
+                <tr>
+                    <th>Month Name</th>
+                    <th>Year</th>
+                    <th>Purchase Method</th>
+                    <th>Order Count</th>
+
+                </tr>
+                <%
+                    List<OrderDTO> listOrderA = (List<OrderDTO>) request.getAttribute("lista");
+                    for (OrderDTO lista : listOrderA) {
+                        pageContext.setAttribute("lista", lista);
+                %>
+                <tr>
+                    <td>${lista.monthName}</td>
+                    <td>${lista.year}</td>
+                    <td>${lista.purchaseMethod}</td>
+                    <td>${lista.orderCount}</td>
+                </tr>
+                <%
+                    }
+                %>    
+            </table>
+
+            <h4>Number of orders in a week</h4>
+            <table style="margin: 0 auto;">
+                <tr>
+                    <th>Week Number</th>
+                    <th>Year</th>
+                    <th>Order Count</th>
+
+                </tr>
+                <%
+                    List<OrderDTO> listOrderC = (List<OrderDTO>) request.getAttribute("listc");
+                    for (OrderDTO listc : listOrderC) {
+                        pageContext.setAttribute("listc", listc);
+                %>
+                <tr>
+                    <td>${listc.weekNumber}</td>
+                    <td>${listc.year}</td>
+                    <td>${listc.orderCount}</td>
+                </tr>
+                <%
+                    }
+                %>    
+            </table>
+
+            <h4>Number of orders in month</h4>
+            <table style="margin: 0 auto;">
+                <tr>
+                    <th>Month Name</th>
+                    <th>Month Number</th>
+                    <th>Year</th>
+                    <th>Order Count</th>
+
+                </tr>
+                <%
+                    List<OrderDTO> listOrderB = (List<OrderDTO>) request.getAttribute("listb");
+                    for (OrderDTO listb : listOrderB) {
+                        pageContext.setAttribute("listb", listb);
+                %>
+                <tr>
+                    <td>${listb.monthName}</td>
+                    <td>${listb.monthNumber}</td>
+                    <td>${listb.year}</td>
+                    <td>${listb.orderCount}</td>
+                </tr>
+                <%
+                    }
+                %>    
+            </table>
+
+            <h4>List of weekly transactions</h4>
+            <table style="margin: 0 auto;">
+                <tr>
+                    <th>Order ID</th>
+                    <th>User ID</th>
+                    <th>Order Date</th>
+                    <th>Ring ID</th>
+
+                </tr>
+                <%
+                    List<OrderDTO> listOrderD = (List<OrderDTO>) request.getAttribute("listd");
+                    for (OrderDTO listd : listOrderD) {
+                        pageContext.setAttribute("listd", listd);
+                %>
+                <tr>
+                    <td>${listd.orderID}</td>
+                    <td>${listd.userID}</td>
+                    <td>${listd.orderDate}</td>
+                    <td><a href="DashboardController?action=ringdetails&id=${listd.ringID}">${listd.ringID}</td>
+                </tr>
+                <%
+                    }
+                %>    
+            </table>
+            <h4>Revenue for Week</h4>
+            <table style="margin: 0 auto;">
+                <tr>
+                    <th>Year</th>
+                    <th>Current Week</th>
+                    <th>Current Week Revenue</th>
+                    <th>Previous Week Revenue</th>
+                    <th>Percentage Change</th>
+
+                </tr>
+                <%
+                    List<OrderDTO> listOrderE = (List<OrderDTO>) request.getAttribute("liste");
+                    for (OrderDTO liste : listOrderE) {
+                        pageContext.setAttribute("liste", liste);
+                %>
+                <tr>
+                    <td>${liste.year}</td>
+                    <td>${liste.currentWeek}</td>
+                    <td>${liste.currentWeekRevenue}</td>
+                    <td>${liste.previousWeekRevenue}</td>
+                    <td>${liste.percentageChange}%</td>
+                </tr>
+                <%
+                    }
+                %>    
+            </table>
+            <h4>Revenue for Month</h4>
+            <table style="margin: 0 auto;">
+                <tr>
+                    <th>Year</th>
+                    <th>Month Number</th>
+                    <th>Month Name</th>
+                    <th>Current Month Revenue</th>
+                    <th>Previous Month Revenue</th>
+                    <th>Percentage Change</th>
+
+                </tr>
+                <%
+                    List<OrderDTO> listOrderF = (List<OrderDTO>) request.getAttribute("listf");
+                    for (OrderDTO listf : listOrderF) {
+                        pageContext.setAttribute("listf", listf);
+                %>
+                <tr>
+                    <td>${listf.year}</td>
+                    <td>${listf.monthNumber}</td>
+                    <td>${listf.monthName}</td>
+                    <td>${listf.currentMonthRevenue}</td>
+                    <td>${listf.previousMonthRevenue}</td>
+                    <td>${listf.percentageChange}%</td>
                 </tr>
                 <%
                     }

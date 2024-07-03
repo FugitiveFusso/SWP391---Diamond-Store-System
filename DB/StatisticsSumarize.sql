@@ -398,10 +398,8 @@ SELECT
     orderID,
     userID,
     CONVERT(date, orderDate, 103) AS OrderDate,
-    ringID,
-    CASE WHEN voucherID IS NULL THEN 'N/A' ELSE CAST(voucherID AS varchar(255)) END AS voucherID
-FROM [Order]
-WHERE [status] IN ('purchased', 'verified', 'shipping', 'delivered', 'received at store')
+    ringID	FROM [Order]
+WHERE [status] IN ('delivered', 'received at store')
     AND DATEDIFF(DAY, CONVERT(date, orderDate, 103), GETDATE()) <= 7
 ORDER BY OrderDate;
 -- Revenue for Week and Month
@@ -415,7 +413,7 @@ WITH WeeklyRevenue AS (
     JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID
     JOIN [Diamond] d ON d.diamondID = r.diamondID
     JOIN [DiamondPrice] dp ON d.dpID = dp.dpID
-    WHERE o.[status] IN ('purchased', 'verified', 'shipping', 'delivered', 'received at store')
+    WHERE o.[status] IN ('delivered', 'received at store')
     GROUP BY DATEPART(YEAR, CONVERT(date, orderDate, 103)), DATEPART(WEEK, CONVERT(date, orderDate, 103))
 )
 SELECT 
@@ -432,6 +430,7 @@ LEFT JOIN WeeklyRevenue AS PreviousWeek ON CurrentWeek.Year = PreviousWeek.Year
     AND CurrentWeek.WeekNumber = PreviousWeek.WeekNumber + 1
 WHERE CurrentWeek.Year = YEAR(GETDATE())
     AND CurrentWeek.WeekNumber = DATEPART(WEEK, GETDATE());
+
 WITH MonthlyRevenue AS (
     SELECT 
         DATEPART(YEAR, CONVERT(date, orderDate, 103)) AS Year,
@@ -443,7 +442,7 @@ WITH MonthlyRevenue AS (
     JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID
     JOIN [Diamond] d ON d.diamondID = r.diamondID
     JOIN [DiamondPrice] dp ON d.dpID = dp.dpID
-    WHERE o.[status] IN ('purchased', 'verified', 'shipping', 'delivered', 'received at store')
+    WHERE o.[status] IN ('delivered', 'received at store')
     GROUP BY DATEPART(YEAR, CONVERT(date, orderDate, 103)), DATEPART(MONTH, CONVERT(date, orderDate, 103))
 )
 SELECT 

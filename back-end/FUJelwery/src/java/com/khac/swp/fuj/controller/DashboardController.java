@@ -15,6 +15,8 @@ import com.khac.swp.fuj.diamond.DiamondDAO;
 import com.khac.swp.fuj.diamond.DiamondDTO;
 import com.khac.swp.fuj.diamondprice.DiamondPriceDAO;
 import com.khac.swp.fuj.diamondprice.DiamondPriceDTO;
+import com.khac.swp.fuj.order.OrderDAO;
+import com.khac.swp.fuj.order.OrderDTO;
 import com.khac.swp.fuj.posts.PostDAO;
 import com.khac.swp.fuj.posts.PostDTO;
 import com.khac.swp.fuj.ring.RingDAO;
@@ -129,7 +131,25 @@ public class DashboardController extends HttpServlet {
                 //Top5Sales
                 List<RingDTO> ringListTopSales = ringDao.listTopSales();
                 request.setAttribute("ringlisttopsales", ringListTopSales);
-
+                //Number of Orders for Home Delivery/Store Pickup
+                OrderDAO orderDao = new OrderDAO();
+                List<OrderDTO> listA = orderDao.listStatisticA();
+                request.setAttribute("lista", listA);
+                //Number of orders in a week/month by order date
+                List<OrderDTO> listB = orderDao.listStatisticB();
+                request.setAttribute("listb", listB);
+                List<OrderDTO> listC = orderDao.listStatisticC();
+                request.setAttribute("listc", listC);
+                //List of weekly transactions
+                List<OrderDTO> listD = orderDao.listStatisticD();
+                request.setAttribute("listd", listD);
+                //Revenue for Week
+                List<OrderDTO> listE = orderDao.listStatisticE();
+                request.setAttribute("liste", listE);
+                //Revenue for Month
+                List<OrderDTO> listF = orderDao.listStatisticF();
+                request.setAttribute("listf", listF);
+                
                 request.getRequestDispatcher("/dashboard.jsp").forward(request, response);
 
             } else if (action.equals("userdetails")) {

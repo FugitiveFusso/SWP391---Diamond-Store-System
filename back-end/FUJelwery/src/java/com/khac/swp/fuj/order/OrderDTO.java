@@ -10,6 +10,7 @@ package com.khac.swp.fuj.order;
  * @author Dell
  */
 public class OrderDTO {
+
     private int orderID;
     private int userID;
     private String userName;
@@ -40,6 +41,18 @@ public class OrderDTO {
     private int numberOfThings;
     private String image;
 
+    private String monthName;
+    private int year;
+    private int orderCount;
+    private int monthNumber;
+    private int weekNumber;
+    private int currentWeek;
+    private String currentWeekRevenue;
+    private String previousWeekRevenue;
+    private double percentageChange;
+    private String currentMonthRevenue;
+    private String previousMonthRevenue;
+
     public int getOrderID() {
         return orderID;
     }
@@ -47,6 +60,7 @@ public class OrderDTO {
     public void setOrderID(int orderID) {
         this.orderID = orderID;
     }
+
     public void setUserID(int userID) {
         this.userID = userID;
     }
@@ -62,7 +76,7 @@ public class OrderDTO {
     public void setUserName(String userName) {
         this.userName = userName;
     }
-    
+
     public String getAddress() {
         return address;
     }
@@ -70,7 +84,7 @@ public class OrderDTO {
     public void setAddress(String address) {
         this.address = address;
     }
-    
+
     public String getOrderDate() {
         return orderDate;
     }
@@ -190,7 +204,6 @@ public class OrderDTO {
     public void setWarrantyTerms(String warrantyTerms) {
         this.warrantyTerms = warrantyTerms;
     }
-    
 
     public int getCertificateID() {
         return certificateID;
@@ -215,7 +228,7 @@ public class OrderDTO {
     public void setCertificateImage(String certificateImage) {
         this.certificateImage = certificateImage;
     }
-    
+
     public int getRingSize() {
         return ringSize;
     }
@@ -264,8 +277,6 @@ public class OrderDTO {
         this.numberOfThings = numberOfThings;
     }
 
-    
-
     public String getImage() {
         return image;
     }
@@ -274,13 +285,96 @@ public class OrderDTO {
         this.image = image;
     }
 
+    public String getMonthName() {
+        return monthName;
+    }
+
+    public void setMonthName(String monthName) {
+        this.monthName = monthName;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getOrderCount() {
+        return orderCount;
+    }
+
+    public void setOrderCount(int orderCount) {
+        this.orderCount = orderCount;
+    }
+
+    public int getMonthNumber() {
+        return monthNumber;
+    }
+
+    public void setMonthNumber(int monthNumber) {
+        this.monthNumber = monthNumber;
+    }
+
+    public int getWeekNumber() {
+        return weekNumber;
+    }
+
+    public void setWeekNumber(int weekNumber) {
+        this.weekNumber = weekNumber;
+    }
+
+    public int getCurrentWeek() {
+        return currentWeek;
+    }
+
+    public void setCurrentWeek(int currentWeek) {
+        this.currentWeek = currentWeek;
+    }
+
+    public String getCurrentWeekRevenue() {
+        return currentWeekRevenue;
+    }
+
+    public void setCurrentWeekRevenue(String currentWeekRevenue) {
+        this.currentWeekRevenue = currentWeekRevenue;
+    }
+
+    public String getPreviousWeekRevenue() {
+        return previousWeekRevenue;
+    }
+
+    public void setPreviousWeekRevenue(String previousWeekRevenue) {
+        this.previousWeekRevenue = previousWeekRevenue;
+    }
+
+    public double getPercentageChange() {
+        return percentageChange;
+    }
+
+    public void setPercentageChange(double percentageChange) {
+        this.percentageChange = percentageChange;
+    }
+
+    public String getCurrentMonthRevenue() {
+        return currentMonthRevenue;
+    }
+
+    public void setCurrentMonthRevenue(String currentMonthRevenue) {
+        this.currentMonthRevenue = currentMonthRevenue;
+    }
+
+    public String getPreviousMonthRevenue() {
+        return previousMonthRevenue;
+    }
+
+    public void setPreviousMonthRevenue(String previousMonthRevenue) {
+        this.previousMonthRevenue = previousMonthRevenue;
+    }
+
     @Override
     public String toString() {
-        return "OrderDTO{" + "orderID=" + orderID + ", userID=" + userID + ", userName=" + userName + ", address=" + address + ", orderDate=" + orderDate + ", ringID=" + ringID + ", ringName=" + ringName + ", voucherID=" + voucherID + ", voucherName=" + voucherName + ", warrantyID=" + warrantyID + ", warrantyName=" + warrantyName + ", certificateID=" + certificateID + ", certificateName=" + certificateName + ", ringSize=" + ringSize + ", totalPrice=" + totalPrice + ", purchaseMethod=" + purchaseMethod + ", status=" + status + ", delivered=" + delivered + ", numberOfThings=" + numberOfThings + ", image=" + image + '}';
+        return "OrderDTO{" + "orderID=" + orderID + ", userID=" + userID + ", userName=" + userName + ", address=" + address + ", orderDate=" + orderDate + ", ringID=" + ringID + ", ringName=" + ringName + ", ringImage=" + ringImage + ", voucherID=" + voucherID + ", voucherName=" + voucherName + ", warrantyID=" + warrantyID + ", warrantyName=" + warrantyName + ", warrantyImage=" + warrantyImage + ", warrantyMonth=" + warrantyMonth + ", warrantyDescription=" + warrantyDescription + ", warrantyType=" + warrantyType + ", warrantyStartDate=" + warrantyStartDate + ", warrantyEndDate=" + warrantyEndDate + ", warrantyTerms=" + warrantyTerms + ", certificateID=" + certificateID + ", certificateName=" + certificateName + ", certificateImage=" + certificateImage + ", ringSize=" + ringSize + ", totalPrice=" + totalPrice + ", purchaseMethod=" + purchaseMethod + ", status=" + status + ", delivered=" + delivered + ", numberOfThings=" + numberOfThings + ", image=" + image + ", monthName=" + monthName + ", year=" + year + ", orderCount=" + orderCount + ", monthNumber=" + monthNumber + ", weekNumber=" + weekNumber + ", currentWeek=" + currentWeek + ", currentWeekRevenue=" + currentWeekRevenue + ", previousWeekRevenue=" + previousWeekRevenue + ", percentageChange=" + percentageChange + ", currentMonthRevenue=" + currentMonthRevenue + ", previousMonthRevenue=" + previousMonthRevenue + '}';
     }
-    
-    
-
-
-    
 }
