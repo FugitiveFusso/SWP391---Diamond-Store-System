@@ -71,6 +71,7 @@
                     <div class="product-details">
                         <p><strong>UserID:</strong> ${requestScope.deliveryorder.userID}</p>
                         <p><strong>Product Name:</strong> ${requestScope.deliveryorder.ringName}</p>
+                        <p><strong>Ring Size:</strong> ${requestScope.deliveryorder.ringSize}</p>
                         <p><strong>Date of Purchase:</strong> ${requestScope.deliveryorder.orderDate}</p>
                         <p><strong>Voucher:</strong> ${requestScope.deliveryorder.voucherName}</p>
                         <p><strong>Destination:</strong> ${requestScope.deliveryorder.address}</p>
