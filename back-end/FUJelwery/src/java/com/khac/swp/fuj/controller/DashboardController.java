@@ -256,7 +256,7 @@ public class DashboardController extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("manager_certificatedetails.jsp");
                 rd.forward(request, response);
 
-            }if(action.equals("orderdetails")){
+            }else if(action.equals("orderdetails")){
                 Integer id = null;
                 try {
                     id = Integer.parseInt(request.getParameter("id"));
