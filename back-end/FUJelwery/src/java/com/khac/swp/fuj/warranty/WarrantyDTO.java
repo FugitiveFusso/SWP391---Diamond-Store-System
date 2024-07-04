@@ -22,8 +22,8 @@ public class WarrantyDTO {
     public int avgWarrantyDurationMonths;
     public int activeWarranties;
     public int deletedWarranties;
-    public String percentageUsedActive;
-    public String percentageUnusedActive;
+    public double percentageUsedActive;
+    public double percentageUnusedActive;
     public String earliestStartDate;
     public String latestStartDate;
     public String earliestEndDate;
@@ -195,19 +195,19 @@ public class WarrantyDTO {
         this.deletedWarranties = deletedWarranties;
     }
 
-    public String getPercentageUsedActive() {
+    public double getPercentageUsedActive() {
         return percentageUsedActive;
     }
 
-    public void setPercentageUsedActive(String percentageUsedActive) {
+    public void setPercentageUsedActive(double percentageUsedActive) {
         this.percentageUsedActive = percentageUsedActive;
     }
 
-    public String getPercentageUnusedActive() {
+    public double getPercentageUnusedActive() {
         return percentageUnusedActive;
     }
 
-    public void setPercentageUnusedActive(String percentageUnusedActive) {
+    public void setPercentageUnusedActive(double percentageUnusedActive) {
         this.percentageUnusedActive = percentageUnusedActive;
     }
 

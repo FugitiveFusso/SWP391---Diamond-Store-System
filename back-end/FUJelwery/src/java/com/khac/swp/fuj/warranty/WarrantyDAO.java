@@ -259,8 +259,8 @@ public class WarrantyDAO {
                 + "    totalWarranties,\n"
                 + "    usedActiveWarranties,\n"
                 + "    unusedActiveWarranties,\n"
-                + "    percentageUsedActive + '%' AS percentageUsedActive,\n"
-                + "    percentageUnusedActive + '%' AS percentageUnusedActive,\n"
+                + "    percentageUsedActive  AS percentageUsedActive,\n"
+                + "    percentageUnusedActive AS percentageUnusedActive,\n"
                 + "    manufacturerWarranties,\n"
                 + "    extendedWarranties,\n"
                 + "    limitedWarranties,\n"
@@ -293,8 +293,8 @@ public class WarrantyDAO {
                 int totalWarranties = rs.getInt("totalWarranties");
                 int usedActiveWarranties = rs.getInt("usedActiveWarranties");
                 int unusedActiveWarranties = rs.getInt("unusedActiveWarranties");
-                String percentageUsedActive = rs.getString("percentageUsedActive");
-                String percentageUnusedActive = rs.getString("percentageUnusedActive");
+                double percentageUsedActive = rs.getDouble("percentageUsedActive");
+                double percentageUnusedActive = rs.getDouble("percentageUnusedActive");
                 int retailerWarranties = rs.getInt("retailerWarranties");
                 int manufacturerWarranties = rs.getInt("manufacturerWarranties");
                 int extendedWarranties = rs.getInt("extendedWarranties");

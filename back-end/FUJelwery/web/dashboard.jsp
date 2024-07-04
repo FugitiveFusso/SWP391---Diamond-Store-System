@@ -501,18 +501,29 @@
     degreePieChart.render();
 </script>     
 <script>
-    // Get JSP variables into JavaScript
-    var percentageUsedActive = <%= request.getAttribute("percentageUsedActive")%>;
-    var percentageUnusedActive = <%= request.getAttribute("percentageUnusedActive")%>;
+    <%-- Retrieve data from request scope --%>
+    var percentageUsedActive = ${requestScope.warranty.percentageUsedActive};
+    var percentageUnusedActive = ${requestScope.warranty.percentageUnusedActive};
 
     // ApexCharts configuration
-    var options = {
+    const options = {
         series: [percentageUsedActive, percentageUnusedActive],
         chart: {
             type: 'pie',
-            height: 350,
+            background: 'transparent', // Adding background property to match the first snippet
+            height: 130,
         },
         labels: ['Used', 'Not Used'],
+        legend: {
+            labels: {
+                colors: '#f5f7ff',
+            },
+            show: true,
+            position: 'bottom',
+        },
+        tooltip: {
+            theme: 'dark',
+        },
         responsive: [{
                 breakpoint: 480,
                 options: {
@@ -526,12 +537,14 @@
             }]
     };
 
+
+    // Render ApexCharts
     var chart = new ApexCharts(document.querySelector("#diamond-pie-chart"), options);
     chart.render();
 </script>
 <script>
-    var ordersDataFromJSP = JSON.parse('<%= new Gson().toJson(listOrderA) %>');
-  </script>
+    var ordersDataFromJSP = JSON.parse('<%= new Gson().toJson(listOrderA)%>');
+</script>
 </body>
 
 </html>
