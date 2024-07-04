@@ -131,9 +131,29 @@
 
                 </div>
 
-                <div class="charts">
+                <div class="charts">  
+                    <%
+                        List<OrderDTO> listOrderI = (List<OrderDTO>) request.getAttribute("listi");
+                        StringBuilder categories4 = new StringBuilder("[");
+                        StringBuilder storeOrderData = new StringBuilder("[");
+                        StringBuilder deliveryOrderData = new StringBuilder("[");
+                        for (Iterator<OrderDTO> iterator = listOrderI.iterator(); iterator.hasNext();) {
+                            OrderDTO listi = iterator.next();
+                            categories4.append("'").append(listi.getMonthName()).append(" - ").append(listi.getYear()).append("'");
+                            storeOrderData.append(listi.getStoreOrderCount());
+                            deliveryOrderData.append(listi.getDeliveryOrderCount());
+                            if (iterator.hasNext()) {
+                                categories4.append(", ");
+                                storeOrderData.append(", ");
+                                deliveryOrderData.append(", ");
+                            }
+                        }
+                        categories4.append("]");
+                        storeOrderData.append("]");
+                        deliveryOrderData.append("]");
+                    %>
                     <div class="charts-card1 area-chart">
-                        <h2 class="chart-title">Purchase and Sales Orders</h2>
+                        <h2 class="chart-title">Store and Delivery Statistic</h2>
                         <div id="area-chart"></div>
                     </div>
 
@@ -283,7 +303,7 @@
                                         <td>${liste.currentWeekRevenue} VND</td>
                                         <td>${liste.previousWeekRevenue} VND</td>
                                         <td class="${liste.percentageChange > 0 ? 'positive' : 'negative'}">${liste.percentageChange}%</td>
-                                    </tr> 
+                                    </tr>
                                     <%
                                         }
                                     %>  
@@ -314,7 +334,7 @@
                                         <td>${listf.currentMonthRevenue} VND</td>
                                         <td>${listf.previousMonthRevenue} VND</td>
                                         <td class="${listf.percentageChange > 0 ? 'positive' : 'negative'}">${listf.percentageChange}%</td>
-                                    </tr>   
+                                    </tr>
                                     <%
                                         }
                                     %> 
@@ -385,6 +405,136 @@
                                 %>                                  
                                 <!-- Add more rows as needed -->
                             </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="charts-row">
+                    <div class="x_content" style="display: block;">
+                        <div class="table-container">
+
+                            <div class="x_title">
+                                <h2>Top 5 Categories</h2>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </div>
+                            <div class="collapse-content">
+                                <table>
+                                    <tr>
+                                        <th>Current Week Revenue</th>
+                                        <th>Previous Week Revenue</th>
+                                    </tr>
+                                    <tr>    
+                                        <%
+                                            List<CategoryDTO> cateList = (List<CategoryDTO>) request.getAttribute("calist");
+                                            int totalCategories = 0;
+                                            int activeCategories = 0;
+                                            int deletedCategories = 0;
+
+                                            if (cateList != null) {
+                                                for (CategoryDTO category : cateList) {
+                                                    totalCategories = category.getTotalCategories();
+                                                    activeCategories = category.getActiveCategories();
+                                                    deletedCategories = category.getDeletedCategories();
+                                                }
+                                            }
+                                            request.setAttribute("totalCategories", totalCategories);
+                                            request.setAttribute("activeCategories", activeCategories);
+                                            request.setAttribute("deletedCategories", deletedCategories);
+                                        %>
+                                        <% for (CategoryDTO cate : cateList) {
+                                                pageContext.setAttribute("cate", cate);
+                                        %>
+                                        <td><a href="DashboardController?action=categorydetails&id=${cate.categoryID}">${cate.top3CategoryNames}</td>
+                                        <td>${cate.top3CategoryRingCounts}</td>
+                                    </tr>
+                                    <%
+                                        }
+                                    %>  
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="x_content" style="display: block;">
+                        <div class="table-container">                            
+                            <div class="x_title">
+                                <h2>Top 5 Collections</h2>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </div>
+                            <div class="collapse-content">
+                                <table>
+                                    <tr>
+                                        <th>Collection Name</th>
+                                        <th>Number Of Rings</th>
+                                        <th>Total Collection Price</th>
+                                    </tr>
+                                    <tr>
+                                        <%
+                                            List<CollectionDTO> collList = (List<CollectionDTO>) request.getAttribute("colist");
+                                            int numberOfCollections = 0;
+
+                                            if (collList != null) {
+                                                for (CollectionDTO collection : collList) {
+                                                    numberOfCollections = collection.getNumberOfCollections();
+                                                }
+                                            }
+                                            request.setAttribute("numberOfCollections", numberOfCollections);
+
+                                        %>
+                                        <% for (CollectionDTO coll : collList) {
+                                                pageContext.setAttribute("coll", coll);
+                                        %>
+                                        <td><a href="DashboardController?action=collectiondetails&id=${coll.collectionID}">${coll.collectionName}</td>
+                                        <td>${coll.numberOfRings}</td>
+                                        <td>${coll.totalCollectionPrice} VND</td>
+                                    </tr>
+                                    <%
+                                        }
+                                    %> 
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="x_content" style="display: block;">
+                        <div class="table-container">
+                            <div class="x_title">
+                                <h2>All Warranty Types</h2>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </div>
+                            <div class="collapse-content">
+                                <table>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Usage</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="flex-row"> Limited
+                                            Warranties</td>
+                                        <td>${requestScope.warranty.limitedWarranties}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="flex-row">
+                                            Manufacturer Warranties</td>
+                                        <td>${requestScope.warranty.manufacturerWarranties}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="flex-row"> Extended
+                                            Warranties</td>
+                                        <td>${requestScope.warranty.extendedWarranties}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="flex-row"> Lifetime
+                                            Warranties</td>
+                                        <td>${requestScope.warranty.lifetimeWarranties}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="flex-row"> Retailer
+                                            Warranties</td>
+                                        <td>${requestScope.warranty.retailerWarranties}</td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -527,6 +677,35 @@
                     </div>
 
                     <div class="x_content" style="display: block;">
+                        <div class="table-container">                            
+                            <div class="x_title">
+                                <h2>Top 5 Ring Placement By Color</h2>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </div>
+                            <div class="collapse-content">
+                                <table>
+                                    <tr>
+                                        <th>Color</th>
+                                        <th>Ring Placement By Color</th>
+                                    </tr>
+                                    <tr>
+                                        <%
+                                            List<RingPlacementPriceDTO> rppListB = (List<RingPlacementPriceDTO>) request.getAttribute("rpplistb");
+                                            for (RingPlacementPriceDTO rpplistb : rppListB) {
+                                                pageContext.setAttribute("rpplistb", rpplistb);
+                                        %>
+                                        <td>${rpplistb.color}</td>
+                                        <td>${rpplistb.ringPlacementsByColor}</td>
+                                    </tr>
+                                    <%
+                                        }
+                                    %> 
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="x_content" style="display: block;">
                         <div class="table-container">
                             <div class="x_title">
                                 <h2>Top 3 Most Used Vouchers</h2>
@@ -560,48 +739,6 @@
                                     <%
                                         }
                                     %>                                     
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="x_content" style="display: block;">
-                        <div class="table-container">
-                            <div class="x_title">
-                                <h2>All Warranty Types</h2>
-                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                            </div>
-                            <div class="collapse-content">
-                                <table>
-                                    <tr>
-                                        <th>Type</th>
-                                        <th>Usage</th>
-                                    </tr>
-                                    <tr>
-                                        <td class="flex-row"> Limited
-                                            Warranties</td>
-                                        <td>${requestScope.warranty.limitedWarranties}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="flex-row">
-                                            Manufacturer Warranties</td>
-                                        <td>${requestScope.warranty.manufacturerWarranties}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="flex-row"> Extended
-                                            Warranties</td>
-                                        <td>${requestScope.warranty.extendedWarranties}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="flex-row"> Lifetime
-                                            Warranties</td>
-                                        <td>${requestScope.warranty.lifetimeWarranties}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="flex-row"> Retailer
-                                            Warranties</td>
-                                        <td>${requestScope.warranty.retailerWarranties}</td>
-                                    </tr>
                                 </table>
                             </div>
                         </div>
@@ -779,7 +916,8 @@
     <%
         for (DiamondDTO diamond : diaList) {
             // Outputting data in the format needed for JavaScript
-%>{country: '<%= diamond.getCountry()%>', diamondCount: <%= diamond.getDiamondCount()%>}, <% }%>
+%>{country: '<%= diamond.getCountry()%>', diamondCount: <%= diamond.getDiamondCount()%>},
+    <% }%>
     ];
 
     // Extract categories (countries) and data (diamond counts)
@@ -1089,6 +1227,131 @@
 
     var chart = new ApexCharts(document.querySelector("#revenue-month-column-chart"), revenueMonthColumnChartOptions);
     chart.render();
+</script>
+
+<!--Number of orders for each method in month-->
+<script>
+    const areaChartOptions = {
+        series: [
+            {
+                name: 'Store Orders',
+                data: <%= storeOrderData.toString()%>
+            },
+            {
+                name: 'Delivery Orders',
+                data: <%= deliveryOrderData.toString()%>
+            }
+        ],
+        chart: {
+            type: 'area',
+            background: 'transparent',
+            height: 250, // Reduced height
+            width: 900,
+            stacked: false,
+            toolbar: {
+                show: false,
+            },
+        },
+        colors: ['#00ab57', '#d50000'],
+        labels: <%= categories4.toString()%>,
+        dataLabels: {
+            enabled: false,
+        },
+        fill: {
+            gradient: {
+                opacityFrom: 0.4,
+                opacityTo: 0.1,
+                shadeIntensity: 1,
+                stops: [0, 100],
+                type: 'vertical',
+            },
+            type: 'gradient',
+        },
+        grid: {
+            borderColor: '#55596e',
+            yaxis: {
+                lines: {
+                    show: true,
+                },
+            },
+            xaxis: {
+                lines: {
+                    show: true,
+                },
+            },
+        },
+        legend: {
+            labels: {
+                colors: '#f5f7ff',
+            },
+            show: true,
+            position: 'top',
+        },
+        markers: {
+            size: 6,
+            strokeColors: '#1b2635',
+            strokeWidth: 3,
+        },
+        stroke: {
+            curve: 'smooth',
+        },
+        xaxis: {
+            axisBorder: {
+                color: '#55596e',
+                show: true,
+            },
+            axisTicks: {
+                color: '#55596e',
+                show: true,
+            },
+            labels: {
+                offsetY: 5,
+                style: {
+                    colors: '#f5f7ff',
+                },
+            },
+        },
+        yaxis: [
+            {
+                title: {
+                    text: 'Store Orders',
+                    style: {
+                        color: '#f5f7ff',
+                    },
+                },
+                labels: {
+                    style: {
+                        colors: ['#f5f7ff'],
+                    },
+                },
+            },
+            {
+                opposite: true,
+                title: {
+                    text: 'Delivery Orders',
+                    style: {
+                        color: '#f5f7ff',
+                    },
+                },
+                labels: {
+                    style: {
+                        colors: ['#f5f7ff'],
+                    },
+                },
+            },
+        ],
+        tooltip: {
+            shared: true,
+            intersect: false,
+            theme: 'dark',
+        },
+    };
+
+    const areaChart = new ApexCharts(
+            document.querySelector('#area-chart'),
+            areaChartOptions
+            );
+    areaChart.render();
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
