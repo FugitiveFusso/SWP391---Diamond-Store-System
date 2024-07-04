@@ -1,3 +1,4 @@
+<%@page import="com.google.gson.Gson"%>
 <%@page import="com.khac.swp.fuj.order.OrderDTO"%>
 <%@page import="com.khac.swp.fuj.diamond.DiamondDTO"%>
 <%@page import="com.khac.swp.fuj.ring.RingDTO"%>
@@ -9,6 +10,10 @@
 <%@page import="com.khac.swp.fuj.users.UserDTO"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    // Assume 'lista' is populated with OrderDTO objects in your servlet or controller
+    List<OrderDTO> listOrderA = (List<OrderDTO>) request.getAttribute("lista");
+%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -103,6 +108,20 @@
                     </div>
 
                     <div class="pie-chart">
+                        <%
+                            List<CertificateDTO> certListB = (List<CertificateDTO>) request.getAttribute("certlist");
+                            double usedPercentage = 0.0;
+                            double unusedPercentage = 0.0;
+
+                            if (certListB != null) {
+                                for (CertificateDTO certificate : certListB) {
+                                    usedPercentage = certificate.getUsedPercentage();
+                                    unusedPercentage = certificate.getUnusedPercentage();
+                                }
+                            }
+                            request.setAttribute("usedPercentage", usedPercentage);
+                            request.setAttribute("unusedPercentage", unusedPercentage);
+                        %>
                         <div class="charts-card1">
                             <h2 class="chart-title">Certificate Usage</h2>
                             <div id="degree-pie-chart"></div>
@@ -117,7 +136,7 @@
 
                 <div class="charts-row1">
                     <div class="charts-card2 bar-chart">
-                        <h2 class="chart-title">Orders for Home Delivery/Store Pickup</h2>
+                        <h2 class="chart-title">Orders for Home Delivery/Store Pickup in 2024</h2>
                         <div id="orders-column-chart"></div>
                     </div>
 
@@ -451,6 +470,68 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
 <!-- Custom JS -->
 <script src="js/dashboard.js"></script>
+<script>
+    // Get JSP variables into JavaScript
+    var usedPercentage = <%= usedPercentage%>;
+    var unusedPercentage = <%= unusedPercentage%>;
+
+    // ApexCharts configuration
+    const degreePieChartOptions = {
+        series: [usedPercentage, unusedPercentage],
+        chart: {
+            type: 'pie',
+            background: 'transparent',
+            height: 130,
+        },
+        labels: ['Used', 'Not Used'],
+        legend: {
+            labels: {
+                colors: '#f5f7ff',
+            },
+            show: true,
+            position: 'bottom',
+        },
+        tooltip: {
+            theme: 'dark',
+        },
+    };
+
+    // Render the chart
+    const degreePieChart = new ApexCharts(document.querySelector('#degree-pie-chart'), degreePieChartOptions);
+    degreePieChart.render();
+</script>     
+<script>
+    // Get JSP variables into JavaScript
+    var percentageUsedActive = <%= request.getAttribute("percentageUsedActive")%>;
+    var percentageUnusedActive = <%= request.getAttribute("percentageUnusedActive")%>;
+
+    // ApexCharts configuration
+    var options = {
+        series: [percentageUsedActive, percentageUnusedActive],
+        chart: {
+            type: 'pie',
+            height: 350,
+        },
+        labels: ['Used', 'Not Used'],
+        responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: {
+                        width: 200
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }]
+    };
+
+    var chart = new ApexCharts(document.querySelector("#diamond-pie-chart"), options);
+    chart.render();
+</script>
+<script>
+    var ordersDataFromJSP = JSON.parse('<%= new Gson().toJson(listOrderA) %>');
+  </script>
 </body>
 
 </html>
