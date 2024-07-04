@@ -1,0 +1,416 @@
+body {
+    margin: 0;
+    padding: 0;
+    color: #9e9ea4;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f4f4;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: 'main';
+    max-width: 1200px;
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+}
+
+.merged-charts-container {
+    display: flex;
+    justify-content: space-between;
+    width: 1120px;
+    height: auto;
+    background-color: #273147;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.purchased-history-container{
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Align the table to the right */
+    margin-top: 20px;
+}
+
+#map-chart-container {
+    width: 700px;
+    height: 350px;
+}
+
+#bar-chart-container {
+    width: 500px;
+    height: 300px;
+}
+
+.chart-title {
+    color: #f5f7ff;
+}
+
+.main-container {
+    grid-area: main;
+    padding: 20px;
+    color: rgba(0, 0, 0, 0.85);
+}
+
+.main-title {
+    text-align: center;
+}
+
+.main-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+}
+
+.card {
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    width: 150px;
+    text-align: center;
+    color: #fff;
+}
+
+.card:first-child {
+    background-color: #2962ff;
+}
+
+.card:nth-child(2) {
+    background-color: #ff6d00;
+}
+
+.card:nth-child(3) {
+    background-color: #2e7d32;
+}
+
+.card:nth-child(4) {
+    background-color: #d50000;
+}
+
+.card-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.card h3 {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+.card h1 {
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+.material-icons-outlined {
+    font-size: 24px;
+}
+
+.apexcharts-legend-text {
+    fill: #ffffff !important; /* Change text color to white */
+}
+
+.charts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 38px;
+    margin-top: 20px;
+}
+
+.area-chart {
+    flex: 3;
+}
+
+.pie-chart {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
+}
+
+.charts-card1 {
+    background: #273147;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    width: 200px;
+    height: 130px;
+    text-align: center;
+}
+
+.charts-card2 {
+    background: #273147;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    text-align: center;
+}
+
+.charts-row1 {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.charts-row1 .chart-title{
+    color: #fff;
+}
+
+.charts-card2.bar-chart,
+.charts-card2.line-chart {
+    height: 200px; /* Adjust the height to make charts thin */
+    width: 30%; /* Adjust the width for each chart to fit in one row */
+}
+
+#orders-bar-chart,
+#orders-weekly-line-chart,
+#orders-monthly-line-chart {
+    width: 100%;
+    height: 100%;
+}
+
+.charts-card1.area-chart {
+    width: 880px;
+    height: 300px;
+}
+
+#area-chart,
+#degree-pie-chart,
+#diamond-pie-chart{
+    width: 100%;
+    height: calc(100% - 30px);
+    /* Adjust height to fit within card */
+}
+
+.charts-card {
+    background: #273147;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.chart-title {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.charts-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.smaller-size {
+    transform: scale(0.9);
+    transform-origin: top center;
+}
+
+.table-container {
+    padding: 10px;
+    background-color: #273147;
+    border-radius: 5px;
+    color: white;
+    width: 300px; /* Increased the width */
+}
+
+.table-container1 {
+    padding: 10px 10px;
+    background-color: #273147;
+    border-radius: 5px;
+    color: white;
+    width: 1140px; /* Increased the width */
+}
+
+.table-container1 .x_title a i {
+    margin-top: 13px;
+}
+
+.x_title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.x_title a i {
+    margin-top: 13px;
+}
+
+.table-container .x_title h2 {
+    font-size: 15px;
+}
+
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-container table th,
+.table-container table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    font-size: 12px; /* Make text smaller */
+    vertical-align: middle; /* Ensure vertical alignment */
+}
+
+.table-container table th {
+    background-color: #2a3f54;
+    color: white;
+}
+
+.table-container table td a{
+    text-decoration: none;
+    color: white;
+}
+
+.table-container1 .x_title h2 {
+    font-size: 15px;
+}
+
+.table-container1 table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-container1 table th,
+.table-container1 table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    font-size: 12px; /* Make text smaller */
+    vertical-align: middle; /* Ensure vertical alignment */
+}
+
+.table-container1 table th {
+    background-color: #2a3f54;
+    color: white;
+}
+
+.collapse-content {
+    display: none;
+    padding: 15px;
+    background-color: #273147;
+    border-radius: 5px;
+    color: white;
+}
+
+.table-container table img {
+    width: 50px; /* Reduce image size */
+    height: auto;
+    margin-right: 10px; /* Add space between image and text */
+}
+
+.collapse-content.show {
+    display: block;
+    background-color: #273147;
+    color: white;
+}
+
+/* Flexbox for aligning image and text */
+.table-container .flex-row {
+    display: flex;
+}
+
+
+.staff-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-left: 10px;
+}
+
+.staff-member {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    width: 200px;
+}
+
+.staff-photo {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.staff-member h3 {
+    font-size: 1.2em;
+    margin: 10px 0 5px;
+}
+
+.staff-member p {
+    color: #555;
+    font-size: 0.9em;
+    margin: 0;
+}
+
+.staff-member a {
+    color: #000;
+    text-decoration: none;    
+}
+
+@media screen and (max-width: 992px) {
+    .grid-container {
+        width: 90%;
+    }
+
+    .charts {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .main-cards {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .charts {
+        grid-template-columns: 1fr;
+        margin-top: 30px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .main-title {
+        font-size: 1.5rem;
+    }
+}
+
+.collapse-content {
+    display: none;
+    /* Initially hide the table content */
+}
+
+.dropdown-toggle {
+    cursor: pointer;
+}
+
+.dropdown-toggle:hover .collapse-content {
+    display: block;
+    /* Show the table content on hover */
+}
+
+table img {
+    width: 100px;
+    height: auto;
+}
