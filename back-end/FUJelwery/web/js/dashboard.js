@@ -408,7 +408,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Process data from ordersDataFromJSP to prepare for chart rendering
     ordersDataFromJSP.forEach(item => {
-        const monthYear = `${item.monthName} ${item.monthName}`;
+        const monthYear = `${item.monthName} ${item.year}`;
 
         if (!ordersData.categories.includes(monthYear)) {
             ordersData.categories.push(monthYear);

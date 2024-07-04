@@ -136,7 +136,7 @@
 
                 <div class="charts-row1">
                     <div class="charts-card2 bar-chart">
-                        <h2 class="chart-title">Orders for Home Delivery/Store Pickup in 2024</h2>
+                        <h2 class="chart-title">Orders for Home Delivery/Store Pickup</h2>
                         <div id="orders-column-chart"></div>
                     </div>
 
