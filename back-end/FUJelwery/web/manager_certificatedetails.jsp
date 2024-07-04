@@ -1,3 +1,4 @@
+<%@page import="com.khac.swp.fuj.certificate.CertificateDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -67,7 +68,14 @@
                 border-radius: 10px;
                 cursor: pointer;
             }
-
+            a {
+                text-decoration: none;
+                color: black;
+            }
+            a:hover {
+                text-decoration: none;
+                color: black;
+            }
 
         </style>
     </head>
@@ -114,6 +122,28 @@
                         <div class="card-body">
                             <h6 class="card-subtitle mb-2 text-muted" >Certificate ID: ${requestScope.certificate.certificateID}</h6>                                                  
                             <p class="card-text"><strong>Description: </strong> ${requestScope.certificate.certificateDescription}</p>                           
+                            <%-- Retrieve warranty object from request attribute --%>
+                            <% CertificateDTO certificate = (CertificateDTO) request.getAttribute("certificate"); %>
+
+                            <%-- Check if warranty is not null and has a valid orderID --%>
+                            <% if (certificate != null && certificate.getDiamondID() != 0) { %>
+                            <p class="card-text">
+                                <a href="DashboardController?action=diamonddetails&id=${requestScope.certificate.diamondID}">
+                                    <strong>Diamond ID:</strong> ${certificate.getDiamondID()}
+                                </a>
+                            </p>
+                            <% } else { %>
+                            <p class="card-text">
+                                <strong>No valid Diamond ID found.</strong>
+                            </p>
+                            <% }%>
+
+                            <p class="card-text">
+                                <strong>Status: </strong> 
+                                <span class="${requestScope.certificate.status == 'Applied' ? 'text-success' : 'text-danger'}">
+                                    ${requestScope.certificate.status}
+                                </span>
+                            </p>
                             <div class="btn-group" role="group" aria-label="Voucher Actions">
                                 <form action="DashboardController" method="post" class="mr-2">
                                     <input type="hidden" name="action" value="list">

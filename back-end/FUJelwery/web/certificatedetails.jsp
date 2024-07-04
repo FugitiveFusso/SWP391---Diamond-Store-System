@@ -159,10 +159,10 @@
                             <% CertificateDTO certificate = (CertificateDTO) request.getAttribute("certificate"); %>
 
                             <%-- Check if warranty is not null and has a valid orderID --%>
-                            <% if (certificate != null && certificate.getDiamondID()!= 0) { %>
+                            <% if (certificate != null && certificate.getDiamondID() != 0) { %>
                             <p class="card-text">
                                 <a href="DiamondController?action=details&id=${requestScope.certificate.diamondID}">
-                                    <strong>Order ID:</strong> ${certificate.getDiamondID()}
+                                    <strong>Diamond ID:</strong> ${certificate.getDiamondID()}
                                 </a>
                             </p>
                             <% } else { %>
@@ -170,7 +170,7 @@
                                 <strong>No valid Diamond ID found.</strong>
                             </p>
                             <% }%>
-                            
+
                             <p class="card-text">
                                 <strong>Status: </strong> 
                                 <span class="${requestScope.certificate.status == 'Applied' ? 'text-success' : 'text-danger'}">
