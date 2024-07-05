@@ -1,46 +1,6 @@
 
 // ---------- CHARTS ----------
 
-Highcharts.mapChart('map-chart', {
-    chart: {
-        map: 'custom/world',
-        width: 600, // Adjusted width
-        height: 300 // Adjusted height (if needed)
-    },
-    title: {
-        text: 'Top 5 Countries with Most Diamonds Sold'
-    },
-    mapNavigation: {
-        enabled: true,
-        buttonOptions: {
-            verticalAlign: 'bottom'
-        }
-    },
-    colorAxis: {
-        min: 0
-    },
-    series: [{
-            data: [
-                {'code': 'US', 'value': 1000},
-                {'code': 'SZ', 'value': 900},
-                {'code': 'IN', 'value': 800},
-                {'code': 'ML', 'value': 700},
-                {'code': 'MZ', 'value': 600}
-            ],
-            mapData: Highcharts.maps['custom/world'],
-            joinBy: ['iso-a2', 'code'],
-            name: 'Diamonds Sold',
-            states: {
-                hover: {
-                    color: '#a4edba'
-                }
-            },
-            dataLabels: {
-                enabled: true,
-                format: '{point.name}'
-            }
-        }]
-});
 
 // Bar Chart
 var optionsBar = {

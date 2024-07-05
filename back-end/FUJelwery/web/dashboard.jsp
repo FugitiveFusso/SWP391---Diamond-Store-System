@@ -11,8 +11,10 @@
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    // Assume 'lista' is populated with OrderDTO objects in your servlet or controller
     List<OrderDTO> listOrderA = (List<OrderDTO>) request.getAttribute("lista");
+%>
+<%
+    List<DiamondDTO> diaList1 = (List<DiamondDTO>) request.getAttribute("diaList");
 %>
 
 <!DOCTYPE html>
@@ -167,6 +169,26 @@
 
 
                 <div class="merged-charts-container">
+                    <%
+// Initialize a variable to hold the JavaScript data array
+                        StringBuilder jsDataArray = new StringBuilder("[");
+
+                        for (DiamondDTO diamond : diaList) {
+                            pageContext.setAttribute("diamond", diamond);
+
+                            // Add each diamond's data to the JavaScript array
+                            jsDataArray.append("{")
+                                    .append("\"name\": \"").append(diamond.getCountry()).append("\", ")
+                                    .append("\"value\": ").append(diamond.getDiamondCount())
+                                    .append("},");
+                        }
+
+// Remove the trailing comma if array has elements and close the array
+                        if (jsDataArray.length() > 1) {
+                            jsDataArray.setLength(jsDataArray.length() - 1);
+                        }
+                        jsDataArray.append("]");
+                    %>
                     <div class="chart-card" id="map-chart-container">
                         <h2 class="chart-title">Top 5 Countries with Most Diamonds Originated</h2>
                         <div id="map-chart"></div>
@@ -463,6 +485,8 @@
 <!-- Scripts -->
 <!-- Highcharts -->
 <script src="https://code.highcharts.com/maps/highmaps.js"></script>
+<script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/mapdata/custom/world.js"></script>
 <script src="https://code.highcharts.com/maps/modules/data.js"></script>
 <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/mapdata/custom/world.js"></script>
@@ -470,6 +494,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
 <!-- Custom JS -->
 <script src="js/dashboard.js"></script>
+
+<!--Certificate Pie Chart-->
 <script>
     // Get JSP variables into JavaScript
     var usedPercentage = <%= usedPercentage%>;
@@ -499,7 +525,9 @@
     // Render the chart
     const degreePieChart = new ApexCharts(document.querySelector('#degree-pie-chart'), degreePieChartOptions);
     degreePieChart.render();
-</script>     
+</script>   
+
+<!--Warranty Pie Chart-->
 <script>
     <%-- Retrieve data from request scope --%>
     var percentageUsedActive = ${requestScope.warranty.percentageUsedActive};
@@ -542,8 +570,52 @@
     var chart = new ApexCharts(document.querySelector("#diamond-pie-chart"), options);
     chart.render();
 </script>
+
+<!--Orders for Home Delivery/Store Pickup Grouped Column Chart-->
 <script>
     var ordersDataFromJSP = JSON.parse('<%= new Gson().toJson(listOrderA)%>');
+</script>
+
+<!--Map Chart-->
+<script>
+    // Parse the JavaScript data array from JSP
+    var diamondData = <%= jsDataArray.toString() %>;
+
+    // Initialize the Highcharts map chart with the dynamic data
+    Highcharts.mapChart('map-chart', {
+        chart: {
+            map: 'custom/world',
+            width: 600, // Adjusted width
+            height: 300 // Adjusted height
+        },
+        title: {
+            text: 'Top Countries with Most Diamonds Sold'
+        },
+        mapNavigation: {
+            enabled: true,
+            buttonOptions: {
+                verticalAlign: 'bottom'
+            }
+        },
+        colorAxis: {
+            min: 0
+        },
+        series: [{
+            data: diamondData,
+            mapData: Highcharts.maps['custom/world'],
+            joinBy: ['name', 'name'], // Match data by country name
+            name: 'Diamonds Sold',
+            states: {
+                hover: {
+                    color: '#a4edba'
+                }
+            },
+            dataLabels: {
+                enabled: true,
+                format: '{point.name}'
+            }
+        }]
+    });
 </script>
 </body>
 
