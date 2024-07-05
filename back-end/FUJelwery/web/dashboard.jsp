@@ -253,7 +253,7 @@
                         <div id="map-chart"></div>
                     </div>
                     <div class="chart-card" id="bar-chart-container">
-                        <h2 class="chart-title">125.7k Views from 60 countries</h2>
+                        <h2 class="chart-title">Diamond Originate from Top 5 Countries</h2>
                         <div id="bar-chart"></div>
                     </div>
                 </div>
@@ -649,7 +649,7 @@
             height: 300 // Adjusted height
         },
         title: {
-            text: 'Top Countries with Most Diamonds Sold'
+            text: 'Top Countries with Most Diamonds Originate'
         },
         mapNavigation: {
             enabled: true,
@@ -664,7 +664,7 @@
                 data: diamondData,
                 mapData: Highcharts.maps['custom/world'],
                 joinBy: ['name', 'name'], // Match data by country name
-                name: 'Diamonds Sold',
+                name: 'Diamonds Originate',
                 states: {
                     hover: {
                         color: '#a4edba'
@@ -698,7 +698,8 @@
     // ApexCharts configuration
     var optionsBar = {
         series: [{
-                data: data
+                name: 'Diamonds',
+                data: data,
             }],
         chart: {
             type: 'bar',
@@ -718,13 +719,14 @@
             }
         },
         dataLabels: {
-            enabled: false
+            enabled: false,
         },
         yaxis: {
+            
             labels: {
                 style: {
                     colors: '#fff', // Simplified for all labels
-                    fontSize: '14px'
+                    fontSize: '11px'
                 }
             }
         },

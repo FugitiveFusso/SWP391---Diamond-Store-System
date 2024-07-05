@@ -191,11 +191,10 @@
                             <option value="Cameroon" ${requestScope.diamond.origin == 'Cameroon' ? 'selected' : ''}>Cameroon</option>
                             <option value="Gabon" ${requestScope.diamond.origin == 'Gabon' ? 'selected' : ''}>Gabon</option>
                             <option value="Republic of the Congo" ${requestScope.diamond.origin == 'Republic of the Congo (Congo-Brazzaville)' ? 'selected' : ''}>Republic of the Congo</option>
-                            <option value="Swaziland" ${requestScope.diamond.origin == 'Swaziland (Eswatini)' ? 'selected' : ''}>Swaziland</option>
                             <option value="Mali" ${requestScope.diamond.origin == 'Mali' ? 'selected' : ''}>Mali</option>
                             <option value="Mozambique" ${requestScope.diamond.origin == 'Mozambique' ? 'selected' : ''}>Mozambique</option>
                             <option value="Suriname" ${requestScope.diamond.origin == 'Suriname' ? 'selected' : ''}>Suriname</option>
-                            <option value="United States" ${requestScope.diamond.origin == 'United States' ? 'selected' : ''}>United States</option>
+                            <option value="United States of America" ${requestScope.diamond.origin == 'United States of America' ? 'selected' : ''}>United States</option>
                         </select>                           
                     </div>
                 </div>
