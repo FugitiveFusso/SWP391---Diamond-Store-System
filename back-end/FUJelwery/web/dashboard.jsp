@@ -1,3 +1,4 @@
+<%@page import="java.util.Iterator"%>
 <%@page import="com.google.gson.Gson"%>
 <%@page import="com.khac.swp.fuj.order.OrderDTO"%>
 <%@page import="com.khac.swp.fuj.diamond.DiamondDTO"%>
@@ -13,6 +14,7 @@
 <%
     List<OrderDTO> listOrderA = (List<OrderDTO>) request.getAttribute("lista");
 %>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -139,10 +141,43 @@
                         <div id="orders-column-chart"></div>
                     </div>
 
+                    <%
+                        List<OrderDTO> listOrderC = (List<OrderDTO>) request.getAttribute("listc");
+                        StringBuilder categories = new StringBuilder("[");
+                        StringBuilder data = new StringBuilder("[");
+                        for (Iterator<OrderDTO> iterator = listOrderC.iterator(); iterator.hasNext();) {
+                            OrderDTO listc = iterator.next();
+                            categories.append("'").append(listc.getWeekNumber()).append(" - ").append(listc.getYear()).append("'");
+                            data.append(listc.getOrderCount());
+                            if (iterator.hasNext()) {
+                                categories.append(", ");
+                                data.append(", ");
+                            }
+                        }
+                        categories.append("]");
+                        data.append("]");
+                    %>
                     <div class="charts-card2 line-chart">
                         <h2 class="chart-title">Number of Orders per Week</h2>
                         <div id="orders-weekly-line-chart"></div>
                     </div>
+
+                    <%
+                        List<OrderDTO> listOrderB = (List<OrderDTO>) request.getAttribute("listb");
+                        StringBuilder categories1 = new StringBuilder("[");
+                        StringBuilder data1 = new StringBuilder("[");
+                        for (Iterator<OrderDTO> iterator = listOrderB.iterator(); iterator.hasNext();) {
+                            OrderDTO listb = iterator.next();
+                            categories1.append("'").append(listb.getMonthName()).append(" - ").append(listb.getYear()).append("'");
+                            data1.append(listb.getOrderCount());
+                            if (iterator.hasNext()) {
+                                categories1.append(", ");
+                                data1.append(", ");
+                            }
+                        }
+                        categories1.append("]");
+                        data1.append("]");
+                    %>
 
                     <div class="charts-card2 line-chart">
                         <h2 class="chart-title">Number of Orders per Month</h2>
@@ -167,25 +202,23 @@
 
                 <div class="merged-charts-container">
                     <%
-// Initialize a variable to hold the JavaScript data array
-StringBuilder jsDataArray = new StringBuilder("[");
+                        StringBuilder jsDataArray = new StringBuilder("[");
 
-for (DiamondDTO diamond : diaList) {
-    pageContext.setAttribute("diamond", diamond);
+                        for (DiamondDTO diamond : diaList) {
+                            pageContext.setAttribute("diamond", diamond);
 
-    // Add each diamond's data to the JavaScript array
-    jsDataArray.append("{")
-              .append("\"name\": \"").append(diamond.getCountry()).append("\", ")
-              .append("\"value\": ").append(diamond.getDiamondCount())
-              .append("},");
-}
+                            // Add each diamond's data to the JavaScript array
+                            jsDataArray.append("{")
+                                    .append("\"name\": \"").append(diamond.getCountry()).append("\", ")
+                                    .append("\"value\": ").append(diamond.getDiamondCount())
+                                    .append("},");
+                        }
 
-// Remove the trailing comma if array has elements and close the array
-if (jsDataArray.length() > 1) {
-    jsDataArray.setLength(jsDataArray.length() - 1);
-}
-jsDataArray.append("]");
-%>
+                        if (jsDataArray.length() > 1) {
+                            jsDataArray.setLength(jsDataArray.length() - 1);
+                        }
+                        jsDataArray.append("]");
+                    %>
                     <div class="chart-card" id="map-chart-container">
                         <h2 class="chart-title">Top 5 Countries with Most Diamonds Originated</h2>
                         <div id="map-chart"></div>
@@ -576,7 +609,7 @@ jsDataArray.append("]");
 <!--Map Chart-->
 <script>
     // Parse the JavaScript data array from JSP
-    var diamondData = <%= jsDataArray.toString() %>;
+    var diamondData = <%= jsDataArray.toString()%>;
 
     // Initialize the Highcharts map chart with the dynamic data
     Highcharts.mapChart('map-chart', {
@@ -598,20 +631,20 @@ jsDataArray.append("]");
             min: 0
         },
         series: [{
-            data: diamondData,
-            mapData: Highcharts.maps['custom/world'],
-            joinBy: ['name', 'name'], // Match data by country name
-            name: 'Diamonds Sold',
-            states: {
-                hover: {
-                    color: '#a4edba'
+                data: diamondData,
+                mapData: Highcharts.maps['custom/world'],
+                joinBy: ['name', 'name'], // Match data by country name
+                name: 'Diamonds Sold',
+                states: {
+                    hover: {
+                        color: '#a4edba'
+                    }
+                },
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name}'
                 }
-            },
-            dataLabels: {
-                enabled: true,
-                format: '{point.name}'
-            }
-        }]
+            }]
     });
 </script>
 <script>
@@ -620,7 +653,7 @@ jsDataArray.append("]");
     <%
         for (DiamondDTO diamond : diaList) {
             // Outputting data in the format needed for JavaScript
-%>{country: '<%= diamond.getCountry()%>', diamondCount: <%= diamond.getDiamondCount()%>},
+    %>{country: '<%= diamond.getCountry()%>', diamondCount: <%= diamond.getDiamondCount()%>},
     <% }%>
     ];
 
@@ -679,6 +712,112 @@ jsDataArray.append("]");
     // Initialize and render the chart
     var chartBar = new ApexCharts(document.querySelector("#bar-chart"), optionsBar);
     chartBar.render();
+</script>
+
+<!--Number of Orders per Week Line Graph-->
+<script>
+    const weeklyOrdersData = {
+        categories: <%= categories.toString()%>,
+        series: [{
+                name: 'Orders',
+                data: <%= data.toString()%>
+            }]
+    };
+
+    const ordersWeeklyLineChartOptions = {
+        chart: {
+            type: 'line',
+            height: 150,
+        },
+        series: [{
+                name: 'Orders',
+                data: weeklyOrdersData.series[0].data
+            }],
+        xaxis: {
+            categories: weeklyOrdersData.categories,
+            labels: {
+                style: {
+                    colors: ['#ffffff', '#ffffff', '#ffffff', '#ffffff'], // White color for x-axis labels
+                }
+            }
+        },
+        yaxis: {
+            title: {
+                text: 'Orders',
+                style: {
+                    color: '#ffffff' // White color for y-axis title
+                }
+            },
+            labels: {
+                style: {
+                    colors: ['#ffffff'], // White color for y-axis labels
+                }
+            }
+        },
+        markers: {
+            size: 6
+        },
+        tooltip: {
+            shared: true
+        }
+    };
+
+    // Assuming you are using ApexCharts
+    var chart = new ApexCharts(document.querySelector("#orders-weekly-line-chart"), ordersWeeklyLineChartOptions);
+    chart.render();
+</script>
+
+<!--Number of Orders per Month Line Graph-->
+<script>
+    const monthlyOrdersData = {
+        categories: <%= categories1.toString() %>,
+        series: [{
+            name: 'Orders',
+            data: <%= data1.toString() %>
+        }]
+    };
+
+    const ordersMonthlyLineChartOptions = {
+        chart: {
+            type: 'line',
+            height: 150,
+        },
+        series: [{
+            name: 'Orders',
+            data: monthlyOrdersData.series[0].data
+        }],
+        xaxis: {
+            categories: monthlyOrdersData.categories,
+            labels: {
+                style: {
+                    colors: Array(monthlyOrdersData.categories.length).fill('#ffffff') // White color for x-axis labels
+                }
+            }
+        },
+        yaxis: {
+            title: {
+                text: 'Orders',
+                style: {
+                    color: '#ffffff' // White color for y-axis title
+                }
+            },
+            labels: {
+                style: {
+                    colors: ['#ffffff'], // White color for y-axis labels
+                }
+            }
+        },
+        markers: {
+            size: 6
+        },
+        tooltip: {
+            shared: true
+        }
+    };
+
+    // Assuming you are using ApexCharts
+    var chart = new ApexCharts(document.querySelector("#orders-monthly-line-chart"), ordersMonthlyLineChartOptions);
+    chart.render();
 </script>
 </body>
 

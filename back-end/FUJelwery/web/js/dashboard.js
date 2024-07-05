@@ -153,22 +153,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }]
     };
 
-    const weeklyOrdersData = {
-        categories: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
-        series: [{
-                name: 'Orders',
-                data: [30, 45, 60, 40]
-            }]
-    };
-
-    const monthlyOrdersData = {
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-        series: [{
-                name: 'Orders',
-                data: [150, 200, 180, 250, 210, 190]
-            }]
-    };
-
     // Initialize ApexCharts for each chart
     const ordersBarChartOptions = {
         chart: {
@@ -226,92 +210,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 
-    const ordersWeeklyLineChartOptions = {
-        chart: {
-            type: 'line',
-            height: 150,
-        },
-        series: [{
-                name: 'Orders',
-                data: weeklyOrdersData.series[0].data
-            }],
-        xaxis: {
-            categories: weeklyOrdersData.categories,
-            labels: {
-                style: {
-                    colors: ['#ffffff', '#ffffff', '#ffffff', '#ffffff'], // White color for x-axis labels
-                }
-            }
-        },
-        yaxis: {
-            title: {
-                text: 'Orders',
-                style: {
-                    color: '#ffffff' // White color for y-axis title
-                }
-            },
-            labels: {
-                style: {
-                    colors: ['#ffffff'], // White color for y-axis labels
-                }
-            }
-        },
-        markers: {
-            size: 6
-        },
-        tooltip: {
-            shared: true
-        }
-    };
-
-    const ordersMonthlyLineChartOptions = {
-        chart: {
-            type: 'line',
-            height: 150,
-        },
-        series: [{
-                name: 'Orders',
-                data: monthlyOrdersData.series[0].data
-            }],
-        xaxis: {
-            categories: monthlyOrdersData.categories,
-            labels: {
-                style: {
-                    colors: ['#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff'], // White color for x-axis labels
-                }
-            }
-        },
-        yaxis: {
-            title: {
-                text: 'Orders',
-                style: {
-                    color: '#ffffff' // White color for y-axis title
-                }
-            },
-            labels: {
-                style: {
-                    colors: ['#ffffff'], // White color for y-axis labels
-                }
-            }
-        },
-        markers: {
-            size: 6
-        },
-        tooltip: {
-            shared: true
-        }
-    };
-
-
     // Render ApexCharts
     const ordersBarChart = new ApexCharts(document.querySelector("#orders-bar-chart"), ordersBarChartOptions);
     ordersBarChart.render();
 
-    const ordersWeeklyLineChart = new ApexCharts(document.querySelector("#orders-weekly-line-chart"), ordersWeeklyLineChartOptions);
-    ordersWeeklyLineChart.render();
-
-    const ordersMonthlyLineChart = new ApexCharts(document.querySelector("#orders-monthly-line-chart"), ordersMonthlyLineChartOptions);
-    ordersMonthlyLineChart.render();
 });
 
 document.addEventListener("DOMContentLoaded", function () {
