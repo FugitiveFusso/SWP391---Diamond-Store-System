@@ -33,14 +33,43 @@
 
         <!-- Custom CSS -->
         <link rel="stylesheet" href="css/dashboard.css">
+        <link rel="stylesheet" href="css/navbar_dashboard.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css" />
+
     </head>
 
     <body>
-        <div class="grid-container">
 
+
+        <div class="grid-container">
+            
             <!-- Main -->
             <main class="main-container">
+                <div class="menu-btn">
+                <div class="btn-cover">
+
+                    <i class="fas fa-bars"></i>
+                </div>            
+            </div>
+
+            <div class="side-bar">
+                <header>
+                    <div class="close-btn">
+                        <i class="fa-solid fa-xmark"></i>
+                    </div>
+                    <img src="images/Screenshot (656).png">
+                    <h1>${sessionScope.managersession.lastname} ${sessionScope.managersession.firstname}</h1>
+                </header>
+
+                <div class="menu">
+                    <div class="item"><a href="./DashboardController"><i class="fas fa-chart-line"></i>Dashboard</a></div>
+                    <div class="item"><a href="manageraccount.jsp"><i class="fas fa-user"></i>Account</a></div>
+                    <div class="item"><a href="managerlogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
+
+                </div>
+            </div>
                 <div class="main-title">
                     <h2>DASHBOARD</h2>
                 </div>
@@ -524,6 +553,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
 <!-- Custom JS -->
 <script src="js/dashboard.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!--Certificate Pie Chart-->
 <script>
@@ -770,11 +800,11 @@
 <!--Number of Orders per Month Line Graph-->
 <script>
     const monthlyOrdersData = {
-        categories: <%= categories1.toString() %>,
+        categories: <%= categories1.toString()%>,
         series: [{
-            name: 'Orders',
-            data: <%= data1.toString() %>
-        }]
+                name: 'Orders',
+                data: <%= data1.toString()%>
+            }]
     };
 
     const ordersMonthlyLineChartOptions = {
@@ -783,9 +813,9 @@
             height: 150,
         },
         series: [{
-            name: 'Orders',
-            data: monthlyOrdersData.series[0].data
-        }],
+                name: 'Orders',
+                data: monthlyOrdersData.series[0].data
+            }],
         xaxis: {
             categories: monthlyOrdersData.categories,
             labels: {
@@ -818,6 +848,28 @@
     // Assuming you are using ApexCharts
     var chart = new ApexCharts(document.querySelector("#orders-monthly-line-chart"), ordersMonthlyLineChartOptions);
     chart.render();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+        integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function () {
+        $('.menu-btn').click(function () {
+            $('.side-bar').addClass('active');
+            $('.menu-btn').css("visibility", "hidden");
+        });
+
+        $('.close-btn').click(function () {
+            $('.side-bar').removeClass('active');
+            $('.menu-btn').css("visibility", "visible");
+        });
+
+        // Optional: If you have sub-menus, toggle them on click
+        $('.item .sub-btn').click(function () {
+            $(this).next('.sub-menu').slideToggle();
+            $(this).find('.dropdown').toggleClass('rotate');
+        });
+    });
 </script>
 </body>
 
