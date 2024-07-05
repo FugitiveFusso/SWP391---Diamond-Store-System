@@ -167,24 +167,25 @@
 
                 <div class="merged-charts-container">
                     <%
-// Initialize a StringBuilder to hold the JavaScript data array
-                        StringBuilder jsDataArray = new StringBuilder("[");
+// Initialize a variable to hold the JavaScript data array
+StringBuilder jsDataArray = new StringBuilder("[");
 
-// Iterate through diaList to construct the data array
-                        for (DiamondDTO diamond : diaList) {
-                            jsDataArray.append("{")
-                                    .append("\"name\": \"").append(diamond.getCountry()).append("\", ")
-                                    .append("\"value\": ").append(diamond.getDiamondCount())
-                                    .append("},");
-                        }
+for (DiamondDTO diamond : diaList) {
+    pageContext.setAttribute("diamond", diamond);
 
-// Remove the trailing comma if the array has elements
-                        if (jsDataArray.length() > 1) {
-                            jsDataArray.setLength(jsDataArray.length() - 1);
-                        }
-                        jsDataArray.append("]");
-                    %>
+    // Add each diamond's data to the JavaScript array
+    jsDataArray.append("{")
+              .append("\"name\": \"").append(diamond.getCountry()).append("\", ")
+              .append("\"value\": ").append(diamond.getDiamondCount())
+              .append("},");
+}
 
+// Remove the trailing comma if array has elements and close the array
+if (jsDataArray.length() > 1) {
+    jsDataArray.setLength(jsDataArray.length() - 1);
+}
+jsDataArray.append("]");
+%>
                     <div class="chart-card" id="map-chart-container">
                         <h2 class="chart-title">Top 5 Countries with Most Diamonds Originated</h2>
                         <div id="map-chart"></div>
@@ -525,44 +526,46 @@
 
 <!--Warranty Pie Chart-->
 <script>
-    // Parse the JavaScript data array from JSP
-    var diamondData = <%= jsDataArray.toString()%>;
+    <%-- Retrieve data from request scope --%>
+    var percentageUsedActive = ${requestScope.warranty.percentageUsedActive};
+    var percentageUnusedActive = ${requestScope.warranty.percentageUnusedActive};
 
-    // Initialize the Highcharts map chart with the dynamic data
-    Highcharts.mapChart('map-chart', {
+    // ApexCharts configuration
+    const options = {
+        series: [percentageUsedActive, percentageUnusedActive],
         chart: {
-            map: 'custom/world',
-            width: 600, // Adjusted width
-            height: 300 // Adjusted height
+            type: 'pie',
+            background: 'transparent', // Adding background property to match the first snippet
+            height: 130,
         },
-        title: {
-            text: 'Top Countries with Most Diamonds Sold'
+        labels: ['Used', 'Not Used'],
+        legend: {
+            labels: {
+                colors: '#f5f7ff',
+            },
+            show: true,
+            position: 'bottom',
         },
-        mapNavigation: {
-            enabled: true,
-            buttonOptions: {
-                verticalAlign: 'bottom'
-            }
+        tooltip: {
+            theme: 'dark',
         },
-        colorAxis: {
-            min: 0
-        },
-        series: [{
-                data: diamondData,
-                mapData: Highcharts.maps['custom/world'],
-                joinBy: ['name', 'name'], // Match data by country name
-                name: 'Diamonds Sold',
-                states: {
-                    hover: {
-                        color: '#a4edba'
+        responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: {
+                        width: 200
+                    },
+                    legend: {
+                        position: 'bottom'
                     }
-                },
-                dataLabels: {
-                    enabled: true,
-                    format: '{point.name}'
                 }
             }]
-    });
+    };
+
+
+    // Render ApexCharts
+    var chart = new ApexCharts(document.querySelector("#diamond-pie-chart"), options);
+    chart.render();
 </script>
 
 <!--Orders for Home Delivery/Store Pickup Grouped Column Chart-->
@@ -573,7 +576,7 @@
 <!--Map Chart-->
 <script>
     // Parse the JavaScript data array from JSP
-    var diamondData = <%= jsDataArray.toString()%>;
+    var diamondData = <%= jsDataArray.toString() %>;
 
     // Initialize the Highcharts map chart with the dynamic data
     Highcharts.mapChart('map-chart', {
@@ -595,21 +598,87 @@
             min: 0
         },
         series: [{
-                data: diamondData,
-                mapData: Highcharts.maps['custom/world'],
-                joinBy: ['name', 'name'], // Match data by country name
-                name: 'Diamonds Sold',
-                states: {
-                    hover: {
-                        color: '#a4edba'
-                    }
-                },
-                dataLabels: {
-                    enabled: true,
-                    format: '{point.name}'
+            data: diamondData,
+            mapData: Highcharts.maps['custom/world'],
+            joinBy: ['name', 'name'], // Match data by country name
+            name: 'Diamonds Sold',
+            states: {
+                hover: {
+                    color: '#a4edba'
                 }
-            }]
+            },
+            dataLabels: {
+                enabled: true,
+                format: '{point.name}'
+            }
+        }]
     });
+</script>
+<script>
+    // Assuming you have retrieved diaList from your JSP file
+    var diaList = [
+    <%
+        for (DiamondDTO diamond : diaList) {
+            // Outputting data in the format needed for JavaScript
+%>{country: '<%= diamond.getCountry()%>', diamondCount: <%= diamond.getDiamondCount()%>},
+    <% }%>
+    ];
+
+    // Extract categories (countries) and data (diamond counts)
+    var categories = [];
+    var data = [];
+    diaList.forEach(function (diamond) {
+        categories.push(diamond.country);
+        data.push(diamond.diamondCount);
+    });
+
+    // ApexCharts configuration
+    var optionsBar = {
+        series: [{
+                data: data
+            }],
+        chart: {
+            type: 'bar',
+            height: 200,
+            width: '90%' // Adjusted width to span the container
+        },
+        plotOptions: {
+            bar: {
+                horizontal: true,
+                colors: {
+                    ranges: [{
+                            from: 0,
+                            to: 1000,
+                            color: '#007bff'
+                        }]
+                }
+            }
+        },
+        dataLabels: {
+            enabled: false
+        },
+        yaxis: {
+            labels: {
+                style: {
+                    colors: '#fff', // Simplified for all labels
+                    fontSize: '14px'
+                }
+            }
+        },
+        xaxis: {
+            categories: categories,
+            labels: {
+                style: {
+                    colors: '#fff', // Simplified for all labels
+                    fontSize: '14px'
+                }
+            }
+        }
+    };
+
+    // Initialize and render the chart
+    var chartBar = new ApexCharts(document.querySelector("#bar-chart"), optionsBar);
+    chartBar.render();
 </script>
 </body>
 

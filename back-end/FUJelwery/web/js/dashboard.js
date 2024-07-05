@@ -3,51 +3,6 @@
 
 
 // Bar Chart
-var optionsBar = {
-    series: [{
-            data: [500, 400, 300, 200, 100] // Example data, replace with actual data
-        }],
-    chart: {
-        type: 'bar',
-        height: 200, // Adjusted height
-        width: 400   // Adjusted width
-    },
-    plotOptions: {
-        bar: {
-            horizontal: true,
-            colors: {
-                ranges: [{
-                        from: 0,
-                        to: 1000,
-                        color: '#007bff' // Color for the bars
-                    }]
-            }
-        }
-    },
-    dataLabels: {
-        enabled: false
-    },
-    yaxis: {
-        labels: {
-            style: {
-                colors: ['#fff', '#fff', '#fff', '#fff', '#fff'], // Colors for each label
-                fontSize: '14px'
-            }
-        }
-    },
-    xaxis: {
-        categories: ['United States', 'Swaziland', 'India', 'Mali', 'Mozambique'], // Example categories, replace with actual data
-        labels: {
-            style: {
-                colors: ['#fff', '#fff', '#fff', '#fff', '#fff'], // Colors for each label
-                fontSize: '14px'
-            }
-        }
-    }
-};
-
-var chartBar = new ApexCharts(document.querySelector("#bar-chart"), optionsBar);
-chartBar.render();
 
 
 // AREA CHART
