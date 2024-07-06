@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.khac.swp.fuj.order;
 
-/**
- *
- * @author Dell
- */
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 public class OrderDTO {
 
     private int orderID;
@@ -47,11 +42,12 @@ public class OrderDTO {
     private int monthNumber;
     private int weekNumber;
     private int currentWeek;
-    private double currentWeekRevenue;
-    private double previousWeekRevenue;
+    private String currentWeekRevenue;
+    private String previousWeekRevenue;
     private double percentageChange;
-    private double currentMonthRevenue;
-    private double previousMonthRevenue;
+    private String currentMonthRevenue;
+    private String previousMonthRevenue;
+    private BigDecimal totalRevenue;
 
     public int getOrderID() {
         return orderID;
@@ -343,42 +339,53 @@ public class OrderDTO {
         this.percentageChange = percentageChange;
     }
 
-    public double getCurrentWeekRevenue() {
+    public String getCurrentWeekRevenue() {
         return currentWeekRevenue;
     }
 
-    public void setCurrentWeekRevenue(double currentWeekRevenue) {
+    public void setCurrentWeekRevenue(String currentWeekRevenue) {
         this.currentWeekRevenue = currentWeekRevenue;
     }
 
-    public double getPreviousWeekRevenue() {
+    public String getPreviousWeekRevenue() {
         return previousWeekRevenue;
     }
 
-    public void setPreviousWeekRevenue(double previousWeekRevenue) {
+    public void setPreviousWeekRevenue(String previousWeekRevenue) {
         this.previousWeekRevenue = previousWeekRevenue;
     }
 
-    public double getCurrentMonthRevenue() {
+    public String getCurrentMonthRevenue() {
         return currentMonthRevenue;
     }
 
-    public void setCurrentMonthRevenue(double currentMonthRevenue) {
+    public void setCurrentMonthRevenue(String currentMonthRevenue) {
         this.currentMonthRevenue = currentMonthRevenue;
     }
 
-    public double getPreviousMonthRevenue() {
+    public String getPreviousMonthRevenue() {
         return previousMonthRevenue;
     }
 
-    public void setPreviousMonthRevenue(double previousMonthRevenue) {
+    public void setPreviousMonthRevenue(String previousMonthRevenue) {
         this.previousMonthRevenue = previousMonthRevenue;
     }
 
-    
+    public BigDecimal getTotalRevenue() {
+        return totalRevenue;
+    }
+
+    public void setTotalRevenue(BigDecimal totalRevenue) {
+        this.totalRevenue = totalRevenue;
+    }
+
+
+
+   
 
     @Override
     public String toString() {
-        return "OrderDTO{" + "orderID=" + orderID + ", userID=" + userID + ", userName=" + userName + ", address=" + address + ", orderDate=" + orderDate + ", ringID=" + ringID + ", ringName=" + ringName + ", ringImage=" + ringImage + ", voucherID=" + voucherID + ", voucherName=" + voucherName + ", warrantyID=" + warrantyID + ", warrantyName=" + warrantyName + ", warrantyImage=" + warrantyImage + ", warrantyMonth=" + warrantyMonth + ", warrantyDescription=" + warrantyDescription + ", warrantyType=" + warrantyType + ", warrantyStartDate=" + warrantyStartDate + ", warrantyEndDate=" + warrantyEndDate + ", warrantyTerms=" + warrantyTerms + ", certificateID=" + certificateID + ", certificateName=" + certificateName + ", certificateImage=" + certificateImage + ", ringSize=" + ringSize + ", totalPrice=" + totalPrice + ", purchaseMethod=" + purchaseMethod + ", status=" + status + ", delivered=" + delivered + ", numberOfThings=" + numberOfThings + ", image=" + image + ", monthName=" + monthName + ", year=" + year + ", orderCount=" + orderCount + ", monthNumber=" + monthNumber + ", weekNumber=" + weekNumber + ", currentWeek=" + currentWeek + ", currentWeekRevenue=" + currentWeekRevenue + ", previousWeekRevenue=" + previousWeekRevenue + ", percentageChange=" + percentageChange + ", currentMonthRevenue=" + currentMonthRevenue + ", previousMonthRevenue=" + previousMonthRevenue + '}';
+        return "OrderDTO{" + "orderID=" + orderID + ", userID=" + userID + ", userName=" + userName + ", address=" + address + ", orderDate=" + orderDate + ", ringID=" + ringID + ", ringName=" + ringName + ", ringImage=" + ringImage + ", voucherID=" + voucherID + ", voucherName=" + voucherName + ", warrantyID=" + warrantyID + ", warrantyName=" + warrantyName + ", warrantyImage=" + warrantyImage + ", warrantyMonth=" + warrantyMonth + ", warrantyDescription=" + warrantyDescription + ", warrantyType=" + warrantyType + ", warrantyStartDate=" + warrantyStartDate + ", warrantyEndDate=" + warrantyEndDate + ", warrantyTerms=" + warrantyTerms + ", certificateID=" + certificateID + ", certificateName=" + certificateName + ", certificateImage=" + certificateImage + ", ringSize=" + ringSize + ", totalPrice=" + totalPrice + ", purchaseMethod=" + purchaseMethod + ", status=" + status + ", delivered=" + delivered + ", numberOfThings=" + numberOfThings + ", image=" + image + ", monthName=" + monthName + ", year=" + year + ", orderCount=" + orderCount + ", monthNumber=" + monthNumber + ", weekNumber=" + weekNumber + ", currentWeek=" + currentWeek + ", currentWeekRevenue=" + currentWeekRevenue + ", previousWeekRevenue=" + previousWeekRevenue + ", percentageChange=" + percentageChange + ", currentMonthRevenue=" + currentMonthRevenue + ", previousMonthRevenue=" + previousMonthRevenue + ", totalRevenue=" + totalRevenue + '}';
     }
+    
 }

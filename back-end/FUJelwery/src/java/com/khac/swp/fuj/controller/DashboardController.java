@@ -144,13 +144,19 @@ public class DashboardController extends HttpServlet {
                 //List of weekly transactions
                 List<OrderDTO> listD = orderDao.listStatisticD();
                 request.setAttribute("listd", listD);
-                //Revenue for Week
+                //Revenue for Week have change
                 List<OrderDTO> listE = orderDao.listStatisticE();
                 request.setAttribute("liste", listE);
-                //Revenue for Month
+                //Revenue for Month have change
                 List<OrderDTO> listF = orderDao.listStatisticF();
                 request.setAttribute("listf", listF);
-                
+                //Revenue for Week
+                List<OrderDTO> listG = orderDao.listStatisticG();
+                request.setAttribute("listg", listG);
+                //Revenue for Month
+                List<OrderDTO> listH = orderDao.listStatisticH();
+                request.setAttribute("listh", listH);
+
                 request.getRequestDispatcher("/dashboard.jsp").forward(request, response);
 
             } else if (action.equals("userdetails")) {
@@ -256,7 +262,7 @@ public class DashboardController extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("manager_certificatedetails.jsp");
                 rd.forward(request, response);
 
-            }else if(action.equals("orderdetails")){
+            } else if (action.equals("orderdetails")) {
                 Integer id = null;
                 try {
                     id = Integer.parseInt(request.getParameter("id"));

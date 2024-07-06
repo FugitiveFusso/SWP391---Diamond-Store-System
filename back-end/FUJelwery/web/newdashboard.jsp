@@ -664,7 +664,7 @@
                     }
                 %>    
             </table>
-            <h4>Revenue for Week</h4>
+            <h4>Revenue for Week have Changes</h4>
             <table style="margin: 0 auto;">
                 <tr>
                     <th>Year</th>
@@ -690,7 +690,7 @@
                     }
                 %>    
             </table>
-            <h4>Revenue for Month</h4>
+            <h4>Revenue for Month have Changes</h4>
             <table style="margin: 0 auto;">
                 <tr>
                     <th>Year</th>
@@ -714,6 +714,51 @@
                     <td>${listf.previousMonthRevenue} VND</td>
                     <td class="${listf.percentageChange > 0 ? 'positive' : 'negative'}">${listf.percentageChange}%</td>
                 </tr>
+                <%
+                    }
+                %>    
+            </table>
+            <h4>Revenue for Week</h4>
+            <table style="margin: 0 auto;">
+                <tr>
+                    <th>Year</th>
+                    <th>Week Number</th>
+                    <th>Total Revenue</th>
+                </tr>
+                <%
+                    List<OrderDTO> listOrderG = (List<OrderDTO>) request.getAttribute("listg");
+                    for (OrderDTO listg : listOrderG) {
+                        pageContext.setAttribute("listg", listg);
+                %>
+                <tr>
+                    <td>${listg.year}</td>
+                    <td>${listg.weekNumber}</td>
+                    <td>${listg.totalRevenue} VND</td>
+                  </tr>
+                <%
+                    }
+                %>    
+            </table>
+            <h4>Revenue for Month</h4>
+            <table style="margin: 0 auto;">
+                <tr>
+                    <th>Year</th>
+                    <th>Month Number</th>
+                    <th>Month Name</th>
+                    <th>Total Revenue</th>
+
+                </tr>
+                <%
+                    List<OrderDTO> listOrderH = (List<OrderDTO>) request.getAttribute("listh");
+                    for (OrderDTO listh : listOrderH) {
+                        pageContext.setAttribute("listh", listh);
+                %>
+                <tr>
+                    <td>${listh.year}</td>
+                    <td>${listh.monthNumber}</td>
+                    <td>${listh.monthName}</td>
+                    <td>${listh.totalRevenue} VND</td>
+                 </tr>
                 <%
                     }
                 %>    
