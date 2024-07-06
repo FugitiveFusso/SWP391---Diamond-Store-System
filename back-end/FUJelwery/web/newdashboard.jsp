@@ -639,7 +639,32 @@
                     }
                 %>    
             </table>
+            <h4>Number of orders for each method in month</h4>
+            <table style="margin: 0 auto;">
+                <tr>
+                    <th>Month Name</th>
+                    <th>Month Number</th>
+                    <th>Year</th>
+                    <th>Store Order Count</th>
+                    <th>Delivery Order Count</th>
 
+                </tr>
+                <%
+                    List<OrderDTO> listOrderI = (List<OrderDTO>) request.getAttribute("listi");
+                    for (OrderDTO listi : listOrderI) {
+                        pageContext.setAttribute("listi", listi);
+                %>
+                <tr>
+                    <td>${listi.monthName}</td>
+                    <td>${listi.monthNumber}</td>
+                    <td>${listi.year}</td>
+                    <td>${listi.storeOrderCount}</td>
+                    <td>${listi.deliveryOrderCount}</td>
+                </tr>
+                <%
+                    }
+                %>    
+            </table>
             <h4>List of weekly transactions</h4>
             <table style="margin: 0 auto;">
                 <tr>
@@ -734,7 +759,7 @@
                     <td>${listg.year}</td>
                     <td>${listg.weekNumber}</td>
                     <td>${listg.totalRevenue} VND</td>
-                  </tr>
+                </tr>
                 <%
                     }
                 %>    
@@ -758,7 +783,7 @@
                     <td>${listh.monthNumber}</td>
                     <td>${listh.monthName}</td>
                     <td>${listh.totalRevenue} VND</td>
-                 </tr>
+                </tr>
                 <%
                     }
                 %>    

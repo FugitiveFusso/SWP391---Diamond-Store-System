@@ -156,6 +156,9 @@ public class DashboardController extends HttpServlet {
                 //Revenue for Month
                 List<OrderDTO> listH = orderDao.listStatisticH();
                 request.setAttribute("listh", listH);
+                //Order Count for each method
+                List<OrderDTO> listI = orderDao.listStatisticI();
+                request.setAttribute("listi", listI);
 
                 request.getRequestDispatcher("/dashboard.jsp").forward(request, response);
 

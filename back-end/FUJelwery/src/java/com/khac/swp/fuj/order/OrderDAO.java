@@ -1538,4 +1538,54 @@ public class OrderDAO {
         return list;
     }
 
+    public List<OrderDTO> listStatisticI() {
+        List<OrderDTO> list = new ArrayList<OrderDTO>();
+        try {
+
+            Connection con = DBUtils.getConnection();
+            String sql = "SELECT \n"
+                    + "    DATENAME(MONTH, CONVERT(date, orderDate, 103)) AS MonthName,\n"
+                    + "    DATEPART(MONTH, CONVERT(date, orderDate, 103)) AS MonthNumber,\n"
+                    + "    DATEPART(YEAR, CONVERT(date, orderDate, 103)) AS Year,\n"
+                    + "    COUNT(CASE WHEN PurchaseMethod = 'Received at store' THEN orderID ELSE NULL END) AS StoreOrderCount,\n"
+                    + "    COUNT(CASE WHEN PurchaseMethod = 'Door-to-door delivery service' THEN orderID ELSE NULL END) AS DeliveryOrderCount\n"
+                    + "FROM [Order]\n"
+                    + "WHERE [status] IN ('purchased', 'verified', 'shipping', 'delivered', 'received at store')\n"
+                    + "GROUP BY \n"
+                    + "    DATENAME(MONTH, CONVERT(date, orderDate, 103)), \n"
+                    + "    DATEPART(MONTH, CONVERT(date, orderDate, 103)), \n"
+                    + "    DATEPART(YEAR, CONVERT(date, orderDate, 103))\n"
+                    + "ORDER BY Year, MonthNumber;";
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+
+                    String monthName = rs.getString("MonthName");
+                    int monthNumber = rs.getInt("MonthNumber");
+                    int year = rs.getInt("Year");
+                    int storeOrderCount = rs.getInt("StoreOrderCount");
+                    int deliveryOrderCount = rs.getInt("DeliveryOrderCount");
+
+                    OrderDTO order = new OrderDTO();
+
+                    order.setMonthName(monthName);
+                    order.setYear(year);
+                    order.setMonthNumber(monthNumber);
+                    order.setStoreOrderCount(storeOrderCount);
+                    order.setDeliveryOrderCount(deliveryOrderCount);
+                    list.add(order);
+                }
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return list;
+    }
 }

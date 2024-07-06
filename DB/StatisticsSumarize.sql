@@ -393,6 +393,20 @@ WHERE [status] IN ('purchased', 'verified', 'shipping', 'delivered', 'received a
 GROUP BY DATEPART(WEEK, CONVERT(date, orderDate, 103)), DATEPART(YEAR, CONVERT(date, orderDate, 103))
 ORDER BY Year, WeekNumber;
 
+SELECT 
+    DATENAME(MONTH, CONVERT(date, orderDate, 103)) AS MonthName,
+    DATEPART(MONTH, CONVERT(date, orderDate, 103)) AS MonthNumber,
+    DATEPART(YEAR, CONVERT(date, orderDate, 103)) AS Year,
+    COUNT(CASE WHEN PurchaseMethod = 'Received at store' THEN orderID ELSE NULL END) AS StoreOrderCount,
+    COUNT(CASE WHEN PurchaseMethod = 'Door-to-door delivery service' THEN orderID ELSE NULL END) AS DeliveryOrderCount
+FROM [Order]
+WHERE [status] IN ('purchased', 'verified', 'shipping', 'delivered', 'received at store')
+GROUP BY 
+    DATENAME(MONTH, CONVERT(date, orderDate, 103)), 
+    DATEPART(MONTH, CONVERT(date, orderDate, 103)), 
+    DATEPART(YEAR, CONVERT(date, orderDate, 103))
+ORDER BY Year, MonthNumber;
+
 --  List of weekly transactions similar to history (list table)
 SELECT 
     orderID,
