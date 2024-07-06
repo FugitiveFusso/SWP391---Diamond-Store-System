@@ -47,11 +47,11 @@ public class OrderDTO {
     private int monthNumber;
     private int weekNumber;
     private int currentWeek;
-    private String currentWeekRevenue;
-    private String previousWeekRevenue;
+    private double currentWeekRevenue;
+    private double previousWeekRevenue;
     private double percentageChange;
-    private String currentMonthRevenue;
-    private String previousMonthRevenue;
+    private double currentMonthRevenue;
+    private double previousMonthRevenue;
 
     public int getOrderID() {
         return orderID;
@@ -333,21 +333,7 @@ public class OrderDTO {
         this.currentWeek = currentWeek;
     }
 
-    public String getCurrentWeekRevenue() {
-        return currentWeekRevenue;
-    }
-
-    public void setCurrentWeekRevenue(String currentWeekRevenue) {
-        this.currentWeekRevenue = currentWeekRevenue;
-    }
-
-    public String getPreviousWeekRevenue() {
-        return previousWeekRevenue;
-    }
-
-    public void setPreviousWeekRevenue(String previousWeekRevenue) {
-        this.previousWeekRevenue = previousWeekRevenue;
-    }
+    
 
     public double getPercentageChange() {
         return percentageChange;
@@ -357,21 +343,39 @@ public class OrderDTO {
         this.percentageChange = percentageChange;
     }
 
-    public String getCurrentMonthRevenue() {
+    public double getCurrentWeekRevenue() {
+        return currentWeekRevenue;
+    }
+
+    public void setCurrentWeekRevenue(double currentWeekRevenue) {
+        this.currentWeekRevenue = currentWeekRevenue;
+    }
+
+    public double getPreviousWeekRevenue() {
+        return previousWeekRevenue;
+    }
+
+    public void setPreviousWeekRevenue(double previousWeekRevenue) {
+        this.previousWeekRevenue = previousWeekRevenue;
+    }
+
+    public double getCurrentMonthRevenue() {
         return currentMonthRevenue;
     }
 
-    public void setCurrentMonthRevenue(String currentMonthRevenue) {
+    public void setCurrentMonthRevenue(double currentMonthRevenue) {
         this.currentMonthRevenue = currentMonthRevenue;
     }
 
-    public String getPreviousMonthRevenue() {
+    public double getPreviousMonthRevenue() {
         return previousMonthRevenue;
     }
 
-    public void setPreviousMonthRevenue(String previousMonthRevenue) {
+    public void setPreviousMonthRevenue(double previousMonthRevenue) {
         this.previousMonthRevenue = previousMonthRevenue;
     }
+
+    
 
     @Override
     public String toString() {

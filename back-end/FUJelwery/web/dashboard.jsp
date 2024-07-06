@@ -44,32 +44,32 @@
 
 
         <div class="grid-container">
-            
+
             <!-- Main -->
             <main class="main-container">
                 <div class="menu-btn">
-                <div class="btn-cover">
+                    <div class="btn-cover">
 
-                    <i class="fas fa-bars"></i>
-                </div>            
-            </div>
-
-            <div class="side-bar">
-                <header>
-                    <div class="close-btn">
-                        <i class="fa-solid fa-xmark"></i>
-                    </div>
-                    <img src="images/Screenshot (656).png">
-                    <h1>${sessionScope.managersession.lastname} ${sessionScope.managersession.firstname}</h1>
-                </header>
-
-                <div class="menu">
-                    <div class="item"><a href="./DashboardController"><i class="fas fa-chart-line"></i>Dashboard</a></div>
-                    <div class="item"><a href="manageraccount.jsp"><i class="fas fa-user"></i>Account</a></div>
-                    <div class="item"><a href="managerlogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
-
+                        <i class="fas fa-bars"></i>
+                    </div>            
                 </div>
-            </div>
+
+                <div class="side-bar">
+                    <header>
+                        <div class="close-btn">
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+                        <img src="images/Screenshot (656).png">
+                        <h1>${sessionScope.managersession.lastname} ${sessionScope.managersession.firstname}</h1>
+                    </header>
+
+                    <div class="menu">
+                        <div class="item"><a href="./DashboardController"><i class="fas fa-chart-line"></i>Dashboard</a></div>
+                        <div class="item"><a href="manageraccount.jsp"><i class="fas fa-user"></i>Account</a></div>
+                        <div class="item"><a href="managerlogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
+
+                    </div>
+                </div>
                 <div class="main-title">
                     <h2>DASHBOARD</h2>
                 </div>
@@ -215,6 +215,28 @@
                 </div>
 
                 <div class="charts-row">
+                    <%
+                        List<OrderDTO> listOrderE = (List<OrderDTO>) request.getAttribute("liste");
+                        StringBuilder categories2 = new StringBuilder("[");
+                        StringBuilder currentWeekData = new StringBuilder("[");
+                        StringBuilder previousWeekData = new StringBuilder("[");
+                        for (Iterator<OrderDTO> iterator = listOrderE.iterator(); iterator.hasNext();) {
+                            OrderDTO liste = iterator.next();
+                            categories2.append("'").append(liste.getCurrentWeek()).append(" - ").append(liste.getYear()).append("'");
+                            currentWeekData.append(liste.getCurrentWeekRevenue());
+                            previousWeekData.append(liste.getPreviousWeekRevenue());
+                            if (iterator.hasNext()) {
+                                categories2.append(", ");
+                                currentWeekData.append(", ");
+                                previousWeekData.append(", ");
+                            }
+                        }
+                        categories2.append("]");
+                        currentWeekData.append("]");
+                        previousWeekData.append("]");
+                    %>
+
+
                     <div class="charts-card2 column-chart">
                         <h2 class="chart-title">Revenue for Week</h2>
                         <div id="revenue-week-column-chart"></div>
@@ -683,7 +705,7 @@
     <%
         for (DiamondDTO diamond : diaList) {
             // Outputting data in the format needed for JavaScript
-    %>{country: '<%= diamond.getCountry()%>', diamondCount: <%= diamond.getDiamondCount()%>},
+%>{country: '<%= diamond.getCountry()%>', diamondCount: <%= diamond.getDiamondCount()%>},
     <% }%>
     ];
 
@@ -722,7 +744,7 @@
             enabled: false,
         },
         yaxis: {
-            
+
             labels: {
                 style: {
                     colors: '#fff', // Simplified for all labels
@@ -851,9 +873,92 @@
     var chart = new ApexCharts(document.querySelector("#orders-monthly-line-chart"), ordersMonthlyLineChartOptions);
     chart.render();
 </script>
+
+<!--Revenue for Week Column Chart-->
+<script>
+    const revenueWeekColumnChartOptions = {
+        chart: {
+            type: 'bar',
+            width: 550,
+            height: 150,
+        },
+        plotOptions: {
+            bar: {
+                horizontal: false,
+                columnWidth: '55%',
+                endingShape: 'rounded'
+            },
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            show: true,
+            width: 2,
+            colors: ['transparent']
+        },
+        series: [
+            {
+                name: 'Current Week Revenue',
+                data: <%= currentWeekData.toString()%>
+            },
+            {
+                name: 'Previous Week Revenue',
+                data: <%= previousWeekData.toString()%>
+            }
+        ],
+        xaxis: {
+            categories: <%= categories2.toString()%>,
+            labels: {
+                style: {
+                    colors: '#ffffff' // White color for x-axis labels
+                }
+            }
+        },
+        yaxis: {
+            title: {
+                text: 'Revenue (VND)',
+                style: {
+                    color: '#ffffff' // White color for y-axis title
+                }
+            },
+            labels: {
+                formatter: function (value) {
+                    return new Intl.NumberFormat('en-US', {style: 'currency', currency: 'VND'}).format(value);
+                },
+                style: {
+                    colors: '#ffffff' // White color for y-axis labels
+                }
+            }
+        },
+        fill: {
+            opacity: 1
+        },
+        tooltip: {
+            y: {
+                formatter: function (val) {
+                    return new Intl.NumberFormat('en-US', {style: 'currency', currency: 'VND'}).format(val);
+                }
+            }
+        },
+        legend: {
+            labels: {
+                colors: ['#ffffff'] // White color for legend items
+            }
+        }
+    };
+
+    // Assuming you're using ApexCharts
+    var chart = new ApexCharts(document.querySelector("#revenue-week-column-chart"), revenueWeekColumnChartOptions);
+    chart.render();
+</script>
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
         integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
 crossorigin="anonymous"></script>
+
+<!--Navbar-->
 <script>
     $(document).ready(function () {
         $('.menu-btn').click(function () {

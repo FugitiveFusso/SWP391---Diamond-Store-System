@@ -400,14 +400,14 @@ SELECT
     CONVERT(date, orderDate, 103) AS OrderDate,
     ringID	FROM [Order]
 WHERE [status] IN ('delivered', 'received at store')
-    AND DATEDIFF(DAY, CONVERT(date, orderDate, 103), GETDATE()) <= 7
+    AND DATEDIFF(DAY, CONVERT(date, orderDate, 103), GETDATE()) <= 14
 ORDER BY OrderDate;
 -- Revenue for Week and Month
 WITH WeeklyRevenue AS (
     SELECT 
         DATEPART(YEAR, CONVERT(date, orderDate, 103)) AS Year,
         DATEPART(WEEK, CONVERT(date, orderDate, 103)) AS WeekNumber,
-        FORMAT(SUM((r.price + rp.rpPrice + dp.price) * 1.02), 'N0') AS TotalRevenue
+        SUM((r.price + rp.rpPrice + dp.price) * 1.02) AS TotalRevenue
     FROM [Order] o
     JOIN [Ring] r ON o.ringID = r.ringID
     JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID
@@ -420,10 +420,10 @@ SELECT
     CurrentWeek.Year AS Year,
     CurrentWeek.WeekNumber AS CurrentWeek,
     CurrentWeek.TotalRevenue AS CurrentWeekRevenue,
-    ISNULL(PreviousWeek.TotalRevenue, 'N/A') AS PreviousWeekRevenue,
+    ISNULL(PreviousWeek.TotalRevenue, 0) AS PreviousWeekRevenue,
     CASE 
         WHEN PreviousWeek.TotalRevenue IS NULL THEN NULL
-        ELSE FORMAT(((CAST(REPLACE(CurrentWeek.TotalRevenue, ',', '') AS decimal(18,2)) - CAST(REPLACE(PreviousWeek.TotalRevenue, ',', '') AS decimal(18,2))) / CAST(REPLACE(PreviousWeek.TotalRevenue, ',', '') AS decimal(18,2))) * 100, 'N2')
+        ELSE FORMAT(((CurrentWeek.TotalRevenue - PreviousWeek.TotalRevenue) / PreviousWeek.TotalRevenue) * 100, 'N2')
     END AS PercentageChange
 FROM WeeklyRevenue AS CurrentWeek
 LEFT JOIN WeeklyRevenue AS PreviousWeek ON CurrentWeek.Year = PreviousWeek.Year
@@ -431,12 +431,13 @@ LEFT JOIN WeeklyRevenue AS PreviousWeek ON CurrentWeek.Year = PreviousWeek.Year
 WHERE CurrentWeek.Year = YEAR(GETDATE())
     AND CurrentWeek.WeekNumber = DATEPART(WEEK, GETDATE());
 
+
 WITH MonthlyRevenue AS (
     SELECT 
         DATEPART(YEAR, CONVERT(date, orderDate, 103)) AS Year,
         DATEPART(MONTH, CONVERT(date, orderDate, 103)) AS MonthNumber,
-        DATENAME(MONTH, DATEFROMPARTS(YEAR(GETDATE()), DATEPART(MONTH, CONVERT(date, orderDate, 103)), 1)) AS MonthName,
-        FORMAT(SUM((r.price + rp.rpPrice + dp.price) * 1.02), 'N0') AS TotalRevenue
+        DATENAME(MONTH, DATEFROMPARTS(DATEPART(YEAR, CONVERT(date, orderDate, 103)), DATEPART(MONTH, CONVERT(date, orderDate, 103)), 1)) AS MonthName,
+        SUM((r.price + rp.rpPrice + dp.price) * 1.02) AS TotalRevenue
     FROM [Order] o
     JOIN [Ring] r ON o.ringID = r.ringID
     JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID
@@ -450,10 +451,10 @@ SELECT
     CurrentMonth.MonthNumber AS MonthNumber,
     CurrentMonth.MonthName AS MonthName,
     CurrentMonth.TotalRevenue AS CurrentMonthRevenue,
-    ISNULL(PreviousMonth.TotalRevenue, 'N/A') AS PreviousMonthRevenue,
+    ISNULL(PreviousMonth.TotalRevenue, 0) AS PreviousMonthRevenue,
     CASE 
-        WHEN PreviousMonth.TotalRevenue IS NULL THEN NULL
-        ELSE FORMAT(((CAST(REPLACE(CurrentMonth.TotalRevenue, ',', '') AS decimal(18,2)) - CAST(REPLACE(PreviousMonth.TotalRevenue, ',', '') AS decimal(18,2))) / CAST(REPLACE(PreviousMonth.TotalRevenue, ',', '') AS decimal(18,2))) * 100, 'N2')
+        WHEN PreviousMonth.TotalRevenue = 0 THEN NULL
+        ELSE FORMAT(((CurrentMonth.TotalRevenue - PreviousMonth.TotalRevenue) / PreviousMonth.TotalRevenue) * 100, 'N2')
     END AS PercentageChange
 FROM (
     SELECT 
@@ -465,7 +466,14 @@ FROM (
     WHERE Year = YEAR(GETDATE())
         AND MonthNumber = MONTH(GETDATE())
 ) AS CurrentMonth
-LEFT JOIN MonthlyRevenue AS PreviousMonth ON CurrentMonth.Year = PreviousMonth.Year
+LEFT JOIN (
+    SELECT 
+        Year,
+        MonthNumber,
+        MonthName,
+        TotalRevenue
+    FROM MonthlyRevenue
+) AS PreviousMonth ON CurrentMonth.Year = PreviousMonth.Year
     AND CurrentMonth.MonthNumber = PreviousMonth.MonthNumber + 1;
 
 

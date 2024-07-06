@@ -318,61 +318,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ordersColumnChart.render();
 });
 
-const revenueWeekColumnChartOptions = {
-    chart: {
-        type: 'bar',
-        width: 550,
-        height: 150,
-    },
-    plotOptions: {
-        bar: {
-            horizontal: false,
-            columnWidth: '55%',
-            endingShape: 'rounded'
-        },
-    },
-    dataLabels: {
-        enabled: false
-    },
-    stroke: {
-        show: true,
-        width: 2,
-        colors: ['transparent']
-    },
-    series: [{
-            name: 'Revenue',
-            data: [400, 550, 620, 800, 700, 850, 900]
-        }],
-    xaxis: {
-        categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-        labels: {
-            style: {
-                colors: '#ffffff' // White color for x-axis labels
-            }
-        }
-    },
-    yaxis: {
-        title: {
-            text: 'Revenue ($)',
-            style: {
-                color: '#ffffff' // White color for y-axis title
-            }
-        }
-    },
-    fill: {
-        opacity: 1
-    },
-    tooltip: {
-        y: {
-            formatter: function (val) {
-                return '$' + val
-            }
-        }
-    },
-    legend: {
-        colors: ['#ffffff'], // White color for legend items
-    }
-};
+
 
 const revenueMonthColumnChartOptions = {
     chart: {
@@ -431,8 +377,6 @@ const revenueMonthColumnChartOptions = {
 };
 
 // Initialize the charts
-const revenueWeekChart = new ApexCharts(document.querySelector("#revenue-week-column-chart"), revenueWeekColumnChartOptions);
-revenueWeekChart.render();
 
 const revenueMonthChart = new ApexCharts(document.querySelector("#revenue-month-column-chart"), revenueMonthColumnChartOptions);
 revenueMonthChart.render();

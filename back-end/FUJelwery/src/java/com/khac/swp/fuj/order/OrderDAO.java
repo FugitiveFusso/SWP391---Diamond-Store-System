@@ -1295,7 +1295,7 @@ public class OrderDAO {
                     + "    SELECT \n"
                     + "        DATEPART(YEAR, CONVERT(date, orderDate, 103)) AS Year,\n"
                     + "        DATEPART(WEEK, CONVERT(date, orderDate, 103)) AS WeekNumber,\n"
-                    + "        FORMAT(SUM((r.price + rp.rpPrice + dp.price) * 1.02), 'N0') AS TotalRevenue\n"
+                    + "        SUM((r.price + rp.rpPrice + dp.price) * 1.02) AS TotalRevenue\n"
                     + "    FROM [Order] o\n"
                     + "    JOIN [Ring] r ON o.ringID = r.ringID\n"
                     + "    JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID\n"
@@ -1308,10 +1308,10 @@ public class OrderDAO {
                     + "    CurrentWeek.Year AS Year,\n"
                     + "    CurrentWeek.WeekNumber AS CurrentWeek,\n"
                     + "    CurrentWeek.TotalRevenue AS CurrentWeekRevenue,\n"
-                    + "    ISNULL(PreviousWeek.TotalRevenue, 'N/A') AS PreviousWeekRevenue,\n"
+                    + "    ISNULL(PreviousWeek.TotalRevenue, 0) AS PreviousWeekRevenue,\n"
                     + "    CASE \n"
                     + "        WHEN PreviousWeek.TotalRevenue IS NULL THEN NULL\n"
-                    + "        ELSE FORMAT(((CAST(REPLACE(CurrentWeek.TotalRevenue, ',', '') AS decimal(18,2)) - CAST(REPLACE(PreviousWeek.TotalRevenue, ',', '') AS decimal(18,2))) / CAST(REPLACE(PreviousWeek.TotalRevenue, ',', '') AS decimal(18,2))) * 100, 'N2')\n"
+                    + "        ELSE FORMAT(((CurrentWeek.TotalRevenue - PreviousWeek.TotalRevenue) / PreviousWeek.TotalRevenue) * 100, 'N2')\n"
                     + "    END AS PercentageChange\n"
                     + "FROM WeeklyRevenue AS CurrentWeek\n"
                     + "LEFT JOIN WeeklyRevenue AS PreviousWeek ON CurrentWeek.Year = PreviousWeek.Year\n"
@@ -1328,8 +1328,8 @@ public class OrderDAO {
 
                     int currentWeek = rs.getInt("CurrentWeek");
                     int year = rs.getInt("Year");
-                    String currentWeekRevenue = rs.getString("CurrentWeekRevenue");
-                    String previousWeekRevenue = rs.getString("PreviousWeekRevenue");
+                    double currentWeekRevenue = rs.getDouble("CurrentWeekRevenue");
+                    double previousWeekRevenue = rs.getDouble("PreviousWeekRevenue");
                     double percentageChange = rs.getDouble("PercentageChange");
 
                     OrderDTO order = new OrderDTO();
@@ -1360,8 +1360,8 @@ public class OrderDAO {
                     + "    SELECT \n"
                     + "        DATEPART(YEAR, CONVERT(date, orderDate, 103)) AS Year,\n"
                     + "        DATEPART(MONTH, CONVERT(date, orderDate, 103)) AS MonthNumber,\n"
-                    + "        DATENAME(MONTH, DATEFROMPARTS(YEAR(GETDATE()), DATEPART(MONTH, CONVERT(date, orderDate, 103)), 1)) AS MonthName,\n"
-                    + "        FORMAT(SUM((r.price + rp.rpPrice + dp.price) * 1.02), 'N0') AS TotalRevenue\n"
+                    + "        DATENAME(MONTH, DATEFROMPARTS(DATEPART(YEAR, CONVERT(date, orderDate, 103)), DATEPART(MONTH, CONVERT(date, orderDate, 103)), 1)) AS MonthName,\n"
+                    + "        SUM((r.price + rp.rpPrice + dp.price) * 1.02) AS TotalRevenue\n"
                     + "    FROM [Order] o\n"
                     + "    JOIN [Ring] r ON o.ringID = r.ringID\n"
                     + "    JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID\n"
@@ -1375,10 +1375,10 @@ public class OrderDAO {
                     + "    CurrentMonth.MonthNumber AS MonthNumber,\n"
                     + "    CurrentMonth.MonthName AS MonthName,\n"
                     + "    CurrentMonth.TotalRevenue AS CurrentMonthRevenue,\n"
-                    + "    ISNULL(PreviousMonth.TotalRevenue, 'N/A') AS PreviousMonthRevenue,\n"
+                    + "    ISNULL(PreviousMonth.TotalRevenue, 0) AS PreviousMonthRevenue,\n"
                     + "    CASE \n"
-                    + "        WHEN PreviousMonth.TotalRevenue IS NULL THEN NULL\n"
-                    + "        ELSE FORMAT(((CAST(REPLACE(CurrentMonth.TotalRevenue, ',', '') AS decimal(18,2)) - CAST(REPLACE(PreviousMonth.TotalRevenue, ',', '') AS decimal(18,2))) / CAST(REPLACE(PreviousMonth.TotalRevenue, ',', '') AS decimal(18,2))) * 100, 'N2')\n"
+                    + "        WHEN PreviousMonth.TotalRevenue = 0 THEN NULL\n"
+                    + "        ELSE FORMAT(((CurrentMonth.TotalRevenue - PreviousMonth.TotalRevenue) / PreviousMonth.TotalRevenue) * 100, 'N2')\n"
                     + "    END AS PercentageChange\n"
                     + "FROM (\n"
                     + "    SELECT \n"
@@ -1390,7 +1390,14 @@ public class OrderDAO {
                     + "    WHERE Year = YEAR(GETDATE())\n"
                     + "        AND MonthNumber = MONTH(GETDATE())\n"
                     + ") AS CurrentMonth\n"
-                    + "LEFT JOIN MonthlyRevenue AS PreviousMonth ON CurrentMonth.Year = PreviousMonth.Year\n"
+                    + "LEFT JOIN (\n"
+                    + "    SELECT \n"
+                    + "        Year,\n"
+                    + "        MonthNumber,\n"
+                    + "        MonthName,\n"
+                    + "        TotalRevenue\n"
+                    + "    FROM MonthlyRevenue\n"
+                    + ") AS PreviousMonth ON CurrentMonth.Year = PreviousMonth.Year\n"
                     + "    AND CurrentMonth.MonthNumber = PreviousMonth.MonthNumber + 1;";
 
             Connection conn = DBUtils.getConnection();
@@ -1403,8 +1410,8 @@ public class OrderDAO {
                     int monthNumber = rs.getInt("MonthNumber");
                     int year = rs.getInt("Year");
                     String monthName = rs.getString("MonthName");
-                    String currentMonthRevenue = rs.getString("CurrentMonthRevenue");
-                    String previousMonthRevenue = rs.getString("PreviousMonthRevenue");
+                    double currentMonthRevenue = rs.getDouble("CurrentMonthRevenue");
+                    double previousMonthRevenue = rs.getDouble("PreviousMonthRevenue");
                     double percentageChange = rs.getDouble("PercentageChange");
 
                     OrderDTO order = new OrderDTO();
