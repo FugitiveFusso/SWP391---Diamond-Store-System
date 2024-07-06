@@ -1,7 +1,7 @@
 .side-bar {
   background: #fff;
   width: 250px;
-  left: -250px;
+  left: -260px;
   height: 100vh;
   position: fixed;
   top: 0;
@@ -83,7 +83,7 @@ header h1 {
   font-size: 35px;
   cursor: pointer;
   margin-top: 35px;
-  margin-left: 100px;
+  margin-left: 25px;
 }
 
 
