@@ -216,37 +216,114 @@
 
                 <div class="charts-row">
                     <%
-                        List<OrderDTO> listOrderE = (List<OrderDTO>) request.getAttribute("liste");
+                        List<OrderDTO> listOrderG = (List<OrderDTO>) request.getAttribute("listg");
                         StringBuilder categories2 = new StringBuilder("[");
-                        StringBuilder currentWeekData = new StringBuilder("[");
-                        StringBuilder previousWeekData = new StringBuilder("[");
-                        for (Iterator<OrderDTO> iterator = listOrderE.iterator(); iterator.hasNext();) {
-                            OrderDTO liste = iterator.next();
-                            categories2.append("'").append(liste.getCurrentWeek()).append(" - ").append(liste.getYear()).append("'");
-                            currentWeekData.append(liste.getCurrentWeekRevenue());
-                            previousWeekData.append(liste.getPreviousWeekRevenue());
+                        StringBuilder revenueData = new StringBuilder("[");
+                        for (Iterator<OrderDTO> iterator = listOrderG.iterator(); iterator.hasNext();) {
+                            OrderDTO listg = iterator.next();
+                            categories2.append("'").append(listg.getWeekNumber()).append(" - ").append(listg.getYear()).append("'");
+                            revenueData.append(listg.getTotalRevenue());
                             if (iterator.hasNext()) {
                                 categories2.append(", ");
-                                currentWeekData.append(", ");
-                                previousWeekData.append(", ");
+                                revenueData.append(", ");
                             }
                         }
                         categories2.append("]");
-                        currentWeekData.append("]");
-                        previousWeekData.append("]");
+                        revenueData.append("]");
                     %>
-
-
                     <div class="charts-card2 column-chart">
                         <h2 class="chart-title">Revenue for Week</h2>
                         <div id="revenue-week-column-chart"></div>
                         <div class="percentage-change" id="weekly-revenue-change"></div>
                     </div>
 
+                    <%
+                        List<OrderDTO> listOrderH = (List<OrderDTO>) request.getAttribute("listh");
+                        StringBuilder categories3 = new StringBuilder("[");
+                        StringBuilder revenueData1 = new StringBuilder("[");
+                        for (Iterator<OrderDTO> iterator = listOrderH.iterator(); iterator.hasNext();) {
+                            OrderDTO listh = iterator.next();
+                            categories3.append("'").append(listh.getMonthName()).append(" - ").append(listh.getYear()).append("'");
+                            revenueData1.append(listh.getTotalRevenue());
+                            if (iterator.hasNext()) {
+                                categories3.append(", ");
+                                revenueData1.append(", ");
+                            }
+                        }
+                        categories3.append("]");
+                        revenueData1.append("]");
+                    %>
                     <div class="charts-card2 column-chart">
                         <h2 class="chart-title">Revenue for Month</h2>
                         <div id="revenue-month-column-chart"></div>
                         <div class="percentage-change" id="monthly-revenue-change"></div>
+                    </div>
+                </div>
+
+                <div class="charts-row">
+                    <div class="x_content" style="display: block;">
+                        <div class="table-container">
+                            <div class="x_title">
+                                <h2>Top 5 Ring Placements</h2>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </div>
+                            <div class="collapse-content">
+                                <table>
+                                    <tr>
+                                        <th>Material</th>
+                                        <th>Ring Placement By Material</th>
+                                    </tr>
+                                    <tr>
+
+                                        <td class="flex-row"></td>
+                                        <td></td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="x_content" style="display: block;">
+                        <div class="table-container">
+                            <div class="x_title">
+                                <h2>All Warranty Types</h2>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </div>
+                            <div class="collapse-content">
+                                <table>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Usage</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="flex-row"> Limited
+                                            Warranties</td>
+                                        <td>${requestScope.warranty.limitedWarranties}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="flex-row">
+                                            Manufacturer Warranties</td>
+                                        <td>${requestScope.warranty.manufacturerWarranties}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="flex-row"> Extended
+                                            Warranties</td>
+                                        <td>${requestScope.warranty.extendedWarranties}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="flex-row"> Lifetime
+                                            Warranties</td>
+                                        <td>${requestScope.warranty.lifetimeWarranties}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="flex-row"> Retailer
+                                            Warranties</td>
+                                        <td>${requestScope.warranty.retailerWarranties}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -897,16 +974,10 @@
             width: 2,
             colors: ['transparent']
         },
-        series: [
-            {
-                name: 'Current Week Revenue',
-                data: <%= currentWeekData.toString()%>
-            },
-            {
-                name: 'Previous Week Revenue',
-                data: <%= previousWeekData.toString()%>
-            }
-        ],
+        series: [{
+                name: 'Revenue',
+                data: <%= revenueData.toString()%>
+            }],
         xaxis: {
             categories: <%= categories2.toString()%>,
             labels: {
@@ -948,17 +1019,87 @@
         }
     };
 
-    // Assuming you're using ApexCharts
     var chart = new ApexCharts(document.querySelector("#revenue-week-column-chart"), revenueWeekColumnChartOptions);
     chart.render();
 </script>
 
+<!--Revenue for Month Column Chart-->
+<script>
+    const revenueMonthColumnChartOptions = {
+        chart: {
+            type: 'bar',
+            width: 550,
+            height: 150,
+        },
+        plotOptions: {
+            bar: {
+                horizontal: false,
+                columnWidth: '55%',
+                endingShape: 'rounded'
+            },
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            show: true,
+            width: 2,
+            colors: ['transparent']
+        },
+        series: [{
+            name: 'Revenue',
+            data: <%= revenueData1.toString() %>
+        }],
+        xaxis: {
+            categories: <%= categories3.toString() %>,
+            labels: {
+                style: {
+                    colors: '#ffffff' // White color for x-axis labels
+                }
+            }
+        },
+        yaxis: {
+            title: {
+                text: 'Revenue (VND)',
+                style: {
+                    color: '#ffffff' // White color for y-axis title
+                }
+            },
+            labels: {
+                formatter: function (value) {
+                    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'VND' }).format(value);
+                },
+                style: {
+                    colors: '#ffffff' // White color for y-axis labels
+                }
+            }
+        },
+        fill: {
+            opacity: 1
+        },
+        tooltip: {
+            y: {
+                formatter: function (val) {
+                    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'VND' }).format(val);
+                }
+            }
+        },
+        legend: {
+            labels: {
+                colors: ['#ffffff'] // White color for legend items
+            }
+        }
+    };
+
+    var chart = new ApexCharts(document.querySelector("#revenue-month-column-chart"), revenueMonthColumnChartOptions);
+    chart.render();
+</script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
         integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
 crossorigin="anonymous"></script>
 
-<!--Navbar-->
+
 <script>
     $(document).ready(function () {
         $('.menu-btn').click(function () {
