@@ -307,6 +307,46 @@ body {
     color: white;
 }
 
+.table-container2 {
+    padding: 10px;
+    background-color: #273147;
+    border-radius: 5px;
+    color: white;
+    width: 550px; /* Increased the width */
+}
+
+.table-container2 .x_title h2 {
+    font-size: 15px;
+}
+
+.table-container2 table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-container2 table th,
+.table-container2 table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    font-size: 12px; /* Make text smaller */
+    vertical-align: middle; /* Ensure vertical alignment */
+}
+
+.table-container2 table th {
+    background-color: #2a3f54;
+    color: white;
+}
+
+.table-container2 table td a {
+    text-decoration: none;
+    color: white;
+}
+
+.table-container2 .flex-row {
+    display: flex;
+}
+
 .collapse-content {
     display: none;
     padding: 15px;
