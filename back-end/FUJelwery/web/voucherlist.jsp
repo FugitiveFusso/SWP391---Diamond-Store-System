@@ -128,7 +128,7 @@
                                     <form id="deleteForm" action="VoucherController" method="POST" class="input">
                                         <input name="action" value="delete" type="hidden">
                                         <input name="id" value="${voucher.id}" type="hidden">
-                                        <input type="submit" value="Delete" class="deleteButton">
+                                        <input type="submit" value="Delete" class="deleteButton btn" style="margin: 0 auto;">
                                     </form>
                                 </td>
                             </tr>

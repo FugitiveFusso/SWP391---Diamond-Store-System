@@ -150,7 +150,7 @@
                                     <form id="deleteForm" action="DiamondController" method="POST" class="input">
                                         <input name="action" value="delete" type="hidden">
                                         <input name="id" value="${diamond.diamondID}" type="hidden">
-                                        <input type="submit" value="Delete" class="deleteButton">
+                                        <input type="submit" value="Delete" class="deleteButton btn" style="margin: 0 auto;">
                                     </form>
                                 </td>
 

@@ -138,13 +138,13 @@
                     <div class="card">
                         <!-- Left Column: Image -->
                         <div class="card-image-container">
-                            <img src="${requestScope.category.image}" class="card-img-left" alt="Category Image" style="width: 260px; height: 350px;">
+                            <img src="${requestScope.category.image}" class="card-img-left" alt="Category Image" style="height: auto;">
                         </div>
                         <!-- Right Column: Information -->
                         <div class="card-body">
                             <h6 class="card-subtitle mb-2 text-muted">Category ID: ${requestScope.category.categoryID}</h6>
                             <h4 class="card-title" style="font-weight: 700">${requestScope.category.categoryName}</h4>
-                            <div class="btn-group d-flex justify-content-center align-items-center" role="group" aria-label="Voucher Actions">
+                            <div class="btn-group d-flex justify-content-start align-items-center" role="group" aria-label="Voucher Actions">
                                 <form action="CategoryController" method="post" class="mr-2">
                                     <input type="hidden" name="action" value="list">
                                     <button type="submit" class="btn btn-primary">Return</button>

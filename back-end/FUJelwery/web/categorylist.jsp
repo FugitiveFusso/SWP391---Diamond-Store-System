@@ -123,7 +123,7 @@
                                     <form id="deleteForm" action="CategoryController" method="POST" class="input">
                                         <input name="action" value="delete" type="hidden">
                                         <input name="id" value="${category.categoryID}" type="hidden">
-                                        <input type="submit" value="Delete"class="deleteButton">
+                                        <input type="submit" value="Delete"class="deleteButton btn" style="margin: 0 auto;">
                                     </form>
                                 </td>
 

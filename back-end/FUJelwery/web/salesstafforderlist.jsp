@@ -108,6 +108,7 @@
                         <input name=keyword_a type=text class="search-input" value="<%=request.getParameter("keyword_a") != null ? request.getParameter("keyword_a") : ""%>">
                         <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
                     </form>
+                    <div class="title">Delivering Order</div>
                     <table id="pagination">
                         <thead>
                             <tr>
@@ -164,6 +165,7 @@
                         <input name=keyword_b type=text class="search-input" value="<%=request.getParameter("keyword_b") != null ? request.getParameter("keyword_b") : ""%>">
                         <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
                     </form>
+                    <div class="title">Receive At Store</div>
                     <table id="pagination1">
                         <thead>
                             <tr>
