@@ -1,4 +1,3 @@
-
 package com.khac.swp.fuj.order;
 
 import java.math.BigDecimal;
@@ -48,6 +47,8 @@ public class OrderDTO {
     private String currentMonthRevenue;
     private String previousMonthRevenue;
     private BigDecimal totalRevenue;
+    private int storeOrderCount;
+    private int deliveryOrderCount;
 
     public int getOrderID() {
         return orderID;
@@ -329,8 +330,6 @@ public class OrderDTO {
         this.currentWeek = currentWeek;
     }
 
-    
-
     public double getPercentageChange() {
         return percentageChange;
     }
@@ -379,13 +378,25 @@ public class OrderDTO {
         this.totalRevenue = totalRevenue;
     }
 
+    public int getStoreOrderCount() {
+        return storeOrderCount;
+    }
 
+    public void setStoreOrderCount(int storeOrderCount) {
+        this.storeOrderCount = storeOrderCount;
+    }
 
-   
+    public int getDeliveryOrderCount() {
+        return deliveryOrderCount;
+    }
+
+    public void setDeliveryOrderCount(int deliveryOrderCount) {
+        this.deliveryOrderCount = deliveryOrderCount;
+    }
 
     @Override
     public String toString() {
-        return "OrderDTO{" + "orderID=" + orderID + ", userID=" + userID + ", userName=" + userName + ", address=" + address + ", orderDate=" + orderDate + ", ringID=" + ringID + ", ringName=" + ringName + ", ringImage=" + ringImage + ", voucherID=" + voucherID + ", voucherName=" + voucherName + ", warrantyID=" + warrantyID + ", warrantyName=" + warrantyName + ", warrantyImage=" + warrantyImage + ", warrantyMonth=" + warrantyMonth + ", warrantyDescription=" + warrantyDescription + ", warrantyType=" + warrantyType + ", warrantyStartDate=" + warrantyStartDate + ", warrantyEndDate=" + warrantyEndDate + ", warrantyTerms=" + warrantyTerms + ", certificateID=" + certificateID + ", certificateName=" + certificateName + ", certificateImage=" + certificateImage + ", ringSize=" + ringSize + ", totalPrice=" + totalPrice + ", purchaseMethod=" + purchaseMethod + ", status=" + status + ", delivered=" + delivered + ", numberOfThings=" + numberOfThings + ", image=" + image + ", monthName=" + monthName + ", year=" + year + ", orderCount=" + orderCount + ", monthNumber=" + monthNumber + ", weekNumber=" + weekNumber + ", currentWeek=" + currentWeek + ", currentWeekRevenue=" + currentWeekRevenue + ", previousWeekRevenue=" + previousWeekRevenue + ", percentageChange=" + percentageChange + ", currentMonthRevenue=" + currentMonthRevenue + ", previousMonthRevenue=" + previousMonthRevenue + ", totalRevenue=" + totalRevenue + '}';
+        return "OrderDTO{" + "orderID=" + orderID + ", userID=" + userID + ", userName=" + userName + ", address=" + address + ", orderDate=" + orderDate + ", ringID=" + ringID + ", ringName=" + ringName + ", ringImage=" + ringImage + ", voucherID=" + voucherID + ", voucherName=" + voucherName + ", warrantyID=" + warrantyID + ", warrantyName=" + warrantyName + ", warrantyImage=" + warrantyImage + ", warrantyMonth=" + warrantyMonth + ", warrantyDescription=" + warrantyDescription + ", warrantyType=" + warrantyType + ", warrantyStartDate=" + warrantyStartDate + ", warrantyEndDate=" + warrantyEndDate + ", warrantyTerms=" + warrantyTerms + ", certificateID=" + certificateID + ", certificateName=" + certificateName + ", certificateImage=" + certificateImage + ", ringSize=" + ringSize + ", totalPrice=" + totalPrice + ", purchaseMethod=" + purchaseMethod + ", status=" + status + ", delivered=" + delivered + ", numberOfThings=" + numberOfThings + ", image=" + image + ", monthName=" + monthName + ", year=" + year + ", orderCount=" + orderCount + ", monthNumber=" + monthNumber + ", weekNumber=" + weekNumber + ", currentWeek=" + currentWeek + ", currentWeekRevenue=" + currentWeekRevenue + ", previousWeekRevenue=" + previousWeekRevenue + ", percentageChange=" + percentageChange + ", currentMonthRevenue=" + currentMonthRevenue + ", previousMonthRevenue=" + previousMonthRevenue + ", totalRevenue=" + totalRevenue + ", storeOrderCount=" + storeOrderCount + ", deliveryOrderCount=" + deliveryOrderCount + '}';
     }
-    
+
 }
