@@ -112,4 +112,3 @@ document.addEventListener("DOMContentLoaded", function () {
     const ordersColumnChart = new ApexCharts(document.querySelector("#orders-column-chart"), ordersColumnChartOptions);
     ordersColumnChart.render();
 });
-

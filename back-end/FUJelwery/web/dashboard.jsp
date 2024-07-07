@@ -70,7 +70,6 @@
 
                     </div>
                 </div>
-                    
                 <!--Title of Dashboard-->    
                 <div class="main-title">
                     <h2>DASHBOARD</h2>
@@ -240,7 +239,6 @@
                         <div id="orders-monthly-line-chart"></div>
                     </div>
                 </div>
-                    
                 <!--Revenue for Week Column Chart-->     
                 <div class="charts-row">
                     <%
@@ -379,7 +377,6 @@
                         <h2 class="chart-title">Top 5 Countries with Most Diamonds Originated</h2>
                         <div id="map-chart"></div>
                     </div>
-                    
                     <!--Diamond Originate from Top 5 Countries Bar Chart--> 
                     <div class="chart-card" id="bar-chart-container">
                         <h2 class="chart-title">Diamond Originate from Top 5 Countries</h2>
@@ -409,10 +406,31 @@
                                 %>
                                 <!-- Add your rows here -->
                                 <tr class="flex-row1">
-                                    <td><a href="DashboardController?action=orderdetails&id=${listd.orderID}">${listd.orderID}</td>
-                                    <td><a href="DashboardController?action=userdetails&id=${listd.userID}">${listd.userID}</td>
-                                    <td>${listd.orderDate}</td>
-                                    <td><a href="DashboardController?action=ringdetails&id=${listd.ringID}">${listd.ringID}</td>
+                                    <td>
+                                        <%-- Check if orderID is non-zero --%>
+                                        <% if (listd.getOrderID() != 0) {%>
+                                        <a href="DashboardController?action=orderdetails&id=<%= listd.getOrderID()%>"><%= listd.getOrderID()%></a>
+                                        <% } else {%>
+                                        <%= listd.getOrderID()%>
+                                        <% } %>
+                                    </td>
+                                    <td>
+                                        <%-- Check if userID is non-zero --%>
+                                        <% if (listd.getUserID() != 0) {%>
+                                        <a href="DashboardController?action=userdetails&id=<%= listd.getUserID()%>"><%= listd.getUserID()%></a>
+                                        <% } else {%>
+                                        <%= listd.getUserID()%>
+                                        <% }%>
+                                    </td>
+                                    <td><%= listd.getOrderDate()%></td>
+                                    <td>
+                                        <%-- Check if ringID is non-zero --%>
+                                        <% if (listd.getRingID() != 0) {%>
+                                        <a href="DashboardController?action=ringdetails&id=<%= listd.getRingID()%>"><%= listd.getRingID()%></a>
+                                        <% } else {%>
+                                        <%= listd.getRingID()%>
+                                        <% } %>
+                                    </td>
                                 </tr>
                                 <%
                                     }
@@ -663,7 +681,6 @@
                         </div>
                     </div>
                 </div>
-               
                 <!--Top 5 Ring Placements Table--> 
                 <div class="charts-row">
                     <div class="x_content" style="display: block;">
@@ -939,7 +956,7 @@
     <%
         for (DiamondDTO diamond : diaList) {
             // Outputting data in the format needed for JavaScript
-%>{country: '<%= diamond.getCountry()%>', diamondCount: <%= diamond.getDiamondCount()%>},
+    %>{country: '<%= diamond.getCountry()%>', diamondCount: <%= diamond.getDiamondCount()%>},
     <% }%>
     ];
 

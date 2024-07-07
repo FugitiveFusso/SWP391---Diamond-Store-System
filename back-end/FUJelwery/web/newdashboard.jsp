@@ -680,11 +680,33 @@
                         pageContext.setAttribute("listd", listd);
                 %>
                 <tr>
-                    <td><a href="DashboardController?action=orderdetails&id=${listd.orderID}">${listd.orderID}</td>
-                    <td><a href="DashboardController?action=userdetails&id=${listd.userID}">${listd.userID}</td>
-                    <td>${listd.orderDate}</td>
-                    <td><a href="DashboardController?action=ringdetails&id=${listd.ringID}">${listd.ringID}</td>
+                    <td>
+                        <%-- Check if orderID is non-zero --%>
+                        <% if (listd.getOrderID() != 0) {%>
+                        <a href="DashboardController?action=orderdetails&id=<%= listd.getOrderID()%>"><%= listd.getOrderID()%></a>
+                        <% } else {%>
+                        <%= listd.getOrderID()%>
+                        <% } %>
+                    </td>
+                    <td>
+                        <%-- Check if userID is non-zero --%>
+                        <% if (listd.getUserID() != 0) {%>
+                        <a href="DashboardController?action=userdetails&id=<%= listd.getUserID()%>"><%= listd.getUserID()%></a>
+                        <% } else {%>
+                        <%= listd.getUserID()%>
+                        <% }%>
+                    </td>
+                    <td><%= listd.getOrderDate()%></td>
+                    <td>
+                        <%-- Check if ringID is non-zero --%>
+                        <% if (listd.getRingID() != 0) {%>
+                        <a href="DashboardController?action=ringdetails&id=<%= listd.getRingID()%>"><%= listd.getRingID()%></a>
+                        <% } else {%>
+                        <%= listd.getRingID()%>
+                        <% } %>
+                    </td>
                 </tr>
+
                 <%
                     }
                 %>    
