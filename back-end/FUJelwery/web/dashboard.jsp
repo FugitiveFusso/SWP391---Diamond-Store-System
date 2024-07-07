@@ -262,65 +262,62 @@
 
                 <div class="charts-row">
                     <div class="x_content" style="display: block;">
-                        <div class="table-container">
+                        <div class="table-container2">
+                            <%
+                                List<OrderDTO> listOrderE = (List<OrderDTO>) request.getAttribute("liste");
+                                for (OrderDTO liste : listOrderE) {
+                                    pageContext.setAttribute("liste", liste);
+                            %>
                             <div class="x_title">
-                                <h2>Top 5 Ring Placements</h2>
+                                <h2>Weekly Revenue for Week ${liste.currentWeek} - ${liste.year}</h2>
                                 <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                             </div>
                             <div class="collapse-content">
                                 <table>
                                     <tr>
-                                        <th>Material</th>
-                                        <th>Ring Placement By Material</th>
+                                        <th>Current Week Revenue</th>
+                                        <th>Previous Week Revenue</th>
+                                        <th>Percentage Change</th>
                                     </tr>
-                                    <tr>
-
-                                        <td class="flex-row"></td>
-                                        <td></td>
-                                    </tr>
-
+                                    <tr>                                        
+                                        <td>${liste.currentWeekRevenue} VND</td>
+                                        <td>${liste.previousWeekRevenue} VND</td>
+                                        <td class="${liste.percentageChange > 0 ? 'positive' : 'negative'}">${liste.percentageChange}%</td>
+                                    </tr> 
+                                    <%
+                                        }
+                                    %>  
                                 </table>
                             </div>
                         </div>
                     </div>
 
                     <div class="x_content" style="display: block;">
-                        <div class="table-container">
+                        <div class="table-container2">
+                            <%
+                                List<OrderDTO> listOrderF = (List<OrderDTO>) request.getAttribute("listf");
+                                for (OrderDTO listf : listOrderF) {
+                                    pageContext.setAttribute("listf", listf);
+                            %>
                             <div class="x_title">
-                                <h2>All Warranty Types</h2>
+                                <h2>Monthly Revenue in ${listf.monthName} - ${listf.year}</h2>
                                 <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                             </div>
                             <div class="collapse-content">
                                 <table>
                                     <tr>
-                                        <th>Type</th>
-                                        <th>Usage</th>
+                                        <th>Current Month Revenue</th>
+                                        <th>Previous Month Revenue</th>
+                                        <th>Percentage Change</th>
                                     </tr>
                                     <tr>
-                                        <td class="flex-row"> Limited
-                                            Warranties</td>
-                                        <td>${requestScope.warranty.limitedWarranties}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="flex-row">
-                                            Manufacturer Warranties</td>
-                                        <td>${requestScope.warranty.manufacturerWarranties}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="flex-row"> Extended
-                                            Warranties</td>
-                                        <td>${requestScope.warranty.extendedWarranties}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="flex-row"> Lifetime
-                                            Warranties</td>
-                                        <td>${requestScope.warranty.lifetimeWarranties}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="flex-row"> Retailer
-                                            Warranties</td>
-                                        <td>${requestScope.warranty.retailerWarranties}</td>
-                                    </tr>
+                                        <td>${listf.currentMonthRevenue} VND</td>
+                                        <td>${listf.previousMonthRevenue} VND</td>
+                                        <td class="${listf.percentageChange > 0 ? 'positive' : 'negative'}">${listf.percentageChange}%</td>
+                                    </tr>   
+                                    <%
+                                        }
+                                    %> 
                                 </table>
                             </div>
                         </div>
@@ -782,8 +779,7 @@
     <%
         for (DiamondDTO diamond : diaList) {
             // Outputting data in the format needed for JavaScript
-%>{country: '<%= diamond.getCountry()%>', diamondCount: <%= diamond.getDiamondCount()%>},
-    <% }%>
+%>{country: '<%= diamond.getCountry()%>', diamondCount: <%= diamond.getDiamondCount()%>}, <% }%>
     ];
 
     // Extract categories (countries) and data (diamond counts)
@@ -1047,11 +1043,11 @@
             colors: ['transparent']
         },
         series: [{
-            name: 'Revenue',
-            data: <%= revenueData1.toString() %>
-        }],
+                name: 'Revenue',
+                data: <%= revenueData1.toString()%>
+            }],
         xaxis: {
-            categories: <%= categories3.toString() %>,
+            categories: <%= categories3.toString()%>,
             labels: {
                 style: {
                     colors: '#ffffff' // White color for x-axis labels
@@ -1067,7 +1063,7 @@
             },
             labels: {
                 formatter: function (value) {
-                    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'VND' }).format(value);
+                    return new Intl.NumberFormat('en-US', {style: 'currency', currency: 'VND'}).format(value);
                 },
                 style: {
                     colors: '#ffffff' // White color for y-axis labels
@@ -1080,7 +1076,7 @@
         tooltip: {
             y: {
                 formatter: function (val) {
-                    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'VND' }).format(val);
+                    return new Intl.NumberFormat('en-US', {style: 'currency', currency: 'VND'}).format(val);
                 }
             }
         },
