@@ -159,7 +159,7 @@ public class DashboardController extends HttpServlet {
                 //Order Count for each method
                 List<OrderDTO> listI = orderDao.listStatisticI();
                 request.setAttribute("listi", listI);
-                request.getRequestDispatcher("dashboard.jsp").forward(request, response);
+                request.getRequestDispatcher("newdashboard.jsp").forward(request, response);
             } else if (action.equals("userdetails")) {
                 Integer id = null;
                 try {
