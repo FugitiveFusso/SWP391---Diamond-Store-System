@@ -59,6 +59,12 @@ public class DashboardController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            String action = request.getParameter("action");
+            String keyword = request.getParameter("keyword");
+            if (keyword == null) {
+                keyword = "";
+            }
+            String sortCol = request.getParameter("colSort");
             UserDAO userDAO = new UserDAO();
             RingDAO ringDAO = new RingDAO();
             VoucherDAO voucherDAO = new VoucherDAO();
@@ -66,8 +72,8 @@ public class DashboardController extends HttpServlet {
             CategoryDAO categoryDAO = new CategoryDAO();
             CertificateDAO certificateDAO = new CertificateDAO();
             OrderDAO orderDAO = new OrderDAO();
+            PostDAO postDAO = new PostDAO();
 
-            String action = request.getParameter("action");
             HttpSession session = request.getSession(false);
             if (session == null || session.getAttribute("managersession") == null) {
                 response.sendRedirect("managerlogin.jsp");
@@ -163,6 +169,63 @@ public class DashboardController extends HttpServlet {
                 List<OrderDTO> listI = orderDao.listStatisticI();
                 request.setAttribute("listi", listI);
                 request.getRequestDispatcher("dashboard.jsp").forward(request, response);
+            } else if (action.equals("listofposts")) {//lists
+
+                PostDAO dao = new PostDAO();
+                List<PostDTO> list = dao.getAllPost(keyword, sortCol);
+                request.setAttribute("postlist", list);
+
+                request.getRequestDispatcher("manager_postlist.jsp").forward(request, response);
+
+            } else if (action.equals("listofwarranty")) {//lists
+
+                WarrantyDAO dao = new WarrantyDAO();
+                List<WarrantyDTO> list = dao.getAllWarranty(keyword, sortCol);
+                request.setAttribute("warrantylist", list);
+
+                request.getRequestDispatcher("manager_warrantylist.jsp").forward(request, response);
+
+            } else if (action.equals("listofcertificates")) {//lists
+
+                CertificateDAO dao = new CertificateDAO();
+                List<CertificateDTO> list = dao.list(keyword, sortCol);
+                request.setAttribute("certificatelist", list);
+
+                request.getRequestDispatcher("manager_certificatelist.jsp").forward(request, response);
+
+            } else if (action.equals("listofrings")) {//lists
+
+                RingDAO dao = new RingDAO();
+                List<RingDTO> list = dao.list(keyword, sortCol);
+                request.setAttribute("ringlist", list);
+
+                request.getRequestDispatcher("manager_ringlist.jsp").forward(request, response);
+
+            } else if (action.equals("listofdiamonds")) {//lists
+
+                DiamondDAO dao = new DiamondDAO();
+                List<DiamondDTO> list = dao.list(keyword, sortCol);
+                request.setAttribute("diamondlist", list);
+
+                request.getRequestDispatcher("manager_diamondlist.jsp").forward(request, response);
+
+            } else if (action.equals("postdetails")) {//details
+
+                Integer id = null;
+                try {
+                    id = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+
+                PostDTO post = null;
+                if (id != null) {
+                    post = postDAO.load(id);
+                }
+
+                request.setAttribute("post", post);//object
+                RequestDispatcher rd = request.getRequestDispatcher("manager_postdetails.jsp");
+                rd.forward(request, response);
             } else if (action.equals("userdetails")) {
                 Integer id = null;
                 try {

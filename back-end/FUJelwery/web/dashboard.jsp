@@ -37,7 +37,27 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css" />
+        <style>
+            .card:first-child {
+                background-color: #2962ff;
+            }
 
+            .card:nth-child(2) {
+                background-color: #ff6d00;
+            }
+
+            .card:nth-child(3) {
+                background-color: #2e7d32;
+            }
+
+            .card:nth-child(4) {
+                background-color: #d50000;
+            }
+
+            .card:nth-child(5) {
+                background-color: black;
+            }   
+        </style>
     </head>
 
     <body>
@@ -134,7 +154,7 @@
                             <h3>POSTS</h3>
                             <span class="material-icons-outlined">newspaper</span>
                         </div>
-                        <h1>${requestScope.post.totalNumberOfActivePosts}</h1>
+                        <h1><a href="DashboardController?action=listofposts">${requestScope.post.totalNumberOfActivePosts}</h1>
                     </div>
 
                 </div>

@@ -1,9 +1,10 @@
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Certificate Details</title>
+        <title>Post Management</title>
         <link rel="stylesheet" href="css/navbar.css">
         <script src="https://unpkg.com/@phosphor-icons/web"></script>
         <link rel="stylesheet" href="css/staff_details.css">
@@ -15,8 +16,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
         <script>
             window.onload = function () {
                 if (!sessionStorage.getItem('hasReloaded')) {
@@ -51,7 +51,7 @@
                 border-radius: 0.25rem 0.25rem 0 0;
             }
             .btn-group .btn {
-                width: 100px;
+                width: 220px;
             }           
 
             .btn-group{
@@ -94,30 +94,33 @@
 
             </div>
         </div>
-
         <div class="post-title">
-            <h1>Certificate Details </h1>         
+            <h1>Post Details </h1>         
             <p> Login username: ${sessionScope.managersession.username}</p>
         </div>
 
         <div class="container mt-4">
             <div class="row">
-
-                <div class="col-md-6">
-                    <div class="card">
-                        <img src="${certificate.certificateImage}" class="card-img-top" alt="Voucher Image" style="height: 500px; width: 500px;">
-                    </div>
-                </div>
-
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
-                            <h6 class="card-subtitle mb-2 text-muted" >Certificate ID: ${requestScope.certificate.certificateID}</h6>                                                  
-                            <p class="card-text"><strong>Description: </strong> ${requestScope.certificate.certificateDescription}</p>                           
+                            <div class="card">
+                                <img src="${requestScope.post.image}" class="card-img-top" alt="Voucher Image" style="height: 250px; object-fit: cover">
+                            </div>
+                            <h6 class="card-subtitle mb-2 text-muted" >Post ID: ${requestScope.post.id}</h6>
+                            <h4 class="card-title" style="font-weight: 700">${requestScope.post.name}</h4> 
+                            <p class="card-text"><strong>Date: </strong> ${requestScope.post.date}</p>
+                            <p class="card-text"><strong>Author: </strong> ${requestScope.post.author}</p>
+                            <p class="card-text"><strong>Description: </strong> ${requestScope.post.description}</p>
+                            <p class="card-text"><strong>Script: </strong> ${requestScope.post.text}</p>
                             <div class="btn-group" role="group" aria-label="Voucher Actions">
                                 <form action="DashboardController" method="post" class="mr-2">
+                                    <input type="hidden" name="action" value="listofposts">
+                                    <button type="submit" class="btn btn-primary">Return to Post List</button>
+                                </form>
+                                <form action="DashboardController" method="post">
                                     <input type="hidden" name="action" value="list">
-                                    <button type="submit" class="btn btn-primary">Return</button>
+                                    <button type="submit" class="btn btn-secondary">Return to Dashboard</button>
                                 </form>
                             </div>
                         </div>
