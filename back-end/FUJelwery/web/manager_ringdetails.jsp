@@ -39,7 +39,7 @@
                 border-radius: 0.25rem 0.25rem 0 0;
             }
             .d-flex .btn {
-                width: 150px;
+                width: 120px;
             }           
 
             .d-flex{
@@ -130,8 +130,13 @@
                             <div class="d-flex flex-column align-items-center" role="group" aria-label="Voucher Actions">
                                 <div class="button-top mb-2">
                                     <form action="DashboardController" method="post" style="display:inline-block; margin-right: 10px;">
+                                        <input type="hidden" name="action" value="listofrings">
+                                        <button type="submit" class="btn btn-primary">Ring List</button>
+                                    </form>
+                                    <form action="DashboardController" method="post" style="display:inline-block;">
+                                        <input type="hidden" name="id" value="${requestScope.ring.ringID}">
                                         <input type="hidden" name="action" value="list">
-                                        <button type="submit" class="btn btn-primary">Return</button>
+                                        <button type="submit" class="btn btn-secondary">Dashboard</button>
                                     </form>
                                 </div>
                                 <div class="button-down mt-2">
@@ -151,12 +156,11 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        <script src="js/pagination.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
-                integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
-        crossorigin="anonymous"></script>
-        <script src="js/sidenav.js"></script>
+            <script src="js/pagination.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+                    integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+            crossorigin="anonymous"></script>
+            <script src="js/sidenav.js"></script>
     </body>
 </html>

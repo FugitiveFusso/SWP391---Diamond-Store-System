@@ -6,15 +6,73 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Ring Management</title>
+        <title>Rings Management</title>
         <link rel="stylesheet" href="css/navbar.css">
         <script src="https://unpkg.com/@phosphor-icons/web"></script>
+        <link rel="stylesheet" href="css/staff_details.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="css/customer_list.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <script src="js/pagination.js"></script>
         <link rel="stylesheet" href="css/pagination.css">
+        <script>
+            window.onload = function () {
+                if (!sessionStorage.getItem('hasReloaded')) {
+                    sessionStorage.setItem('hasReloaded', 'true');
+                    location.reload();
+                } else {
+                    sessionStorage.removeItem('hasReloaded');
+                }
+            };
+        </script>
+
         <style>
+            .post-title{
+                align-items: center;
+                text-align: center;
+                margin-top: 30px;
+            }
+
+            .post-title h1{
+                font-size: 50px;               
+                font-weight: 700;
+            }
+
+            .card {
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                transition: transform 0.2s;
+            }
+            .card:hover {
+                transform: scale(1.02);
+            }
+            .card-img-top {
+                border-radius: 0.25rem 0.25rem 0 0;
+            }
+            .btn-group .btn {
+                width: 100px;
+            }           
+
+            .btn-group{
+                display: flex;
+                justify-content: center;
+            }
+
+            .btn-group form button{
+                font-size: 20px;
+                padding: 8px 6px;
+                background: #15156b;
+                color: #fff;
+                border-radius: 10px;
+                cursor: pointer;
+            }
             p {
                 font-family: Arial, sans-serif; /* Set font family */
                 color: #333; /* Set text color */
@@ -41,50 +99,16 @@
                     <i class="fa-solid fa-xmark"></i>
                 </div>
                 <img src="images/Screenshot (656).png">
-                <h1>${sessionScope.salessession.lastname} ${sessionScope.salessession.firstname}</h1>
+                <h1>${sessionScope.managersession.lastname} ${sessionScope.managersession.firstname}</h1>
             </header>
 
-            <div class="menu">               
-                <div class="item"><a class="sub-btn"><i class="fas fa-ring"></i>View Product
-                        <i class="fas fa-angle-right dropdown"></i>
-                        <div class="sub-menu">
-                            <a href="DiamondController" class="sub-item">Diamond List</a>
-                            <a href="RingController" class="sub-item">Ring List</a>
-                            <a href="CollectionController" class="sub-item">Collection List</a>
-
-                        </div>
-                    </a>
-                    <a href="warrantydetails.jsp"></a>
-                </div>
-                <div class="item"><a class="sub-btn"><i class="fas fa-tags"></i>View Product Price
-                        <i class="fas fa-angle-right dropdown"></i>
-                        <div class="sub-menu">
-                            <a href="DiamondPriceController" class="sub-item">Diamond Price List</a>
-                            <a href="RingPlacementPriceController" class="sub-item">Ring Price List</a>                                                    
-                        </div>
-                    </a>
-                </div>
-                <div class="item"><a class="sub-btn"><i class="fas fa-folder"></i>View Document
-                        <i class="fas fa-angle-right dropdown"></i>
-                        <div class="sub-menu">
-                            <a href="VoucherController" class="sub-item">Voucher List</a>
-                            <a href="WarrantyController" class="sub-item">Warranty List</a> 
-                            <a href="CertificateController" class="sub-item">Certificate List</a>  
-                        </div>
-                    </a>
-                </div>
-
-                <div class="item"><a href="CategoryController"><i class="fas fa-layer-group"></i>View Category</a></div>
-                <div class="item"><a href="SalesStaffOrderController"><i class="fas fa-receipt"></i>Track All Orders</a></div>
-                <div class="item"><a href="SalesHistory"><i class="fas fa-clock-rotate-left"></i>View Processed Orders</a></div>
-
-                <div class="item"><a href="salesstaffaccount.jsp"><i class="fas fa-user"></i>Account</a></div>
-                <div class="item"><a href="saleslogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
+            <div class="menu">
+                <div class="item"><a href="./DashboardController"><i class="fas fa-chart-line"></i>Dashboard</a></div>
+                <div class="item"><a href="manageraccount.jsp"><i class="fas fa-user"></i>Account</a></div>
+                <div class="item"><a href="managerlogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
 
             </div>
         </div>
-
-
         <div class="list-container">
             <div class="smaller-container">
                 <div class="list1">
@@ -98,10 +122,12 @@
                         </div>
                     </div>
                     <div class="list-intro-right">
-                        <form action="RingController" method="POST" class="input1">
-                            <input name="action" value="create" type="hidden">
+                        <form action="DashboardController" method="POST">
+                            <input name="action" value="list" type="hidden">
                             <button type="submit" class="styled-button">
-                                <span>Add new Ring</span>
+                                <div style="align-items: center;">
+                                    Return to Dashboard
+                                </div>                                           
                             </button>
                         </form>
                     </div>
@@ -112,7 +138,6 @@
                         <input name=keyword type=text class="search-input" value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
                         <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
                     </form>
-                    <p>You need to add Diamond Price, Diamond, Ring Placement Price, before you add a new Ring</p>
                     <table id="pagination">
                         <thead>
                             <tr>
@@ -123,7 +148,6 @@
                                 <th><a href=?colSort=price>Price</th>
                                 <th><a href=?colSort=categoryID>Category</th>
                                 <th><a href=?colSort=collectionID>Collection</th>
-                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -135,21 +159,13 @@
                             %>
                             <tr>
                                 <td>
-                                    <a href="RingController?action=details&id=${ring.ringID}">   ${ring.ringID}</td>
+                                    <a href="DashboardController?action=ringdetails&id=${ring.ringID}">   ${ring.ringID}</td>
                                 <td>${ring.ringName}</td>
                                 <td><img src=${ring.ringImage} width="300px" height="300px" style="border-radius: 20px;"></td>
                                 <td>${ring.diamondName}</td>
                                 <td>${ring.totalPrice} VND</td>
                                 <td>${ring.categoryID}</td>
                                 <td>${ring.collectionID}</td>
-                                <td>
-                                    <form id="deleteForm" action="RingController" method="POST" class="input">
-                                        <input name="action" value="delete" type="hidden">
-                                        <input name="id" value="${ring.ringID}" type="hidden">
-                                        <input type="submit" value="Delete" class="deleteButton btn" style="margin: 0 auto;">
-                                    </form>
-                                </td>
-
                             </tr>
                             <%
                                 }
