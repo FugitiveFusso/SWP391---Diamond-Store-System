@@ -32,8 +32,10 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 
         <!-- Custom CSS -->
+        <link rel="stylesheet" href="css/dashboard_pagination.css">
         <link rel="stylesheet" href="css/dashboard.css">
         <link rel="stylesheet" href="css/navbar_dashboard.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-WK3OOUK7yUUTj9zE54NkVKJ1qI8Pdxs5Jb8C4qOX6ZoyINccmjeclZ2Rd+j+rkMeArR0tzT3ePdtF6q4WTa6BQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css" />
@@ -684,7 +686,7 @@
                                 <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                             </div>
                             <div class="collapse-content">
-                                <table>
+                                <table id="top-sales-table">
                                     <tr>
                                         <th>Month</th>
                                         <th>Ring</th>
@@ -698,9 +700,8 @@
                                         %>
                                         <td>${topsales.monthName}</td>
                                         <td class="flex-row">
-                                            <img src="${topsales.ringImage}"
-                                                 alt="Silver Ring" class="smaller-size">
-                                            <a href="DashboardController?action=ringdetails&id=${topsales.ringID}">${topsales.ringName}
+                                            <img src="${topsales.ringImage}" alt="Silver Ring" class="smaller-size">
+                                            <a href="DashboardController?action=ringdetails&id=${topsales.ringID}">${topsales.ringName}</a>
                                         </td>
                                         <td>${topsales.totalPrice} VND</td>
                                     </tr>
@@ -708,9 +709,11 @@
                                         }
                                     %>                                      
                                 </table>
+                                <div id="top-sales-pagination" class="pagination-controls"></div>
                             </div>
                         </div>
                     </div>
+
                 </div>
                 <!--Top 5 Ring Placements Table--> 
                 <div class="charts-row">
@@ -854,6 +857,7 @@
 <!-- ApexCharts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
 <!-- Custom JS -->
+<script src="js/dashboard_pagination.js"></script>
 <script src="js/dashboard.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -987,7 +991,7 @@
     <%
         for (DiamondDTO diamond : diaList) {
             // Outputting data in the format needed for JavaScript
-%>{country: '<%= diamond.getCountry()%>', diamondCount: <%= diamond.getDiamondCount()%>},
+    %>{country: '<%= diamond.getCountry()%>', diamondCount: <%= diamond.getDiamondCount()%>},
     <% }%>
     ];
 
