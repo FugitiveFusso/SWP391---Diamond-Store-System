@@ -64,6 +64,11 @@ body {
     text-align: center;
 }
 
+.main-title h2{
+    font-size: 30px;
+    font-weight: 700;
+}
+
 .main-cards {
     display: flex;
     flex-wrap: wrap;
@@ -96,6 +101,10 @@ body {
 
 .card:nth-child(4) {
     background-color: #d50000;
+}
+
+.card:nth-child(5) {
+    background-color: black;
 }
 
 .card-inner {

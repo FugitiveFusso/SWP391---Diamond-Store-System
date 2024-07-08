@@ -92,9 +92,16 @@
                             <h3>DIAMONDS</h3>
                             <span class="material-icons-outlined">diamond</span>
                         </div>                      
-                        <h1>40</h1>
+                        <h1>${totalDiamonds}</h1>
                     </div>
 
+                    <div class="card">
+                        <div class="card-inner">
+                            <h3>RINGS</h3>
+                            <span class="material-icons-outlined">stars</span>
+                        </div>
+                        <h1>${requestScope.ringtotal.totalRings}</h1>
+                    </div>
 
                     <div class="card">
                         <%
@@ -956,7 +963,7 @@
     <%
         for (DiamondDTO diamond : diaList) {
             // Outputting data in the format needed for JavaScript
-    %>{country: '<%= diamond.getCountry()%>', diamondCount: <%= diamond.getDiamondCount()%>},
+%>{country: '<%= diamond.getCountry()%>', diamondCount: <%= diamond.getDiamondCount()%>},
     <% }%>
     ];
 
