@@ -74,6 +74,7 @@ public class DashboardController extends HttpServlet {
             OrderDAO orderDAO = new OrderDAO();
             PostDAO postDAO = new PostDAO();
             WarrantyDAO warrantyDAO = new WarrantyDAO();
+            DiamondDAO diamondDAO = new DiamondDAO();
 
             HttpSession session = request.getSession(false);
             if (session == null || session.getAttribute("managersession") == null) {
@@ -227,6 +228,24 @@ public class DashboardController extends HttpServlet {
                 request.setAttribute("warranty", warranty);//object
                 RequestDispatcher rd = request.getRequestDispatcher("manager_warrantydetails.jsp");
                 rd.forward(request, response);
+            } else if (action.equals("diamonddetails")) {//details
+
+                Integer id = null;
+                try {
+                    id = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+
+                DiamondDTO diamond = null;
+                if (id != null) {
+                    diamond = diamondDAO.load(id);
+                }
+
+                request.setAttribute("diamond", diamond);//object
+                RequestDispatcher rd = request.getRequestDispatcher("manager_diamonddetails.jsp");
+                rd.forward(request, response);
+
             } else if (action.equals("postdetails")) {//details
 
                 Integer id = null;

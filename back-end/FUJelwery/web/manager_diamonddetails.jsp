@@ -1,15 +1,31 @@
-
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Diamond Detail Page</title>
-        <link rel="stylesheet" href="css/navbar_admin.css">
+        <title>Diamonds Management</title>
+        <link rel="stylesheet" href="css/navbar.css">
         <script src="https://unpkg.com/@phosphor-icons/web"></script>
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/staff_details.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <script>
+            window.onload = function () {
+                if (!sessionStorage.getItem('hasReloaded')) {
+                    sessionStorage.setItem('hasReloaded', 'true');
+                    location.reload();
+                } else {
+                    sessionStorage.removeItem('hasReloaded');
+                }
+            };
+        </script>
 
         <style>
             .post-title{
@@ -34,7 +50,7 @@
                 border-radius: 0.25rem 0.25rem 0 0;
             }
             .btn-group .btn {
-                width: 100px;
+                width: 180px;
             }           
 
             .btn-group{
@@ -50,20 +66,7 @@
                 border-radius: 10px;
                 cursor: pointer;
             }
-
-
         </style>
-
-        <script>
-            window.onload = function () {
-                if (!sessionStorage.getItem('hasReloaded')) {
-                    sessionStorage.setItem('hasReloaded', 'true');
-                    location.reload();
-                } else {
-                    sessionStorage.removeItem('hasReloaded');
-                }
-            };
-        </script>
     </head>
     <body>
         <div class="menu-btn">
@@ -78,52 +81,19 @@
                     <i class="fa-solid fa-xmark"></i>
                 </div>
                 <img src="images/Screenshot (656).png">
-                <h1>${sessionScope.salessession.lastname} ${sessionScope.salessession.firstname}</h1>
+                <h1>${sessionScope.managersession.lastname} ${sessionScope.managersession.firstname}</h1>
             </header>
 
-            <div class="menu">               
-                <div class="item"><a class="sub-btn"><i class="fas fa-ring"></i>View Product
-                        <i class="fas fa-angle-right dropdown"></i>
-                        <div class="sub-menu">
-                            <a href="DiamondController" class="sub-item">Diamond List</a>
-                            <a href="RingController" class="sub-item">Ring List</a>
-                            <a href="CollectionController" class="sub-item">Collection List</a>
-
-                        </div>
-                    </a>
-                    <a href="warrantydetails.jsp"></a>
-                </div>
-                <div class="item"><a class="sub-btn"><i class="fas fa-tags"></i>View Product Price
-                        <i class="fas fa-angle-right dropdown"></i>
-                        <div class="sub-menu">
-                            <a href="DiamondPriceController" class="sub-item">Diamond Price List</a>
-                            <a href="RingPlacementPriceController" class="sub-item">Ring Price List</a>                                                    
-                        </div>
-                    </a>
-                </div>
-                <div class="item"><a class="sub-btn"><i class="fas fa-folder"></i>View Document
-                        <i class="fas fa-angle-right dropdown"></i>
-                        <div class="sub-menu">
-                            <a href="VoucherController" class="sub-item">Voucher List</a>
-                            <a href="WarrantyController" class="sub-item">Warranty List</a> 
-                            <a href="CertificateController" class="sub-item">Certificate List</a>  
-                        </div>
-                    </a>
-                </div>
-
-                <div class="item"><a href="CategoryController"><i class="fas fa-layer-group"></i>View Category</a></div>
-                <div class="item"><a href="SalesStaffOrderController"><i class="fas fa-receipt"></i>Track All Orders</a></div>
-                <div class="item"><a href="SalesHistory"><i class="fas fa-clock-rotate-left"></i>View Processed Orders</a></div>
-
-                <div class="item"><a href="salesstaffaccount.jsp"><i class="fas fa-user"></i>Account</a></div>
-                <div class="item"><a href="saleslogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
+            <div class="menu">
+                <div class="item"><a href="./DashboardController"><i class="fas fa-chart-line"></i>Dashboard</a></div>
+                <div class="item"><a href="manageraccount.jsp"><i class="fas fa-user"></i>Account</a></div>
+                <div class="item"><a href="managerlogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
 
             </div>
         </div>
-
         <div class="post-title">
             <h1>Diamond Details </h1>         
-            <p> Login username: ${sessionScope.salessession.username}</p>
+            <p> Login username: ${sessionScope.managersession.username}</p>
         </div>
 
         <div class="container mt-4">
@@ -150,14 +120,13 @@
                             <p class="card-text"><strong>Certificate:</strong> ${requestScope.diamond.certificateID}</p>
                             <p class="card-text"><strong>Price:</strong> ${requestScope.diamond.diamondPrice} VND</p>
                             <div class="btn-group" role="group" aria-label="Voucher Actions">
-                                <form action="DiamondController" method="post" class="mr-2">
+                                <form action="DashboardController" method="post" class="mr-2">
                                     <input type="hidden" name="action" value="list">
-                                    <button type="submit" class="btn btn-primary">Return</button>
+                                    <button type="submit" class="btn btn-primary">Dashboard</button>
                                 </form>
-                                <form action="DiamondController" method="post">
-                                    <input type="hidden" name="id" value="${requestScope.diamond.diamondID}">
-                                    <input type="hidden" name="action" value="edit">
-                                    <button type="submit" class="btn btn-secondary">Edit</button>
+                                <form action="DashboardController" method="post">
+                                    <input type="hidden" name="action" value="listofdiamonds">
+                                    <button type="submit" class="btn btn-secondary">List of Diamonds</button>
                                 </form>
                             </div>
                         </div>
