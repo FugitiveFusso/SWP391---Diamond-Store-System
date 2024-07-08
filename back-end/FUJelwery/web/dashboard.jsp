@@ -112,7 +112,7 @@
                             <h3>DIAMONDS</h3>
                             <span class="material-icons-outlined">diamond</span>
                         </div>                      
-                        <h1>${totalDiamonds}</h1>
+                        <h1><a href="DashboardController?action=listofdiamonds">${totalDiamonds}</a></h1>
                     </div>
 
                     <div class="card">
@@ -120,7 +120,7 @@
                             <h3>RINGS</h3>
                             <span class="material-icons-outlined">stars</span>
                         </div>
-                        <h1>${requestScope.ringtotal.totalRings}</h1>
+                        <h1><a href="DashboardController?action=listofrings">${requestScope.ringtotal.totalRings}</a></h1>
                     </div>
 
                     <div class="card">
@@ -138,7 +138,7 @@
                             <h3>CERTIFICATES</h3>
                             <span class="material-icons-outlined">card_membership</span>
                         </div>
-                        <h1>${totalCertificates}</h1>
+                        <h1><a href="DashboardController?action=listofcertificates">${totalCertificates}</a></h1>
                     </div>
 
                     <div class="card">
@@ -146,7 +146,7 @@
                             <h3>WARRANTY</h3>
                             <span class="material-icons-outlined">verified_user</span>
                         </div>
-                        <h1>${requestScope.warranty.totalWarranties}</h1>
+                        <h1><a href="DashboardController?action=listofwarranty">${requestScope.warranty.totalWarranties}</a></h1>
                     </div>
 
                     <div class="card">
@@ -154,7 +154,7 @@
                             <h3>POSTS</h3>
                             <span class="material-icons-outlined">newspaper</span>
                         </div>
-                        <h1><a href="DashboardController?action=listofposts">${requestScope.post.totalNumberOfActivePosts}</h1>
+                        <h1><a href="DashboardController?action=listofposts">${requestScope.post.totalNumberOfActivePosts}</a></h1>
                     </div>
 
                 </div>
