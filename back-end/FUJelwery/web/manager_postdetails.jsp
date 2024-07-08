@@ -51,7 +51,7 @@
                 border-radius: 0.25rem 0.25rem 0 0;
             }
             .btn-group .btn {
-                width: 220px;
+                width: 100%;
             }           
 
             .btn-group{
