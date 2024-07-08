@@ -145,8 +145,8 @@
 
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <p class="m-b-10 f-w-600">Points</p>
-                                                    <input name="point" value="${requestScope.sales.point}" required="Please enter">                                           
+                                                    <p class="m-b-10 f-w-600"></p>
+                                                    <input name="point" value="0" hidden="" required="Please enter">                                           
                                                 </div>
 
                                             </div>
