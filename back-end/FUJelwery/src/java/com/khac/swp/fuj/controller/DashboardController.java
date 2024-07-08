@@ -129,6 +129,9 @@ public class DashboardController extends HttpServlet {
                 //Top5Lowest
                 List<RingDTO> ringListLowest = ringDao.listLowest();
                 request.setAttribute("ringlistlowest", ringListLowest);
+                //TotalRings
+                RingDTO ringTotal = ringDao.loadTotalRings();
+                request.setAttribute("ringtotal", ringTotal);
                 //Top5Sales
                 List<RingDTO> ringListTopSales = ringDao.listTopSales();
                 request.setAttribute("ringlisttopsales", ringListTopSales);

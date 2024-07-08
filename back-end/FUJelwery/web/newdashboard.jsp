@@ -481,7 +481,9 @@
             <strong>Percentage Retailer Warranties: ${requestScope.warranty.percentageRetailerWarranties}</strong>
             <strong>Unused Active Warranty List By Ids: ${requestScope.warranty.unusedActiveWarrantyIds}</strong>
 
-            <h1>Ring Statistics</h1>
+            <h1>Ring Statistics</h1
+            <strong>Total Rings: ${requestScope.ringtotal.totalRings}</strong>
+
             <h4>Top 5 Rings have highest price</h4>
 
             <table style="margin: 0 auto;">
@@ -810,6 +812,7 @@
                     }
                 %>    
             </table>
+
         </div>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"

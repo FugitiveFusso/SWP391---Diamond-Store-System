@@ -777,7 +777,7 @@ public class RingDAO {
                     ring.setRingImage(ringImage);
                     ring.setPurchaseCount(purchaseCount);
                     ring.setTotalPrice(totalPrice);
-                    
+
                     ring.setOrderYear(orderYear);
                     ring.setOrderMonth(orderMonth);
                     ring.setMonthName(monthName);
@@ -791,5 +791,34 @@ public class RingDAO {
             ex.printStackTrace();
         }
         return list;
+    }
+
+    public RingDTO loadTotalRings() {
+
+        String sql = "SELECT COUNT(*) as totalRings\n"
+                + "FROM Ring \n"
+                + "WHERE isDeleted = 'active'; ";
+
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                int totalRings = rs.getInt("totalRings");
+
+                RingDTO ring = new RingDTO();
+
+                ring.setTotalRings(totalRings);
+
+                return ring;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Query Rings error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return null;
     }
 }
