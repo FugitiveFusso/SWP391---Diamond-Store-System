@@ -158,8 +158,8 @@ body{
 }
 
 .product-card {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
+    background-color: #fff;
+    border: 0.5px solid #ddd;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin: 10px 30px;
@@ -170,8 +170,8 @@ body{
 }
 
 .product-card:hover{
-    border: 1px solid black;
-    transform: scale(1.02);
+    border: 0.5px solid #151542;
+    transform: scale(1.03);
     transition: 0.3s;
     color: black;
 }
@@ -188,6 +188,8 @@ body{
 
 .product-card h3{
     font-weight: 800;
+    font-size: 20px;
+
 }
 
 .product-card a {
