@@ -155,10 +155,9 @@ public class OrderController extends HttpServlet {
                 } catch (NumberFormatException ex) {
                     log("Parameter UserID has wrong format.");
                 }
-
-                if (userID != null) {
+                int voucherID = orderDAO.searchVoucherID(code);
+                if (voucherID != 0) {
                     try {
-                        int voucherID = orderDAO.searchVoucherID(code);
                         orderDAO.applyVoucher(voucherID, userID);
                         request.setAttribute("success", "Apply Voucher Successfully!!!");
                     } catch (Exception e) {

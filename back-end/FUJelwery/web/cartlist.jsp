@@ -83,7 +83,10 @@
 
             </div>
         </div>
-
+        <% String error1 = (String) request.getAttribute("errorMessage"); %>
+        <% if (error1 != null) {%>
+        <h4 style="color: red; text-align: center"> <%= error1%> </h4>
+        <% }%>
         <div class="container">
             <div class="wrapper wrapper-content animated fadeInRight">
                 <div class="row" style="margin-top: 30px;">
