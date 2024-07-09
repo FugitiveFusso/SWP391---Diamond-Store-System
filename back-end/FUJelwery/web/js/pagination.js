@@ -13,7 +13,18 @@ function setupPagination(tableId, controlsId, prevButtonId, nextButtonId, pageNu
     const prevButton = document.getElementById(prevButtonId);
     const nextButton = document.getElementById(nextButtonId);
     const pageNumbers = document.getElementById(pageNumbersId);
-    let currentPage = 1;
+    const currentURL = window.location.href;
+    const savedPage = localStorage.getItem(tableId + '_currentPage');
+    const savedURL = localStorage.getItem(tableId + '_currentURL');
+    
+    let currentPage;
+
+    if (savedURL !== currentURL) {
+        currentPage = 1;
+        localStorage.setItem(tableId + '_currentURL', currentURL);
+    } else {
+        currentPage = savedPage ? parseInt(savedPage) : 1;
+    }
 
     function showPage(pageNumber) {
         let start = (pageNumber - 1) * rowsPerPage;
@@ -22,6 +33,7 @@ function setupPagination(tableId, controlsId, prevButtonId, nextButtonId, pageNu
             rows[i].style.display = (i >= start && i < end) ? '' : 'none';
         }
         currentPage = pageNumber;
+        localStorage.setItem(tableId + '_currentPage', currentPage); // Save current page to localStorage
         updatePaginationControls();
         window.scrollTo(0, 0); // Scroll to the top of the page
     }
@@ -93,5 +105,5 @@ function setupPagination(tableId, controlsId, prevButtonId, nextButtonId, pageNu
         }
     });
 
-    showPage(1);
+    showPage(currentPage);
 }

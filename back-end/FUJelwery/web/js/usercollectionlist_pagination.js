@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     const containers = document.querySelectorAll(".gallery .container");
-    const rowsPerPage = 1;
+    const rowsPerPage = 2;
     const containersPerRow = 4;
     const containersPerPage = rowsPerPage * containersPerRow;
     const pageNumbersContainer = document.getElementById("pageNumbers");
