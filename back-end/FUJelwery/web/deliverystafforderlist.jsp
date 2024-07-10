@@ -104,7 +104,7 @@
                                     <form id="form-delivered-${deliveryorder.orderID}" action="DeliveryStaffOrderController" method="POST">
                                         <input name="action" value="delivered" type="hidden">
                                         <input name="orderID" value="${deliveryorder.orderID}" type="hidden">
-                                        <button type="button" class="btn" onclick="confirmAction('delivered', '${deliveryorder.orderID}', '${deliveryorder.status}')">Delivered</button>
+                                        <button type="button" class="btn2" onclick="confirmAction('delivered', '${deliveryorder.orderID}', '${deliveryorder.status}')">Delivered</button>
                                     </form>
                                 </td>
                             </tr>

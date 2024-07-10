@@ -111,7 +111,7 @@
                                     <form id="deleteForm" action="PostController" method="POST" class="input">
                                         <input name="action" value="delete" type="hidden">
                                         <input name="id" value="${post.id}" type="hidden">
-                                        <input type="submit" value="Delete"class="deleteButton">
+                                        <input type="submit" value="Delete"class="deleteButton btn">
                                     </form>
                                 </td>
 
