@@ -118,7 +118,7 @@
                                     <form id="deleteForm" action="AdminController" method="POST" class="input">
                                         <input name="action" value="delete" type="hidden">
                                         <input name="id" value="${admin.userid}" type="hidden">
-                                        <input type="submit" value="Delete" class="deleteButton">
+                                        <input type="submit" value="Delete" class="deleteButton btn">
                                     </form>
                                 </td>
 
