@@ -878,7 +878,7 @@
         labels: ['Used', 'Not Used'],
         legend: {
             labels: {
-                colors: '#f5f7ff',
+                colors: '#000',
             },
             show: true,
             position: 'bottom',
@@ -910,7 +910,7 @@
         labels: ['Used', 'Not Used'],
         legend: {
             labels: {
-                colors: '#f5f7ff',
+                colors: '#000',
             },
             show: true,
             position: 'bottom',
@@ -991,7 +991,7 @@
     <%
         for (DiamondDTO diamond : diaList) {
             // Outputting data in the format needed for JavaScript
-    %>{country: '<%= diamond.getCountry()%>', diamondCount: <%= diamond.getDiamondCount()%>},
+%>{country: '<%= diamond.getCountry()%>', diamondCount: <%= diamond.getDiamondCount()%>},
     <% }%>
     ];
 
@@ -1030,24 +1030,40 @@
             enabled: false,
         },
         yaxis: {
-
             labels: {
                 style: {
-                    colors: '#fff', // Simplified for all labels
+                    colors: '#000', // Color for y-axis labels
                     fontSize: '11px'
                 }
+            },
+            axisBorder: {
+                show: true,
+                color: '#000' // Color for y-axis grid lines
+            },
+            axisTicks: {
+                show: true,
+                color: '#000' // Color for y-axis ticks (if needed)
             }
         },
         xaxis: {
             categories: categories,
             labels: {
                 style: {
-                    colors: '#fff', // Simplified for all labels
+                    colors: '#000', // Color for x-axis labels
                     fontSize: '14px'
                 }
+            },
+            axisBorder: {
+                show: true,
+                color: '#000' // Color for x-axis grid lines
+            },
+            axisTicks: {
+                show: true,
+                color: '#000' // Color for x-axis ticks (if needed)
             }
         }
     };
+
 
     // Initialize and render the chart
     var chartBar = new ApexCharts(document.querySelector("#bar-chart"), optionsBar);
@@ -1065,46 +1081,85 @@
     };
 
     const ordersWeeklyLineChartOptions = {
-        chart: {
-            type: 'line',
-            height: 150,
-        },
-        series: [{
-                name: 'Orders',
-                data: weeklyOrdersData.series[0].data
-            }],
-        xaxis: {
-            categories: weeklyOrdersData.categories,
-            labels: {
-                style: {
-                    colors: ['#ffffff', '#ffffff', '#ffffff', '#ffffff'], // White color for x-axis labels
-                }
+    chart: {
+        type: 'line',
+        height: 150,
+    },
+    series: [{
+        name: 'Orders',
+        data: weeklyOrdersData.series[0].data
+    }],
+    xaxis: {
+        categories: weeklyOrdersData.categories,
+        labels: {
+            style: {
+                colors: '#000' // Black color for x-axis labels
             }
         },
-        yaxis: {
-            title: {
-                text: 'Orders',
-                style: {
-                    color: '#ffffff' // White color for y-axis title
-                }
-            },
-            labels: {
-                style: {
-                    colors: ['#ffffff'], // White color for y-axis labels
+        axisBorder: {
+            show: true,
+            color: '#000' // Black color for x-axis grid lines
+        },
+        axisTicks: {
+            show: true,
+            color: '#000' // Black color for x-axis ticks
+        },
+        grid: {
+            show: true,
+            borderColor: '#000', // Black color for x-axis grid lines
+            strokeDashArray: 0, // Optional: remove the dashed grid lines
+            position: 'back', // Optional: place grid lines behind the lines
+            xaxis: {
+                lines: {
+                    show: true
                 }
             }
-        },
-        markers: {
-            size: 6
-        },
-        tooltip: {
-            shared: true
         }
-    };
+    },
+    yaxis: {
+        title: {
+            text: 'Orders',
+            style: {
+                color: '#000' // Black color for y-axis title
+            }
+        },
+        labels: {
+            style: {
+                colors: '#000' // Black color for y-axis labels
+            }
+        },
+        axisBorder: {
+            show: true,
+            color: '#000' // Black color for y-axis grid lines
+        },
+        axisTicks: {
+            show: true,
+            color: '#000' // Black color for y-axis ticks
+        },
+        grid: {
+            show: true,
+            borderColor: '#000', // Black color for y-axis grid lines
+            strokeDashArray: 0, // Optional: remove the dashed grid lines
+            position: 'back', // Optional: place grid lines behind the lines
+            yaxis: {
+                lines: {
+                    show: true
+                }
+            }
+        }
+    },
+    markers: {
+        size: 6
+    },
+    tooltip: {
+        shared: true
+    }
+};
 
-    // Assuming you are using ApexCharts
-    var chart = new ApexCharts(document.querySelector("#orders-weekly-line-chart"), ordersWeeklyLineChartOptions);
-    chart.render();
+// Initialize the chart with options
+var chart = new ApexCharts(document.querySelector("#orders-weekly-line-chart"), ordersWeeklyLineChartOptions);
+chart.render();
+
 </script>
 
 <!--Number of Orders per Month Line Graph-->
@@ -1118,46 +1173,85 @@
     };
 
     const ordersMonthlyLineChartOptions = {
-        chart: {
-            type: 'line',
-            height: 150,
-        },
-        series: [{
-                name: 'Orders',
-                data: monthlyOrdersData.series[0].data
-            }],
-        xaxis: {
-            categories: monthlyOrdersData.categories,
-            labels: {
-                style: {
-                    colors: Array(monthlyOrdersData.categories.length).fill('#ffffff') // White color for x-axis labels
-                }
+    chart: {
+        type: 'line',
+        height: 150,
+    },
+    series: [{
+        name: 'Orders',
+        data: monthlyOrdersData.series[0].data
+    }],
+    xaxis: {
+        categories: monthlyOrdersData.categories,
+        labels: {
+            style: {
+                colors: '#000' // Black color for x-axis labels
             }
         },
-        yaxis: {
-            title: {
-                text: 'Orders',
-                style: {
-                    color: '#ffffff' // White color for y-axis title
-                }
-            },
-            labels: {
-                style: {
-                    colors: ['#ffffff'], // White color for y-axis labels
+        axisBorder: {
+            show: true,
+            color: '#000' // Black color for x-axis grid lines
+        },
+        axisTicks: {
+            show: true,
+            color: '#000' // Black color for x-axis ticks
+        },
+        grid: {
+            show: true,
+            borderColor: '#000', // Black color for x-axis grid lines
+            strokeDashArray: 0, // Optional: remove the dashed grid lines
+            position: 'back', // Optional: place grid lines behind the lines
+            xaxis: {
+                lines: {
+                    show: true
                 }
             }
-        },
-        markers: {
-            size: 6
-        },
-        tooltip: {
-            shared: true
         }
-    };
+    },
+    yaxis: {
+        title: {
+            text: 'Orders',
+            style: {
+                color: '#000' // Black color for y-axis title
+            }
+        },
+        labels: {
+            style: {
+                colors: '#000' // Black color for y-axis labels
+            }
+        },
+        axisBorder: {
+            show: true,
+            color: '#000' // Black color for y-axis grid lines
+        },
+        axisTicks: {
+            show: true,
+            color: '#000' // Black color for y-axis ticks
+        },
+        grid: {
+            show: true,
+            borderColor: '#000', // Black color for y-axis grid lines
+            strokeDashArray: 0, // Optional: remove the dashed grid lines
+            position: 'back', // Optional: place grid lines behind the lines
+            yaxis: {
+                lines: {
+                    show: true
+                }
+            }
+        }
+    },
+    markers: {
+        size: 6
+    },
+    tooltip: {
+        shared: true
+    }
+};
 
-    // Assuming you are using ApexCharts
-    var chart = new ApexCharts(document.querySelector("#orders-monthly-line-chart"), ordersMonthlyLineChartOptions);
-    chart.render();
+// Initialize the chart with options
+var chart = new ApexCharts(document.querySelector("#orders-monthly-line-chart"), ordersMonthlyLineChartOptions);
+chart.render();
+
 </script>
 
 <!--Revenue for Week Column Chart-->
@@ -1191,15 +1285,23 @@
             categories: <%= categories2.toString()%>,
             labels: {
                 style: {
-                    colors: '#ffffff' // White color for x-axis labels
+                    colors: '#000' // Black color for x-axis labels
                 }
+            },
+            axisBorder: {
+                show: true,
+                color: '#000' // Black color for x-axis grid lines
+            },
+            axisTicks: {
+                show: true,
+                color: '#000' // Black color for x-axis ticks
             }
         },
         yaxis: {
             title: {
                 text: 'Revenue (VND)',
                 style: {
-                    color: '#ffffff' // White color for y-axis title
+                    color: '#000' // Black color for y-axis title
                 }
             },
             labels: {
@@ -1207,8 +1309,16 @@
                     return new Intl.NumberFormat('en-US', {style: 'currency', currency: 'VND'}).format(value);
                 },
                 style: {
-                    colors: '#ffffff' // White color for y-axis labels
+                    colors: '#000' // Black color for y-axis labels
                 }
+            },
+            axisBorder: {
+                show: true,
+                color: '#000' // Black color for y-axis grid lines
+            },
+            axisTicks: {
+                show: true,
+                color: '#000' // Black color for y-axis ticks
             }
         },
         fill: {
@@ -1223,85 +1333,125 @@
         },
         legend: {
             labels: {
-                colors: ['#ffffff'] // White color for legend items
+                colors: ['#000'] // Black color for legend items
             }
         }
     };
 
     var chart = new ApexCharts(document.querySelector("#revenue-week-column-chart"), revenueWeekColumnChartOptions);
     chart.render();
+
 </script>
 
 <!--Revenue for Month Column Chart-->
 <script>
     const revenueMonthColumnChartOptions = {
-        chart: {
-            type: 'bar',
-            width: 550,
-            height: 150,
+    chart: {
+        type: 'bar',
+        width: 550,
+        height: 150,
+    },
+    plotOptions: {
+        bar: {
+            horizontal: false,
+            columnWidth: '55%',
+            endingShape: 'rounded'
         },
-        plotOptions: {
-            bar: {
-                horizontal: false,
-                columnWidth: '55%',
-                endingShape: 'rounded'
-            },
+    },
+    dataLabels: {
+        enabled: false
+    },
+    stroke: {
+        show: true,
+        width: 2,
+        colors: ['transparent']
+    },
+    series: [{
+        name: 'Revenue',
+        data: <%= revenueData1.toString()%>
+    }],
+    xaxis: {
+        categories: <%= categories3.toString()%>,
+        labels: {
+            style: {
+                colors: '#000' // White color for x-axis labels
+            }
         },
-        dataLabels: {
-            enabled: false
-        },
-        stroke: {
+        axisBorder: {
             show: true,
-            width: 2,
-            colors: ['transparent']
+            color: '#000' // Black color for x-axis grid lines
         },
-        series: [{
-                name: 'Revenue',
-                data: <%= revenueData1.toString()%>
-            }],
-        xaxis: {
-            categories: <%= categories3.toString()%>,
-            labels: {
-                style: {
-                    colors: '#ffffff' // White color for x-axis labels
+        axisTicks: {
+            show: true,
+            color: '#000' // Black color for x-axis ticks
+        },
+        grid: {
+            show: true,
+            borderColor: '#000', // Black color for x-axis grid lines
+            strokeDashArray: 0, // Optional: remove the dashed grid lines
+            position: 'back', // Optional: place grid lines behind the bars
+            xaxis: {
+                lines: {
+                    show: true
                 }
-            }
-        },
-        yaxis: {
-            title: {
-                text: 'Revenue (VND)',
-                style: {
-                    color: '#ffffff' // White color for y-axis title
-                }
-            },
-            labels: {
-                formatter: function (value) {
-                    return new Intl.NumberFormat('en-US', {style: 'currency', currency: 'VND'}).format(value);
-                },
-                style: {
-                    colors: '#ffffff' // White color for y-axis labels
-                }
-            }
-        },
-        fill: {
-            opacity: 1
-        },
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return new Intl.NumberFormat('en-US', {style: 'currency', currency: 'VND'}).format(val);
-                }
-            }
-        },
-        legend: {
-            labels: {
-                colors: ['#ffffff'] // White color for legend items
             }
         }
-    };
+    },
+    yaxis: {
+        title: {
+            text: 'Revenue (VND)',
+            style: {
+                color: '#000' // White color for y-axis title
+            }
+        },
+        labels: {
+            formatter: function (value) {
+                return new Intl.NumberFormat('en-US', {style: 'currency', currency: 'VND'}).format(value);
+            },
+            style: {
+                colors: '#000' // White color for y-axis labels
+            }
+        },
+        axisBorder: {
+            show: true,
+            color: '#000' // Black color for y-axis grid lines
+        },
+        axisTicks: {
+            show: true,
+            color: '#000' // Black color for y-axis ticks
+        },
+        grid: {
+            show: true,
+            borderColor: '#000', // Black color for y-axis grid lines
+            strokeDashArray: 0, // Optional: remove the dashed grid lines
+            position: 'back', // Optional: place grid lines behind the bars
+            yaxis: {
+                lines: {
+                    show: true
+                }
+            }
+        }
+    },
+    fill: {
+        opacity: 1
+    },
+    tooltip: {
+        y: {
+            formatter: function (val) {
+                return new Intl.NumberFormat('en-US', {style: 'currency', currency: 'VND'}).format(val);
+            }
+        }
+    },
+    legend: {
+        labels: {
+            colors: ['#000'] // White color for legend items
+        }
+    }
+};
 
-    var chart = new ApexCharts(document.querySelector("#revenue-month-column-chart"), revenueMonthColumnChartOptions);
-    chart.render();
+var chart = new ApexCharts(document.querySelector("#revenue-month-column-chart"), revenueMonthColumnChartOptions);
+chart.render();
+
 </script>
 
 <!--Number of orders for each method in month-->
@@ -1357,7 +1507,7 @@
         },
         legend: {
             labels: {
-                colors: '#f5f7ff',
+                colors: '#000',
             },
             show: true,
             position: 'top',
@@ -1372,17 +1522,17 @@
         },
         xaxis: {
             axisBorder: {
-                color: '#55596e',
+                color: '#000',
                 show: true,
             },
             axisTicks: {
-                color: '#55596e',
+                color: '#000',
                 show: true,
             },
             labels: {
                 offsetY: 5,
                 style: {
-                    colors: '#f5f7ff',
+                    colors: '#000',
                 },
             },
         },
@@ -1391,12 +1541,12 @@
                 title: {
                     text: 'Store Orders',
                     style: {
-                        color: '#f5f7ff',
+                        color: '#000',
                     },
                 },
                 labels: {
                     style: {
-                        colors: ['#f5f7ff'],
+                        colors: ['#000'],
                     },
                 },
             },
@@ -1405,12 +1555,12 @@
                 title: {
                     text: 'Delivery Orders',
                     style: {
-                        color: '#f5f7ff',
+                        color: '#000',
                     },
                 },
                 labels: {
                     style: {
-                        colors: ['#f5f7ff'],
+                        colors: ['#000'],
                     },
                 },
             },

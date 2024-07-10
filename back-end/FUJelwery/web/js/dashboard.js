@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Check if series for purchaseMethod exists, if not, create it
         let seriesItem = ordersData.series.find(series => series.name === item.purchaseMethod);
         if (!seriesItem) {
-            seriesItem = { name: item.purchaseMethod, data: [] };
+            seriesItem = {name: item.purchaseMethod, data: []};
             ordersData.series.push(seriesItem);
         }
 
@@ -65,7 +65,26 @@ document.addEventListener("DOMContentLoaded", function () {
             categories: ordersData.categories,
             labels: {
                 style: {
-                    colors: '#ffffff' // White color for x-axis labels
+                    colors: '#000' // Black color for x-axis labels
+                }
+            },
+            axisBorder: {
+                show: true,
+                color: '#000' // Black color for x-axis grid lines
+            },
+            axisTicks: {
+                show: true,
+                color: '#000' // Black color for x-axis ticks
+            },
+            grid: {
+                show: true,
+                borderColor: '#000', // Black color for x-axis grid lines
+                strokeDashArray: 0, // Optional: remove the dashed grid lines
+                position: 'back', // Optional: place grid lines behind the bars
+                xaxis: {
+                    lines: {
+                        show: true
+                    }
                 }
             }
         },
@@ -73,12 +92,31 @@ document.addEventListener("DOMContentLoaded", function () {
             title: {
                 text: 'Number of Orders',
                 style: {
-                    color: '#ffffff' // White color for y-axis title
+                    color: '#000' // Black color for y-axis title
                 }
             },
             labels: {
                 style: {
-                    colors: '#ffffff' // White color for y-axis labels
+                    colors: '#000' // Black color for y-axis labels
+                }
+            },
+            axisBorder: {
+                show: true,
+                color: '#000' // Black color for y-axis grid lines
+            },
+            axisTicks: {
+                show: true,
+                color: '#000' // Black color for y-axis ticks
+            },
+            grid: {
+                show: true,
+                borderColor: '#000', // Black color for y-axis grid lines
+                strokeDashArray: 0, // Optional: remove the dashed grid lines
+                position: 'back', // Optional: place grid lines behind the bars
+                yaxis: {
+                    lines: {
+                        show: true
+                    }
                 }
             }
         },
@@ -95,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
         legend: {
             show: true,
             labels: {
-                colors: '#ffffff' // White color for legend labels
+                colors: '#000' // Black color for legend labels
             }
         },
         responsive: [{
