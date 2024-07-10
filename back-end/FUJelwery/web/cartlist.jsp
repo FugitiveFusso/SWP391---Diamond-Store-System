@@ -158,19 +158,19 @@
                                 <!-- Apply Voucher Form -->
                                 <form action="OrderController" method="POST" class="mt-3">
                                     <div class="form-group">
-                                        <p>Remmember to click the Apply Voucher button to get better price: </p>
+                                        <p>Remember to Apply Voucher to get better price: </p>
                                         <input name="action" value="applyVoucher" type="hidden">
                                         <input name="coupon" type="text" placeholder="Enter coupon code" class="form-control">
                                         <input type="hidden" name="userid" value="${sessionScope.usersession.userid}">
                                     </div>
-                                    <button type="submit" class="btn btn-primary"><i class="fa fa-ticket"></i>Apply Voucher</button>
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-ticket"></i> Apply Voucher</button>
                                 </form>
 
                                 <!-- Remove Voucher Form -->
                                 <form action="OrderController" method="POST" class="mt-3">
                                     <input name="action" value="removeVoucher" type="hidden">
                                     <input type="hidden" name="userid" value="${sessionScope.usersession.userid}">
-                                    <button type="submit" class="btn btn-danger"><i class="fa fa-ticket"></i>Remove Voucher</button>
+                                    <button type="submit" class="btn btn-danger"><i class="fa fa-ticket"></i> Remove Voucher</button>
                                 </form>
                             </div>
                         </div>
@@ -298,34 +298,34 @@
         <!--        <script src="js/voucherConfirmation.js"></script>-->
         <script src="js/productlist_pagination.js"></script>
         <script>
-                                                                document.getElementById('purchaseButton').addEventListener('click', function (event) {
-                                                                    event.preventDefault();
-                                                                    const purchaseMethod = document.getElementById('purchaseMethod').value;
+        document.getElementById('purchaseButton').addEventListener('click', function (event) {
+            event.preventDefault();
+            const purchaseMethod = document.getElementById('purchaseMethod').value;
 
-                                                                    if (!purchaseMethod) {
-                                                                        Swal.fire({
-                                                                            title: 'Error',
-                                                                            text: 'Please select a payment method.',
-                                                                            icon: 'error',
-                                                                            confirmButtonText: 'OK'
-                                                                        });
-                                                                        return;
-                                                                    }
+            if (!purchaseMethod) {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Please select a payment method.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
 
-                                                                    Swal.fire({
-                                                                        title: 'Are you sure?',
-                                                                        text: "Do you want to proceed with the purchase?",
-                                                                        icon: 'warning',
-                                                                        showCancelButton: true,
-                                                                        confirmButtonColor: '#3085d6',
-                                                                        cancelButtonColor: '#d33',
-                                                                        confirmButtonText: 'Yes, purchase it!'
-                                                                    }).then((result) => {
-                                                                        if (result.isConfirmed) {
-                                                                            document.getElementById('purchaseForm').submit();
-                                                                        }
-                                                                    });
-                                                                });
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to proceed with the purchase?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, purchase it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('purchaseForm').submit();
+                }
+            });
+        });
         </script>
         <script>
             function confirmDelete(orderID) {
