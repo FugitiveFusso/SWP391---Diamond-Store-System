@@ -381,9 +381,16 @@ SELECT
     DATEPART(YEAR, CONVERT(date, orderDate, 103)) AS Year,
     COUNT(orderID) AS OrderCount
 FROM [Order]
-GROUP BY DATENAME(MONTH, CONVERT(date, orderDate, 103)), DATEPART(MONTH, CONVERT(date, orderDate, 103)), DATEPART(YEAR, CONVERT(date, orderDate, 103))
-ORDER BY Year, MonthNumber;
-
+WHERE 
+    [status] IN ('purchased', 'verified', 'shipping', 'delivered', 'received at store')
+    AND purchaseMethod IN ('Door-to-door delivery service', 'Received at store')
+GROUP BY 
+    DATENAME(MONTH, CONVERT(date, orderDate, 103)), 
+    DATEPART(MONTH, CONVERT(date, orderDate, 103)), 
+    DATEPART(YEAR, CONVERT(date, orderDate, 103))
+ORDER BY 
+    Year, 
+    MonthNumber;
 SELECT 
     DATEPART(WEEK, CONVERT(date, orderDate, 103)) AS WeekNumber,
     DATEPART(YEAR, CONVERT(date, orderDate, 103)) AS Year,
