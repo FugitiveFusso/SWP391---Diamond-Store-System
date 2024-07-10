@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 } else if (result.dismiss === Swal.DismissReason.cancel) {
                     Swal.fire(
                         'Cancelled',
-                        'Your item is safe :)',
+                        'Cancelled successfully',
                         'error'
                     );
                 }
