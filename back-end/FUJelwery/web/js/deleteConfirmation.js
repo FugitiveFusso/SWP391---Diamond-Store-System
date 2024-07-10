@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (result.isConfirmed) {
                     Swal.fire({
                         title: 'Deleted',
-                        text: 'Your item has been deleted :)',
+                        text: 'Your item has been deleted',
                         icon: 'success',
                         confirmButtonText: 'OK'
                     }).then(() => {
