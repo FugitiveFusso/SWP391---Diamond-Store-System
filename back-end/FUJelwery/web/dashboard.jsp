@@ -45,19 +45,19 @@
                 text-decoration: none;
             }
             .card:first-child {
-                background-color: #2962ff;
+                background-color: #2e003e;
             }
 
             .card:nth-child(2) {
-                background-color: #ff6d00;
+                background-color: #001f3f;
             }
 
             .card:nth-child(3) {
-                background-color: #2e7d32;
+                background-color: #004d00;
             }
 
             .card:nth-child(4) {
-                background-color: #d50000;
+                background-color: #8B0000;
             }
 
             .card:nth-child(5) {
@@ -1005,69 +1005,74 @@
 
     // ApexCharts configuration
     var optionsBar = {
-        series: [{
-                name: 'Diamonds',
-                data: data,
-            }],
-        chart: {
-            type: 'bar',
-            height: 200,
-            width: '90%' // Adjusted width to span the container
-        },
-        plotOptions: {
-            bar: {
-                horizontal: true,
-                colors: {
-                    ranges: [{
-                            from: 0,
-                            to: 1000,
-                            color: '#007bff'
-                        }]
-                }
-            }
-        },
-        dataLabels: {
-            enabled: false,
-        },
-        yaxis: {
-            labels: {
-                style: {
-                    colors: '#000', // Color for y-axis labels
-                    fontSize: '11px'
-                }
-            },
-            axisBorder: {
-                show: true,
-                color: '#000' // Color for y-axis grid lines
-            },
-            axisTicks: {
-                show: true,
-                color: '#000' // Color for y-axis ticks (if needed)
-            }
-        },
-        xaxis: {
-            categories: categories,
-            labels: {
-                style: {
-                    colors: '#000', // Color for x-axis labels
-                    fontSize: '14px'
-                }
-            },
-            axisBorder: {
-                show: true,
-                color: '#000' // Color for x-axis grid lines
-            },
-            axisTicks: {
-                show: true,
-                color: '#000' // Color for x-axis ticks (if needed)
+    series: [{
+        name: 'Diamonds',
+        data: data,
+    }],
+    chart: {
+        type: 'bar',
+        height: 200,
+        width: '90%' // Adjusted width to span the container
+    },
+    plotOptions: {
+        bar: {
+            horizontal: true,
+            colors: {
+                ranges: [{
+                    from: 0,
+                    to: 1000,
+                    color: '#007bff'
+                }]
             }
         }
-    };
+    },
+    dataLabels: {
+        enabled: false,
+    },
+    yaxis: {
+        labels: {
+            style: {
+                colors: '#000', // Color for y-axis labels
+                fontSize: '11px'
+            }
+        },
+        axisBorder: {
+            show: true,
+            color: '#000' // Color for y-axis grid lines
+        },
+        axisTicks: {
+            show: true,
+            color: '#000' // Color for y-axis ticks (if needed)
+        }
+    },
+    xaxis: {
+        categories: categories,
+        labels: {
+            style: {
+                colors: '#000', // Color for x-axis labels
+                fontSize: '14px'
+            }
+        },
+        axisBorder: {
+            show: true,
+            color: '#000' // Color for x-axis grid lines
+        },
+        axisTicks: {
+            show: true,
+            color: '#000' // Color for x-axis ticks (if needed)
+        }
+    },
+    grid: {
+        borderColor: '#000', // Black color for grid lines
+        strokeDashArray: 0, // Optional: remove the dashed grid lines
+        position: 'back' // Optional: place grid lines behind the bars
+    }
+};
 
+// Initialize and render the chart
+var chartBar = new ApexCharts(document.querySelector("#bar-chart"), optionsBar);
+chartBar.render();
 
-    // Initialize and render the chart
-    var chartBar = new ApexCharts(document.querySelector("#bar-chart"), optionsBar);
-    chartBar.render();
 </script>
 
 <!--Number of Orders per Week Line Graph-->
@@ -1103,17 +1108,6 @@
         axisTicks: {
             show: true,
             color: '#000' // Black color for x-axis ticks
-        },
-        grid: {
-            show: true,
-            borderColor: '#000', // Black color for x-axis grid lines
-            strokeDashArray: 0, // Optional: remove the dashed grid lines
-            position: 'back', // Optional: place grid lines behind the lines
-            xaxis: {
-                lines: {
-                    show: true
-                }
-            }
         }
     },
     yaxis: {
@@ -1135,25 +1129,36 @@
         axisTicks: {
             show: true,
             color: '#000' // Black color for y-axis ticks
-        },
-        grid: {
-            show: true,
-            borderColor: '#000', // Black color for y-axis grid lines
-            strokeDashArray: 0, // Optional: remove the dashed grid lines
-            position: 'back', // Optional: place grid lines behind the lines
-            yaxis: {
-                lines: {
-                    show: true
-                }
-            }
         }
+    },
+    fill: {
+        opacity: 1
+    },
+    tooltip: {
+        shared: true
     },
     markers: {
         size: 6
     },
-    tooltip: {
-        shared: true
-    }
+    legend: {
+        show: true,
+        labels: {
+            colors: '#000' // Black color for legend labels
+        }
+    },
+    grid: {
+        borderColor: '#000', // Black color for grid lines
+        strokeDashArray: 0, // Optional: remove the dashed grid lines
+        position: 'back' // Optional: place grid lines behind the lines
+    },
+    responsive: [{
+        breakpoint: 480,
+        options: {
+            legend: {
+                position: 'bottom'
+            }
+        }
+    }]
 };
 
 // Initialize the chart with options
@@ -1195,17 +1200,6 @@ chart.render();
         axisTicks: {
             show: true,
             color: '#000' // Black color for x-axis ticks
-        },
-        grid: {
-            show: true,
-            borderColor: '#000', // Black color for x-axis grid lines
-            strokeDashArray: 0, // Optional: remove the dashed grid lines
-            position: 'back', // Optional: place grid lines behind the lines
-            xaxis: {
-                lines: {
-                    show: true
-                }
-            }
         }
     },
     yaxis: {
@@ -1227,119 +1221,135 @@ chart.render();
         axisTicks: {
             show: true,
             color: '#000' // Black color for y-axis ticks
-        },
-        grid: {
-            show: true,
-            borderColor: '#000', // Black color for y-axis grid lines
-            strokeDashArray: 0, // Optional: remove the dashed grid lines
-            position: 'back', // Optional: place grid lines behind the lines
-            yaxis: {
-                lines: {
-                    show: true
-                }
-            }
         }
+    },
+    fill: {
+        opacity: 1
+    },
+    tooltip: {
+        shared: true
     },
     markers: {
         size: 6
     },
-    tooltip: {
-        shared: true
-    }
+    legend: {
+        show: true,
+        labels: {
+            colors: '#000' // Black color for legend labels
+        }
+    },
+    grid: {
+        borderColor: '#000', // Black color for grid lines
+        strokeDashArray: 0, // Optional: remove the dashed grid lines
+        position: 'back' // Optional: place grid lines behind the lines
+    },
+    responsive: [{
+        breakpoint: 480,
+        options: {
+            legend: {
+                position: 'bottom'
+            }
+        }
+    }]
 };
 
 // Initialize the chart with options
 var chart = new ApexCharts(document.querySelector("#orders-monthly-line-chart"), ordersMonthlyLineChartOptions);
 chart.render();
 
+
 </script>
 
 <!--Revenue for Week Column Chart-->
 <script>
     const revenueWeekColumnChartOptions = {
-        chart: {
-            type: 'bar',
-            width: 550,
-            height: 150,
+    chart: {
+        type: 'bar',
+        width: 550,
+        height: 150,
+    },
+    plotOptions: {
+        bar: {
+            horizontal: false,
+            columnWidth: '55%',
+            endingShape: 'rounded'
         },
-        plotOptions: {
-            bar: {
-                horizontal: false,
-                columnWidth: '55%',
-                endingShape: 'rounded'
-            },
+    },
+    dataLabels: {
+        enabled: false
+    },
+    stroke: {
+        show: true,
+        width: 2,
+        colors: ['transparent']
+    },
+    series: [{
+            name: 'Revenue',
+            data: <%= revenueData.toString()%>
+        }],
+    xaxis: {
+        categories: <%= categories2.toString()%>,
+        labels: {
+            style: {
+                colors: '#000' // Black color for x-axis labels
+            }
         },
-        dataLabels: {
-            enabled: false
-        },
-        stroke: {
+        axisBorder: {
             show: true,
-            width: 2,
-            colors: ['transparent']
+            color: '#000' // Black color for x-axis grid lines
         },
-        series: [{
-                name: 'Revenue',
-                data: <%= revenueData.toString()%>
-            }],
-        xaxis: {
-            categories: <%= categories2.toString()%>,
-            labels: {
-                style: {
-                    colors: '#000' // Black color for x-axis labels
-                }
-            },
-            axisBorder: {
-                show: true,
-                color: '#000' // Black color for x-axis grid lines
-            },
-            axisTicks: {
-                show: true,
-                color: '#000' // Black color for x-axis ticks
+        axisTicks: {
+            show: true,
+            color: '#000' // Black color for x-axis ticks
+        }
+    },
+    yaxis: {
+        title: {
+            text: 'Revenue (VND)',
+            style: {
+                color: '#000' // Black color for y-axis title
             }
         },
-        yaxis: {
-            title: {
-                text: 'Revenue (VND)',
-                style: {
-                    color: '#000' // Black color for y-axis title
-                }
+        labels: {
+            formatter: function (value) {
+                return new Intl.NumberFormat('en-US', {style: 'currency', currency: 'VND'}).format(value);
             },
-            labels: {
-                formatter: function (value) {
-                    return new Intl.NumberFormat('en-US', {style: 'currency', currency: 'VND'}).format(value);
-                },
-                style: {
-                    colors: '#000' // Black color for y-axis labels
-                }
-            },
-            axisBorder: {
-                show: true,
-                color: '#000' // Black color for y-axis grid lines
-            },
-            axisTicks: {
-                show: true,
-                color: '#000' // Black color for y-axis ticks
+            style: {
+                colors: '#000' // Black color for y-axis labels
             }
         },
-        fill: {
-            opacity: 1
+        axisBorder: {
+            show: true,
+            color: '#000' // Black color for y-axis grid lines
         },
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return new Intl.NumberFormat('en-US', {style: 'currency', currency: 'VND'}).format(val);
-                }
-            }
-        },
-        legend: {
-            labels: {
-                colors: ['#000'] // Black color for legend items
+        axisTicks: {
+            show: true,
+            color: '#000' // Black color for y-axis ticks
+        }
+    },
+    fill: {
+        opacity: 1
+    },
+    tooltip: {
+        y: {
+            formatter: function (val) {
+                return new Intl.NumberFormat('en-US', {style: 'currency', currency: 'VND'}).format(val);
             }
         }
-    };
+    },
+    grid: {
+        borderColor: '#000', // Black color for grid lines
+    },
+    legend: {
+        labels: {
+            colors: ['#000'] // Black color for legend items
+        }
+    }
+};
 
-    var chart = new ApexCharts(document.querySelector("#revenue-week-column-chart"), revenueWeekColumnChartOptions);
-    chart.render();
+var chart = new ApexCharts(document.querySelector("#revenue-week-column-chart"), revenueWeekColumnChartOptions);
+chart.render();
+
 
 </script>
 
@@ -1368,13 +1378,13 @@ chart.render();
     },
     series: [{
         name: 'Revenue',
-        data: <%= revenueData1.toString()%>
+        data: <%= revenueData1.toString() %>
     }],
     xaxis: {
-        categories: <%= categories3.toString()%>,
+        categories: <%= categories3.toString() %>,
         labels: {
             style: {
-                colors: '#000' // White color for x-axis labels
+                colors: '#000' // Black color for x-axis labels
             }
         },
         axisBorder: {
@@ -1384,24 +1394,13 @@ chart.render();
         axisTicks: {
             show: true,
             color: '#000' // Black color for x-axis ticks
-        },
-        grid: {
-            show: true,
-            borderColor: '#000', // Black color for x-axis grid lines
-            strokeDashArray: 0, // Optional: remove the dashed grid lines
-            position: 'back', // Optional: place grid lines behind the bars
-            xaxis: {
-                lines: {
-                    show: true
-                }
-            }
         }
     },
     yaxis: {
         title: {
             text: 'Revenue (VND)',
             style: {
-                color: '#000' // White color for y-axis title
+                color: '#000' // Black color for y-axis title
             }
         },
         labels: {
@@ -1409,7 +1408,7 @@ chart.render();
                 return new Intl.NumberFormat('en-US', {style: 'currency', currency: 'VND'}).format(value);
             },
             style: {
-                colors: '#000' // White color for y-axis labels
+                colors: '#000' // Black color for y-axis labels
             }
         },
         axisBorder: {
@@ -1419,17 +1418,6 @@ chart.render();
         axisTicks: {
             show: true,
             color: '#000' // Black color for y-axis ticks
-        },
-        grid: {
-            show: true,
-            borderColor: '#000', // Black color for y-axis grid lines
-            strokeDashArray: 0, // Optional: remove the dashed grid lines
-            position: 'back', // Optional: place grid lines behind the bars
-            yaxis: {
-                lines: {
-                    show: true
-                }
-            }
         }
     },
     fill: {
@@ -1444,13 +1432,19 @@ chart.render();
     },
     legend: {
         labels: {
-            colors: ['#000'] // White color for legend items
+            colors: ['#000'] // Black color for legend items
         }
+    },
+    grid: {
+        borderColor: '#000', // Black color for grid lines
+        strokeDashArray: 0, // Optional: remove the dashed grid lines
+        position: 'back' // Optional: place grid lines behind the bars
     }
 };
 
 var chart = new ApexCharts(document.querySelector("#revenue-month-column-chart"), revenueMonthColumnChartOptions);
 chart.render();
+
 
 </script>
 

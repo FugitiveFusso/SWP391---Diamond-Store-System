@@ -75,17 +75,6 @@ document.addEventListener("DOMContentLoaded", function () {
             axisTicks: {
                 show: true,
                 color: '#000' // Black color for x-axis ticks
-            },
-            grid: {
-                show: true,
-                borderColor: '#000', // Black color for x-axis grid lines
-                strokeDashArray: 0, // Optional: remove the dashed grid lines
-                position: 'back', // Optional: place grid lines behind the bars
-                xaxis: {
-                    lines: {
-                        show: true
-                    }
-                }
             }
         },
         yaxis: {
@@ -107,17 +96,6 @@ document.addEventListener("DOMContentLoaded", function () {
             axisTicks: {
                 show: true,
                 color: '#000' // Black color for y-axis ticks
-            },
-            grid: {
-                show: true,
-                borderColor: '#000', // Black color for y-axis grid lines
-                strokeDashArray: 0, // Optional: remove the dashed grid lines
-                position: 'back', // Optional: place grid lines behind the bars
-                yaxis: {
-                    lines: {
-                        show: true
-                    }
-                }
             }
         },
         fill: {
@@ -126,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
         tooltip: {
             y: {
                 formatter: function (val) {
-                    return val + " orders"
+                    return val + " orders";
                 }
             }
         },
@@ -135,6 +113,11 @@ document.addEventListener("DOMContentLoaded", function () {
             labels: {
                 colors: '#000' // Black color for legend labels
             }
+        },
+        grid: {
+            borderColor: '#000', // Black color for grid lines
+            strokeDashArray: 0, // Optional: remove the dashed grid lines
+            position: 'back' // Optional: place grid lines behind the bars
         },
         responsive: [{
             breakpoint: 480,
