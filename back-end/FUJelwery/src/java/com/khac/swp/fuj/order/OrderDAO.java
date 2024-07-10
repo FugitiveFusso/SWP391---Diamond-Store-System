@@ -1168,8 +1168,16 @@ public class OrderDAO {
                     + "    DATEPART(YEAR, CONVERT(date, orderDate, 103)) AS Year,\n"
                     + "    COUNT(orderID) AS OrderCount\n"
                     + "FROM [Order]\n"
-                    + "GROUP BY DATENAME(MONTH, CONVERT(date, orderDate, 103)), DATEPART(MONTH, CONVERT(date, orderDate, 103)), DATEPART(YEAR, CONVERT(date, orderDate, 103))\n"
-                    + "ORDER BY Year, MonthNumber; ";
+                    + "WHERE \n"
+                    + "    [status] IN ('purchased', 'verified', 'shipping', 'delivered', 'received at store')\n"
+                    + "    AND purchaseMethod IN ('Door-to-door delivery service', 'Received at store')\n"
+                    + "GROUP BY \n"
+                    + "    DATENAME(MONTH, CONVERT(date, orderDate, 103)), \n"
+                    + "    DATEPART(MONTH, CONVERT(date, orderDate, 103)), \n"
+                    + "    DATEPART(YEAR, CONVERT(date, orderDate, 103))\n"
+                    + "ORDER BY \n"
+                    + "    Year, \n"
+                    + "    MonthNumber; ";
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
