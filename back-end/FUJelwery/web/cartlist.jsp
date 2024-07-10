@@ -83,10 +83,6 @@
 
             </div>
         </div>
-        <% String error1 = (String) request.getAttribute("errorMessage"); %>
-        <% if (error1 != null) {%>
-        <h4 style="color: red; text-align: center"> <%= error1%> </h4>
-        <% }%>
         <div class="container">
             <div class="wrapper wrapper-content animated fadeInRight">
                 <div class="row" style="margin-top: 30px;">
@@ -155,9 +151,14 @@
 
                         <div class="ibox-content">
                             <div class="voucher">
+                                <!-- Hidden inputs for messages -->
+                                <input type="hidden" id="success-message" value="${requestScope.success}">
+                                <input type="hidden" id="error-message" value="${requestScope.errorMessage}">
+
                                 <!-- Apply Voucher Form -->
                                 <form action="OrderController" method="POST" class="mt-3">
                                     <div class="form-group">
+                                        <p>Remmember to click the Apply Voucher button to get better price: </p>
                                         <input name="action" value="applyVoucher" type="hidden">
                                         <input name="coupon" type="text" placeholder="Enter coupon code" class="form-control">
                                         <input type="hidden" name="userid" value="${sessionScope.usersession.userid}">
@@ -294,7 +295,7 @@
             </div>
         </div>
 
-
+        <!--        <script src="js/voucherConfirmation.js"></script>-->
         <script src="js/productlist_pagination.js"></script>
         <script>
                                                                 document.getElementById('purchaseButton').addEventListener('click', function (event) {
@@ -343,7 +344,61 @@
                 })
             }
         </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Get session attributes
+                var successMessage = '${sessionScope.success}';
+                var errorMessage = '${sessionScope.errorMessage}';
 
+                // Display success message if it exists
+                if (successMessage) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: successMessage,
+                        timer: 3000,
+                        showConfirmButton: false
+                    });
+                    // Remove the attribute from session scope
+                    <c:remove var="success" scope="session"/>
+                }
 
+                // Display error message if it exists
+                if (errorMessage) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: errorMessage,
+                        timer: 3000,
+                        showConfirmButton: false
+                    });
+                    // Remove the attribute from session scope
+                    <c:remove var="errorMessage" scope="session"/>
+                }
+            });
+        </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // Check if success message is present
+                let successMessage = document.querySelector("#success-message").value;
+                if (successMessage) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: successMessage,
+                    });
+                }
+
+                // Check if error message is present
+                let errorMessage = document.querySelector("#error-message").value;
+                if (errorMessage) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: errorMessage,
+                    });
+                }
+            });
+        </script>
     </body>
 </html>
