@@ -1,4 +1,5 @@
 
+<%@page import="com.khac.swp.fuj.warranty.WarrantyDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -60,8 +61,20 @@
                 border-radius: 10px;
                 cursor: pointer;
             }
-
-
+            .text-success {
+                color: green;
+            }
+            .text-danger {
+                color: red;
+            }
+            a {
+                text-decoration: none;
+                color: black;
+            }
+            a:hover {
+                text-decoration: none;
+                color: black;
+            }
         </style>
 
     </head>
@@ -147,6 +160,27 @@
                             <p class="card-text"><strong>Start Date: </strong> ${requestScope.warranty.startdate}</p>
                             <p class="card-text"><strong>End Date: </strong> ${requestScope.warranty.enddate}</p>
                             <p class="card-text"><strong>Terms and Conditions: </strong> ${requestScope.warranty.termsandconditions}</p>
+                            <%-- Retrieve warranty object from request attribute --%>
+                            <% WarrantyDTO warranty = (WarrantyDTO) request.getAttribute("warranty"); %>
+
+                            <%-- Check if warranty is not null and has a valid orderID --%>
+                            <% if (warranty != null && warranty.getOrderID() != 0) { %>
+                            <p class="card-text">
+                                <a href="SalesHistory?action=historydetails&id=${warranty.getOrderID()}">
+                                    <strong>Order ID:</strong> ${warranty.getOrderID()}
+                                </a>
+                            </p>
+                            <% } else { %>
+                            <p class="card-text">
+                                <strong>No valid Order ID found.</strong>
+                            </p>
+                            <% }%>
+                            <p class="card-text">
+                                <strong>Status: </strong> 
+                                <span class="${requestScope.warranty.status == 'Applied' ? 'text-success' : 'text-danger'}">
+                                    ${requestScope.warranty.status}
+                                </span>
+                            </p>
                             <div class="btn-group" role="group" aria-label="Voucher Actions">
                                 <form action="WarrantyController" method="post" class="mr-2">
                                     <input type="hidden" name="action" value="list">
