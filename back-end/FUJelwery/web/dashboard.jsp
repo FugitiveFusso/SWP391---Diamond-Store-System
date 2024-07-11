@@ -1451,126 +1451,117 @@ chart.render();
 <!--Number of orders for each method in month-->
 <script>
     const areaChartOptions = {
-        series: [
-            {
-                name: 'Store Orders',
-                data: <%= storeOrderData.toString()%>
-            },
-            {
-                name: 'Delivery Orders',
-                data: <%= deliveryOrderData.toString()%>
-            }
-        ],
-        chart: {
-            type: 'area',
-            background: 'transparent',
-            height: 250, // Reduced height
-            width: 900,
-            stacked: false,
-            toolbar: {
-                show: false,
-            },
+    series: [
+        {
+            name: 'Store Orders',
+            data: <%= storeOrderData.toString() %>
         },
-        colors: ['#00ab57', '#d50000'],
-        labels: <%= categories4.toString()%>,
-        dataLabels: {
-            enabled: false,
+        {
+            name: 'Delivery Orders',
+            data: <%= deliveryOrderData.toString() %>
+        }
+    ],
+    chart: {
+        type: 'line', // Change chart type to 'line'
+        background: 'transparent',
+        height: 250, // Reduced height
+        width: 900,
+        stacked: false,
+        toolbar: {
+            show: false,
         },
-        fill: {
-            gradient: {
-                opacityFrom: 0.4,
-                opacityTo: 0.1,
-                shadeIntensity: 1,
-                stops: [0, 100],
-                type: 'vertical',
+    },
+    colors: ['#008ffb', '#00e396'],
+    labels: <%= categories4.toString() %>,
+    dataLabels: {
+        enabled: false,
+    },
+    grid: {
+        borderColor: '#55596e',
+        yaxis: {
+            lines: {
+                show: true,
             },
-            type: 'gradient',
-        },
-        grid: {
-            borderColor: '#55596e',
-            yaxis: {
-                lines: {
-                    show: true,
-                },
-            },
-            xaxis: {
-                lines: {
-                    show: true,
-                },
-            },
-        },
-        legend: {
-            labels: {
-                colors: '#000',
-            },
-            show: true,
-            position: 'top',
-        },
-        markers: {
-            size: 6,
-            strokeColors: '#1b2635',
-            strokeWidth: 3,
-        },
-        stroke: {
-            curve: 'smooth',
         },
         xaxis: {
-            axisBorder: {
-                color: '#000',
+            lines: {
                 show: true,
             },
-            axisTicks: {
-                color: '#000',
-                show: true,
+        },
+    },
+    legend: {
+        labels: {
+            colors: '#000',
+        },
+        show: true,
+        position: 'top',
+    },
+    markers: {
+        size: 6,
+        strokeColors: '#1b2635',
+        strokeWidth: 3,
+    },
+    stroke: {
+        curve: 'smooth',
+    },
+    xaxis: {
+        axisBorder: {
+            color: '#000',
+            show: true,
+        },
+        axisTicks: {
+            color: '#000',
+            show: true,
+        },
+        labels: {
+            offsetY: 5,
+            style: {
+                colors: '#000',
+            },
+        },
+    },
+    yaxis: [
+        {
+            title: {
+                text: 'Store Orders',
+                style: {
+                    color: '#000',
+                },
             },
             labels: {
-                offsetY: 5,
                 style: {
-                    colors: '#000',
+                    colors: ['#000'],
                 },
             },
         },
-        yaxis: [
-            {
-                title: {
-                    text: 'Store Orders',
-                    style: {
-                        color: '#000',
-                    },
-                },
-                labels: {
-                    style: {
-                        colors: ['#000'],
-                    },
+        {
+            opposite: true,
+            title: {
+                text: 'Delivery Orders',
+                style: {
+                    color: '#000',
                 },
             },
-            {
-                opposite: true,
-                title: {
-                    text: 'Delivery Orders',
-                    style: {
-                        color: '#000',
-                    },
-                },
-                labels: {
-                    style: {
-                        colors: ['#000'],
-                    },
+            labels: {
+                style: {
+                    colors: ['#000'],
                 },
             },
-        ],
-        tooltip: {
-            shared: true,
-            intersect: false,
-            theme: 'dark',
         },
-    };
+    ],
+    tooltip: {
+        shared: true,
+        intersect: false,
+        theme: 'dark',
+    },
+};
 
-    const areaChart = new ApexCharts(
-            document.querySelector('#area-chart'),
-            areaChartOptions
-            );
-    areaChart.render();
+const areaChart = new ApexCharts(
+    document.querySelector('#area-chart'),
+    areaChartOptions
+);
+areaChart.render();
+
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
