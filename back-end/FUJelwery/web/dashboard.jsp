@@ -45,24 +45,30 @@
                 text-decoration: none;
             }
             .card:first-child {
-                background-color: #2e003e;
+                background-color: #2962ff;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
             }
 
             .card:nth-child(2) {
-                background-color: #001f3f;
+                background-color: #ff6d00;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
             }
 
             .card:nth-child(3) {
-                background-color: #004d00;
+                background-color: #2e7d32;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
             }
 
             .card:nth-child(4) {
-                background-color: #8B0000;
+                background-color: #d50000;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
             }
 
             .card:nth-child(5) {
                 background-color: black;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
             }   
+            
         </style>
     </head>
 

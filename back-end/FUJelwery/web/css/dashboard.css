@@ -27,10 +27,11 @@ body {
     justify-content: space-between;
     width: 1120px;
     height: auto;
-    background-color: #d3d3d3;
+    background-color: #f7f7f7;
     padding: 20px;
     border-radius: 10px;
     margin-top: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .purchased-history-container{
@@ -74,15 +75,15 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 60px;
+    gap: 20px;
 }
 
 .card {
     background: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     padding: 10px;
-    width: 150px;
+    width: 190px;
     text-align: center;
     color: #fff;
 }
@@ -95,13 +96,13 @@ body {
 }
 
 .card h3 {
-    font-size: 16px;
+    font-size: 18px;
     margin: 5px 0;
 }
 
 .card h1 {
     font-size: 24px;
-    margin: 10px 0;
+    margin: 5px 0;
 }
 
 .material-icons-outlined {
@@ -133,9 +134,9 @@ body {
 }
 
 .charts-card1 {
-    background: #d3d3d3;
+    background: #f7f7f7;
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     padding: 10px;
     width: 200px;
     height: 130px;
@@ -143,9 +144,9 @@ body {
 }
 
 .charts-card2 {
-    background: #d3d3d3;
+    background: #f7f7f7;
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     padding: 10px;
     text-align: center;
 }
@@ -187,9 +188,10 @@ body {
 }
 
 .charts-card {
-    background: #d3d3d3;
+    background: #f7f7f7;
     border-radius: 10px;
     padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .chart-title {
@@ -213,18 +215,20 @@ body {
 
 .table-container {
     padding: 10px;
-    background-color: #d3d3d3;
+    background-color: #f7f7f7;
     border-radius: 5px;
     color: #000;
     width: 300px; /* Increased the width */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .table-container1 {
     padding: 10px 10px;
-    background-color: #d3d3d3;
+    background-color: #f7f7f7;
     border-radius: 5px;
     color: #000;
     width: 1140px; /* Increased the width */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .table-container1 .x_title a i {
@@ -302,10 +306,11 @@ body {
 
 .table-container2 {
     padding: 10px;
-    background-color: #d3d3d3;
+    background-color: #f7f7f7;
     border-radius: 5px;
     color: #000;
     width: 550px; /* Increased the width */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .table-container2 .x_title h2 {
@@ -343,7 +348,7 @@ body {
 .collapse-content {
     display: none;
     padding: 15px;
-    background-color: #d3d3d3;
+    background-color: #f7f7f7;
     border-radius: 5px;
     color: #000;
 }
@@ -356,7 +361,7 @@ body {
 
 .collapse-content.show {
     display: block;
-    background-color: #d3d3d3;
+    background-color: #f7f7f7;
     color: #000;
 }
 
