@@ -9,82 +9,10 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <link rel="stylesheet" href="css/adminlogin.css">
-        <!--        <style>
-                    .placeicon {
-                        font-family: fontawesome
-                    }
-        
-                    .custom-control-label::before {
-                        background-color: #dee2e6;
-                        border: #dee2e6
-                    }
-                </style>-->
-        <!--        <link rel="stylesheet" href="css/newPassword.css">-->
+       
     </head>
     <body>
-        <!-- Container containing all contents -->
-        <!--        <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-12 col-md-9 col-lg-7 col-xl-6 mt-5">
-                             White Container 
-                            <div class="content-container rounded mt-2 mb-2 px-0 wrapper">
-                                 Main Heading 
-                                <div class="row justify-content-center align-items-center pt-3">
-                                    <h1>
-                                        <strong style="color: #fff">Reset Password</strong>
-                                    </h1>
-                                </div>
-                                <div class="pt-3 pb-3">
-                                    <form class="form-horizontal" action="newPassword" method="POST">
-                                         User Name Input 
-                                        <div class="form-group row justify-content-center px-3 input-box">
-                                            <div class="col-9 px-0 ">
-                                                                                        <input type="text" name="password" placeholder="&#xf084; &nbsp; New Password"
-                                                                                               class="form-control border-info placeicon">
-                                                <input name="password" type="password" required>
-                                                <span class="placeholder">Password</span>
-                                            </div>
-                                        </div>
-                                         Password Input 
-                                        <div class="form-group row justify-content-center px-3 input-box">
-                                            <div class="col-9 px-0">
-                                                                                        <input type="password" name="confPassword"
-                                                                                               placeholder="&#xf084; &nbsp; Confirm New Password"
-                                                                                               class="form-control border-info placeicon">
-                                                <input name="confPassword" type="password" required>
-                                                <span class="placeholder">Re-enter Password</span>
-                                            </div>
-                                        </div>
         
-                                         Log in Button 
-                                        <div class="form-group row justify-content-center">
-                                            <div class="col-3 px-3 mt-3">
-                                                <input type="submit" value="Reset"
-                                                       class="btn btn-block btn-info">
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                 Alternative Login 
-                                <div class="mx-0 px-0">
-        
-                                     Horizontal Line 
-                                    <div class="px-4">
-                                        <hr>
-                                    </div>
-                                     Register Now 
-                                    <div class="pt-2">
-                                        <div class="row justify-content-center">
-                                            <div class="register-link">
-                                                <p>Don't have an account? <a href="register.jsp">Register</a></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>-->
 
         <section class="ftco-section">                       
             <div class="wrapper">
