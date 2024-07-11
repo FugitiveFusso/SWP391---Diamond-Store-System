@@ -58,7 +58,22 @@ public class CertificateDAO {
 
     public CertificateDTO load(int certificateID) {
 
-        String sql = "select * from Certificate where certificateID = ? and isDeleted = 'active'";
+        String sql = "SELECT \n"
+                + "    c.certificateID, \n"
+                + "    c.certificateImage, \n"
+                + "    c.description,\n"
+                + "    ISNULL(d.diamondID, 0) AS diamondID,\n"
+                + "    CASE \n"
+                + "        WHEN d.diamondID IS NOT NULL THEN 'Applied'\n"
+                + "        ELSE 'Not Applied'\n"
+                + "    END AS [status]\n"
+                + "FROM \n"
+                + "    Certificate c\n"
+                + "LEFT JOIN \n"
+                + "    Diamond d ON c.certificateID = d.certificateID\n"
+                + "WHERE \n"
+                + "    c.certificateID = ? \n"
+                + "    AND c.isDeleted = 'active';";
 
         try {
 
@@ -72,11 +87,15 @@ public class CertificateDAO {
                 int ID = rs.getInt("certificateID");
                 String certificateImage = rs.getString("certificateImage");
                 String certificateDescription = rs.getString("description");
+                int diamondID = rs.getInt("diamondID");
+                String status = rs.getString("status");
 
                 CertificateDTO certificate = new CertificateDTO();
                 certificate.setCertificateID(ID);
                 certificate.setCertificateImage(certificateImage);
                 certificate.setCertificateDescription(certificateDescription);
+                certificate.setDiamondID(diamondID);
+                certificate.setStatus(status);
                 return certificate;
             }
         } catch (SQLException ex) {

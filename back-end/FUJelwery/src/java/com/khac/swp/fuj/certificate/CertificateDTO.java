@@ -5,6 +5,8 @@ public class CertificateDTO {
     private int certificateID;
     private String certificateImage;
     private String certificateDescription;
+    private int diamondID;
+    private String status;
     private int totalCertificates;
     private int activeCertificates;
     private int deletedCertificates;
@@ -93,9 +95,25 @@ public class CertificateDTO {
         this.unusedPercentage = unusedPercentage;
     }
 
+    public int getDiamondID() {
+        return diamondID;
+    }
+
+    public void setDiamondID(int diamondID) {
+        this.diamondID = diamondID;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
-        return "CertificateDTO{" + "certificateID=" + certificateID + ", certificateImage=" + certificateImage + ", certificateDescription=" + certificateDescription + ", totalCertificates=" + totalCertificates + ", activeCertificates=" + activeCertificates + ", deletedCertificates=" + deletedCertificates + ", usedCertificates=" + usedCertificates + ", unusedCertificates=" + unusedCertificates + ", usedPercentage=" + usedPercentage + ", unusedPercentage=" + unusedPercentage + '}';
-    }   
+        return "CertificateDTO{" + "certificateID=" + certificateID + ", certificateImage=" + certificateImage + ", certificateDescription=" + certificateDescription + ", diamondID=" + diamondID + ", status=" + status + ", totalCertificates=" + totalCertificates + ", activeCertificates=" + activeCertificates + ", deletedCertificates=" + deletedCertificates + ", usedCertificates=" + usedCertificates + ", unusedCertificates=" + unusedCertificates + ", usedPercentage=" + usedPercentage + ", unusedPercentage=" + unusedPercentage + '}';
+    }
 
 }
