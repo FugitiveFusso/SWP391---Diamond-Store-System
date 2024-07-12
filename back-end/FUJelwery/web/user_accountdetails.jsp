@@ -5,6 +5,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>User Account</title>
+        <link rel="icon" type="image/x-icon" href="images/Screenshot__656_-removebg-preview.png">
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="css/user_accountdetails.css">
         <link rel="stylesheet" href="css/navigation_bar.css">

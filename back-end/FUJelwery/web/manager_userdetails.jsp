@@ -5,6 +5,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Staff Details</title>
+        <link rel="icon" type="image/x-icon" href="images/Screenshot__656_-removebg-preview.png">
         <link rel="stylesheet" href="css/navbar.css">
         <script src="https://unpkg.com/@phosphor-icons/web"></script>
         <link rel="stylesheet" href="css/staff_details.css">
@@ -41,7 +42,7 @@
 
             </div>
         </div>
-                    <div class="container d-flex justify-content-center align-items-center">
+        <div class="container d-flex justify-content-center align-items-center">
             <div class="text-center">
                 <h1 style="font-size: 50px; font-weight: 700">User Details</h1>
                 <p>Login username: ${sessionScope.managersession.username}</p>
@@ -112,5 +113,5 @@
                         integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
                 crossorigin="anonymous"></script>
                 <script src="js/sidenav.js"></script>
-    </body>
-</html>
+                </body>
+                </html>

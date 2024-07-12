@@ -4,6 +4,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Sales Staff Management Page</title>
+        <link rel="icon" type="image/x-icon" href="images/Screenshot__656_-removebg-preview.png">
         <link rel="stylesheet" href="css/navbar_admin.css">
         <script src="https://unpkg.com/@phosphor-icons/web"></script>
         <link rel="stylesheet" href="css/staff_details.css">
@@ -21,7 +22,7 @@
 
     </head>
     <body>
-        
+
         <div class="menu-btn">
             <div class="btn-cover">
                 <i class="fas fa-bars"></i>
@@ -51,7 +52,7 @@
                 </div>
 
                 <div class="item"><a href="PostController"><i class="fas fa-file"></i>Posts</a></div>
-                
+
                 <div class="item"><a href="adminaccount.jsp"><i class="fas fa-user"></i>Account</a></div>
                 <div class="item"><a href="adminlogin?action=logout"><i class="fas fa-right-from-bracket"></i>Logout</a></div>
 

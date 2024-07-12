@@ -7,6 +7,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Warranty Management Page</title>
+        <link rel="icon" type="image/x-icon" href="images/Screenshot__656_-removebg-preview.png">
         <link rel="stylesheet" href="css/navbar.css">
         <script src="https://unpkg.com/@phosphor-icons/web"></script>
         <link rel="stylesheet" href="css/customer_list.css">
@@ -16,7 +17,7 @@
         <link rel="stylesheet" href="css/pagination.css">
     </head>
     <body>        
-      <div class="menu-btn">
+        <div class="menu-btn">
             <div class="btn-cover">
                 <i class="fas fa-bars"></i>
             </div>            
@@ -70,7 +71,7 @@
 
             </div>
         </div>
-        
+
         <div class="list-container">
             <div class="smaller-container">
                 <div class="list1">

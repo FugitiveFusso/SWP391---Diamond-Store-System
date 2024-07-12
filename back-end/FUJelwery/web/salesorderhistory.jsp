@@ -8,6 +8,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Order History</title>
+        <link rel="icon" type="image/x-icon" href="images/Screenshot__656_-removebg-preview.png">
         <link rel="stylesheet" href="css/navbar.css">
         <script src="https://unpkg.com/@phosphor-icons/web"></script>
         <link rel="stylesheet" href="css/customer_list.css">
@@ -106,22 +107,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <%
-                            List<OrderDTO> list = (List<OrderDTO>) request.getAttribute("saleshistory");
-                            for (OrderDTO salesorder : list) {
-                                pageContext.setAttribute("salesorder", salesorder);
-                        %>
+                            <%
+                                List<OrderDTO> list = (List<OrderDTO>) request.getAttribute("saleshistory");
+                                for (OrderDTO salesorder : list) {
+                                    pageContext.setAttribute("salesorder", salesorder);
+                            %>
                             <tr>
-                            <td><a href="SalesHistory?action=historydetails&id=${salesorder.orderID}">${salesorder.orderID}</td>
-                            <td><a href="Staff_Customer_Controller?action=details&id=${salesorder.userID}">${salesorder.userName}</a></td>
-                            <td><a href="RingController?action=details&id=${salesorder.ringID}">${salesorder.ringName}</td>
-                            <td>${salesorder.ringSize}</td>
-                            <td>${salesorder.orderDate}</td>
-                            <td>${salesorder.address}</td>
-                            <td>${salesorder.totalPrice} VND</td>
-                            <td class="<%= "delivered".equals(salesorder.getStatus()) ? "status-verified" : "shipping".equals(salesorder.getStatus()) ? "status-shipping" : "received at store".equals(salesorder.getStatus()) ? "status-verified" : "status-default"%>">
-                                ${salesorder.status}
-                            </td>
+                                <td><a href="SalesHistory?action=historydetails&id=${salesorder.orderID}">${salesorder.orderID}</td>
+                                <td><a href="Staff_Customer_Controller?action=details&id=${salesorder.userID}">${salesorder.userName}</a></td>
+                                <td><a href="RingController?action=details&id=${salesorder.ringID}">${salesorder.ringName}</td>
+                                <td>${salesorder.ringSize}</td>
+                                <td>${salesorder.orderDate}</td>
+                                <td>${salesorder.address}</td>
+                                <td>${salesorder.totalPrice} VND</td>
+                                <td class="<%= "delivered".equals(salesorder.getStatus()) ? "status-verified" : "shipping".equals(salesorder.getStatus()) ? "status-shipping" : "received at store".equals(salesorder.getStatus()) ? "status-verified" : "status-default"%>">
+                                    ${salesorder.status}
+                                </td>
                             </tr>
                             <%
                                 }

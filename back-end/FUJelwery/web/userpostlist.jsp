@@ -8,6 +8,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Post List</title>
+        <link rel="icon" type="image/x-icon" href="images/Screenshot__656_-removebg-preview.png">
         <link rel="stylesheet" href="css/navigation_bar.css">
         <link rel="stylesheet" href="css/blog.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -18,7 +19,7 @@
     </head>
     <body>
 
-               <div class="header">
+        <div class="header">
             <div class="header-top">
                 <div class="top-info-left">
                     <ul>
@@ -106,9 +107,9 @@
         <div class="main">           
             <div class="content">    
                 <form action='' method=GET id="searchbox">
-                        <input name="keyword" type="text" class="search-input" value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
-                        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
-                    </form>
+                    <input name="keyword" type="text" class="search-input" value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
+                    <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+                </form>
                 <table id="pagination">
                     <tbody>
                         <%
