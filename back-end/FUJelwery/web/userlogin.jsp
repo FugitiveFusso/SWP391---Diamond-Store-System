@@ -13,13 +13,21 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <link rel="stylesheet" href="css/adminlogin.css">
+        
+        <style>
+            .wrapper h1 a{
+                color: white;
+                text-decoration: none;
+            }
+        </style>
     </head>
+    
     <body>
 
         <section class="ftco-section">                       
             <div class="wrapper">
                 <form action="./userlogin" name="" method="POST" class="signin-form">
-                    <h1>User Login</h1>
+                    <h1><a href="user_homepage.jsp">User Login</a></h1>
 
                     <% String error = (String) request.getAttribute("error"); %>
                     <% if (error != null) {%>
