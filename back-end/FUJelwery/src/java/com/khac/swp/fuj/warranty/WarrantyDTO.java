@@ -11,6 +11,8 @@ public class WarrantyDTO {
     public String startdate;
     public String enddate;
     public String termsandconditions;
+    public int orderID;
+    public String status;
     public int totalWarranties;
     public int usedActiveWarranties;
     public int unusedActiveWarranties;
@@ -291,11 +293,25 @@ public class WarrantyDTO {
         this.unusedActiveWarrantyIds = unusedActiveWarrantyIds;
     }
 
-    @Override
-    public String toString() {
-        return "WarrantyDTO{" + "id=" + id + ", name=" + name + ", image=" + image + ", month=" + month + ", description=" + description + ", type=" + type + ", startdate=" + startdate + ", enddate=" + enddate + ", termsandconditions=" + termsandconditions + ", totalWarranties=" + totalWarranties + ", usedActiveWarranties=" + usedActiveWarranties + ", unusedActiveWarranties=" + unusedActiveWarranties + ", extendedWarranties=" + extendedWarranties + ", manufacturerWarranties=" + manufacturerWarranties + ", limitedWarranties=" + limitedWarranties + ", lifetimeWarranties=" + lifetimeWarranties + ", retailerWarranties=" + retailerWarranties + ", avgWarrantyDurationMonths=" + avgWarrantyDurationMonths + ", activeWarranties=" + activeWarranties + ", deletedWarranties=" + deletedWarranties + ", percentageUsedActive=" + percentageUsedActive + ", percentageUnusedActive=" + percentageUnusedActive + ", earliestStartDate=" + earliestStartDate + ", latestStartDate=" + latestStartDate + ", earliestEndDate=" + earliestEndDate + ", latestEndDate=" + latestEndDate + ", percentageManufacturerWarranties=" + percentageManufacturerWarranties + ", percentageExtendedWarranties=" + percentageExtendedWarranties + ", percentageLimitedWarranties=" + percentageLimitedWarranties + ", percentageLifetimeWarranties=" + percentageLifetimeWarranties + ", percentageRetailerWarranties=" + percentageRetailerWarranties + ", unusedActiveWarrantyIds=" + unusedActiveWarrantyIds + '}';
+    public int getOrderID() {
+        return orderID;
     }
 
+    public void setOrderID(int orderID) {
+        this.orderID = orderID;
+    }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "WarrantyDTO{" + "id=" + id + ", name=" + name + ", image=" + image + ", month=" + month + ", description=" + description + ", type=" + type + ", startdate=" + startdate + ", enddate=" + enddate + ", termsandconditions=" + termsandconditions + ", orderID=" + orderID + ", status=" + status + ", totalWarranties=" + totalWarranties + ", usedActiveWarranties=" + usedActiveWarranties + ", unusedActiveWarranties=" + unusedActiveWarranties + ", extendedWarranties=" + extendedWarranties + ", manufacturerWarranties=" + manufacturerWarranties + ", limitedWarranties=" + limitedWarranties + ", lifetimeWarranties=" + lifetimeWarranties + ", retailerWarranties=" + retailerWarranties + ", avgWarrantyDurationMonths=" + avgWarrantyDurationMonths + ", activeWarranties=" + activeWarranties + ", deletedWarranties=" + deletedWarranties + ", percentageUsedActive=" + percentageUsedActive + ", percentageUnusedActive=" + percentageUnusedActive + ", earliestStartDate=" + earliestStartDate + ", latestStartDate=" + latestStartDate + ", earliestEndDate=" + earliestEndDate + ", latestEndDate=" + latestEndDate + ", percentageManufacturerWarranties=" + percentageManufacturerWarranties + ", percentageExtendedWarranties=" + percentageExtendedWarranties + ", percentageLimitedWarranties=" + percentageLimitedWarranties + ", percentageLifetimeWarranties=" + percentageLifetimeWarranties + ", percentageRetailerWarranties=" + percentageRetailerWarranties + ", unusedActiveWarrantyIds=" + unusedActiveWarrantyIds + '}';
+    }
 
 }

@@ -1,4 +1,5 @@
 
+<%@page import="com.khac.swp.fuj.certificate.CertificateDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -61,12 +62,26 @@
                 border-radius: 10px;
                 cursor: pointer;
             }
+            .text-success {
+                color: green;
+            }
+            .text-danger {
+                color: red;
+            }
+            a {
+                text-decoration: none;
+                color: black;
+            }
+            a:hover {
+                text-decoration: none;
+                color: black;
+            }
 
 
         </style>
     </head>
     <body>        
-    <div class="menu-btn">
+        <div class="menu-btn">
             <div class="btn-cover">
                 <i class="fas fa-bars"></i>
             </div>            
@@ -140,6 +155,28 @@
                         <div class="card-body">
                             <h6 class="card-subtitle mb-2 text-muted" >Certificate ID: ${requestScope.certificate.certificateID}</h6>                                                  
                             <p class="card-text"><strong>Description: </strong> ${requestScope.certificate.certificateDescription}</p>                           
+                            <%-- Retrieve warranty object from request attribute --%>
+                            <% CertificateDTO certificate = (CertificateDTO) request.getAttribute("certificate"); %>
+
+                            <%-- Check if warranty is not null and has a valid orderID --%>
+                            <% if (certificate != null && certificate.getDiamondID() != 0) { %>
+                            <p class="card-text">
+                                <a href="DiamondController?action=details&id=${requestScope.certificate.diamondID}">
+                                    <strong>Diamond ID:</strong> ${certificate.getDiamondID()}
+                                </a>
+                            </p>
+                            <% } else { %>
+                            <p class="card-text">
+                                <strong>No valid Diamond ID found.</strong>
+                            </p>
+                            <% }%>
+
+                            <p class="card-text">
+                                <strong>Status: </strong> 
+                                <span class="${requestScope.certificate.status == 'Applied' ? 'text-success' : 'text-danger'}">
+                                    ${requestScope.certificate.status}
+                                </span>
+                            </p>
                             <div class="btn-group" role="group" aria-label="Voucher Actions">
                                 <form action="CertificateController" method="post" class="mr-2">
                                     <input type="hidden" name="action" value="list">

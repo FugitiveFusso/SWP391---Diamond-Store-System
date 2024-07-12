@@ -53,10 +53,11 @@ public class WarrantyController extends HttpServlet {
                 } catch (NumberFormatException ex) {
                     log("Parameter id has wrong format.");
                 }
-
+                
                 WarrantyDTO warranty = null;
                 if (id != null) {
                     warranty = warrantyDAO.load(id);
+                    
                 }
 
                 request.setAttribute("warranty", warranty);//object

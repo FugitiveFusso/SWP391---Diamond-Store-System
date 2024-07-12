@@ -71,7 +71,28 @@ public class WarrantyDAO {
 
     public WarrantyDTO load(int warrantyID) {
 
-        String sql = "select warrantyID, warrantyName, warrantyImage, warrantyMonth, warrantyDescription, warrantyType, startDate, endDate, termsAndConditions from Warranty where warrantyID = ? and isDeleted = 'active'";
+        String sql = "SELECT \n"
+                + "    w.warrantyID, \n"
+                + "    w.warrantyName, \n"
+                + "    w.warrantyImage, \n"
+                + "    w.warrantyMonth, \n"
+                + "    w.warrantyDescription, \n"
+                + "    w.warrantyType, \n"
+                + "    w.startDate, \n"
+                + "    w.endDate, \n"
+                + "    w.termsAndConditions,\n"
+                + "    ISNULL(o.orderID, 0) AS orderID,\n"
+                + "    CASE \n"
+                + "        WHEN o.orderID IS NOT NULL THEN 'Applied'\n"
+                + "        ELSE 'Not Applied'\n"
+                + "    END AS [status]\n"
+                + "FROM \n"
+                + "    Warranty w\n"
+                + "LEFT JOIN \n"
+                + "    [Order] o ON w.warrantyID = o.warrantyID\n"
+                + "WHERE \n"
+                + "    w.warrantyID = ? \n"
+                + "    AND w.isDeleted = 'active';";
 
         try {
 
@@ -91,6 +112,8 @@ public class WarrantyDAO {
                 String startdate = rs.getString("startDate");
                 String enddate = rs.getString("endDate");
                 String tac = rs.getString("termsAndConditions");
+                int orderID = rs.getInt("orderID");
+                String status = rs.getString("status");
 
                 WarrantyDTO warranty = new WarrantyDTO();
                 warranty.setId(id);
@@ -102,6 +125,8 @@ public class WarrantyDAO {
                 warranty.setStartdate(startdate);
                 warranty.setEnddate(enddate);
                 warranty.setTermsandconditions(tac);
+                warranty.setOrderID(orderID);
+                warranty.setStatus(status);
                 return warranty;
             }
         } catch (SQLException ex) {
@@ -313,7 +338,7 @@ public class WarrantyDAO {
                 String percentageLimitedWarranties = rs.getString("percentageLimitedWarranties");
                 String percentageLifetimeWarranties = rs.getString("percentageLifetimeWarranties");
                 String percentageRetailerWarranties = rs.getString("percentageRetailerWarranties");
-                
+
                 WarrantyDTO warranty = new WarrantyDTO();
                 warranty.setTotalWarranties(totalWarranties);
                 warranty.setUsedActiveWarranties(usedActiveWarranties);
@@ -347,4 +372,6 @@ public class WarrantyDAO {
         }
         return null;
     }
+    
+
 }
