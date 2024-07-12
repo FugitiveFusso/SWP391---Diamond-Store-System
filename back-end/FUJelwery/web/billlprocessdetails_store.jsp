@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="css/order_detail.css">
         <link rel="stylesheet" href="css/progressbar.css">    
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="icon" type="image/x-icon" href="images/Screenshot__656_-removebg-preview.png">
     </head>
 
     <body>

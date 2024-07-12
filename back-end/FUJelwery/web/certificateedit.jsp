@@ -5,6 +5,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Certificate Management Page</title>
+        <link rel="icon" type="image/x-icon" href="images/Screenshot__656_-removebg-preview.png">
         <link rel="stylesheet" href="css/post_edit.css"/>
         <link rel="stylesheet" href="css/navbar_admin.css">
         <script src="https://unpkg.com/@phosphor-icons/web"></script>

@@ -4,7 +4,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>FUJ - FPT Jewelry</title>
-
+        <link rel="icon" type="image/x-icon" href="images/Screenshot__656_-removebg-preview.png">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -19,12 +19,12 @@
             <div class="wrapper">
                 <form action="./deliverystafflogin" name="" method="POST" class="signin-form">
                     <h1>Delivery Staff Login</h1>
-                    
+
                     <% String error = (String) request.getAttribute("error"); %>
                     <% if (error != null) {%>
                     <h3 style="color: red; display: flex; justify-content: center; text-align: center ;margin-top: 10px"> <%= error%> </h3>
                     <% }%>
-                    
+
                     <div class="input-box">
                         <input name="user" type="text" required>
                         <span class="placeholder">Username</span>
@@ -60,26 +60,26 @@
         <script src="js/login.js"></script>
 
         <script>
-                                function myFunction() {
-                                    var x = document.getElementById("myInput");
-                                    var y = document.getElementById("hide1");
-                                    var z = document.getElementById("hide2");
+                            function myFunction() {
+                                var x = document.getElementById("myInput");
+                                var y = document.getElementById("hide1");
+                                var z = document.getElementById("hide2");
 
-                                    if (x.type === 'password') {
-                                        x.type = "text";
-                                        y.style.display = "block";
-                                        z.style.display = "none"
-                                    } else {
-                                        x.type = "password";
-                                        y.style.display = "none";
-                                        z.style.display = "block"
-                                    }
+                                if (x.type === 'password') {
+                                    x.type = "text";
+                                    y.style.display = "block";
+                                    z.style.display = "none"
+                                } else {
+                                    x.type = "password";
+                                    y.style.display = "none";
+                                    z.style.display = "block"
                                 }
+                            }
 
-                                let dropdown = document.querySelector('.dropdown');
-                                dropdown.onclick = function () {
-                                    dropdown.classList.toggle('active');
-                                }
+                            let dropdown = document.querySelector('.dropdown');
+                            dropdown.onclick = function () {
+                                dropdown.classList.toggle('active');
+                            }
         </script>
 
     </body>

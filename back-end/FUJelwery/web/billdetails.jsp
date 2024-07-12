@@ -7,6 +7,7 @@
         <title>Bill Details</title>
         <link rel="stylesheet" href="css/billdetalis.css">
         <link rel="stylesheet" href="css/navigation_bar.css">
+        <link rel="icon" type="image/x-icon" href="images/Screenshot__656_-removebg-preview.png">
 
     </head>
     <body>

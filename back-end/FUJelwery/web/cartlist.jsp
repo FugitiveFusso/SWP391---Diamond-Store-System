@@ -7,6 +7,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Cart Details</title>
+        <link rel="icon" type="image/x-icon" href="images/Screenshot__656_-removebg-preview.png">
         <link rel="stylesheet" href="css/navigation_bar.css">
         <link rel="stylesheet" href="css/usercart.css">
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
