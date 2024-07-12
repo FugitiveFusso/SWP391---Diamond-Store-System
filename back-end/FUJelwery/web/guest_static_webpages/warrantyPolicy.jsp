@@ -15,6 +15,7 @@
 
         <link rel="stylesheet" href="../css/navigation_bar.css">
         <link rel="stylesheet" href="../css/popup_fake.css">
+        <link rel="icon" type="image/x-icon" href="../images/Screenshot__656_-removebg-preview.png">
 
     </head>
 

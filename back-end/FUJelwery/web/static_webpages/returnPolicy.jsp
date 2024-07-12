@@ -12,6 +12,7 @@
             href="https://fonts.googleapis.com/css2?family=Gantari:ital,wght@0,100..900;1,100..900&family=Inika:wght@400;700&family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:wght@100..900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Syne:wght@400..800&display=swap"
             rel="stylesheet">
         <link rel="stylesheet" href="../css/navigation_bar.css">
+        <link rel="icon" type="image/x-icon" href="../images/Screenshot__656_-removebg-preview.png">
 
     </head>
     <body>
