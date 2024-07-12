@@ -27,7 +27,7 @@
         <section class="ftco-section">                       
             <div class="wrapper">
                 <form action="./userlogin" name="" method="POST" class="signin-form">
-                    <h1><a href="user_homepage.jsp">User Login</a></h1>
+                    <h1><a href="guest_homepage.jsp">User Login</a></h1>
 
                     <% String error = (String) request.getAttribute("error"); %>
                     <% if (error != null) {%>
