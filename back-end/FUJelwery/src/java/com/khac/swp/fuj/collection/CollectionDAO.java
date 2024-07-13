@@ -13,41 +13,47 @@ public class CollectionDAO {
     Connection conn = DBUtils.getConnection();
     ResultSet rs = null;
 
-    public List<CollectionDTO> list(String keyword, String sortCol) {
-        List<CollectionDTO> list = new ArrayList<CollectionDTO>();
+    public List<CollectionDTO> list(String keyword, String sortCol, int page, int pageSize) {
+        List<CollectionDTO> list = new ArrayList<>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = "SELECT * FROM [Collection] where isDeleted = 'active' ";
+            String sql = "SELECT * FROM [Collection] WHERE isDeleted = 'active'";
+
             if (keyword != null && !keyword.isEmpty()) {
-                sql += " and collectionName like ?";
+                sql += " AND collectionName LIKE ?";
             }
 
             if (sortCol != null && !sortCol.isEmpty()) {
-                sql += " ORDER BY " + sortCol + " ASC ";
+                sql += " ORDER BY " + sortCol + " ASC";
+            } else {
+                sql += " ORDER BY collectionID ASC"; // Default sorting by collectionID
             }
+
+            sql += " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
+            int paramIndex = 1;
             if (keyword != null && !keyword.isEmpty()) {
-                stmt.setString(1, "%" + keyword + "%");
-
+                stmt.setString(paramIndex++, "%" + keyword + "%");
             }
+
+            stmt.setInt(paramIndex++, (page - 1) * pageSize);
+            stmt.setInt(paramIndex, pageSize);
+
             ResultSet rs = stmt.executeQuery();
-            if (rs != null) {
-                while (rs.next()) {
+            while (rs.next()) {
+                int collectionID = rs.getInt("collectionID");
+                String collectionName = rs.getString("collectionName");
+                String collectionImage = rs.getString("collectionImage");
+                String collectionDescription = rs.getString("description");
 
-                    int collectionID = rs.getInt("collectionID");
-                    String collectionName = rs.getString("collectionName");
-                    String collectionImage = rs.getString("collectionImage");
-                    String collectionDescription = rs.getString("description");
-
-                    CollectionDTO collection = new CollectionDTO();
-                    collection.setCollectionID(collectionID);
-                    collection.setCollectionName(collectionName);
-                    collection.setCollectionImage(collectionImage);
-                    collection.setCollectionDescription(collectionDescription);
-                    list.add(collection);
-                }
+                CollectionDTO collection = new CollectionDTO();
+                collection.setCollectionID(collectionID);
+                collection.setCollectionName(collectionName);
+                collection.setCollectionImage(collectionImage);
+                collection.setCollectionDescription(collectionDescription);
+                list.add(collection);
             }
 
             con.close();
@@ -56,6 +62,35 @@ public class CollectionDAO {
             ex.printStackTrace();
         }
         return list;
+    }
+
+    public int getTotalCollectionCount(String keyword) {
+        int total = 0;
+        try {
+            Connection con = DBUtils.getConnection();
+            String sql = "SELECT COUNT(*) FROM [Collection] WHERE isDeleted = 'active'";
+
+            if (keyword != null && !keyword.isEmpty()) {
+                sql += " AND collectionName LIKE ?";
+            }
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            if (keyword != null && !keyword.isEmpty()) {
+                stmt.setString(1, "%" + keyword + "%");
+            }
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                total = rs.getInt(1);
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return total;
     }
 
     public CollectionDTO load(int collectionID) {

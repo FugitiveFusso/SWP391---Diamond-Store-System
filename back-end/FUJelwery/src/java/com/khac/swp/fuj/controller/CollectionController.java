@@ -33,6 +33,15 @@ public class CollectionController extends HttpServlet {
                 keyword = "";
             }
             String sortCol = request.getParameter("colSort");
+            if (sortCol == null) {
+                sortCol = "";
+            }
+            String pageStr = request.getParameter("page");
+            int page = 1;
+            if (pageStr != null) {
+                page = Integer.parseInt(pageStr);
+            }
+            int pageSize = 10; // Set the number of posts per page
             RingDAO ringDAO = new RingDAO();
             CollectionDAO collectionDAO = new CollectionDAO();
             HttpSession session = request.getSession(false);
@@ -41,8 +50,22 @@ public class CollectionController extends HttpServlet {
                 return;
             } else if (action == null || action.equals("list")) {//lists
 
-                CollectionDAO dao = new CollectionDAO();
-                List<CollectionDTO> list = dao.list(keyword, sortCol);
+                int totalCollections = collectionDAO.getTotalCollectionCount(keyword);
+                int totalPages = (int) Math.ceil((double) totalCollections / pageSize);
+
+                // Ensure page is within valid range
+                if (page < 1) {
+                    page = 1;
+                } else if (page > totalPages) {
+                    page = totalPages;
+                }
+
+                List<CollectionDTO> list = collectionDAO.list(keyword, sortCol, page, pageSize);
+                request.setAttribute("currentPage", page);
+                request.setAttribute("totalPages", totalPages);
+                request.setAttribute("pageSize", pageSize);
+                request.setAttribute("sortCol", sortCol);
+                request.setAttribute("keyword", keyword);
                 request.setAttribute("collectionlist", list);
 
                 request.getRequestDispatcher("/collectionlist.jsp").forward(request, response);
@@ -168,8 +191,22 @@ public class CollectionController extends HttpServlet {
                 }
 
                 collectionDAO.delete(id);
+                int totalCollections = collectionDAO.getTotalCollectionCount(keyword);
+                int totalPages = (int) Math.ceil((double) totalCollections / pageSize);
 
-                List<CollectionDTO> list = collectionDAO.list(keyword, sortCol);
+                // Ensure page is within valid range
+                if (page < 1) {
+                    page = 1;
+                } else if (page > totalPages) {
+                    page = totalPages;
+                }
+
+                List<CollectionDTO> list = collectionDAO.list(keyword, sortCol, page, pageSize);
+                request.setAttribute("currentPage", page);
+                request.setAttribute("totalPages", totalPages);
+                request.setAttribute("pageSize", pageSize);
+                request.setAttribute("sortCol", sortCol);
+                request.setAttribute("keyword", keyword);
                 request.setAttribute("collectionlist", list);
                 RequestDispatcher rd = request.getRequestDispatcher("collectionlist.jsp");
                 rd.forward(request, response);
