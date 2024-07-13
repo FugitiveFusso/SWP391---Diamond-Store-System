@@ -53,7 +53,7 @@ public class UserCategoryController extends HttpServlet {
             if (pageStr != null) {
                 page = Integer.parseInt(pageStr);
             }
-            int pageSize = 4; // Set the number of posts per page
+            int pageSize = 8; // Set the number of posts per page
 
             CategoryDAO categoryDAO = new CategoryDAO();
             HttpSession session = request.getSession(false);
