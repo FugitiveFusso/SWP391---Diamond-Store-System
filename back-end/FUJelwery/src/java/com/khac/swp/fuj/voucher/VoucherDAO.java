@@ -11,50 +11,58 @@ import java.util.List;
 
 public class VoucherDAO {
 
-    public List<VoucherDTO> getAllVoucher(String keyword, String sortCol) {
-        List<VoucherDTO> list = new ArrayList<VoucherDTO>();
+    public List<VoucherDTO> getAllVouchers(String keyword, String sortCol, int page, int pageSize) {
+        List<VoucherDTO> list = new ArrayList<>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = " select voucherID, voucherName, voucherImage, createdDate, createdBy, description, coupon, percentage from Voucher where isDeleted = 'active'  ";
+            String sql = "SELECT voucherID, voucherName, voucherImage, createdDate, createdBy, description, coupon, percentage "
+                    + "FROM Voucher WHERE isDeleted = 'active'";
+
             if (keyword != null && !keyword.isEmpty()) {
-                sql += " and ( voucherName like ? or createdBy like ?)";
+                sql += " AND (voucherName LIKE ? OR createdBy LIKE ?)";
             }
 
             if (sortCol != null && !sortCol.isEmpty()) {
-                sql += " ORDER BY " + sortCol + " ASC ";
+                sql += " ORDER BY " + sortCol + " ASC";
+            } else {
+                sql += " ORDER BY voucherID ASC"; // Default sorting by voucherID
             }
+
+            sql += " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
+            int paramIndex = 1;
             if (keyword != null && !keyword.isEmpty()) {
-                stmt.setString(1, "%" + keyword + "%");
-                stmt.setString(2, "%" + keyword + "%");
-
+                stmt.setString(paramIndex++, "%" + keyword + "%");
+                stmt.setString(paramIndex++, "%" + keyword + "%");
             }
+
+            stmt.setInt(paramIndex++, (page - 1) * pageSize);
+            stmt.setInt(paramIndex, pageSize);
+
             ResultSet rs = stmt.executeQuery();
-            if (rs != null) {
-                while (rs.next()) {
+            while (rs.next()) {
+                int voucherid = rs.getInt("voucherID");
+                String vouchername = rs.getString("voucherName");
+                String voucherimage = rs.getString("voucherImage");
+                String createddate = rs.getString("createdDate");
+                String createdby = rs.getString("createdBy");
+                String description = rs.getString("description");
+                String coupon = rs.getString("coupon");
+                int percentage = rs.getInt("percentage");
 
-                    int voucherid = rs.getInt("voucherID");
-                    String vouchername = rs.getString("voucherName");
-                    String voucherimage = rs.getString("voucherImage");
-                    String createddate = rs.getString("createdDate");
-                    String createdby = rs.getString("createdBy");
-                    String description = rs.getString("description");
-                    String coupon = rs.getString("coupon");
-                    int percentage = rs.getInt("percentage");
+                VoucherDTO voucher = new VoucherDTO();
+                voucher.setId(voucherid);
+                voucher.setName(vouchername);
+                voucher.setImage(voucherimage);
+                voucher.setCreateddate(createddate);
+                voucher.setCreatedby(createdby);
+                voucher.setDescription(description);
+                voucher.setCoupon(coupon);
+                voucher.setPercentage(percentage);
 
-                    VoucherDTO voucher = new VoucherDTO();
-                    voucher.setId(voucherid);
-                    voucher.setName(vouchername);
-                    voucher.setImage(voucherimage);
-                    voucher.setCreateddate(createddate);
-                    voucher.setCreatedby(createdby);
-                    voucher.setDescription(description);
-                    voucher.setCoupon(coupon);
-                    voucher.setPercentage(percentage);
-                    list.add(voucher);
-                }
+                list.add(voucher);
             }
 
             con.close();
@@ -63,6 +71,36 @@ public class VoucherDAO {
             ex.printStackTrace();
         }
         return list;
+    }
+
+    public int getTotalVouchers(String keyword) {
+        int total = 0;
+        try {
+            Connection con = DBUtils.getConnection();
+            String sql = "SELECT COUNT(*) FROM Voucher WHERE isDeleted = 'active'";
+
+            if (keyword != null && !keyword.isEmpty()) {
+                sql += " AND (voucherName LIKE ? OR createdBy LIKE ?)";
+            }
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            if (keyword != null && !keyword.isEmpty()) {
+                stmt.setString(1, "%" + keyword + "%");
+                stmt.setString(2, "%" + keyword + "%");
+            }
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                total = rs.getInt(1);
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return total;
     }
 
     public VoucherDTO load(int voucherID) {
@@ -204,7 +242,7 @@ public class VoucherDAO {
         }
         return null;
     }
-   
+
     public List<VoucherDTO> listStatistics() {
         List<VoucherDTO> list = new ArrayList<VoucherDTO>();
         try {

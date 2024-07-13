@@ -36,13 +36,39 @@ public class GuestVoucherController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            VoucherDAO voucherDAO = new VoucherDAO();
+            String action = request.getParameter("action");
             String keyword = request.getParameter("keyword");
             if (keyword == null) {
                 keyword = "";
             }
             String sortCol = request.getParameter("colSort");
-            VoucherDAO dao = new VoucherDAO();
-            List<VoucherDTO> list = dao.getAllVoucher(keyword, sortCol);
+            if (sortCol == null) {
+                sortCol = "";
+            }
+            String pageStr = request.getParameter("page");
+            int page = 1;
+            if (pageStr != null) {
+                page = Integer.parseInt(pageStr);
+            }
+            int pageSize = 10; // Set the number of posts per page
+
+            int totalVouchers = voucherDAO.getTotalVouchers(keyword);
+            int totalPages = (int) Math.ceil((double) totalVouchers / pageSize);
+
+            // Ensure page is within valid range
+            if (page < 1) {
+                page = 1;
+            } else if (page > totalPages) {
+                page = totalPages;
+            }
+
+            List<VoucherDTO> list = voucherDAO.getAllVouchers(keyword, sortCol, page, pageSize);
+            request.setAttribute("currentPage", page);
+            request.setAttribute("totalPages", totalPages);
+            request.setAttribute("pageSize", pageSize);
+            request.setAttribute("sortCol", sortCol);
+            request.setAttribute("keyword", keyword);
             request.setAttribute("uservoucherlist", list);
 
             request.getRequestDispatcher("/guestvoucherlist.jsp").forward(request, response);
