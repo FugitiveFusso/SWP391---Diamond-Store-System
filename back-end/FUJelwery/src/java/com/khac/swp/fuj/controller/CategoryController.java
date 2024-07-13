@@ -33,6 +33,15 @@ public class CategoryController extends HttpServlet {
                 keyword = "";
             }
             String sortCol = request.getParameter("colSort");
+            if (sortCol == null) {
+                sortCol = "";
+            }
+            String pageStr = request.getParameter("page");
+            int page = 1;
+            if (pageStr != null) {
+                page = Integer.parseInt(pageStr);
+            }
+            int pageSize = 10; // Set the number of posts per page
 
             CategoryDAO categoryDAO = new CategoryDAO();
             HttpSession session = request.getSession(false);
@@ -41,8 +50,22 @@ public class CategoryController extends HttpServlet {
                 return;
             } else if (action == null || action.equals("list")) {//lists
 
-                CategoryDAO dao = new CategoryDAO();
-                List<CategoryDTO> list = dao.list(keyword, sortCol);
+                int totalCategories = categoryDAO.getTotalCategories(keyword);
+                int totalPages = (int) Math.ceil((double) totalCategories / pageSize);
+
+                // Ensure page is within valid range
+                if (page < 1) {
+                    page = 1;
+                } else if (page > totalPages) {
+                    page = totalPages;
+                }
+
+                List<CategoryDTO> list = categoryDAO.list(keyword, sortCol, page, pageSize);
+                request.setAttribute("currentPage", page);
+                request.setAttribute("totalPages", totalPages);
+                request.setAttribute("pageSize", pageSize);
+                request.setAttribute("sortCol", sortCol);
+                request.setAttribute("keyword", keyword);
                 request.setAttribute("categorylist", list);
 
                 request.getRequestDispatcher("/categorylist.jsp").forward(request, response);
@@ -163,8 +186,22 @@ public class CategoryController extends HttpServlet {
                 }
 
                 categoryDAO.delete(id);
+                int totalCategories = categoryDAO.getTotalCategories(keyword);
+                int totalPages = (int) Math.ceil((double) totalCategories / pageSize);
 
-                List<CategoryDTO> list = categoryDAO.list(keyword, sortCol);
+                // Ensure page is within valid range
+                if (page < 1) {
+                    page = 1;
+                } else if (page > totalPages) {
+                    page = totalPages;
+                }
+
+                List<CategoryDTO> list = categoryDAO.list(keyword, sortCol, page, pageSize);
+                request.setAttribute("currentPage", page);
+                request.setAttribute("totalPages", totalPages);
+                request.setAttribute("pageSize", pageSize);
+                request.setAttribute("sortCol", sortCol);
+                request.setAttribute("keyword", keyword);
                 request.setAttribute("categorylist", list);
                 RequestDispatcher rd = request.getRequestDispatcher("categorylist.jsp");
                 rd.forward(request, response);

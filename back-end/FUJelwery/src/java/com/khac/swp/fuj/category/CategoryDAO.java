@@ -10,29 +10,37 @@ import java.util.List;
 
 public class CategoryDAO {
 
-    public List<CategoryDTO> list(String keyword, String sortCol) {
+    public List<CategoryDTO> list(String keyword, String sortCol, int page, int pageSize) {
         List<CategoryDTO> list = new ArrayList<CategoryDTO>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = " SELECT categoryID, categoryName, categoryImage FROM [Category] where isDeleted = 'active' ";
+            String sql = "SELECT categoryID, categoryName, categoryImage FROM [Category] WHERE isDeleted = 'active'";
+
             if (keyword != null && !keyword.isEmpty()) {
-                sql += " and categoryName like ?";
+                sql += " AND categoryName LIKE ?";
             }
 
             if (sortCol != null && !sortCol.isEmpty()) {
-                sql += " ORDER BY " + sortCol + " ASC ";
+                sql += " ORDER BY " + sortCol + " ASC";
+            } else {
+                sql += " ORDER BY categoryID ASC";
             }
+
+            sql += " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
+            int paramIndex = 1;
             if (keyword != null && !keyword.isEmpty()) {
-                stmt.setString(1, "%" + keyword + "%");
-
+                stmt.setString(paramIndex++, "%" + keyword + "%");
             }
+
+            stmt.setInt(paramIndex++, (page - 1) * pageSize);
+            stmt.setInt(paramIndex, pageSize);
+
             ResultSet rs = stmt.executeQuery();
             if (rs != null) {
                 while (rs.next()) {
-
                     int categoryID = rs.getInt("categoryID");
                     String categoryName = rs.getString("categoryName");
                     String image = rs.getString("categoryImage");
@@ -41,6 +49,7 @@ public class CategoryDAO {
                     category.setCategoryID(categoryID);
                     category.setCategoryName(categoryName);
                     category.setImage(image);
+
                     list.add(category);
                 }
             }
@@ -51,6 +60,35 @@ public class CategoryDAO {
             ex.printStackTrace();
         }
         return list;
+    }
+
+    public int getTotalCategories(String keyword) {
+        int total = 0;
+        try {
+            Connection con = DBUtils.getConnection();
+            String sql = "SELECT COUNT(*) FROM [Category] WHERE isDeleted = 'active'";
+
+            if (keyword != null && !keyword.isEmpty()) {
+                sql += " AND categoryName LIKE ?";
+            }
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            if (keyword != null && !keyword.isEmpty()) {
+                stmt.setString(1, "%" + keyword + "%");
+            }
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                total = rs.getInt(1);
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return total;
     }
 
     public CategoryDTO load(int categoryID) {

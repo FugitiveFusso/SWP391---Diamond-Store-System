@@ -45,12 +45,35 @@ public class GuestCategoryController extends HttpServlet {
                 keyword = "";
             }
             String sortCol = request.getParameter("colSort");
+            if (sortCol == null) {
+                sortCol = "";
+            }
+            String pageStr = request.getParameter("page");
+            int page = 1;
+            if (pageStr != null) {
+                page = Integer.parseInt(pageStr);
+            }
+            int pageSize = 4; // Set the number of posts per page
 
             CategoryDAO categoryDAO = new CategoryDAO();
             if (action == null || action.equals("list")) {//lists
 
-                CategoryDAO dao = new CategoryDAO();
-                List<CategoryDTO> list = dao.list(keyword, sortCol);
+                int totalCategories = categoryDAO.getTotalCategories(keyword);
+                int totalPages = (int) Math.ceil((double) totalCategories / pageSize);
+
+                // Ensure page is within valid range
+                if (page < 1) {
+                    page = 1;
+                } else if (page > totalPages) {
+                    page = totalPages;
+                }
+
+                List<CategoryDTO> list = categoryDAO.list(keyword, sortCol, page, pageSize);
+                request.setAttribute("currentPage", page);
+                request.setAttribute("totalPages", totalPages);
+                request.setAttribute("pageSize", pageSize);
+                request.setAttribute("sortCol", sortCol);
+                request.setAttribute("keyword", keyword);
                 request.setAttribute("categorylist", list);
 
                 request.getRequestDispatcher("/guestcategorylist.jsp").forward(request, response);
