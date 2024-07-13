@@ -169,15 +169,15 @@
                         <thead>
                             <tr>
                                 <th>Diamond ID</td>
-                                <th><a href=?colSort=diamondName>Diamond Name</a></th>
+                                <th><a href="?action=listofdiamonds&colSort=diamondName<%= request.getAttribute("keyword") != null && !request.getAttribute("keyword").toString().isEmpty() ? "&keyword=" + request.getAttribute("keyword") : ""%>">Diamond Name</a></th>
                                 <th>Diamond Image</th>
                                 <th>Origin</th>
-                                <th><a href=?colSort=diamondSize>Diamond Size</a></th>
-                                <th><a href=?colSort=caratWeight>Carat Weight</a></th>
+                                <th><a href="?action=listofdiamonds&colSort=diamondSize<%= request.getAttribute("keyword") != null && !request.getAttribute("keyword").toString().isEmpty() ? "&keyword=" + request.getAttribute("keyword") : ""%>">Diamond Size</a></th>
+                                <th><a href="?action=listofdiamonds&colSort=caratWeight<%= request.getAttribute("keyword") != null && !request.getAttribute("keyword").toString().isEmpty() ? "&keyword=" + request.getAttribute("keyword") : ""%>">Carat Weight</a></th>
                                 <th>Cut</th>
-                                <th><a href=?colSort=color>Color</a></th>
-                                <th><a href=?colSort=clarity>Clarity</a></th>
-                                <th><a href=?colSort=price>Price</a></th>
+                                <th><a href="?action=listofdiamonds&colSort=color<%= request.getAttribute("keyword") != null && !request.getAttribute("keyword").toString().isEmpty() ? "&keyword=" + request.getAttribute("keyword") : ""%>">Color</a></th>
+                                <th><a href="?action=listofdiamonds&colSort=clarity<%= request.getAttribute("keyword") != null && !request.getAttribute("keyword").toString().isEmpty() ? "&keyword=" + request.getAttribute("keyword") : ""%>">Clarity</a></th>
+                                <th><a href="?action=listofdiamonds&colSort=price<%= request.getAttribute("keyword") != null && !request.getAttribute("keyword").toString().isEmpty() ? "&keyword=" + request.getAttribute("keyword") : ""%>">Price</a></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -215,7 +215,7 @@
                         %>
 
                         <% if (currentPage > 1) {%>
-                        <a href="?page=<%= currentPage - 1%><%= !sortCol.isEmpty() ? "&colSort=" + sortCol : ""%><%= !keyword.isEmpty() ? "&keyword=" + keyword : ""%>" class="pagination-arrow">&#8249;</a>
+                        <a href="?action=listofdiamonds&page=<%= currentPage - 1%><%= !sortCol.isEmpty() ? "&colSort=" + sortCol : ""%><%= !keyword.isEmpty() ? "&keyword=" + keyword : ""%>" class="pagination-arrow">&#8249;</a>
                         <% } else { %>
                         <span class="pagination-arrow disabled">&#8249;</span>
                         <% } %>
@@ -225,14 +225,14 @@
                             int endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
 
                             if (startPage > 1) {%>
-                        <a href="?page=1<%= !sortCol.isEmpty() ? "&colSort=" + sortCol : ""%><%= !keyword.isEmpty() ? "&keyword=" + keyword : ""%>" class="pagination-number">1</a>
+                        <a href="?action=listofdiamonds&page=1<%= !sortCol.isEmpty() ? "&colSort=" + sortCol : ""%><%= !keyword.isEmpty() ? "&keyword=" + keyword : ""%>" class="pagination-number">1</a>
                         <% if (startPage > 2) { %>
                         <span class="pagination-ellipsis">...</span>
                         <% }
                             }
 
                             for (int i = startPage; i <= endPage; i++) {%>
-                        <a href="?page=<%= i%><%= !sortCol.isEmpty() ? "&colSort=" + sortCol : ""%><%= !keyword.isEmpty() ? "&keyword=" + keyword : ""%>"
+                        <a href="?action=listofdiamonds&page=<%= i%><%= !sortCol.isEmpty() ? "&colSort=" + sortCol : ""%><%= !keyword.isEmpty() ? "&keyword=" + keyword : ""%>"
                            class="pagination-number <%= (i == currentPage) ? "active" : ""%>"><%= i%></a>
                         <% }
 
@@ -240,12 +240,12 @@
                         <% if (endPage < totalPages - 1) { %>
                         <span class="pagination-ellipsis">...</span>
                         <% }%>
-                        <a href="?page=<%= totalPages%><%= !sortCol.isEmpty() ? "&colSort=" + sortCol : ""%><%= !keyword.isEmpty() ? "&keyword=" + keyword : ""%>" class="pagination-number"><%= totalPages%></a>
+                        <a href="?action=listofdiamonds&page=<%= totalPages%><%= !sortCol.isEmpty() ? "&colSort=" + sortCol : ""%><%= !keyword.isEmpty() ? "&keyword=" + keyword : ""%>" class="pagination-number"><%= totalPages%></a>
                         <% }
                         %>
 
                         <% if (currentPage < totalPages) {%>
-                        <a href="?page=<%= currentPage + 1%><%= !sortCol.isEmpty() ? "&colSort=" + sortCol : ""%><%= !keyword.isEmpty() ? "&keyword=" + keyword : ""%>" class="pagination-arrow">&#8250;</a>
+                        <a href="?action=listofdiamonds&page=<%= currentPage + 1%><%= !sortCol.isEmpty() ? "&colSort=" + sortCol : ""%><%= !keyword.isEmpty() ? "&keyword=" + keyword : ""%>" class="pagination-arrow">&#8250;</a>
                         <% } else { %>
                         <span class="pagination-arrow disabled">&#8250;</span>
                         <% }%>

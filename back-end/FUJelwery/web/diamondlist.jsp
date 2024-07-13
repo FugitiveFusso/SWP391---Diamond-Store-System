@@ -159,7 +159,7 @@
                                 <th><a href="?colSort=diamondName<%= request.getAttribute("keyword") != null && !request.getAttribute("keyword").toString().isEmpty() ? "&keyword=" + request.getAttribute("keyword") : ""%>">Diamond Name</a></th>
                                 <th>Diamond Image</th>
                                 <th>Origin</th>
-=                                <th><a href="?colSort=diamondSize<%= request.getAttribute("keyword") != null && !request.getAttribute("keyword").toString().isEmpty() ? "&keyword=" + request.getAttribute("keyword") : ""%>">Diamond Size</a></th>
+                                <th><a href="?colSort=diamondSize<%= request.getAttribute("keyword") != null && !request.getAttribute("keyword").toString().isEmpty() ? "&keyword=" + request.getAttribute("keyword") : ""%>">Diamond Size</a></th>
                                 <th><a href="?colSort=caratWeight<%= request.getAttribute("keyword") != null && !request.getAttribute("keyword").toString().isEmpty() ? "&keyword=" + request.getAttribute("keyword") : ""%>">Carat Weight</a></th>
                                 <th>Cut</th>
                                 <th><a href="?colSort=color<%= request.getAttribute("keyword") != null && !request.getAttribute("keyword").toString().isEmpty() ? "&keyword=" + request.getAttribute("keyword") : ""%>">Color</a></th>

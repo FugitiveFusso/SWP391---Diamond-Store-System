@@ -177,11 +177,10 @@
                         <thead>
                             <tr>
                                 <th>Post ID</th>
-                                <th><a href="?colSort=postName<%= request.getAttribute("keyword") != null && !request.getAttribute("keyword").toString().isEmpty() ? "&keyword=" + request.getAttribute("keyword") : ""%>">Post Name</a></th>
+                                <th><a href="?action=listofposts&colSort=postName<%= request.getAttribute("keyword") != null && !request.getAttribute("keyword").toString().isEmpty() ? "&keyword=" + request.getAttribute("keyword") : ""%>">Post Name</a></th>
                                 <th>Post Image</th>
                                 <th>Date</th>
                                 <th>Author</th>
-                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -196,14 +195,6 @@
                                 <td><img src="${post.image}" width="300px" height="300px" style="border-radius: 20px;"></td>
                                 <td>${post.date}</td>
                                 <td>${post.author}</td>
-
-                                <td>
-                                    <form id="deleteForm" action="PostController" method="POST" class="input">
-                                        <input name="action" value="delete" type="hidden">
-                                        <input name="id" value="${post.id}" type="hidden">
-                                        <input type="submit" value="Delete" class="deleteButton btn">
-                                    </form>
-                                </td>
                             </tr>
                             <%
                                 }
