@@ -223,48 +223,55 @@ public class OrderDAO {
         return list;
     }
 
-    public List<OrderDTO> listPastPurchase(int userID) {
-        List<OrderDTO> list = new ArrayList<OrderDTO>();
+    public List<OrderDTO> listPastPurchase(int userID, int page, int pageSize) {
+        List<OrderDTO> list = new ArrayList<>();
         try {
-
             Connection con = DBUtils.getConnection();
-            String sql = " SELECT o.orderID, o.userID, u.userName, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, o.ringSize, FORMAT((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * ((100.0 - COALESCE(v.percentage, 0)) / 100), 'N0') AS totalPrice, o.status FROM [Order] o LEFT JOIN [User] u ON o.userID = u.userID LEFT JOIN [Ring] r ON o.ringID = r.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON r.diamondID = d.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID WHERE o.userID = ? AND o.status NOT IN ('pending', 'purchased', 'verified', 'shipping') ";
+            String sql = "SELECT o.orderID, o.userID, u.userName, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, o.ringSize, "
+                    + "FORMAT((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * ((100.0 - COALESCE(v.percentage, 0)) / 100), 'N0') AS totalPrice, o.status "
+                    + "FROM [Order] o "
+                    + "LEFT JOIN [User] u ON o.userID = u.userID "
+                    + "LEFT JOIN [Ring] r ON o.ringID = r.ringID "
+                    + "LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID "
+                    + "LEFT JOIN [Diamond] d ON r.diamondID = d.diamondID "
+                    + "LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID "
+                    + "LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID "
+                    + "WHERE o.userID = ? AND o.status NOT IN ('pending', 'purchased', 'verified', 'shipping') "
+                    + "ORDER BY o.orderID ASC OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
 
-            Connection conn = DBUtils.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
+            PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, userID);
+            ps.setInt(2, (page - 1) * pageSize);
+            ps.setInt(3, pageSize);
 
             ResultSet rs = ps.executeQuery();
-            if (rs != null) {
-                while (rs.next()) {
-                    int orderID = rs.getInt("orderID");
-                    int userID1 = rs.getInt("userID");
-                    String userName = rs.getString("userName");
-                    String orderDate = rs.getString("orderDate");
-                    int ringID = rs.getInt("ringID");
-                    String ringName = rs.getString("ringName");
-                    int voucherID = rs.getInt("voucherID");
-                    String voucherName = rs.getString("voucherName");
-                    int ringSize = rs.getInt("ringSize");
-                    String totalPrice = rs.getString("totalPrice");
-                    String status = rs.getString("status");
+            while (rs.next()) {
+                int orderID = rs.getInt("orderID");
+                int userID1 = rs.getInt("userID");
+                String userName = rs.getString("userName");
+                String orderDate = rs.getString("orderDate");
+                int ringID = rs.getInt("ringID");
+                String ringName = rs.getString("ringName");
+                int voucherID = rs.getInt("voucherID");
+                String voucherName = rs.getString("voucherName");
+                int ringSize = rs.getInt("ringSize");
+                String totalPrice = rs.getString("totalPrice");
+                String status = rs.getString("status");
 
-                    OrderDTO order = new OrderDTO();
+                OrderDTO order = new OrderDTO();
+                order.setOrderID(orderID);
+                order.setUserID(userID1);
+                order.setUserName(userName);
+                order.setOrderDate(orderDate);
+                order.setRingID(ringID);
+                order.setRingName(ringName);
+                order.setVoucherID(voucherID);
+                order.setVoucherName(voucherName);
+                order.setRingSize(ringSize);
+                order.setTotalPrice(totalPrice);
+                order.setStatus(status);
 
-                    order.setOrderID(orderID);
-                    order.setUserID(userID1);
-                    order.setUserName(userName);
-                    order.setOrderDate(orderDate);
-                    order.setRingID(ringID);
-                    order.setRingName(ringName);
-                    order.setVoucherID(voucherID);
-                    order.setVoucherName(voucherName);
-                    order.setRingSize(ringSize);
-                    order.setTotalPrice(totalPrice);
-                    order.setStatus(status);
-
-                    list.add(order);
-                }
+                list.add(order);
             }
 
             con.close();
@@ -273,6 +280,29 @@ public class OrderDAO {
             ex.printStackTrace();
         }
         return list;
+    }
+
+    public int getTotalPastPurchaseCount(int userID) {
+        int total = 0;
+        try {
+            Connection con = DBUtils.getConnection();
+            String sql = "SELECT COUNT(*) FROM [Order] o "
+                    + "WHERE o.userID = ? AND o.status NOT IN ('pending', 'purchased', 'verified', 'shipping')";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, userID);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                total = rs.getInt(1);
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return total;
     }
 
     public List<OrderDTO> listForSales(String keyword_a) {
