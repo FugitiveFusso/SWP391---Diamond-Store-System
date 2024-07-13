@@ -84,6 +84,8 @@ public class DashboardController extends HttpServlet {
                 page = Integer.parseInt(pageStr);
             }
             int pageSize = 10; // Set the number of posts per page
+            int pageSize_a = 5;
+
             HttpSession session = request.getSession(false);
             if (session == null || session.getAttribute("managersession") == null) {
                 response.sendRedirect("managerlogin.jsp");
@@ -247,7 +249,22 @@ public class DashboardController extends HttpServlet {
             } else if (action.equals("listofrings")) {//lists
 
                 RingDAO dao = new RingDAO();
-                List<RingDTO> list = dao.list(keyword, sortCol);
+                int totalRings = ringDAO.getTotalRingCount(keyword);
+                int totalPages = (int) Math.ceil((double) totalRings / pageSize);
+
+                // Ensure page is within valid range
+                if (page < 1) {
+                    page = 1;
+                } else if (page > totalPages) {
+                    page = totalPages;
+                }
+
+                List<RingDTO> list = ringDAO.list(keyword, sortCol, page, pageSize);
+                request.setAttribute("currentPage", page);
+                request.setAttribute("totalPages", totalPages);
+                request.setAttribute("pageSize", pageSize);
+                request.setAttribute("sortCol", sortCol);
+                request.setAttribute("keyword", keyword);
                 request.setAttribute("ringlist", list);
 
                 request.getRequestDispatcher("manager_ringlist.jsp").forward(request, response);
@@ -383,7 +400,23 @@ public class DashboardController extends HttpServlet {
                 if (id != null) {
                     RingDAO dao_1 = new RingDAO();
                     collection = collectionDAO.load(id);
-                    List<RingDTO> ring_1 = dao_1.listByCollection(id);
+                    int totalRCs = dao_1.getTotalRingCountByCollection(id);
+                    int totalPages = (int) Math.ceil((double) totalRCs / pageSize_a);
+
+                    // Ensure page is within valid range
+                    if (page < 1) {
+                        page = 1;
+                    } else if (page > totalPages) {
+                        page = totalPages;
+                    }
+
+                    List<RingDTO> ring_1 = dao_1.listByCollection(id, page, pageSize_a);
+                    request.setAttribute("currentPage", page);
+                    request.setAttribute("totalPages", totalPages);
+                    request.setAttribute("pageSize", pageSize);
+                    request.setAttribute("sortCol", sortCol);
+                    request.setAttribute("keyword", keyword);
+                    request.setAttribute("id", id);
                     request.setAttribute("ringclist", ring_1);
                 }
 
@@ -402,7 +435,23 @@ public class DashboardController extends HttpServlet {
                 CategoryDTO category = null;
                 if (id != null) {
                     RingDAO dao_1 = new RingDAO();
-                    List<RingDTO> ring_1 = dao_1.listByCategory(id);
+                    int totalRCs = dao_1.getTotalRingCountByCategory(id);
+                    int totalPages = (int) Math.ceil((double) totalRCs / pageSize_a);
+
+                    // Ensure page is within valid range
+                    if (page < 1) {
+                        page = 1;
+                    } else if (page > totalPages) {
+                        page = totalPages;
+                    }
+
+                    List<RingDTO> ring_1 = dao_1.listByCategory(id, page, pageSize_a);
+                    request.setAttribute("currentPage", page);
+                    request.setAttribute("totalPages", totalPages);
+                    request.setAttribute("pageSize", pageSize);
+                    request.setAttribute("sortCol", sortCol);
+                    request.setAttribute("keyword", keyword);
+                    request.setAttribute("id", id);
                     request.setAttribute("ringclist", ring_1);
                     category = categoryDAO.load(id);
                 }

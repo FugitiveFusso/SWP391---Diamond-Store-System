@@ -93,8 +93,25 @@ public class UserCategoryController extends HttpServlet {
 
                 CategoryDTO category = null;
                 if (id != null) {
+                    int pageSize_a = 6;
                     RingDAO dao_1 = new RingDAO();
-                    List<RingDTO> ring_1 = dao_1.listByCategory(id);
+                    int totalRCs = dao_1.getTotalRingCountByCategory(id);
+                    int totalPages = (int) Math.ceil((double) totalRCs / pageSize_a);
+
+                    // Ensure page is within valid range
+                    if (page < 1) {
+                        page = 1;
+                    } else if (page > totalPages) {
+                        page = totalPages;
+                    }
+
+                    List<RingDTO> ring_1 = dao_1.listByCategory(id, page, pageSize_a);
+                    request.setAttribute("currentPage", page);
+                    request.setAttribute("totalPages", totalPages);
+                    request.setAttribute("pageSize", pageSize);
+                    request.setAttribute("sortCol", sortCol);
+                    request.setAttribute("keyword", keyword);
+                    request.setAttribute("id", id);
                     request.setAttribute("ringclist", ring_1);
                     category = categoryDAO.load(id);
                 }
