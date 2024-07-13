@@ -180,19 +180,19 @@
                             int startPage = Math.max(1, currentPage - (maxPagesToShow / 2));
                             int endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
 
-        if (startPage > 1) {%>
+                            if (startPage > 1) {%>
                         <a href="?page=1<%= !sortCol.isEmpty() ? "&colSort=" + sortCol : ""%><%= !keyword.isEmpty() ? "&keyword=" + keyword : ""%>" class="pagination-number">1</a>
                         <% if (startPage > 2) { %>
                         <span class="pagination-ellipsis">...</span>
                         <% }
-               }
+                            }
 
-               for (int i = startPage; i <= endPage; i++) {%>
+                            for (int i = startPage; i <= endPage; i++) {%>
                         <a href="?page=<%= i%><%= !sortCol.isEmpty() ? "&colSort=" + sortCol : ""%><%= !keyword.isEmpty() ? "&keyword=" + keyword : ""%>"
                            class="pagination-number <%= (i == currentPage) ? "active" : ""%>"><%= i%></a>
                         <% }
 
-           if (endPage < totalPages) { %>
+                            if (endPage < totalPages) { %>
                         <% if (endPage < totalPages - 1) { %>
                         <span class="pagination-ellipsis">...</span>
                         <% }%>

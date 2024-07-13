@@ -226,8 +226,22 @@ public class DashboardController extends HttpServlet {
 
             } else if (action.equals("listofdiamonds")) {//lists
 
-                DiamondDAO dao = new DiamondDAO();
-                List<DiamondDTO> list = dao.list(keyword, sortCol);
+                int totalDiamond = diamondDAO.getTotalDiamonds(keyword);
+                int totalPages = (int) Math.ceil((double) totalDiamond / pageSize);
+
+                // Ensure page is within valid range
+                if (page < 1) {
+                    page = 1;
+                } else if (page > totalPages) {
+                    page = totalPages;
+                }
+
+                List<DiamondDTO> list = diamondDAO.list(keyword, sortCol, page, pageSize);
+                request.setAttribute("currentPage", page);
+                request.setAttribute("totalPages", totalPages);
+                request.setAttribute("pageSize", pageSize);
+                request.setAttribute("sortCol", sortCol);
+                request.setAttribute("keyword", keyword);
                 request.setAttribute("diamondlist", list);
 
                 request.getRequestDispatcher("manager_diamondlist.jsp").forward(request, response);

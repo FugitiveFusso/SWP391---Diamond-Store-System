@@ -13,70 +13,132 @@ public class DiamondDAO {
     Connection conn = DBUtils.getConnection();
     ResultSet rs = null;
 
-    public List<DiamondDTO> list(String keyword, String sortCol) {
-        List<DiamondDTO> list = new ArrayList<DiamondDTO>();
+    public List<DiamondDTO> list(String keyword, String sortCol, int page, int pageSize) {
+        List<DiamondDTO> list = new ArrayList<>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = "SELECT d.diamondID, d.diamondName, d.diamondImage, d.origin, d.dpID, d.certificateID, dp.diamondSize, dp.caratWeight, dp.color, dp.clarity, dp.cut, FORMAT(dp.price, 'N0') AS price FROM Diamond d LEFT JOIN DiamondPrice dp ON d.dpID = dp.dpID where d.isDeleted = 'active' ";
+            String sql = "SELECT d.diamondID, d.diamondName, d.diamondImage, d.origin, d.dpID, d.certificateID, "
+                    + "dp.diamondSize, dp.caratWeight, dp.color, dp.clarity, dp.cut, FORMAT(dp.price, 'N0') AS price "
+                    + "FROM Diamond d LEFT JOIN DiamondPrice dp ON d.dpID = dp.dpID "
+                    + "WHERE d.isDeleted = 'active' ";
+
+            // Append conditions based on keyword
             if (keyword != null && !keyword.isEmpty()) {
-                sql += " and ( d.diamondName like ? or dp.diamondSize like ? or dp.caratWeight like ? or dp.color like ? or dp.clarity like ? or dp.price like ?) ";
+                sql += "AND (d.diamondName LIKE ? OR dp.diamondSize LIKE ? OR dp.caratWeight LIKE ? OR dp.color LIKE ? OR dp.clarity LIKE ? OR dp.price LIKE ?) ";
             }
 
+            // Append sorting
             if (sortCol != null && !sortCol.isEmpty()) {
-                sql += " ORDER BY " + sortCol + " ASC ";
+                // Check if sortCol contains both column name and direction (e.g., "columnName ASC")
+                if (sortCol.contains(" ")) {
+                    sql += "ORDER BY " + sortCol;
+                } else {
+                    sql += "ORDER BY " + sortCol + " ASC ";
+                }
+            } else {
+                // Default sorting if none provided
+                sql += "ORDER BY d.diamondID ASC ";
             }
+
+            // Pagination: OFFSET and FETCH NEXT
+            sql += " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
+            // Set parameters
+            int paramIndex = 1;
             if (keyword != null && !keyword.isEmpty()) {
-                stmt.setString(1, "%" + keyword + "%");
-                stmt.setString(2, "%" + keyword + "%");
-                stmt.setString(3, "%" + keyword + "%");
-                stmt.setString(4, "%" + keyword + "%");
-                stmt.setString(5, "%" + keyword + "%");
-                stmt.setString(6, "%" + keyword + "%");
-
+                String likeParam = "%" + keyword + "%";
+                stmt.setString(paramIndex++, likeParam);
+                stmt.setString(paramIndex++, likeParam);
+                stmt.setString(paramIndex++, likeParam);
+                stmt.setString(paramIndex++, likeParam);
+                stmt.setString(paramIndex++, likeParam);
+                stmt.setString(paramIndex++, likeParam);
             }
+
+            stmt.setInt(paramIndex++, (page - 1) * pageSize); // Calculate offset
+            stmt.setInt(paramIndex, pageSize); // Set number of rows to fetch
+
             ResultSet rs = stmt.executeQuery();
-            if (rs != null) {
-                while (rs.next()) {
+            while (rs.next()) {
+                // Retrieve data from result set and create DiamondDTO objects
+                DiamondDTO diamond = new DiamondDTO();
+                diamond.setDiamondID(rs.getInt("diamondID"));
+                diamond.setDiamondName(rs.getString("diamondName"));
+                diamond.setDiamondImage(rs.getString("diamondImage"));
+                diamond.setOrigin(rs.getString("origin"));
+                diamond.setDpID(rs.getInt("dpID"));
+                diamond.setCertificateID(rs.getInt("certificateID"));
+                diamond.setDiamondSize(rs.getDouble("diamondSize"));
+                diamond.setCaratWeight(rs.getDouble("caratWeight"));
+                diamond.setColor(rs.getString("color"));
+                diamond.setClarity(rs.getString("clarity"));
+                diamond.setCut(rs.getString("cut"));
+                diamond.setDiamondPrice(rs.getString("price"));
 
-                    int diamondID = rs.getInt("diamondID");
-                    String diamondName = rs.getString("diamondName");
-                    String diamondImage = rs.getString("diamondImage");
-                    String origin = rs.getString("origin");
-                    int dpID = rs.getInt("dpID");
-                    int certificateID = rs.getInt("certificateID");
-                    double diamondSize = rs.getDouble("diamondSize");
-                    double caratWeight = rs.getDouble("caratWeight");
-                    String color = rs.getString("color");
-                    String clarity = rs.getString("clarity");
-                    String cut = rs.getString("cut");
-                    String price = rs.getString("price");
-
-                    DiamondDTO diamond = new DiamondDTO();
-                    diamond.setDiamondID(diamondID);
-                    diamond.setDiamondName(diamondName);
-                    diamond.setDiamondImage(diamondImage);
-                    diamond.setOrigin(origin);
-                    diamond.setDpID(dpID);
-                    diamond.setCertificateID(certificateID);
-                    diamond.setDiamondSize(diamondSize);
-                    diamond.setCaratWeight(caratWeight);
-                    diamond.setColor(color);
-                    diamond.setClarity(clarity);
-                    diamond.setCut(cut);
-                    diamond.setDiamondPrice(price);
-                    list.add(diamond);
-                }
+                list.add(diamond);
             }
 
+            // Close resources
+            rs.close();
+            stmt.close();
             con.close();
         } catch (SQLException ex) {
             System.out.println("Error in servlet. Details:" + ex.getMessage());
             ex.printStackTrace();
         }
         return list;
+    }
+
+    public int getTotalDiamonds(String keyword) {
+        int total = 0;
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            con = DBUtils.getConnection();
+            String sql = "SELECT COUNT(*) FROM Diamond d WHERE d.isDeleted = 'active' ";
+
+            // Append conditions based on keyword
+            if (keyword != null && !keyword.isEmpty()) {
+                sql += "AND (d.diamondName LIKE ? OR d.origin LIKE ?)";
+            }
+
+            stmt = con.prepareStatement(sql);
+
+            // Set parameters for keyword search
+            if (keyword != null && !keyword.isEmpty()) {
+                stmt.setString(1, "%" + keyword + "%");
+                stmt.setString(2, "%" + keyword + "%");
+            }
+
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                total = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error in retrieving total diamonds count. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        } finally {
+            // Close resources in a finally block to ensure they are always closed
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println("Error closing resources. Details:" + ex.getMessage());
+                ex.printStackTrace();
+            }
+        }
+        return total;
     }
 
     public DiamondDTO load(int diamondID) {

@@ -47,7 +47,7 @@ public class DeliveryStaffController extends HttpServlet {
                 return;
             } else if (action == null || action.equals("list")) {//lists
 
-                int totalUsers = userDAO.getTotalUsers("Delivery Staff");
+                int totalUsers = userDAO.getTotalUsers(keyword, "Delivery Staff");
                 int totalPages = (int) Math.ceil((double) totalUsers / pageSize);
 
                 // Ensure page is within valid range
@@ -214,7 +214,7 @@ public class DeliveryStaffController extends HttpServlet {
 
                 userDAO.delete(id);
 
-                int totalUsers = userDAO.getTotalUsers("Delivery Staff");
+                int totalUsers = userDAO.getTotalUsers(keyword, "Delivery Staff");
                 int totalPages = (int) Math.ceil((double) totalUsers / pageSize);
 
                 // Ensure page is within valid range

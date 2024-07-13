@@ -33,6 +33,15 @@ public class DiamondController extends HttpServlet {
                 keyword = "";
             }
             String sortCol = request.getParameter("colSort");
+            if (sortCol == null) {
+                sortCol = "";
+            }
+            String pageStr = request.getParameter("page");
+            int page = 1;
+            if (pageStr != null) {
+                page = Integer.parseInt(pageStr);
+            }
+            int pageSize = 10; // Set the number of posts per page
 
             DiamondDAO diamondDAO = new DiamondDAO();
             HttpSession session = request.getSession(false);
@@ -40,9 +49,22 @@ public class DiamondController extends HttpServlet {
                 response.sendRedirect("saleslogin.jsp");
                 return;
             } else if (action == null || action.equals("list")) {//lists
+                int totalDiamond = diamondDAO.getTotalDiamonds(keyword);
+                int totalPages = (int) Math.ceil((double) totalDiamond / pageSize);
 
-                DiamondDAO dao = new DiamondDAO();
-                List<DiamondDTO> list = dao.list(keyword, sortCol);
+                // Ensure page is within valid range
+                if (page < 1) {
+                    page = 1;
+                } else if (page > totalPages) {
+                    page = totalPages;
+                }
+
+                List<DiamondDTO> list = diamondDAO.list(keyword, sortCol, page, pageSize);
+                request.setAttribute("currentPage", page);
+                request.setAttribute("totalPages", totalPages);
+                request.setAttribute("pageSize", pageSize);
+                request.setAttribute("sortCol", sortCol);
+                request.setAttribute("keyword", keyword);
                 request.setAttribute("diamondlist", list);
 
                 request.getRequestDispatcher("/diamondlist.jsp").forward(request, response);
@@ -192,8 +214,22 @@ public class DiamondController extends HttpServlet {
                 }
 
                 diamondDAO.delete(id);
+                int totalDiamond = diamondDAO.getTotalDiamonds(keyword);
+                int totalPages = (int) Math.ceil((double) totalDiamond / pageSize);
 
-                List<DiamondDTO> list = diamondDAO.list(keyword, sortCol);
+                // Ensure page is within valid range
+                if (page < 1) {
+                    page = 1;
+                } else if (page > totalPages) {
+                    page = totalPages;
+                }
+
+                List<DiamondDTO> list = diamondDAO.list(keyword, sortCol, page, pageSize);
+                request.setAttribute("currentPage", page);
+                request.setAttribute("totalPages", totalPages);
+                request.setAttribute("pageSize", pageSize);
+                request.setAttribute("sortCol", sortCol);
+                request.setAttribute("keyword", keyword);
                 request.setAttribute("diamondlist", list);
                 RequestDispatcher rd = request.getRequestDispatcher("diamondlist.jsp");
                 rd.forward(request, response);

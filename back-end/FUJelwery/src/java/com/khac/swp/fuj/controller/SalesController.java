@@ -47,7 +47,7 @@ public class SalesController extends HttpServlet {
                 return;
             } else if (action == null || action.equals("list")) {//lists
 
-                int totalUsers = userDAO.getTotalUsers("Sales Staff");
+                int totalUsers = userDAO.getTotalUsers(keyword, "Sales Staff");
                 int totalPages = (int) Math.ceil((double) totalUsers / pageSize);
 
                 // Ensure page is within valid range
@@ -215,7 +215,7 @@ public class SalesController extends HttpServlet {
 
                 userDAO.delete(id);
 
-                int totalUsers = userDAO.getTotalUsers("Sales Staff");
+                int totalUsers = userDAO.getTotalUsers(keyword, "Sales Staff");
                 int totalPages = (int) Math.ceil((double) totalUsers / pageSize);
 
                 // Ensure page is within valid range

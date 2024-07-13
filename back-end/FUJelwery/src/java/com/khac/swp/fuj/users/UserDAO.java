@@ -166,28 +166,66 @@ public class UserDAO {
         return list;
     }
 
-    public int getTotalUsers(String roleName) {
+    public int getTotalUsers(String keyword, String roleName) {
         int total = 0;
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
         try {
-            Connection con = DBUtils.getConnection();
+            con = DBUtils.getConnection();
             String sql = "SELECT COUNT(*) FROM [User] u FULL JOIN [Role] r ON u.roleID = r.roleID "
-                    + "WHERE u.isDeleted = 'active' AND r.roleName LIKE ?";
+                    + "WHERE u.isDeleted = 'active' ";
 
-            PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1, "%" + roleName + "%");
+            // Append conditions based on roleName
+            if (roleName != null && !roleName.isEmpty()) {
+                sql += "AND r.roleName LIKE ? ";
+            }
 
-            ResultSet rs = stmt.executeQuery();
+            // Append conditions based on keyword
+            if (keyword != null && !keyword.isEmpty()) {
+                sql += "AND (u.userName LIKE ? OR u.firstName LIKE ? OR u.lastName LIKE ? OR u.email LIKE ?) ";
+            }
+
+            stmt = con.prepareStatement(sql);
+
+            // Set parameters for roleName search
+            int paramIndex = 1;
+            if (roleName != null && !roleName.isEmpty()) {
+                stmt.setString(paramIndex++, "%" + roleName + "%");
+            }
+
+            // Set parameters for keyword search
+            if (keyword != null && !keyword.isEmpty()) {
+                stmt.setString(paramIndex++, "%" + keyword + "%");
+                stmt.setString(paramIndex++, "%" + keyword + "%");
+                stmt.setString(paramIndex++, "%" + keyword + "%");
+                stmt.setString(paramIndex++, "%" + keyword + "%");
+            }
+
+            rs = stmt.executeQuery();
             if (rs.next()) {
                 total = rs.getInt(1);
             }
-
-            // Close resources
-            rs.close();
-            stmt.close();
-            con.close();
         } catch (SQLException ex) {
-            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            System.out.println("Error in retrieving total users count. Details:" + ex.getMessage());
             ex.printStackTrace();
+        } finally {
+            // Close resources in a finally block to ensure they are always closed
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println("Error closing resources. Details:" + ex.getMessage());
+                ex.printStackTrace();
+            }
         }
         return total;
     }

@@ -47,7 +47,7 @@ public class CustomerController extends HttpServlet {
                 return;
             } else if (action == null || action.equals("list")) {//lists
 
-                int totalUsers = userDAO.getTotalUsers("Customer");
+                int totalUsers = userDAO.getTotalUsers(keyword, "Customer");
                 int totalPages = (int) Math.ceil((double) totalUsers / pageSize);
 
                 // Ensure page is within valid range
@@ -201,7 +201,7 @@ public class CustomerController extends HttpServlet {
 
                 userDAO.delete(id);
 
-                int totalUsers = userDAO.getTotalUsers("Customer");
+                int totalUsers = userDAO.getTotalUsers(keyword, "Customer");
                 int totalPages = (int) Math.ceil((double) totalUsers / pageSize);
 
                 // Ensure page is within valid range
@@ -231,7 +231,7 @@ public class CustomerController extends HttpServlet {
 
                 userDAO.active(id);
 
-                int totalUsers = userDAO.getTotalUsers("Customer");
+                int totalUsers = userDAO.getTotalUsers(keyword, "Customer");
                 int totalPages = (int) Math.ceil((double) totalUsers / pageSize);
 
                 // Ensure page is within valid range
@@ -261,7 +261,7 @@ public class CustomerController extends HttpServlet {
 
                 userDAO.banned(id);
 
-                int totalUsers = userDAO.getTotalUsers("Customer");
+                int totalUsers = userDAO.getTotalUsers(keyword, "Customer");
                 int totalPages = (int) Math.ceil((double) totalUsers / pageSize);
 
                 // Ensure page is within valid range

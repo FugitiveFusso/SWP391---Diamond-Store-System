@@ -46,7 +46,7 @@ public class ManagerController extends HttpServlet {
                 response.sendRedirect("adminlogin.jsp");
                 return;
             } else if (action == null || action.equals("list")) {//lists
-                int totalUsers = userDAO.getTotalUsers("Manager");
+                int totalUsers = userDAO.getTotalUsers(keyword, "Manager");
                 int totalPages = (int) Math.ceil((double) totalUsers / pageSize);
 
                 // Ensure page is within valid range
@@ -215,7 +215,7 @@ public class ManagerController extends HttpServlet {
                 }
 
                 userDAO.delete(id);
-                int totalUsers = userDAO.getTotalUsers("Manager");
+                int totalUsers = userDAO.getTotalUsers(keyword, "Manager");
                 int totalPages = (int) Math.ceil((double) totalUsers / pageSize);
 
                 // Ensure page is within valid range
