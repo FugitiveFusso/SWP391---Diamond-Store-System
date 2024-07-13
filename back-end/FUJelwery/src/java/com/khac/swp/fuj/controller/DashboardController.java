@@ -202,8 +202,22 @@ public class DashboardController extends HttpServlet {
 
             } else if (action.equals("listofwarranty")) {//lists
 
-                WarrantyDAO dao = new WarrantyDAO();
-                List<WarrantyDTO> list = dao.getAllWarranty(keyword, sortCol);
+                int totalWarranties = warrantyDAO.getTotalWarranties(keyword);
+                int totalPages = (int) Math.ceil((double) totalWarranties / pageSize);
+
+                // Ensure page is within valid range
+                if (page < 1) {
+                    page = 1;
+                } else if (page > totalPages) {
+                    page = totalPages;
+                }
+
+                List<WarrantyDTO> list = warrantyDAO.getAllWarranties(keyword, sortCol, page, pageSize);
+                request.setAttribute("currentPage", page);
+                request.setAttribute("totalPages", totalPages);
+                request.setAttribute("pageSize", pageSize);
+                request.setAttribute("sortCol", sortCol);
+                request.setAttribute("keyword", keyword);
                 request.setAttribute("warrantylist", list);
 
                 request.getRequestDispatcher("manager_warrantylist.jsp").forward(request, response);

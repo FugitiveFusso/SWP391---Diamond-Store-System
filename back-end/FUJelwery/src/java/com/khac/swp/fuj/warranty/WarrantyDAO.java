@@ -10,55 +10,64 @@ import java.util.List;
 
 public class WarrantyDAO {
 
-    public List<WarrantyDTO> getAllWarranty(String keyword, String sortCol) {
-        List<WarrantyDTO> list = new ArrayList<WarrantyDTO>();
+    public List<WarrantyDTO> getAllWarranties(String keyword, String sortCol, int page, int pageSize) {
+        List<WarrantyDTO> list = new ArrayList<>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = " select warrantyID, warrantyName, warrantyImage, warrantyMonth, warrantyDescription, warrantyType, startDate, endDate, termsAndConditions from Warranty where isDeleted = 'active'  ";
+            String sql = "SELECT warrantyID, warrantyName, warrantyImage, warrantyMonth, warrantyDescription, warrantyType, startDate, endDate, termsAndConditions "
+                    + "FROM Warranty WHERE isDeleted = 'active'";
+
             if (keyword != null && !keyword.isEmpty()) {
-                sql += "and (warrantyName like ? or warrantyMonth like ? or startDate like ? or endDate like ? or termsAndConditions like ?) ";
+                sql += " AND (warrantyName LIKE ? OR warrantyMonth LIKE ? OR startDate LIKE ? OR endDate LIKE ? OR termsAndConditions LIKE ?)";
             }
 
             if (sortCol != null && !sortCol.isEmpty()) {
-                sql += " ORDER BY " + sortCol + " ASC ";
+                sql += " ORDER BY " + sortCol + " ASC";
+            } else {
+                sql += " ORDER BY warrantyID ASC"; // Default sorting by warrantyID
             }
+
+            sql += " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
+            int paramIndex = 1;
             if (keyword != null && !keyword.isEmpty()) {
-                stmt.setString(1, "%" + keyword + "%");
-                stmt.setString(2, "%" + keyword + "%");
-                stmt.setString(3, "%" + keyword + "%");
-                stmt.setString(4, "%" + keyword + "%");
-                stmt.setString(5, "%" + keyword + "%");
-
+                String likePattern = "%" + keyword + "%";
+                stmt.setString(paramIndex++, likePattern);
+                stmt.setString(paramIndex++, likePattern);
+                stmt.setString(paramIndex++, likePattern);
+                stmt.setString(paramIndex++, likePattern);
+                stmt.setString(paramIndex++, likePattern);
             }
+
+            stmt.setInt(paramIndex++, (page - 1) * pageSize);
+            stmt.setInt(paramIndex, pageSize);
+
             ResultSet rs = stmt.executeQuery();
-            if (rs != null) {
-                while (rs.next()) {
+            while (rs.next()) {
+                int id = rs.getInt("warrantyID");
+                String name = rs.getString("warrantyName");
+                String image = rs.getString("warrantyImage");
+                int month = rs.getInt("warrantyMonth");
+                String description = rs.getString("warrantyDescription");
+                String type = rs.getString("warrantyType");
+                String startdate = rs.getString("startDate");
+                String enddate = rs.getString("endDate");
+                String tac = rs.getString("termsAndConditions");
 
-                    int id = rs.getInt("warrantyID");
-                    String name = rs.getString("warrantyName");
-                    String image = rs.getString("warrantyImage");
-                    int month = rs.getInt("warrantyMonth");
-                    String description = rs.getString("warrantyDescription");
-                    String type = rs.getString("warrantyType");
-                    String startdate = rs.getString("startDate");
-                    String enddate = rs.getString("endDate");
-                    String tac = rs.getString("termsAndConditions");
+                WarrantyDTO warranty = new WarrantyDTO();
+                warranty.setId(id);
+                warranty.setName(name);
+                warranty.setImage(image);
+                warranty.setMonth(month);
+                warranty.setDescription(description);
+                warranty.setType(type);
+                warranty.setStartdate(startdate);
+                warranty.setEnddate(enddate);
+                warranty.setTermsandconditions(tac);
 
-                    WarrantyDTO warranty = new WarrantyDTO();
-                    warranty.setId(id);
-                    warranty.setName(name);
-                    warranty.setImage(image);
-                    warranty.setMonth(month);
-                    warranty.setDescription(description);
-                    warranty.setType(type);
-                    warranty.setStartdate(startdate);
-                    warranty.setEnddate(enddate);
-                    warranty.setTermsandconditions(tac);
-                    list.add(warranty);
-                }
+                list.add(warranty);
             }
 
             con.close();
@@ -67,6 +76,40 @@ public class WarrantyDAO {
             ex.printStackTrace();
         }
         return list;
+    }
+
+    public int getTotalWarranties(String keyword) {
+        int total = 0;
+        try {
+            Connection con = DBUtils.getConnection();
+            String sql = "SELECT COUNT(*) FROM Warranty WHERE isDeleted = 'active'";
+
+            if (keyword != null && !keyword.isEmpty()) {
+                sql += " AND (warrantyName LIKE ? OR warrantyMonth LIKE ? OR startDate LIKE ? OR endDate LIKE ? OR termsAndConditions LIKE ?)";
+            }
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            if (keyword != null && !keyword.isEmpty()) {
+                String likePattern = "%" + keyword + "%";
+                stmt.setString(1, likePattern);
+                stmt.setString(2, likePattern);
+                stmt.setString(3, likePattern);
+                stmt.setString(4, likePattern);
+                stmt.setString(5, likePattern);
+            }
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                total = rs.getInt(1);
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return total;
     }
 
     public WarrantyDTO load(int warrantyID) {
@@ -372,6 +415,5 @@ public class WarrantyDAO {
         }
         return null;
     }
-    
 
 }
