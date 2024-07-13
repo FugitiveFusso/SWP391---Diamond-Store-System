@@ -31,6 +31,15 @@ public class DiamondPriceController extends HttpServlet {
                 keyword = "";
             }
             String sortCol = request.getParameter("colSort");
+            if (sortCol == null) {
+                sortCol = "";
+            }
+            String pageStr = request.getParameter("page");
+            int page = 1;
+            if (pageStr != null) {
+                page = Integer.parseInt(pageStr);
+            }
+            int pageSize = 10; // Set the number of posts per page
 
             HttpSession session = request.getSession(false);
             if (session == null || session.getAttribute("salessession") == null) {
@@ -38,8 +47,22 @@ public class DiamondPriceController extends HttpServlet {
                 return;
             } else if (action == null || action.equals("list")) {//lists
 
-                DiamondPriceDAO dao = new DiamondPriceDAO();
-                List<DiamondPriceDTO> list = dao.getAllDiamondPrice(keyword, sortCol);
+                int totalDPrices = dpDAO.getTotalDiamondPriceCount(keyword);
+                int totalPages = (int) Math.ceil((double) totalDPrices / pageSize);
+
+                // Ensure page is within valid range
+                if (page < 1) {
+                    page = 1;
+                } else if (page > totalPages) {
+                    page = totalPages;
+                }
+
+                List<DiamondPriceDTO> list = dpDAO.getAllDiamondPrice(keyword, sortCol, page, pageSize);
+                request.setAttribute("currentPage", page);
+                request.setAttribute("totalPages", totalPages);
+                request.setAttribute("pageSize", pageSize);
+                request.setAttribute("sortCol", sortCol);
+                request.setAttribute("keyword", keyword);
                 request.setAttribute("dplist", list);
 
                 request.getRequestDispatcher("/dplist.jsp").forward(request, response);
@@ -179,7 +202,22 @@ public class DiamondPriceController extends HttpServlet {
 
                 dpDAO.delete(id);
 
-                List<DiamondPriceDTO> list = dpDAO.getAllDiamondPrice(keyword, sortCol);
+                int totalDPrices = dpDAO.getTotalDiamondPriceCount(keyword);
+                int totalPages = (int) Math.ceil((double) totalDPrices / pageSize);
+
+                // Ensure page is within valid range
+                if (page < 1) {
+                    page = 1;
+                } else if (page > totalPages) {
+                    page = totalPages;
+                }
+
+                List<DiamondPriceDTO> list = dpDAO.getAllDiamondPrice(keyword, sortCol, page, pageSize);
+                request.setAttribute("currentPage", page);
+                request.setAttribute("totalPages", totalPages);
+                request.setAttribute("pageSize", pageSize);
+                request.setAttribute("sortCol", sortCol);
+                request.setAttribute("keyword", keyword);
                 request.setAttribute("dplist", list);
                 RequestDispatcher rd = request.getRequestDispatcher("dplist.jsp");
                 rd.forward(request, response);

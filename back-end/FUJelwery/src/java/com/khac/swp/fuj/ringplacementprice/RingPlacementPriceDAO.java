@@ -15,17 +15,72 @@ import java.util.List;
 
 public class RingPlacementPriceDAO {
 
-    public List<RingPlacementPriceDTO> getAllRingPlacementPrice(String keyword, String sortCol) {
-        List<RingPlacementPriceDTO> list = new ArrayList<RingPlacementPriceDTO>();
+    public List<RingPlacementPriceDTO> getAllRingPlacementPrice(String keyword, String sortCol, int page, int pageSize) {
+        List<RingPlacementPriceDTO> list = new ArrayList<>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = " select rpID, rName, material, color, FORMAT(rpPrice, 'N0') AS rpPrice from RingPlacementPrice where isDeleted = 'active' ";
+            String sql = "SELECT rpID, rName, material, color, FORMAT(rpPrice, 'N0') AS rpPrice "
+                    + "FROM RingPlacementPrice WHERE isDeleted = 'active'";
+
             if (keyword != null && !keyword.isEmpty()) {
-                sql += " and ( rName like ? or material like ? or color like ? or rpPrice like ?) ";
+                sql += " AND (rName LIKE ? OR material LIKE ? OR color LIKE ? OR rpPrice LIKE ?)";
             }
 
             if (sortCol != null && !sortCol.isEmpty()) {
-                sql += " ORDER BY " + sortCol + " ASC ";
+                sql += " ORDER BY " + sortCol + " ASC";
+            } else {
+                sql += " ORDER BY rpID ASC"; // Default sorting by rpID
+            }
+
+            sql += " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            int paramIndex = 1;
+            if (keyword != null && !keyword.isEmpty()) {
+                stmt.setString(paramIndex++, "%" + keyword + "%");
+                stmt.setString(paramIndex++, "%" + keyword + "%");
+                stmt.setString(paramIndex++, "%" + keyword + "%");
+                stmt.setString(paramIndex++, "%" + keyword + "%");
+            }
+
+            stmt.setInt(paramIndex++, (page - 1) * pageSize);
+            stmt.setInt(paramIndex, pageSize);
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                int rpid = rs.getInt("rpID");
+                String name = rs.getString("rName");
+                String material = rs.getString("material");
+                String color = rs.getString("color");
+                String price = rs.getString("rpPrice");
+
+                RingPlacementPriceDTO rp = new RingPlacementPriceDTO();
+                rp.setId(rpid);
+                rp.setName(name);
+                rp.setMaterial(material);
+                rp.setColor(color);
+                rp.setPrice(price);
+
+                list.add(rp);
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return list;
+    }
+
+    public int getTotalRingPlacementPriceCount(String keyword) {
+        int total = 0;
+        try {
+            Connection con = DBUtils.getConnection();
+            String sql = "SELECT COUNT(*) FROM RingPlacementPrice WHERE isDeleted = 'active'";
+
+            if (keyword != null && !keyword.isEmpty()) {
+                sql += " AND (rName LIKE ? OR material LIKE ? OR color LIKE ? OR rpPrice LIKE ?)";
             }
 
             PreparedStatement stmt = con.prepareStatement(sql);
@@ -35,26 +90,11 @@ public class RingPlacementPriceDAO {
                 stmt.setString(2, "%" + keyword + "%");
                 stmt.setString(3, "%" + keyword + "%");
                 stmt.setString(4, "%" + keyword + "%");
-
             }
+
             ResultSet rs = stmt.executeQuery();
-            if (rs != null) {
-                while (rs.next()) {
-                    int rpid = rs.getInt("rpID");
-                    String name = rs.getString("rName");
-                    String material = rs.getString("material");
-                    String color = rs.getString("color");
-                    String price = rs.getString("rpPrice");
-
-                    RingPlacementPriceDTO rp = new RingPlacementPriceDTO();
-                    rp.setId(rpid);
-                    rp.setName(name);
-                    rp.setMaterial(material);
-                    rp.setColor(color);
-                    rp.setPrice(price);
-
-                    list.add(rp);
-                }
+            if (rs.next()) {
+                total = rs.getInt(1);
             }
 
             con.close();
@@ -62,7 +102,7 @@ public class RingPlacementPriceDAO {
             System.out.println("Error in servlet. Details:" + ex.getMessage());
             ex.printStackTrace();
         }
-        return list;
+        return total;
     }
 
     public RingPlacementPriceDTO load(int rpID) {

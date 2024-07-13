@@ -12,8 +12,47 @@
         <script src="https://unpkg.com/@phosphor-icons/web"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-        <script src="js/pagination.js"></script>
-        <link rel="stylesheet" href="css/pagination.css">
+        <style>
+            .pagination {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 20px;
+            }
+
+            .pagination a, .pagination span {
+                text-decoration: none;
+                color: #1A1A3D;
+                background-color: #fff;
+                border: 1px solid #1A1A3D;
+                border-radius: 50%;
+                padding: 10px;
+                width: 40px;
+                height: 40px;
+                margin: 0 5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 16px;
+                transition: background-color 0.3s, color 0.3s;
+            }
+
+            .pagination a:hover {
+                background-color: #1A1A3D;
+                color: #fff;
+            }
+
+            .pagination a.disabled, .pagination span.disabled {
+                pointer-events: none;
+                opacity: 0.5;
+            }
+
+            .pagination a.active, .pagination span.active {
+                background-color: #1A1A3D;
+                color: #fff;
+            }
+
+        </style>
 
     </head>
     <body>
@@ -100,14 +139,14 @@
                         <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
                     </form>
 
-                    <table id="pagination">
+                    <table>
                         <thead>
                             <tr>
                                 <th>Ring Placement Price ID</th>
-                                <th><a href=?colSort=rName>Ring Placement Name</a></th>
-                                <th><a href=?colSort=material>Material</a></th>
-                                <th><a href=?colSort=color>Color</a></th>
-                                <th><a href=?colSort=rpPrice>Price</a></th>
+                                <th><a href="?colSort=rName<%= request.getAttribute("keyword") != null && !request.getAttribute("keyword").toString().isEmpty() ? "&keyword=" + request.getAttribute("keyword") : ""%>">Ring Placement Name</a></th>
+                                <th><a href="?colSort=material<%= request.getAttribute("keyword") != null && !request.getAttribute("keyword").toString().isEmpty() ? "&keyword=" + request.getAttribute("keyword") : ""%>">Material</a></th>
+                                <th><a href="?colSort=color<%= request.getAttribute("keyword") != null && !request.getAttribute("keyword").toString().isEmpty() ? "&keyword=" + request.getAttribute("keyword") : ""%>">Color</a></th>
+                                <th><a href="?colSort=rpPrice<%= request.getAttribute("keyword") != null && !request.getAttribute("keyword").toString().isEmpty() ? "&keyword=" + request.getAttribute("keyword") : ""%>">Price</a></th>
                                 <th>Delete</th>
 
                             </tr>
@@ -141,10 +180,50 @@
 
                         </tbody>
                     </table>
-                    <div id="paginationControls" class="pagination-controls">
-                        <button id="prevButton" class="pagination-button"><i class="fas fa-chevron-left"></i></button>
-                        <div id="pageNumbers"></div>
-                        <button id="nextButton" class="pagination-button"><i class="fas fa-chevron-right"></i></button>
+                    <!-- Pagination controls -->
+                    <div class="pagination">
+                        <% int currentPage = (Integer) request.getAttribute("currentPage");
+                            int totalPages = (Integer) request.getAttribute("totalPages");
+                            String sortCol = (String) request.getAttribute("sortCol");
+                            String keyword = (String) request.getAttribute("keyword");
+                            int maxPagesToShow = 5; // Adjust this to change how many pages to show around current page
+                        %>
+
+                        <% if (currentPage > 1) {%>
+                        <a href="?page=<%= currentPage - 1%><%= !sortCol.isEmpty() ? "&colSort=" + sortCol : ""%><%= !keyword.isEmpty() ? "&keyword=" + keyword : ""%>" class="pagination-arrow">&#8249;</a>
+                        <% } else { %>
+                        <span class="pagination-arrow disabled">&#8249;</span>
+                        <% } %>
+
+                        <%
+                            int startPage = Math.max(1, currentPage - (maxPagesToShow / 2));
+                            int endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
+
+                            if (startPage > 1) {%>
+                        <a href="?page=1<%= !sortCol.isEmpty() ? "&colSort=" + sortCol : ""%><%= !keyword.isEmpty() ? "&keyword=" + keyword : ""%>" class="pagination-number">1</a>
+                        <% if (startPage > 2) { %>
+                        <span class="pagination-ellipsis">...</span>
+                        <% }
+                            }
+
+                            for (int i = startPage; i <= endPage; i++) {%>
+                        <a href="?page=<%= i%><%= !sortCol.isEmpty() ? "&colSort=" + sortCol : ""%><%= !keyword.isEmpty() ? "&keyword=" + keyword : ""%>"
+                           class="pagination-number <%= (i == currentPage) ? "active" : ""%>"><%= i%></a>
+                        <% }
+
+                            if (endPage < totalPages) { %>
+                        <% if (endPage < totalPages - 1) { %>
+                        <span class="pagination-ellipsis">...</span>
+                        <% }%>
+                        <a href="?page=<%= totalPages%><%= !sortCol.isEmpty() ? "&colSort=" + sortCol : ""%><%= !keyword.isEmpty() ? "&keyword=" + keyword : ""%>" class="pagination-number"><%= totalPages%></a>
+                        <% }
+                        %>
+
+                        <% if (currentPage < totalPages) {%>
+                        <a href="?page=<%= currentPage + 1%><%= !sortCol.isEmpty() ? "&colSort=" + sortCol : ""%><%= !keyword.isEmpty() ? "&keyword=" + keyword : ""%>" class="pagination-arrow">&#8250;</a>
+                        <% } else { %>
+                        <span class="pagination-arrow disabled">&#8250;</span>
+                        <% }%>
                     </div>
                 </div>
             </div>
