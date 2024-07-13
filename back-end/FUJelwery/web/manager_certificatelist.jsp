@@ -125,8 +125,9 @@
 
 
                 <div class="list">
-                    <form action='' method=GET id="searchbox"> 
-                        <input name=keyword type=text class="search-input" value="<%=request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
+                    <form action="DashboardController" method="GET" id="searchbox">
+                        <input name="action" type="hidden" value="listofcertificates">
+                        <input name="keyword" type="text" class="search-input" value="<%= request.getParameter("keyword") != null ? request.getParameter("keyword") : ""%>">
                         <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
                     </form>
 

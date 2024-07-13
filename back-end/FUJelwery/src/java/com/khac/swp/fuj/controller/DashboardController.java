@@ -59,12 +59,7 @@ public class DashboardController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String action = request.getParameter("action");
-            String keyword = request.getParameter("keyword");
-            if (keyword == null) {
-                keyword = "";
-            }
-            String sortCol = request.getParameter("colSort");
+            PostDAO postDAO = new PostDAO();
             UserDAO userDAO = new UserDAO();
             RingDAO ringDAO = new RingDAO();
             VoucherDAO voucherDAO = new VoucherDAO();
@@ -72,10 +67,23 @@ public class DashboardController extends HttpServlet {
             CategoryDAO categoryDAO = new CategoryDAO();
             CertificateDAO certificateDAO = new CertificateDAO();
             OrderDAO orderDAO = new OrderDAO();
-            PostDAO postDAO = new PostDAO();
             WarrantyDAO warrantyDAO = new WarrantyDAO();
             DiamondDAO diamondDAO = new DiamondDAO();
-
+            String action = request.getParameter("action");
+            String keyword = request.getParameter("keyword");
+            if (keyword == null) {
+                keyword = "";
+            }
+            String sortCol = request.getParameter("colSort");
+            if (sortCol == null) {
+                sortCol = "";
+            }
+            String pageStr = request.getParameter("page");
+            int page = 1;
+            if (pageStr != null) {
+                page = Integer.parseInt(pageStr);
+            }
+            int pageSize = 10; // Set the number of posts per page
             HttpSession session = request.getSession(false);
             if (session == null || session.getAttribute("managersession") == null) {
                 response.sendRedirect("managerlogin.jsp");
@@ -172,9 +180,22 @@ public class DashboardController extends HttpServlet {
                 request.setAttribute("listi", listI);
                 request.getRequestDispatcher("dashboard.jsp").forward(request, response);
             } else if (action.equals("listofposts")) {//lists
+                int totalPosts = postDAO.getTotalPosts(keyword);
+                int totalPages = (int) Math.ceil((double) totalPosts / pageSize);
 
-                PostDAO dao = new PostDAO();
-                List<PostDTO> list = dao.getAllPost(keyword, sortCol);
+                // Ensure page is within valid range
+                if (page < 1) {
+                    page = 1;
+                } else if (page > totalPages) {
+                    page = totalPages;
+                }
+
+                List<PostDTO> list = postDAO.getAllPost(keyword, sortCol, page, pageSize);
+                request.setAttribute("currentPage", page);
+                request.setAttribute("totalPages", totalPages);
+                request.setAttribute("pageSize", pageSize);
+                request.setAttribute("sortCol", sortCol);
+                request.setAttribute("keyword", keyword);
                 request.setAttribute("postlist", list);
 
                 request.getRequestDispatcher("manager_postlist.jsp").forward(request, response);

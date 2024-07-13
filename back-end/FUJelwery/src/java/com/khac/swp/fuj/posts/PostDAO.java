@@ -10,30 +10,38 @@ import java.util.List;
 
 public class PostDAO {
 
-    public List<PostDTO> getAllPost(String keyword, String sortCol) {
+    public List<PostDTO> getAllPost(String keyword, String sortCol, int page, int pageSize) {
         List<PostDTO> list = new ArrayList<PostDTO>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = " select postID, postName, postDate, author, postImage, description, postText from Post where isDeleted = 'active' ";
+            String sql = "SELECT postID, postName, postDate, author, postImage, description, postText FROM Post WHERE isDeleted = 'active'";
+
             if (keyword != null && !keyword.isEmpty()) {
-                sql += " and (postName like ? or author like ?)";
+                sql += " AND (postName LIKE ? OR author LIKE ?)";
             }
 
             if (sortCol != null && !sortCol.isEmpty()) {
-                sql += " ORDER BY " + sortCol + " ASC ";
+                sql += " ORDER BY " + sortCol + " ASC";
+            } else {
+                sql += " ORDER BY postID ASC";
             }
+
+            sql += " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
+            int paramIndex = 1;
             if (keyword != null && !keyword.isEmpty()) {
-                stmt.setString(1, "%" + keyword + "%");
-                stmt.setString(2, "%" + keyword + "%");
-
+                stmt.setString(paramIndex++, "%" + keyword + "%");
+                stmt.setString(paramIndex++, "%" + keyword + "%");
             }
+
+            stmt.setInt(paramIndex++, (page - 1) * pageSize);
+            stmt.setInt(paramIndex, pageSize);
+
             ResultSet rs = stmt.executeQuery();
             if (rs != null) {
                 while (rs.next()) {
-
                     int postid = rs.getInt("postID");
                     String postname = rs.getString("postName");
                     String postimage = rs.getString("postImage");
@@ -61,6 +69,34 @@ public class PostDAO {
             ex.printStackTrace();
         }
         return list;
+    }
+
+    public int getTotalPosts(String keyword) {
+        int total = 0;
+        try {
+            Connection con = DBUtils.getConnection();
+            String sql = "SELECT COUNT(*) FROM Post WHERE isDeleted = 'active' ";
+            if (keyword != null && !keyword.isEmpty()) {
+                sql += " AND (postName LIKE ? OR author LIKE ?)";
+            }
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            if (keyword != null && !keyword.isEmpty()) {
+                stmt.setString(1, "%" + keyword + "%");
+                stmt.setString(2, "%" + keyword + "%");
+            }
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                total = rs.getInt(1);
+            }
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return total;
     }
 
     public PostDTO load(int postID) {
