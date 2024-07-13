@@ -30,6 +30,15 @@ public class CustomerController extends HttpServlet {
                 keyword = "";
             }
             String sortCol = request.getParameter("colSort");
+            if (sortCol == null) {
+                sortCol = "";
+            }
+            String pageStr = request.getParameter("page");
+            int page = 1;
+            if (pageStr != null) {
+                page = Integer.parseInt(pageStr);
+            }
+            int pageSize = 10; // Set the number of posts per page
 
             UserDAO userDAO = new UserDAO();
             HttpSession session = request.getSession(false);
@@ -38,8 +47,22 @@ public class CustomerController extends HttpServlet {
                 return;
             } else if (action == null || action.equals("list")) {//lists
 
+                int totalUsers = userDAO.getTotalUsers("Customer");
+                int totalPages = (int) Math.ceil((double) totalUsers / pageSize);
+
+                // Ensure page is within valid range
+                if (page < 1) {
+                    page = 1;
+                } else if (page > totalPages) {
+                    page = totalPages;
+                }
                 UserDAO dao = new UserDAO();
-                List<UserDTO> list = dao.list(keyword, sortCol, "Customer");
+                request.setAttribute("currentPage", page);
+                request.setAttribute("totalPages", totalPages);
+                request.setAttribute("pageSize", pageSize);
+                request.setAttribute("sortCol", sortCol);
+                request.setAttribute("keyword", keyword);
+                List<UserDTO> list = dao.list(keyword, sortCol, "Customer", page, pageSize);
                 request.setAttribute("customerlist", list);
 
                 request.getRequestDispatcher("/customerlist.jsp").forward(request, response);
@@ -178,7 +201,22 @@ public class CustomerController extends HttpServlet {
 
                 userDAO.delete(id);
 
-                List<UserDTO> list = userDAO.list(keyword, sortCol, "Customer");
+                int totalUsers = userDAO.getTotalUsers("Customer");
+                int totalPages = (int) Math.ceil((double) totalUsers / pageSize);
+
+                // Ensure page is within valid range
+                if (page < 1) {
+                    page = 1;
+                } else if (page > totalPages) {
+                    page = totalPages;
+                }
+                UserDAO dao = new UserDAO();
+                request.setAttribute("currentPage", page);
+                request.setAttribute("totalPages", totalPages);
+                request.setAttribute("pageSize", pageSize);
+                request.setAttribute("sortCol", sortCol);
+                request.setAttribute("keyword", keyword);
+                List<UserDTO> list = dao.list(keyword, sortCol, "Customer", page, pageSize);
                 request.setAttribute("customerlist", list);
                 RequestDispatcher rd = request.getRequestDispatcher("customerlist.jsp");
                 rd.forward(request, response);
@@ -193,11 +231,26 @@ public class CustomerController extends HttpServlet {
 
                 userDAO.active(id);
 
-                List<UserDTO> list = userDAO.list(keyword, sortCol, "Customer");
+                int totalUsers = userDAO.getTotalUsers("Customer");
+                int totalPages = (int) Math.ceil((double) totalUsers / pageSize);
+
+                // Ensure page is within valid range
+                if (page < 1) {
+                    page = 1;
+                } else if (page > totalPages) {
+                    page = totalPages;
+                }
+                UserDAO dao = new UserDAO();
+                request.setAttribute("currentPage", page);
+                request.setAttribute("totalPages", totalPages);
+                request.setAttribute("pageSize", pageSize);
+                request.setAttribute("sortCol", sortCol);
+                request.setAttribute("keyword", keyword);
+                List<UserDTO> list = dao.list(keyword, sortCol, "Customer", page, pageSize);
                 request.setAttribute("customerlist", list);
                 RequestDispatcher rd = request.getRequestDispatcher("customerlist.jsp");
                 rd.forward(request, response);
-            }else if (action.equals("banned")) {//active
+            } else if (action.equals("banned")) {//active
 
                 Integer id = null;
                 try {
@@ -208,7 +261,22 @@ public class CustomerController extends HttpServlet {
 
                 userDAO.banned(id);
 
-                List<UserDTO> list = userDAO.list(keyword, sortCol, "Customer");
+                int totalUsers = userDAO.getTotalUsers("Customer");
+                int totalPages = (int) Math.ceil((double) totalUsers / pageSize);
+
+                // Ensure page is within valid range
+                if (page < 1) {
+                    page = 1;
+                } else if (page > totalPages) {
+                    page = totalPages;
+                }
+                UserDAO dao = new UserDAO();
+                request.setAttribute("currentPage", page);
+                request.setAttribute("totalPages", totalPages);
+                request.setAttribute("pageSize", pageSize);
+                request.setAttribute("sortCol", sortCol);
+                request.setAttribute("keyword", keyword);
+                List<UserDTO> list = dao.list(keyword, sortCol, "Customer", page, pageSize);
                 request.setAttribute("customerlist", list);
                 RequestDispatcher rd = request.getRequestDispatcher("customerlist.jsp");
                 rd.forward(request, response);

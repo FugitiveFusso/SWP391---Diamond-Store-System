@@ -30,6 +30,15 @@ public class DeliveryStaffController extends HttpServlet {
                 keyword = "";
             }
             String sortCol = request.getParameter("colSort");
+            if (sortCol == null) {
+                sortCol = "";
+            }
+            String pageStr = request.getParameter("page");
+            int page = 1;
+            if (pageStr != null) {
+                page = Integer.parseInt(pageStr);
+            }
+            int pageSize = 10; // Set the number of posts per page
 
             UserDAO userDAO = new UserDAO();
             HttpSession session = request.getSession(false);
@@ -38,8 +47,22 @@ public class DeliveryStaffController extends HttpServlet {
                 return;
             } else if (action == null || action.equals("list")) {//lists
 
+                int totalUsers = userDAO.getTotalUsers("Delivery Staff");
+                int totalPages = (int) Math.ceil((double) totalUsers / pageSize);
+
+                // Ensure page is within valid range
+                if (page < 1) {
+                    page = 1;
+                } else if (page > totalPages) {
+                    page = totalPages;
+                }
                 UserDAO dao = new UserDAO();
-                List<UserDTO> list = dao.list(keyword, sortCol, "Delivery Staff");
+                request.setAttribute("currentPage", page);
+                request.setAttribute("totalPages", totalPages);
+                request.setAttribute("pageSize", pageSize);
+                request.setAttribute("sortCol", sortCol);
+                request.setAttribute("keyword", keyword);
+                List<UserDTO> list = dao.list(keyword, sortCol, "Delivery Staff", page, pageSize);
                 request.setAttribute("deliverystafflist", list);
 
                 request.getRequestDispatcher("/deliverystafflist.jsp").forward(request, response);
@@ -191,7 +214,22 @@ public class DeliveryStaffController extends HttpServlet {
 
                 userDAO.delete(id);
 
-                List<UserDTO> list = userDAO.list(keyword, sortCol, "Delivery Staff");
+                int totalUsers = userDAO.getTotalUsers("Delivery Staff");
+                int totalPages = (int) Math.ceil((double) totalUsers / pageSize);
+
+                // Ensure page is within valid range
+                if (page < 1) {
+                    page = 1;
+                } else if (page > totalPages) {
+                    page = totalPages;
+                }
+                UserDAO dao = new UserDAO();
+                request.setAttribute("currentPage", page);
+                request.setAttribute("totalPages", totalPages);
+                request.setAttribute("pageSize", pageSize);
+                request.setAttribute("sortCol", sortCol);
+                request.setAttribute("keyword", keyword);
+                List<UserDTO> list = dao.list(keyword, sortCol, "Delivery Staff", page, pageSize);
                 request.setAttribute("deliverystafflist", list);
                 RequestDispatcher rd = request.getRequestDispatcher("deliverystafflist.jsp");
                 rd.forward(request, response);

@@ -30,6 +30,15 @@ public class AdminController extends HttpServlet {
                 keyword = "";
             }
             String sortCol = request.getParameter("colSort");
+            if (sortCol == null) {
+                sortCol = "";
+            }
+            String pageStr = request.getParameter("page");
+            int page = 1;
+            if (pageStr != null) {
+                page = Integer.parseInt(pageStr);
+            }
+            int pageSize = 10; // Set the number of posts per page
 
             UserDAO userDAO = new UserDAO();
             HttpSession session = request.getSession(false);
@@ -37,9 +46,23 @@ public class AdminController extends HttpServlet {
                 response.sendRedirect("adminlogin.jsp");
                 return;
             } else if (action == null || action.equals("list")) {//lists
+                int totalUsers = userDAO.getTotalUsers("Administrator");
+                int totalPages = (int) Math.ceil((double) totalUsers / pageSize);
 
+                // Ensure page is within valid range
+                if (page < 1) {
+                    page = 1;
+                } else if (page > totalPages) {
+                    page = totalPages;
+                }
                 UserDAO dao = new UserDAO();
-                List<UserDTO> list = dao.list(keyword, sortCol, "Administrator");
+                request.setAttribute("currentPage", page);
+                request.setAttribute("totalPages", totalPages);
+                request.setAttribute("pageSize", pageSize);
+                request.setAttribute("sortCol", sortCol);
+                request.setAttribute("keyword", keyword);
+                List<UserDTO> list = dao.list(keyword, sortCol, "Administrator", page, pageSize);
+
                 request.setAttribute("adminlist", list);
 
                 request.getRequestDispatcher("/adminlist.jsp").forward(request, response);
@@ -191,8 +214,23 @@ public class AdminController extends HttpServlet {
                 }
 
                 userDAO.delete(id);
+                int totalUsers = userDAO.getTotalUsers("Administrator");
+                int totalPages = (int) Math.ceil((double) totalUsers / pageSize);
 
-                List<UserDTO> list = userDAO.list(keyword, sortCol, "Administrator");
+                // Ensure page is within valid range
+                if (page < 1) {
+                    page = 1;
+                } else if (page > totalPages) {
+                    page = totalPages;
+                }
+                UserDAO dao = new UserDAO();
+                request.setAttribute("currentPage", page);
+                request.setAttribute("totalPages", totalPages);
+                request.setAttribute("pageSize", pageSize);
+                request.setAttribute("sortCol", sortCol);
+                request.setAttribute("keyword", keyword);
+                List<UserDTO> list = dao.list(keyword, sortCol, "Administrator", page, pageSize);
+
                 request.setAttribute("adminlist", list);
                 RequestDispatcher rd = request.getRequestDispatcher("adminlist.jsp");
                 rd.forward(request, response);

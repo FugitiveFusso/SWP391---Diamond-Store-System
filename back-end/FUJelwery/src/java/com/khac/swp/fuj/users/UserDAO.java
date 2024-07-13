@@ -91,64 +91,105 @@ public class UserDAO {
         return user;
     }
 
-    public List<UserDTO> list(String keyword, String sortCol, String roleName) {
-        List<UserDTO> list = new ArrayList<UserDTO>();
+    public List<UserDTO> list(String keyword, String sortCol, String roleName, int page, int pageSize) {
+        List<UserDTO> list = new ArrayList<>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = " select userID, userName, firstName, lastName, email, address, status, r.roleID, roleName  from [User] u full join [Role] r on u.roleID = r.roleID where roleName like ? AND isDeleted = 'active' ";
+            String sql = "SELECT userID, userName, firstName, lastName, email, address, status, r.roleID, roleName "
+                    + "FROM [User] u FULL JOIN [Role] r ON u.roleID = r.roleID "
+                    + "WHERE roleName LIKE ? AND isDeleted = 'active'";
+
+            // Append conditions based on keyword
             if (keyword != null && !keyword.isEmpty()) {
-                sql += " and (userName like ? or firstName like ? or lastName like ? or email like ?)";
+                sql += " AND (userName LIKE ? OR firstName LIKE ? OR lastName LIKE ? OR email LIKE ?)";
             }
 
+            // Append sorting
             if (sortCol != null && !sortCol.isEmpty()) {
-                sql += " ORDER BY " + sortCol + " ASC ";
+                sql += " ORDER BY " + sortCol + " ASC";
+            } else {
+                sql += " ORDER BY userID ASC"; // Default sorting by userID
             }
+
+            // Pagination: OFFSET and FETCH NEXT
+            sql += " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
-            stmt.setString(1, "%" + roleName + "%");
-
+            // Set parameters
+            int paramIndex = 1;
+            stmt.setString(paramIndex++, "%" + roleName + "%"); // roleName parameter
             if (keyword != null && !keyword.isEmpty()) {
-                stmt.setString(2, "%" + keyword + "%");
-                stmt.setString(3, "%" + keyword + "%");
-                stmt.setString(4, "%" + keyword + "%");
-                stmt.setString(5, "%" + keyword + "%");
-
+                stmt.setString(paramIndex++, "%" + keyword + "%");
+                stmt.setString(paramIndex++, "%" + keyword + "%");
+                stmt.setString(paramIndex++, "%" + keyword + "%");
+                stmt.setString(paramIndex++, "%" + keyword + "%");
             }
+            stmt.setInt(paramIndex++, (page - 1) * pageSize); // Calculate offset
+            stmt.setInt(paramIndex, pageSize); // Set number of rows to fetch
+
             ResultSet rs = stmt.executeQuery();
-            if (rs != null) {
-                while (rs.next()) {
+            while (rs.next()) {
+                int userID = rs.getInt("userID");
+                String userName = rs.getString("userName");
+                String firstName = rs.getString("firstName");
+                String lastName = rs.getString("lastName");
+                String email = rs.getString("email");
+                String address = rs.getString("address");
+                String status = rs.getString("status");
+                int roleID = rs.getInt("roleID");
+                String roleNameResult = rs.getString("roleName");
 
-                    int customerid = rs.getInt("userID");
-                    String username = rs.getString("userName");
-                    String firstname = rs.getString("firstName");
-                    String lastname = rs.getString("lastName");
-                    String email = rs.getString("email");
-                    String address = rs.getString("address");
-                    String status = rs.getString("status");
-                    int roleid = rs.getInt("roleID");
-                    String rolename = rs.getString("roleName");
+                // Create UserDTO object and populate it
+                UserDTO user = new UserDTO();
+                user.setUserid(userID);
+                user.setUsername(userName);
+                user.setFirstname(firstName);
+                user.setLastname(lastName);
+                user.setEmail(email);
+                user.setAddress(address);
+                user.setStatus(status);
+                user.setRoleid(roleID);
+                user.setRolename(roleNameResult);
 
-                    UserDTO user = new UserDTO();
-                    user.setUserid(customerid);
-                    user.setUsername(username);
-                    user.setFirstname(firstname);
-                    user.setLastname(lastname);
-                    user.setEmail(email);
-                    user.setAddress(address);
-                    user.setStatus(status);
-                    user.setRoleid(roleid);
-                    user.setRolename(rolename);
-                    list.add(user);
-                }
+                list.add(user);
             }
 
+            // Close resources
+            rs.close();
+            stmt.close();
             con.close();
         } catch (SQLException ex) {
             System.out.println("Error in servlet. Details:" + ex.getMessage());
             ex.printStackTrace();
         }
         return list;
+    }
+
+    public int getTotalUsers(String roleName) {
+        int total = 0;
+        try {
+            Connection con = DBUtils.getConnection();
+            String sql = "SELECT COUNT(*) FROM [User] u FULL JOIN [Role] r ON u.roleID = r.roleID "
+                    + "WHERE u.isDeleted = 'active' AND r.roleName LIKE ?";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, "%" + roleName + "%");
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                total = rs.getInt(1);
+            }
+
+            // Close resources
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return total;
     }
 
     public UserDTO load(int userID, String roleName) {
