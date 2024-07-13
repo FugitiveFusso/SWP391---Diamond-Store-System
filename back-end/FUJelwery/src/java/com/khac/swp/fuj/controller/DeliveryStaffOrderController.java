@@ -55,7 +55,15 @@ public class DeliveryStaffOrderController extends HttpServlet {
                 keyword = "";
             }
             String sortCol = request.getParameter("colSort");
-
+            if (sortCol == null) {
+                sortCol = "";
+            }
+            String pageStr = request.getParameter("page");
+            int page = 1;
+            if (pageStr != null) {
+                page = Integer.parseInt(pageStr);
+            }
+            int pageSize = 10; // Set the number of posts per page
             OrderDAO orderDAO = new OrderDAO();
             HttpSession session = request.getSession(false);
             if (session == null || session.getAttribute("deliverystaffsession") == null) {
@@ -63,19 +71,33 @@ public class DeliveryStaffOrderController extends HttpServlet {
                 return;
             } else if (action == null || action.equals("list")) {//lists
 
-
                 OrderDAO dao = new OrderDAO();
-                List<OrderDTO> list = dao.listForDelivery(keyword);                
+                int totalOrders = orderDAO.getTotalDeliveryOrderCount_A(keyword);
+                int totalPages = (int) Math.ceil((double) totalOrders / pageSize);
+
+                // Ensure page is within valid range
+                if (page < 1) {
+                    page = 1;
+                } else if (page > totalPages) {
+                    page = totalPages;
+                }
+
+                List<OrderDTO> list = orderDAO.listForDelivery(keyword, page, pageSize);
+                request.setAttribute("currentPage", page);
+                request.setAttribute("totalPages", totalPages);
+                request.setAttribute("pageSize", pageSize);
+                request.setAttribute("sortCol", sortCol);
+                request.setAttribute("keyword", keyword);
                 request.setAttribute("deliverystafforderlist", list);
                 request.getRequestDispatcher("./deliverystafforderlist.jsp").forward(request, response);
-            }else if (action.equals("shipping")) {
+            } else if (action.equals("shipping")) {
                 Integer orderID = null;
                 try {
                     orderID = Integer.parseInt(request.getParameter("orderID"));
                 } catch (NumberFormatException ex) {
                     log("Parameter orderID has wrong format.");
                 }
-                
+
                 if (orderID != null) {
                     try {
                         orderDAO.deliveringOrder(orderID);
@@ -91,9 +113,39 @@ public class DeliveryStaffOrderController extends HttpServlet {
                 }
 
                 try {
-                    List<OrderDTO> list = orderDAO.listForDelivery(keyword);
+                    int totalOrders = orderDAO.getTotalDeliveryOrderCount_A(keyword);
+                    int totalPages = (int) Math.ceil((double) totalOrders / pageSize);
+
+                    // Ensure page is within valid range
+                    if (page < 1) {
+                        page = 1;
+                    } else if (page > totalPages) {
+                        page = totalPages;
+                    }
+
+                    List<OrderDTO> list = orderDAO.listForDelivery(keyword, page, pageSize);
+                    request.setAttribute("currentPage", page);
+                    request.setAttribute("totalPages", totalPages);
+                    request.setAttribute("pageSize", pageSize);
+                    request.setAttribute("sortCol", sortCol);
+                    request.setAttribute("keyword", keyword);
                     request.setAttribute("deliverystafforderlist", list);
-                    List<OrderDTO> listHistory = orderDAO.deliveryHistory(keyword);
+                    int totalOrders_A = orderDAO.getTotalDeliveryOrderCount(keyword);
+                    int totalPages_A = (int) Math.ceil((double) totalOrders_A / pageSize);
+
+                    // Ensure page is within valid range
+                    if (page < 1) {
+                        page = 1;
+                    } else if (page > totalPages_A) {
+                        page = totalPages_A;
+                    }
+
+                    List<OrderDTO> listHistory = orderDAO.deliveryHistory(keyword, page, pageSize);
+                    request.setAttribute("currentPage", page);
+                    request.setAttribute("totalPages", totalPages_A);
+                    request.setAttribute("pageSize", pageSize);
+                    request.setAttribute("sortCol", sortCol);
+                    request.setAttribute("keyword", keyword);
                     request.setAttribute("deliveryhistory", listHistory);
                     request.getRequestDispatcher("/deliverystafforderlist.jsp").forward(request, response);
                 } catch (Exception e) {
@@ -108,7 +160,7 @@ public class DeliveryStaffOrderController extends HttpServlet {
                 } catch (NumberFormatException ex) {
                     log("Parameter orderID has wrong format.");
                 }
-                
+
                 if (orderID != null) {
                     try {
                         orderDAO.deliveredOrder(orderID);
@@ -124,9 +176,40 @@ public class DeliveryStaffOrderController extends HttpServlet {
                 }
 
                 try {
-                    List<OrderDTO> list = orderDAO.listForDelivery(keyword);
+                    int totalOrders = orderDAO.getTotalDeliveryOrderCount_A(keyword);
+                    int totalPages = (int) Math.ceil((double) totalOrders / pageSize);
+
+                    // Ensure page is within valid range
+                    if (page < 1) {
+                        page = 1;
+                    } else if (page > totalPages) {
+                        page = totalPages;
+                    }
+
+                    List<OrderDTO> list = orderDAO.listForDelivery(keyword, page, pageSize);
+                    request.setAttribute("currentPage", page);
+                    request.setAttribute("totalPages", totalPages);
+                    request.setAttribute("pageSize", pageSize);
+                    request.setAttribute("sortCol", sortCol);
+                    request.setAttribute("keyword", keyword);
                     request.setAttribute("deliverystafforderlist", list);
-                    List<OrderDTO> listHistory = orderDAO.deliveryHistory(keyword);
+                    request.setAttribute("deliverystafforderlist", list);
+                    int totalOrders_A = orderDAO.getTotalDeliveryOrderCount(keyword);
+                    int totalPages_A = (int) Math.ceil((double) totalOrders_A / pageSize);
+
+                    // Ensure page is within valid range
+                    if (page < 1) {
+                        page = 1;
+                    } else if (page > totalPages_A) {
+                        page = totalPages_A;
+                    }
+
+                    List<OrderDTO> listHistory = orderDAO.deliveryHistory(keyword, page, pageSize);
+                    request.setAttribute("currentPage", page);
+                    request.setAttribute("totalPages", totalPages_A);
+                    request.setAttribute("pageSize", pageSize);
+                    request.setAttribute("sortCol", sortCol);
+                    request.setAttribute("keyword", keyword);
                     request.setAttribute("deliveryhistory", listHistory);
                     request.getRequestDispatcher("/deliverystafforderlist.jsp").forward(request, response);
                 } catch (Exception e) {

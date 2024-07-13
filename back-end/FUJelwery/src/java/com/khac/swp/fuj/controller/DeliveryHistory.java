@@ -48,6 +48,15 @@ public class DeliveryHistory extends HttpServlet {
                 keyword = "";
             }
             String sortCol = request.getParameter("colSort");
+            if (sortCol == null) {
+                sortCol = "";
+            }
+            String pageStr = request.getParameter("page");
+            int page = 1;
+            if (pageStr != null) {
+                page = Integer.parseInt(pageStr);
+            }
+            int pageSize = 10; // Set the number of posts per page
 
             OrderDAO orderDAO = new OrderDAO();
             HttpSession session = request.getSession(false);
@@ -56,12 +65,26 @@ public class DeliveryHistory extends HttpServlet {
                 return;
             } else if (action == null || action.equals("list")) {//lists
 
-
                 OrderDAO dao = new OrderDAO();
-                List<OrderDTO> list = dao.deliveryHistory(keyword);                
+                int totalOrders = orderDAO.getTotalDeliveryOrderCount(keyword);
+                int totalPages = (int) Math.ceil((double) totalOrders / pageSize);
+
+                // Ensure page is within valid range
+                if (page < 1) {
+                    page = 1;
+                } else if (page > totalPages) {
+                    page = totalPages;
+                }
+
+                List<OrderDTO> list = orderDAO.deliveryHistory(keyword, page, pageSize);
+                request.setAttribute("currentPage", page);
+                request.setAttribute("totalPages", totalPages);
+                request.setAttribute("pageSize", pageSize);
+                request.setAttribute("sortCol", sortCol);
+                request.setAttribute("keyword", keyword);
                 request.setAttribute("deliveryhistory", list);
                 request.getRequestDispatcher("./deliveryorderhistory.jsp").forward(request, response);
-            } else if(action.equals("historydetails")){
+            } else if (action.equals("historydetails")) {
                 Integer id = null;
                 try {
                     id = Integer.parseInt(request.getParameter("id"));

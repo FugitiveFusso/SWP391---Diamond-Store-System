@@ -408,10 +408,9 @@ public class OrderDAO {
         return list;
     }
 
-    public List<OrderDTO> listForDelivery(String keyword) {
-        List<OrderDTO> list = new ArrayList<OrderDTO>();
+    public List<OrderDTO> listForDelivery(String keyword, int page, int pageSize) {
+        List<OrderDTO> list = new ArrayList<>();
         try {
-
             Connection con = DBUtils.getConnection();
 
             String sql = "SELECT "
@@ -443,56 +442,57 @@ public class OrderDAO {
                 sql += " AND (u.userName LIKE ? OR r.ringName LIKE ? OR CONVERT(VARCHAR, o.orderDate, 103) LIKE ? OR u.address LIKE ?)";
             }
 
-            sql += " GROUP BY o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, v.percentage, o.warrantyID, o.ringSize, o.status, w.warrantyName";
+            sql += " GROUP BY o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, v.percentage, o.warrantyID, o.ringSize, o.status, w.warrantyName"
+                    + " ORDER BY o.orderID ASC OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
 
-// Now you can use the SQL string in your PreparedStatement or other database query execution mechanism
-            Connection conn = DBUtils.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            int paramIndex = 1;
             if (keyword != null && !keyword.isEmpty()) {
-                ps.setString(1, "%" + keyword + "%");
-                ps.setString(2, "%" + keyword + "%");
-                ps.setString(3, "%" + keyword + "%");
-                ps.setString(4, "%" + keyword + "%");
-
+                ps.setString(paramIndex++, "%" + keyword + "%");
+                ps.setString(paramIndex++, "%" + keyword + "%");
+                ps.setString(paramIndex++, "%" + keyword + "%");
+                ps.setString(paramIndex++, "%" + keyword + "%");
             }
 
+            ps.setInt(paramIndex++, (page - 1) * pageSize);
+            ps.setInt(paramIndex++, pageSize);
+
             ResultSet rs = ps.executeQuery();
-            if (rs != null) {
-                while (rs.next()) {
-                    int orderID = rs.getInt("orderID");
-                    int userID1 = rs.getInt("userID");
-                    String userName = rs.getString("userName");
-                    String address = rs.getString("address");
-                    String orderDate = rs.getString("orderDate");
-                    int ringID = rs.getInt("ringID");
-                    String ringName = rs.getString("ringName");
-                    int voucherID = rs.getInt("voucherID");
-                    String voucherName = rs.getString("voucherName");
-                    int warrantyID = rs.getInt("warrantyID");
-                    String warrantyName = rs.getString("warrantyName");
-                    int ringSize = rs.getInt("ringSize");
-                    String totalPrice = rs.getString("totalPrice");
-                    String status = rs.getString("status");
+            while (rs.next()) {
+                int orderID = rs.getInt("orderID");
+                int userID = rs.getInt("userID");
+                String userName = rs.getString("userName");
+                String address = rs.getString("address");
+                String orderDate = rs.getString("orderDate");
+                int ringID = rs.getInt("ringID");
+                String ringName = rs.getString("ringName");
+                int voucherID = rs.getInt("voucherID");
+                String voucherName = rs.getString("voucherName");
+                int warrantyID = rs.getInt("warrantyID");
+                String warrantyName = rs.getString("warrantyName");
+                int ringSize = rs.getInt("ringSize");
+                String totalPrice = rs.getString("totalPrice");
+                String status = rs.getString("status");
 
-                    OrderDTO order = new OrderDTO();
+                OrderDTO order = new OrderDTO();
 
-                    order.setOrderID(orderID);
-                    order.setUserID(userID1);
-                    order.setUserName(userName);
-                    order.setAddress(address);
-                    order.setOrderDate(orderDate);
-                    order.setRingID(ringID);
-                    order.setRingName(ringName);
-                    order.setVoucherID(voucherID);
-                    order.setVoucherName(voucherName);
-                    order.setWarrantyID(warrantyID);
-                    order.setWarrantyName(warrantyName);
-                    order.setRingSize(ringSize);
-                    order.setTotalPrice(totalPrice);
-                    order.setStatus(status);
+                order.setOrderID(orderID);
+                order.setUserID(userID);
+                order.setUserName(userName);
+                order.setAddress(address);
+                order.setOrderDate(orderDate);
+                order.setRingID(ringID);
+                order.setRingName(ringName);
+                order.setVoucherID(voucherID);
+                order.setVoucherName(voucherName);
+                order.setWarrantyID(warrantyID);
+                order.setWarrantyName(warrantyName);
+                order.setRingSize(ringSize);
+                order.setTotalPrice(totalPrice);
+                order.setStatus(status);
 
-                    list.add(order);
-                }
+                list.add(order);
             }
 
             con.close();
@@ -503,65 +503,118 @@ public class OrderDAO {
         return list;
     }
 
-    public List<OrderDTO> deliveryHistory(String keyword) {
-        List<OrderDTO> list = new ArrayList<OrderDTO>();
+    public int getTotalDeliveryOrderCount_A(String keyword) {
+        int total = 0;
         try {
+            Connection con = DBUtils.getConnection();
+            String sql = "SELECT COUNT(*) FROM [Order] o "
+                    + "LEFT JOIN [User] u ON o.userID = u.userID "
+                    + "LEFT JOIN [Ring] r ON o.ringID = r.ringID "
+                    + "LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID "
+                    + "LEFT JOIN [Warranty] w ON o.warrantyID = w.warrantyID "
+                    + "WHERE o.purchaseMethod = 'Door-to-door delivery service' AND o.status IN ('shipping', 'verified')";
 
+            if (keyword != null && !keyword.isEmpty()) {
+                sql += " AND (u.userName LIKE ? OR r.ringName LIKE ? OR CONVERT(VARCHAR, o.orderDate, 103) LIKE ? OR u.address LIKE ?)";
+            }
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            if (keyword != null && !keyword.isEmpty()) {
+                stmt.setString(1, "%" + keyword + "%");
+                stmt.setString(2, "%" + keyword + "%");
+                stmt.setString(3, "%" + keyword + "%");
+                stmt.setString(4, "%" + keyword + "%");
+            }
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                total = rs.getInt(1);
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return total;
+    }
+
+    public List<OrderDTO> deliveryHistory(String keyword, int page, int pageSize) {
+        List<OrderDTO> list = new ArrayList<>();
+        try {
             Connection con = DBUtils.getConnection();
 
-            String sql = "select o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, COALESCE(v.voucherID, 0) AS [voucherID], COALESCE(v.voucherName,'n/a') AS [voucherName], COALESCE(o.warrantyID, 0) AS [warrantyID], COALESCE(w.warrantyName, 'n/a') AS [warrantyName], o.ringSize, FORMAT(SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * ((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0' ) AS [totalPrice], o.status from [Order] o left join [User] u ON o.userID = u.userID left join [Ring] r ON o.ringID = r.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID  left join [Voucher] v ON o.voucherID = v.voucherID LEFT JOIN [Warranty] w ON o.warrantyID = w.warrantyID group by o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, v.percentage, o.warrantyID, o.ringSize, o.status, o.purchaseMethod, w.warrantyName HAVING o.status = 'delivered'  ";
+            String sql = "SELECT o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, "
+                    + "COALESCE(v.voucherID, 0) AS [voucherID], COALESCE(v.voucherName, 'n/a') AS [voucherName], "
+                    + "COALESCE(o.warrantyID, 0) AS [warrantyID], COALESCE(w.warrantyName, 'n/a') AS [warrantyName], "
+                    + "o.ringSize, FORMAT(SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * "
+                    + "((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0') AS [totalPrice], o.status "
+                    + "FROM [Order] o "
+                    + "LEFT JOIN [User] u ON o.userID = u.userID "
+                    + "LEFT JOIN [Ring] r ON o.ringID = r.ringID "
+                    + "LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID "
+                    + "LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID "
+                    + "LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID "
+                    + "LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID "
+                    + "LEFT JOIN [Warranty] w ON o.warrantyID = w.warrantyID "
+                    + "GROUP BY o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, "
+                    + "v.voucherID, v.voucherName, v.percentage, o.warrantyID, o.ringSize, o.status, o.purchaseMethod, w.warrantyName "
+                    + "HAVING o.status = 'delivered'";
 
             if (keyword != null && !keyword.isEmpty()) {
                 sql += " AND (u.userName LIKE ? OR r.ringName LIKE ? OR o.orderDate LIKE ? OR u.address LIKE ?)";
             }
 
-            Connection conn = DBUtils.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
-            if (keyword != null && !keyword.isEmpty()) {
-                ps.setString(1, "%" + keyword + "%");
-                ps.setString(2, "%" + keyword + "%");
-                ps.setString(3, "%" + keyword + "%");
-                ps.setString(4, "%" + keyword + "%");
+            sql += " ORDER BY o.orderID ASC OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
 
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            int paramIndex = 1;
+            if (keyword != null && !keyword.isEmpty()) {
+                ps.setString(paramIndex++, "%" + keyword + "%");
+                ps.setString(paramIndex++, "%" + keyword + "%");
+                ps.setString(paramIndex++, "%" + keyword + "%");
+                ps.setString(paramIndex++, "%" + keyword + "%");
             }
 
+            ps.setInt(paramIndex++, (page - 1) * pageSize);
+            ps.setInt(paramIndex++, pageSize);
+
             ResultSet rs = ps.executeQuery();
-            if (rs != null) {
-                while (rs.next()) {
-                    int orderID = rs.getInt("orderID");
-                    int userID1 = rs.getInt("userID");
-                    String userName = rs.getString("userName");
-                    String address = rs.getString("address");
-                    String orderDate = rs.getString("orderDate");
-                    int ringID = rs.getInt("ringID");
-                    String ringName = rs.getString("ringName");
-                    int voucherID = rs.getInt("voucherID");
-                    String voucherName = rs.getString("voucherName");
-                    int warrantyID = rs.getInt("warrantyID");
-                    String warrantyName = rs.getString("warrantyName");
-                    int ringSize = rs.getInt("ringSize");
-                    String totalPrice = rs.getString("totalPrice");
-                    String status = rs.getString("status");
+            while (rs.next()) {
+                int orderID = rs.getInt("orderID");
+                int userID = rs.getInt("userID");
+                String userName = rs.getString("userName");
+                String address = rs.getString("address");
+                String orderDate = rs.getString("orderDate");
+                int ringID = rs.getInt("ringID");
+                String ringName = rs.getString("ringName");
+                int voucherID = rs.getInt("voucherID");
+                String voucherName = rs.getString("voucherName");
+                int warrantyID = rs.getInt("warrantyID");
+                String warrantyName = rs.getString("warrantyName");
+                int ringSize = rs.getInt("ringSize");
+                String totalPrice = rs.getString("totalPrice");
+                String status = rs.getString("status");
 
-                    OrderDTO order = new OrderDTO();
+                OrderDTO order = new OrderDTO();
+                order.setOrderID(orderID);
+                order.setUserID(userID);
+                order.setUserName(userName);
+                order.setAddress(address);
+                order.setOrderDate(orderDate);
+                order.setRingID(ringID);
+                order.setRingName(ringName);
+                order.setVoucherID(voucherID);
+                order.setVoucherName(voucherName);
+                order.setWarrantyID(warrantyID);
+                order.setWarrantyName(warrantyName);
+                order.setRingSize(ringSize);
+                order.setTotalPrice(totalPrice);
+                order.setStatus(status);
 
-                    order.setOrderID(orderID);
-                    order.setUserID(userID1);
-                    order.setUserName(userName);
-                    order.setAddress(address);
-                    order.setOrderDate(orderDate);
-                    order.setRingID(ringID);
-                    order.setRingName(ringName);
-                    order.setVoucherID(voucherID);
-                    order.setVoucherName(voucherName);
-                    order.setWarrantyID(warrantyID);
-                    order.setWarrantyName(warrantyName);
-                    order.setRingSize(ringSize);
-                    order.setTotalPrice(totalPrice);
-                    order.setStatus(status);
-
-                    list.add(order);
-                }
+                list.add(order);
             }
 
             con.close();
@@ -572,10 +625,46 @@ public class OrderDAO {
         return list;
     }
 
-    public List<OrderDTO> salesHistory(String keyword) {
-        List<OrderDTO> list = new ArrayList<OrderDTO>();
+    public int getTotalDeliveryOrderCount(String keyword) {
+        int total = 0;
         try {
+            Connection con = DBUtils.getConnection();
+            String sql = "SELECT COUNT(*) FROM [Order] o "
+                    + "LEFT JOIN [User] u ON o.userID = u.userID "
+                    + "LEFT JOIN [Ring] r ON o.ringID = r.ringID "
+                    + "LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID "
+                    + "LEFT JOIN [Warranty] w ON o.warrantyID = w.warrantyID "
+                    + "WHERE o.status = 'delivered'";
 
+            if (keyword != null && !keyword.isEmpty()) {
+                sql += " AND (u.userName LIKE ? OR r.ringName LIKE ? OR o.orderDate LIKE ? OR u.address LIKE ?)";
+            }
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            if (keyword != null && !keyword.isEmpty()) {
+                stmt.setString(1, "%" + keyword + "%");
+                stmt.setString(2, "%" + keyword + "%");
+                stmt.setString(3, "%" + keyword + "%");
+                stmt.setString(4, "%" + keyword + "%");
+            }
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                total = rs.getInt(1);
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return total;
+    }
+
+    public List<OrderDTO> salesHistory(String keyword, int page, int pageSize) {
+        List<OrderDTO> list = new ArrayList<>();
+        try {
             Connection con = DBUtils.getConnection();
 
             String sql = "SELECT o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, "
@@ -599,52 +688,55 @@ public class OrderDAO {
                 sql += " AND (u.userName LIKE ? OR r.ringName LIKE ? OR o.orderDate LIKE ? OR u.address LIKE ?)";
             }
 
-            Connection conn = DBUtils.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
+            sql += " ORDER BY o.orderID ASC OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            int paramIndex = 1;
             if (keyword != null && !keyword.isEmpty()) {
-                ps.setString(1, "%" + keyword + "%");
-                ps.setString(2, "%" + keyword + "%");
-                ps.setString(3, "%" + keyword + "%");
-                ps.setString(4, "%" + keyword + "%");
-
+                ps.setString(paramIndex++, "%" + keyword + "%");
+                ps.setString(paramIndex++, "%" + keyword + "%");
+                ps.setString(paramIndex++, "%" + keyword + "%");
+                ps.setString(paramIndex++, "%" + keyword + "%");
             }
+
+            ps.setInt(paramIndex++, (page - 1) * pageSize);
+            ps.setInt(paramIndex++, pageSize);
+
             ResultSet rs = ps.executeQuery();
-            if (rs != null) {
-                while (rs.next()) {
-                    int orderID = rs.getInt("orderID");
-                    int userID1 = rs.getInt("userID");
-                    String userName = rs.getString("userName");
-                    String address = rs.getString("address");
-                    String orderDate = rs.getString("orderDate");
-                    int ringID = rs.getInt("ringID");
-                    String ringName = rs.getString("ringName");
-                    int voucherID = rs.getInt("voucherID");
-                    String voucherName = rs.getString("voucherName");
-                    int warrantyID = rs.getInt("warrantyID");
-                    String warrantyName = rs.getString("warrantyName");
-                    int ringSize = rs.getInt("ringSize");
-                    String totalPrice = rs.getString("totalPrice");
-                    String status = rs.getString("status");
+            while (rs.next()) {
+                int orderID = rs.getInt("orderID");
+                int userID = rs.getInt("userID");
+                String userName = rs.getString("userName");
+                String address = rs.getString("address");
+                String orderDate = rs.getString("orderDate");
+                int ringID = rs.getInt("ringID");
+                String ringName = rs.getString("ringName");
+                int voucherID = rs.getInt("voucherID");
+                String voucherName = rs.getString("voucherName");
+                int warrantyID = rs.getInt("warrantyID");
+                String warrantyName = rs.getString("warrantyName");
+                int ringSize = rs.getInt("ringSize");
+                String totalPrice = rs.getString("totalPrice");
+                String status = rs.getString("status");
 
-                    OrderDTO order = new OrderDTO();
+                OrderDTO order = new OrderDTO();
+                order.setOrderID(orderID);
+                order.setUserID(userID);
+                order.setUserName(userName);
+                order.setAddress(address);
+                order.setOrderDate(orderDate);
+                order.setRingID(ringID);
+                order.setRingName(ringName);
+                order.setVoucherID(voucherID);
+                order.setVoucherName(voucherName);
+                order.setWarrantyID(warrantyID);
+                order.setWarrantyName(warrantyName);
+                order.setRingSize(ringSize);
+                order.setTotalPrice(totalPrice);
+                order.setStatus(status);
 
-                    order.setOrderID(orderID);
-                    order.setUserID(userID1);
-                    order.setUserName(userName);
-                    order.setAddress(address);
-                    order.setOrderDate(orderDate);
-                    order.setRingID(ringID);
-                    order.setRingName(ringName);
-                    order.setVoucherID(voucherID);
-                    order.setVoucherName(voucherName);
-                    order.setWarrantyID(warrantyID);
-                    order.setWarrantyName(warrantyName);
-                    order.setRingSize(ringSize);
-                    order.setTotalPrice(totalPrice);
-                    order.setStatus(status);
-
-                    list.add(order);
-                }
+                list.add(order);
             }
 
             con.close();
@@ -653,6 +745,43 @@ public class OrderDAO {
             ex.printStackTrace();
         }
         return list;
+    }
+
+    public int getTotalOrderCount(String keyword) {
+        int total = 0;
+        try {
+            Connection con = DBUtils.getConnection();
+            String sql = "SELECT COUNT(*) FROM [Order] o "
+                    + "LEFT JOIN [User] u ON o.userID = u.userID "
+                    + "LEFT JOIN [Ring] r ON o.ringID = r.ringID "
+                    + "LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID "
+                    + "LEFT JOIN [Warranty] w ON o.warrantyID = w.warrantyID "
+                    + "WHERE (o.status = 'received at store' OR o.status = 'shipping' OR o.status = 'delivered')";
+
+            if (keyword != null && !keyword.isEmpty()) {
+                sql += " AND (u.userName LIKE ? OR r.ringName LIKE ? OR o.orderDate LIKE ? OR u.address LIKE ?)";
+            }
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            if (keyword != null && !keyword.isEmpty()) {
+                stmt.setString(1, "%" + keyword + "%");
+                stmt.setString(2, "%" + keyword + "%");
+                stmt.setString(3, "%" + keyword + "%");
+                stmt.setString(4, "%" + keyword + "%");
+            }
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                total = rs.getInt(1);
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return total;
     }
 
     public OrderDTO load(int orderID) {
