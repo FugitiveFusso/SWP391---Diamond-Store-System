@@ -51,7 +51,7 @@ public class HistoryController extends HttpServlet {
             if (pageStr != null) {
                 page = Integer.parseInt(pageStr);
             }
-            int pageSize = 10; // Set the number of posts per page
+            int pageSize = 5; // Set the number of posts per page
 
             OrderDAO orderDAO = new OrderDAO();
             HttpSession session = request.getSession(false);

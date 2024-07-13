@@ -13,7 +13,47 @@
         <link rel="stylesheet" href="css/navigation_bar.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
         <link rel="stylesheet" href="css/pagination.css">
+        <style>
+            .pagination {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 20px;
+            }
 
+            .pagination a, .pagination span {
+                text-decoration: none;
+                color: #1A1A3D;
+                background-color: #fff;
+                border: 1px solid #1A1A3D;
+                border-radius: 50%;
+                padding: 10px;
+                width: 40px;
+                height: 40px;
+                margin: 0 5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 16px;
+                transition: background-color 0.3s, color 0.3s;
+            }
+
+            .pagination a:hover {
+                background-color: #1A1A3D;
+                color: #fff;
+            }
+
+            .pagination a.disabled, .pagination span.disabled {
+                pointer-events: none;
+                opacity: 0.5;
+            }
+
+            .pagination a.active, .pagination span.active {
+                background-color: #1A1A3D;
+                color: #fff;
+            }
+
+        </style>
     </head>
     <body>
 
@@ -139,11 +179,50 @@
                                                     <% } %>
                                                 </tbody>
                                             </table>
-                                            <div id="paginationControls1" class="pagination-controls">
-                                                <button id="prevButton1" class="pagination-button"><i class="fas fa-chevron-left"></i></button>
-                                                <div id="pageNumbers1"></div>
-                                                <button id="nextButton1" class="pagination-button"><i class="fas fa-chevron-right"></i></button>
+                                            <div class="pagination">
+                                                <% int currentPageA = (Integer) request.getAttribute("currentPageA");
+                                                    int totalPagesA = (Integer) request.getAttribute("totalPagesA");
+                                                    int id = (Integer) request.getAttribute("id");
+                                                %>
+
+                                                <% if (currentPageA > 1) {%>
+                                                <a href="?action=list&id=<%= id%>&pageA=<%= currentPageA - 1%>" class="pagination-arrow">&#8249;</a>
+                                                <% } else { %>
+                                                <span class="pagination-arrow disabled">&#8249;</span>
+                                                <% } %>
+
+                                                <%
+                                                    int startPageA = Math.max(1, currentPageA - 2);
+                                                    int endPageA = Math.min(totalPagesA, startPageA + 4); // Show up to 5 pages
+
+                                                    if (startPageA > 1) {%>
+                                                <a href="?action=list&id=<%= id%>&pageA=1" class="pagination-number">1</a>
+                                                <% if (startPageA > 2) { %>
+                                                <span class="pagination-ellipsis">...</span>
+                                                <% }
+                                                    }
+
+                                                    for (int i = startPageA; i <= endPageA; i++) {%>
+                                                <a href="?action=list&id=<%= id%>&pageA=<%= i%>"
+                                                   class="pagination-number <%= (i == currentPageA) ? "active" : ""%>"><%= i%></a>
+                                                <% }
+
+                                                    if (endPageA < totalPagesA) { %>
+                                                <% if (endPageA < totalPagesA - 1) { %>
+                                                <span class="pagination-ellipsis">...</span>
+                                                <% }%>
+                                                <a href="?action=list&id=<%= id%>&pageA=<%= totalPagesA%>"
+                                                   class="pagination-number"><%= totalPagesA%></a>
+                                                <% } %>
+
+                                                <% if (currentPageA < totalPagesA) {%>
+                                                <a href="?action=list&id=<%= id%>&pageA=<%= currentPageA + 1%>"
+                                                   class="pagination-arrow">&#8250;</a>
+                                                <% } else { %>
+                                                <span class="pagination-arrow disabled">&#8250;</span>
+                                                <% } %>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -182,18 +261,53 @@
                                                     <% }%>
                                                 </tbody>
                                             </table>
-                                            <div id="paginationControls2" class="pagination-controls">
-                                                <button id="prevButton2" class="pagination-button"><i class="fas fa-chevron-left"></i></button>
-                                                <div id="pageNumbers2"></div>
-                                                <button id="nextButton2" class="pagination-button"><i class="fas fa-chevron-right"></i></button>
+                                            <div class="pagination">
+                                                <% int currentPageB = (Integer) request.getAttribute("currentPageB");
+                                                    int totalPagesB = (Integer) request.getAttribute("totalPagesB");
+                                                %>
+
+                                                <% if (currentPageB > 1) {%>
+                                                <a href="?action=list&id=<%= id%>&pageB=<%= currentPageB - 1%>" class="pagination-arrow">&#8249;</a>
+                                                <% } else { %>
+                                                <span class="pagination-arrow disabled">&#8249;</span>
+                                                <% } %>
+
+                                                <%
+                                                    int startPageB = Math.max(1, currentPageB - 2);
+                                                    int endPageB = Math.min(totalPagesB, startPageB + 4); // Show up to 5 pages
+
+                                                    if (startPageB > 1) {%>
+                                                <a href="?action=list&id=<%= id%>&pageB=1" class="pagination-number">1</a>
+                                                <% if (startPageB > 2) { %>
+                                                <span class="pagination-ellipsis">...</span>
+                                                <% }
+                                                    }
+
+                                                    for (int i = startPageB; i <= endPageB; i++) {%>
+                                                <a href="?action=list&id=<%= id%>&pageB=<%= i%>"
+                                                   class="pagination-number <%= (i == currentPageB) ? "active" : ""%>"><%= i%></a>
+                                                <% }
+
+                                                    if (endPageB < totalPagesB) { %>
+                                                <% if (endPageB < totalPagesB - 1) { %>
+                                                <span class="pagination-ellipsis">...</span>
+                                                <% }%>
+                                                <a href="?action=list&id=<%= id%>&pageB=<%= totalPagesB%>"
+                                                   class="pagination-number"><%= totalPagesB%></a>
+                                                <% } %>
+
+                                                <% if (currentPageB < totalPagesB) {%>
+                                                <a href="?action=list&id=<%= id%>&pageB=<%= currentPageB + 1%>"
+                                                   class="pagination-arrow">&#8250;</a>
+                                                <% } else { %>
+                                                <span class="pagination-arrow disabled">&#8250;</span>
+                                                <% }%>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>

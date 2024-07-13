@@ -119,16 +119,31 @@ public class OrderDAO {
         return false;
     }
 
-    public List<OrderDTO> listHistoryReceiveAtStore(int userID) {
-        List<OrderDTO> list = new ArrayList<OrderDTO>();
+    public List<OrderDTO> listHistoryReceiveAtStore(int userID, int page, int pageSize) {
+        List<OrderDTO> list = new ArrayList<>();
         try {
-
             Connection con = DBUtils.getConnection();
-            String sql = " SELECT o.orderID, o.userID, u.userName, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, o.ringSize, FORMAT((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * ((100.0 - COALESCE(v.percentage, 0)) / 100), 'N0') AS totalPrice, o.status FROM [Order] o LEFT JOIN [User] u ON o.userID = u.userID LEFT JOIN [Ring] r ON o.ringID = r.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON r.diamondID = d.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID WHERE o.userID = ? AND o.status NOT IN ('pending', 'shipping', 'delivered')\n" + "  AND o.purchaseMethod = 'Received at store'";
+            String sql = "SELECT o.orderID, o.userID, u.userName, o.orderDate, r.ringID, r.ringName, "
+                    + "v.voucherID, v.voucherName, o.ringSize, "
+                    + "FORMAT((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * "
+                    + "((100.0 - COALESCE(v.percentage, 0)) / 100), 'N0') AS totalPrice, o.status "
+                    + "FROM [Order] o "
+                    + "LEFT JOIN [User] u ON o.userID = u.userID "
+                    + "LEFT JOIN [Ring] r ON o.ringID = r.ringID "
+                    + "LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID "
+                    + "LEFT JOIN [Diamond] d ON r.diamondID = d.diamondID "
+                    + "LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID "
+                    + "LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID "
+                    + "WHERE o.userID = ? "
+                    + "AND o.status NOT IN ('pending', 'shipping', 'delivered') "
+                    + "AND o.purchaseMethod = 'Received at store' "
+                    + "ORDER BY o.orderID "
+                    + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
 
-            Connection conn = DBUtils.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
+            PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, userID);
+            ps.setInt(2, (page - 1) * pageSize); // OFFSET
+            ps.setInt(3, pageSize); // FETCH NEXT
 
             ResultSet rs = ps.executeQuery();
             if (rs != null) {
@@ -146,7 +161,6 @@ public class OrderDAO {
                     String status = rs.getString("status");
 
                     OrderDTO order = new OrderDTO();
-
                     order.setOrderID(orderID);
                     order.setUserID(userID1);
                     order.setUserName(userName);
@@ -171,16 +185,56 @@ public class OrderDAO {
         return list;
     }
 
-    public List<OrderDTO> listHistoryDelivery(int userID) {
-        List<OrderDTO> list = new ArrayList<OrderDTO>();
+    public int getTotalOrderHistoryReceiveAtStore(int userID) {
+        int totalOrders = 0;
         try {
-
             Connection con = DBUtils.getConnection();
-            String sql = " SELECT o.orderID, o.userID, u.userName, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, o.ringSize, FORMAT((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * ((100.0 - COALESCE(v.percentage, 0)) / 100), 'N0') AS totalPrice, o.status FROM [Order] o LEFT JOIN [User] u ON o.userID = u.userID LEFT JOIN [Ring] r ON o.ringID = r.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON r.diamondID = d.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID WHERE o.userID = ? AND o.status NOT IN ('pending')\n" + "    AND (o.purchaseMethod = 'Door-to-door delivery service');";
+            String sql = "SELECT COUNT(*) AS totalOrders FROM [Order] o "
+                    + "WHERE o.userID = ? "
+                    + "AND o.status NOT IN ('pending', 'shipping', 'delivered') "
+                    + "AND o.purchaseMethod = 'Received at store'";
 
-            Connection conn = DBUtils.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
+            PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, userID);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                totalOrders = rs.getInt("totalOrders");
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return totalOrders;
+    }
+
+    public List<OrderDTO> listHistoryDelivery(int userID, int page, int pageSize) {
+        List<OrderDTO> list = new ArrayList<>();
+        try {
+            Connection con = DBUtils.getConnection();
+            String sql = "SELECT o.orderID, o.userID, u.userName, o.orderDate, r.ringID, r.ringName, "
+                    + "v.voucherID, v.voucherName, o.ringSize, "
+                    + "FORMAT((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * "
+                    + "((100.0 - COALESCE(v.percentage, 0)) / 100), 'N0') AS totalPrice, o.status "
+                    + "FROM [Order] o "
+                    + "LEFT JOIN [User] u ON o.userID = u.userID "
+                    + "LEFT JOIN [Ring] r ON o.ringID = r.ringID "
+                    + "LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID "
+                    + "LEFT JOIN [Diamond] d ON r.diamondID = d.diamondID "
+                    + "LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID "
+                    + "LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID "
+                    + "WHERE o.userID = ? "
+                    + "AND o.status NOT IN ('pending') "
+                    + "AND o.purchaseMethod = 'Door-to-door delivery service' "
+                    + "ORDER BY o.orderID "
+                    + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, userID);
+            ps.setInt(2, (page - 1) * pageSize); // OFFSET
+            ps.setInt(3, pageSize); // FETCH NEXT
 
             ResultSet rs = ps.executeQuery();
             if (rs != null) {
@@ -198,7 +252,6 @@ public class OrderDAO {
                     String status = rs.getString("status");
 
                     OrderDTO order = new OrderDTO();
-
                     order.setOrderID(orderID);
                     order.setUserID(userID1);
                     order.setUserName(userName);
@@ -221,6 +274,31 @@ public class OrderDAO {
             ex.printStackTrace();
         }
         return list;
+    }
+
+    public int getTotalOrderHistoryDelivery(int userID) {
+        int totalOrders = 0;
+        try {
+            Connection con = DBUtils.getConnection();
+            String sql = "SELECT COUNT(*) AS totalOrders FROM [Order] o "
+                    + "WHERE o.userID = ? "
+                    + "AND o.status NOT IN ('pending') "
+                    + "AND o.purchaseMethod = 'Door-to-door delivery service'";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, userID);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                totalOrders = rs.getInt("totalOrders");
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return totalOrders;
     }
 
     public List<OrderDTO> listPastPurchase(int userID, int page, int pageSize) {
@@ -305,26 +383,45 @@ public class OrderDAO {
         return total;
     }
 
-    public List<OrderDTO> listForSales(String keyword_a) {
+    public List<OrderDTO> listForSales(String keyword_a, int page, int pageSize) {
         List<OrderDTO> list = new ArrayList<OrderDTO>();
         try {
-
             Connection con = DBUtils.getConnection();
-            String sql = "select o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, COALESCE(v.voucherID, 0) AS [voucherID], COALESCE(v.voucherName,'n/a') AS [voucherName], COALESCE(o.warrantyID, 0) AS [warrantyID],o.ringSize, FORMAT(SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * ((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0' ) AS [totalPrice], o.status from [Order] o left join [User] u ON o.userID = u.userID left join [Ring] r ON o.ringID = r.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID  left join [Voucher] v ON o.voucherID = v.voucherID group by o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, v.percentage, o.warrantyID, o.ringSize, o.status HAVING o.status = 'purchased' ";
+            String sql = "SELECT o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, "
+                    + "COALESCE(v.voucherID, 0) AS [voucherID], COALESCE(v.voucherName, 'n/a') AS [voucherName], "
+                    + "COALESCE(o.warrantyID, 0) AS [warrantyID], o.ringSize, "
+                    + "FORMAT(SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * "
+                    + "((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0') AS [totalPrice], o.status "
+                    + "FROM [Order] o "
+                    + "LEFT JOIN [User] u ON o.userID = u.userID "
+                    + "LEFT JOIN [Ring] r ON o.ringID = r.ringID "
+                    + "LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID "
+                    + "LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID "
+                    + "LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID "
+                    + "LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID "
+                    + "WHERE o.status = 'purchased' ";
+
             if (keyword_a != null && !keyword_a.isEmpty()) {
-                sql += " and ( u.userName like ? or u.address like ? or o.orderDate like ? or r.ringName like ? ) ";
+                sql += "AND (u.userName LIKE ? OR u.address LIKE ? OR o.orderDate LIKE ? OR r.ringName LIKE ?) ";
             }
 
-            Connection conn = DBUtils.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
+            sql += "GROUP BY o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, v.percentage, o.warrantyID, o.ringSize, o.status "
+                    + "ORDER BY o.orderID ASC "
+                    + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
 
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            int paramIndex = 1;
             if (keyword_a != null && !keyword_a.isEmpty()) {
-                ps.setString(1, "%" + keyword_a + "%");
-                ps.setString(2, "%" + keyword_a + "%");
-                ps.setString(3, "%" + keyword_a + "%");
-                ps.setString(4, "%" + keyword_a + "%");
-
+                ps.setString(paramIndex++, "%" + keyword_a + "%");
+                ps.setString(paramIndex++, "%" + keyword_a + "%");
+                ps.setString(paramIndex++, "%" + keyword_a + "%");
+                ps.setString(paramIndex++, "%" + keyword_a + "%");
             }
+
+            ps.setInt(paramIndex++, (page - 1) * pageSize);
+            ps.setInt(paramIndex, pageSize);
+
             ResultSet rs = ps.executeQuery();
             if (rs != null) {
                 while (rs.next()) {
@@ -343,7 +440,6 @@ public class OrderDAO {
                     String status = rs.getString("status");
 
                     OrderDTO order = new OrderDTO();
-
                     order.setOrderID(orderID);
                     order.setUserID(userID1);
                     order.setUserName(userName);
@@ -370,27 +466,84 @@ public class OrderDAO {
         return list;
     }
 
-    public List<OrderDTO> receivedAtStore(String keyword_b) {
+    public int getTotalOrder(String keyword_a) {
+        int totalOrders = 0;
+        try {
+            Connection con = DBUtils.getConnection();
+            String sql = "SELECT COUNT(*) AS total FROM [Order] o "
+                    + "LEFT JOIN [User] u ON o.userID = u.userID "
+                    + "LEFT JOIN [Ring] r ON o.ringID = r.ringID "
+                    + "LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID "
+                    + "WHERE o.status = 'purchased' ";
+
+            if (keyword_a != null && !keyword_a.isEmpty()) {
+                sql += "AND (u.userName LIKE ? OR u.address LIKE ? OR o.orderDate LIKE ? OR r.ringName LIKE ?)";
+            }
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            int paramIndex = 1;
+            if (keyword_a != null && !keyword_a.isEmpty()) {
+                ps.setString(paramIndex++, "%" + keyword_a + "%");
+                ps.setString(paramIndex++, "%" + keyword_a + "%");
+                ps.setString(paramIndex++, "%" + keyword_a + "%");
+                ps.setString(paramIndex, "%" + keyword_a + "%");
+            }
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                totalOrders = rs.getInt("total");
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return totalOrders;
+    }
+
+    public List<OrderDTO> receivedAtStore(String keyword_b, int page, int pageSize) {
         List<OrderDTO> list = new ArrayList<OrderDTO>();
         try {
-
             Connection con = DBUtils.getConnection();
-            String sql = "select o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, COALESCE(v.voucherID, 0) AS [voucherID], COALESCE(v.voucherName,'n/a') AS [voucherName], COALESCE(o.warrantyID, 0) AS [warrantyID], COALESCE(w.warrantyName, 'n/a') AS [warrantyName], o.ringSize, FORMAT(SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * ((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0' ) AS [totalPrice], o.status from [Order] o left join [User] u ON o.userID = u.userID left join [Ring] r ON o.ringID = r.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID  left join [Voucher] v ON o.voucherID = v.voucherID LEFT JOIN [Warranty] w ON o.warrantyID = w.warrantyID group by o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, v.percentage, o.warrantyID, o.ringSize, o.status, o.purchaseMethod, w.warrantyName HAVING o.status = 'verified' AND o.purchaseMethod = 'Received at store' ";
+            String sql = "SELECT o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, "
+                    + "COALESCE(v.voucherID, 0) AS [voucherID], COALESCE(v.voucherName, 'n/a') AS [voucherName], "
+                    + "COALESCE(o.warrantyID, 0) AS [warrantyID], COALESCE(w.warrantyName, 'n/a') AS [warrantyName], "
+                    + "o.ringSize, FORMAT(SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * "
+                    + "((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0') AS [totalPrice], o.status "
+                    + "FROM [Order] o "
+                    + "LEFT JOIN [User] u ON o.userID = u.userID "
+                    + "LEFT JOIN [Ring] r ON o.ringID = r.ringID "
+                    + "LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID "
+                    + "LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID "
+                    + "LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID "
+                    + "LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID "
+                    + "LEFT JOIN [Warranty] w ON o.warrantyID = w.warrantyID "
+                    + "WHERE o.status = 'verified' AND o.purchaseMethod = 'Received at store' ";
 
             if (keyword_b != null && !keyword_b.isEmpty()) {
-                sql += " and ( u.userName like ? or u.address like ? or o.orderDate like ? or r.ringName like ? ) ";
+                sql += "AND (u.userName LIKE ? OR u.address LIKE ? OR o.orderDate LIKE ? OR r.ringName LIKE ?) ";
             }
 
-            Connection conn = DBUtils.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
+            sql += "GROUP BY o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, "
+                    + "v.percentage, o.warrantyID, o.ringSize, o.status, o.purchaseMethod, w.warrantyName "
+                    + "ORDER BY o.orderID ASC "
+                    + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
 
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            int paramIndex = 1;
             if (keyword_b != null && !keyword_b.isEmpty()) {
-                ps.setString(1, "%" + keyword_b + "%");
-                ps.setString(2, "%" + keyword_b + "%");
-                ps.setString(3, "%" + keyword_b + "%");
-                ps.setString(4, "%" + keyword_b + "%");
-
+                ps.setString(paramIndex++, "%" + keyword_b + "%");
+                ps.setString(paramIndex++, "%" + keyword_b + "%");
+                ps.setString(paramIndex++, "%" + keyword_b + "%");
+                ps.setString(paramIndex++, "%" + keyword_b + "%");
             }
+
+            ps.setInt(paramIndex++, (page - 1) * pageSize);
+            ps.setInt(paramIndex, pageSize);
+
             ResultSet rs = ps.executeQuery();
             if (rs != null) {
                 while (rs.next()) {
@@ -410,7 +563,6 @@ public class OrderDAO {
                     String status = rs.getString("status");
 
                     OrderDTO order = new OrderDTO();
-
                     order.setOrderID(orderID);
                     order.setUserID(userID1);
                     order.setUserName(userName);
@@ -436,6 +588,45 @@ public class OrderDAO {
             ex.printStackTrace();
         }
         return list;
+    }
+
+    public int getTotalOrderReceivedAtStore(String keyword_b) {
+        int totalOrders = 0;
+        try {
+            Connection con = DBUtils.getConnection();
+            String sql = "SELECT COUNT(*) AS total "
+                    + "FROM [Order] o "
+                    + "LEFT JOIN [User] u ON o.userID = u.userID "
+                    + "LEFT JOIN [Ring] r ON o.ringID = r.ringID "
+                    + "LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID "
+                    + "LEFT JOIN [Warranty] w ON o.warrantyID = w.warrantyID "
+                    + "WHERE o.status = 'verified' AND o.purchaseMethod = 'Received at store' ";
+
+            if (keyword_b != null && !keyword_b.isEmpty()) {
+                sql += "AND (u.userName LIKE ? OR u.address LIKE ? OR o.orderDate LIKE ? OR r.ringName LIKE ?)";
+            }
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            int paramIndex = 1;
+            if (keyword_b != null && !keyword_b.isEmpty()) {
+                ps.setString(paramIndex++, "%" + keyword_b + "%");
+                ps.setString(paramIndex++, "%" + keyword_b + "%");
+                ps.setString(paramIndex++, "%" + keyword_b + "%");
+                ps.setString(paramIndex, "%" + keyword_b + "%");
+            }
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                totalOrders = rs.getInt("total");
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return totalOrders;
     }
 
     public List<OrderDTO> listForDelivery(String keyword, int page, int pageSize) {

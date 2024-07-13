@@ -49,23 +49,61 @@ public class BillController extends HttpServlet {
             if (session == null || session.getAttribute("usersession") == null) {
                 response.sendRedirect("userlogin.jsp");
                 return;
-            } else if (action == null || action.equals("list")) {//lists
+            } else if (action == null || action.equals("list")) {
                 Integer id = null;
                 try {
                     id = Integer.parseInt(request.getParameter("id"));
                 } catch (NumberFormatException ex) {
                     log("Parameter id has wrong format.");
                 }
+
                 if (id != null) {
-                    OrderDAO dao = new OrderDAO();
-                    List<OrderDTO> listReceive = dao.listHistoryReceiveAtStore(id);
+                    // Pagination for history receive at store
+                    String pageStrA = request.getParameter("pageA");
+                    int pageA = (pageStrA != null) ? Integer.parseInt(pageStrA) : 1;
+                    int pageSizeA = 5; // Number of orders per page for receive at store
+
+                    int totalOrdersA = orderDAO.getTotalOrderHistoryReceiveAtStore(id);
+                    int totalPagesA = (int) Math.ceil((double) totalOrdersA / pageSizeA);
+
+                    if (pageA < 1) {
+                        pageA = 1;
+                    } else if (pageA > totalPagesA) {
+                        pageA = totalPagesA;
+                    }
+
+                    List<OrderDTO> listReceive = orderDAO.listHistoryReceiveAtStore(id, pageA, pageSizeA);
+
+                    // Pagination for history delivery
+                    String pageStrB = request.getParameter("pageB");
+                    int pageB = (pageStrB != null) ? Integer.parseInt(pageStrB) : 1;
+                    int pageSizeB = 5; // Number of orders per page for delivery
+
+                    int totalOrdersB = orderDAO.getTotalOrderHistoryDelivery(id);
+                    int totalPagesB = (int) Math.ceil((double) totalOrdersB / pageSizeB);
+
+                    if (pageB < 1) {
+                        pageB = 1;
+                    } else if (pageB > totalPagesB) {
+                        pageB = totalPagesB;
+                    }
+
+                    List<OrderDTO> listDelivery = orderDAO.listHistoryDelivery(id, pageB, pageSizeB);
+
+                    // Set attributes for both paginations
+                    request.setAttribute("currentPageA", pageA);
+                    request.setAttribute("totalPagesA", totalPagesA);
+                    request.setAttribute("pageSizeA", pageSizeA);
                     request.setAttribute("listreceive", listReceive);
-                    List<OrderDTO> listDelivery = dao.listHistoryDelivery(id);
+                    request.setAttribute("id", id);
+
+                    request.setAttribute("currentPageB", pageB);
+                    request.setAttribute("totalPagesB", totalPagesB);
+                    request.setAttribute("pageSizeB", pageSizeB);
                     request.setAttribute("listdelivery", listDelivery);
                 }
 
                 request.getRequestDispatcher("/user_accountdetails_orderhistory.jsp").forward(request, response);
-
             } else if (action.equals("detailsprocess_store")) {//details
 
                 Integer id = null;

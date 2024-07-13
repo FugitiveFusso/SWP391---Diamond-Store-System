@@ -7,6 +7,7 @@ package com.khac.swp.fuj.controller;
 
 import com.khac.swp.fuj.order.OrderDAO;
 import com.khac.swp.fuj.order.OrderDTO;
+import com.khac.swp.fuj.posts.PostDTO;
 import com.khac.swp.fuj.ring.RingDTO;
 import com.khac.swp.fuj.utils.DBUtils;
 import java.io.IOException;
@@ -60,7 +61,22 @@ public class SalesStaffOrderController extends HttpServlet {
                 keyword_b = "";
             }
             String sortCol = request.getParameter("colSort");
+            if (sortCol == null) {
+                sortCol = "";
+            }
+            String pageStrA = request.getParameter("pageA");
+            String pageStrB = request.getParameter("pageB");
 
+            int pageA = 1;
+            int pageB = 1;
+            if (pageStrA != null) {
+                pageA = Integer.parseInt(pageStrA);
+            }
+            int pageSizeA = 10; // Set the number of orders per page for the first table
+            if (pageStrB != null) {
+                pageB = Integer.parseInt(pageStrB);
+            }
+            int pageSizeB = 10; // Set the number of orders per page for the second table
             OrderDAO orderDAO = new OrderDAO();
             HttpSession session = request.getSession(false);
             if (session == null || session.getAttribute("salessession") == null) {
@@ -69,10 +85,41 @@ public class SalesStaffOrderController extends HttpServlet {
             } else if (action == null || action.equals("list")) {//lists
 
                 OrderDAO dao = new OrderDAO();
-                List<OrderDTO> list = dao.listForSales(keyword_a);
-                request.setAttribute("salesorderlist", list);
-                List<OrderDTO> receiveAtStore = dao.receivedAtStore(keyword_b);
+                int totalOrdersA = orderDAO.getTotalOrder(keyword_a);
+                int totalPagesA = (int) Math.ceil((double) totalOrdersA / pageSizeA);
+
+                if (pageA < 1) {
+                    pageA = 1;
+                } else if (pageA > totalPagesA) {
+                    pageA = totalPagesA;
+                }
+
+                List<OrderDTO> listForSales = orderDAO.listForSales(keyword_a, pageA, pageSizeA);
+                request.setAttribute("currentPageA", pageA);
+                request.setAttribute("totalPagesA", totalPagesA);
+                request.setAttribute("pageSizeA", pageSizeA);
+                request.setAttribute("sortColA", sortCol);
+                request.setAttribute("keyword_a", keyword_a);
+                request.setAttribute("salesorderlist", listForSales);
+
+// Handle pagination for the second table
+                int totalOrdersB = orderDAO.getTotalOrderReceivedAtStore(keyword_b);
+                int totalPagesB = (int) Math.ceil((double) totalOrdersB / pageSizeB);
+
+                if (pageB < 1) {
+                    pageB = 1;
+                } else if (pageB > totalPagesB) {
+                    pageB = totalPagesB;
+                }
+
+                List<OrderDTO> receiveAtStore = orderDAO.receivedAtStore(keyword_b, pageB, pageSizeB);
+                request.setAttribute("currentPageB", pageB);
+                request.setAttribute("totalPagesB", totalPagesB);
+                request.setAttribute("pageSizeB", pageSizeB);
+                request.setAttribute("sortColB", sortCol);
+                request.setAttribute("keyword_b", keyword_b);
                 request.setAttribute("receiveatstore", receiveAtStore);
+
                 request.getRequestDispatcher("/salesstafforderlist.jsp").forward(request, response);
 
             } else if (action.equals("details")) {//details
@@ -133,9 +180,39 @@ public class SalesStaffOrderController extends HttpServlet {
                 }
 
                 try {
-                    List<OrderDTO> list = orderDAO.listForSales(keyword_a);
-                    request.setAttribute("salesorderlist", list);
-                    List<OrderDTO> receiveAtStore = orderDAO.receivedAtStore(keyword_b);
+                    int totalOrdersA = orderDAO.getTotalOrder(keyword_a);
+                    int totalPagesA = (int) Math.ceil((double) totalOrdersA / pageSizeA);
+
+                    if (pageA < 1) {
+                        pageA = 1;
+                    } else if (pageA > totalPagesA) {
+                        pageA = totalPagesA;
+                    }
+
+                    List<OrderDTO> listForSales = orderDAO.listForSales(keyword_a, pageA, pageSizeA);
+                    request.setAttribute("currentPageA", pageA);
+                    request.setAttribute("totalPagesA", totalPagesA);
+                    request.setAttribute("pageSizeA", pageSizeA);
+                    request.setAttribute("sortColA", sortCol);
+                    request.setAttribute("keyword_a", keyword_a);
+                    request.setAttribute("salesorderlist", listForSales);
+
+// Handle pagination for the second table
+                    int totalOrdersB = orderDAO.getTotalOrderReceivedAtStore(keyword_b);
+                    int totalPagesB = (int) Math.ceil((double) totalOrdersB / pageSizeB);
+
+                    if (pageB < 1) {
+                        pageB = 1;
+                    } else if (pageB > totalPagesB) {
+                        pageB = totalPagesB;
+                    }
+
+                    List<OrderDTO> receiveAtStore = orderDAO.receivedAtStore(keyword_b, pageB, pageSizeB);
+                    request.setAttribute("currentPageB", pageB);
+                    request.setAttribute("totalPagesB", totalPagesB);
+                    request.setAttribute("pageSizeB", pageSizeB);
+                    request.setAttribute("sortColB", sortCol);
+                    request.setAttribute("keyword_b", keyword_b);
                     request.setAttribute("receiveatstore", receiveAtStore);
                     request.getRequestDispatcher("/salesstafforderlist.jsp").forward(request, response);
                 } catch (Exception e) {
@@ -166,9 +243,39 @@ public class SalesStaffOrderController extends HttpServlet {
                 }
 
                 try {
-                    List<OrderDTO> list = orderDAO.listForSales(keyword_a);
-                    request.setAttribute("salesorderlist", list);
-                    List<OrderDTO> receiveAtStore = orderDAO.receivedAtStore(keyword_b);
+                    int totalOrdersA = orderDAO.getTotalOrder(keyword_a);
+                    int totalPagesA = (int) Math.ceil((double) totalOrdersA / pageSizeA);
+
+                    if (pageA < 1) {
+                        pageA = 1;
+                    } else if (pageA > totalPagesA) {
+                        pageA = totalPagesA;
+                    }
+
+                    List<OrderDTO> listForSales = orderDAO.listForSales(keyword_a, pageA, pageSizeA);
+                    request.setAttribute("currentPageA", pageA);
+                    request.setAttribute("totalPagesA", totalPagesA);
+                    request.setAttribute("pageSizeA", pageSizeA);
+                    request.setAttribute("sortColA", sortCol);
+                    request.setAttribute("keyword_a", keyword_a);
+                    request.setAttribute("salesorderlist", listForSales);
+
+// Handle pagination for the second table
+                    int totalOrdersB = orderDAO.getTotalOrderReceivedAtStore(keyword_b);
+                    int totalPagesB = (int) Math.ceil((double) totalOrdersB / pageSizeB);
+
+                    if (pageB < 1) {
+                        pageB = 1;
+                    } else if (pageB > totalPagesB) {
+                        pageB = totalPagesB;
+                    }
+
+                    List<OrderDTO> receiveAtStore = orderDAO.receivedAtStore(keyword_b, pageB, pageSizeB);
+                    request.setAttribute("currentPageB", pageB);
+                    request.setAttribute("totalPagesB", totalPagesB);
+                    request.setAttribute("pageSizeB", pageSizeB);
+                    request.setAttribute("sortColB", sortCol);
+                    request.setAttribute("keyword_b", keyword_b);
                     request.setAttribute("receiveatstore", receiveAtStore);
                     request.getRequestDispatcher("/salesstafforderlist.jsp").forward(request, response);
                 } catch (Exception e) {
