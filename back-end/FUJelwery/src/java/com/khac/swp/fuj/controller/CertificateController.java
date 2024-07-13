@@ -31,6 +31,15 @@ public class CertificateController extends HttpServlet {
                 keyword = "";
             }
             String sortCol = request.getParameter("colSort");
+            if (sortCol == null) {
+                sortCol = "";
+            }
+            String pageStr = request.getParameter("page");
+            int page = 1;
+            if (pageStr != null) {
+                page = Integer.parseInt(pageStr);
+            }
+            int pageSize = 10; // Set the number of posts per page
 
             CertificateDAO certificateDAO = new CertificateDAO();
             HttpSession session = request.getSession(false);
@@ -39,8 +48,22 @@ public class CertificateController extends HttpServlet {
                 return;
             } else if (action == null || action.equals("list")) {//lists
 
-                CertificateDAO dao = new CertificateDAO();
-                List<CertificateDTO> list = dao.list(keyword, sortCol);
+                int totalCertificates = certificateDAO.getTotalCertificates(keyword);
+                int totalPages = (int) Math.ceil((double) totalCertificates / pageSize);
+
+                // Ensure page is within valid range
+                if (page < 1) {
+                    page = 1;
+                } else if (page > totalPages) {
+                    page = totalPages;
+                }
+
+                List<CertificateDTO> list = certificateDAO.listCertificates(keyword, sortCol, page, pageSize);
+                request.setAttribute("currentPage", page);
+                request.setAttribute("totalPages", totalPages);
+                request.setAttribute("pageSize", pageSize);
+                request.setAttribute("sortCol", sortCol);
+                request.setAttribute("keyword", keyword);
                 request.setAttribute("certificatelist", list);
 
                 request.getRequestDispatcher("/certificatelist.jsp").forward(request, response);
@@ -143,8 +166,22 @@ public class CertificateController extends HttpServlet {
                 }
 
                 certificateDAO.delete(id);
+                int totalCertificates = certificateDAO.getTotalCertificates(keyword);
+                int totalPages = (int) Math.ceil((double) totalCertificates / pageSize);
 
-                List<CertificateDTO> list = certificateDAO.list(keyword, sortCol);
+                // Ensure page is within valid range
+                if (page < 1) {
+                    page = 1;
+                } else if (page > totalPages) {
+                    page = totalPages;
+                }
+
+                List<CertificateDTO> list = certificateDAO.listCertificates(keyword, sortCol, page, pageSize);
+                request.setAttribute("currentPage", page);
+                request.setAttribute("totalPages", totalPages);
+                request.setAttribute("pageSize", pageSize);
+                request.setAttribute("sortCol", sortCol);
+                request.setAttribute("keyword", keyword);
                 request.setAttribute("certificatelist", list);
                 RequestDispatcher rd = request.getRequestDispatcher("certificatelist.jsp");
                 rd.forward(request, response);

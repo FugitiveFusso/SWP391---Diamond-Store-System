@@ -223,9 +223,23 @@ public class DashboardController extends HttpServlet {
                 request.getRequestDispatcher("manager_warrantylist.jsp").forward(request, response);
 
             } else if (action.equals("listofcertificates")) {//lists
+                int totalCertificates = certificateDAO.getTotalCertificates(keyword);
+                int totalPages = (int) Math.ceil((double) totalCertificates / pageSize);
 
-                CertificateDAO dao = new CertificateDAO();
-                List<CertificateDTO> list = dao.list(keyword, sortCol);
+                // Ensure page is within valid range
+                if (page < 1) {
+                    page = 1;
+                } else if (page > totalPages) {
+                    page = totalPages;
+                }
+
+                List<CertificateDTO> list = certificateDAO.listCertificates(keyword, sortCol, page, pageSize);
+                request.setAttribute("currentPage", page);
+                request.setAttribute("totalPages", totalPages);
+                request.setAttribute("pageSize", pageSize);
+                request.setAttribute("sortCol", sortCol);
+                request.setAttribute("keyword", keyword);
+                request.setAttribute("certificatelist", list);
                 request.setAttribute("certificatelist", list);
 
                 request.getRequestDispatcher("manager_certificatelist.jsp").forward(request, response);

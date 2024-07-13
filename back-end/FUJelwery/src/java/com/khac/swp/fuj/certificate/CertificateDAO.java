@@ -13,39 +13,47 @@ public class CertificateDAO {
     Connection conn = DBUtils.getConnection();
     ResultSet rs = null;
 
-    public List<CertificateDTO> list(String keyword, String sortCol) {
-        List<CertificateDTO> list = new ArrayList<CertificateDTO>();
+    public List<CertificateDTO> listCertificates(String keyword, String sortCol, int page, int pageSize) {
+        List<CertificateDTO> list = new ArrayList<>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = "SELECT * FROM [Certificate] where isDeleted = 'active' ";
+            String sql = "SELECT certificateID, certificateImage, description "
+                    + "FROM [Certificate] WHERE isDeleted = 'active'";
+
             if (keyword != null && !keyword.isEmpty()) {
-                sql += " and description like ?";
+                sql += " AND description LIKE ?";
             }
 
             if (sortCol != null && !sortCol.isEmpty()) {
-                sql += " ORDER BY " + sortCol + " ASC ";
+                sql += " ORDER BY " + sortCol + " ASC";
+            } else {
+                sql += " ORDER BY certificateID ASC"; // Default sorting by certificateID
             }
+
+            sql += " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
+            int paramIndex = 1;
             if (keyword != null && !keyword.isEmpty()) {
-                stmt.setString(1, "%" + keyword + "%");
-
+                stmt.setString(paramIndex++, "%" + keyword + "%");
             }
+
+            stmt.setInt(paramIndex++, (page - 1) * pageSize);
+            stmt.setInt(paramIndex, pageSize);
+
             ResultSet rs = stmt.executeQuery();
-            if (rs != null) {
-                while (rs.next()) {
+            while (rs.next()) {
+                int certificateID = rs.getInt("certificateID");
+                String certificateImage = rs.getString("certificateImage");
+                String certificateDescription = rs.getString("description");
 
-                    int certificateID = rs.getInt("certificateID");
-                    String certificateImage = rs.getString("certificateImage");
-                    String certificateDescription = rs.getString("description");
+                CertificateDTO certificate = new CertificateDTO();
+                certificate.setCertificateID(certificateID);
+                certificate.setCertificateImage(certificateImage);
+                certificate.setCertificateDescription(certificateDescription);
 
-                    CertificateDTO certificate = new CertificateDTO();
-                    certificate.setCertificateID(certificateID);
-                    certificate.setCertificateImage(certificateImage);
-                    certificate.setCertificateDescription(certificateDescription);
-                    list.add(certificate);
-                }
+                list.add(certificate);
             }
 
             con.close();
@@ -54,6 +62,35 @@ public class CertificateDAO {
             ex.printStackTrace();
         }
         return list;
+    }
+
+    public int getTotalCertificates(String keyword) {
+        int total = 0;
+        try {
+            Connection con = DBUtils.getConnection();
+            String sql = "SELECT COUNT(*) FROM [Certificate] WHERE isDeleted = 'active'";
+
+            if (keyword != null && !keyword.isEmpty()) {
+                sql += " AND description LIKE ?";
+            }
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            if (keyword != null && !keyword.isEmpty()) {
+                stmt.setString(1, "%" + keyword + "%");
+            }
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                total = rs.getInt(1);
+            }
+
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error in servlet. Details:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return total;
     }
 
     public CertificateDTO load(int certificateID) {
