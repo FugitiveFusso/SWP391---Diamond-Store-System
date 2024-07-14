@@ -72,11 +72,11 @@ public class SalesStaffOrderController extends HttpServlet {
             if (pageStrA != null) {
                 pageA = Integer.parseInt(pageStrA);
             }
-            int pageSizeA = 10; // Set the number of orders per page for the first table
+            int pageSizeA = 1; // Set the number of orders per page for the first table
             if (pageStrB != null) {
                 pageB = Integer.parseInt(pageStrB);
             }
-            int pageSizeB = 10; // Set the number of orders per page for the second table
+            int pageSizeB = 1; // Set the number of orders per page for the second table
             OrderDAO orderDAO = new OrderDAO();
             HttpSession session = request.getSession(false);
             if (session == null || session.getAttribute("salessession") == null) {

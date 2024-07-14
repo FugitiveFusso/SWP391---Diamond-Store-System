@@ -182,11 +182,12 @@
                                             <div class="pagination">
                                                 <% int currentPageA = (Integer) request.getAttribute("currentPageA");
                                                     int totalPagesA = (Integer) request.getAttribute("totalPagesA");
+                                                    int currentPageB = (Integer) request.getAttribute("currentPageB");
                                                     int id = (Integer) request.getAttribute("id");
                                                 %>
 
                                                 <% if (currentPageA > 1) {%>
-                                                <a href="?action=list&id=<%= id%>&pageA=<%= currentPageA - 1%>" class="pagination-arrow">&#8249;</a>
+                                                <a href="?action=list&id=<%= id%>&pageA=<%= currentPageA - 1%>&pageB=<%= currentPageB%>" class="pagination-arrow">&#8249;</a>
                                                 <% } else { %>
                                                 <span class="pagination-arrow disabled">&#8249;</span>
                                                 <% } %>
@@ -196,33 +197,29 @@
                                                     int endPageA = Math.min(totalPagesA, startPageA + 4); // Show up to 5 pages
 
                                                     if (startPageA > 1) {%>
-                                                <a href="?action=list&id=<%= id%>&pageA=1" class="pagination-number">1</a>
+                                                <a href="?action=list&id=<%= id%>&pageA=1&pageB=<%= currentPageB%>" class="pagination-number">1</a>
                                                 <% if (startPageA > 2) { %>
                                                 <span class="pagination-ellipsis">...</span>
                                                 <% }
                                                     }
 
                                                     for (int i = startPageA; i <= endPageA; i++) {%>
-                                                <a href="?action=list&id=<%= id%>&pageA=<%= i%>"
-                                                   class="pagination-number <%= (i == currentPageA) ? "active" : ""%>"><%= i%></a>
+                                                <a href="?action=list&id=<%= id%>&pageA=<%= i%>&pageB=<%= currentPageB%>" class="pagination-number <%= (i == currentPageA) ? "active" : ""%>"><%= i%></a>
                                                 <% }
 
                                                     if (endPageA < totalPagesA) { %>
                                                 <% if (endPageA < totalPagesA - 1) { %>
                                                 <span class="pagination-ellipsis">...</span>
                                                 <% }%>
-                                                <a href="?action=list&id=<%= id%>&pageA=<%= totalPagesA%>"
-                                                   class="pagination-number"><%= totalPagesA%></a>
+                                                <a href="?action=list&id=<%= id%>&pageA=<%= totalPagesA%>&pageB=<%= currentPageB%>" class="pagination-number"><%= totalPagesA%></a>
                                                 <% } %>
 
                                                 <% if (currentPageA < totalPagesA) {%>
-                                                <a href="?action=list&id=<%= id%>&pageA=<%= currentPageA + 1%>"
-                                                   class="pagination-arrow">&#8250;</a>
+                                                <a href="?action=list&id=<%= id%>&pageA=<%= currentPageA + 1%>&pageB=<%= currentPageB%>" class="pagination-arrow">&#8250;</a>
                                                 <% } else { %>
                                                 <span class="pagination-arrow disabled">&#8250;</span>
                                                 <% } %>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -262,12 +259,10 @@
                                                 </tbody>
                                             </table>
                                             <div class="pagination">
-                                                <% int currentPageB = (Integer) request.getAttribute("currentPageB");
-                                                    int totalPagesB = (Integer) request.getAttribute("totalPagesB");
-                                                %>
+                                                <% int totalPagesB = (Integer) request.getAttribute("totalPagesB"); %>
 
                                                 <% if (currentPageB > 1) {%>
-                                                <a href="?action=list&id=<%= id%>&pageB=<%= currentPageB - 1%>" class="pagination-arrow">&#8249;</a>
+                                                <a href="?action=list&id=<%= id%>&pageB=<%= currentPageB - 1%>&pageA=<%= currentPageA%>" class="pagination-arrow">&#8249;</a>
                                                 <% } else { %>
                                                 <span class="pagination-arrow disabled">&#8249;</span>
                                                 <% } %>
@@ -277,28 +272,25 @@
                                                     int endPageB = Math.min(totalPagesB, startPageB + 4); // Show up to 5 pages
 
                                                     if (startPageB > 1) {%>
-                                                <a href="?action=list&id=<%= id%>&pageB=1" class="pagination-number">1</a>
+                                                <a href="?action=list&id=<%= id%>&pageB=1&pageA=<%= currentPageA%>" class="pagination-number">1</a>
                                                 <% if (startPageB > 2) { %>
                                                 <span class="pagination-ellipsis">...</span>
                                                 <% }
                                                     }
 
                                                     for (int i = startPageB; i <= endPageB; i++) {%>
-                                                <a href="?action=list&id=<%= id%>&pageB=<%= i%>"
-                                                   class="pagination-number <%= (i == currentPageB) ? "active" : ""%>"><%= i%></a>
+                                                <a href="?action=list&id=<%= id%>&pageB=<%= i%>&pageA=<%= currentPageA%>" class="pagination-number <%= (i == currentPageB) ? "active" : ""%>"><%= i%></a>
                                                 <% }
 
                                                     if (endPageB < totalPagesB) { %>
                                                 <% if (endPageB < totalPagesB - 1) { %>
                                                 <span class="pagination-ellipsis">...</span>
                                                 <% }%>
-                                                <a href="?action=list&id=<%= id%>&pageB=<%= totalPagesB%>"
-                                                   class="pagination-number"><%= totalPagesB%></a>
+                                                <a href="?action=list&id=<%= id%>&pageB=<%= totalPagesB%>&pageA=<%= currentPageA%>" class="pagination-number"><%= totalPagesB%></a>
                                                 <% } %>
 
                                                 <% if (currentPageB < totalPagesB) {%>
-                                                <a href="?action=list&id=<%= id%>&pageB=<%= currentPageB + 1%>"
-                                                   class="pagination-arrow">&#8250;</a>
+                                                <a href="?action=list&id=<%= id%>&pageB=<%= currentPageB + 1%>&pageA=<%= currentPageA%>" class="pagination-arrow">&#8250;</a>
                                                 <% } else { %>
                                                 <span class="pagination-arrow disabled">&#8250;</span>
                                                 <% }%>

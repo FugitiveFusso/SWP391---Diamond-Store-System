@@ -197,11 +197,12 @@
                             int totalPagesA = (Integer) request.getAttribute("totalPagesA");
                             String keyword_a = (String) request.getAttribute("keyword_a");
                             String sortColA = (String) request.getAttribute("sortColA");
+                            int currentPageB = (Integer) request.getAttribute("currentPageB");
                             int maxPagesToShow = 5;
                         %>
 
                         <% if (currentPageA > 1) {%>
-                        <a href="?pageA=<%= currentPageA - 1%><%= !sortColA.isEmpty() ? "&colSortA=" + sortColA : ""%><%= !keyword_a.isEmpty() ? "&keyword_a=" + keyword_a : ""%>" class="pagination-arrow">&#8249;</a>
+                        <a href="?pageA=<%= currentPageA - 1%>&pageB=<%= currentPageB%><%= !sortColA.isEmpty() ? "&colSortA=" + sortColA : ""%><%= !keyword_a.isEmpty() ? "&keyword_a=" + keyword_a : ""%>" class="pagination-arrow">&#8249;</a>
                         <% } else { %>
                         <span class="pagination-arrow disabled">&#8249;</span>
                         <% } %>
@@ -211,25 +212,25 @@
                             int endPageA = Math.min(totalPagesA, startPageA + maxPagesToShow - 1);
 
                             if (startPageA > 1) {%>
-                        <a href="?pageA=1<%= !sortColA.isEmpty() ? "&colSortA=" + sortColA : ""%><%= !keyword_a.isEmpty() ? "&keyword_a=" + keyword_a : ""%>" class="pagination-number">1</a>
+                        <a href="?pageA=1&pageB=<%= currentPageB%><%= !sortColA.isEmpty() ? "&colSortA=" + sortColA : ""%><%= !keyword_a.isEmpty() ? "&keyword_a=" + keyword_a : ""%>" class="pagination-number">1</a>
                         <% if (startPageA > 2) { %>
                         <span class="pagination-ellipsis">...</span>
                         <% }
                             }
 
                             for (int i = startPageA; i <= endPageA; i++) {%>
-                        <a href="?pageA=<%= i%><%= !sortColA.isEmpty() ? "&colSortA=" + sortColA : ""%><%= !keyword_a.isEmpty() ? "&keyword_a=" + keyword_a : ""%>" class="pagination-number <%= (i == currentPageA) ? "active" : ""%>"><%= i%></a>
+                        <a href="?pageA=<%= i%>&pageB=<%= currentPageB%><%= !sortColA.isEmpty() ? "&colSortA=" + sortColA : ""%><%= !keyword_a.isEmpty() ? "&keyword_a=" + keyword_a : ""%>" class="pagination-number <%= (i == currentPageA) ? "active" : ""%>"><%= i%></a>
                         <% }
 
                             if (endPageA < totalPagesA) { %>
                         <% if (endPageA < totalPagesA - 1) { %>
                         <span class="pagination-ellipsis">...</span>
                         <% }%>
-                        <a href="?pageA=<%= totalPagesA%><%= !sortColA.isEmpty() ? "&colSortA=" + sortColA : ""%><%= !keyword_a.isEmpty() ? "&keyword_a=" + keyword_a : ""%>" class="pagination-number"><%= totalPagesA%></a>
+                        <a href="?pageA=<%= totalPagesA%>&pageB=<%= currentPageB%><%= !sortColA.isEmpty() ? "&colSortA=" + sortColA : ""%><%= !keyword_a.isEmpty() ? "&keyword_a=" + keyword_a : ""%>" class="pagination-number"><%= totalPagesA%></a>
                         <% } %>
 
                         <% if (currentPageA < totalPagesA) {%>
-                        <a href="?pageA=<%= currentPageA + 1%><%= !sortColA.isEmpty() ? "&colSortA=" + sortColA : ""%><%= !keyword_a.isEmpty() ? "&keyword_a=" + keyword_a : ""%>" class="pagination-arrow">&#8250;</a>
+                        <a href="?pageA=<%= currentPageA + 1%>&pageB=<%= currentPageB%><%= !sortColA.isEmpty() ? "&colSortA=" + sortColA : ""%><%= !keyword_a.isEmpty() ? "&keyword_a=" + keyword_a : ""%>" class="pagination-arrow">&#8250;</a>
                         <% } else { %>
                         <span class="pagination-arrow disabled">&#8250;</span>
                         <% }%>
@@ -286,14 +287,13 @@
                     </table>    
                     <div class="pagination">
                         <%
-                            int currentPageB = (Integer) request.getAttribute("currentPageB");
                             int totalPagesB = (Integer) request.getAttribute("totalPagesB");
                             String keyword_b = (String) request.getAttribute("keyword_b");
                             String sortColB = (String) request.getAttribute("sortColB");
                         %>
 
                         <% if (currentPageB > 1) {%>
-                        <a href="?pageB=<%= currentPageB - 1%><%= !sortColB.isEmpty() ? "&colSortB=" + sortColB : ""%><%= !keyword_b.isEmpty() ? "&keyword_b=" + keyword_b : ""%>" class="pagination-arrow">&#8249;</a>
+                        <a href="?pageB=<%= currentPageB - 1%>&pageA=<%= currentPageA%><%= !sortColB.isEmpty() ? "&colSortB=" + sortColB : ""%><%= !keyword_b.isEmpty() ? "&keyword_b=" + keyword_b : ""%>" class="pagination-arrow">&#8249;</a>
                         <% } else { %>
                         <span class="pagination-arrow disabled">&#8249;</span>
                         <% } %>
@@ -303,25 +303,25 @@
                             int endPageB = Math.min(totalPagesB, startPageB + maxPagesToShow - 1);
 
                             if (startPageB > 1) {%>
-                        <a href="?pageB=1<%= !sortColB.isEmpty() ? "&colSortB=" + sortColB : ""%><%= !keyword_b.isEmpty() ? "&keyword_b=" + keyword_b : ""%>" class="pagination-number">1</a>
+                        <a href="?pageB=1&pageA=<%= currentPageA%><%= !sortColB.isEmpty() ? "&colSortB=" + sortColB : ""%><%= !keyword_b.isEmpty() ? "&keyword_b=" + keyword_b : ""%>" class="pagination-number">1</a>
                         <% if (startPageB > 2) { %>
                         <span class="pagination-ellipsis">...</span>
                         <% }
                             }
 
                             for (int i = startPageB; i <= endPageB; i++) {%>
-                        <a href="?pageB=<%= i%><%= !sortColB.isEmpty() ? "&colSortB=" + sortColB : ""%><%= !keyword_b.isEmpty() ? "&keyword_b=" + keyword_b : ""%>" class="pagination-number <%= (i == currentPageB) ? "active" : ""%>"><%= i%></a>
+                        <a href="?pageB=<%= i%>&pageA=<%= currentPageA%><%= !sortColB.isEmpty() ? "&colSortB=" + sortColB : ""%><%= !keyword_b.isEmpty() ? "&keyword_b=" + keyword_b : ""%>" class="pagination-number <%= (i == currentPageB) ? "active" : ""%>"><%= i%></a>
                         <% }
 
                             if (endPageB < totalPagesB) { %>
                         <% if (endPageB < totalPagesB - 1) { %>
                         <span class="pagination-ellipsis">...</span>
                         <% }%>
-                        <a href="?pageB=<%= totalPagesB%><%= !sortColB.isEmpty() ? "&colSortB=" + sortColB : ""%><%= !keyword_b.isEmpty() ? "&keyword_b=" + keyword_b : ""%>" class="pagination-number"><%= totalPagesB%></a>
+                        <a href="?pageB=<%= totalPagesB%>&pageA=<%= currentPageA%><%= !sortColB.isEmpty() ? "&colSortB=" + sortColB : ""%><%= !keyword_b.isEmpty() ? "&keyword_b=" + keyword_b : ""%>" class="pagination-number"><%= totalPagesB%></a>
                         <% } %>
 
                         <% if (currentPageB < totalPagesB) {%>
-                        <a href="?pageB=<%= currentPageB + 1%><%= !sortColB.isEmpty() ? "&colSortB=" + sortColB : ""%><%= !keyword_b.isEmpty() ? "&keyword_b=" + keyword_b : ""%>" class="pagination-arrow">&#8250;</a>
+                        <a href="?pageB=<%= currentPageB + 1%>&pageA=<%= currentPageA%><%= !sortColB.isEmpty() ? "&colSortB=" + sortColB : ""%><%= !keyword_b.isEmpty() ? "&keyword_b=" + keyword_b : ""%>" class="pagination-arrow">&#8250;</a>
                         <% } else { %>
                         <span class="pagination-arrow disabled">&#8250;</span>
                         <% }%>
