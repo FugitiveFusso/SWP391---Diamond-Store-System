@@ -240,10 +240,6 @@
                     </div>
                 </div>
 
-
-
-
-
                 <div class="list">
                     <form action='' method=GET id="searchbox"> 
                         <input name=keyword_b type=text class="search-input" value="<%=request.getParameter("keyword_b") != null ? request.getParameter("keyword_b") : ""%>">
