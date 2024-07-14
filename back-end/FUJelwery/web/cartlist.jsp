@@ -179,7 +179,7 @@
                         <div class="ibox-content">       
                             <!-- Purchase Method Form -->
                             <div class="purchase">
-                                <form id="purchaseForm" action="OrderController" method="POST" class="mt-3">
+                                <form id="storePurchaseForm" action="OrderController" method="POST" class="mt-3">
                                     <div class="form-group">
                                         <label for="purchaseMethod">Select your preferred payment method:</label>
                                         <select name="purchaseMethod" id="purchaseMethod" required class="form-control">
@@ -188,15 +188,22 @@
                                             <option value="Door-to-door delivery service" ${requestScope.order.purchaseMethod == 'Door-to-door delivery service' ? 'selected' : ''}>Door-to-door delivery service</option>
                                         </select>
                                     </div>
-                                    <input name="action" value="purchase" type="hidden">
-                                    <input type="hidden" name="userid" value="${sessionScope.usersession.userid}">
+                                    <input type="hidden" name="id" value="${sessionScope.usersession.userid}">
                                     <div class="form-group text-right">
-                                        <button type="button" id="purchaseButton" class="btn btn-primary btn-large">
-                                            <i class="fa fa-shopping-cart"></i> Purchase
+                                        <button type="submit" id="storePurchaseButton" name="action" value="purchaseatstore" class="btn btn-primary btn-large">
+                                            <i class="fa fa-shopping-cart"></i> Pay at store
+                                        </button>
+                                    </div>
+                                    <div class="form-group text-right">
+                                        <button type="submit" id="creditCardPurchaseButton" name="action" value="purchasewithcredit" class="btn btn-primary btn-large">
+                                            <i class="fa fa-shopping-cart"></i> Pay via Credit Card
                                         </button>
                                     </div>
                                 </form>
+
                             </div>
+
+
                         </div>
 
                     </div>
@@ -299,34 +306,34 @@
         <!--        <script src="js/voucherConfirmation.js"></script>-->
         <script src="js/productlist_pagination.js"></script>
         <script>
-        document.getElementById('purchaseButton').addEventListener('click', function (event) {
-            event.preventDefault();
-            const purchaseMethod = document.getElementById('purchaseMethod').value;
+                                                                document.getElementById('purchaseButton').addEventListener('click', function (event) {
+                                                                    event.preventDefault();
+                                                                    const purchaseMethod = document.getElementById('purchaseMethod').value;
 
-            if (!purchaseMethod) {
-                Swal.fire({
-                    title: 'Error',
-                    text: 'Please select a payment method.',
-                    icon: 'error',
-                    confirmButtonText: 'OK'
-                });
-                return;
-            }
+                                                                    if (!purchaseMethod) {
+                                                                        Swal.fire({
+                                                                            title: 'Error',
+                                                                            text: 'Please select a payment method.',
+                                                                            icon: 'error',
+                                                                            confirmButtonText: 'OK'
+                                                                        });
+                                                                        return;
+                                                                    }
 
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "Do you want to proceed with the purchase?",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, purchase it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById('purchaseForm').submit();
-                }
-            });
-        });
+                                                                    Swal.fire({
+                                                                        title: 'Are you sure?',
+                                                                        text: "Do you want to proceed with the purchase?",
+                                                                        icon: 'warning',
+                                                                        showCancelButton: true,
+                                                                        confirmButtonColor: '#3085d6',
+                                                                        cancelButtonColor: '#d33',
+                                                                        confirmButtonText: 'Yes, purchase it!'
+                                                                    }).then((result) => {
+                                                                        if (result.isConfirmed) {
+                                                                            document.getElementById('purchaseForm').submit();
+                                                                        }
+                                                                    });
+                                                                });
         </script>
         <script>
             function confirmDelete(orderID) {

@@ -136,3 +136,10 @@ CREATE TABLE [Post](
 	postText varchar(max),
 	isDeleted varchar(10)
 );
+
+CREATE TABLE [Transactions](
+	transactionID int primary key,
+	userID int NOT NULL foreign key REFERENCES [User](userID),
+	paymentDate varchar(20),
+	totalPrice varchar(100)
+);

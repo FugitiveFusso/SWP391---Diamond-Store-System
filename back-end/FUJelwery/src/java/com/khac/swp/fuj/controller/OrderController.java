@@ -7,11 +7,16 @@ package com.khac.swp.fuj.controller;
 
 import com.khac.swp.fuj.order.OrderDAO;
 import com.khac.swp.fuj.order.OrderDTO;
+import com.khac.swp.fuj.order.Transactions;
 import com.khac.swp.fuj.ring.RingDTO;
+import com.khac.swp.fuj.users.UserDAO;
+import com.khac.swp.fuj.users.UserDTO;
 import com.khac.swp.fuj.utils.DBUtils;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -51,6 +56,7 @@ public class OrderController extends HttpServlet {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDate localDate = LocalDate.now();
             String purchasedDate = localDate.format(formatter);
+            Transactions transaction = new Transactions();
             if (keyword == null) {
                 keyword = "";
             }
@@ -122,7 +128,7 @@ public class OrderController extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("cartdetails.jsp");
                 rd.forward(request, response);
 
-            } else if (action.equals("purchase")) {//purchase
+            } else if (action.equals("purchaseatstore")) {//purchase
                 Integer userID = null;
                 try {
                     userID = Integer.parseInt(request.getParameter("userid"));
@@ -147,6 +153,60 @@ public class OrderController extends HttpServlet {
 
                 response.sendRedirect(request.getContextPath() + "/user_homepage.jsp");
 
+            } else if (action.equals("purchasewithcredit")) {//lists
+                Integer id = null;
+                try {
+                    id = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+                String paymentMethod = request.getParameter("purchaseMethod");
+                if (id != null) {
+                    UserDAO user = new UserDAO();
+                    UserDTO userDTO = user.load_Normal(id);
+                    transaction.updateOrder(paymentMethod, purchasedDate, id);
+                    request.setAttribute("customer", userDTO);
+
+                    String totalPrice = orderDAO.totalAllProduct(id);
+                    request.setAttribute("totalPrice", totalPrice);
+                }
+
+                request.getRequestDispatcher("/paymentgateway.jsp").forward(request, response);
+            } else if (action.equals("pay")) {
+                Connection conn = null;
+                conn = DBUtils.getConnection();
+                PreparedStatement ps = conn.prepareStatement("SELECT MAX(transactionID) FROM [Transactions]");
+                ResultSet rs = ps.executeQuery();
+
+                Integer userID = null;
+                try {
+                    userID = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter UserID has wrong format.");
+                }
+                String totalPrice = orderDAO.totalAllProduct(userID);
+
+                if (userID != null) {
+                    try {
+                        Integer transactionID = null;
+                        if (rs.next()) {
+                            transactionID = rs.getInt(1);
+                            transactionID++;
+                        }
+                        orderDAO.updateScore(userID);
+                        transaction.purchaseOrder(userID);
+                        transaction.insert(transactionID, userID, totalPrice, purchasedDate);
+
+                        request.getSession().setAttribute("success", "Purchase Successfully!!!");
+                    } catch (Exception e) {
+                        log("Error deleting order: " + e.getMessage());
+                        request.getSession().setAttribute("errorMessage", "Error deleting order.");
+                    }
+                } else {
+                    request.getSession().setAttribute("errorMessage", "Invalid order ID.");
+                }
+
+                response.sendRedirect(request.getContextPath() + "/user_homepage.jsp");
             } else if (action.equals("applyVoucher")) {
                 String code = request.getParameter("coupon");
                 Integer userID = null;
