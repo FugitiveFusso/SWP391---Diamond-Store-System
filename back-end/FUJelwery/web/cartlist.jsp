@@ -191,7 +191,7 @@
                                     <input type="hidden" name="id" value="${sessionScope.usersession.userid}">
                                     <div class="form-group text-right">
                                         <button type="submit" id="storePurchaseButton" name="action" value="purchaseatstore" class="btn btn-primary btn-large">
-                                            <i class="fa fa-shopping-cart"></i> Pay at store
+                                            <i class="fa fa-shopping-cart"></i> Pay by Cash
                                         </button>
                                     </div>
                                     <div class="form-group text-right">
