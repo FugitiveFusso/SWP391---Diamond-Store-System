@@ -133,8 +133,8 @@
                         <thead>
                             <tr>
                                 <th>Transaction ID</th>
-                                <th>Username</th>
-                                <th>Purchase Date</th>
+                                <th><a href="?colSort=userName<%= request.getAttribute("keyword") != null && !request.getAttribute("keyword").toString().isEmpty() ? "&keyword=" + request.getAttribute("keyword") : ""%>">Username</a></th>
+                                <th><a href="?colSort=paymentDate<%= request.getAttribute("keyword") != null && !request.getAttribute("keyword").toString().isEmpty() ? "&keyword=" + request.getAttribute("keyword") : ""%>">Purchase Date</a></th>
                                 <th>Total Price</th>              
                             </tr>
                         </thead>
@@ -156,7 +156,50 @@
                         </tbody>
                     </table>
                     <!-- Pagination controls -->
-                    
+                    <div class="pagination">
+                        <% int currentPage = (Integer) request.getAttribute("currentPage");
+                            int totalPages = (Integer) request.getAttribute("totalPages");
+                            String sortCol = (String) request.getAttribute("sortCol");
+                            String keyword = (String) request.getAttribute("keyword");
+                            int maxPagesToShow = 5; // Adjust this to change how many pages to show around current page
+                        %>
+
+                        <% if (currentPage > 1) {%>
+                        <a href="?page=<%= currentPage - 1%><%= !sortCol.isEmpty() ? "&colSort=" + sortCol : ""%><%= !keyword.isEmpty() ? "&keyword=" + keyword : ""%>" class="pagination-arrow">&#8249;</a>
+                        <% } else { %>
+                        <span class="pagination-arrow disabled">&#8249;</span>
+                        <% } %>
+
+                        <%
+                            int startPage = Math.max(1, currentPage - (maxPagesToShow / 2));
+                            int endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
+
+                            if (startPage > 1) {%>
+                        <a href="?page=1<%= !sortCol.isEmpty() ? "&colSort=" + sortCol : ""%><%= !keyword.isEmpty() ? "&keyword=" + keyword : ""%>" class="pagination-number">1</a>
+                        <% if (startPage > 2) { %>
+                        <span class="pagination-ellipsis">...</span>
+                        <% }
+                            }
+
+                            for (int i = startPage; i <= endPage; i++) {%>
+                        <a href="?page=<%= i%><%= !sortCol.isEmpty() ? "&colSort=" + sortCol : ""%><%= !keyword.isEmpty() ? "&keyword=" + keyword : ""%>"
+                           class="pagination-number <%= (i == currentPage) ? "active" : ""%>"><%= i%></a>
+                        <% }
+
+                            if (endPage < totalPages) { %>
+                        <% if (endPage < totalPages - 1) { %>
+                        <span class="pagination-ellipsis">...</span>
+                        <% }%>
+                        <a href="?page=<%= totalPages%><%= !sortCol.isEmpty() ? "&colSort=" + sortCol : ""%><%= !keyword.isEmpty() ? "&keyword=" + keyword : ""%>" class="pagination-number"><%= totalPages%></a>
+                        <% }
+                        %>
+
+                        <% if (currentPage < totalPages) {%>
+                        <a href="?page=<%= currentPage + 1%><%= !sortCol.isEmpty() ? "&colSort=" + sortCol : ""%><%= !keyword.isEmpty() ? "&keyword=" + keyword : ""%>" class="pagination-arrow">&#8250;</a>
+                        <% } else { %>
+                        <span class="pagination-arrow disabled">&#8250;</span>
+                        <% }%>
+                    </div>
                 </div>
             </div>             
         </div>

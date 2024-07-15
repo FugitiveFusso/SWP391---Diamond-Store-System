@@ -5,7 +5,6 @@
  */
 package com.khac.swp.fuj.controller;
 
-
 import com.khac.swp.fuj.order.TransactionDTO;
 import com.khac.swp.fuj.order.Transactions;
 import java.io.IOException;
@@ -40,14 +39,43 @@ public class TransactionHistory extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String action = request.getParameter("action");
-
+            String keyword = request.getParameter("keyword");
+            if (keyword == null) {
+                keyword = "";
+            }
+            String sortCol = request.getParameter("colSort");
+            if (sortCol == null) {
+                sortCol = "";
+            }
+            String pageStr = request.getParameter("page");
+            int page = 1;
+            if (pageStr != null) {
+                page = Integer.parseInt(pageStr);
+            }
+            int pageSize = 10; // Set the number of posts per page
+            
             Transactions transaction = new Transactions();
             HttpSession session = request.getSession(false);
             if (session == null || session.getAttribute("salessession") == null) {
                 response.sendRedirect("saleslogin.jsp");
                 return;
             } else if (action == null || action.equals("list")) {//lists
-                List<TransactionDTO> list = transaction.listTransaction();
+                int totalTransactions = transaction.getTotalTransactions(keyword);
+                int totalPages = (int) Math.ceil((double) totalTransactions / pageSize);
+
+                // Ensure page is within valid range
+                if (page < 1) {
+                    page = 1;
+                } else if (page > totalPages) {
+                    page = totalPages;
+                }
+
+                List<TransactionDTO> list = transaction.listTransaction(keyword, sortCol, page, pageSize);
+                request.setAttribute("currentPage", page);
+                request.setAttribute("totalPages", totalPages);
+                request.setAttribute("pageSize", pageSize);
+                request.setAttribute("sortCol", sortCol);
+                request.setAttribute("keyword", keyword);
                 request.setAttribute("transactionlist", list);
 
                 request.getRequestDispatcher("/transactionshistory.jsp").forward(request, response);
