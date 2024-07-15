@@ -131,7 +131,7 @@ public class OrderController extends HttpServlet {
             } else if (action.equals("purchaseatstore")) {//purchase
                 Integer userID = null;
                 try {
-                    userID = Integer.parseInt(request.getParameter("userid"));
+                    userID = Integer.parseInt(request.getParameter("id"));
                 } catch (NumberFormatException ex) {
                     log("Parameter UserID has wrong format.");
                 }
