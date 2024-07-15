@@ -679,7 +679,7 @@ INSERT INTO [Order] (orderID, userID, orderDate, ringID, voucherID, warrantyID, 
 (31, 8, '02/07/2024', 6, 1, NULL, 11, 'Received at store', 'purchased');
 
 INSERT INTO [Transactions] (transactionID,userID,paymentDate,totalPrice) VALUES
-(1,8,'14/07/2024',120,914,000),
-(2,8,'15/07/2024',321,456,000),
-(3,8,'15/07/2024',561,944,000),
-(4,8,'15/07/2024',113,420,000)
+(1,8,'14/07/2024','120,914,000'),
+(2,8,'15/07/2024','321,456,000'),
+(3,8,'15/07/2024','561,944,000'),
+(4,8,'15/07/2024','113,420,000')
