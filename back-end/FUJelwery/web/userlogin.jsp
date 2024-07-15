@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <link rel="stylesheet" href="css/adminlogin.css">
-        
+
         <style>
             .wrapper h1 a{
                 color: white;
@@ -21,7 +21,7 @@
             }
         </style>
     </head>
-    
+
     <body>
 
         <section class="ftco-section">                       
@@ -35,17 +35,18 @@
                     <% }%>
 
                     <div class="input-box">
-                        <input name="user" type="text" required>
+                        <input name="user" type="text" autofocus required>
                         <span class="placeholder">Username</span>
                         <i class='bx bxs-user'></i>
                     </div>
                     <div class="input-box">
-                        <input name="password" type="password" id="myInput" required>
+                        <input id="myInput" name="password" type="password" autofocus required>
                         <span class="placeholder">Password</span>
                         <span class="eye" onclick="myFunction()">
-                            <i id="hide1" class="fa-solid fa-eye"></i>
-                            <i id="hide2" class="fa-solid fa-eye-slash" id="eyeicon"></i>
-                        </span>              
+                            <i id="hide1" class="fa-solid fa-eye" style="display:none;"></i>
+                            <i id="hide2" class="fa-solid fa-eye-slash"></i>
+                        </span>
+                        <p id="capslock-warning" hidden>⚠ Caps Lock is on.</p>
                     </div>
 
                     <div class="dropdown-forget">
@@ -88,8 +89,20 @@
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <link rel="stylesheet" href="alert/dist/sweetalert.css">
         <script src="js/login.js"></script>
-
         <script>
+                            // Caps Lock Warning
+                            const passwordInput = document.getElementById('myInput');
+                            const warning = document.getElementById('capslock-warning');
+
+                            passwordInput.addEventListener('keyup', (event) => {
+                                if (event.getModifierState('CapsLock')) {
+                                    warning.hidden = false;
+                                } else {
+                                    warning.hidden = true;
+                                }
+                            });
+
+                            // Show/Hide Password Function
                             function myFunction() {
                                 var x = document.getElementById("myInput");
                                 var y = document.getElementById("hide1");
@@ -98,14 +111,15 @@
                                 if (x.type === 'password') {
                                     x.type = "text";
                                     y.style.display = "block";
-                                    z.style.display = "none"
+                                    z.style.display = "none";
                                 } else {
                                     x.type = "password";
                                     y.style.display = "none";
-                                    z.style.display = "block"
+                                    z.style.display = "block";
                                 }
                             }
 
+                            // Dropdown Toggle
                             let dropdown = document.querySelector('.dropdown');
                             dropdown.onclick = function () {
                                 dropdown.classList.toggle('active');

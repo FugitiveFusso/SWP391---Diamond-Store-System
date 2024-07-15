@@ -20,24 +20,25 @@
             <div class="wrapper">
                 <form action="./adminlogin" name="" method="POST" class="signin-form">
                     <h1>Admin Login</h1>
-                    
+
                     <% String error = (String) request.getAttribute("error"); %>
                     <% if (error != null) {%>
                     <h3 style="color: red; display: flex; justify-content: center; text-align: center ;margin-top: 10px"> <%= error%> </h3>
                     <% }%>
-                    
+
                     <div class="input-box">
                         <input name="user" type="text" required>
                         <span class="placeholder">Username</span>
                         <i class='bx bxs-user'></i>
                     </div>
                     <div class="input-box">
-                        <input name="password" type="password" id="myInput" required>
+                        <input id="myInput" name="password" type="password" autofocus required>
                         <span class="placeholder">Password</span>
                         <span class="eye" onclick="myFunction()">
-                            <i id="hide1" class="fa-solid fa-eye"></i>
-                            <i id="hide2" class="fa-solid fa-eye-slash" id="eyeicon"></i>
-                        </span>              
+                            <i id="hide1" class="fa-solid fa-eye" style="display:none;"></i>
+                            <i id="hide2" class="fa-solid fa-eye-slash"></i>
+                        </span>
+                        <p id="capslock-warning" hidden>⚠ Caps Lock is on.</p>
                     </div>
 
 
@@ -59,29 +60,41 @@
             </div>
         </section>
         <script src="js/login.js"></script>
-
         <script>
-                                function myFunction() {
-                                    var x = document.getElementById("myInput");
-                                    var y = document.getElementById("hide1");
-                                    var z = document.getElementById("hide2");
+                            // Caps Lock Warning
+                            const passwordInput = document.getElementById('myInput');
+                            const warning = document.getElementById('capslock-warning');
 
-                                    if (x.type === 'password') {
-                                        x.type = "text";
-                                        y.style.display = "block";
-                                        z.style.display = "none"
-                                    } else {
-                                        x.type = "password";
-                                        y.style.display = "none";
-                                        z.style.display = "block"
-                                    }
+                            passwordInput.addEventListener('keyup', (event) => {
+                                if (event.getModifierState('CapsLock')) {
+                                    warning.hidden = false;
+                                } else {
+                                    warning.hidden = true;
                                 }
+                            });
 
-                                let dropdown = document.querySelector('.dropdown');
-                                dropdown.onclick = function () {
-                                    dropdown.classList.toggle('active');
+                            // Show/Hide Password Function
+                            function myFunction() {
+                                var x = document.getElementById("myInput");
+                                var y = document.getElementById("hide1");
+                                var z = document.getElementById("hide2");
+
+                                if (x.type === 'password') {
+                                    x.type = "text";
+                                    y.style.display = "block";
+                                    z.style.display = "none";
+                                } else {
+                                    x.type = "password";
+                                    y.style.display = "none";
+                                    z.style.display = "block";
                                 }
+                            }
+
+                            // Dropdown Toggle
+                            let dropdown = document.querySelector('.dropdown');
+                            dropdown.onclick = function () {
+                                dropdown.classList.toggle('active');
+                            }
         </script>
-
     </body>
 </html>
