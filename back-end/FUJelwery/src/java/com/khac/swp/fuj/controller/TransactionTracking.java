@@ -46,10 +46,16 @@ public class TransactionTracking extends HttpServlet {
                 response.sendRedirect("userlogin.jsp");
                 return;
             } else if (action == null || action.equals("list")) {//lists
-                List<TransactionDTO> list = transaction.listTransaction();
+                Integer id = null;
+                try {
+                    id = Integer.parseInt(request.getParameter("id"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter id has wrong format.");
+                }
+                List<TransactionDTO> list = transaction.listTransactionForUser(id);
                 request.setAttribute("transactionlist", list);
 
-                request.getRequestDispatcher("/transactionshistory.jsp").forward(request, response);
+                request.getRequestDispatcher("/transactionforuser.jsp").forward(request, response);
 
             } else if (action.equals("details")) {//details
 
@@ -62,11 +68,11 @@ public class TransactionTracking extends HttpServlet {
 
                 TransactionDTO transactionDTO = null;
                 if (id != null) {
-                    transactionDTO = transaction.loadTransaction(id);
+                    transactionDTO = transaction.loadTransactionForUser(id);
                 }
 
                 request.setAttribute("transaction", transactionDTO);//object
-                RequestDispatcher rd = request.getRequestDispatcher("transactiondetails.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("transactiondetailsforuser.jsp");
                 rd.forward(request, response);
 
             }

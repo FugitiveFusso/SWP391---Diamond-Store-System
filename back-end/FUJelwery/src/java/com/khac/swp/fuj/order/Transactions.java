@@ -147,4 +147,75 @@ public class Transactions {
         }
         return null;
     }
+    
+    public List<TransactionDTO> listTransactionForUser(int userID){
+        List<TransactionDTO> list = new ArrayList<TransactionDTO>();
+       String sql = "SELECT t.transactionID, t.userID, u.userName, t.paymentDate, t.totalPrice FROM [Transactions] t LEFT JOIN [User] u ON t.userID = u.userID WHERE t.userID = ?";
+       try{
+           Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, userID);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs != null) {
+                while (rs.next()) {
+                    int transactionID = rs.getInt("transactionID");
+                    int userID1 = rs.getInt("userID");
+                    String userName = rs.getString("userName");
+                    String paymentDate = rs.getString("paymentDate");
+                    String totalPrice = rs.getString("totalPrice");
+                    
+                    TransactionDTO dto = new TransactionDTO();
+                    dto.setTransactionID(transactionID);
+                    dto.setUserID(userID1);
+                    dto.setUserName(userName);
+                    dto.setPaymentDate(paymentDate);
+                    dto.setTotalPrice(totalPrice);
+                    
+                    list.add(dto);
+                }
+            }
+            
+       } catch (SQLException ex) {
+            System.out.println("Insert Transaction error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+       return list;
+    }
+    
+    public TransactionDTO loadTransactionForUser(int transactionID){
+        
+        String sql = "SELECT t.transactionID, t.userID, u.userName, t.paymentDate, t.totalPrice FROM [Transactions] t LEFT JOIN [User] u ON t.userID = u.userID WHERE t.transactionID = ? ";
+        try{
+           Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, transactionID);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs != null) {
+                while (rs.next()) {
+                    int transactionID1 = rs.getInt("transactionID");
+                    int userID1 = rs.getInt("userID");
+                    String userName = rs.getString("userName");
+                    String paymentDate = rs.getString("paymentDate");
+                    String totalPrice = rs.getString("totalPrice");
+                    
+                    TransactionDTO dto = new TransactionDTO();
+                    
+                    dto.setTransactionID(transactionID1);
+                    dto.setUserID(userID1);
+                    dto.setUserName(userName);
+                    dto.setPaymentDate(paymentDate);
+                    dto.setTotalPrice(totalPrice);
+                    
+                    return dto;
+                }
+            }
+            
+       } catch (SQLException ex) {
+            System.out.println("Insert Transaction error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return null;
+    }
 }

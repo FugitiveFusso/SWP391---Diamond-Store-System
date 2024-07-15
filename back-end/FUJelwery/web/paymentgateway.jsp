@@ -51,8 +51,8 @@
                             <input type="hidden" name="action" value="pay">
                             <input type="hidden" name="id" value="${sessionScope.usersession.userid}">
 
-                            Credit card number: <input name="creditCardNumber" type="text" class="search-input" value="">
-                            VVS: <input name="vvs" type="text" class="search-input" value="">
+                            Credit card number: <input name="creditCardNumber" type="text" class="search-input" value="" minlength="12" maxlength="12">
+                            VVS: <input name="VVS" type="text" class="search-input" value="" minlength="3" maxlength="3">
 
                             <button type="submit" id="purchaseButton1" class="btn btn-primary btn-large">
                                 <i class="fa fa-shopping-cart"></i> Purchase
