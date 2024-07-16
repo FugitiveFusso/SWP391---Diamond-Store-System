@@ -22,7 +22,7 @@
     }
 }
 
-.container{
+/*.container{
     position: fixed;
     top: 0;
     left: 0;
@@ -31,8 +31,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000; /* Ensures it is above other elements */
-}
+    z-index: 1000;  Ensures it is above other elements 
+}*/
 
 .popup {
     width: 400px;
