@@ -50,6 +50,7 @@
                             <ul>
                                 <li><a href='#' class="trigger-popup">Cart</a></li>
                                 <li><a href='#' class="trigger-popup">Tracking Orders</a></li>
+                                <li><a href='#' class="trigger-popup">Transactions</a></li>
                             </ul>
                         </div>
                     </li>
@@ -77,7 +78,7 @@
 
             </div>
         </div>
-        
+
         <div id="popup" class="popup">
             <div class="popup-content">
                 <h2>Please register or sign in to continue.</h2>
@@ -177,27 +178,27 @@
         </div> 
     </div>
     <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                var popup = document.getElementById('popup');
-                var triggers = document.querySelectorAll('.trigger-popup');
+        document.addEventListener('DOMContentLoaded', function () {
+            var popup = document.getElementById('popup');
+            var triggers = document.querySelectorAll('.trigger-popup');
 
-                triggers.forEach(function (trigger) {
-                    trigger.addEventListener('click', function (event) {
-                        event.preventDefault();  // Prevent the default link behavior
-                        popup.style.display = 'flex';
-                        document.body.classList.add('no-scroll');
-                    });
-                });
-
-                // Close the pop-up when clicking outside of it
-                window.addEventListener('click', function (event) {
-                    if (event.target == popup) {
-                        popup.style.display = 'none';
-                        document.body.classList.remove('no-scroll');
-                    }
+            triggers.forEach(function (trigger) {
+                trigger.addEventListener('click', function (event) {
+                    event.preventDefault();  // Prevent the default link behavior
+                    popup.style.display = 'flex';
+                    document.body.classList.add('no-scroll');
                 });
             });
-        </script>
+
+            // Close the pop-up when clicking outside of it
+            window.addEventListener('click', function (event) {
+                if (event.target == popup) {
+                    popup.style.display = 'none';
+                    document.body.classList.remove('no-scroll');
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>

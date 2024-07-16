@@ -53,6 +53,7 @@
                             <ul>
                                 <li><a href='#' class="trigger-popup">Cart</a></li>
                                 <li><a href='#' class="trigger-popup">Tracking Orders</a></li>
+                                <li><a href='#' class="trigger-popup">Transactions</a></li>
                             </ul>
                         </div>
                     </li>

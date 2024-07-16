@@ -145,7 +145,7 @@
                                     pageContext.setAttribute("transaction", transaction);
                             %>
                             <tr>
-                                <td><a href="TransactionHistory?action=details&id=${transaction.transactionID}">${transaction.transactionID}</td>
+                                <td>${transaction.transactionID}</td>
                                 <td><a href="Staff_Customer_Controller?action=details&id=${transaction.userID}">${transaction.userName}</td>
                                 <td>${transaction.paymentDate}</td>
                                 <td>${transaction.totalPrice} VND</td>

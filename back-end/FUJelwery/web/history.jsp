@@ -93,6 +93,7 @@
                             <ul>
                                 <li><a href='OrderController?action=list&id=${sessionScope.usersession.userid}'>Cart</a></li>
                                 <li><a href='BillController?action=list&id=${sessionScope.usersession.userid}'>Tracking Orders</a></li>
+                                <li><a href='TransactionTracking?action=list&id=${sessionScope.usersession.userid}'>Transactions</a></li>
                             </ul>
                         </div>
                     </li>
@@ -138,6 +139,8 @@
                                 <li><a href="user_accountdetails.jsp"> <i class="fa fa-user"></i> Profile</a></li>
                                 <li><a href='BillController?action=list&id=${sessionScope.usersession.userid}'> <i class="fa fa-calendar"></i> Recent Activity</a></li>
                                 <li  class="active"><a href='HistoryController?action=list&id=${sessionScope.usersession.userid}'> <i class="fa fa-edit"></i> History</a></li>
+                                <li><a href='TransactionTracking?action=list&id=${sessionScope.usersession.userid}'> <i class="fa fa-money-bill"></i> Transaction</a></li>
+
                             </ul>
                         </div>
                     </div>

@@ -36,7 +36,7 @@
                 align-items: center;
                 font-size: 14px; /* Adjust font size for smaller size */
                 font-weight: bolder
-                transition: background-color 0.3s, color 0.3s;
+                    transition: background-color 0.3s, color 0.3s;
             }
 
             .pagination a:hover {
@@ -100,6 +100,7 @@
                             <ul>
                                 <li><a href='OrderController?action=list&id=${sessionScope.usersession.userid}'>Cart</a></li>
                                 <li><a href='BillController?action=list&id=${sessionScope.usersession.userid}'>Tracking Orders</a></li>
+                                <li><a href='TransactionTracking?action=list&id=${sessionScope.usersession.userid}'>Transactions</a></li>
                             </ul>
                         </div>
                     </li>

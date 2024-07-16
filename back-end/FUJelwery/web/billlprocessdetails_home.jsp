@@ -8,8 +8,8 @@
         <link rel="stylesheet" href="css/navigation_bar.css">
         <link rel="stylesheet" href="css/order_detail.css">
         <link rel="stylesheet" href="css/progressbar.css">   
-         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-         <link rel="icon" type="image/x-icon" href="images/Screenshot__656_-removebg-preview.png">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="icon" type="image/x-icon" href="images/Screenshot__656_-removebg-preview.png">
     </head>
 
     <body>
@@ -50,6 +50,7 @@
                             <ul>
                                 <li><a href='OrderController?action=list&id=${sessionScope.usersession.userid}'>Cart</a></li>
                                 <li><a href='BillController?action=list&id=${sessionScope.usersession.userid}'>Tracking Orders</a></li>
+                                <li><a href='TransactionTracking?action=list&id=${sessionScope.usersession.userid}'>Transactions</a></li>
                             </ul>
                         </div>
                     </li>
