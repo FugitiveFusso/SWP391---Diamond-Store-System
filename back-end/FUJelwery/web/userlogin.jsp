@@ -46,7 +46,7 @@
                             <i id="hide1" class="fa-solid fa-eye" style="display:none;"></i>
                             <i id="hide2" class="fa-solid fa-eye-slash"></i>
                         </span>
-                        <p id="capslock-warning" hidden>⚠ Caps Lock is on.</p>
+                        <p id="capslock-warning" hidden style="margin-top: 2px">⚠ Caps Lock is on.</p>
                     </div>
 
                     <div class="dropdown-forget">
