@@ -146,75 +146,76 @@
         <div class="payment">
             <div class="row">
                 <div class="col-75">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-50">
-                                <h2>Billing Address</h2>
-                                <label for="fname"><i class="fa fa-user"></i> Full Name</label>
-                                <!--<h4 class="text-muted f-w-400"></h4>-->
-                                <input type="text" id="fname" name="firstname" placeholder="${requestScope.customer.firstname} ${requestScope.customer.lastname}" readonly>
-                                <label for="email"><i class="fa fa-envelope"></i> Email</label>
-                                <!--<h4 class="text-muted f-w-400"></h4>-->
-                                <input type="text" id="email" name="email" placeholder="${requestScope.customer.email}" readonly>
-                                <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
-                                <!--<h4 class="text-muted f-w-400"></h4>-->
-                                <input type="text" id="adr" name="address" placeholder="${requestScope.customer.address}" readonly >
-                                <label for="city"><i class="fa fa-phone"></i> Phone number</label>
-                                <!--<h4 class="text-muted f-w-400"></h4>-->
-                                <input type="text" id="phone" name="phonenumber" placeholder="${requestScope.customer.phonenumber}" readonly>
-
-                                <div class="row">
-                                    <!--                                        <div class="col-50">
-                                                                                <label for="state">State</label>
-                                                                                <input type="text" id="state" name="state" placeholder="NY">
-                                                                            </div>
-                                                                            <div class="col-50">
-                                                                                <label for="zip">Zip</label>
-                                                                                <input type="text" id="zip" name="zip" placeholder="10001">
-                                                                            </div>-->
-                                    <div class="col-50">
-                                        <i class="fa fa-money" aria-hidden="true"></i>
-                                        Total price:
-                                        <h2 class="font-bold" style="color: red">
-                                            ${totalPrice} VND
-                                        </h2>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-50">
-                                <h2>Payment</h2>
-                                <label for="fname"> <i class="fa fa-credit-card-alt" aria-hidden="true"></i> Accepted Cards</label>
-                                <div class="icon-container">
-                                    <i class="fa fa-cc-visa" style="color:navy;"></i>
-                                    <i class="fa fa-cc-amex" style="color:blue;"></i>
-                                    <i class="fa fa-cc-mastercard" style="color:red;"></i>
-                                    <i class="fa fa-cc-discover" style="color:orange;"></i>
-                                </div>
-                                <label for="cname">Name on Card</label>
-                                <input type="text" id="cname" name="cardname" placeholder="Please enter your name on your card">
-                                <label for="ccnum">Credit card number</label>
-                                <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
-                                <label for="expmonth">Exp Month</label>
-                                <input type="text" id="expmonth" name="expmonth" placeholder="Please enter your exp month">
-                                <div class="row">
-                                    <div class="col-50">
-                                        <label for="expyear">Exp Year</label>
-                                        <input type="text" id="expyear" name="expyear" placeholder="Please enter your exp year">
-                                    </div>
-                                    <div class="col-50">
-                                        <label for="cvv">CVV</label>
-                                        <input type="text" id="cvv" name="cvv" placeholder="Please enter your CVV">
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <!-- <label>
-                          <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
-                        </label> -->
-                        <!--                        <input type="submit" value="Continue to checkout" class="btn">-->
+                    <div class="container">   
                         <form action="OrderController" method="POST">
+
+                            <div class="row">
+                                <div class="col-50">
+                                    <h2>Billing Address</h2>
+                                    <label for="fname"><i class="fa fa-user"></i> Full Name</label>
+                                    <!--<h4 class="text-muted f-w-400"></h4>-->
+                                    <input type="text" id="fname" name="firstname" placeholder="${requestScope.customer.firstname} ${requestScope.customer.lastname}" readonly>
+                                    <label for="email"><i class="fa fa-envelope"></i> Email</label>
+                                    <!--<h4 class="text-muted f-w-400"></h4>-->
+                                    <input type="text" id="email" name="email" placeholder="${requestScope.customer.email}" readonly>
+                                    <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
+                                    <!--<h4 class="text-muted f-w-400"></h4>-->
+                                    <input type="text" id="adr" name="address" placeholder="${requestScope.customer.address}" readonly >
+                                    <label for="city"><i class="fa fa-phone"></i> Phone number</label>
+                                    <!--<h4 class="text-muted f-w-400"></h4>-->
+                                    <input type="text" id="phone" name="phonenumber" placeholder="${requestScope.customer.phonenumber}" readonly>
+
+                                    <div class="row">
+                                        <!--                                        <div class="col-50">
+                                                                                    <label for="state">State</label>
+                                                                                    <input type="text" id="state" name="state" placeholder="NY">
+                                                                                </div>
+                                                                                <div class="col-50">
+                                                                                    <label for="zip">Zip</label>
+                                                                                    <input type="text" id="zip" name="zip" placeholder="10001">
+                                                                                </div>-->
+                                        <div class="col-50">
+                                            <i class="fa fa-money" aria-hidden="true"></i>
+                                            Total price:
+                                            <h2 class="font-bold" style="color: red">
+                                                ${totalPrice} VND
+                                            </h2>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-50">
+                                    <h2>Payment</h2>
+                                    <label for="fname"> <i class="fa fa-credit-card-alt" aria-hidden="true"></i> Accepted Cards</label>
+                                    <div class="icon-container">
+                                        <i class="fa fa-cc-visa" style="color:navy;"></i>
+                                        <i class="fa fa-cc-amex" style="color:blue;"></i>
+                                        <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                                        <i class="fa fa-cc-discover" style="color:orange;"></i>
+                                    </div>
+                                    <label for="cname">Name on Card</label>
+                                    <input type="text" id="cname" name="cardname" placeholder="Please enter your name on your card" required pattern="\d{6,19}">
+                                    <label for="ccnum">Credit card number</label>
+                                    <input name="creditCardNumber" type="text" class="search-input" value="" minlength="16" maxlength="19" required pattern="\d{16,19}" placeholder="Please enter your card number">
+                                    <label for="expmonth">Exp Month</label>
+                                    <input type="text" id="expmonth" name="expmonth" placeholder="Please enter your exp month">
+                                    <div class="row">
+                                        <div class="col-50">
+                                            <label for="expyear">Exp Year</label>
+                                            <input type="text" id="expyear" name="expyear" placeholder="Please enter your exp year">
+                                        </div>
+                                        <div class="col-50">
+                                            <label for="cvv">CVV</label>
+                                            <input name="VVS" type="text" class="search-input" value="" minlength="3" maxlength="3" required pattern="\d{3,3}">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- <label>
+                              <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
+                            </label> -->
+                            <!--                        <input type="submit" value="Continue to checkout" class="btn">-->
                             <button type="submit" id="purchaseButton1" class="btn btn-primary btn-large">
                                 <i class="fa fa-shopping-cart"></i> Purchase
                             </button>
