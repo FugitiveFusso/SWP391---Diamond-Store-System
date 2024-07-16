@@ -39,6 +39,20 @@ public class TransactionTracking extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String action = request.getParameter("action");
+            String keyword = request.getParameter("keyword");
+            if (keyword == null) {
+                keyword = "";
+            }
+            String sortCol = request.getParameter("colSort");
+            if (sortCol == null) {
+                sortCol = "";
+            }
+            String pageStr = request.getParameter("page");
+            int page = 1;
+            if (pageStr != null) {
+                page = Integer.parseInt(pageStr);
+            }
+            int pageSize = 10; // Set the number of posts per page
 
             Transactions transaction = new Transactions();
             HttpSession session = request.getSession(false);
@@ -52,7 +66,23 @@ public class TransactionTracking extends HttpServlet {
                 } catch (NumberFormatException ex) {
                     log("Parameter id has wrong format.");
                 }
-                List<TransactionDTO> list = transaction.listTransactionForUser(id);
+
+                int totalTrans = transaction.getTotalTransactionsForUser(id);
+                int totalPages = (int) Math.ceil((double) totalTrans / pageSize);
+
+                // Ensure page is within valid range
+                if (page < 1) {
+                    page = 1;
+                } else if (page > totalPages) {
+                    page = totalPages;
+                }
+                List<TransactionDTO> list = transaction.listTransactionForUser(id, page, pageSize);
+                request.setAttribute("currentPage", page);
+                request.setAttribute("totalPages", totalPages);
+                request.setAttribute("pageSize", pageSize);
+                request.setAttribute("sortCol", sortCol);
+                request.setAttribute("keyword", keyword);
+                request.setAttribute("id", id);
                 request.setAttribute("transactionlist", list);
 
                 request.getRequestDispatcher("/transactionforuser.jsp").forward(request, response);

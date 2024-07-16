@@ -177,6 +177,51 @@
                                                     %>    
                                                 </tbody>
                                             </table>
+                                            <div class="pagination">
+                                                <% int currentPage = (Integer) request.getAttribute("currentPage");
+                                                    int totalPages = (Integer) request.getAttribute("totalPages");
+                                                    String sortCol = (String) request.getAttribute("sortCol");
+                                                    int id = (Integer) request.getAttribute("id");
+                                                    String keyword = (String) request.getAttribute("keyword");
+                                                    int maxPagesToShow = 5; // Adjust this to change how many pages to show around current page
+                                                %>
+
+                                                <% if (currentPage > 1) {%>
+                                                <a href="?action=list&id=<%= id %>&page=<%= currentPage - 1%><%= !sortCol.isEmpty() ? "&colSort=" + sortCol : ""%><%= !keyword.isEmpty() ? "&keyword=" + keyword : ""%>" class="pagination-arrow">&#8249;</a>
+                                                <% } else { %>
+                                                <span class="pagination-arrow disabled">&#8249;</span>
+                                                <% } %>
+
+                                                <%
+                                                    int startPage = Math.max(1, currentPage - (maxPagesToShow / 2));
+                                                    int endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
+
+                                                    if (startPage > 1) {%>
+                                                <a href="?action=list&id=<%= id %>&page=1<%= !sortCol.isEmpty() ? "&colSort=" + sortCol : ""%><%= !keyword.isEmpty() ? "&keyword=" + keyword : ""%>" class="pagination-number">1</a>
+                                                <% if (startPage > 2) { %>
+                                                <span class="pagination-ellipsis">...</span>
+                                                <% }
+                                                    }
+
+                                                    for (int i = startPage; i <= endPage; i++) {%>
+                                                <a href="?action=list&id=<%= id %>&page=<%= i%><%= !sortCol.isEmpty() ? "&colSort=" + sortCol : ""%><%= !keyword.isEmpty() ? "&keyword=" + keyword : ""%>"
+                                                   class="pagination-number <%= (i == currentPage) ? "active" : ""%>"><%= i%></a>
+                                                <% }
+
+                                                    if (endPage < totalPages) { %>
+                                                <% if (endPage < totalPages - 1) { %>
+                                                <span class="pagination-ellipsis">...</span>
+                                                <% }%>
+                                                <a href="?action=list&id=<%= id %>&page=<%= totalPages%><%= !sortCol.isEmpty() ? "&colSort=" + sortCol : ""%><%= !keyword.isEmpty() ? "&keyword=" + keyword : ""%>" class="pagination-number"><%= totalPages%></a>
+                                                <% }
+                                                %>
+
+                                                <% if (currentPage < totalPages) {%>
+                                                <a href="?action=list&id=<%= id %>&page=<%= currentPage + 1%><%= !sortCol.isEmpty() ? "&colSort=" + sortCol : ""%><%= !keyword.isEmpty() ? "&keyword=" + keyword : ""%>" class="pagination-arrow">&#8250;</a>
+                                                <% } else { %>
+                                                <span class="pagination-arrow disabled">&#8250;</span>
+                                                <% }%>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

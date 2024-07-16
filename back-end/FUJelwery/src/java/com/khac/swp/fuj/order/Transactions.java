@@ -204,39 +204,69 @@ public class Transactions {
         return null;
     }
 
-    public List<TransactionDTO> listTransactionForUser(int userID) {
+    public List<TransactionDTO> listTransactionForUser(int userID, int page, int pageSize) {
         List<TransactionDTO> list = new ArrayList<TransactionDTO>();
-        String sql = "SELECT t.transactionID, t.userID, u.userName, t.paymentDate, t.totalPrice FROM [Transactions] t LEFT JOIN [User] u ON t.userID = u.userID WHERE t.userID = ?";
+        String sql = "SELECT t.transactionID, t.userID, u.userName, t.paymentDate, t.totalPrice "
+                + "FROM [Transactions] t LEFT JOIN [User] u ON t.userID = u.userID "
+                + "WHERE t.userID = ? "
+                + "ORDER BY t.transactionID ASC "
+                + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, userID);
+            ps.setInt(2, (page - 1) * pageSize);
+            ps.setInt(3, pageSize);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int transactionID = rs.getInt("transactionID");
+                int userID1 = rs.getInt("userID");
+                String userName = rs.getString("userName");
+                String paymentDate = rs.getString("paymentDate");
+                String totalPrice = rs.getString("totalPrice");
+
+                TransactionDTO dto = new TransactionDTO();
+                dto.setTransactionID(transactionID);
+                dto.setUserID(userID1);
+                dto.setUserName(userName);
+                dto.setPaymentDate(paymentDate);
+                dto.setTotalPrice(totalPrice);
+
+                list.add(dto);
+            }
+
+            conn.close();
+        } catch (SQLException ex) {
+            System.out.println("Error listing transactions for user. Details: " + ex.getMessage());
+            ex.printStackTrace();
+        }
+
+        return list;
+    }
+
+    public int getTotalTransactionsForUser(int userID) {
+        int total = 0;
+        String sql = "SELECT COUNT(*) FROM [Transactions] WHERE userID = ?";
+
         try {
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, userID);
             ResultSet rs = ps.executeQuery();
 
-            if (rs != null) {
-                while (rs.next()) {
-                    int transactionID = rs.getInt("transactionID");
-                    int userID1 = rs.getInt("userID");
-                    String userName = rs.getString("userName");
-                    String paymentDate = rs.getString("paymentDate");
-                    String totalPrice = rs.getString("totalPrice");
-
-                    TransactionDTO dto = new TransactionDTO();
-                    dto.setTransactionID(transactionID);
-                    dto.setUserID(userID1);
-                    dto.setUserName(userName);
-                    dto.setPaymentDate(paymentDate);
-                    dto.setTotalPrice(totalPrice);
-
-                    list.add(dto);
-                }
+            if (rs.next()) {
+                total = rs.getInt(1);
             }
 
+            conn.close();
         } catch (SQLException ex) {
-            System.out.println("Insert Transaction error!" + ex.getMessage());
+            System.out.println("Error getting total transactions for user. Details: " + ex.getMessage());
             ex.printStackTrace();
         }
-        return list;
+
+        return total;
     }
 
     public TransactionDTO loadTransactionForUser(int transactionID) {
