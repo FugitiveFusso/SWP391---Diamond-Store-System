@@ -135,7 +135,7 @@
                                 <th>Transaction ID</th>
                                 <th><a href="?colSort=userName<%= request.getAttribute("keyword") != null && !request.getAttribute("keyword").toString().isEmpty() ? "&keyword=" + request.getAttribute("keyword") : ""%>">Username</a></th>
                                 <th><a href="?colSort=paymentDate<%= request.getAttribute("keyword") != null && !request.getAttribute("keyword").toString().isEmpty() ? "&keyword=" + request.getAttribute("keyword") : ""%>">Purchase Date</a></th>
-                                <th>Total Price</th>              
+                                <th><a href="?colSort=totalPrice<%= request.getAttribute("keyword") != null && !request.getAttribute("keyword").toString().isEmpty() ? "&keyword=" + request.getAttribute("keyword") : ""%>">Total Price</a></th>              
                             </tr>
                         </thead>
                         <tbody>
