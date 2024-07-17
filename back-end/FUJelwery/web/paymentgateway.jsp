@@ -143,41 +143,46 @@
 </div>
 </div>
 </div>-->
-        <div class="card1">
-            <div class="card-inner1">
-                <div class="front1">
-                    <img src="https://i.ibb.co/PYss3yv/map.png" class="map-img1">
-                    <div class="row1">
-                        <img src="https://i.ibb.co/G9pDnYJ/chip.png" width="60px">
-                        <img src="https://i.ibb.co/WHZ3nRJ/visa.png" width="60px">
-                    </div>
-                    <div class="row1 card-no1">
-                        <p id="card-number">**** **** **** ****</p>
-                    </div>
-                    <div class="row1 card-holder1">
-                        <p>CARD HOLDER</p>
-                        <p>VALID TILL</p>
-                    </div>
-                    <div class="row1 name1">
-                        <p id="card-name">JOHN DOE</p>
-                        <p id="card-expiry">MM / YY</p>
-                    </div>
-                </div>
-                <div class="back1">
-                    <img src="https://i.ibb.co/PYss3yv/map.png" class="map-img1">
-                    <div class="bar1"></div>
-                    <div class="row1 card-cvv1">
-                        <div>
-                            <img src="https://i.ibb.co/S6JG8px/pattern.png">
+        <div class="title">
+            <h1>Payment gateway</h1>
+        </div>
+        <div class="container1">
+            <div class="card1">
+                <div class="card-inner1">
+                    <div class="front1">
+                        <img src="https://i.ibb.co/PYss3yv/map.png" class="map-img1">
+                        <div class="row1">
+                            <img src="https://i.ibb.co/G9pDnYJ/chip.png" width="60px">
+                            <img src="https://i.ibb.co/WHZ3nRJ/visa.png" width="60px">
                         </div>
-                        <p id="card-cvv">***</p>
+                        <div class="row1 card-no1">
+                            <p id="card-number">**** **** **** ****</p>
+                        </div>
+                        <div class="row1 card-holder1">
+                            <p>CARD HOLDER</p>
+                            <p>VALID TILL</p>
+                        </div>
+                        <div class="row1 name1">
+                            <p id="card-name">JOHN DOE</p>
+                            <p id="card-expiry">MM / YY</p>
+                        </div>
                     </div>
-                    <div class="row1 card-text1">
-                        <p>This is a virtual card design using HTML and CSS. You can also design something like this.</p>
-                    </div>
-                    <div class="row1 signature1">
-                        <p>CUSTOMER SIGNATURE</p>
-                        <img src="https://i.ibb.co/WHZ3nRJ/visa.png" width="80px">
+                    <div class="back1">
+                        <img src="https://i.ibb.co/PYss3yv/map.png" class="map-img1">
+                        <div class="bar1"></div>
+                        <div class="row1 card-cvv1">
+                            <div>
+                                <img src="https://i.ibb.co/S6JG8px/pattern.png">
+                            </div>
+                            <p id="card-cvv">***</p>
+                        </div>
+                        <div class="row1 card-text1">
+                            <p>This is a virtual card design using HTML and CSS. You can also design something like this.</p>
+                        </div>
+                        <div class="row1 signature1">
+                            <p>CUSTOMER SIGNATURE</p>
+                            <img src="https://i.ibb.co/WHZ3nRJ/visa.png" width="80px">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -262,39 +267,41 @@
                           <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
                         </label> -->
                         <!--                        <input type="submit" value="Continue to checkout" class="btn">-->
-                        <form action="OrderController" method="POST" style="padding-top: 10px">
-                            <input type="hidden" name="action" value="pay">
-                            <input type="hidden" name="id" value="${sessionScope.usersession.userid}">
-                            <button type="submit" id="purchaseButton1" class="btn btn-primary btn-large">
-                                <i class="fa fa-shopping-cart"></i> Purchase
-                            </button>
-                        </form>
+                        <div class="form-container-flex">
+                            <form action="OrderController" method="POST">
+                                <input type="hidden" name="action" value="pay">
+                                <input type="hidden" name="id" value="${sessionScope.usersession.userid}">
+                                <button type="submit" id="purchaseButton1" class="btn btn-primary btn-large">
+                                    <i class="fa fa-shopping-cart"></i> Purchase
+                                </button>
+                            </form>
 
-                        <form action="OrderController" method="POST" class="mt-3">
-                            <input type="hidden" name="action" value="list">
-                            <input type="hidden" name="id" value="${sessionScope.usersession.userid}">
+                            <form action="OrderController" method="POST" >
+                                <input type="hidden" name="action" value="list">
+                                <input type="hidden" name="id" value="${sessionScope.usersession.userid}">
+                                <button type="submit" id="purchaseButton2" class="btn btn-primary btn-large">
+                                    <i class="fa fa-ban" aria-hidden="true"></i> Cancel
+                                </button>
+                            </form>
+                        </div>
 
-                            <button type="submit" id="purchaseButton2" class="btn btn-primary btn-large">
-                                <i class="fa fa-shopping-cart"></i> Cancel
-                            </button>
-                        </form>
                     </div>
                 </div>
-<!--                    <div class="col-25">
-                     <div class="container">
-                       <h4>Cart <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b>4</b></span></h4>
-                       <p><a href="#">Product 1</a> <span class="price">$15</span></p>
-                       <p><a href="#">Product 2</a> <span class="price">$5</span></p>
-                       <p><a href="#">Product 3</a> <span class="price">$8</span></p>
-                       <p><a href="#">Product 4</a> <span class="price">$2</span></p>
-                       <hr>
-                       <p>Total <span class="price" style="color:black"><b>$30</b></span></p>
-                     </div>
-                   </div> -->
+                <!--                    <div class="col-25">
+                                     <div class="container">
+                                       <h4>Cart <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b>4</b></span></h4>
+                                       <p><a href="#">Product 1</a> <span class="price">$15</span></p>
+                                       <p><a href="#">Product 2</a> <span class="price">$5</span></p>
+                                       <p><a href="#">Product 3</a> <span class="price">$8</span></p>
+                                       <p><a href="#">Product 4</a> <span class="price">$2</span></p>
+                                       <hr>
+                                       <p>Total <span class="price" style="color:black"><b>$30</b></span></p>
+                                     </div>
+                                   </div> -->
 
             </div>
         </div>
-       
+
         <script>
             function updateExpiryDate() {
                 const month = document.getElementById('expmonth').value;

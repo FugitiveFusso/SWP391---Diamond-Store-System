@@ -194,3 +194,14 @@ info-img{
     font-size: 20px;
     color: white;
 }
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px; /* Adjust the gap as needed */
+}
+
+.button-container button {
+    flex: 1;
+}
+

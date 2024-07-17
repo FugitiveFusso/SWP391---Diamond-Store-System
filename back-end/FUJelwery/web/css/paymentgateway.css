@@ -84,6 +84,10 @@ label {
     background-color: #0062cc;
 }
 
+.btn-warning:hover {
+    background-color: #dc3545;
+}
+
 a {
     color: #2196F3;
 }

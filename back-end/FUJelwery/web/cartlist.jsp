@@ -15,6 +15,7 @@
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="css/pagination.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
     </head>
@@ -189,24 +190,20 @@
                                         </select>
                                     </div>
                                     <input type="hidden" name="id" value="${sessionScope.usersession.userid}">
-                                    <div class="form-group text-right">
+                                    <div class="form-group button-container">
                                         <button type="submit" id="storePurchaseButton" name="action" value="purchaseatstore" class="btn btn-primary btn-large">
-                                            <i class="fa fa-shopping-cart"></i> Pay by Cash
+                                            <i class="fa fa-money" aria-hidden="true"></i> Pay by Cash
                                         </button>
-                                    </div>
-                                    <div class="form-group text-right">
                                         <button type="submit" id="creditCardPurchaseButton" name="action" value="purchasewithcredit" class="btn btn-primary btn-large">
-                                            <i class="fa fa-shopping-cart"></i> Pay via Credit Card
+                                            <i class="fa fa-credit-card" aria-hidden="true"></i> Pay via Credit Card
                                         </button>
                                     </div>
                                 </form>
-
                             </div>
-
-
                         </div>
-
                     </div>
+                                    
+                                    
                     <div class="col-md-3">
                         <div class="ibox">
                             <div class="ibox-title">
