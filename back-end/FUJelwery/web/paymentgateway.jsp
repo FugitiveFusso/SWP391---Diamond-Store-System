@@ -163,7 +163,7 @@
                             <p>VALID TILL</p>
                         </div>
                         <div class="row1 name1">
-                            <p id="card-name">JOHN DOE</p>
+                            <p id="card-name">YOUR NAME</p>
                             <p id="card-expiry">MM / YY</p>
                         </div>
                     </div>
@@ -177,7 +177,7 @@
                             <p id="card-cvv">***</p>
                         </div>
                         <div class="row1 card-text1">
-                            <p>This is a virtual card design using HTML and CSS. You can also design something like this.</p>
+                            <p>For customer service, please call to the hotline for more instructions. If this card is found, please cut it in half and mail to our bank. The Action Card is issued by BANKFIRST pursuant to a license from Visa V.N.A Inc. </p>
                         </div>
                         <div class="row1 signature1">
                             <p>CUSTOMER SIGNATURE</p>
@@ -242,7 +242,7 @@
                                         <input type="text" id="cname" name="cardname" placeholder="Please enter your name on your card" oninput="document.getElementById('card-name').textContent = this.value">
 
                                         <label for="ccnum">Credit card number</label>
-                                        <input name="creditCardNumber" type="text" class="search-input" value="" minlength="16" maxlength="19" required pattern="\d{16,19}" placeholder="Please enter your card number" oninput="document.getElementById('card-number').textContent = this.value.replace(/\d{4}(?=.)/g, '$& ')">
+                                        <input name="creditCardNumber" type="text" class="search-input" value="" minlength="16" maxlength="16" required pattern="\d{16,16}" placeholder="Please enter your card number" oninput="document.getElementById('card-number').textContent = this.value.replace(/\d{4}(?=.)/g, '$& ')">
 
                                         <label for="expmonth">Exp Month</label>
                                         <input type="text" id="expmonth" name="expmonth" placeholder="Please enter your exp month" minlength="2" maxlength="2" required pattern="0[1-9]|1[0-2]" title="Please enter a month between 01 and 12" oninput="updateExpiryDate()">
@@ -287,7 +287,7 @@
 
                     </div>
                 </div>
-                <!--                    <div class="col-25">
+<!--                                    <div class="col-25">
                                      <div class="container">
                                        <h4>Cart <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b>4</b></span></h4>
                                        <p><a href="#">Product 1</a> <span class="price">$15</span></p>
