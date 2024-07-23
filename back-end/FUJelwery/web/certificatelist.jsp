@@ -167,7 +167,7 @@
                                     <form id="deleteForm" action="CertificateController" method="POST" class="input">
                                         <input name="action" value="delete" type="hidden">
                                         <input name="id" value="${certificate.certificateID}" type="hidden">
-                                        <input type="submit" value="Delete" class="btn">
+                                        <input type="submit" value="Delete" class="deleteButton btn">
                                     </form>
                                 </td>
 
