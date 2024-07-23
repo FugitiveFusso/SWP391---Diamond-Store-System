@@ -493,8 +493,8 @@
                             <div class="collapse-content">
                                 <table>
                                     <tr>
-                                        <th>Current Week Revenue</th>
-                                        <th>Previous Week Revenue</th>
+                                        <th>Category Name</th>
+                                        <th>Number Of Rings</th>
                                     </tr>
                                     <tr>    
                                         <%
