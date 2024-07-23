@@ -240,7 +240,7 @@
                     </div>
                     <div class="more-details-content">
                         Feel free to contact with us through our hotline: (+ 84) 898876512 <br> <br>
-                        Or you can read by yourself through: <a href="static_webpages/consulation.jsp">Consulation</a>
+                        Or you can read by yourself through: <a href="static_webpages/consulation.jsp">Consultant</a>
                     </div>
                 </div>
 
