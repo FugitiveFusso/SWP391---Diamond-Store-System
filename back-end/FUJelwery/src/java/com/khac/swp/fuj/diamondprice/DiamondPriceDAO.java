@@ -110,7 +110,7 @@ public class DiamondPriceDAO {
         List<DiamondPriceDTO> list = new ArrayList<DiamondPriceDTO>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = " SELECT dpID, diamondSize, caratWeight, color, clarity, cut, FORMAT(price, 'N0') AS price FROM DiamondPrice WHERE isDeleted = 'active' and caratWeight = 0.36 order by diamondSize DESC, color ASC, price DESC, clarity ASC";
+            String sql = " SELECT dpID, diamondSize, caratWeight, color, clarity, cut, FORMAT(price, 'N0') AS price FROM DiamondPrice WHERE isDeleted = 'active' and caratWeight = 0.36 order by diamondSize ASC, color ASC, price DESC, clarity ASC";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
@@ -150,7 +150,7 @@ public class DiamondPriceDAO {
         List<DiamondPriceDTO> list = new ArrayList<DiamondPriceDTO>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = " SELECT dpID, diamondSize, caratWeight, color, clarity, cut, FORMAT(price, 'N0') AS price FROM DiamondPrice WHERE isDeleted = 'active' and caratWeight = 0.7 order by diamondSize DESC,  color ASC, price DESC, clarity ASC ";
+            String sql = " SELECT dpID, diamondSize, caratWeight, color, clarity, cut, FORMAT(price, 'N0') AS price FROM DiamondPrice WHERE isDeleted = 'active' and caratWeight = 0.7 order by diamondSize ASC, color ASC, price DESC, clarity ASC ";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
