@@ -393,7 +393,7 @@ public class UserDAO {
     }
 
     public void signup(String username, String password, String firstname, String lastname, String phonenumber, String email, String address, int point, int roleid) {
-        String sql = "INSERT INTO [User] (userName, password, firstName, lastName, phoneNumber, email, address, point, status, roleID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'active', ?)";
+        String sql = "INSERT INTO [User] (userName, password, firstName, lastName, phoneNumber, email, address, point, status, roleID, isDeleted) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'active', ?, 'active')";
         try {
 
             Connection conn = DBUtils.getConnection();

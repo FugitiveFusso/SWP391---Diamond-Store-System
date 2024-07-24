@@ -135,7 +135,7 @@
                                 <th><a href=?colSort=lastname>Last Name</a></th>
                                 <th><a href=?colSort=email>Email</a></th>
                                 <th>Address</th>
-                                <th>Delete</th>
+<!--                                <th>Delete</th>-->
                             </tr>
                         </thead>
                         <tbody>
@@ -153,13 +153,13 @@
                                 <td style="font-weight: bold">${admin.lastname}</td>
                                 <td>${admin.email}</td>
                                 <td>${admin.address}</td>
-                                <td>
+<!--                                <td>
                                     <form id="deleteForm" action="AdminController" method="POST" class="input">
                                         <input name="action" value="delete" type="hidden">
                                         <input name="id" value="${admin.userid}" type="hidden">
                                         <input type="submit" value="Delete" class="deleteButton btn">
                                     </form>
-                                </td>
+                                </td>-->
 
                             </tr>
                             <%
