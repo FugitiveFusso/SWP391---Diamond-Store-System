@@ -64,13 +64,13 @@
                 <div class="top-info-left">
                     <ul>
                         <li>Timeless elegance and craftsmanship</li>
-                        <li style="margin-left: 30px">at FUJ Jewelry Online Shop.</li>                         
+                        <li style="margin-left: 5px">at KHAC Diamond Ring Online Shop.</li>                         
                     </ul>
                 </div>
                 <a href="user_homepage.jsp"><img src="./images/Screenshot (656).png"></a>
                 <div class="top-info-right">
                     <ul>
-                        <li>FUJ Jewelry Shop - <strong>(+ 84) 898876512</strong></li>
+                        <li>KHAC Diamond Ring Shop - <strong>(+ 84) 898876512</strong></li>
                     </ul>
                 </div>
             </div>
@@ -230,7 +230,7 @@
     <div class="faq">
         <div class="faq-left">
             <div class="faq-title">
-                <h1>FAQs about FUJ Ring Category</h1>
+                <h1>FAQs about KHAC Diamond Ring Category</h1>
             </div>
         </div>
         <div class="faq-right">

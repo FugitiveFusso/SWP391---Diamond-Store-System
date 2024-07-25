@@ -18,13 +18,13 @@
                 <div class="top-info-left">
                     <ul>
                         <li>Timeless elegance and craftsmanship</li>
-                        <li style="margin-left: 30px">at FUJ Jewelry Online Shop.</li>                         
+                        <li style="margin-left: 5px">at KHAC Diamond Rings Online Shop.</li>                         
                     </ul>
                 </div>
                 <a href="user_homepage.jsp"><img src="./images/Screenshot (656).png"></a>
                 <div class="top-info-right">
                     <ul>
-                        <li>FUJ Jewelry Shop - <strong>(+ 84) 898876512</strong></li>
+                        <li>KHAC Diamond Rings Shop - <strong>(+ 84) 898876512</strong></li>
                     </ul>
                 </div>
             </div>
@@ -118,7 +118,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-auto btn-container">
                                     <button type="button" class="btn btn-outline-primary">
-                                        <a href="./user_aboutus.jsp">Reach FUJ</a>
+                                        <a href="./user_aboutus.jsp">Reach KHAC Diamond Ring Shop</a>
                                     </button>
                                     <button type="button" class="btn btn-outline-primary">
                                         <a href="BillController?action=list&id=${sessionScope.usersession.userid}">Return to Recent Activity</a>

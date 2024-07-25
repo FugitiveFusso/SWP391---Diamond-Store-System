@@ -36,13 +36,13 @@
                 <div class="top-info-left">
                     <ul>
                         <li>Timeless elegance and craftsmanship</li>
-                        <li style="margin-left: 30px">at FUJ Jewelry Online Shop.</li>                         
+                        <li style="margin-left: 5px">at KHAC Diamond Ring Online Shop.</li>                         
                     </ul>
                 </div>
                 <a href="user_homepage.jsp"><img src="./images/Screenshot (656).png"></a>
                 <div class="top-info-right">
                     <ul>
-                        <li>FUJ Jewelry Shop - <strong>(+ 84) 898876512</strong></li>
+                        <li>KHAC Diamond Ring Shop - <strong>(+ 84) 898876512</strong></li>
                     </ul>
                 </div>
             </div>
@@ -159,7 +159,7 @@
                         <p class="intro">To get to know more about us</p>
                         <h1>About Us</h1>
                         <div class="description_hero">
-                            <span>At FUJ, we are committed to providing the finest quality jewelry at unbeatable prices. Our journey began with a passion for excellence and a dedication to creating pieces that are not only beautiful but also accessible to everyone. With years of experience and a team of skilled artisans, we take pride in our craftsmanship and the exceptional service we offer to each of our customers.</span>
+                            <span>At KHAC Diamond Ring Shop, we are committed to providing the finest quality jewelry at unbeatable prices. Our journey began with a passion for excellence and a dedication to creating pieces that are not only beautiful but also accessible to everyone. With years of experience and a team of skilled artisans, we take pride in our craftsmanship and the exceptional service we offer to each of our customers.</span>
                         </div>
                         <a style="margin-top: 15px" class="slpBtn" title="Shop Diamond" href="user_aboutus.jsp">About FUJ</a>
                     </div>
@@ -178,7 +178,7 @@
                     </div>
                     <div class="bannerText" style="float: right; width: 65%;">
                         <h1 style="text-align: center">Become An Expert</h1>
-                        <h1 style="text-align: center; font-size: 16px;">FUJ provides some information to help you on your experience</h1>
+                        <h1 style="text-align: center; font-size: 16px;">KHAC Diamond Ring Shop provides some information to help you on your experience</h1>
                         <div style="margin-top: 15px; display: flex; flex-direction: column;">
                             <a class="link" title="Shop Diamond" href="static_webpages/certificate_edu.jsp">Education</a>
                             <a class="link" title="FAQs" href="static_webpages/faqs.jsp" style="margin-top: 10px;">Frequently Asked Question</a>
