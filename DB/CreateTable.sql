@@ -117,7 +117,7 @@ CREATE TABLE [Voucher](
 
 CREATE TABLE [OrderDetails](
 	orderID int NOT NULL primary key,
-	orderCode varchar(6),
+	orderCode varchar(10),
 	userID int NOT NULL foreign key REFERENCES [User](userID),
 	orderDate varchar(255),
 	ringID int NOT NULL foreign key REFERENCES [Ring](ringID),
