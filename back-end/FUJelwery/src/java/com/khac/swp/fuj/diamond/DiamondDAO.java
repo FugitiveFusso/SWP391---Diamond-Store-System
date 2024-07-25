@@ -143,7 +143,27 @@ public class DiamondDAO {
 
     public DiamondDTO load(int diamondID) {
 
-        String sql = "SELECT d.diamondID, d.diamondName, d.diamondImage, d.origin, d.dpID, d.certificateID, dp.diamondSize, dp.caratWeight, dp.color, dp.clarity, dp.cut, FORMAT(dp.price, 'N0') AS price FROM Diamond d LEFT JOIN DiamondPrice dp ON d.dpID = dp.dpID where diamondID = ? and d.isDeleted = 'active'";
+        String sql = "SELECT \n"
+                + "    COALESCE(r.ringID, 0) AS ringID,  \n"
+                + "    d.diamondID, \n"
+                + "    d.diamondName, \n"
+                + "    d.diamondImage, \n"
+                + "    d.origin, \n"
+                + "    d.dpID, \n"
+                + "    d.certificateID, \n"
+                + "    dp.diamondSize, \n"
+                + "    dp.caratWeight, \n"
+                + "    dp.color, \n"
+                + "    dp.clarity, \n"
+                + "    dp.cut, \n"
+                + "    FORMAT(dp.price, 'N0') AS price \n"
+                + "FROM \n"
+                + "    Diamond d \n"
+                + "    LEFT JOIN DiamondPrice dp ON d.dpID = dp.dpID \n"
+                + "    LEFT JOIN Ring r ON d.diamondID = r.diamondID \n"
+                + "WHERE \n"
+                + "    d.diamondID = ?\n"
+                + "    AND d.isDeleted = 'active';";
 
         try {
 
@@ -153,7 +173,7 @@ public class DiamondDAO {
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-
+                int ringID = rs.getInt("ringID");
                 int diamondid = rs.getInt("diamondID");
                 String diamondName = rs.getString("diamondName");
                 String diamondImage = rs.getString("diamondImage");
@@ -168,6 +188,7 @@ public class DiamondDAO {
                 String price = rs.getString("price");
 
                 DiamondDTO diamond = new DiamondDTO();
+                diamond.setRingID(ringID);
                 diamond.setDiamondID(diamondid);
                 diamond.setDiamondName(diamondName);
                 diamond.setDiamondImage(diamondImage);

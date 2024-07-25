@@ -1,5 +1,6 @@
 
 
+<%@page import="com.khac.swp.fuj.diamond.DiamondDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -51,7 +52,14 @@
                 border-radius: 10px;
                 cursor: pointer;
             }
-
+            a {
+                text-decoration: none;
+                color: black;
+            }
+            a:hover {
+                text-decoration: none;
+                color: black;
+            }
 
         </style>
 
@@ -149,8 +157,31 @@
                             <p class="card-text"><strong>Cut:</strong> ${requestScope.diamond.cut}</p>
                             <p class="card-text"><strong>Color:</strong> ${requestScope.diamond.color}</p>
                             <p class="card-text"><strong>Clarity:</strong> ${requestScope.diamond.clarity}</p>
-                            <p class="card-text"><strong>Certificate:</strong> ${requestScope.diamond.certificateID}</p>
-                            <p class="card-text"><strong>Price:</strong> ${requestScope.diamond.diamondPrice} VND</p>
+                            <% DiamondDTO diamond = (DiamondDTO) request.getAttribute("diamond"); %>
+
+                            <% if (diamond != null && diamond.getCertificateID() != 0) { %>
+                            <p class="card-text">
+                                <a href="CertificateController?action=details&id=${diamond.getCertificateID()}">
+                                    <strong>Certificate ID:</strong> ${diamond.getCertificateID()}
+                                </a>
+                            </p>
+                            <% } else { %>
+                            <p class="card-text">
+                                <strong>No valid Certificate ID found.</strong>
+                            </p>
+                            <% }%>              
+
+                            <% if (diamond != null && diamond.getRingID() != 0) { %>
+                            <p class="card-text">
+                                <a href="RingController?action=details&id=${diamond.getRingID()}">
+                                    <strong>Ring ID:</strong> ${diamond.getRingID()}
+                                </a>
+                            </p>
+                            <% } else { %>
+                            <p class="card-text">
+                                <strong>No valid Ring ID found.</strong>
+                            </p>
+                            <% }%>                          <p class="card-text"><strong>Price:</strong> ${requestScope.diamond.diamondPrice} VND</p>
                             <div class="btn-group" role="group" aria-label="Voucher Actions">
                                 <form action="DiamondController" method="post" class="mr-2">
                                     <input type="hidden" name="action" value="list">

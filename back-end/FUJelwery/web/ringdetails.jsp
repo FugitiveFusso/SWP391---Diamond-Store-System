@@ -52,6 +52,15 @@
                 cursor: pointer;
             }
 
+            a {
+                color: black;
+                text-decoration: none;
+            }
+
+            a:hover {
+                color: black;
+                text-decoration: none;
+            }
 
         </style>
 
