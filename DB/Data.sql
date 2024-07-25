@@ -597,22 +597,6 @@ INSERT INTO [RingPlacementPrice] VALUES
 ('Ruthenium','Ruthenium','Black',31000000, 'active'),
 ('Niobium','Niobium','Gray',23000000, 'active');
 
-INSERT INTO [Ring] VALUES
-( 1,'0.7ct Diamond Ring','https://www.universejewelry.co.il/2141-thickbox_default/gold-and-diamonds-ring-2229.jpg',21,15000000,1,1,1, 'active'),
-( 2,'0.7ct Diamond Solitaire Ring','https://4cb73f7e99eaf5ae6430-e2e02f70573d204eabc739b1a68e43a5.ssl.cf2.rackcdn.com/FDENS3115PERANGLE2-NL-WG-300.jpg',22,12000000,1,1,2, 'active'),
-( 3,'0.36ct Diamond Solitaire Ring','https://www.berrysjewellers.co.uk/cdn/shop/products/1620389070-28905700.jpg',1,7000000,2,2,3, 'active'),
-( 4,'0.36ct Diamond Solitaire Ring','https://www.berrysjewellers.co.uk/cdn/shop/products/1620389070-28905700.jpg',2,5000000,2,2,4, 'active'),
-(5, '0.7ct Diamond Halo Ring', 'https://idjewelry.com/media/catalog/product/cache/6772f233b6ab10acdab5c36a45eb28cd/R/1/R11266.jpg', 23, 18000000, 3, 1,5, 'active'),
-(6, '0.7ct Diamond Cluster Ring', 'https://www.chisholmhunter.co.uk/media/catalog/product/1/-/1-008-02-0746_p_1.jpg', 24, 16000000, 3, 1,6, 'active'),
-(7, '0.36ct Diamond Eternity Ring', 'https://www.diamond-heaven.co.uk/media/catalog/product/cache/a5a9c7561e34cee028b5fa41ebc6bab1/d/h/dhjxe01306fetcrnd_white_1_4_1.jpg', 3, 8000000, 4, 2,7, 'active'),
-(8, '0.36ct Diamond Solitaire Ring', 'https://tiagojewellery.co.uk/assets/images/products/md-r1-1253-lab-grown-45mm-qWNn.jpg', 4, 6000000, 4, 2,8, 'active'),
-(9, '0.7ct Diamond Stone Ring', 'https://www.diamondmansion.com/media/catalog/product/design/tst-pav-6263/colorless/white/round/1680545769-Nava_Ring01_Front_03-13-23.jpg', 25, 20000000, 5, 1,9, 'active'),
-(10, '0.7ct Diamond Vintage Ring', 'https://i5.walmartimages.com/seo/ANGARA-Natural-0-7-Ct-Diamond-Fashion-Ring-in-14K-White-Gold-for-Women-Ring-Size-8-5_7bd98f63-7657-4e05-b6d7-7135dedf894f.eeed5935edbff3069783538b0fd0323a.jpeg', 26, 17000000, 5, 1,10, 'active'),
-(11, '0.36ct Diamond A-Deco Ring', 'https://i.etsystatic.com/13067351/r/il/feb418/1991033509/il_570xN.1991033509_2wbj.jpg', 5, 9000000, 6, 2,11, 'active'),
-(12, '0.36ct Diamond Floral Ring', 'https://rongeorgejewelers.com/cdn/shop/products/2022-06-21-21-02-03-AeOKP..jpg', 6, 7000000, 6, 2,12, 'active'),
-(13, '0.7ct Diamond Pave Ring', 'https://i.ebayimg.com/images/g/jhEAAOSweQxjf9B0/s-l1200.webp', 27, 22000000, 7, 1,13, 'active'),
-(14, '0.7ct Diamond Sp-Sa Ring', 'https://images.gabrielny.com/assets/Wilma---14K-White-Gold-Split-Shank-Round-Diamond-Engagement-Ring~ER14058R6W44JJ-1.jpg', 28, 19000000, 7, 1,14, 'active');
-
 INSERT INTO [Warranty] (warrantyName,warrantyImage, warrantyMonth, warrantyDescription, warrantyType, termsAndConditions, isDeleted)
 VALUES
 ('Standard Ring Warranty', 'https://nhomin.com.vn/wp-content/uploads/2020/07/mau-phieu-bao-hanh-4.jpg', 12, 'Covers manufacturing defects for one year.', 'Manufacturer Warranty','See attached warranty document for terms and conditions.', 'active'),
@@ -646,6 +630,22 @@ VALUES
 ('Luxury Diamond Ring Limited Warranty', 'https://ldnew.weebly.com/uploads/4/2/6/6/4266731/7549003.jpg', 84, 'Luxury coverage with worldwide repair services for seven years.', 'Limited Warranty', 'Luxury coverage with worldwide repair services for seven years. Full terms and conditions available in attached warranty.', 'active'),
 ('Exquisite Diamond Ring Limited Warranty', 'https://cdn11.bigcommerce.com/s-h9bpl1lcar/product_images/uploaded_images/warranty-2.jpg', 96, 'Exquisite protection with high-value ring insurance for eight years.', 'Limited Warranty', 'Exquisite protection with high-value ring insurance for eight years. Refer to the attached warranty document for detailed terms and conditions.', 'active');
 
+
+INSERT INTO [Ring] VALUES
+( 1,'0.7ct Diamond Ring','https://www.universejewelry.co.il/2141-thickbox_default/gold-and-diamonds-ring-2229.jpg',21,15000000,1,1,1, 'active'),
+( 2,'0.7ct Diamond Solitaire Ring','https://4cb73f7e99eaf5ae6430-e2e02f70573d204eabc739b1a68e43a5.ssl.cf2.rackcdn.com/FDENS3115PERANGLE2-NL-WG-300.jpg',22,12000000,1,1,2, 'active'),
+( 3,'0.36ct Diamond Solitaire Ring','https://www.berrysjewellers.co.uk/cdn/shop/products/1620389070-28905700.jpg',1,7000000,2,2,3, 'active'),
+( 4,'0.36ct Diamond Solitaire Ring','https://www.berrysjewellers.co.uk/cdn/shop/products/1620389070-28905700.jpg',2,5000000,2,2,4, 'active'),
+(5, '0.7ct Diamond Halo Ring', 'https://idjewelry.com/media/catalog/product/cache/6772f233b6ab10acdab5c36a45eb28cd/R/1/R11266.jpg', 23, 18000000, 3, 1,5, 'active'),
+(6, '0.7ct Diamond Cluster Ring', 'https://www.chisholmhunter.co.uk/media/catalog/product/1/-/1-008-02-0746_p_1.jpg', 24, 16000000, 3, 1,6, 'active'),
+(7, '0.36ct Diamond Eternity Ring', 'https://www.diamond-heaven.co.uk/media/catalog/product/cache/a5a9c7561e34cee028b5fa41ebc6bab1/d/h/dhjxe01306fetcrnd_white_1_4_1.jpg', 3, 8000000, 4, 2,7, 'active'),
+(8, '0.36ct Diamond Solitaire Ring', 'https://tiagojewellery.co.uk/assets/images/products/md-r1-1253-lab-grown-45mm-qWNn.jpg', 4, 6000000, 4, 2,8, 'active'),
+(9, '0.7ct Diamond Stone Ring', 'https://www.diamondmansion.com/media/catalog/product/design/tst-pav-6263/colorless/white/round/1680545769-Nava_Ring01_Front_03-13-23.jpg', 25, 20000000, 5, 1,9, 'active'),
+(10, '0.7ct Diamond Vintage Ring', 'https://i5.walmartimages.com/seo/ANGARA-Natural-0-7-Ct-Diamond-Fashion-Ring-in-14K-White-Gold-for-Women-Ring-Size-8-5_7bd98f63-7657-4e05-b6d7-7135dedf894f.eeed5935edbff3069783538b0fd0323a.jpeg', 26, 17000000, 5, 1,10, 'active'),
+(11, '0.36ct Diamond A-Deco Ring', 'https://i.etsystatic.com/13067351/r/il/feb418/1991033509/il_570xN.1991033509_2wbj.jpg', 5, 9000000, 6, 2,11, 'active'),
+(12, '0.36ct Diamond Floral Ring', 'https://rongeorgejewelers.com/cdn/shop/products/2022-06-21-21-02-03-AeOKP..jpg', 6, 7000000, 6, 2,12, 'active'),
+(13, '0.7ct Diamond Pave Ring', 'https://i.ebayimg.com/images/g/jhEAAOSweQxjf9B0/s-l1200.webp', 27, 22000000, 7, 1,13, 'active'),
+(14, '0.7ct Diamond Sp-Sa Ring', 'https://images.gabrielny.com/assets/Wilma---14K-White-Gold-Split-Shank-Round-Diamond-Engagement-Ring~ER14058R6W44JJ-1.jpg', 28, 19000000, 7, 1,14, 'active');
 
 INSERT INTO [Transactions] (transactionID,userID,paymentDate,totalPrice) VALUES
 (1,8,'14/07/2024','120,914,000'),
