@@ -114,26 +114,23 @@ public class WarrantyDAO {
 
     public WarrantyDTO load(int warrantyID) {
 
-        String sql = "SELECT w.warrantyID,  \n"
-                + "w.warrantyName,  \n"
-                + "w.warrantyImage,  \n"
-                + "w.warrantyMonth,  \n"
-                + "w.warrantyDescription,  \n"
-                + "w.warrantyType,  \n"
+        String sql = "SELECT w.warrantyID, \n"
+                + "w.warrantyName, \n"
+                + "w.warrantyImage, \n"
+                + "w.warrantyMonth, \n"
+                + "w.warrantyDescription, \n"
+                + "w.warrantyType, \n"
                 + "w.termsAndConditions, \n"
                 + "ISNULL(r.ringID, 0) AS ringID, \n"
-                + "CASE  \n"
+                + "CASE \n"
+                + "    WHEN w.isDeleted = 'deleted' THEN 'Deleted' \n"
                 + "    WHEN r.ringID IS NOT NULL THEN 'Applied' \n"
                 + "    ELSE 'Not Applied' \n"
                 + "END AS [status] \n"
-                + "FROM  \n"
-                + "Warranty w \n"
-                + "LEFT JOIN  \n"
-                + "[Ring] r ON w.warrantyID = r.warrantyID \n"
-                + "WHERE  \n"
-                + "w.warrantyID = ?\n"
-                + "AND w.isDeleted = 'active';";
-
+                + "FROM Warranty w \n"
+                + "LEFT JOIN [Ring] r ON w.warrantyID = r.warrantyID \n"
+                + "WHERE w.warrantyID = ?\n";
+        
         try {
 
             Connection conn = DBUtils.getConnection();

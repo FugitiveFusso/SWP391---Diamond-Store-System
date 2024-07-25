@@ -167,6 +167,25 @@
 
                             <p class="card-text"><strong>Diamond Price:</strong> ${requestScope.ring.diamondPrice} VND</p>
                             <p class="card-text"><strong>Total Price:</strong> ${requestScope.ring.totalPrice} VND</p>
+                            <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+                            <c:choose>
+                                <c:when test="${requestScope.ring.status == 'deleted'}">
+                                    <p class="card-text">
+                                        <strong>Status:</strong> <span style="color: red;">${requestScope.ring.status}</span>
+                                    </p>
+                                </c:when>
+                                <c:when test="${requestScope.ring.status == 'active'}">
+                                    <p class="card-text">
+                                        <strong>Status:</strong> <span style="color: green;">${requestScope.ring.status}</span>
+                                    </p>
+                                </c:when>
+                                <c:otherwise>
+                                    <p class="card-text">
+                                        <strong>Status:</strong> <span style="color: black;">${requestScope.ring.status}</span>
+                                    </p>
+                                </c:otherwise>
+                            </c:choose>
                             <div class="d-flex flex-column align-items-center" role="group" aria-label="Voucher Actions">
                                 <div class="button-top mb-2">
                                     <form action="RingController" method="post" style="display:inline-block; margin-right: 10px;">

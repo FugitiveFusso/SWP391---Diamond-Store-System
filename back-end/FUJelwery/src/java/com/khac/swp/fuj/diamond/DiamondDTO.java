@@ -26,6 +26,7 @@ public class DiamondDTO {
     private String country;
     private int diamondCount;
     private int ringID;
+    private String status;
 
     public int getRingID() {
         return ringID;
@@ -221,9 +222,17 @@ public class DiamondDTO {
         this.diamondCount = diamondCount;
     }
 
-    @Override
-    public String toString() {
-        return "DiamondDTO{" + "diamondID=" + diamondID + ", diamondName=" + diamondName + ", diamondImage=" + diamondImage + ", origin=" + origin + ", dpID=" + dpID + ", certificateID=" + certificateID + ", diamondSize=" + diamondSize + ", caratWeight=" + caratWeight + ", color=" + color + ", clarity=" + clarity + ", cut=" + cut + ", diamondPrice=" + diamondPrice + ", totalDiamonds=" + totalDiamonds + ", activeDiamonds=" + activeDiamonds + ", deletedDiamonds=" + deletedDiamonds + ", diamondsUsedInRing=" + diamondsUsedInRing + ", diamondsNotUsedInRing=" + diamondsNotUsedInRing + ", percentageDiamondsUsed=" + percentageDiamondsUsed + ", percentageDiamondsNotUsed=" + percentageDiamondsNotUsed + ", diamondsNotUsedListByID=" + diamondsNotUsedListByID + ", diamondsUsedListbyID=" + diamondsUsedListbyID + ", country=" + country + ", diamondCount=" + diamondCount + ", ringID=" + ringID + '}';
+    public String getStatus() {
+        return status;
     }
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "DiamondDTO{" + "diamondID=" + diamondID + ", diamondName=" + diamondName + ", diamondImage=" + diamondImage + ", origin=" + origin + ", dpID=" + dpID + ", certificateID=" + certificateID + ", diamondSize=" + diamondSize + ", caratWeight=" + caratWeight + ", color=" + color + ", clarity=" + clarity + ", cut=" + cut + ", diamondPrice=" + diamondPrice + ", totalDiamonds=" + totalDiamonds + ", activeDiamonds=" + activeDiamonds + ", deletedDiamonds=" + deletedDiamonds + ", diamondsUsedInRing=" + diamondsUsedInRing + ", diamondsNotUsedInRing=" + diamondsNotUsedInRing + ", percentageDiamondsUsed=" + percentageDiamondsUsed + ", percentageDiamondsNotUsed=" + percentageDiamondsNotUsed + ", diamondsNotUsedListByID=" + diamondsNotUsedListByID + ", diamondsUsedListbyID=" + diamondsUsedListbyID + ", country=" + country + ", diamondCount=" + diamondCount + ", ringID=" + ringID + ", status=" + status + '}';
+    }
+    
 }

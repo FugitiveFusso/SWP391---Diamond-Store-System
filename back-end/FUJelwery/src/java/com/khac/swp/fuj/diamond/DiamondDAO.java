@@ -156,14 +156,14 @@ public class DiamondDAO {
                 + "    dp.color, \n"
                 + "    dp.clarity, \n"
                 + "    dp.cut, \n"
-                + "    FORMAT(dp.price, 'N0') AS price \n"
+                + "    FORMAT(dp.price, 'N0') AS price, \n"
+                + "    d.isDeleted \n"
                 + "FROM \n"
                 + "    Diamond d \n"
                 + "    LEFT JOIN DiamondPrice dp ON d.dpID = dp.dpID \n"
                 + "    LEFT JOIN Ring r ON d.diamondID = r.diamondID \n"
                 + "WHERE \n"
-                + "    d.diamondID = ?\n"
-                + "    AND d.isDeleted = 'active';";
+                + "    d.diamondID = ?\n";
 
         try {
 
@@ -186,6 +186,7 @@ public class DiamondDAO {
                 String clarity = rs.getString("clarity");
                 String cut = rs.getString("cut");
                 String price = rs.getString("price");
+                String status = rs.getString("isDeleted");
 
                 DiamondDTO diamond = new DiamondDTO();
                 diamond.setRingID(ringID);
@@ -201,6 +202,7 @@ public class DiamondDAO {
                 diamond.setClarity(clarity);
                 diamond.setCut(cut);
                 diamond.setDiamondPrice(price);
+                diamond.setStatus(status);
                 return diamond;
             }
         } catch (SQLException ex) {

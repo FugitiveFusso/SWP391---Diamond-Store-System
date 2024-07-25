@@ -98,19 +98,19 @@ public class CertificateDAO {
         String sql = "SELECT \n"
                 + "    c.certificateID, \n"
                 + "    c.certificateImage, \n"
-                + "    c.description,\n"
-                + "    ISNULL(d.diamondID, 0) AS diamondID,\n"
+                + "    c.description, \n"
+                + "    ISNULL(d.diamondID, 0) AS diamondID, \n"
                 + "    CASE \n"
-                + "        WHEN d.diamondID IS NOT NULL THEN 'Applied'\n"
-                + "        ELSE 'Not Applied'\n"
-                + "    END AS [status]\n"
+                + "        WHEN c.isDeleted = 'deleted' THEN 'Deleted' \n"
+                + "        WHEN d.diamondID IS NOT NULL THEN 'Applied' \n"
+                + "        ELSE 'Not Applied' \n"
+                + "    END AS [status] \n"
                 + "FROM \n"
-                + "    Certificate c\n"
+                + "    Certificate c \n"
                 + "LEFT JOIN \n"
-                + "    Diamond d ON c.certificateID = d.certificateID\n"
+                + "    Diamond d ON c.certificateID = d.certificateID \n"
                 + "WHERE \n"
-                + "    c.certificateID = ? \n"
-                + "    AND c.isDeleted = 'active';";
+                + "    c.certificateID = ? \n";
 
         try {
 

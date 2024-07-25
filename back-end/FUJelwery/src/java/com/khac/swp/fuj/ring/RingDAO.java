@@ -168,7 +168,7 @@ public class RingDAO {
                 + "LEFT JOIN [Collection] c ON r.collectionID = c.collectionID "
                 + "LEFT JOIN [Category] cat ON r.categoryID = cat.categoryID "
                 + "LEFT JOIN [Warranty] w ON r.warrantyID = w.warrantyID "
-                + "WHERE r.ringID = ? AND r.status <> 'deleted'";
+                + "WHERE r.ringID = ?";
 
         try {
 
