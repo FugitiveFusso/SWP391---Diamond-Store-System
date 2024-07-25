@@ -22,6 +22,7 @@
                 color: black;
                 text-decoration: none;
             }
+
         </style>
     </head>
     <body>
@@ -169,7 +170,7 @@
                     <div class="detail-container">
                         <span>${requestScope.product.warrantyDescription}</span>
                     </div>
-                    
+
                 </div>
             </div>
             <div class="right-column">
@@ -178,8 +179,8 @@
                 </div>
                 <hr style="margin-bottom: 10px;">
                 <p class="price" style="margin-top: 20px;"><strong style="color: #151542">Total Price:</strong> ${requestScope.product.totalPrice} VND</p>
-
-                <form action="AddToCart" method="post" class="buttons-form">
+                <p id="status">Status: ${requestScope.product.status}</p>
+                <form id="addToCartForm" action="AddToCart" method="post" class="buttons-form">
                     <input type="hidden" name="userID" value=${sessionScope.usersession.userid}>
                     <input type="hidden" name="ringID" value=${requestScope.product.ringID}>
                     <select name="ringSize" class="productquantities" required>
@@ -211,6 +212,21 @@
                     </div>
                 </div>
 
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        var statusText = "${requestScope.product.status}";
+                        var statusElement = document.getElementById("status");
+                        var formElement = document.getElementById("addToCartForm");
+
+                        if (statusText !== "active") {
+                            statusElement.style.display = "block";
+                            formElement.style.display = "none";
+                        } else {
+                            statusElement.style.display = "none";
+                            formElement.style.display = "flex"; // Ensure the form is displayed as flex
+                        }
+                    });
+                </script>
                 <div class="Inclusion">
                     <h2>Your Order Includes:</h2>
                     <div class="Inclusion-container">

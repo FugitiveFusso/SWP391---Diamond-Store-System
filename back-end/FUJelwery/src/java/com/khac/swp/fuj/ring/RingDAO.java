@@ -154,7 +154,7 @@ public class RingDAO {
     }
 
     public RingDTO load(int ringID) {
-        String sql = "SELECT r.warrantyID, r.ringID, r.rpID, r.ringName, r.ringImage, r.diamondID, FORMAT(r.price , 'N0') AS ringPrice, "
+        String sql = "SELECT r.status, r.warrantyID, r.ringID, r.rpID, r.ringName, r.ringImage, r.diamondID, FORMAT(r.price , 'N0') AS ringPrice, "
                 + "FORMAT(((r.price + rp.rpPrice + dp.price)*1.02) , 'N0') AS totalPrice, r.collectionID, r.categoryID, "
                 + "rp.rName, rp.material, rp.color AS [ringColor], FORMAT(rp.rpPrice , 'N0') AS rpPrice, d.diamondName, "
                 + "d.diamondImage, d.origin, d.certificateID, dp.diamondSize, dp.caratWeight, dp.color AS [diamondColor], "
@@ -186,7 +186,7 @@ public class RingDAO {
                 String price = rs.getString("ringPrice");
                 int collectionID = rs.getInt("collectionID");
                 int categoryID = rs.getInt("categoryID");
-
+                String status = rs.getString("status");
                 String rName = rs.getString("rName");
                 String material = rs.getString("material");
                 String ringColor = rs.getString("ringColor");
@@ -216,6 +216,7 @@ public class RingDAO {
                 ring.setWarrantyID(warrantyID);
 
                 ring.setRingID(ringID);
+                ring.setStatus(status);
                 ring.setRpID(rpID);
                 ring.setRingName(ringName);
                 ring.setRingImage(ringImage);
