@@ -22,11 +22,15 @@ public class RingDAO {
                     + "FORMAT(((r.price + rp.rpPrice + dp.price)*1.02) , 'N0') AS totalPrice, r.collectionID, r.categoryID, "
                     + "rp.rName, rp.material, rp.color AS [ringColor], FORMAT(rp.rpPrice , 'N0') AS rpPrice, d.diamondName, "
                     + "d.diamondImage, d.origin, d.certificateID, dp.diamondSize, dp.caratWeight, dp.color AS [diamondColor], "
-                    + "dp.clarity, dp.cut, FORMAT(dp.price , 'N0') AS [diamondShapePrice] "
-                    + "FROM [Ring] r LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID "
+                    + "dp.clarity, dp.cut, FORMAT(dp.price , 'N0') AS [diamondShapePrice], "
+                    + "c.collectionName, cat.categoryName "
+                    + "FROM [Ring] r "
+                    + "LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID "
                     + "LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID "
-                    + "LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID WHERE r.status = 'active' ";
-
+                    + "LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID "
+                    + "LEFT JOIN [Collection] c ON r.collectionID = c.collectionID "
+                    + "LEFT JOIN [Category] cat ON r.categoryID = cat.categoryID "
+                    + "WHERE r.status = 'active'";
             if (keyword != null && !keyword.isEmpty()) {
                 sql += " AND r.ringName LIKE ? ";
             }
@@ -78,7 +82,8 @@ public class RingDAO {
                 String cut = rs.getString("cut");
                 String diamondPrice = rs.getString("diamondShapePrice");
                 String totalPrice = rs.getString("totalPrice");
-
+                String categoryName = rs.getString("categoryName");
+                String collectionName = rs.getString("collectionName");
                 RingDTO ring = new RingDTO();
 
                 ring.setWarrantyID(warrantyID);
@@ -103,6 +108,8 @@ public class RingDAO {
                 ring.setColor(color);
                 ring.setClarity(clarity);
                 ring.setCut(cut);
+                ring.setCollectionName(collectionName);
+                ring.setCategoryName(categoryName);
                 ring.setDiamondPrice(diamondPrice);
                 ring.setTotalPrice(totalPrice);
 
@@ -147,9 +154,21 @@ public class RingDAO {
     }
 
     public RingDTO load(int ringID) {
-
-        String sql = "SELECT r.warrantyID, r.ringID, r.rpID, r.ringName, r.ringImage, r.diamondID, FORMAT(r.price , 'N0') AS ringPrice, FORMAT(((r.price + rp.rpPrice + dp.price)*1.02) , 'N0') AS totalPrice, r.collectionID, r.categoryID, rp.rName, rp.material, rp.color AS [ringColor], FORMAT(rp.rpPrice , 'N0') AS rpPrice, d.diamondName, d.diamondImage, d.origin, d.certificateID, dp.diamondSize, dp.caratWeight, dp.color AS [diamondColor], dp.clarity, dp.cut, FORMAT(dp.price , 'N0') AS [diamondShapePrice]"
-                + " FROM [Ring] r LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID WHERE r.ringID = ? and r.status = 'active' ";
+        String sql = "SELECT r.warrantyID, r.ringID, r.rpID, r.ringName, r.ringImage, r.diamondID, FORMAT(r.price , 'N0') AS ringPrice, "
+                + "FORMAT(((r.price + rp.rpPrice + dp.price)*1.02) , 'N0') AS totalPrice, r.collectionID, r.categoryID, "
+                + "rp.rName, rp.material, rp.color AS [ringColor], FORMAT(rp.rpPrice , 'N0') AS rpPrice, d.diamondName, "
+                + "d.diamondImage, d.origin, d.certificateID, dp.diamondSize, dp.caratWeight, dp.color AS [diamondColor], "
+                + "dp.clarity, dp.cut, FORMAT(dp.price , 'N0') AS [diamondShapePrice], "
+                + "c.collectionName, cat.categoryName, "
+                + "w.warrantyName, w.warrantyMonth, w.warrantyDescription, w.warrantyType "
+                + "FROM [Ring] r "
+                + "LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID "
+                + "LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID "
+                + "LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID "
+                + "LEFT JOIN [Collection] c ON r.collectionID = c.collectionID "
+                + "LEFT JOIN [Category] cat ON r.categoryID = cat.categoryID "
+                + "LEFT JOIN [Warranty] w ON r.warrantyID = w.warrantyID "
+                + "WHERE r.ringID = ? AND r.status = 'active'";
 
         try {
 
@@ -186,7 +205,13 @@ public class RingDAO {
                 String diamondPrice = rs.getString("diamondShapePrice");
                 String totalPrice = rs.getString("totalPrice");
                 int warrantyID = rs.getInt("warrantyID");
-
+                String categoryName = rs.getString("categoryName");
+                String collectionName = rs.getString("collectionName");
+                String warrantyName = rs.getString("warrantyName");
+                int warrantyMonth = rs.getInt("warrantyMonth");
+                String warrantyDescription = rs.getString("warrantyDescription");
+                String warrantyType = rs.getString("warrantyType");
+                
                 RingDTO ring = new RingDTO();
                 ring.setWarrantyID(warrantyID);
 
@@ -207,7 +232,8 @@ public class RingDAO {
                 ring.setDiamondImage(diamondImage);
                 ring.setOrigin(origin);
                 ring.setCertificateID(certificateID);
-
+                ring.setCollectionName(collectionName);
+                ring.setCategoryName(categoryName);
                 ring.setDiamondSize(diamondSize);
                 ring.setCaratWeight(caratWeight);
                 ring.setColor(color);
@@ -215,6 +241,10 @@ public class RingDAO {
                 ring.setCut(cut);
                 ring.setDiamondPrice(diamondPrice);
                 ring.setTotalPrice(totalPrice);
+                ring.setWarrantyName(warrantyName);
+                ring.setWarrantyMonth(warrantyMonth);
+                ring.setWarrantyDescription(warrantyDescription);
+                ring.setWarrantyType(warrantyType);
                 return ring;
             }
         } catch (SQLException ex) {

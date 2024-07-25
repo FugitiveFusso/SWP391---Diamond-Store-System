@@ -31,6 +31,12 @@ public class RingDTO {
     private String monthName;
     private int totalRings;
     private int warrantyID;
+    private String categoryName;
+    private String collectionName;
+    private String warrantyName;
+    private int warrantyMonth;
+    private String warrantyDescription;
+    private String warrantyType;
 
     public int getRingID() {
         return ringID;
@@ -264,9 +270,57 @@ public class RingDTO {
         this.warrantyID = warrantyID;
     }
 
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public String getCollectionName() {
+        return collectionName;
+    }
+
+    public void setCollectionName(String collectionName) {
+        this.collectionName = collectionName;
+    }
+
+    public String getWarrantyName() {
+        return warrantyName;
+    }
+
+    public void setWarrantyName(String warrantyName) {
+        this.warrantyName = warrantyName;
+    }
+
+    public int getWarrantyMonth() {
+        return warrantyMonth;
+    }
+
+    public void setWarrantyMonth(int warrantyMonth) {
+        this.warrantyMonth = warrantyMonth;
+    }
+
+    public String getWarrantyDescription() {
+        return warrantyDescription;
+    }
+
+    public void setWarrantyDescription(String warrantyDescription) {
+        this.warrantyDescription = warrantyDescription;
+    }
+
+    public String getWarrantyType() {
+        return warrantyType;
+    }
+
+    public void setWarrantyType(String warrantyType) {
+        this.warrantyType = warrantyType;
+    }
+
     @Override
     public String toString() {
-        return "RingDTO{" + "ringID=" + ringID + ", rpID=" + rpID + ", ringName=" + ringName + ", ringImage=" + ringImage + ", diamondID=" + diamondID + ", price=" + price + ", categoryID=" + categoryID + ", collectionID=" + collectionID + ", ringPlacementName=" + ringPlacementName + ", material=" + material + ", ringColor=" + ringColor + ", rpPrice=" + rpPrice + ", diamondName=" + diamondName + ", diamondImage=" + diamondImage + ", origin=" + origin + ", certificateID=" + certificateID + ", diamondSize=" + diamondSize + ", caratWeight=" + caratWeight + ", cut=" + cut + ", color=" + color + ", clarity=" + clarity + ", diamondPrice=" + diamondPrice + ", totalPrice=" + totalPrice + ", purchaseCount=" + purchaseCount + ", orderYear=" + orderYear + ", orderMonth=" + orderMonth + ", monthName=" + monthName + ", totalRings=" + totalRings + ", warrantyID=" + warrantyID + '}';
+        return "RingDTO{" + "ringID=" + ringID + ", rpID=" + rpID + ", ringName=" + ringName + ", ringImage=" + ringImage + ", diamondID=" + diamondID + ", price=" + price + ", categoryID=" + categoryID + ", collectionID=" + collectionID + ", ringPlacementName=" + ringPlacementName + ", material=" + material + ", ringColor=" + ringColor + ", rpPrice=" + rpPrice + ", diamondName=" + diamondName + ", diamondImage=" + diamondImage + ", origin=" + origin + ", certificateID=" + certificateID + ", diamondSize=" + diamondSize + ", caratWeight=" + caratWeight + ", cut=" + cut + ", color=" + color + ", clarity=" + clarity + ", diamondPrice=" + diamondPrice + ", totalPrice=" + totalPrice + ", purchaseCount=" + purchaseCount + ", orderYear=" + orderYear + ", orderMonth=" + orderMonth + ", monthName=" + monthName + ", totalRings=" + totalRings + ", warrantyID=" + warrantyID + ", categoryName=" + categoryName + ", collectionName=" + collectionName + ", warrantyName=" + warrantyName + ", warrantyMonth=" + warrantyMonth + ", warrantyDescription=" + warrantyDescription + ", warrantyType=" + warrantyType + '}';
     }
 
 }

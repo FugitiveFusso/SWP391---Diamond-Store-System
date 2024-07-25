@@ -13,7 +13,17 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <link rel="stylesheet" type="text/css" href="css/navigation_bar.css">
         <link rel="stylesheet" href="css/popupfake.css">
+        <style>
+            a {
+                color: black;
+                text-decoration: none;
+            }
 
+            a:hover {
+                color: black;
+                text-decoration: none;
+            }
+        </style>
     </head>
     <body>
         <div class="header">
@@ -102,10 +112,10 @@
                 <div class="additional-details">
                     <h2>Product Details</h2>
                     <div class="detail-row">
-                        <strong>Category:</strong> <span>${requestScope.product.categoryID}</span>
+                        <strong>Category:</strong> <span><a href="GuestCategoryController?action=details&id=${requestScope.product.categoryID}">${requestScope.product.categoryName}</a></span>
                     </div>
                     <div class="detail-row">
-                        <strong>Collection:</strong> <span>${requestScope.product.collectionID}</span>
+                        <strong>Collection:</strong> <span><a href="GuestCollectionController?action=details&id=${requestScope.product.collectionID}" >${requestScope.product.collectionName}</a></span>
                     </div>
                     <div class="detail-row">
                         <strong>Ring Placement Name:</strong> <span>${requestScope.product.ringPlacementName}</span>
@@ -145,6 +155,17 @@
                     </div>
                     <div class="detail-row">
                         <strong>Adds-on Fee:</strong> <span>${requestScope.product.price} VND</span>
+                    </div>
+                    <h2>Product's Warranty</h2>
+                    <div class="">
+                        <h3>${requestScope.product.warrantyName} in ${requestScope.product.warrantyMonth} months</h3>
+                    </div>
+                    <div class="detail-container">
+                        <span>${requestScope.product.warrantyType}</span>
+                    </div>
+                    <br>
+                    <div class="detail-container">
+                        <span>${requestScope.product.warrantyDescription}</span>
                     </div>
                 </div>
             </div>
