@@ -25,7 +25,7 @@ public class RingDAO {
                     + "dp.clarity, dp.cut, FORMAT(dp.price , 'N0') AS [diamondShapePrice] "
                     + "FROM [Ring] r LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID "
                     + "LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID "
-                    + "LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID WHERE r.isDeleted = 'active' ";
+                    + "LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID WHERE r.status = 'active' ";
 
             if (keyword != null && !keyword.isEmpty()) {
                 sql += " AND r.ringName LIKE ? ";
@@ -118,7 +118,7 @@ public class RingDAO {
         int total = 0;
         try {
             Connection con = DBUtils.getConnection();
-            String sql = "SELECT COUNT(*) FROM [Ring] WHERE isDeleted = 'active'";
+            String sql = "SELECT COUNT(*) FROM [Ring] WHERE status = 'active'";
 
             if (keyword != null && !keyword.isEmpty()) {
                 sql += " AND ringName LIKE ?";
@@ -146,7 +146,7 @@ public class RingDAO {
     public RingDTO load(int ringID) {
 
         String sql = "SELECT r.ringID, r.rpID, r.ringName, r.ringImage, r.diamondID, FORMAT(r.price , 'N0') AS ringPrice, FORMAT(((r.price + rp.rpPrice + dp.price)*1.02) , 'N0') AS totalPrice, r.collectionID, r.categoryID, rp.rName, rp.material, rp.color AS [ringColor], FORMAT(rp.rpPrice , 'N0') AS rpPrice, d.diamondName, d.diamondImage, d.origin, d.certificateID, dp.diamondSize, dp.caratWeight, dp.color AS [diamondColor], dp.clarity, dp.cut, FORMAT(dp.price , 'N0') AS [diamondShapePrice]"
-                + " FROM [Ring] r LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID WHERE r.ringID = ? and r.isDeleted = 'active' ";
+                + " FROM [Ring] r LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID WHERE r.ringID = ? and r.status = 'active' ";
 
         try {
 
@@ -220,7 +220,7 @@ public class RingDAO {
     }
 
     public Integer insert(RingDTO ring) {
-        String sql = "INSERT INTO [Ring] (rpID, ringName, ringImage, diamondID, price, collectionID, categoryID, isDeleted) VALUES (?, ?, ?, ?, ?, ?, ?, 'active' )";
+        String sql = "INSERT INTO [Ring] (rpID, ringName, ringImage, diamondID, price, collectionID, categoryID, status) VALUES (?, ?, ?, ?, ?, ?, ?, 'active' )";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -270,7 +270,7 @@ public class RingDAO {
     }
 
     public boolean delete(int id) {
-        String sql = "UPDATE [Ring] SET isDeleted = 'deleted' WHERE ringID = ? ";
+        String sql = "UPDATE [Ring] SET status = 'deleted' WHERE ringID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -292,7 +292,7 @@ public class RingDAO {
     public RingDTO checkRingExistbyName(String ringName) {
 
         String sql = "SELECT r.ringID, r.rpID, r.ringName, r.ringImage, r.diamondID, FORMAT(r.price , 'N0') AS ringPrice, FORMAT(((r.price + rp.rpPrice + dp.price)*1.02) , 'N0') AS totalPrice, r.collectionID, r.categoryID, rp.rName, rp.material, rp.color AS [ringColor], FORMAT(rp.rpPrice , 'N0') AS rpPrice, d.diamondName, d.diamondImage, d.origin, d.certificateID, dp.diamondSize, dp.caratWeight, dp.color AS [diamondColor], dp.clarity, dp.cut, FORMAT(dp.price , 'N0') AS [diamondShapePrice]"
-                + " FROM [Ring] r LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID WHERE r.ringName = ? and r.isDeleted = 'active' ";
+                + " FROM [Ring] r LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID WHERE r.ringName = ? and r.status = 'active' ";
 
         try {
 
@@ -490,7 +490,7 @@ public class RingDAO {
                     + "FROM [Ring] r LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID "
                     + "LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID "
                     + "LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID "
-                    + "WHERE r.collectionID = ? AND r.isDeleted = 'active' "
+                    + "WHERE r.collectionID = ? AND r.status = 'active' "
                     + "ORDER BY r.ringID ASC "
                     + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
 
@@ -570,7 +570,7 @@ public class RingDAO {
         int total = 0;
         try {
             Connection con = DBUtils.getConnection();
-            String sql = "SELECT COUNT(*) FROM [Ring] WHERE collectionID = ? AND isDeleted = 'active'";
+            String sql = "SELECT COUNT(*) FROM [Ring] WHERE collectionID = ? AND status = 'active'";
 
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setInt(1, collectionID);
@@ -600,7 +600,7 @@ public class RingDAO {
                     + "FROM [Ring] r LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID "
                     + "LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID "
                     + "LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID "
-                    + "WHERE r.categoryID = ? AND r.isDeleted = 'active' "
+                    + "WHERE r.categoryID = ? AND r.status = 'active' "
                     + "ORDER BY r.ringID ASC "
                     + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
 
@@ -680,7 +680,7 @@ public class RingDAO {
         int total = 0;
         try {
             Connection con = DBUtils.getConnection();
-            String sql = "SELECT COUNT(*) FROM [Ring] WHERE categoryID = ? AND isDeleted = 'active'";
+            String sql = "SELECT COUNT(*) FROM [Ring] WHERE categoryID = ? AND status = 'active'";
 
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setInt(1, categoryID);
@@ -713,7 +713,7 @@ public class RingDAO {
                     + "    LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID\n"
                     + "    LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID\n"
                     + "    LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID\n"
-                    + "    WHERE r.isDeleted = 'active'\n"
+                    + "    WHERE r.status = 'active'\n"
                     + ")\n"
                     + "SELECT \n"
                     + "    ringID, \n"
@@ -769,7 +769,7 @@ public class RingDAO {
                     + "    LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID\n"
                     + "    LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID\n"
                     + "    LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID\n"
-                    + "    WHERE r.isDeleted = 'active'\n"
+                    + "    WHERE r.status = 'active'\n"
                     + ")\n"
                     + "SELECT \n"
                     + "    ringID, \n"
@@ -831,7 +831,7 @@ public class RingDAO {
                     + "    LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID\n"
                     + "    LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID\n"
                     + "    LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID\n"
-                    + "    WHERE r.isDeleted = 'active'\n"
+                    + "    WHERE r.status = 'active'\n"
                     + "      AND o.status IN ('verified', 'shipping', 'purchased', 'delivered', 'received at store')\n"
                     + "      AND TRY_CONVERT(datetime, o.orderDate, 105) IS NOT NULL\n"
                     + "    GROUP BY r.ringID, r.ringName, r.ringImage, YEAR(TRY_CONVERT(datetime, o.orderDate, 105)), \n"
@@ -893,7 +893,7 @@ public class RingDAO {
 
         String sql = "SELECT COUNT(*) as totalRings\n"
                 + "FROM Ring \n"
-                + "WHERE isDeleted = 'active'; ";
+                + "WHERE status = 'active'; ";
 
         try {
 

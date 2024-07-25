@@ -24,7 +24,6 @@ public class UserDTO {
     public String status;
     public int roleid;
     public String rolename;
-    public String isDeleted;
     public int totalUsers;
     public int totalActiveUserCount;
     public int totalBannedUSerCount;
@@ -51,16 +50,6 @@ public class UserDTO {
 
     public void setTotalBannedUSerCount(int totalBannedUSerCount) {
         this.totalBannedUSerCount = totalBannedUSerCount;
-    }
-    
-    
-
-    public String getIsDeleted() {
-        return isDeleted;
-    }
-
-    public void setIsDeleted(String isDeleted) {
-        this.isDeleted = isDeleted;
     }
     
     
@@ -173,7 +162,8 @@ public class UserDTO {
 
     @Override
     public String toString() {
-        return "UserDTO{" + "userid=" + userid + ", fullName=" + fullName + ", username=" + username + ", password=" + password + ", firstname=" + firstname + ", lastname=" + lastname + ", phonenumber=" + phonenumber + ", email=" + email + ", address=" + address + ", point=" + point + ", status=" + status + ", roleid=" + roleid + ", rolename=" + rolename + ", isDeleted=" + isDeleted + ", totalUsers=" + totalUsers + ", totalActiveUserCount=" + totalActiveUserCount + ", totalBannedUSerCount=" + totalBannedUSerCount + '}';
+        return "UserDTO{" + "userid=" + userid + ", fullName=" + fullName + ", username=" + username + ", password=" + password + ", firstname=" + firstname + ", lastname=" + lastname + ", phonenumber=" + phonenumber + ", email=" + email + ", address=" + address + ", point=" + point + ", status=" + status + ", roleid=" + roleid + ", rolename=" + rolename + ", totalUsers=" + totalUsers + ", totalActiveUserCount=" + totalActiveUserCount + ", totalBannedUSerCount=" + totalBannedUSerCount + '}';
     }
+
     
 }

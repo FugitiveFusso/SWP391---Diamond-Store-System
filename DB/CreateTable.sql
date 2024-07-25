@@ -96,9 +96,9 @@ CREATE TABLE [Ring](
 	ringImage varchar(8000) NOT NULL,
 	diamondID int NOT NULL unique foreign key REFERENCES [Diamond](diamondID),
 	price bigint NOT NULL,
-	collectionID int NOT NULL unique foreign key REFERENCES [Collection](collectionID),
-	categoryID int NOT NULL unique foreign key REFERENCES [Category](categoryID),
-	warrantyID int NOT NULL unique foreign key REFERENCES Warranty(warrantyID),
+	collectionID int NOT NULL foreign key REFERENCES [Collection](collectionID),
+	categoryID int NOT NULL foreign key REFERENCES [Category](categoryID),
+	warrantyID int NOT NULL unique foreign key REFERENCES [Warranty](warrantyID),
 	[status] varchar(10)
 );
 
