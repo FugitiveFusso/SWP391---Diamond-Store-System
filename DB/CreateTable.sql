@@ -33,7 +33,7 @@ CREATE TABLE [Diamond](
 	origin varchar(255) NOT NULL,
 	isDeleted varchar(10),
 	dpID int foreign key REFERENCES [DiamondPrice](dpID),
-	certificateID int foreign key REFERENCES [Certificate](certificateID)
+	certificateID int unique foreign key REFERENCES [Certificate](certificateID)
 );
 
 
@@ -64,7 +64,6 @@ CREATE TABLE [User](
     point int NOT NULL,
 	[status] varchar(10), 
     roleID int NOT NULL,
-	isDeleted varchar(10),
     FOREIGN KEY (roleID) REFERENCES [Role](roleID)
 );
 
@@ -77,16 +76,30 @@ CREATE TABLE [RingPlacementPrice](
 	isDeleted varchar(10)
 );
 
+CREATE TABLE [Warranty] (
+    warrantyID int IDENTITY(1,1) NOT NULL PRIMARY KEY,        
+    warrantyName varchar(255) NOT NULL,                  
+    warrantyImage varchar(8000),                              
+    warrantyMonth int NOT NULL CHECK (warrantyMonth > 0),     
+    warrantyDescription text,                                 
+    warrantyType varchar(255),                                
+    startDate date,                                  
+    endDate AS DATEADD(month, warrantyMonth, startDate),      
+    termsAndConditions text,
+	isDeleted varchar(10)
+);
+
 CREATE TABLE [Ring](
 	ringID int IDENTITY(1,1) NOT NULL primary key,
 	rpID int foreign key REFERENCES [RingPlacementPrice](rpID),
 	ringName varchar(255) NOT NULL,
 	ringImage varchar(8000) NOT NULL,
-	diamondID int NOT NULL foreign key REFERENCES [Diamond](diamondID),
+	diamondID int NOT NULL unique foreign key REFERENCES [Diamond](diamondID),
 	price bigint NOT NULL,
-	collectionID int NOT NULL foreign key REFERENCES [Collection](collectionID),
-	categoryID int NOT NULL foreign key REFERENCES [Category](categoryID),
-	isDeleted varchar(10)
+	collectionID int NOT NULL unique foreign key REFERENCES [Collection](collectionID),
+	categoryID int NOT NULL unique foreign key REFERENCES [Category](categoryID),
+	warrantyID int NOT NULL unique foreign key REFERENCES Warranty(warrantyID),
+	[status] varchar(10)
 );
 
 CREATE TABLE [Voucher](
@@ -101,18 +114,7 @@ CREATE TABLE [Voucher](
 	isDeleted varchar(10)
 );
 
-CREATE TABLE [Warranty] (
-    warrantyID int IDENTITY(1,1) NOT NULL PRIMARY KEY,        
-    warrantyName varchar(255) NOT NULL,                  
-    warrantyImage varchar(8000),                              
-    warrantyMonth int NOT NULL CHECK (warrantyMonth > 0),     
-    warrantyDescription text,                                 
-    warrantyType varchar(255),                                
-    startDate date NOT NULL,                                  
-    endDate AS DATEADD(month, warrantyMonth, startDate),      
-    termsAndConditions text,
-	isDeleted varchar(10)
-);
+
 
 CREATE TABLE [Order](
 	orderID int NOT NULL primary key,
