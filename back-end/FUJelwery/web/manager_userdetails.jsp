@@ -59,9 +59,9 @@
                                         <div class="m-b-25">
                                             <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image">
                                         </div>
-                                        <h6 class="f-w-600"style="font-size: 18px; margin: 10px 0;">${requestScope.user.firstname} ${requestScope.user.lastname} </h6>
-                                        <p style="color: #fff; font-family: 'Inter'; font-size: 13px;">${requestScope.user.rolename} of FUJ</p>
-                                        <p style="color: #fff; font-family: 'Inter'; font-size: 13px;">${requestScope.user.username}</p>
+                                        <h6 class="f-w-600"style="font-size: 17px; margin: 10px 0;">${requestScope.user.firstname} ${requestScope.user.lastname} </h6>
+                                        <p style="color: #fff; font-family: 'Inter'; font-size: 12px;">${requestScope.user.rolename} of KHAC Diamond Ring Shop</p>
+                                        <p style="color: #fff; font-family: 'Inter'; font-size: 11px;">${requestScope.user.username}</p>
                                         <input name="roleID" value=1 required="Please enter"   type="hidden">
 
                                     </div>

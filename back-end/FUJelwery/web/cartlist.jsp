@@ -26,13 +26,13 @@
                 <div class="top-info-left">
                     <ul>
                         <li>Timeless elegance and craftsmanship</li>
-                        <li style="margin-left: 5px">at KHAC Diamond Rings Online Shop.</li>                         
+                        <li style="margin-left: 5px;">at KHAC Diamond Ring Online Shop.</li>                         
                     </ul>
                 </div>
                 <a href="user_homepage.jsp"><img src="./images/Screenshot (656).png"></a>
                 <div class="top-info-right">
                     <ul>
-                        <li>KHAC Diamond Rings Shop - <strong>(+ 84) 898876512</strong></li>
+                        <li>KHAC Diamond Ring Shop - <strong>(+ 84) 898876512</strong></li>
                     </ul>
                 </div>
             </div>
@@ -58,6 +58,7 @@
                             <ul>
                                 <li><a href='OrderController?action=list&id=${sessionScope.usersession.userid}'>Cart</a></li>
                                 <li><a href='BillController?action=list&id=${sessionScope.usersession.userid}'>Tracking Orders</a></li>
+                                <li><a href='TransactionTracking?action=list&id=${sessionScope.usersession.userid}'>Transactions</a></li>
                             </ul>
                         </div>
                     </li>
@@ -202,8 +203,8 @@
                             </div>
                         </div>
                     </div>
-                                    
-                                    
+
+
                     <div class="col-md-3">
                         <div class="ibox">
                             <div class="ibox-title">

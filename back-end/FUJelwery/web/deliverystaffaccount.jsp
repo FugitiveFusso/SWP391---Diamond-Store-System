@@ -64,8 +64,8 @@
                                             <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image">
                                         </div>
                                         <h6 class="f-w-600"style="font-size: 18px; margin: 10px 0;">${sessionScope.deliverystaffsession.lastname} ${sessionScope.deliverystaffsession.firstname}</h6>
-                                        <p style="color: #fff; font-family: 'Inter'; font-size: 13px;">Delivery Staff of KHAC Diamond Rings Online Shop</p>
-                                        <p style="color: #fff; font-family: 'Inter'; font-size: 13px;">${sessionScope.deliverystaffsession.username}</p>
+                                        <p style="color: #fff; font-family: 'Inter'; font-size: 12px;">Delivery Staff of KHAC Diamond Ring Online Shop</p>
+                                        <p style="color: #fff; font-family: 'Inter'; font-size: 11px;">${sessionScope.deliverystaffsession.username}</p>
                                         <input name="roleID" value=1 required="Please enter"   type="hidden">
 
                                     </div>

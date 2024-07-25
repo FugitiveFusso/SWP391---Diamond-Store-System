@@ -205,7 +205,7 @@
                     </table>
                     <p>Note: The diamond price chart may fluctuate over time. 
                         For the most accurate diamond price quote, 
-                        please contact FUJ Jewelry directly.</p>
+                        please contact KHAC Diamond Shop directly.</p>
                 </div>
             </div>
         </div> 
@@ -220,7 +220,7 @@
                     and carat weight), as well as other factors including 
                     symmetry, fluorescence, luminescence, cleanliness, certificates and many more factors.</p>
                 <br>
-                <p>At FUJ Jewelry, every single diamond that we offer comes with certification documents 
+                <p>At KHAC Diamond Shop, every single diamond that we offer comes with certification documents 
                     from the most renowned institutions, not to mention the Gemological Institute of America (GIA). 
                     These certificates provide exquisite and detailed information on the diamond's origin, cut, 
                     clarity, color, and carat weight. </p>
@@ -229,7 +229,7 @@
                 </div>
                 <p>To explore these bespoke options further or to receive expert 
                     guidance on selecting the perfect diamond, we invite you to contact 
-                    FUJ Jewelry via our hotline at <strong>(+84) 898876512</strong>. Our team of experts 
+                    KHAC Diamond Shop via our hotline at <strong>(+84) 898876512</strong>. Our team of experts 
                     is ready to provide detail and personalized advice and assist you in making a confident 
                     and informed choices.</p>
             </div>

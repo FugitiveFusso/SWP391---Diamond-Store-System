@@ -20,13 +20,13 @@
                 <div class="top-info-left">
                     <ul>
                         <li>Timeless elegance and craftsmanship</li>
-                        <li style="margin-left: 30px">at FUJ Jewelry Online Shop.</li>                         
+                        <li style="margin-left: 5px">at KHAC Diamond Ring Online Shop.</li>                         
                     </ul>
                 </div>
                 <a href="user_homepage.jsp"><img src="./images/Screenshot (656).png"></a>
                 <div class="top-info-right">
                     <ul>
-                        <li>FUJ Jewelry Shop - <strong>(+ 84) 898876512</strong></li>
+                        <li>KHAC Diamond Ring Shop - <strong>(+ 84) 898876512</strong></li>
                     </ul>
                 </div>
             </div>
@@ -229,7 +229,7 @@
                         <button class="plus-button">+</button>
                     </div>
                     <div class="more-details-content">
-                        Each product from FUJ has it own GIA Certificate <br> <br>
+                        Each product from KHAC Diamond Ring Shop has it own GIA Certificate <br> <br>
                         Click this link to know about GIA Certificate: <a href="static_webpages/certificate_certification.jsp">GIA Certificate</a>
                     </div>
                 </div>
