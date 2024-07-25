@@ -175,8 +175,9 @@
                 </div>
                 <hr style="margin-bottom: 10px;">
                 <p class="price" style="margin-top: 20px;"><strong style="color: #151542">Total Price:</strong> ${requestScope.product.totalPrice} VND</p>
+                <p id="status">Status: ${requestScope.product.status}</p>
 
-                <form action="#" method="post" class="buttons-form">
+                <form id="addToCartForm" action="#" method="post" class="buttons-form">
                     <select name="ringSize" class="productquantities" required>
                         <option value="" disabled selected>Select ring size</option>
                         <option value="3">3</option>
@@ -191,6 +192,21 @@
                     </select>
                     <button type="submit" class="btn btn-primary trigger-popup" onclick="openPopup()">Add to Cart</button>
                 </form>
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                         var statusText = "${requestScope.product.status}";
+                        var statusElement = document.getElementById("status");
+                        var formElement = document.getElementById("addToCartForm");
+
+                        if (statusText !== "active") {
+                            statusElement.style.display = "block";
+                            formElement.style.display = "none";
+                        } else {
+                            statusElement.style.display = "none";
+                            formElement.style.display = "flex"; // Ensure the form is displayed as flex
+                        }
+                    });
+                </script>
                 <div class="More-Info">
                     <h2>More products related:</h2>
                     <div class="form-container">
