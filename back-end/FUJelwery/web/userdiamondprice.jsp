@@ -208,11 +208,7 @@
                     and carat weight), as well as other factors including 
                     symmetry, fluorescence, luminescence, cleanliness, certificates and many more factors.</p>
                 <br>
-<<<<<<< HEAD
-                <p>At KHAC Diamond Rings Shop, every single diamond that we offer comes with certification documents 
-=======
                 <p>At KHAC Diamond Ring Shop, every single diamond that we offer comes with certification documents 
->>>>>>> origin/main
                     from the most renowned institutions, not to mention the Gemological Institute of America (GIA). 
                 </p>
                 <div>
@@ -220,14 +216,8 @@
                 </div>
                 <p>To explore these bespoke options further or to receive expert 
                     guidance on selecting the perfect diamond, we invite you to contact 
-<<<<<<< HEAD
-                    KHAC Diamond Rings Shop via our hotline at <strong>(+84) 898876512</strong>. Our team of experts 
-                    is ready to provide some details and give personalized advice that may assist you.</p>
-=======
                     KHAC Diamond Ring Shop via our hotline at <strong>(+84) 898876512</strong>. Our team of experts 
-                    is ready to provide detail and personalized advice and assist you in making a confident 
-                    and informed choices.</p>
->>>>>>> origin/main
+                    is ready to provide explicit detail and give personalized advice in order to assist you.</p>
             </div>
         </div>                
 

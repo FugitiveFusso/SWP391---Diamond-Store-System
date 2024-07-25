@@ -161,7 +161,7 @@
                         <div class="description_hero">
                             <span>At KHAC Diamond Ring Shop, we are committed to providing the finest quality jewelry at unbeatable prices. Our journey began with a passion for excellence and a dedication to creating pieces that are not only beautiful but also accessible to everyone. With years of experience and a team of skilled artisans, we take pride in our craftsmanship and the exceptional service we offer to each of our customers.</span>
                         </div>
-                        <a style="margin-top: 15px" class="slpBtn" title="Shop Diamond" href="user_aboutus.jsp">About FUJ</a>
+                        <a style="margin-top: 15px" class="slpBtn" title="Shop Diamond" href="user_aboutus.jsp">About KHAC</a>
                     </div>
                     <div class="bannerImage">
                         <img src="images/AboutUs.jpg" id="diamondHero" style="width: 76%; height: 50%">
