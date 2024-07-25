@@ -115,14 +115,13 @@ CREATE TABLE [Voucher](
 );
 
 
-
-CREATE TABLE [Order](
+CREATE TABLE [OrderDetails](
 	orderID int NOT NULL primary key,
+	orderCode varchar(6),
 	userID int NOT NULL foreign key REFERENCES [User](userID),
 	orderDate varchar(255),
 	ringID int NOT NULL foreign key REFERENCES [Ring](ringID),
 	voucherID int foreign key REFERENCES [Voucher](voucherID),
-	warrantyID int foreign key REFERENCES [Warranty](warrantyID),
 	ringSize int,
 	purchaseMethod varchar(50),
 	[status] varchar(255)
