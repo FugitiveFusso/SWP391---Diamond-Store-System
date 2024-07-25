@@ -21,7 +21,7 @@ public class UserDAO {
 
             Connection con = DBUtils.getConnection();
             String sql = " select userID, userName, firstName, lastName, email, phoneNumber, address, point, status, roleName from [User] u full join [Role] r on u.roleID = r.roleID ";
-            sql += " WHERE roleName = ? AND password = ? AND userName = ? and isDeleted = 'active' ";
+            sql += " WHERE roleName = ? AND password = ? AND userName = ? and status = 'active' ";
 
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, rolename);
@@ -97,7 +97,7 @@ public class UserDAO {
             Connection con = DBUtils.getConnection();
             String sql = "SELECT userID, userName, firstName, lastName, email, address, status, r.roleID, roleName "
                     + "FROM [User] u FULL JOIN [Role] r ON u.roleID = r.roleID "
-                    + "WHERE roleName LIKE ? AND isDeleted = 'active'";
+                    + "WHERE roleName LIKE ? AND status in ('active', 'banned')";
 
             // Append conditions based on keyword
             if (keyword != null && !keyword.isEmpty()) {
@@ -175,7 +175,7 @@ public class UserDAO {
         try {
             con = DBUtils.getConnection();
             String sql = "SELECT COUNT(*) FROM [User] u FULL JOIN [Role] r ON u.roleID = r.roleID "
-                    + "WHERE u.isDeleted = 'active' ";
+                    + "WHERE u.status in ('active', 'banned') ";
 
             // Append conditions based on roleName
             if (roleName != null && !roleName.isEmpty()) {
@@ -232,7 +232,7 @@ public class UserDAO {
 
     public UserDTO load(int userID, String roleName) {
 
-        String sql = "select userID, userName, password, firstName, lastName, email, phoneNumber, address, point from [User] u full join [Role] r on u.roleID = r.roleID where userID = ? and roleName like ? and isDeleted = 'active'";
+        String sql = "select userID, userName, password, firstName, lastName, email, phoneNumber, address, point from [User] u full join [Role] r on u.roleID = r.roleID where userID = ? and roleName like ? and status = 'active'";
 
         try {
 
@@ -275,7 +275,7 @@ public class UserDAO {
 
     public UserDTO load_Normal(int userID) {
 
-        String sql = "select userID, userName, password, firstName, lastName, email, phoneNumber, address, roleName, point from [User] u full join [Role] r on u.roleID = r.roleID where userID = ? and isDeleted = 'active' ";
+        String sql = "select userID, userName, password, firstName, lastName, email, phoneNumber, address, roleName, point from [User] u full join [Role] r on u.roleID = r.roleID where userID = ? and status = 'active' ";
 
         try {
 
@@ -318,7 +318,7 @@ public class UserDAO {
     }
 
     public Integer insert(UserDTO user) {
-        String sql = "INSERT INTO [User] (userName, password, firstName, lastName, phoneNumber, email, address, point, status, roleID, isDeleted) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'active', ?, 'active' )";
+        String sql = "INSERT INTO [User] (userName, password, firstName, lastName, phoneNumber, email, address, point, status, roleID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'active', ?)";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -373,7 +373,7 @@ public class UserDAO {
     Delete student 
      */
     public boolean delete(int id) {
-        String sql = "UPDATE [User] set isDeleted = 'deleted' where userID = ? ";
+        String sql = "UPDATE [User] set status = 'deleted' where userID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -393,7 +393,7 @@ public class UserDAO {
     }
 
     public void signup(String username, String password, String firstname, String lastname, String phonenumber, String email, String address, int point, int roleid) {
-        String sql = "INSERT INTO [User] (userName, password, firstName, lastName, phoneNumber, email, address, point, status, roleID, isDeleted) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'active', ?, 'active')";
+        String sql = "INSERT INTO [User] (userName, password, firstName, lastName, phoneNumber, email, address, point, status, roleID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'active', ?)";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -422,7 +422,7 @@ public class UserDAO {
 
             Connection con = DBUtils.getConnection();
             String sql = " select userName, firstName, lastName, email, phoneNumber, point, roleID from [User] u ";
-            sql += " WHERE userName = ? and status = 'active' and isDeleted = 'active' ";
+            sql += " WHERE userName = ? and status in ('active', 'banned') ";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
@@ -458,7 +458,7 @@ public class UserDAO {
 
             Connection con = DBUtils.getConnection();
             String sql = " select userName, firstName, lastName, email, phoneNumber, point, roleID from [User] u ";
-            sql += " WHERE email = ? AND isDeleted = 'active'";
+            sql += " WHERE email = ? AND status in ('active', 'banned') ";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
@@ -574,8 +574,8 @@ public class UserDAO {
                     + "       SUM(CASE WHEN u.[status] = 'banned' THEN 1 ELSE 0 END) AS BannedUserCount\n"
                     + "FROM [Role] r\n"
                     + "LEFT JOIN [User] u ON r.roleID = u.roleID\n"
-                    + "GROUP BY r.roleName, u.isDeleted\n"
-                    + "HAVING u.isDeleted = 'active'\n"
+                    + "GROUP BY r.roleName, u.status\n"
+                    + "HAVING u.status = 'active'\n"
                     + "ORDER BY r.roleName;";
             PreparedStatement stmt = con.prepareStatement(sql);
 
@@ -612,7 +612,7 @@ public class UserDAO {
             String sql = "SELECT u.firstName + ' ' + u.lastName as fullName, r.roleName, u.userID\n"
                     + "FROM [User] u\n"
                     + "JOIN [Role] r ON u.roleID = r.roleID\n"
-                    + "WHERE r.roleName != 'Customer' and u.isDeleted = 'active';";
+                    + "WHERE r.roleName != 'Customer' and u.status = 'active';";
             PreparedStatement stmt = con.prepareStatement(sql);
 
             ResultSet rs = stmt.executeQuery();
