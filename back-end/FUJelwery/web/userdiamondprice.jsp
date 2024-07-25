@@ -24,13 +24,13 @@
                 <div class="top-info-left">
                     <ul>
                         <li>Timeless elegance and craftsmanship</li>
-                        <li style="margin-left: 5px">at KHAC Diamond Rings Online Shop.</li>                         
+                        <li style="margin-left: 5px">at KHAC Diamond Ring Online Shop.</li>                         
                     </ul>
                 </div>
                 <a href="user_homepage.jsp"><img src="./images/Screenshot (656).png"></a>
                 <div class="top-info-right">
                     <ul>
-                        <li>KHAC Diamond Rings Shop - <strong>(+ 84) 898876512</strong></li>
+                        <li>KHAC Diamond Ring Shop - <strong>(+ 84) 898876512</strong></li>
                     </ul>
                 </div>
             </div>
@@ -193,7 +193,7 @@
                     </table>
                     <p>Note: The diamond price chart may fluctuate over time. 
                         For the most accurate diamond price quote, 
-                        please contact KHAC Diamond Rings Shop directly.</p>
+                        please contact KHAC Diamond Ring Shop directly.</p>
                 </div>
             </div>
         </div> 
@@ -208,7 +208,11 @@
                     and carat weight), as well as other factors including 
                     symmetry, fluorescence, luminescence, cleanliness, certificates and many more factors.</p>
                 <br>
+<<<<<<< HEAD
                 <p>At KHAC Diamond Rings Shop, every single diamond that we offer comes with certification documents 
+=======
+                <p>At KHAC Diamond Ring Shop, every single diamond that we offer comes with certification documents 
+>>>>>>> origin/main
                     from the most renowned institutions, not to mention the Gemological Institute of America (GIA). 
                 </p>
                 <div>
@@ -216,8 +220,14 @@
                 </div>
                 <p>To explore these bespoke options further or to receive expert 
                     guidance on selecting the perfect diamond, we invite you to contact 
+<<<<<<< HEAD
                     KHAC Diamond Rings Shop via our hotline at <strong>(+84) 898876512</strong>. Our team of experts 
                     is ready to provide some details and give personalized advice that may assist you.</p>
+=======
+                    KHAC Diamond Ring Shop via our hotline at <strong>(+84) 898876512</strong>. Our team of experts 
+                    is ready to provide detail and personalized advice and assist you in making a confident 
+                    and informed choices.</p>
+>>>>>>> origin/main
             </div>
         </div>                
 

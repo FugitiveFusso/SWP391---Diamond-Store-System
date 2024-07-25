@@ -63,7 +63,7 @@
                 <div class="top-info-left">
                     <ul>
                         <li>Timeless elegance and craftsmanship</li>
-                        <li style="margin-left: 5px">at KHAC Diamond Rings Online Shop.</li>                         
+                        <li style="margin-left: 5px">at KHAC Diamond Ring Online Shop.</li>                         
                     </ul>
                 </div>
                 <a href="user_homepage.jsp"><img src="./images/Screenshot (656).png"></a>
@@ -227,7 +227,7 @@
         <div class="faq">
             <div class="faq-left">
                 <div class="faq-title">
-                    <h1>FAQs about KHAC Diamond Rings Collection</h1>
+                    <h1>FAQs about KHAC Diamond Ring Collection</h1>
                 </div>
             </div>
             <div class="faq-right">

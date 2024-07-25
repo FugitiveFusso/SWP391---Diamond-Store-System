@@ -233,7 +233,7 @@
     <div class="faq">
         <div class="faq-left">
             <div class="faq-title">
-                <h1>FAQs about FUJ Ring</h1>
+                <h1>FAQs about KHAC Diamond Ring</h1>
             </div>
         </div>
         <div class="faq-right">

@@ -154,6 +154,8 @@
                             <p class="card-text"><strong>Color:</strong> ${requestScope.ring.color}</p>
                             <p class="card-text"><strong>Clarity:</strong> ${requestScope.ring.clarity}</p>
                             <p class="card-text"><strong>Cut:</strong> ${requestScope.ring.cut}</p>
+                            <p class="card-text"><strong>WarrantyID:</strong> <a href="WarrantyController?action=details&id=${requestScope.ring.warrantyID}">${requestScope.ring.warrantyID}</a></p>
+
                             <p class="card-text"><strong>Diamond Price:</strong> ${requestScope.ring.diamondPrice} VND</p>
                             <p class="card-text"><strong>Total Price:</strong> ${requestScope.ring.totalPrice} VND</p>
                             <div class="d-flex flex-column align-items-center" role="group" aria-label="Voucher Actions">

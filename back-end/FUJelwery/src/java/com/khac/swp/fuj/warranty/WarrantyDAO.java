@@ -114,28 +114,25 @@ public class WarrantyDAO {
 
     public WarrantyDTO load(int warrantyID) {
 
-        String sql = "SELECT \n"
-                + "    w.warrantyID, \n"
-                + "    w.warrantyName, \n"
-                + "    w.warrantyImage, \n"
-                + "    w.warrantyMonth, \n"
-                + "    w.warrantyDescription, \n"
-                + "    w.warrantyType, \n"
-                + "    w.startDate, \n"
-                + "    w.endDate, \n"
-                + "    w.termsAndConditions,\n"
-                + "    ISNULL(o.orderID, 0) AS orderID,\n"
-                + "    CASE \n"
-                + "        WHEN o.orderID IS NOT NULL THEN 'Applied'\n"
-                + "        ELSE 'Not Applied'\n"
-                + "    END AS [status]\n"
-                + "FROM \n"
-                + "    Warranty w\n"
-                + "LEFT JOIN \n"
-                + "    [Order] o ON w.warrantyID = o.warrantyID\n"
-                + "WHERE \n"
-                + "    w.warrantyID = ? \n"
-                + "    AND w.isDeleted = 'active';";
+        String sql = "SELECT w.warrantyID,  \n"
+                + "w.warrantyName,  \n"
+                + "w.warrantyImage,  \n"
+                + "w.warrantyMonth,  \n"
+                + "w.warrantyDescription,  \n"
+                + "w.warrantyType,  \n"
+                + "w.termsAndConditions, \n"
+                + "ISNULL(r.ringID, 0) AS ringID, \n"
+                + "CASE  \n"
+                + "    WHEN r.ringID IS NOT NULL THEN 'Applied' \n"
+                + "    ELSE 'Not Applied' \n"
+                + "END AS [status] \n"
+                + "FROM  \n"
+                + "Warranty w \n"
+                + "LEFT JOIN  \n"
+                + "[Ring] r ON w.warrantyID = r.warrantyID \n"
+                + "WHERE  \n"
+                + "w.warrantyID = ?\n"
+                + "AND w.isDeleted = 'active';";
 
         try {
 
@@ -152,10 +149,9 @@ public class WarrantyDAO {
                 int month = rs.getInt("warrantyMonth");
                 String description = rs.getString("warrantyDescription");
                 String type = rs.getString("warrantyType");
-                String startdate = rs.getString("startDate");
-                String enddate = rs.getString("endDate");
+
                 String tac = rs.getString("termsAndConditions");
-                int orderID = rs.getInt("orderID");
+                int ringID = rs.getInt("ringID");
                 String status = rs.getString("status");
 
                 WarrantyDTO warranty = new WarrantyDTO();
@@ -165,10 +161,9 @@ public class WarrantyDAO {
                 warranty.setMonth(month);
                 warranty.setDescription(description);
                 warranty.setType(type);
-                warranty.setStartdate(startdate);
-                warranty.setEnddate(enddate);
+
                 warranty.setTermsandconditions(tac);
-                warranty.setOrderID(orderID);
+                warranty.setRingID(ringID);
                 warranty.setStatus(status);
                 return warranty;
             }

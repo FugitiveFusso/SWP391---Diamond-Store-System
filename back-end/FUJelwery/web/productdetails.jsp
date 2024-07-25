@@ -229,7 +229,7 @@
                         <button class="plus-button">+</button>
                     </div>
                     <div class="more-details-content">
-                        Each product from FUJ has it own GIA Certificate <br> <br>
+                        Each product from KHAC Diamond Ring Shop has it own GIA Certificate <br> <br>
                         Click this link to know about GIA Certificate: <a href="static_webpages/certificate_certification.jsp">GIA Certificate</a>
                     </div>
                 </div>

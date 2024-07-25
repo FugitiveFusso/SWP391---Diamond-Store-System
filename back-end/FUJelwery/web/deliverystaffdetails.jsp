@@ -76,8 +76,13 @@
                                             <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image">
                                         </div>
                                         <h6 class="f-w-600"style="font-size: 18px; margin: 10px 0;">${requestScope.deliverystaff.lastname} ${requestScope.deliverystaff.firstname}</h6>
+<<<<<<< HEAD
                                         <p style="color: #fff; font-family: 'Inter'; font-size: 13px;">Delivery Staff of KHAC Diamond Ring Shop</p>
                                         <p style="color: #fff; font-family: 'Inter'; font-size: 13px;">${requestScope.deliverystaff.username}</p>
+=======
+                                        <p style="color: #fff; font-family: 'Inter'; font-size: 12Fpx;">Delivery Staff of KHAC Diamond Ring Shop</p>
+                                        <p style="color: #fff; font-family: 'Inter'; font-size: 11px;">${requestScope.deliverystaff.username}</p>
+>>>>>>> origin/main
 
                                         <input name="roleID" value=4 required="Please enter"   type="hidden">
 

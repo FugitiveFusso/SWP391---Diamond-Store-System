@@ -30,6 +30,7 @@ public class RingDTO {
     private int orderMonth;
     private String monthName;
     private int totalRings;
+    private int warrantyID;
 
     public int getRingID() {
         return ringID;
@@ -255,9 +256,17 @@ public class RingDTO {
         this.totalRings = totalRings;
     }
 
+    public int getWarrantyID() {
+        return warrantyID;
+    }
+
+    public void setWarrantyID(int warrantyID) {
+        this.warrantyID = warrantyID;
+    }
+
     @Override
     public String toString() {
-        return "RingDTO{" + "ringID=" + ringID + ", rpID=" + rpID + ", ringName=" + ringName + ", ringImage=" + ringImage + ", diamondID=" + diamondID + ", price=" + price + ", categoryID=" + categoryID + ", collectionID=" + collectionID + ", ringPlacementName=" + ringPlacementName + ", material=" + material + ", ringColor=" + ringColor + ", rpPrice=" + rpPrice + ", diamondName=" + diamondName + ", diamondImage=" + diamondImage + ", origin=" + origin + ", certificateID=" + certificateID + ", diamondSize=" + diamondSize + ", caratWeight=" + caratWeight + ", cut=" + cut + ", color=" + color + ", clarity=" + clarity + ", diamondPrice=" + diamondPrice + ", totalPrice=" + totalPrice + ", purchaseCount=" + purchaseCount + ", orderYear=" + orderYear + ", orderMonth=" + orderMonth + ", monthName=" + monthName + ", totalRings=" + totalRings + '}';
+        return "RingDTO{" + "ringID=" + ringID + ", rpID=" + rpID + ", ringName=" + ringName + ", ringImage=" + ringImage + ", diamondID=" + diamondID + ", price=" + price + ", categoryID=" + categoryID + ", collectionID=" + collectionID + ", ringPlacementName=" + ringPlacementName + ", material=" + material + ", ringColor=" + ringColor + ", rpPrice=" + rpPrice + ", diamondName=" + diamondName + ", diamondImage=" + diamondImage + ", origin=" + origin + ", certificateID=" + certificateID + ", diamondSize=" + diamondSize + ", caratWeight=" + caratWeight + ", cut=" + cut + ", color=" + color + ", clarity=" + clarity + ", diamondPrice=" + diamondPrice + ", totalPrice=" + totalPrice + ", purchaseCount=" + purchaseCount + ", orderYear=" + orderYear + ", orderMonth=" + orderMonth + ", monthName=" + monthName + ", totalRings=" + totalRings + ", warrantyID=" + warrantyID + '}';
     }
 
 }
