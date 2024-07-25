@@ -62,11 +62,7 @@
                 <div class="top-info-left">
                     <ul>
                         <li>Timeless elegance and craftsmanship</li>
-<<<<<<< HEAD
-                        <li style="margin-left: 5px">at KHAC Diamond Ring Online Shop.</li>                         
-=======
                         <li style="margin-left: 5px; padding-top: 5px">at KHAC Diamond Ring Shop Online Shop.</li>                         
->>>>>>> origin/main
                     </ul>
                 </div>
                 <a href="user_homepage.jsp"><img src="./images/Screenshot (656).png"></a>

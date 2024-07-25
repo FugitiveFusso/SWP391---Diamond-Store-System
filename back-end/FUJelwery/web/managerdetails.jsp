@@ -76,13 +76,8 @@
                                             <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image">
                                         </div>
                                         <h6 class="f-w-600"style="font-size: 18px; margin: 10px 0;">${requestScope.manager.lastname} ${requestScope.manager.firstname}</h6>
-<<<<<<< HEAD
-                                        <p style="color: #fff; font-family: 'Inter'; font-size: 13px;">Manager of KHAC Diamond Ring Shop</p>
-                                        <p style="color: #fff; font-family: 'Inter'; font-size: 13px;">${requestScope.manager.username}</p>
-=======
                                         <p style="color: #fff; font-family: 'Inter'; font-size: 12px;">Manager of KHAC Diamond Ring Shop</p>
                                         <p style="color: #fff; font-family: 'Inter'; font-size: 11px;">${requestScope.manager.username}</p>
->>>>>>> origin/main
                                         <input name="roleID" value=2 required="Please enter"   type="hidden">
 
                                     </div> 
