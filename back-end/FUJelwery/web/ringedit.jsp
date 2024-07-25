@@ -188,6 +188,10 @@
                             <h2>Collection ID</h2>
                             <input name="collectionID" type="number" value="${requestScope.ring.collectionID}" required="Please enter" min="1" class="form-control">                           
                         </div>
+                        <div class="info-input">                          
+                        <h2>Warranty ID</h2>
+                        <input name="warrantyID" type="number" value="${requestScope.ring.warrantyID}" required="Please enter" min="1" class="form-control">                           
+                    </div>
                     </div>
                     <div class="col-md-6 content-right">
                         <div class="info-input">                          
@@ -203,13 +207,13 @@
                             <input type="number" name="price" value="${requestScope.ring.price}" required min="1000000" max="1000000000" class="form-control">                           
                             <span id="priceNotification" class="notification"></span>
                         </div>
-
-
-                    </div>
-                    <div class="col-md-12">                          
+                    <div class="info-input">                          
                         <h2>Category ID</h2>
                         <input name="categoryID" type="number" value="${requestScope.ring.categoryID}" required="Please enter" min="1" class="form-control">                           
                     </div>
+
+                    </div>
+
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-md-4">

@@ -175,7 +175,7 @@ public class WarrantyDAO {
     }
 
     public Integer insert(WarrantyDTO warranty) {
-        String sql = "INSERT INTO [Warranty] (warrantyName, warrantyImage, warrantyMonth, warrantyDescription, warrantyType, startDate, termsAndConditions, isDeleted) VALUES (?, ?, ?, ?, ?, ?, ?, 'active')";
+        String sql = "INSERT INTO [Warranty] (warrantyName, warrantyImage, warrantyMonth, warrantyDescription, warrantyType, termsAndConditions, isDeleted) VALUES (?, ?, ?, ?, ?, ?, 'active')";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -186,8 +186,7 @@ public class WarrantyDAO {
             ps.setInt(3, warranty.getMonth());
             ps.setString(4, warranty.getDescription());
             ps.setString(5, warranty.getType());
-            ps.setString(6, warranty.getStartdate());
-            ps.setString(7, warranty.getTermsandconditions());
+            ps.setString(6, warranty.getTermsandconditions());
 
             ps.executeUpdate();
             conn.close();
@@ -200,20 +199,19 @@ public class WarrantyDAO {
     }
 
     public boolean update(WarrantyDTO warranty) {
-        String sql = "UPDATE [Warranty] SET warrantyName = ?, warrantyImage = ?, warrantyMonth = ?, warrantyDescription = ?, warrantyType = ?, startDate = ?, termsAndConditions = ? WHERE warrantyID = ? ";
+        String sql = "UPDATE [Warranty] SET warrantyName = ?, warrantyImage = ?, warrantyMonth = ?, warrantyDescription = ?, warrantyType = ?, termsAndConditions = ? WHERE warrantyID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
 
-            ps.setInt(8, warranty.getId());
+            ps.setInt(7, warranty.getId());
             ps.setString(1, warranty.getName());
             ps.setString(2, warranty.getImage());
             ps.setInt(3, warranty.getMonth());
             ps.setString(4, warranty.getDescription());
             ps.setString(5, warranty.getType());
-            ps.setString(6, warranty.getStartdate());
-            ps.setString(7, warranty.getTermsandconditions());
+            ps.setString(6, warranty.getTermsandconditions());
 
             ps.executeUpdate();
             conn.close();

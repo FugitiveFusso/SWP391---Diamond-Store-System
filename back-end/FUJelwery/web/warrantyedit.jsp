@@ -156,28 +156,6 @@
                             <h2>Warranty Image</h2>
                             <input name="warrantyImage" value="${requestScope.warranty.image}" required="Please enter" class="form-control">
                         </div> 
-
-
-                        <div class="info-input">                          
-                            <h2>Warranty Start Date</h2>
-                            <input type="date" name="startDate" value="${requestScope.warranty.startdate}" required="Please enter" class="form-control">                           
-                        </div>
-                        <div class="info-input">                          
-                            <h2>Warranty Description</h2>
-                            <textarea id="description" name="warrantyDescription" required="Please enter" class="form-control" style="resize: both;">${requestScope.warranty.description}</textarea>                                                   
-                            <span id="description-error" class="error" style="color: red"></span>
-
-                        </div>
-                    </div>
-                    <div class="col-md-6 content-right">
-                        <div class="info-input">                          
-                            <h2>Warranty Name</h2>
-                            <input name="warrantyName" value="${requestScope.warranty.name}" required="Please enter" class="form-control">                           
-                        </div>
-                        <div class="info-input">                          
-                            <h2>Warranty Month</h2>
-                            <input name="warrantyMonth" type="number" value="${requestScope.warranty.month}" required="required" class="form-control" min="1">                           
-                        </div>
                         <div class="info-input">                          
                             <h2>Warranty Type</h2>
                             <select name="warrantyType" required="" class="form-control">
@@ -191,11 +169,29 @@
                             </select>
                         </div>
                         <div class="info-input">                          
+                            <h2>Warranty Description</h2>
+                            <textarea id="description" name="warrantyDescription" required="Please enter" class="form-control" style="resize: both;">${requestScope.warranty.description}</textarea>                                                   
+                            <span id="description-error" class="error" style="color: red"></span>
+
+                        </div>
+
+                    </div>
+                    <div class="col-md-6 content-right">
+                        <div class="info-input">                          
+                            <h2>Warranty Name</h2>
+                            <input name="warrantyName" value="${requestScope.warranty.name}" required="Please enter" class="form-control">                           
+                        </div>
+                        <div class="info-input">                          
+                            <h2>Warranty Month</h2>
+                            <input name="warrantyMonth" type="number" value="${requestScope.warranty.month}" required="required" class="form-control" min="1">                           
+                        </div>
+                        <div class="info-input">                          
                             <h2>Terms and Conditions</h2>
                             <textarea id="termandcondition" name="termsAndConditions" required="Please enter" class="form-control" style="resize: both;">${requestScope.warranty.termsandconditions}</textarea>                                                   
                             <span id="tac-error" class="error" style="color: red"></span>
 
                         </div>
+
 
                     </div>
                 </div>

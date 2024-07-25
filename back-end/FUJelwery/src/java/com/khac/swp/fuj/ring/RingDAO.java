@@ -251,7 +251,7 @@ public class RingDAO {
     }
 
     public boolean update(RingDTO ring) {
-        String sql = "UPDATE [Ring] SET rpID = ?, ringName = ?, ringImage = ?, diamondID = ?, price = ?, categoryID = ?, collectionID = ? WHERE ringID = ? ";
+        String sql = "UPDATE [Ring] SET rpID = ?, ringName = ?, ringImage = ?, diamondID = ?, price = ?, categoryID = ?, collectionID = ?, warrantyID = ? WHERE ringID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -264,7 +264,8 @@ public class RingDAO {
             ps.setString(5, ring.getPrice());
             ps.setInt(6, ring.getCollectionID());
             ps.setInt(7, ring.getCategoryID());
-            ps.setInt(8, ring.getRingID());
+            ps.setInt(8, ring.getWarrantyID());
+            ps.setInt(9, ring.getRingID());
 
             ps.executeUpdate();
             conn.close();
@@ -474,6 +475,34 @@ public class RingDAO {
                 RingDTO ring = new RingDTO();
 
                 ring.setCollectionID(coID);
+
+                return ring;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Query User error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public RingDTO checkRingExistbyWarrantyID(int warrantyID) {
+
+        String sql = "select warrantyID from Warranty WHERE warrantyID = ? and isDeleted = 'active' ";
+
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, warrantyID);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                int waID = rs.getInt("warrantyID");
+
+                RingDTO ring = new RingDTO();
+
+                ring.setWarrantyID(waID);
 
                 return ring;
             }
