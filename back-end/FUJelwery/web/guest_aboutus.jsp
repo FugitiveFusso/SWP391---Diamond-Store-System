@@ -18,13 +18,13 @@
                 <div class="top-info-left">
                     <ul>
                         <li>Timeless elegance and craftsmanship</li>
-                        <li style="margin-left: 30px">at FUJ Jewelry Online Shop.</li>                         
+                        <li style="margin-left: 5px">at KHAC Diamond Ring Online Shop.</li>                             
                     </ul>
                 </div>
-                <a href="guest_homepage.jsp"><img src="./images/Screenshot (656).png"></a>
+                <a href="./user_homepage.jsp"><img src="./images/Screenshot (656).png"></a>
                 <div class="top-info-right">
                     <ul>
-                        <li>FUJ Jewelry Shop - <strong>(+ 84) 898876512</strong></li>
+                        <li>KHAC Diamond Ring Shop - <strong>(+ 84) 898876512</strong></li>
                     </ul>
                 </div>
             </div>
@@ -93,14 +93,14 @@
         <div class="main"> 
             <div class="content">
                 <div class="about-us-title">
-                    THE STORY OF FUJ
+                    THE STORY OF DIAMOND RING SHOP
                 </div>
 
 
                 <div class="story">
                     <div class="story-left">
                         <p class="text">
-                            FUJ was founded in 2024 with the idea that the diamond and engagement ring business was ready 
+                            Diamond Ring Shop was founded in 2024 with the idea that the diamond and engagement ring business was ready 
                             for innovation. We revolutionized the industry with a disruptive online business model, making 
                             it possible to shop for extraordinary, high-quality diamonds at a great value. And we didn't stop there.
                         </p>
