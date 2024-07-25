@@ -211,40 +211,55 @@ public class RingController extends HttpServlet {
                     if (ring != null) {
                         ring = dao.checkRingExistbyDiamondID(diamondID);
                         if (ring != null) {
-                            ring = dao.checkRingExistbyCollectionID(collectionID);
-                            if (ring != null) {
-                                ring = dao.checkRingExistbyCategoryID(categoryID);
+                            ring = dao.checkRingExistbyDiamondIDwithRing(diamondID);
+                            if (ring == null) {
+                                ring = dao.checkRingExistbyCollectionID(collectionID);
                                 if (ring != null) {
-                                    ring = dao.checkRingExistbyWarrantyID(warrantyID);
+                                    ring = dao.checkRingExistbyCategoryID(categoryID);
                                     if (ring != null) {
-                                        ring = new RingDTO();
-                                        ring.setRpID(rpID);
-                                        ring.setRingName(ringName);
-                                        ring.setRingImage(ringImage);
-                                        ring.setDiamondID(diamondID);
-                                        ring.setPrice(price);
-                                        ring.setCategoryID(categoryID);
-                                        ring.setCollectionID(collectionID);
-                                        ring.setWarrantyID(warrantyID);
-                                        request.setAttribute("ring", ring);
-                                        ringDAO.insert(ring);
-                                        request.setAttribute("success", "Added Successfully!!!");
-                                        RequestDispatcher rd = request.getRequestDispatcher("ringedit.jsp");
-                                        rd.forward(request, response);
+                                        ring = dao.checkRingExistbyWarrantyID(warrantyID);
+                                        if (ring != null) {
+                                            ring = dao.checkRingExistbyWarrantyIDwithRing(warrantyID);
+                                            if (ring == null) {
+                                                ring = new RingDTO();
+                                                ring.setRpID(rpID);
+                                                ring.setRingName(ringName);
+                                                ring.setRingImage(ringImage);
+                                                ring.setDiamondID(diamondID);
+                                                ring.setPrice(price);
+                                                ring.setCategoryID(categoryID);
+                                                ring.setCollectionID(collectionID);
+                                                ring.setWarrantyID(warrantyID);
+                                                request.setAttribute("ring", ring);
+                                                ringDAO.insert(ring);
+                                                request.setAttribute("success", "Added Successfully!!!");
+                                                RequestDispatcher rd = request.getRequestDispatcher("ringedit.jsp");
+                                                rd.forward(request, response);
+                                            } else {
+                                                request.setAttribute("error", "Your Ring is not inserted by used Warranty");
+                                                RequestDispatcher rd = request.getRequestDispatcher("ringedit.jsp");
+                                                rd.forward(request, response);
+                                            }
+
+                                        } else {
+                                            request.setAttribute("error", "Your Ring is not inserted by wrong Warranty ID");
+                                            RequestDispatcher rd = request.getRequestDispatcher("ringedit.jsp");
+                                            rd.forward(request, response);
+                                        }
+
                                     } else {
-                                        request.setAttribute("error", "Your Ring is not inserted by wrong Warranty ID");
+                                        request.setAttribute("error", "Your Ring is not inserted by wrong Category ID");
                                         RequestDispatcher rd = request.getRequestDispatcher("ringedit.jsp");
                                         rd.forward(request, response);
                                     }
 
                                 } else {
-                                    request.setAttribute("error", "Your Ring is not inserted by wrong Category ID");
+                                    request.setAttribute("error", "Your Ring is not inserted by wrong Collectionn ID");
                                     RequestDispatcher rd = request.getRequestDispatcher("ringedit.jsp");
                                     rd.forward(request, response);
                                 }
-
                             } else {
-                                request.setAttribute("error", "Your Ring is not inserted by wrong Collectionn ID");
+                                request.setAttribute("error", "Your Ring is not inserted by used Diamond");
                                 RequestDispatcher rd = request.getRequestDispatcher("ringedit.jsp");
                                 rd.forward(request, response);
                             }

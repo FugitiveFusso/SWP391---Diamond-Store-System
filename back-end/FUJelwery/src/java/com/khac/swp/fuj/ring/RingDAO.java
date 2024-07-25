@@ -211,7 +211,7 @@ public class RingDAO {
                 int warrantyMonth = rs.getInt("warrantyMonth");
                 String warrantyDescription = rs.getString("warrantyDescription");
                 String warrantyType = rs.getString("warrantyType");
-                
+
                 RingDTO ring = new RingDTO();
                 ring.setWarrantyID(warrantyID);
 
@@ -460,6 +460,34 @@ public class RingDAO {
         return null;
     }
 
+    public RingDTO checkRingExistbyDiamondIDwithRing(int diamondID) {
+
+        String sql = "SELECT diamondID from Ring where diamondID = ?";
+
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, diamondID);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                int dID = rs.getInt("diamondID");
+
+                RingDTO ring = new RingDTO();
+
+                ring.setDiamondID(dID);
+
+                return ring;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Query User error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
     public RingDTO checkRingExistbyCategoryID(int categoryID) {
 
         String sql = "select categoryID from Category WHERE categoryID = ? and isDeleted = 'active' ";
@@ -519,6 +547,34 @@ public class RingDAO {
     public RingDTO checkRingExistbyWarrantyID(int warrantyID) {
 
         String sql = "select warrantyID from Warranty WHERE warrantyID = ? and isDeleted = 'active' ";
+
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, warrantyID);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                int waID = rs.getInt("warrantyID");
+
+                RingDTO ring = new RingDTO();
+
+                ring.setWarrantyID(waID);
+
+                return ring;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Query User error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public RingDTO checkRingExistbyWarrantyIDwithRing(int warrantyID) {
+
+        String sql = "SELECT warrantyID from Ring where warrantyID = ? ";
 
         try {
 
