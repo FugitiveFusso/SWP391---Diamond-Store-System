@@ -172,8 +172,8 @@
                     <div class="small-detail"> <b>I1, I2, I3 Included Diamonds </b>
                         <br>
                         <li>I clarity diamonds have obvious inclusions that are likely to be visible and impact beauty </li>
-                        <li>FUJ does not sell I clarity grade loose diamonds for engagement ring designs </li>
-                        <li>FUJ does offer a limited selection of jewelry preset with I1 diamonds </li>
+                        <li>KHAC Diamond Ring Shop does not sell I clarity grade loose diamonds for engagement ring designs </li>
+                        <li>KHAC Diamond Ring Shop does offer a limited selection of jewelry preset with I1 diamonds </li>
                     </div>
 
                     <div class="small-detail"> <b>SI1, SI2 Slightly Included (SI) Diamonds </b>
@@ -188,7 +188,7 @@
                         <br>
                         <li>Minor inclusions ranging from difficult (VS1) to somewhat easy (VS2) to see at 10x magnification
                         </li>
-                        <li>Great value; FUJ’s most popular diamond clarity </li>
+                        <li>Great value; KHAC Diamond Ring Shop’s most popular diamond clarity </li>
                     </div>
 
                     <div class="small-detail"> <b>VVS1, VVS2 Very, Very Slightly Included (VVS) Diamonds </b>
@@ -258,8 +258,8 @@
                         seen with the unaided eye. Many diamond characteristics can also be hidden by the diamond cut or
                         shape. </p>
 
-                    <div class="content-title">Shop FUJ Diamonds By Clarity Grade</div>
-                    <p>At FUJ, we offer the highest quality diamonds and deliver the best value for your budget.
+                    <div class="content-title">Shop KHAC Diamond Ring Shop Diamonds By Clarity Grade</div>
+                    <p>At KHAC Diamond Ring Shop, we offer the highest quality diamonds and deliver the best value for your budget.
                         If you're shopping for a diamond ring or other diamond jewelry, we offer the following
                         diamond clarity grades: </p>
                     <div class="small-detail"> <b>Flawless Diamonds </b>

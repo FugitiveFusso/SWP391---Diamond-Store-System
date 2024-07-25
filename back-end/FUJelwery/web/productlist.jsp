@@ -5,7 +5,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>FUJ's Rings</title>
+        <title>KHAC Diamond Ring Shop's Rings</title>
         <link rel="icon" type="image/x-icon" href="images/Screenshot__656_-removebg-preview.png">
         <link rel="stylesheet" href="css/navigation_bar.css">
         <link rel="stylesheet" href="css/user_productlist.css">
@@ -64,13 +64,13 @@
                 <div class="top-info-left">
                     <ul>
                         <li>Timeless elegance and craftsmanship</li>
-                        <li style="margin-left: 30px">at FUJ Jewelry Online Shop.</li>                         
+                        <li style="margin-left: 5px">at KHAC Diamond Ring Online Shop.</li>                         
                     </ul>
                 </div>
                 <a href="user_homepage.jsp"><img src="./images/Screenshot (656).png"></a>
                 <div class="top-info-right">
                     <ul>
-                        <li>FUJ Jewelry Shop - <strong>(+ 84) 898876512</strong></li>
+                        <li>KHAC Diamond Ring Shop - <strong>(+ 84) 898876512</strong></li>
                     </ul>
                 </div>
             </div>

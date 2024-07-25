@@ -824,9 +824,9 @@
                     </div>
                 </div>
 
-                <!--FUJ Staffs Cards--> 
+                <!--KHAC Diamond Ring Shop< Staffs Cards--> 
                 <div class="charts-card" style="margin-top: 20px;">
-                    <h2 class="chart-title">FUJ Staffs</h2>
+                    <h2 class="chart-title">KHAC Diamond Ring Shop Staffs</h2>
                     <div class="staff-container">
                         <%
                             List<UserDTO> listStaff = (List<UserDTO>) request.getAttribute("usliststaff");

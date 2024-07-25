@@ -190,7 +190,7 @@
                     <p class="method">
                         2. How long does delivery take?
                     </p>
-                    <p class="details">FUJ offers free delivery from 1-7 days nationwide and delivery within 3 hours in some central
+                    <p class="details">KHAC Diamond Ring Shop offers free delivery from 1-7 days nationwide and delivery within 3 hours in some central
                         areas for labeled products.
                     </p>
 
@@ -209,7 +209,7 @@
                             is not supported and refund
                         </li>
                         <li> Gold product: exchange 100% of product value within 48H (with the condition of exchanging for another
-                            product of higher or equal value to the old product, after 48 hours FUJ will exchange the product according
+                            product of higher or equal value to the old product, after 48 hours KHAC Diamond Ring Shop will exchange the product according
                             to normal exchange mode )
                         </li>
                     </ul>
@@ -223,22 +223,22 @@
                     </p>
                     <!-- 1. -->
                     <p class="method">
-                        1. Can purchases at FUJ stores & online sites be engraved for free?
+                        1. Can purchases at KHAC Diamond Ring Shop stores & online sites be engraved for free?
                     </p>
                     <p class="details">Please share your need to engrave your name on the product when purchasing, the consultant
                         will receive your request and assist in engraving your name on the product. However, it depends on the
                         properties of the material to decide whether it can be engraved on the product or not.
                     </p>
-                    <p class="details">You can go to the nearest FUJ Store for support.
+                    <p class="details">You can go to the nearest KHAC Diamond Ring Shop Store for support.
                     </p>
 
                     <!-- 2. -->
                     <p class="method">
-                        2. Where do FUJ diamonds come from?
+                        2. Where do KHAC Diamond Ring Shop diamonds come from?
                     </p>
                     <p class="details">Diamonds are currently being mined the most in South Africa and on the current market there
                         are many importing countries. However, Belgium is the place with the best cutting and grinding standards in
-                        the world and was chosen by FUJ to import directly, so FUJ's financial invoice represents the true value of
+                        the world and was chosen by KHAC Diamond Ring Shop to import directly, so KHAC Diamond Ring Shop's financial invoice represents the true value of
                         the product.
                     </p>
                 </div>

@@ -136,7 +136,7 @@
                     </h4>
 
                     <ul class="b">
-                        <li>To protect the interests of customers when purchasing high-value jewelry, all FUJ products through shipping partners are insured by the store.</li>
+                        <li>To protect the interests of customers when purchasing high-value jewelry, all KHAC Diamond Ring Shop products through shipping partners are insured by the store.</li>
                         <li>Always commit to compensating 100% of the value of the goods in case of loss.</li>               
                     </ul>  
 
@@ -172,7 +172,7 @@
                         <li>Ho Chi Minh City and Hanoi areas: 1-4 days.</li>
                         <li>Other provinces and cities: 2-6 days.</li>
                         <li>Delivery time starts from the time the store consultant contacts to confirm the successful order</li>
-                        <li>The above delivery time is for reference only, the actual delivery time may fluctuate sooner or later depending on product inventory status, delivery address and some objective conditions that FUJ cannot control ( For example: natural disasters, floods, vehicle breakdowns...).</li>               
+                        <li>The above delivery time is for reference only, the actual delivery time may fluctuate sooner or later depending on product inventory status, delivery address and some objective conditions that KHAC Diamond Ring Shop cannot control ( For example: natural disasters, floods, vehicle breakdowns...).</li>               
                     </ul>                  
                 </div>
 

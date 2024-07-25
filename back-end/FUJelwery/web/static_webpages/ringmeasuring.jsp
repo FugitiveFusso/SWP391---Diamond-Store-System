@@ -165,7 +165,7 @@
                         removing small amounts of metal depending on the difference between the size purchased
                         and the new size requested. As a result, your ring may be slightly thicker or thinner
                         after resizing. These tiny changes are often visually imperceptible.</p>
-                    <p>Our expert jewelry makers at FUJ adhere to strict quality standards so your resized
+                    <p>Our expert jewelry makers at KHAC Diamond Ring Shop adhere to strict quality standards so your resized
                         ring both sparkles, and fits, beautifully. After the band is resized, each ring gets cleaned
                         and polished before being returned to you. </p>
 

@@ -208,18 +208,16 @@
                     and carat weight), as well as other factors including 
                     symmetry, fluorescence, luminescence, cleanliness, certificates and many more factors.</p>
                 <br>
-                <p>At FUJ Jewelry, every single diamond that we offer comes with certification documents 
+                <p>At KHAC Diamond Rings Shop, every single diamond that we offer comes with certification documents 
                     from the most renowned institutions, not to mention the Gemological Institute of America (GIA). 
-                    These certificates provide exquisite and detailed information on the diamond's origin, cut, 
-                    clarity, color, and carat weight. </p>
+                </p>
                 <div>
                     <img src="images/ATTIC_GIA_Report.webp">
                 </div>
                 <p>To explore these bespoke options further or to receive expert 
                     guidance on selecting the perfect diamond, we invite you to contact 
-                    FUJ Jewelry via our hotline at <strong>(+84) 898876512</strong>. Our team of experts 
-                    is ready to provide detail and personalized advice and assist you in making a confident 
-                    and informed choices.</p>
+                    KHAC Diamond Rings Shop via our hotline at <strong>(+84) 898876512</strong>. Our team of experts 
+                    is ready to provide some details and give personalized advice that may assist you.</p>
             </div>
         </div>                
 

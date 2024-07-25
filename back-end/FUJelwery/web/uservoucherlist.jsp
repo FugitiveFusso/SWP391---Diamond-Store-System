@@ -265,7 +265,7 @@
         <div class="faq">
             <div class="faq-left">
                 <div class="faq-title">
-                    <h1>FAQs about FUJ Ring Voucher</h1>
+                    <h1>FAQs about KHAC shop's Ring Voucher</h1>
                 </div>
             </div>
             <div class="faq-right">

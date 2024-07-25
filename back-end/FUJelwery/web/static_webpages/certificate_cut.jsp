@@ -144,7 +144,7 @@
                         quality. It reflects nearly as much light as the ideal cut, but for a lower price.</div>
                     <div class="small-detail"><b>Good: </b> This cut represents roughly the top 25% of diamond cut quality.
                         It reflects most of the light that enters, but not as much as a Very Good cut grade. </div>
-                    <div class="content-title">The "Ideal" Cut Grade At FUJ Is The Same As The "Excellent" Cut Grade
+                    <div class="content-title">The "Ideal" Cut Grade At KHAC Diamond Ring Shop Is The Same As The "Excellent" Cut Grade
                         Rating By The GIA</div>
                     <p>"We" uses the term Ideal while the GIA uses the term Excellent for the highest cut grade in round
                         brilliant diamonds. These two words are interchangeable to represent the cutting style, proportions,
@@ -179,7 +179,7 @@
                     </div>
                     <img src="../images/The_Anatomy_Of_A_Diamond.webp" alt="" srcset="">
 
-                    <div class="content-title">The "Ideal" Cut Grade At FUJ Is The Same As The "Excellent" Cut Grade
+                    <div class="content-title">The "Ideal" Cut Grade At KHAC Diamond Ring Shop Is The Same As The "Excellent" Cut Grade
                         Rating By The GIA</div>
                     <p>Although these terms are sometimes used interchangeably, diamond cut, and diamond shape mean
                         different things. </p>
