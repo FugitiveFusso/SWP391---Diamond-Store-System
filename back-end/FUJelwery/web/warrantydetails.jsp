@@ -166,15 +166,15 @@
                             <% WarrantyDTO warranty = (WarrantyDTO) request.getAttribute("warranty"); %>
 
                             <%-- Check if warranty is not null and has a valid orderID --%>
-                            <% if (warranty != null && warranty.getOrderID() != 0) { %>
+                            <% if (warranty != null && warranty.getRingID()!= 0) { %>
                             <p class="card-text">
-                                <a href="SalesHistory?action=historydetails&id=${warranty.getOrderID()}">
-                                    <strong>Order ID:</strong> ${warranty.getOrderID()}
+                                <a href="RingController?action=details&id=${warranty.getRingID()}">
+                                    <strong>Ring ID:</strong> ${warranty.getRingID()}
                                 </a>
                             </p>
                             <% } else { %>
                             <p class="card-text">
-                                <strong>No valid Order ID found.</strong>
+                                <strong>No valid Ring ID found.</strong>
                             </p>
                             <% }%>
                             <p class="card-text">

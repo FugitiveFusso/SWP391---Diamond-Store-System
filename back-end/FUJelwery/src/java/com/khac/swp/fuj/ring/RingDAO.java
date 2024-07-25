@@ -18,7 +18,7 @@ public class RingDAO {
         List<RingDTO> list = new ArrayList<>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = "SELECT r.ringID, r.rpID, r.ringName, r.ringImage, r.diamondID, FORMAT(r.price , 'N0') AS ringPrice, "
+            String sql = "SELECT r.warrantyID, r.ringID, r.rpID, r.ringName, r.ringImage, r.diamondID, FORMAT(r.price , 'N0') AS ringPrice, "
                     + "FORMAT(((r.price + rp.rpPrice + dp.price)*1.02) , 'N0') AS totalPrice, r.collectionID, r.categoryID, "
                     + "rp.rName, rp.material, rp.color AS [ringColor], FORMAT(rp.rpPrice , 'N0') AS rpPrice, d.diamondName, "
                     + "d.diamondImage, d.origin, d.certificateID, dp.diamondSize, dp.caratWeight, dp.color AS [diamondColor], "
@@ -51,6 +51,7 @@ public class RingDAO {
 
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
+                int warrantyID = rs.getInt("warrantyID");
                 int ringID = rs.getInt("ringID");
                 int rpID = rs.getInt("rpID");
                 String ringName = rs.getString("ringName");
@@ -79,6 +80,8 @@ public class RingDAO {
                 String totalPrice = rs.getString("totalPrice");
 
                 RingDTO ring = new RingDTO();
+
+                ring.setWarrantyID(warrantyID);
                 ring.setRingID(ringID);
                 ring.setRpID(rpID);
                 ring.setRingName(ringName);
@@ -145,7 +148,7 @@ public class RingDAO {
 
     public RingDTO load(int ringID) {
 
-        String sql = "SELECT r.ringID, r.rpID, r.ringName, r.ringImage, r.diamondID, FORMAT(r.price , 'N0') AS ringPrice, FORMAT(((r.price + rp.rpPrice + dp.price)*1.02) , 'N0') AS totalPrice, r.collectionID, r.categoryID, rp.rName, rp.material, rp.color AS [ringColor], FORMAT(rp.rpPrice , 'N0') AS rpPrice, d.diamondName, d.diamondImage, d.origin, d.certificateID, dp.diamondSize, dp.caratWeight, dp.color AS [diamondColor], dp.clarity, dp.cut, FORMAT(dp.price , 'N0') AS [diamondShapePrice]"
+        String sql = "SELECT r.warrantyID, r.ringID, r.rpID, r.ringName, r.ringImage, r.diamondID, FORMAT(r.price , 'N0') AS ringPrice, FORMAT(((r.price + rp.rpPrice + dp.price)*1.02) , 'N0') AS totalPrice, r.collectionID, r.categoryID, rp.rName, rp.material, rp.color AS [ringColor], FORMAT(rp.rpPrice , 'N0') AS rpPrice, d.diamondName, d.diamondImage, d.origin, d.certificateID, dp.diamondSize, dp.caratWeight, dp.color AS [diamondColor], dp.clarity, dp.cut, FORMAT(dp.price , 'N0') AS [diamondShapePrice]"
                 + " FROM [Ring] r LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID WHERE r.ringID = ? and r.status = 'active' ";
 
         try {
@@ -182,8 +185,10 @@ public class RingDAO {
                 String cut = rs.getString("cut");
                 String diamondPrice = rs.getString("diamondShapePrice");
                 String totalPrice = rs.getString("totalPrice");
+                int warrantyID = rs.getInt("warrantyID");
 
                 RingDTO ring = new RingDTO();
+                ring.setWarrantyID(warrantyID);
 
                 ring.setRingID(ringID);
                 ring.setRpID(rpID);
@@ -220,7 +225,7 @@ public class RingDAO {
     }
 
     public Integer insert(RingDTO ring) {
-        String sql = "INSERT INTO [Ring] (rpID, ringName, ringImage, diamondID, price, collectionID, categoryID, status) VALUES (?, ?, ?, ?, ?, ?, ?, 'active' )";
+        String sql = "INSERT INTO [Ring] (rpID, ringName, ringImage, diamondID, price, collectionID, categoryID, warrantyID, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'active' )";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -233,6 +238,7 @@ public class RingDAO {
             ps.setString(5, ring.getPrice());
             ps.setInt(6, ring.getCollectionID());
             ps.setInt(7, ring.getCategoryID());
+            ps.setInt(8, ring.getWarrantyID());
 
             ps.executeUpdate();
             conn.close();
