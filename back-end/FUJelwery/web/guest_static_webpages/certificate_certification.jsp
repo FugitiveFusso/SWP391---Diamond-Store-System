@@ -141,9 +141,9 @@
 
                         <br><br> Independent certification is how you can be sure that you're getting a quality diamond
                         that’s
-                        accurately graded without bias. All FUJ loose diamonds are analyzed and graded for quality by
+                        accurately graded without bias. All KHAC Diamond Ring Shop loose diamonds are analyzed and graded for quality by
                         the Gemological Institute of America (GIA), one of the most respected and accurate labs in the
-                        diamond industry. Additionally, all Astor by FUJ™ diamonds are certified for light performance
+                        diamond industry. Additionally, all Astor by KHAC Diamond Ring Shop™ diamonds are certified for light performance
                         by GemEx, the leader in light measurement.
                     </p>
                     <div class="content-title">Understanding Diamond Grading Reports
@@ -175,13 +175,13 @@
                     <p>Your diamond certification is so important, it’s sometimes referred to as the 5th C. Diamonds with a
                         GIA grading report will help you down the road to:
                     </p>
-                    <div class="list-learnMorwe">
+                    <div class="list-learnMore">
                         <li>Confirm the quality of your diamond </li>
                         <li>Help to verify ownership for repair or insurance </li>
                         <li>Prove useful if you want to resell a diamond </li>
                     </div>
                     <br>
-                    <p style="font-size: 20px;"><b>All FUJewelry Diamonds Include A GIA Diamond Grading Report</b></p>
+                    <div class="content-title">All KHAC Diamond Ring Shop diamonds include A GIA Diamond Grading Report</div>
                     <p><b>Keep in Mind: </b>GIA diamond certification helps buyers understand the quality of the diamond
                         they’re purchasing. This kind of third-party diamond certification ensures that you’re getting a
                         quality stone with transparency for the purchase process. For worry-free diamond selection, choose

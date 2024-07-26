@@ -103,17 +103,17 @@
                 </div>
                 <div class="return-policy-intro">
                     <p>
-                        Thank you for selecting jewelry from FUJ - Please carefully review the following information to ensure the best possible support from FUJ.
+                        Thank you for selecting jewelry from KHAC Diamond Ring Shop - Please carefully review the following information to ensure the best possible support from KHAC's.
                     </p>
                     <p>
-                        FUJ offers product exchanges for customers, which fall into two categories:
+                        KHAC Diamond Ring Shop offers product exchanges for customers, which fall into two categories:
                     </p>         
                 </div>
 
                 <div class="one">
                     <div class="title">
                         <h3>
-                            1. FUJ COVERS SHIPPING EXPENSES:
+                            1. KHAC COVERS SHIPPING EXPENSES:
                         </h3> 
                     </div>                  
                     <ul class="a">
@@ -122,7 +122,7 @@
                         <li>The product received does not match the size or color specified by the customer.</li>          
                         <li>Missing order or incorrect product received.</li>
                     </ul>
-                    <p class="text">(All of the above cases must be addressed within 7 days of receiving the goods; after this period, FUJ will not facilitate the exchange).</p>
+                    <p class="text">(All of the above cases must be addressed within 7 days of receiving the goods; after this period, KHAC Diamond Ring Shop will not facilitate the exchange).</p>
                 </div>
 
                 <div>
@@ -147,12 +147,12 @@
                         </h3>
                     </div>                               
                     <ul class="b">
-                        <li>FUJ does not handle any refund cases for customers.</li>
-                        <li>Please return products of the same model (size, color...) unless the product is exchanged by the Customer. FUJ is out of stock and will require you to switch to another color or size.</li>
-                        <li>If you wish to exchange for a higher-value product due to the shop's defective item, please cover the price difference. However, if the exchanged product is of lower value, FUJ will not issue a refund but require payment of the price discrepancy.</li>          
+                        <li>KHAC Diamond Ring Shop does not handle any refund cases for customers.</li>
+                        <li>Please return products of the same model (size, color...) unless the product is exchanged by the Customer. KHAC Diamond Ring Shop is out of stock and will require you to switch to another color or size.</li>
+                        <li>If you wish to exchange for a higher-value product due to the shop's defective item, please cover the price difference. However, if the exchanged product is of lower value, KHAC Diamond Ring Shop will not issue a refund but require payment of the price discrepancy.</li>          
                         <li>This policy is not applicable to promotions or gifts.</li>
-                        <li>Product exchanges in the Earrings category are not applicable for health reasons, to avoid infectious diseases, FUJ protects all Customers.</li>
-                        <li>Please thoroughly review the information provided and reach out to FUJ staff in advance for guidance and instructions on the return process.</li>
+                        <li>Product exchanges in the Earrings category are not applicable for health reasons, to avoid infectious diseases, KHAC Diamond Ring Shop protects all Customers.</li>
+                        <li>Please thoroughly review the information provided and reach out to KHAC Diamond Ring Shop staff in advance for guidance and instructions on the return process.</li>
                     </ul>            
                 </div>
 

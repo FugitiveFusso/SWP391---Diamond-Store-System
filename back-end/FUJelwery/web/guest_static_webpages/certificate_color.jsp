@@ -181,9 +181,9 @@
                         <img src="../images/D_Color_Diamonds_.jpeg">
                     </div>
 
-                    <div class="content-title">FUJ Does Not Sell L-Z Color Grade Diamonds</div>
+                    <div class="content-title">KHAC Diamond Ring Shop Does Not Sell L-Z Color Grade Diamonds</div>
                     <p>Diamonds in the L-Z range have a noticeably warm yellow hue which do not meet the quality and value
-                        standards at FUJ. We do, however, sell fancy colored diamonds that are graded on a different
+                        standards at KHAC Diamond Ring Shop. We do, however, sell fancy colored diamonds that are graded on a different
                         scale and are highly prized.</p>
 
                     <div class="content-title">Which Diamond Color Is Best?</div>

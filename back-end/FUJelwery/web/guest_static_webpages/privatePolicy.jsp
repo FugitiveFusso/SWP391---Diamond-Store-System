@@ -101,10 +101,10 @@
                 </div>
                 <div class="return-policy-intro">
                     <p style="font-family: 'Inter', sans-serif; font-weight: 400;">
-                        Thank you for visiting the website operated by FUJ. Protecting customer information is always a top
-                        issue for FUJ. Therefore, we respect and commit to keeping private information confidential and only
+                        Thank you for visiting the website operated by KHAC Diamond Ring Shop. Protecting customer information is always a top
+                        issue for KHAC Diamond Ring Shop. Therefore, we respect and commit to keeping private information confidential and only
                         collect necessary information related to purchase transactions. To ensure the security of customer
-                        information, FUJ implements the following principles: 
+                        information, KHAC Diamond Ring Shop implements the following principles: 
                     </p>
                 </div>
 
@@ -117,13 +117,13 @@
                     <p class="text">We provide services and manage the use of customers' personal information to manage the customer database and promptly handle arising problems (if any).</p>
                     <p class="text">Collecting information is aimed at building a system that brings the most benefits to customers. Therefore, the information will be used for the following activities:</p>
                     <p class="text1">(All of the above cases must be addressed within 7 days of receiving the goods; after
-                        this period, FUJ will not facilitate the exchange).
+                        this period, KHAC Diamond Ring Shop will not facilitate the exchange).
                     </p>
                     <ul class="a">
-                        <li>Providing services and notifying information exchange activities between customers and FUJ.</li>
+                        <li>Providing services and notifying information exchange activities between customers and KHAC Diamond Ring Shop.</li>
                         <li>Prevent acts of sabotage, account appropriation or fraud.</li>
                         <li>Contact to resolve customer complaints.</li>          
-                        <li>Verify and exchange information about customer transactions at FUJ.</li>
+                        <li>Verify and exchange information about customer transactions at KHAC Diamond Ring Shop.</li>
                         <li>Meet the requirements of competent state management agencies when necessary.</li>
                     </ul>
                 </div>
@@ -144,7 +144,7 @@
                         Customers' personal information will not be used, transferred, provided or disclosed to third parties without the customer's consent, except in cases prescribed by law.
                     </p>
                     <p class="text">
-                        All customer online transaction information, including accounting invoice information and digital documents, are absolutely confidential in FUJ's high-level secure central data area.
+                        All customer online transaction information, including accounting invoice information and digital documents, are absolutely confidential in KHAC Diamond Ring Shop's high-level secure central data area.
                     </p>
                 </div>
 
@@ -154,7 +154,7 @@
                             3. ADDRESS OF THE INFORMATION COLLECTION AND MANAGEMENT UNIT:
                         </h3>
                         <h3>
-                            FUJ Jewelry Store
+                            KHAC Diamond Ring Shop
                         </h3>
                     </div>
 

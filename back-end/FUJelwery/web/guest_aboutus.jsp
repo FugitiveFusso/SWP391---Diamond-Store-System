@@ -189,7 +189,7 @@
                 <br>
                 <br>
                 <div class="about-us-title">
-                    FUJ INFORMATION
+                    KHAC's INFORMATION
                 </div>
 
                 <div class="general-info">
@@ -199,7 +199,7 @@
                             <li>Head office address: Slot E2a-7, D1, Đ. D1 Road, Long Thanh My Ward,  Thu Duc City, HCMC</li>
                             <li>Phone: (+84) 898876512</li>
                             <li>Email: fuj.khac.diamondshopsystem@gmail.com</li>
-                            <li>Stock code: FUJ</li>
+                            <li>Stock code: KHAC</li>
                             <li>Officers and employees: 4 people</li>
                         </ul>
                     </div>

@@ -104,8 +104,8 @@
                 </div>
                 <div class="warranty-policy-intro">
                     <p>
-                        FUJ distinguishes between fine jewelry and other fashion accessories, recognizing that each selected piece of
-                        jewelry carries a unique narrative or sentimental value. As a steadfast and dedicated purveyor of love, FUJ
+                        KHAC Diamond Ring Shop distinguishes between fine jewelry and other fashion accessories, recognizing that each selected piece of
+                        jewelry carries a unique narrative or sentimental value. As a steadfast and dedicated purveyor of love, KHAC Diamond Ring Shop
                         offers the comprehensive Warranty policy.
                     </p>
                 </div>
@@ -132,10 +132,10 @@
                         The product is defective or damaged due to improper use by the Customer
                     </p>
                     <p class="text">
-                        The product has been edited and changed from FUJ's original shape
+                        The product has been edited and changed from KHAC Diamond Ring Shop's original shape
                     </p>
                     <p class="text">
-                        Not a FUJ product
+                        Not a KHAC Diamond Ring Shop product
                     </p>
                 </div>
 
