@@ -35,7 +35,7 @@ INSERT INTO [Collection] VALUES
 ('NIGHT LUXURY','https://www.thejewelleryeditor.com/media/images_thumbnails/filer_public_thumbnails/old/52643/Chanel-Cosmique-jewellery.jpg__1536x0_q75_crop-scale_subsampling-2_upscale-false.jpg','Nightwear and lingerie', 'active')
 
 INSERT INTO [Voucher] VALUES
-('GRAND OPENING SALE', 'https://bluenile-blog.r2net.com/wp-content/uploads/Ring-Spacing-Hero.jpg', '2024-10-06', 'Khoa Le Anh',  'SALE MO CUA HANG FUJ, SAN SALE KHUYEN MAI 20% VAO TUAN DAU TIEN, BA CON OI MAI DO MAI DO!!!! THOI LUONG CO HAN!!!', '2BA', 20, 'active'),
+('GRAND OPENING SALE', 'https://bluenile-blog.r2net.com/wp-content/uploads/Ring-Spacing-Hero.jpg', '2024-10-06', 'Khoa Le Anh',  'Grand Opening of Khac Diamond Ring Shop! Enjoy a 20% discount during the first week. We invite everyone to take advantage of this limited-time offer. Hurry, the promotion will not last long!', '2BA', 20, 'active'),
 ('SUMMER FESTIVAL', 'https://t3.ftcdn.net/jpg/04/88/69/66/360_F_488696618_kWOXm54yPma0njDqtKuKRPDs1YmZiaUx.jpg', '2024-07-01', 'Cuong Nguyen Phu', 'SUMMER FESTIVAL SALE, 15% OFF ON ALL ITEMS! LIMITED TIME OFFER!!!', '3BF', 15, 'active'),
 ('WINTER HOLIDAY SALE', 'https://vancouver.housing.ubc.ca/wp-content/uploads/2020/12/Winter-Break-2020-Header-1200x675-1.jpg', '2024-06-02', 'Hoang Nguyen Minh', 'WINTER HOLIDAY SALE, 20% OFF ON SELECTED ITEMS! GRAB YOUR DEALS NOW!!!', '4CD', 20, 'active'),
 ('SPRING BLOOM', 'https://www.telegraph.co.uk/content/dam/gardening/2024/03/15/TELEMMGLPICT000370560604_17105173385660_trans_NvBQzQNjv4BqpVlberWd9EgFPZtcLiMQf_4Xpit_DMGvdp2n7FDd82k.jpeg', '2024-03-20', 'An Do Dinh', 'SPRING BLOOM SALE, 10% OFF ON ALL SPRING COLLECTION! HURRY UP!!!', '5EF11', 10, 'active'),
