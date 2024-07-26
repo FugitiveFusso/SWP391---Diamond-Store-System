@@ -109,10 +109,10 @@
         <div class="container">
             <% if (failed != null) {%>
             <div class="popup open-popup" id="popup">
-                <img src="images/404-tick.png">
-                <h2>Thank you!</h2>
+                <img src="images/X icon.png">
+                <h2>Oops!</h2>
                 <p><%= failed%></p>
-                <p>If you want to see your cart, <a href="OrderController?action=list&id=${sessionScope.usersession.userid}">Click here!!!</a></p>
+                <p>It seems like you already bought this product, you can reference other if you want to.</p>
                 <button type="button" onclick="closePopup()">OK</button>
             </div>
             <% }%> 
