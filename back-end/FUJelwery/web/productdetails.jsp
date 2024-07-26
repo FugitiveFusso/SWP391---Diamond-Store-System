@@ -104,7 +104,7 @@
             </div>
             <% }%> 
         </div>
-        
+
         <% String failed = (String) request.getAttribute("failed");%>
         <div class="container">
             <% if (failed != null) {%>
@@ -193,7 +193,13 @@
                 </div>
                 <hr style="margin-bottom: 10px;">
                 <p class="price" style="margin-top: 20px;"><strong style="color: #151542">Total Price:</strong> ${requestScope.product.totalPrice} VND</p>
-                <p id="status">Status: ${requestScope.product.status}</p>
+                <!--<p id="status">Status: ${requestScope.product.status}</p>-->
+                <c:choose>
+                    <c:when test="${requestScope.product.status == 'outOfStock'}">
+                        <button id="status" type="button" disabled class="unavailable-btn">Unavailable</button>
+                    </c:when>
+                </c:choose>
+
                 <form id="addToCartForm" action="AddToCart" method="post" class="buttons-form">
                     <input type="hidden" name="userID" value=${sessionScope.usersession.userid}>
                     <input type="hidden" name="ringID" value=${requestScope.product.ringID}>
