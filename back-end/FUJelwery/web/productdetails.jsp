@@ -109,11 +109,10 @@
         <div class="container">
             <% if (failed != null) {%>
             <div class="popup open-popup" id="popup">
-                <img src="images/X icon.png">
+                <img src="images/error.png" style="width: 100">
                 <h2>Oops!</h2>
                 <p><%= failed%></p>
-                <p>It seems like you already bought this product, you can reference other if you want to.</p>
-                <button type="button" onclick="closePopup()">OK</button>
+                <button type="button" onclick="closePopup()">I understood</button>
             </div>
             <% }%> 
         </div>

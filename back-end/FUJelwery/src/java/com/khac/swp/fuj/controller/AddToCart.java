@@ -81,6 +81,8 @@ public class AddToCart extends HttpServlet {
                 OrderDAO dao = new OrderDAO();
                 if (dao.checkRingActive(ringID).equals("active") && dao.isInCart(ringID, userID) == null) {
                     dao.insert(order);
+                    request.setAttribute("success", "Add the ring to your cart successfully!");
+
                 } else {
                     request.setAttribute("failed", "The ring is either out of stock or is in your cart!");
                 }
@@ -98,8 +100,6 @@ public class AddToCart extends HttpServlet {
                 if (id != null) {
                     product = ringDAO.load(id);
                 }
-
-                request.setAttribute("success", "Add the ring to your cart successfully!");
 
                 request.setAttribute("product", product);//object
                 request.getRequestDispatcher("/productdetails.jsp").forward(request, response);
