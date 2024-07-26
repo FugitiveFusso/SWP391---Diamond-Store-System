@@ -1296,13 +1296,13 @@ public class OrderDAO {
     }
     
     public boolean outOfStockRing(int userID){
-        String sql = "UPDATE [Ring] SET r.status = 'outOfStock' FROM [OrderDetails] o JOIN [Ring] r ON o.ringID = r.ringID WHERE o.userID = ? ";
+        String sql = "UPDATE [Ring] SET [status] = 'outOfStock' FROM [Ring] r  JOIN [OrderDetails] o  ON o.ringID = r.ringID WHERE o.userID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
 
-            ps.setInt(4, userID);
+            ps.setInt(1, userID);
 
             ps.executeUpdate();
             conn.close();
