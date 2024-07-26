@@ -293,8 +293,8 @@ public class RingDAO {
             ps.setString(3, ring.getRingImage());
             ps.setInt(4, ring.getDiamondID());
             ps.setString(5, ring.getPrice());
-            ps.setInt(6, ring.getCollectionID());
-            ps.setInt(7, ring.getCategoryID());
+            ps.setInt(6, ring.getCategoryID());
+            ps.setInt(7, ring.getCollectionID());
             ps.setInt(8, ring.getWarrantyID());
             ps.setInt(9, ring.getRingID());
 
