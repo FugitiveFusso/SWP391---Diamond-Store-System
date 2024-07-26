@@ -43,7 +43,7 @@ public class AddToCart extends HttpServlet {
             Connection conn = null;
             try {
                 conn = DBUtils.getConnection();
-                PreparedStatement ps = conn.prepareStatement("SELECT MAX(orderID) FROM [Order]");
+                PreparedStatement ps = conn.prepareStatement("SELECT MAX(orderID) FROM [OrderDetails]");
                 ResultSet rs = ps.executeQuery();
                 Integer orderID = null;
                 if (rs.next()) {
@@ -79,7 +79,11 @@ public class AddToCart extends HttpServlet {
                 order.setStatus(status);
 
                 OrderDAO dao = new OrderDAO();
-                dao.insert(order);
+                if (dao.checkRingActive(ringID).equals("active") && dao.isInCart(ringID, userID) == null) {
+                    dao.insert(order);
+                } else {
+                    request.setAttribute("failed", "The ring is either out of stock or is in your cart!");
+                }
 
                 // Redirect to prevent duplicate submission
                 Integer id = null;

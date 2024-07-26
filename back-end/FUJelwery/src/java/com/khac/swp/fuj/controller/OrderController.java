@@ -5,6 +5,7 @@
  */
 package com.khac.swp.fuj.controller;
 
+import static com.khac.swp.fuj.controller.CodeGenerator.generateRandomCode;
 import com.khac.swp.fuj.order.OrderDAO;
 import com.khac.swp.fuj.order.OrderDTO;
 import com.khac.swp.fuj.order.Transactions;
@@ -57,6 +58,11 @@ public class OrderController extends HttpServlet {
             LocalDate localDate = LocalDate.now();
             String purchasedDate = localDate.format(formatter);
             Transactions transaction = new Transactions();
+            OrderDAO DAO = new OrderDAO();
+            String codeGenerator;
+            do {
+                codeGenerator = CodeGenerator.generateRandomCode(10);
+            } while (DAO.isCodeDuplicate(codeGenerator));
             if (keyword == null) {
                 keyword = "";
             }
@@ -141,7 +147,8 @@ public class OrderController extends HttpServlet {
                 if (userID != null) {
                     try {
                         orderDAO.updateScore(userID);
-                        orderDAO.purchase(purchaseMethod, userID, purchasedDate);
+                        orderDAO.outOfStockRing(userID);
+                        orderDAO.purchase(codeGenerator, purchaseMethod, userID, purchasedDate);
                         request.getSession().setAttribute("success", "Purchase Successfully!!!");
                     } catch (Exception e) {
                         log("Error deleting order: " + e.getMessage());

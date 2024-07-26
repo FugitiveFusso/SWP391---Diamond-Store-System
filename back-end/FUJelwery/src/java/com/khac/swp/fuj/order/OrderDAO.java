@@ -11,6 +11,7 @@ import com.khac.swp.fuj.voucher.VoucherDTO;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,8 +30,8 @@ public class OrderDAO {
 
             Connection con = DBUtils.getConnection();
             String sql = "SELECT o.orderID, o.userID, u.userName, o.orderDate, r.ringID, r.ringName, r.ringImage, v.voucherID, v.voucherName, o.ringSize, FORMAT(((SUM(COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02) * ((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0') AS [totalPrice], o.status,\n"
-                    + "(SELECT COUNT(DISTINCT o2.orderID) FROM [Order] o2 WHERE o2.userID = ? AND o2.status = 'pending') AS totalOrders\n"
-                    + "FROM [Order] o LEFT JOIN [User] u ON o.userID = u.userID LEFT JOIN [Ring] r ON o.ringID = r.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID \n"
+                    + "(SELECT COUNT(DISTINCT o2.orderID) FROM [OrderDetails] o2 WHERE o2.userID = ? AND o2.status = 'pending') AS totalOrders\n"
+                    + "FROM [OrderDetails] o LEFT JOIN [User] u ON o.userID = u.userID LEFT JOIN [Ring] r ON o.ringID = r.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID \n"
                     + "GROUP BY o.orderID, o.userID, u.userName, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, v.percentage,  o.ringSize, o.status, r.ringImage\n"
                     + "HAVING o.userID = ? AND o.status = 'pending'";
 
@@ -85,7 +86,7 @@ public class OrderDAO {
 
     public String totalAllProduct(int userID) throws SQLException {
         Connection connection = DBUtils.getConnection();
-        String query = "SELECT FORMAT(SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * ((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0' )  AS totalPrice FROM [Order] o LEFT JOIN [Ring] r ON o.ringID = r.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON r.diamondID = d.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID WHERE o.userID = ? AND o.status = 'pending';";
+        String query = "SELECT FORMAT(SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * ((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0' )  AS totalPrice FROM [OrderDetails] o LEFT JOIN [Ring] r ON o.ringID = r.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON r.diamondID = d.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID WHERE o.userID = ? AND o.status = 'pending';";
 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, userID);
@@ -101,7 +102,7 @@ public class OrderDAO {
     }
 
     public boolean updateScore(int userID) {
-        String sql = "UPDATE [User] set point = point + ((SELECT SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * ((100.0 - COALESCE(v.percentage, 0)) / 100))  AS totalPrice FROM [Order] o LEFT JOIN [Ring] r ON o.ringID = r.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON r.diamondID = d.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID WHERE o.userID = ? AND o.status = 'pending') / 1000000) where userID = ? ";
+        String sql = "UPDATE [User] set point = point + ((SELECT SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * ((100.0 - COALESCE(v.percentage, 0)) / 100))  AS totalPrice FROM [OrderDetails] o LEFT JOIN [Ring] r ON o.ringID = r.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON r.diamondID = d.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID WHERE o.userID = ? AND o.status = 'pending') / 1000000) where userID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -127,7 +128,7 @@ public class OrderDAO {
                     + "v.voucherID, v.voucherName, o.ringSize, "
                     + "FORMAT((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * "
                     + "((100.0 - COALESCE(v.percentage, 0)) / 100), 'N0') AS totalPrice, o.status "
-                    + "FROM [Order] o "
+                    + "FROM [OrderDetails] o "
                     + "LEFT JOIN [User] u ON o.userID = u.userID "
                     + "LEFT JOIN [Ring] r ON o.ringID = r.ringID "
                     + "LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID "
@@ -189,7 +190,7 @@ public class OrderDAO {
         int totalOrders = 0;
         try {
             Connection con = DBUtils.getConnection();
-            String sql = "SELECT COUNT(*) AS totalOrders FROM [Order] o "
+            String sql = "SELECT COUNT(*) AS totalOrders FROM [OrderDetails] o "
                     + "WHERE o.userID = ? "
                     + "AND o.status NOT IN ('pending', 'shipping', 'delivered') "
                     + "AND o.purchaseMethod = 'Received at store'";
@@ -218,7 +219,7 @@ public class OrderDAO {
                     + "v.voucherID, v.voucherName, o.ringSize, "
                     + "FORMAT((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * "
                     + "((100.0 - COALESCE(v.percentage, 0)) / 100), 'N0') AS totalPrice, o.status "
-                    + "FROM [Order] o "
+                    + "FROM [OrderDetails] o "
                     + "LEFT JOIN [User] u ON o.userID = u.userID "
                     + "LEFT JOIN [Ring] r ON o.ringID = r.ringID "
                     + "LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID "
@@ -280,7 +281,7 @@ public class OrderDAO {
         int totalOrders = 0;
         try {
             Connection con = DBUtils.getConnection();
-            String sql = "SELECT COUNT(*) AS totalOrders FROM [Order] o "
+            String sql = "SELECT COUNT(*) AS totalOrders FROM [OrderDetails] o "
                     + "WHERE o.userID = ? "
                     + "AND o.status NOT IN ('pending') "
                     + "AND o.purchaseMethod = 'Door-to-door delivery service'";
@@ -307,7 +308,7 @@ public class OrderDAO {
             Connection con = DBUtils.getConnection();
             String sql = "SELECT o.orderID, o.userID, u.userName, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, o.ringSize, "
                     + "FORMAT((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * ((100.0 - COALESCE(v.percentage, 0)) / 100), 'N0') AS totalPrice, o.status "
-                    + "FROM [Order] o "
+                    + "FROM [OrderDetails] o "
                     + "LEFT JOIN [User] u ON o.userID = u.userID "
                     + "LEFT JOIN [Ring] r ON o.ringID = r.ringID "
                     + "LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID "
@@ -364,7 +365,7 @@ public class OrderDAO {
         int total = 0;
         try {
             Connection con = DBUtils.getConnection();
-            String sql = "SELECT COUNT(*) FROM [Order] o "
+            String sql = "SELECT COUNT(*) FROM [OrderDetails] o "
                     + "WHERE o.userID = ? AND o.status NOT IN ('pending', 'purchased', 'verified', 'shipping')";
 
             PreparedStatement stmt = con.prepareStatement(sql);
@@ -392,7 +393,7 @@ public class OrderDAO {
                     + "COALESCE(o.warrantyID, 0) AS [warrantyID], o.ringSize, "
                     + "FORMAT(SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * "
                     + "((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0') AS [totalPrice], o.status "
-                    + "FROM [Order] o "
+                    + "FROM [OrderDetails] o "
                     + "LEFT JOIN [User] u ON o.userID = u.userID "
                     + "LEFT JOIN [Ring] r ON o.ringID = r.ringID "
                     + "LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID "
@@ -470,7 +471,7 @@ public class OrderDAO {
         int totalOrders = 0;
         try {
             Connection con = DBUtils.getConnection();
-            String sql = "SELECT COUNT(*) AS total FROM [Order] o "
+            String sql = "SELECT COUNT(*) AS total FROM [OrderDetails] o "
                     + "LEFT JOIN [User] u ON o.userID = u.userID "
                     + "LEFT JOIN [Ring] r ON o.ringID = r.ringID "
                     + "LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID "
@@ -512,7 +513,7 @@ public class OrderDAO {
                     + "COALESCE(o.warrantyID, 0) AS [warrantyID], COALESCE(w.warrantyName, 'n/a') AS [warrantyName], "
                     + "o.ringSize, FORMAT(SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * "
                     + "((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0') AS [totalPrice], o.status "
-                    + "FROM [Order] o "
+                    + "FROM [OrderDetails] o "
                     + "LEFT JOIN [User] u ON o.userID = u.userID "
                     + "LEFT JOIN [Ring] r ON o.ringID = r.ringID "
                     + "LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID "
@@ -595,7 +596,7 @@ public class OrderDAO {
         try {
             Connection con = DBUtils.getConnection();
             String sql = "SELECT COUNT(*) AS total "
-                    + "FROM [Order] o "
+                    + "FROM [OrderDetails] o "
                     + "LEFT JOIN [User] u ON o.userID = u.userID "
                     + "LEFT JOIN [Ring] r ON o.ringID = r.ringID "
                     + "LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID "
@@ -649,7 +650,7 @@ public class OrderDAO {
                     + "o.ringSize, "
                     + "FORMAT(SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * ((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0') AS totalPrice, "
                     + "o.status "
-                    + "FROM [Order] o "
+                    + "FROM [OrderDetails] o "
                     + "LEFT JOIN [User] u ON o.userID = u.userID "
                     + "LEFT JOIN [Ring] r ON o.ringID = r.ringID "
                     + "LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID "
@@ -728,7 +729,7 @@ public class OrderDAO {
         int total = 0;
         try {
             Connection con = DBUtils.getConnection();
-            String sql = "SELECT COUNT(*) FROM [Order] o "
+            String sql = "SELECT COUNT(*) FROM [OrderDetails] o "
                     + "LEFT JOIN [User] u ON o.userID = u.userID "
                     + "LEFT JOIN [Ring] r ON o.ringID = r.ringID "
                     + "LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID "
@@ -771,7 +772,7 @@ public class OrderDAO {
                     + "COALESCE(o.warrantyID, 0) AS [warrantyID], COALESCE(w.warrantyName, 'n/a') AS [warrantyName], "
                     + "o.ringSize, FORMAT(SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * "
                     + "((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0') AS [totalPrice], o.status "
-                    + "FROM [Order] o "
+                    + "FROM [OrderDetails] o "
                     + "LEFT JOIN [User] u ON o.userID = u.userID "
                     + "LEFT JOIN [Ring] r ON o.ringID = r.ringID "
                     + "LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID "
@@ -850,7 +851,7 @@ public class OrderDAO {
         int total = 0;
         try {
             Connection con = DBUtils.getConnection();
-            String sql = "SELECT COUNT(*) FROM [Order] o "
+            String sql = "SELECT COUNT(*) FROM [OrderDetails] o "
                     + "LEFT JOIN [User] u ON o.userID = u.userID "
                     + "LEFT JOIN [Ring] r ON o.ringID = r.ringID "
                     + "LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID "
@@ -893,7 +894,7 @@ public class OrderDAO {
                     + "COALESCE(o.warrantyID, 0) AS [warrantyID], COALESCE(w.warrantyName, 'n/a') AS [warrantyName], "
                     + "o.ringSize, FORMAT(SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * "
                     + "((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0') AS [totalPrice], o.status "
-                    + "FROM [Order] o "
+                    + "FROM [OrderDetails] o "
                     + "LEFT JOIN [User] u ON o.userID = u.userID "
                     + "LEFT JOIN [Ring] r ON o.ringID = r.ringID "
                     + "LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID "
@@ -972,7 +973,7 @@ public class OrderDAO {
         int total = 0;
         try {
             Connection con = DBUtils.getConnection();
-            String sql = "SELECT COUNT(*) FROM [Order] o "
+            String sql = "SELECT COUNT(*) FROM [OrderDetails] o "
                     + "LEFT JOIN [User] u ON o.userID = u.userID "
                     + "LEFT JOIN [Ring] r ON o.ringID = r.ringID "
                     + "LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID "
@@ -1008,7 +1009,7 @@ public class OrderDAO {
     public OrderDTO load(int orderID) {
 
         String sql = " select o.orderID, u.userID, u.userName, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, o.ringSize, FORMAT( ((r.price + rp.rpPrice + dp.price)*1.02), 'N0') AS [totalPrice], o.status, o.delivered ";
-        sql += " from [Order] o left join [User] u ON o.userID = u.userID left join [Ring] r ON r.ringID = o.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID  left join [Voucher] v ON o.voucherID = v.voucherID";
+        sql += " from [OrderDetails] o left join [User] u ON o.userID = u.userID left join [Ring] r ON r.ringID = o.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID  left join [Voucher] v ON o.voucherID = v.voucherID";
         sql += " WHERE o.orderID = ? AND o.status = 'pending' r.isDeleted = 'active'";
 
         try {
@@ -1056,7 +1057,7 @@ public class OrderDAO {
 
     public OrderDTO loadBillDetail(int orderID) {
 
-        String sql = "SELECT o.orderID, o.userID, u.userName, u.address, o.orderDate, o.purchaseMethod, r.ringID, r.ringName, r.ringImage, o.warrantyID, w.warrantyName, w.warrantyMonth, CAST(w.warrantyDescription AS VARCHAR(255)) AS [warrantyDescription], w.warrantyType, w.startDate, w.endDate, CAST(w.termsAndConditions AS VARCHAR(255)) AS [termsAndConditions], w.warrantyImage, c.certificateImage, COALESCE(v.voucherID, 0) AS [voucherID], COALESCE(v.voucherName, 'n/a') AS [voucherName], COALESCE(c.certificateID, 0) AS [certificateID], COALESCE(c.description, 'n/a') AS [certificateName], o.ringSize, FORMAT(SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * ((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0') AS [totalPrice], o.status FROM [Order] o LEFT JOIN [User] u ON o.userID = u.userID LEFT JOIN [Ring] r ON o.ringID = r.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID LEFT JOIN [Warranty] w ON o.warrantyID = w.warrantyID LEFT JOIN [Certificate] c ON d.certificateID = c.certificateID WHERE o.orderID = ? AND o.status <> 'pending' GROUP BY o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, r.ringImage, o.warrantyID, w.warrantyName, w.warrantyMonth, CAST(w.warrantyDescription AS VARCHAR(255)), w.warrantyType, w.startDate, w.endDate, CAST(w.termsAndConditions AS VARCHAR(255)), w.warrantyImage, c.certificateImage, v.voucherID, v.voucherName, c.certificateID, c.description, o.ringSize, o.status, o.purchaseMethod";
+        String sql = "SELECT o.orderID, o.userID, u.userName, u.address, o.orderDate, o.purchaseMethod, r.ringID, r.ringName, r.ringImage, o.warrantyID, w.warrantyName, w.warrantyMonth, CAST(w.warrantyDescription AS VARCHAR(255)) AS [warrantyDescription], w.warrantyType, w.startDate, w.endDate, CAST(w.termsAndConditions AS VARCHAR(255)) AS [termsAndConditions], w.warrantyImage, c.certificateImage, COALESCE(v.voucherID, 0) AS [voucherID], COALESCE(v.voucherName, 'n/a') AS [voucherName], COALESCE(c.certificateID, 0) AS [certificateID], COALESCE(c.description, 'n/a') AS [certificateName], o.ringSize, FORMAT(SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * ((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0') AS [totalPrice], o.status FROM [OrderDetails] o LEFT JOIN [User] u ON o.userID = u.userID LEFT JOIN [Ring] r ON o.ringID = r.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID LEFT JOIN [Warranty] w ON o.warrantyID = w.warrantyID LEFT JOIN [Certificate] c ON d.certificateID = c.certificateID WHERE o.orderID = ? AND o.status <> 'pending' GROUP BY o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, r.ringImage, o.warrantyID, w.warrantyName, w.warrantyMonth, CAST(w.warrantyDescription AS VARCHAR(255)), w.warrantyType, w.startDate, w.endDate, CAST(w.termsAndConditions AS VARCHAR(255)), w.warrantyImage, c.certificateImage, v.voucherID, v.voucherName, c.certificateID, c.description, o.ringSize, o.status, o.purchaseMethod";
 
         try {
 
@@ -1132,7 +1133,7 @@ public class OrderDAO {
 
     public OrderDTO loadBillProcessDetails(int orderID) {
 
-        String sql = "select o.orderID, o.userID, u.userName, u.address, o.orderDate, o.purchaseMethod, r.ringID, r.ringName, r.ringImage, COALESCE(v.voucherID, 0) AS [voucherID], COALESCE(v.voucherName,'n/a') AS [voucherName], o.ringSize, FORMAT(SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * ((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0' ) AS [totalPrice], o.status from [Order] o left join [User] u ON o.userID = u.userID left join [Ring] r ON o.ringID = r.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID  left join [Voucher] v ON o.voucherID = v.voucherID WHERE o.orderID = ? AND o.status <> 'pending' group by o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, r.ringImage, v.voucherID, v.voucherName, v.percentage, o.warrantyID, o.ringSize, o.status, o.purchaseMethod ";
+        String sql = "select o.orderID, o.userID, u.userName, u.address, o.orderDate, o.purchaseMethod, r.ringID, r.ringName, r.ringImage, COALESCE(v.voucherID, 0) AS [voucherID], COALESCE(v.voucherName,'n/a') AS [voucherName], o.ringSize, FORMAT(SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * ((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0' ) AS [totalPrice], o.status from [OrderDetails] o left join [User] u ON o.userID = u.userID left join [Ring] r ON o.ringID = r.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID  left join [Voucher] v ON o.voucherID = v.voucherID WHERE o.orderID = ? AND o.status <> 'pending' group by o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, r.ringImage, v.voucherID, v.voucherName, v.percentage, o.warrantyID, o.ringSize, o.status, o.purchaseMethod ";
 
         try {
 
@@ -1180,7 +1181,7 @@ public class OrderDAO {
     }
 
     public Integer insert(OrderDTO order) {
-        String sql = "INSERT INTO [Order] (orderID, userID, orderDate, ringID, ringSize, status) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO [OrderDetails] (orderID, userID, orderDate, ringID, ringSize, status) VALUES (?, ?, ?, ?, ?, ?)";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -1202,9 +1203,53 @@ public class OrderDAO {
         }
         return null;
     }
+    
+    public String checkRingActive(int ringID) {
+
+        String sql = "select status from [Ring] where ringID = ? ";
+
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, ringID);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                String status = rs.getString("status");
+                return status;
+                
+            }
+        } catch (SQLException ex) {
+            System.out.println("Query User error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    
+    public Integer isInCart(int ringID, int userID) {
+        try (
+            Connection conn = DBUtils.getConnection();
+                ) {
+            String query = "SELECT orderID FROM [OrderDetails] WHERE ringID = ? AND userID = ?";
+            try (PreparedStatement statement = conn.prepareStatement(query)) {
+                statement.setInt(1, ringID);
+                statement.setInt(2, userID);
+                ResultSet rs = statement.executeQuery();
+                if (rs.next()) {
+                    int orderID = rs.getInt("orderID");
+                    return orderID;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public boolean update(OrderDTO order) {
-        String sql = "UPDATE [Order] SET ringID = ?, voucherID = ?, ringSize = ?, status = ? WHERE orderID = ? ";
+        String sql = "UPDATE [OrderDetails] SET ringID = ?, voucherID = ?, ringSize = ?, status = ? WHERE orderID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -1225,17 +1270,54 @@ public class OrderDAO {
         }
         return false;
     }
-
-    public boolean purchase(String paymentMethod, int userID, String purchasedDate) {
-        String sql = "UPDATE [Order] SET orderDate = ?, purchaseMethod = ?, status = 'purchased' WHERE userID = ? AND status = 'pending' ";
+    
+    public boolean outOfStockRing(int userID){
+        String sql = "UPDATE [Ring] SET r.status = 'outOfStock' FROM [OrderDetails] o JOIN [Ring] r ON o.ringID = r.ringID WHERE o.userID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
 
-            ps.setString(1, purchasedDate);
-            ps.setString(2, paymentMethod);
-            ps.setInt(3, userID);
+            ps.setInt(4, userID);
+
+            ps.executeUpdate();
+            conn.close();
+        } catch (SQLException ex) {
+            System.out.println("Purchase error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return false;
+    }
+    
+    public boolean isCodeDuplicate(String orderCode) {
+        try (
+            Connection conn = DBUtils.getConnection();
+                ) {
+            String query = "SELECT COUNT(*) FROM [OrderDetails] WHERE orderCode = ?";
+            try (PreparedStatement statement = conn.prepareStatement(query)) {
+                statement.setString(1, orderCode);
+                ResultSet resultSet = statement.executeQuery();
+                if (resultSet.next()) {
+                    return resultSet.getInt(1) > 0;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean purchase(String orderCode, String paymentMethod, int userID, String purchasedDate) {
+        String sql = "UPDATE [OrderDetails] SET orderCode = ?, orderDate = ?, purchaseMethod = ?, status = 'purchased' WHERE userID = ? AND status = 'pending' ";
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setString(1, orderCode);
+            ps.setString(2, purchasedDate);
+            ps.setString(3, paymentMethod);
+            ps.setInt(4, userID);
 
             ps.executeUpdate();
             conn.close();
@@ -1269,7 +1351,7 @@ public class OrderDAO {
 
     public int checkWarranty(int warrantyID) {
         int orderID = 0;
-        String sql = "SELECT orderID FROM [Order] WHERE warrantyID = ? ";
+        String sql = "SELECT orderID FROM [OrderDetails] WHERE warrantyID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -1314,7 +1396,7 @@ public class OrderDAO {
     }
 
     public boolean applyVoucher(int voucherID, int userID) {
-        String sql = "UPDATE [Order] SET voucherID = ? WHERE userID = ? AND status = 'pending' ";
+        String sql = "UPDATE [OrderDetails] SET voucherID = ? WHERE userID = ? AND status = 'pending' ";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -1333,7 +1415,7 @@ public class OrderDAO {
     }
 
     public boolean removeVoucher(int userID) {
-        String sql = "UPDATE [Order] SET voucherID = null WHERE userID = ? AND status = 'pending' ";
+        String sql = "UPDATE [OrderDetails] SET voucherID = null WHERE userID = ? AND status = 'pending' ";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -1351,7 +1433,7 @@ public class OrderDAO {
     }
 
     public boolean addWarranty(int warrantyID, int orderID) {
-        String sql = "UPDATE [Order] SET warrantyID = ? WHERE orderID = ? ";
+        String sql = "UPDATE [OrderDetails] SET warrantyID = ? WHERE orderID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -1370,7 +1452,7 @@ public class OrderDAO {
     }
 
     public boolean acceptOrder(int orderID) {
-        String sql = "UPDATE [Order] SET status = 'verified' WHERE orderID = ? ";
+        String sql = "UPDATE [OrderDetails] SET status = 'verified' WHERE orderID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -1388,7 +1470,7 @@ public class OrderDAO {
     }
 
     public boolean receivedOrder(int orderID) {
-        String sql = "UPDATE [Order] SET status = 'received at store' WHERE orderID = ? ";
+        String sql = "UPDATE [OrderDetails] SET status = 'received at store' WHERE orderID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -1406,7 +1488,7 @@ public class OrderDAO {
     }
 
     public boolean deliveringOrder(int orderID) {
-        String sql = "UPDATE [Order] SET status = 'shipping' WHERE orderID = ? ";
+        String sql = "UPDATE [OrderDetails] SET status = 'shipping' WHERE orderID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -1424,7 +1506,7 @@ public class OrderDAO {
     }
 
     public boolean deliveredOrder(int orderID) {
-        String sql = "UPDATE [Order] SET status = 'delivered' WHERE orderID = ? ";
+        String sql = "UPDATE [OrderDetails] SET status = 'delivered' WHERE orderID = ? ";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -1442,7 +1524,7 @@ public class OrderDAO {
     }
 
     public boolean delete(int id) {
-        String sql = "DELETE [Order] WHERE orderID = ?";
+        String sql = "DELETE [OrderDetails] WHERE orderID = ?";
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -1471,7 +1553,7 @@ public class OrderDAO {
                     + "    DATEPART(YEAR, CONVERT(date, orderDate, 103)) AS Year,\n"
                     + "    purchaseMethod,\n"
                     + "    COUNT(orderID) AS OrderCount\n"
-                    + "FROM [Order]\n"
+                    + "FROM [OrderDetails]\n"
                     + "WHERE [status] IN ('purchased', 'verified', 'shipping', 'delivered', 'received at store')\n"
                     + "    AND purchaseMethod IN ('Door-to-door delivery service', 'Received at store')\n"
                     + "GROUP BY DATENAME(MONTH, CONVERT(date, orderDate, 103)), DATEPART(YEAR, CONVERT(date, orderDate, 103)), DATEPART(MONTH, CONVERT(date, orderDate, 103)), purchaseMethod\n"
@@ -1517,7 +1599,7 @@ public class OrderDAO {
                     + "    DATEPART(MONTH, CONVERT(date, orderDate, 103)) AS MonthNumber,\n"
                     + "    DATEPART(YEAR, CONVERT(date, orderDate, 103)) AS Year,\n"
                     + "    COUNT(orderID) AS OrderCount\n"
-                    + "FROM [Order]\n"
+                    + "FROM [OrderDetails]\n"
                     + "WHERE \n"
                     + "    [status] IN ('purchased', 'verified', 'shipping', 'delivered', 'received at store')\n"
                     + "    AND purchaseMethod IN ('Door-to-door delivery service', 'Received at store')\n"
@@ -1568,7 +1650,7 @@ public class OrderDAO {
                     + "    DATEPART(WEEK, CONVERT(date, orderDate, 103)) AS WeekNumber,\n"
                     + "    DATEPART(YEAR, CONVERT(date, orderDate, 103)) AS Year,\n"
                     + "    COUNT(orderID) AS OrderCount\n"
-                    + "FROM [Order]\n"
+                    + "FROM [OrderDetails]\n"
                     + "WHERE [status] IN ('purchased', 'verified', 'shipping', 'delivered', 'received at store')\n"
                     + "GROUP BY DATEPART(WEEK, CONVERT(date, orderDate, 103)), DATEPART(YEAR, CONVERT(date, orderDate, 103))\n"
                     + "ORDER BY Year, WeekNumber; ";
@@ -1617,7 +1699,7 @@ public class OrderDAO {
                     + "        userID,\n"
                     + "        CONVERT(date, orderDate, 103) AS OrderDate,\n"
                     + "        ringID\n"
-                    + "    FROM [Order]\n"
+                    + "    FROM [OrderDetails]\n"
                     + "    WHERE [status] IN ('delivered', 'received at store')\n"
                     + "        AND DATEDIFF(DAY, CONVERT(date, orderDate, 103), GETDATE()) <= 7\n"
                     + "\n"
@@ -1629,7 +1711,7 @@ public class OrderDAO {
                     + "        NULL AS OrderDate,\n"
                     + "        NULL AS ringID\n"
                     + "    WHERE NOT EXISTS (\n"
-                    + "        SELECT 1 FROM [Order]\n"
+                    + "        SELECT 1 FROM [OrderDetails]\n"
                     + "        WHERE [status] IN ('delivered', 'received at store')\n"
                     + "        AND DATEDIFF(DAY, CONVERT(date, orderDate, 103), GETDATE()) <= 7\n"
                     + "    )\n"
@@ -1677,7 +1759,7 @@ public class OrderDAO {
                     + "        DATEPART(YEAR, CONVERT(date, orderDate, 103)) AS Year,\n"
                     + "        DATEPART(WEEK, CONVERT(date, orderDate, 103)) AS WeekNumber,\n"
                     + "        SUM((r.price + rp.rpPrice + dp.price) * 1.02) AS TotalRevenue\n"
-                    + "    FROM [Order] o\n"
+                    + "    FROM [OrderDetails] o\n"
                     + "    JOIN [Ring] r ON o.ringID = r.ringID\n"
                     + "    JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID\n"
                     + "    JOIN [Diamond] d ON d.diamondID = r.diamondID\n"
@@ -1750,7 +1832,7 @@ public class OrderDAO {
                     + "        DATEPART(MONTH, CONVERT(date, orderDate, 103)) AS MonthNumber,\n"
                     + "        DATENAME(MONTH, DATEFROMPARTS(YEAR(GETDATE()), DATEPART(MONTH, CONVERT(date, orderDate, 103)), 1)) AS MonthName,\n"
                     + "        SUM((r.price + rp.rpPrice + dp.price) * 1.02) AS TotalRevenue\n"
-                    + "    FROM [Order] o\n"
+                    + "    FROM [OrderDetails] o\n"
                     + "    JOIN [Ring] r ON o.ringID = r.ringID\n"
                     + "    JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID\n"
                     + "    JOIN [Diamond] d ON d.diamondID = r.diamondID\n"
@@ -1826,7 +1908,7 @@ public class OrderDAO {
                     + "        DATEPART(YEAR, CONVERT(date, orderDate, 103)) AS Year,\n"
                     + "        DATEPART(WEEK, CONVERT(date, orderDate, 103)) AS WeekNumber,\n"
                     + "        SUM((r.price + rp.rpPrice + dp.price) * 1.02) AS TotalRevenue\n"
-                    + "    FROM [Order] o\n"
+                    + "    FROM [OrderDetails] o\n"
                     + "    JOIN [Ring] r ON o.ringID = r.ringID\n"
                     + "    JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID\n"
                     + "    JOIN [Diamond] d ON d.diamondID = r.diamondID\n"
@@ -1880,7 +1962,7 @@ public class OrderDAO {
                     + "        DATEPART(MONTH, CONVERT(date, orderDate, 103)) AS MonthNumber,\n"
                     + "        DATENAME(MONTH, DATEFROMPARTS(DATEPART(YEAR, CONVERT(date, orderDate, 103)), DATEPART(MONTH, CONVERT(date, orderDate, 103)), 1)) AS MonthName,\n"
                     + "        SUM((r.price + rp.rpPrice + dp.price) * 1.02) AS TotalRevenue\n"
-                    + "    FROM [Order] o\n"
+                    + "    FROM [OrderDetails] o\n"
                     + "    JOIN [Ring] r ON o.ringID = r.ringID\n"
                     + "    JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID\n"
                     + "    JOIN [Diamond] d ON d.diamondID = r.diamondID\n"
@@ -1936,7 +2018,7 @@ public class OrderDAO {
                     + "    DATEPART(YEAR, CONVERT(date, orderDate, 103)) AS Year,\n"
                     + "    COUNT(CASE WHEN PurchaseMethod = 'Received at store' THEN orderID ELSE NULL END) AS StoreOrderCount,\n"
                     + "    COUNT(CASE WHEN PurchaseMethod = 'Door-to-door delivery service' THEN orderID ELSE NULL END) AS DeliveryOrderCount\n"
-                    + "FROM [Order]\n"
+                    + "FROM [OrderDetails]\n"
                     + "WHERE [status] IN ('purchased', 'verified', 'shipping', 'delivered', 'received at store')\n"
                     + "GROUP BY \n"
                     + "    DATENAME(MONTH, CONVERT(date, orderDate, 103)), \n"

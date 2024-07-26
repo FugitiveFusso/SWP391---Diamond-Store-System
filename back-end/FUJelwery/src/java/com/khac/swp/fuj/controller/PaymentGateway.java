@@ -57,6 +57,14 @@ public class PaymentGateway extends HttpServlet {
             LocalDate localDate = LocalDate.now();
             String purchasedDate = localDate.format(formatter);
             Transactions transaction = new Transactions();
+            OrderDAO DAO = new OrderDAO();
+            String codeGenerator;
+            do {
+                codeGenerator = CodeGenerator.generateRandomCode(10);
+            } while (DAO.isCodeDuplicate(codeGenerator));
+            if (keyword == null) {
+                keyword = "";
+            }
             if (keyword == null) {
                 keyword = "";
             }
@@ -110,7 +118,7 @@ public class PaymentGateway extends HttpServlet {
                             transactionID++;
                         }
                         orderDAO.updateScore(userID);
-                        orderDAO.purchase(purchaseMethod, userID, purchasedDate);
+                        orderDAO.purchase(codeGenerator, purchaseMethod, userID, purchasedDate);
                         transaction.insert(transactionID, userID, totalPrice, purchasedDate);
 
                         request.getSession().setAttribute("success", "Purchase Successfully!!!");
