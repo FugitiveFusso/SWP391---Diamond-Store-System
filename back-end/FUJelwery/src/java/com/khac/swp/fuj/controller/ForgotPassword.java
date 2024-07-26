@@ -29,15 +29,13 @@ public class ForgotPassword extends HttpServlet {
 
         String email = request.getParameter("email");
         RequestDispatcher dispatcher = null;
-        int otpvalue = 0;
         HttpSession mySession = request.getSession();
 
-        if (email != null || !email.equals("")) {
+        if (email != null || !email.isEmpty()) {
             // sending otp
             Random rand = new Random();
-//            otpvalue = rand.nextInt(1255650);
-            otpvalue = rand.nextInt(100000);
-            String otp = String.format("%06d", otpvalue); 
+            int otpvalue = rand.nextInt(900000) + 100000; //ensures the OTP will be between 100000 and 999999
+            String otp = String.format("%06d", otpvalue);
 
             String to = email;// change accordingly
             // Get the session object
