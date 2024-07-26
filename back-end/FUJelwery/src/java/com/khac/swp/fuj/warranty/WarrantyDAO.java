@@ -130,7 +130,7 @@ public class WarrantyDAO {
                 + "FROM Warranty w \n"
                 + "LEFT JOIN [Ring] r ON w.warrantyID = r.warrantyID \n"
                 + "WHERE w.warrantyID = ?\n";
-        
+
         try {
 
             Connection conn = DBUtils.getConnection();
@@ -270,6 +270,7 @@ public class WarrantyDAO {
         return null;
     }
 
+    
     public WarrantyDTO loadStatistics() {
 
         String sql = "WITH ActiveWarrantyStats AS (\n"
@@ -296,18 +297,18 @@ public class WarrantyDAO {
                 + "            FROM Warranty\n"
                 + "            WHERE isDeleted = 'active'\n"
                 + "            AND NOT EXISTS (\n"
-                + "                SELECT 1 FROM [Order] WHERE [Order].warrantyID = Warranty.warrantyID\n"
+                + "                SELECT 1 FROM Ring WHERE Ring.warrantyID = Warranty.warrantyID\n"
                 + "            )\n"
                 + "            FOR XML PATH('')\n"
                 + "        ), 1, 2, '') AS UnusedActiveWarrantyIds\n"
                 + "    FROM (\n"
                 + "        SELECT \n"
                 + "            w.*, \n"
-                + "            COUNT(o.orderID) OVER (PARTITION BY w.warrantyID) AS usageCount \n"
+                + "            COUNT(r.ringID) OVER (PARTITION BY w.warrantyID) AS usageCount \n"
                 + "        FROM \n"
                 + "            Warranty w\n"
                 + "        LEFT JOIN \n"
-                + "            [Order] o ON w.warrantyID = o.warrantyID\n"
+                + "            Ring r ON w.warrantyID = r.warrantyID\n"
                 + "        WHERE \n"
                 + "            w.isDeleted = 'active'\n"
                 + "    ) AS ActiveWarrantyUsage\n"
@@ -317,20 +318,20 @@ public class WarrantyDAO {
                 + "    totalWarranties,\n"
                 + "    usedActiveWarranties,\n"
                 + "    unusedActiveWarranties,\n"
-                + "    percentageUsedActive  AS percentageUsedActive,\n"
+                + "    percentageUsedActive AS percentageUsedActive,\n"
                 + "    percentageUnusedActive AS percentageUnusedActive,\n"
                 + "    manufacturerWarranties,\n"
                 + "    extendedWarranties,\n"
                 + "    limitedWarranties,\n"
                 + "    lifetimeWarranties,\n"
                 + "    retailerWarranties,\n"
-                + "    earliestStartDate,\n"
-                + "    latestStartDate,\n"
+                + "    COALESCE(FORMAT(earliestStartDate, 'yyyy-MM-dd'), 'N/A') AS earliestStartDate,\n"
+                + "    COALESCE(FORMAT(latestStartDate, 'yyyy-MM-dd'), 'N/A') AS latestStartDate,\n"
                 + "    avgWarrantyDurationMonths,\n"
                 + "    activeWarranties,\n"
                 + "    deletedWarranties,\n"
-                + "    earliestEndDate,\n"
-                + "    latestEndDate,\n"
+                + "    COALESCE(FORMAT(earliestEndDate, 'yyyy-MM-dd'), 'N/A') AS earliestEndDate,\n"
+                + "    COALESCE(FORMAT(latestEndDate, 'yyyy-MM-dd'), 'N/A') AS latestEndDate,\n"
                 + "    FORMAT(manufacturerWarranties * 100.0 / totalWarranties, 'N2') + '%' AS percentageManufacturerWarranties,\n"
                 + "    FORMAT(extendedWarranties * 100.0 / totalWarranties, 'N2') + '%' AS percentageExtendedWarranties,\n"
                 + "    FORMAT(limitedWarranties * 100.0 / totalWarranties, 'N2') + '%' AS percentageLimitedWarranties,\n"

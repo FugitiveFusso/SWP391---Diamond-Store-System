@@ -33,7 +33,7 @@ SELECT categoryID, TotalCategories, ActiveCategories, DeletedCategories, Top3Cat
 -- All Collections have ring
 WITH CollectionSummary AS (
 SELECT c.collectionID, c.collectionName, COUNT(r.ringID) AS NumberOfRings, SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02) AS TotalCollectionPrice
-FROM [Collection] c LEFT JOIN [Ring] r ON c.collectionID = r.collectionID AND r.isDeleted = 'active'
+FROM [Collection] c LEFT JOIN [Ring] r ON c.collectionID = r.collectionID AND r.status <> 'deleted'
 LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID
 WHERE c.isDeleted = 'active' GROUP BY c.collectionID, c.collectionName)
 
@@ -49,7 +49,7 @@ WITH CollectionSummary AS (
         SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02) AS TotalCollectionPrice
     FROM 
         [Collection] c 
-        LEFT JOIN [Ring] r ON c.collectionID = r.collectionID AND r.isDeleted = 'active'
+        LEFT JOIN [Ring] r ON c.collectionID = r.collectionID AND r.status <> 'deleted'
         LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID 
         LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID 
         LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID
@@ -75,11 +75,11 @@ ORDER BY
 
 -- Vouchers
 WITH VoucherUsage AS (
-   SELECT v.voucherName, v.createdDate, COUNT(o.orderID) AS totalOrdersUsingVoucher
-   FROM [Voucher] v LEFT JOIN [Order] o ON v.voucherID = o.voucherID WHERE v.isDeleted = 'active'
-   GROUP BY v.voucherName, v.createdDate
+   SELECT v.voucherID, v.voucherName, v.createdDate, COUNT(o.orderID) AS totalOrdersUsingVoucher
+   FROM [Voucher] v LEFT JOIN [OrderDetails] o ON v.voucherID = o.voucherID WHERE v.isDeleted = 'active'
+   GROUP BY v.voucherName, v.createdDate, v.voucherID
 )
-SELECT vu.voucherName, vu.createdDate, vu.totalOrdersUsingVoucher, av.activeVouchersCount
+SELECT vu.voucherID,vu.voucherName, vu.createdDate, vu.totalOrdersUsingVoucher, av.activeVouchersCount
 FROM VoucherUsage vu CROSS JOIN (SELECT COUNT(*) AS activeVouchersCount FROM [Voucher] WHERE isDeleted = 'active') av
 ORDER BY vu.totalOrdersUsingVoucher DESC, createdDate ASC OFFSET 0 ROWS FETCH NEXT 3 ROWS ONLY;
 
@@ -233,18 +233,18 @@ WITH ActiveWarrantyStats AS (
             FROM Warranty
             WHERE isDeleted = 'active'
             AND NOT EXISTS (
-                SELECT 1 FROM [Order] WHERE [Order].warrantyID = Warranty.warrantyID
+                SELECT 1 FROM Ring WHERE Ring.warrantyID = Warranty.warrantyID
             )
             FOR XML PATH('')
         ), 1, 2, '') AS UnusedActiveWarrantyIds
     FROM (
         SELECT 
             w.*, 
-            COUNT(o.orderID) OVER (PARTITION BY w.warrantyID) AS usageCount 
+            COUNT(r.ringID) OVER (PARTITION BY w.warrantyID) AS usageCount 
         FROM 
             Warranty w
         LEFT JOIN 
-            [Order] o ON w.warrantyID = o.warrantyID
+            Ring r ON w.warrantyID = r.warrantyID
         WHERE 
             w.isDeleted = 'active'
     ) AS ActiveWarrantyUsage
@@ -261,13 +261,13 @@ SELECT
     limitedWarranties,
     lifetimeWarranties,
     retailerWarranties,
-    earliestStartDate,
-    latestStartDate,
+    COALESCE(FORMAT(earliestStartDate, 'yyyy-MM-dd'), 'N/A') AS earliestStartDate,
+    COALESCE(FORMAT(latestStartDate, 'yyyy-MM-dd'), 'N/A') AS latestStartDate,
     avgWarrantyDurationMonths,
     activeWarranties,
     deletedWarranties,
-    earliestEndDate,
-    latestEndDate,
+    COALESCE(FORMAT(earliestEndDate, 'yyyy-MM-dd'), 'N/A') AS earliestEndDate,
+    COALESCE(FORMAT(latestEndDate, 'yyyy-MM-dd'), 'N/A') AS latestEndDate,
     FORMAT(manufacturerWarranties * 100.0 / totalWarranties, 'N2') + '%' AS percentageManufacturerWarranties,
     FORMAT(extendedWarranties * 100.0 / totalWarranties, 'N2') + '%' AS percentageExtendedWarranties,
     FORMAT(limitedWarranties * 100.0 / totalWarranties, 'N2') + '%' AS percentageLimitedWarranties,

@@ -179,8 +179,7 @@
                                 <th><a href="?action=listofwarranty&colSort=warrantyMonth<%= request.getAttribute("keyword") != null && !request.getAttribute("keyword").toString().isEmpty() ? "&keyword=" + request.getAttribute("keyword") : ""%>">Month</a></th>
                                 <th>Description</th>
                                 <th><a href="?action=listofwarranty&colSort=warrantyType<%= request.getAttribute("keyword") != null && !request.getAttribute("keyword").toString().isEmpty() ? "&keyword=" + request.getAttribute("keyword") : ""%>">Warranty Type</a></th>
-                                <th><a href="?action=listofwarranty&colSort=startDate<%= request.getAttribute("keyword") != null && !request.getAttribute("keyword").toString().isEmpty() ? "&keyword=" + request.getAttribute("keyword") : ""%>">Start Date</a></th>
-                                <th><a href="?action=listofwarranty&colSort=endDate<%= request.getAttribute("keyword") != null && !request.getAttribute("keyword").toString().isEmpty() ? "&keyword=" + request.getAttribute("keyword") : ""%>">End Date</a></th>
+                               
                             </tr>
                         </thead>
                         <tbody>
@@ -196,8 +195,6 @@
                                 <td style="text-align: center; width: 5%;">${warranty.month}</td>
                                 <td style="width: 20%; text-align: center">${warranty.description}</td>
                                 <td style="text-align: center">${warranty.type}</td>
-                                <td style="text-align: center">${warranty.startdate}</td>
-                                <td style="text-align: center">${warranty.enddate}</td>
                             </tr>
                             <%
                                 }

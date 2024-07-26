@@ -125,22 +125,43 @@
                             <p class="card-text"><strong>Warranty Month: </strong> ${requestScope.warranty.month}</p>
                             <p class="card-text"><strong>Description:</strong> ${requestScope.warranty.description}</p>
                             <p class="card-text"><strong>Warranty Type: </strong> ${requestScope.warranty.type}</p>
-                            <p class="card-text"><strong>Start Date: </strong> ${requestScope.warranty.startdate}</p>
-                            <p class="card-text"><strong>End Date: </strong> ${requestScope.warranty.enddate}</p>
+                            <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+                            <p class="card-text"><strong>Start Date: </strong> 
+                            <c:choose>
+                                <c:when test="${requestScope.warranty.startdate == null}">
+                                    N/A
+                                </c:when>
+                                <c:otherwise>
+                                    ${requestScope.warranty.startdate}
+                                </c:otherwise>
+                            </c:choose>
+                            </p>
+
+                            <p class="card-text"><strong>End Date: </strong> 
+                            <c:choose>
+                                <c:when test="${requestScope.warranty.enddate == null}">
+                                    N/A
+                                </c:when>
+                                <c:otherwise>
+                                    ${requestScope.warranty.enddate}
+                                </c:otherwise>
+                            </c:choose>
+                            </p>
                             <p class="card-text"><strong>Terms and Conditions: </strong> ${requestScope.warranty.termsandconditions}</p>
                             <%-- Retrieve warranty object from request attribute --%>
                             <% WarrantyDTO warranty = (WarrantyDTO) request.getAttribute("warranty"); %>
 
                             <%-- Check if warranty is not null and has a valid orderID --%>
-                            <% if (warranty != null && warranty.getOrderID() != 0) { %>
+                            <% if (warranty != null && warranty.getRingID() != 0) { %>
                             <p class="card-text">
-                                <a href="DashboardController?action=orderdetails&id=${warranty.getOrderID()}">
-                                    <strong>Order ID:</strong> ${warranty.getOrderID()}
+                                <a href="DashboardController?action=ringdetails&id=${warranty.getRingID()}">
+                                    <strong>Ring ID:</strong> ${warranty.getRingID()}
                                 </a>
                             </p>
                             <% } else { %>
                             <p class="card-text">
-                                <strong>No valid Order ID found.</strong>
+                                <strong>No valid Ring ID found.</strong>
                             </p>
                             <% }%>
                             <p class="card-text">

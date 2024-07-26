@@ -1,3 +1,4 @@
+<%@page import="com.khac.swp.fuj.diamond.DiamondDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -67,6 +68,14 @@
                 border-radius: 10px;
                 cursor: pointer;
             }
+            a {
+                text-decoration: none;
+                color: black;
+            }
+            a:hover {
+                text-decoration: none;
+                color: black;
+            }
         </style>
     </head>
     <body>
@@ -118,28 +127,60 @@
                             <p class="card-text"><strong>Cut:</strong> ${requestScope.diamond.cut}</p>
                             <p class="card-text"><strong>Color:</strong> ${requestScope.diamond.color}</p>
                             <p class="card-text"><strong>Clarity:</strong> ${requestScope.diamond.clarity}</p>
-                            <p class="card-text"><strong>Certificate:</strong> ${requestScope.diamond.certificateID}</p>
+                            <% DiamondDTO diamond = (DiamondDTO) request.getAttribute("diamond"); %>
+
+                            <% if (diamond != null && diamond.getCertificateID() != 0) { %>
+                            <p class="card-text">
+                                <a href="DashboardController?action=certificatedetails&id=${diamond.getCertificateID()}">
+                                    <strong>Certificate ID:</strong> ${diamond.getCertificateID()}
+                                </a>
+                            </p>
+                            <% } else { %>
+                            <p class="card-text">
+                                <strong>No valid Certificate ID found.</strong>
+                            </p>
+                            <% }%>              
+
+                            <% if (diamond != null && diamond.getRingID() != 0) { %>
+                            <p class="card-text">
+                                <a href="DashboardController?action=ringdetails&id=${diamond.getRingID()}">
+                                    <strong>Ring ID:</strong> ${diamond.getRingID()}
+                                </a>
+                            </p>
+                            <% } else { %>
+                            <p class="card-text">
+                                <strong>No valid Ring ID found.</strong>
+                            </p>
+                            <% }%>                          
                             <p class="card-text"><strong>Price:</strong> ${requestScope.diamond.diamondPrice} VND</p>
-                            <div class="btn-group" role="group" aria-label="Voucher Actions">
-                                <form action="DashboardController" method="post" class="mr-2">
-                                    <input type="hidden" name="action" value="list">
-                                    <button type="submit" class="btn btn-primary">Dashboard</button>
-                                </form>
-                                <form action="DashboardController" method="post">
-                                    <input type="hidden" name="action" value="listofdiamonds">
-                                    <button type="submit" class="btn btn-secondary">List of Diamonds</button>
-                                </form>
+                            <p class="card-text">
+                                <strong>Status:</strong> 
+                                <span style="color: 
+                                      ${requestScope.diamond.status == 'active' ? 'green' : 
+                                        (requestScope.diamond.status == 'deleted' ? 'red' : 'red')};">
+                                          ${requestScope.diamond.status}
+                                      </span>
+                                </p>
+                                <div class="btn-group" role="group" aria-label="Voucher Actions">
+                                    <form action="DashboardController" method="post" class="mr-2">
+                                        <input type="hidden" name="action" value="list">
+                                        <button type="submit" class="btn btn-primary">Dashboard</button>
+                                    </form>
+                                    <form action="DashboardController" method="post">
+                                        <input type="hidden" name="action" value="listofdiamonds">
+                                        <button type="submit" class="btn btn-secondary">List of Diamonds</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <script src="js/pagination.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
-                                                        integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
-        crossorigin="anonymous"></script>
-        <script src="js/sidenav.js"></script>
+            <script src="js/pagination.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+                                                            integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+            crossorigin="anonymous"></script>
+            <script src="js/sidenav.js"></script>
 
-    </body>
-</html>
+        </body>
+    </html>

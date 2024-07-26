@@ -228,7 +228,7 @@ public class CollectionDAO {
                     + "        SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02) AS TotalCollectionPrice\n"
                     + "    FROM \n"
                     + "        [Collection] c \n"
-                    + "        LEFT JOIN [Ring] r ON c.collectionID = r.collectionID AND r.isDeleted = 'active'\n"
+                    + "        LEFT JOIN [Ring] r ON c.collectionID = r.collectionID AND r.status <> 'deleted'\n"
                     + "        LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID \n"
                     + "        LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID \n"
                     + "        LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID\n"

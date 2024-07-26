@@ -535,13 +535,13 @@
                 %>    
             </table>
             <br>
-            <h4>Top 5 Sales From Each Month (Latest to Earliest)</h4>
+<!--            <h4>Top 5 Sales From Each Month (Latest to Earliest)</h4>
             <table style="margin: 0 auto;">
                 <tr>
                     <th>Order Year</th>
                     <th>Order Month</th>
                     <th>Month Name</th>
-                    <!--                    <th>Ring ID</th>-->
+                                        <th>Ring ID</th>
                     <th>Ring Name</th>
                     <th>Ring Image</th>
                     <th>Number of Purchased Ring</th>
@@ -557,7 +557,7 @@
                     <td>${topsales.orderYear}</td>
                     <td>${topsales.orderMonth}</td>
                     <td>${topsales.monthName}</td>
-<!--                    <td>${topsales.ringID}</td>-->
+                    <td>${topsales.ringID}</td>
                     <td><a href="DashboardController?action=ringdetails&id=${topsales.ringID}">${topsales.ringName}</td>
                     <td><img src=${topsales.ringImage} width="100px" height="100px"></td>
                     <td>${topsales.purchaseCount}</td>
@@ -812,7 +812,7 @@
                 <%
                     }
                 %>    
-            </table>
+            </table>-->
 
         </div>
 

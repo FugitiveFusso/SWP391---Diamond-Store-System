@@ -151,8 +151,8 @@
                             <h6 class="card-subtitle mb-2 text-muted" >Ring ID: ${requestScope.ring.ringID}</h6>
                             <h4 class="card-title" style="font-weight: 700">${requestScope.ring.ringName}</h4>
                             <p class="card-text"><strong>Price:</strong> ${requestScope.ring.price} VND</p>
-                            <p class="card-text"><strong>Category:</strong> ${requestScope.ring.categoryID}</p>
-                            <p class="card-text"><strong>Collection:</strong> ${requestScope.ring.collectionID}</p>
+                            <p class="card-text"><strong>Category:</strong> ${requestScope.ring.categoryName}</p>
+                            <p class="card-text"><strong>Collection:</strong> ${requestScope.ring.collectionName}</p>
                             <p class="card-text"><strong>Ring Placement Name:</strong> ${requestScope.ring.ringPlacementName}</p>
                             <p class="card-text"><strong>Material:</strong> ${requestScope.ring.material}</p>
                             <p class="card-text"><strong>Ring Placement Color:</strong> ${requestScope.ring.ringColor}</p>

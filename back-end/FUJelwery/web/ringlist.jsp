@@ -181,8 +181,8 @@
                                 <td><img src=${ring.ringImage} width="300px" height="300px" style="border-radius: 20px;"></td>
                                 <td>${ring.diamondName}</td>
                                 <td>${ring.totalPrice} VND</td>
-                                <td>${ring.categoryID}</td>
-                                <td>${ring.collectionID}</td>
+                                <td>${ring.categoryName}</td>
+                                <td>${ring.collectionName}</td>
                                 <td>
                                     <form id="deleteForm" action="RingController" method="POST" class="input">
                                         <input name="action" value="delete" type="hidden">

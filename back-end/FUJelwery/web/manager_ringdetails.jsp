@@ -114,8 +114,8 @@
                             <h6 class="card-subtitle mb-2 text-muted" >Ring ID: ${requestScope.ring.ringID}</h6>
                             <h4 class="card-title" style="font-weight: 700">${requestScope.ring.ringName}</h4>
                             <p class="card-text"><strong>Price:</strong> ${requestScope.ring.price} VND</p>
-                            <p class="card-text"><strong>Category:</strong> ${requestScope.ring.categoryID}</p>
-                            <p class="card-text"><strong>Collection:</strong> ${requestScope.ring.collectionID}</p>
+                            <p class="card-text"><strong>Category:</strong> ${requestScope.ring.categoryName}</p>
+                            <p class="card-text"><strong>Collection:</strong> ${requestScope.ring.collectionName}</p>
                             <p class="card-text"><strong>Ring Placement Name:</strong> ${requestScope.ring.ringPlacementName}</p>
                             <p class="card-text"><strong>Material:</strong> ${requestScope.ring.material}</p>
                             <p class="card-text"><strong>Ring Placement Color:</strong> ${requestScope.ring.ringColor}</p>
@@ -126,8 +126,29 @@
                             <p class="card-text"><strong>Color:</strong> ${requestScope.ring.color}</p>
                             <p class="card-text"><strong>Clarity:</strong> ${requestScope.ring.clarity}</p>
                             <p class="card-text"><strong>Cut:</strong> ${requestScope.ring.cut}</p>
+                            <p class="card-text"><strong>WarrantyID:</strong> <a href="DashboardController?action=warrantydetails&id=${requestScope.ring.warrantyID}">${requestScope.ring.warrantyID}</a></p>
+
                             <p class="card-text"><strong>Diamond Price:</strong> ${requestScope.ring.diamondPrice} VND</p>
                             <p class="card-text"><strong>Total Price:</strong> ${requestScope.ring.totalPrice} VND</p>
+                            <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+                            <c:choose>
+                                <c:when test="${requestScope.ring.status == 'deleted'}">
+                                    <p class="card-text">
+                                        <strong>Status:</strong> <span style="color: red;">${requestScope.ring.status}</span>
+                                    </p>
+                                </c:when>
+                                <c:when test="${requestScope.ring.status == 'active'}">
+                                    <p class="card-text">
+                                        <strong>Status:</strong> <span style="color: green;">${requestScope.ring.status}</span>
+                                    </p>
+                                </c:when>
+                                <c:otherwise>
+                                    <p class="card-text">
+                                        <strong>Status:</strong> <span style="color: black;">${requestScope.ring.status}</span>
+                                    </p>
+                                </c:otherwise>
+                            </c:choose>
                             <div class="d-flex flex-column align-items-center" role="group" aria-label="Voucher Actions">
                                 <div class="button-top mb-2">
                                     <form action="DashboardController" method="post" style="display:inline-block; margin-right: 10px;">

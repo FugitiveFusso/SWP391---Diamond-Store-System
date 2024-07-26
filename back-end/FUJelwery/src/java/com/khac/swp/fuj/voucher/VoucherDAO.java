@@ -249,10 +249,10 @@ public class VoucherDAO {
             Connection con = DBUtils.getConnection();
             String sql = "WITH VoucherUsage AS (\n"
                     + "   SELECT v.voucherID, v.voucherName, v.createdDate, COUNT(o.orderID) AS totalOrdersUsingVoucher\n"
-                    + "   FROM [Voucher] v LEFT JOIN [Order] o ON v.voucherID = o.voucherID WHERE v.isDeleted = 'active'\n"
+                    + "   FROM [Voucher] v LEFT JOIN [OrderDetails] o ON v.voucherID = o.voucherID WHERE v.isDeleted = 'active'\n"
                     + "   GROUP BY v.voucherName, v.createdDate, v.voucherID\n"
                     + ")\n"
-                    + "SELECT vu.voucherID, vu.voucherName, vu.createdDate, vu.totalOrdersUsingVoucher, av.activeVouchersCount\n"
+                    + "SELECT vu.voucherID,vu.voucherName, vu.createdDate, vu.totalOrdersUsingVoucher, av.activeVouchersCount\n"
                     + "FROM VoucherUsage vu CROSS JOIN (SELECT COUNT(*) AS activeVouchersCount FROM [Voucher] WHERE isDeleted = 'active') av\n"
                     + "ORDER BY vu.totalOrdersUsingVoucher DESC, createdDate ASC OFFSET 0 ROWS FETCH NEXT 3 ROWS ONLY;";
 

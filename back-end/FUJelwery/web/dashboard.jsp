@@ -69,7 +69,7 @@
                 background-color: black;
                 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
             }   
-            
+
         </style>
     </head>
 
@@ -226,172 +226,172 @@
                         </div>
                     </div>
                 </div>
-
-                <!--Order for Home Delivery/Store Grouped Column Chart-->         
-                <div class="charts-row1">
-                    <div class="charts-card2 bar-chart">
-                        <h2 class="chart-title">Orders for Home Delivery/Store Pickup</h2>
-                        <div id="orders-column-chart"></div>
-                    </div>
-
-                    <!--Number of Orders per Week Line Graph--> 
-                    <%
-                        List<OrderDTO> listOrderC = (List<OrderDTO>) request.getAttribute("listc");
-                        StringBuilder categories = new StringBuilder("[");
-                        StringBuilder data = new StringBuilder("[");
-                        for (Iterator<OrderDTO> iterator = listOrderC.iterator(); iterator.hasNext();) {
-                            OrderDTO listc = iterator.next();
-                            categories.append("'").append(listc.getWeekNumber()).append(" - ").append(listc.getYear()).append("'");
-                            data.append(listc.getOrderCount());
-                            if (iterator.hasNext()) {
-                                categories.append(", ");
-                                data.append(", ");
-                            }
+                <!--
+                                Order for Home Delivery/Store Grouped Column Chart         
+                                <div class="charts-row1">
+                                    <div class="charts-card2 bar-chart">
+                                        <h2 class="chart-title">Orders for Home Delivery/Store Pickup</h2>
+                                        <div id="orders-column-chart"></div>
+                                    </div>
+                
+                                    Number of Orders per Week Line Graph 
+                <%
+                    List<OrderDTO> listOrderC = (List<OrderDTO>) request.getAttribute("listc");
+                    StringBuilder categories = new StringBuilder("[");
+                    StringBuilder data = new StringBuilder("[");
+                    for (Iterator<OrderDTO> iterator = listOrderC.iterator(); iterator.hasNext();) {
+                        OrderDTO listc = iterator.next();
+                        categories.append("'").append(listc.getWeekNumber()).append(" - ").append(listc.getYear()).append("'");
+                        data.append(listc.getOrderCount());
+                        if (iterator.hasNext()) {
+                            categories.append(", ");
+                            data.append(", ");
                         }
-                        categories.append("]");
-                        data.append("]");
-                    %>
-                    <div class="charts-card2 line-chart">
-                        <h2 class="chart-title">Number of Orders per Week</h2>
-                        <div id="orders-weekly-line-chart"></div>
-                    </div>
-
-                    <!--Number of Orders per Month Line Graph--> 
-                    <%
-                        List<OrderDTO> listOrderB = (List<OrderDTO>) request.getAttribute("listb");
-                        StringBuilder categories1 = new StringBuilder("[");
-                        StringBuilder data1 = new StringBuilder("[");
-                        for (Iterator<OrderDTO> iterator = listOrderB.iterator(); iterator.hasNext();) {
-                            OrderDTO listb = iterator.next();
-                            categories1.append("'").append(listb.getMonthName()).append(" - ").append(listb.getYear()).append("'");
-                            data1.append(listb.getOrderCount());
-                            if (iterator.hasNext()) {
-                                categories1.append(", ");
-                                data1.append(", ");
-                            }
-                        }
-                        categories1.append("]");
-                        data1.append("]");
-                    %>
-
-                    <div class="charts-card2 line-chart">
-                        <h2 class="chart-title">Number of Orders per Month</h2>
-                        <div id="orders-monthly-line-chart"></div>
-                    </div>
-                </div>
-                <!--Revenue for Week Column Chart-->     
-                <div class="charts-row">
-                    <%
-                        List<OrderDTO> listOrderG = (List<OrderDTO>) request.getAttribute("listg");
-                        StringBuilder categories2 = new StringBuilder("[");
-                        StringBuilder revenueData = new StringBuilder("[");
-                        for (Iterator<OrderDTO> iterator = listOrderG.iterator(); iterator.hasNext();) {
-                            OrderDTO listg = iterator.next();
-                            categories2.append("'").append(listg.getWeekNumber()).append(" - ").append(listg.getYear()).append("'");
-                            revenueData.append(listg.getTotalRevenue());
-                            if (iterator.hasNext()) {
-                                categories2.append(", ");
-                                revenueData.append(", ");
-                            }
-                        }
-                        categories2.append("]");
-                        revenueData.append("]");
-                    %>
-                    <div class="charts-card2 column-chart">
-                        <h2 class="chart-title">Revenue for Week</h2>
-                        <div id="revenue-week-column-chart"></div>
-                        <div class="percentage-change" id="weekly-revenue-change"></div>
-                    </div>
-
-                    <!--Revenue for Month Column Chart--> 
-                    <%
-                        List<OrderDTO> listOrderH = (List<OrderDTO>) request.getAttribute("listh");
-                        StringBuilder categories3 = new StringBuilder("[");
-                        StringBuilder revenueData1 = new StringBuilder("[");
-                        for (Iterator<OrderDTO> iterator = listOrderH.iterator(); iterator.hasNext();) {
-                            OrderDTO listh = iterator.next();
-                            categories3.append("'").append(listh.getMonthName()).append(" - ").append(listh.getYear()).append("'");
-                            revenueData1.append(listh.getTotalRevenue());
-                            if (iterator.hasNext()) {
-                                categories3.append(", ");
-                                revenueData1.append(", ");
-                            }
-                        }
-                        categories3.append("]");
-                        revenueData1.append("]");
-                    %>
-                    <div class="charts-card2 column-chart">
-                        <h2 class="chart-title">Revenue for Month</h2>
-                        <div id="revenue-month-column-chart"></div>
-                        <div class="percentage-change" id="monthly-revenue-change"></div>
-                    </div>
+                    }
+                    categories.append("]");
+                    data.append("]");
+                %>
+                <div class="charts-card2 line-chart">
+                    <h2 class="chart-title">Number of Orders per Week</h2>
+                    <div id="orders-weekly-line-chart"></div>
                 </div>
 
-                <!--Weekly Revenue Table--> 
-                <div class="charts-row">
-                    <div class="x_content" style="display: block;">
-                        <div class="table-container2">
-                            <%
-                                List<OrderDTO> listOrderE = (List<OrderDTO>) request.getAttribute("liste");
-                                for (OrderDTO liste : listOrderE) {
-                                    pageContext.setAttribute("liste", liste);
-                            %>
-                            <div class="x_title">
-                                <h2>Weekly Revenue for Week ${liste.currentWeek} - ${liste.year}</h2>
-                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                            </div>
-                            <div class="collapse-content">
-                                <table>
-                                    <tr>
-                                        <th>Current Week Revenue</th>
-                                        <th>Previous Week Revenue</th>
-                                        <th>Percentage Change</th>
-                                    </tr>
-                                    <tr>                                        
-                                        <td>${liste.currentWeekRevenue} VND</td>
-                                        <td>${liste.previousWeekRevenue} VND</td>
-                                        <td class="${liste.percentageChange > 0 ? 'positive' : 'negative'}">${liste.percentageChange}%</td>
-                                    </tr>
-                                    <%
-                                        }
-                                    %>  
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+                Number of Orders per Month Line Graph 
+                <%
+                    List<OrderDTO> listOrderB = (List<OrderDTO>) request.getAttribute("listb");
+                    StringBuilder categories1 = new StringBuilder("[");
+                    StringBuilder data1 = new StringBuilder("[");
+                    for (Iterator<OrderDTO> iterator = listOrderB.iterator(); iterator.hasNext();) {
+                        OrderDTO listb = iterator.next();
+                        categories1.append("'").append(listb.getMonthName()).append(" - ").append(listb.getYear()).append("'");
+                        data1.append(listb.getOrderCount());
+                        if (iterator.hasNext()) {
+                            categories1.append(", ");
+                            data1.append(", ");
+                        }
+                    }
+                    categories1.append("]");
+                    data1.append("]");
+                %>
 
-                    <!--Monthly Revenue Table--> 
-                    <div class="x_content" style="display: block;">
-                        <div class="table-container2">
-                            <%
-                                List<OrderDTO> listOrderF = (List<OrderDTO>) request.getAttribute("listf");
-                                for (OrderDTO listf : listOrderF) {
-                                    pageContext.setAttribute("listf", listf);
-                            %>
-                            <div class="x_title">
-                                <h2>Monthly Revenue in ${listf.monthName} - ${listf.year}</h2>
-                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                            </div>
-                            <div class="collapse-content">
-                                <table>
-                                    <tr>
-                                        <th>Current Month Revenue</th>
-                                        <th>Previous Month Revenue</th>
-                                        <th>Percentage Change</th>
-                                    </tr>
-                                    <tr>
-                                        <td>${listf.currentMonthRevenue} VND</td>
-                                        <td>${listf.previousMonthRevenue} VND</td>
-                                        <td class="${listf.percentageChange > 0 ? 'positive' : 'negative'}">${listf.percentageChange}%</td>
-                                    </tr>
-                                    <%
-                                        }
-                                    %> 
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+                <div class="charts-card2 line-chart">
+                    <h2 class="chart-title">Number of Orders per Month</h2>
+                    <div id="orders-monthly-line-chart"></div>
                 </div>
+            </div>
+            Revenue for Week Column Chart     
+            <div class="charts-row">
+                <%
+                    List<OrderDTO> listOrderG = (List<OrderDTO>) request.getAttribute("listg");
+                    StringBuilder categories2 = new StringBuilder("[");
+                    StringBuilder revenueData = new StringBuilder("[");
+                    for (Iterator<OrderDTO> iterator = listOrderG.iterator(); iterator.hasNext();) {
+                        OrderDTO listg = iterator.next();
+                        categories2.append("'").append(listg.getWeekNumber()).append(" - ").append(listg.getYear()).append("'");
+                        revenueData.append(listg.getTotalRevenue());
+                        if (iterator.hasNext()) {
+                            categories2.append(", ");
+                            revenueData.append(", ");
+                        }
+                    }
+                    categories2.append("]");
+                    revenueData.append("]");
+                %>
+                <div class="charts-card2 column-chart">
+                    <h2 class="chart-title">Revenue for Week</h2>
+                    <div id="revenue-week-column-chart"></div>
+                    <div class="percentage-change" id="weekly-revenue-change"></div>
+                </div>
+
+                Revenue for Month Column Chart 
+                <%
+                    List<OrderDTO> listOrderH = (List<OrderDTO>) request.getAttribute("listh");
+                    StringBuilder categories3 = new StringBuilder("[");
+                    StringBuilder revenueData1 = new StringBuilder("[");
+                    for (Iterator<OrderDTO> iterator = listOrderH.iterator(); iterator.hasNext();) {
+                        OrderDTO listh = iterator.next();
+                        categories3.append("'").append(listh.getMonthName()).append(" - ").append(listh.getYear()).append("'");
+                        revenueData1.append(listh.getTotalRevenue());
+                        if (iterator.hasNext()) {
+                            categories3.append(", ");
+                            revenueData1.append(", ");
+                        }
+                    }
+                    categories3.append("]");
+                    revenueData1.append("]");
+                %>
+                <div class="charts-card2 column-chart">
+                    <h2 class="chart-title">Revenue for Month</h2>
+                    <div id="revenue-month-column-chart"></div>
+                    <div class="percentage-change" id="monthly-revenue-change"></div>
+                </div>
+            </div>
+
+            Weekly Revenue Table 
+            <div class="charts-row">
+                <div class="x_content" style="display: block;">
+                    <div class="table-container2">
+                <%
+                    List<OrderDTO> listOrderE = (List<OrderDTO>) request.getAttribute("liste");
+                    for (OrderDTO liste : listOrderE) {
+                        pageContext.setAttribute("liste", liste);
+                %>
+                <div class="x_title">
+                    <h2>Weekly Revenue for Week ${liste.currentWeek} - ${liste.year}</h2>
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </div>
+                <div class="collapse-content">
+                    <table>
+                        <tr>
+                            <th>Current Week Revenue</th>
+                            <th>Previous Week Revenue</th>
+                            <th>Percentage Change</th>
+                        </tr>
+                        <tr>                                        
+                            <td>${liste.currentWeekRevenue} VND</td>
+                            <td>${liste.previousWeekRevenue} VND</td>
+                            <td class="${liste.percentageChange > 0 ? 'positive' : 'negative'}">${liste.percentageChange}%</td>
+                        </tr>
+                <%
+                    }
+                %>  
+            </table>
+        </div>
+    </div>
+</div>
+
+Monthly Revenue Table 
+<div class="x_content" style="display: block;">
+    <div class="table-container2">
+                <%
+                    List<OrderDTO> listOrderF = (List<OrderDTO>) request.getAttribute("listf");
+                    for (OrderDTO listf : listOrderF) {
+                        pageContext.setAttribute("listf", listf);
+                %>
+                <div class="x_title">
+                    <h2>Monthly Revenue in ${listf.monthName} - ${listf.year}</h2>
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </div>
+                <div class="collapse-content">
+                    <table>
+                        <tr>
+                            <th>Current Month Revenue</th>
+                            <th>Previous Month Revenue</th>
+                            <th>Percentage Change</th>
+                        </tr>
+                        <tr>
+                            <td>${listf.currentMonthRevenue} VND</td>
+                            <td>${listf.previousMonthRevenue} VND</td>
+                            <td class="${listf.percentageChange > 0 ? 'positive' : 'negative'}">${listf.percentageChange}%</td>
+                        </tr>
+                <%
+                    }
+                %> 
+            </table>
+        </div>
+    </div>
+</div>
+</div>-->
 
                 <!--Top 5 Countries with Most Diamonds Originated Map Chart--> 
                 <div class="merged-charts-container">
@@ -480,140 +480,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!--Top 5 Categories Table--> 
-                <div class="charts-row">
-                    <div class="x_content" style="display: block;">
-                        <div class="table-container">
-
-                            <div class="x_title">
-                                <h2>Top 5 Categories</h2>
-                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                            </div>
-                            <div class="collapse-content">
-                                <table>
-                                    <tr>
-                                        <th>Category Name</th>
-                                        <th>Number Of Rings</th>
-                                    </tr>
-                                    <tr>    
-                                        <%
-                                            List<CategoryDTO> cateList = (List<CategoryDTO>) request.getAttribute("calist");
-                                            int totalCategories = 0;
-                                            int activeCategories = 0;
-                                            int deletedCategories = 0;
-
-                                            if (cateList != null) {
-                                                for (CategoryDTO category : cateList) {
-                                                    totalCategories = category.getTotalCategories();
-                                                    activeCategories = category.getActiveCategories();
-                                                    deletedCategories = category.getDeletedCategories();
-                                                }
-                                            }
-                                            request.setAttribute("totalCategories", totalCategories);
-                                            request.setAttribute("activeCategories", activeCategories);
-                                            request.setAttribute("deletedCategories", deletedCategories);
-                                        %>
-                                        <% for (CategoryDTO cate : cateList) {
-                                                pageContext.setAttribute("cate", cate);
-                                        %>
-                                        <td><a href="DashboardController?action=categorydetails&id=${cate.categoryID}">${cate.top3CategoryNames}</td>
-                                        <td>${cate.top3CategoryRingCounts}</td>
-                                    </tr>
-                                    <%
-                                        }
-                                    %>  
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--Top 5 Collections Table--> 
-                    <div class="x_content" style="display: block;">
-                        <div class="table-container">                            
-                            <div class="x_title">
-                                <h2>Top 5 Collections</h2>
-                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                            </div>
-                            <div class="collapse-content">
-                                <table>
-                                    <tr>
-                                        <th>Collection Name</th>
-                                        <th>Number Of Rings</th>
-                                        <th>Total Collection Price</th>
-                                    </tr>
-                                    <tr>
-                                        <%
-                                            List<CollectionDTO> collList = (List<CollectionDTO>) request.getAttribute("colist");
-                                            int numberOfCollections = 0;
-
-                                            if (collList != null) {
-                                                for (CollectionDTO collection : collList) {
-                                                    numberOfCollections = collection.getNumberOfCollections();
-                                                }
-                                            }
-                                            request.setAttribute("numberOfCollections", numberOfCollections);
-
-                                        %>
-                                        <% for (CollectionDTO coll : collList) {
-                                                pageContext.setAttribute("coll", coll);
-                                        %>
-                                        <td><a href="DashboardController?action=collectiondetails&id=${coll.collectionID}">${coll.collectionName}</td>
-                                        <td>${coll.numberOfRings}</td>
-                                        <td>${coll.totalCollectionPrice} VND</td>
-                                    </tr>
-                                    <%
-                                        }
-                                    %> 
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--All Warranty Types Table--> 
-                    <div class="x_content" style="display: block;">
-                        <div class="table-container">
-                            <div class="x_title">
-                                <h2>All Warranty Types</h2>
-                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                            </div>
-                            <div class="collapse-content">
-                                <table>
-                                    <tr>
-                                        <th>Type</th>
-                                        <th>Usage</th>
-                                    </tr>
-                                    <tr>
-                                        <td class="flex-row"> Limited
-                                            Warranties</td>
-                                        <td>${requestScope.warranty.limitedWarranties}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="flex-row">
-                                            Manufacturer Warranties</td>
-                                        <td>${requestScope.warranty.manufacturerWarranties}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="flex-row"> Extended
-                                            Warranties</td>
-                                        <td>${requestScope.warranty.extendedWarranties}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="flex-row"> Lifetime
-                                            Warranties</td>
-                                        <td>${requestScope.warranty.lifetimeWarranties}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="flex-row"> Retailer
-                                            Warranties</td>
-                                        <td>${requestScope.warranty.retailerWarranties}</td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <!--Top 5 Rings with Highest Price Table--> 
                 <div class="charts-row">
                     <div class="x_content" style="display: block;">
@@ -721,107 +587,6 @@
                         </div>
                     </div>
 
-                </div>
-                <!--Top 5 Ring Placements Table--> 
-                <div class="charts-row">
-                    <div class="x_content" style="display: block;">
-                        <div class="table-container">
-                            <div class="x_title">
-                                <h2>Top 5 Ring Placements</h2>
-                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                            </div>
-                            <div class="collapse-content">
-                                <table>
-                                    <tr>
-                                        <th>Material</th>
-                                        <th>Ring Placement By Material</th>
-                                    </tr>
-                                    <tr>
-                                        <%
-                                            List<RingPlacementPriceDTO> rppListA = (List<RingPlacementPriceDTO>) request.getAttribute("rpplista");
-                                            for (RingPlacementPriceDTO rpplista : rppListA) {
-                                                pageContext.setAttribute("rpplista", rpplista);
-                                        %>
-                                        <td class="flex-row">${rpplista.material}</td>
-                                        <td>${rpplista.ringPlacementsByMaterial}</td>
-                                    </tr>
-                                    <%
-                                        }
-                                    %>                                      
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--Top 5 Ring Placement By Color Table--> 
-                    <div class="x_content" style="display: block;">
-                        <div class="table-container">                            
-                            <div class="x_title">
-                                <h2>Top 5 Ring Placement By Color</h2>
-                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                            </div>
-                            <div class="collapse-content">
-                                <table>
-                                    <tr>
-                                        <th>Color</th>
-                                        <th>Ring Placement By Color</th>
-                                    </tr>
-                                    <tr>
-                                        <%
-                                            List<RingPlacementPriceDTO> rppListB = (List<RingPlacementPriceDTO>) request.getAttribute("rpplistb");
-                                            for (RingPlacementPriceDTO rpplistb : rppListB) {
-                                                pageContext.setAttribute("rpplistb", rpplistb);
-                                        %>
-                                        <td>${rpplistb.color}</td>
-                                        <td>${rpplistb.ringPlacementsByColor}</td>
-                                    </tr>
-                                    <%
-                                        }
-                                    %> 
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--Top 3 Most Used Vouchers Table--> 
-                    <div class="x_content" style="display: block;">
-                        <div class="table-container">
-                            <div class="x_title">
-                                <h2>Top 3 Most Used Vouchers</h2>
-                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                            </div>
-                            <div class="collapse-content">
-                                <table>
-                                    <tr>
-                                        <th>Coupon</th>
-                                        <th>Usage</th>
-                                    </tr>
-                                    <tr>
-                                        <%
-                                            List<VoucherDTO> vouList = (List<VoucherDTO>) request.getAttribute("voulist");
-                                            int numberOfVouchers = 0;
-
-                                            if (vouList != null) {
-                                                for (VoucherDTO voucher : vouList) {
-                                                    numberOfVouchers = voucher.getTotalActiveVouchers();
-                                                }
-                                            }
-                                            request.setAttribute("numberOfVouchers", numberOfVouchers);
-
-                                        %>
-                                        <% for (VoucherDTO vou : vouList) {
-                                                pageContext.setAttribute("vou", vou);
-                                        %>
-                                        <td class="flex-row"><a href="DashboardController?action=voucherdetails&id=${vou.id}">${vou.name}</td>
-                                        <td>${vou.totalOrdersUsingVoucher}</td>
-                                    </tr>
-                                    <%
-                                        }
-                                    %>                                     
-                                </table>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <!--KHAC Diamond Ring Shop< Staffs Cards--> 
@@ -998,7 +763,7 @@
     <%
         for (DiamondDTO diamond : diaList) {
             // Outputting data in the format needed for JavaScript
-%>{country: '<%= diamond.getCountry()%>', diamondCount: <%= diamond.getDiamondCount()%>},
+    %>{country: '<%= diamond.getCountry()%>', diamondCount: <%= diamond.getDiamondCount()%>},
     <% }%>
     ];
 
@@ -1012,73 +777,73 @@
 
     // ApexCharts configuration
     var optionsBar = {
-    series: [{
-        name: 'Diamonds',
-        data: data,
-    }],
-    chart: {
-        type: 'bar',
-        height: 200,
-        width: '90%' // Adjusted width to span the container
-    },
-    plotOptions: {
-        bar: {
-            horizontal: true,
-            colors: {
-                ranges: [{
-                    from: 0,
-                    to: 1000,
-                    color: '#007bff'
-                }]
-            }
-        }
-    },
-    dataLabels: {
-        enabled: false,
-    },
-    yaxis: {
-        labels: {
-            style: {
-                colors: '#000', // Color for y-axis labels
-                fontSize: '11px'
+        series: [{
+                name: 'Diamonds',
+                data: data,
+            }],
+        chart: {
+            type: 'bar',
+            height: 200,
+            width: '90%' // Adjusted width to span the container
+        },
+        plotOptions: {
+            bar: {
+                horizontal: true,
+                colors: {
+                    ranges: [{
+                            from: 0,
+                            to: 1000,
+                            color: '#007bff'
+                        }]
+                }
             }
         },
-        axisBorder: {
-            show: true,
-            color: '#000' // Color for y-axis grid lines
+        dataLabels: {
+            enabled: false,
         },
-        axisTicks: {
-            show: true,
-            color: '#000' // Color for y-axis ticks (if needed)
-        }
-    },
-    xaxis: {
-        categories: categories,
-        labels: {
-            style: {
-                colors: '#000', // Color for x-axis labels
-                fontSize: '14px'
+        yaxis: {
+            labels: {
+                style: {
+                    colors: '#000', // Color for y-axis labels
+                    fontSize: '11px'
+                }
+            },
+            axisBorder: {
+                show: true,
+                color: '#000' // Color for y-axis grid lines
+            },
+            axisTicks: {
+                show: true,
+                color: '#000' // Color for y-axis ticks (if needed)
             }
         },
-        axisBorder: {
-            show: true,
-            color: '#000' // Color for x-axis grid lines
+        xaxis: {
+            categories: categories,
+            labels: {
+                style: {
+                    colors: '#000', // Color for x-axis labels
+                    fontSize: '14px'
+                }
+            },
+            axisBorder: {
+                show: true,
+                color: '#000' // Color for x-axis grid lines
+            },
+            axisTicks: {
+                show: true,
+                color: '#000' // Color for x-axis ticks (if needed)
+            }
         },
-        axisTicks: {
-            show: true,
-            color: '#000' // Color for x-axis ticks (if needed)
+        grid: {
+            borderColor: '#000', // Black color for grid lines
+            strokeDashArray: 0, // Optional: remove the dashed grid lines
+            position: 'back' // Optional: place grid lines behind the bars
         }
-    },
-    grid: {
-        borderColor: '#000', // Black color for grid lines
-        strokeDashArray: 0, // Optional: remove the dashed grid lines
-        position: 'back' // Optional: place grid lines behind the bars
-    }
-};
+    };
 
 // Initialize and render the chart
-var chartBar = new ApexCharts(document.querySelector("#bar-chart"), optionsBar);
-chartBar.render();
+    var chartBar = new ApexCharts(document.querySelector("#bar-chart"), optionsBar);
+    chartBar.render();
 
 </script>
 
@@ -1093,84 +858,84 @@ chartBar.render();
     };
 
     const ordersWeeklyLineChartOptions = {
-    chart: {
-        type: 'line',
-        height: 150,
-    },
-    series: [{
-        name: 'Orders',
-        data: weeklyOrdersData.series[0].data
-    }],
-    xaxis: {
-        categories: weeklyOrdersData.categories,
-        labels: {
-            style: {
-                colors: '#000' // Black color for x-axis labels
+        chart: {
+            type: 'line',
+            height: 150,
+        },
+        series: [{
+                name: 'Orders',
+                data: weeklyOrdersData.series[0].data
+            }],
+        xaxis: {
+            categories: weeklyOrdersData.categories,
+            labels: {
+                style: {
+                    colors: '#000' // Black color for x-axis labels
+                }
+            },
+            axisBorder: {
+                show: true,
+                color: '#000' // Black color for x-axis grid lines
+            },
+            axisTicks: {
+                show: true,
+                color: '#000' // Black color for x-axis ticks
             }
         },
-        axisBorder: {
-            show: true,
-            color: '#000' // Black color for x-axis grid lines
-        },
-        axisTicks: {
-            show: true,
-            color: '#000' // Black color for x-axis ticks
-        }
-    },
-    yaxis: {
-        title: {
-            text: 'Orders',
-            style: {
-                color: '#000' // Black color for y-axis title
+        yaxis: {
+            title: {
+                text: 'Orders',
+                style: {
+                    color: '#000' // Black color for y-axis title
+                }
+            },
+            labels: {
+                style: {
+                    colors: '#000' // Black color for y-axis labels
+                }
+            },
+            axisBorder: {
+                show: true,
+                color: '#000' // Black color for y-axis grid lines
+            },
+            axisTicks: {
+                show: true,
+                color: '#000' // Black color for y-axis ticks
             }
         },
-        labels: {
-            style: {
-                colors: '#000' // Black color for y-axis labels
+        fill: {
+            opacity: 1
+        },
+        tooltip: {
+            shared: true
+        },
+        markers: {
+            size: 6
+        },
+        legend: {
+            show: true,
+            labels: {
+                colors: '#000' // Black color for legend labels
             }
         },
-        axisBorder: {
-            show: true,
-            color: '#000' // Black color for y-axis grid lines
+        grid: {
+            borderColor: '#000', // Black color for grid lines
+            strokeDashArray: 0, // Optional: remove the dashed grid lines
+            position: 'back' // Optional: place grid lines behind the lines
         },
-        axisTicks: {
-            show: true,
-            color: '#000' // Black color for y-axis ticks
-        }
-    },
-    fill: {
-        opacity: 1
-    },
-    tooltip: {
-        shared: true
-    },
-    markers: {
-        size: 6
-    },
-    legend: {
-        show: true,
-        labels: {
-            colors: '#000' // Black color for legend labels
-        }
-    },
-    grid: {
-        borderColor: '#000', // Black color for grid lines
-        strokeDashArray: 0, // Optional: remove the dashed grid lines
-        position: 'back' // Optional: place grid lines behind the lines
-    },
-    responsive: [{
-        breakpoint: 480,
-        options: {
-            legend: {
-                position: 'bottom'
-            }
-        }
-    }]
-};
+        responsive: [{
+                breakpoint: 480,
+                options: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }]
+    };
 
 // Initialize the chart with options
-var chart = new ApexCharts(document.querySelector("#orders-weekly-line-chart"), ordersWeeklyLineChartOptions);
-chart.render();
+    var chart = new ApexCharts(document.querySelector("#orders-weekly-line-chart"), ordersWeeklyLineChartOptions);
+    chart.render();
 
 </script>
 
@@ -1185,84 +950,84 @@ chart.render();
     };
 
     const ordersMonthlyLineChartOptions = {
-    chart: {
-        type: 'line',
-        height: 150,
-    },
-    series: [{
-        name: 'Orders',
-        data: monthlyOrdersData.series[0].data
-    }],
-    xaxis: {
-        categories: monthlyOrdersData.categories,
-        labels: {
-            style: {
-                colors: '#000' // Black color for x-axis labels
+        chart: {
+            type: 'line',
+            height: 150,
+        },
+        series: [{
+                name: 'Orders',
+                data: monthlyOrdersData.series[0].data
+            }],
+        xaxis: {
+            categories: monthlyOrdersData.categories,
+            labels: {
+                style: {
+                    colors: '#000' // Black color for x-axis labels
+                }
+            },
+            axisBorder: {
+                show: true,
+                color: '#000' // Black color for x-axis grid lines
+            },
+            axisTicks: {
+                show: true,
+                color: '#000' // Black color for x-axis ticks
             }
         },
-        axisBorder: {
-            show: true,
-            color: '#000' // Black color for x-axis grid lines
-        },
-        axisTicks: {
-            show: true,
-            color: '#000' // Black color for x-axis ticks
-        }
-    },
-    yaxis: {
-        title: {
-            text: 'Orders',
-            style: {
-                color: '#000' // Black color for y-axis title
+        yaxis: {
+            title: {
+                text: 'Orders',
+                style: {
+                    color: '#000' // Black color for y-axis title
+                }
+            },
+            labels: {
+                style: {
+                    colors: '#000' // Black color for y-axis labels
+                }
+            },
+            axisBorder: {
+                show: true,
+                color: '#000' // Black color for y-axis grid lines
+            },
+            axisTicks: {
+                show: true,
+                color: '#000' // Black color for y-axis ticks
             }
         },
-        labels: {
-            style: {
-                colors: '#000' // Black color for y-axis labels
+        fill: {
+            opacity: 1
+        },
+        tooltip: {
+            shared: true
+        },
+        markers: {
+            size: 6
+        },
+        legend: {
+            show: true,
+            labels: {
+                colors: '#000' // Black color for legend labels
             }
         },
-        axisBorder: {
-            show: true,
-            color: '#000' // Black color for y-axis grid lines
+        grid: {
+            borderColor: '#000', // Black color for grid lines
+            strokeDashArray: 0, // Optional: remove the dashed grid lines
+            position: 'back' // Optional: place grid lines behind the lines
         },
-        axisTicks: {
-            show: true,
-            color: '#000' // Black color for y-axis ticks
-        }
-    },
-    fill: {
-        opacity: 1
-    },
-    tooltip: {
-        shared: true
-    },
-    markers: {
-        size: 6
-    },
-    legend: {
-        show: true,
-        labels: {
-            colors: '#000' // Black color for legend labels
-        }
-    },
-    grid: {
-        borderColor: '#000', // Black color for grid lines
-        strokeDashArray: 0, // Optional: remove the dashed grid lines
-        position: 'back' // Optional: place grid lines behind the lines
-    },
-    responsive: [{
-        breakpoint: 480,
-        options: {
-            legend: {
-                position: 'bottom'
-            }
-        }
-    }]
-};
+        responsive: [{
+                breakpoint: 480,
+                options: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }]
+    };
 
 // Initialize the chart with options
-var chart = new ApexCharts(document.querySelector("#orders-monthly-line-chart"), ordersMonthlyLineChartOptions);
-chart.render();
+    var chart = new ApexCharts(document.querySelector("#orders-monthly-line-chart"), ordersMonthlyLineChartOptions);
+    chart.render();
 
 
 </script>
@@ -1270,92 +1035,92 @@ chart.render();
 <!--Revenue for Week Column Chart-->
 <script>
     const revenueWeekColumnChartOptions = {
-    chart: {
-        type: 'bar',
-        width: 550,
-        height: 150,
-    },
-    plotOptions: {
-        bar: {
-            horizontal: false,
-            columnWidth: '55%',
-            endingShape: 'rounded'
+        chart: {
+            type: 'bar',
+            width: 550,
+            height: 150,
         },
-    },
-    dataLabels: {
-        enabled: false
-    },
-    stroke: {
-        show: true,
-        width: 2,
-        colors: ['transparent']
-    },
-    series: [{
-            name: 'Revenue',
-            data: <%= revenueData.toString()%>
-        }],
-    xaxis: {
-        categories: <%= categories2.toString()%>,
-        labels: {
-            style: {
-                colors: '#000' // Black color for x-axis labels
-            }
-        },
-        axisBorder: {
-            show: true,
-            color: '#000' // Black color for x-axis grid lines
-        },
-        axisTicks: {
-            show: true,
-            color: '#000' // Black color for x-axis ticks
-        }
-    },
-    yaxis: {
-        title: {
-            text: 'Revenue (VND)',
-            style: {
-                color: '#000' // Black color for y-axis title
-            }
-        },
-        labels: {
-            formatter: function (value) {
-                return new Intl.NumberFormat('en-US', {style: 'currency', currency: 'VND'}).format(value);
+        plotOptions: {
+            bar: {
+                horizontal: false,
+                columnWidth: '55%',
+                endingShape: 'rounded'
             },
-            style: {
-                colors: '#000' // Black color for y-axis labels
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            show: true,
+            width: 2,
+            colors: ['transparent']
+        },
+        series: [{
+                name: 'Revenue',
+                data: <%= revenueData.toString()%>
+            }],
+        xaxis: {
+            categories: <%= categories2.toString()%>,
+            labels: {
+                style: {
+                    colors: '#000' // Black color for x-axis labels
+                }
+            },
+            axisBorder: {
+                show: true,
+                color: '#000' // Black color for x-axis grid lines
+            },
+            axisTicks: {
+                show: true,
+                color: '#000' // Black color for x-axis ticks
             }
         },
-        axisBorder: {
-            show: true,
-            color: '#000' // Black color for y-axis grid lines
+        yaxis: {
+            title: {
+                text: 'Revenue (VND)',
+                style: {
+                    color: '#000' // Black color for y-axis title
+                }
+            },
+            labels: {
+                formatter: function (value) {
+                    return new Intl.NumberFormat('en-US', {style: 'currency', currency: 'VND'}).format(value);
+                },
+                style: {
+                    colors: '#000' // Black color for y-axis labels
+                }
+            },
+            axisBorder: {
+                show: true,
+                color: '#000' // Black color for y-axis grid lines
+            },
+            axisTicks: {
+                show: true,
+                color: '#000' // Black color for y-axis ticks
+            }
         },
-        axisTicks: {
-            show: true,
-            color: '#000' // Black color for y-axis ticks
-        }
-    },
-    fill: {
-        opacity: 1
-    },
-    tooltip: {
-        y: {
-            formatter: function (val) {
-                return new Intl.NumberFormat('en-US', {style: 'currency', currency: 'VND'}).format(val);
+        fill: {
+            opacity: 1
+        },
+        tooltip: {
+            y: {
+                formatter: function (val) {
+                    return new Intl.NumberFormat('en-US', {style: 'currency', currency: 'VND'}).format(val);
+                }
+            }
+        },
+        grid: {
+            borderColor: '#000', // Black color for grid lines
+        },
+        legend: {
+            labels: {
+                colors: ['#000'] // Black color for legend items
             }
         }
-    },
-    grid: {
-        borderColor: '#000', // Black color for grid lines
-    },
-    legend: {
-        labels: {
-            colors: ['#000'] // Black color for legend items
-        }
-    }
-};
+    };
 
-var chart = new ApexCharts(document.querySelector("#revenue-week-column-chart"), revenueWeekColumnChartOptions);
-chart.render();
+    var chart = new ApexCharts(document.querySelector("#revenue-week-column-chart"), revenueWeekColumnChartOptions);
+    chart.render();
 
 
 </script>
@@ -1363,94 +1128,94 @@ chart.render();
 <!--Revenue for Month Column Chart-->
 <script>
     const revenueMonthColumnChartOptions = {
-    chart: {
-        type: 'bar',
-        width: 550,
-        height: 150,
-    },
-    plotOptions: {
-        bar: {
-            horizontal: false,
-            columnWidth: '55%',
-            endingShape: 'rounded'
+        chart: {
+            type: 'bar',
+            width: 550,
+            height: 150,
         },
-    },
-    dataLabels: {
-        enabled: false
-    },
-    stroke: {
-        show: true,
-        width: 2,
-        colors: ['transparent']
-    },
-    series: [{
-        name: 'Revenue',
-        data: <%= revenueData1.toString() %>
-    }],
-    xaxis: {
-        categories: <%= categories3.toString() %>,
-        labels: {
-            style: {
-                colors: '#000' // Black color for x-axis labels
-            }
-        },
-        axisBorder: {
-            show: true,
-            color: '#000' // Black color for x-axis grid lines
-        },
-        axisTicks: {
-            show: true,
-            color: '#000' // Black color for x-axis ticks
-        }
-    },
-    yaxis: {
-        title: {
-            text: 'Revenue (VND)',
-            style: {
-                color: '#000' // Black color for y-axis title
-            }
-        },
-        labels: {
-            formatter: function (value) {
-                return new Intl.NumberFormat('en-US', {style: 'currency', currency: 'VND'}).format(value);
+        plotOptions: {
+            bar: {
+                horizontal: false,
+                columnWidth: '55%',
+                endingShape: 'rounded'
             },
-            style: {
-                colors: '#000' // Black color for y-axis labels
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            show: true,
+            width: 2,
+            colors: ['transparent']
+        },
+        series: [{
+                name: 'Revenue',
+                data: <%= revenueData1.toString()%>
+            }],
+        xaxis: {
+            categories: <%= categories3.toString()%>,
+            labels: {
+                style: {
+                    colors: '#000' // Black color for x-axis labels
+                }
+            },
+            axisBorder: {
+                show: true,
+                color: '#000' // Black color for x-axis grid lines
+            },
+            axisTicks: {
+                show: true,
+                color: '#000' // Black color for x-axis ticks
             }
         },
-        axisBorder: {
-            show: true,
-            color: '#000' // Black color for y-axis grid lines
-        },
-        axisTicks: {
-            show: true,
-            color: '#000' // Black color for y-axis ticks
-        }
-    },
-    fill: {
-        opacity: 1
-    },
-    tooltip: {
-        y: {
-            formatter: function (val) {
-                return new Intl.NumberFormat('en-US', {style: 'currency', currency: 'VND'}).format(val);
+        yaxis: {
+            title: {
+                text: 'Revenue (VND)',
+                style: {
+                    color: '#000' // Black color for y-axis title
+                }
+            },
+            labels: {
+                formatter: function (value) {
+                    return new Intl.NumberFormat('en-US', {style: 'currency', currency: 'VND'}).format(value);
+                },
+                style: {
+                    colors: '#000' // Black color for y-axis labels
+                }
+            },
+            axisBorder: {
+                show: true,
+                color: '#000' // Black color for y-axis grid lines
+            },
+            axisTicks: {
+                show: true,
+                color: '#000' // Black color for y-axis ticks
             }
+        },
+        fill: {
+            opacity: 1
+        },
+        tooltip: {
+            y: {
+                formatter: function (val) {
+                    return new Intl.NumberFormat('en-US', {style: 'currency', currency: 'VND'}).format(val);
+                }
+            }
+        },
+        legend: {
+            labels: {
+                colors: ['#000'] // Black color for legend items
+            }
+        },
+        grid: {
+            borderColor: '#000', // Black color for grid lines
+            strokeDashArray: 0, // Optional: remove the dashed grid lines
+            position: 'back' // Optional: place grid lines behind the bars
         }
-    },
-    legend: {
-        labels: {
-            colors: ['#000'] // Black color for legend items
-        }
-    },
-    grid: {
-        borderColor: '#000', // Black color for grid lines
-        strokeDashArray: 0, // Optional: remove the dashed grid lines
-        position: 'back' // Optional: place grid lines behind the bars
-    }
-};
+    };
 
-var chart = new ApexCharts(document.querySelector("#revenue-month-column-chart"), revenueMonthColumnChartOptions);
-chart.render();
+    var chart = new ApexCharts(document.querySelector("#revenue-month-column-chart"), revenueMonthColumnChartOptions);
+    chart.render();
 
 
 </script>
@@ -1458,116 +1223,116 @@ chart.render();
 <!--Number of orders for each method in month-->
 <script>
     const areaChartOptions = {
-    series: [
-        {
-            name: 'Store Orders',
-            data: <%= storeOrderData.toString() %>
-        },
-        {
-            name: 'Delivery Orders',
-            data: <%= deliveryOrderData.toString() %>
-        }
-    ],
-    chart: {
-        type: 'line', // Change chart type to 'line'
-        background: 'transparent',
-        height: 250, // Reduced height
-        width: 900,
-        stacked: false,
-        toolbar: {
-            show: false,
-        },
-    },
-    colors: ['#008ffb', '#00e396'],
-    labels: <%= categories4.toString() %>,
-    dataLabels: {
-        enabled: false,
-    },
-    grid: {
-        borderColor: '#55596e',
-        yaxis: {
-            lines: {
-                show: true,
+        series: [
+            {
+                name: 'Store Orders',
+                data: <%= storeOrderData.toString()%>
+            },
+            {
+                name: 'Delivery Orders',
+                data: <%= deliveryOrderData.toString()%>
+            }
+        ],
+        chart: {
+            type: 'line', // Change chart type to 'line'
+            background: 'transparent',
+            height: 250, // Reduced height
+            width: 900,
+            stacked: false,
+            toolbar: {
+                show: false,
             },
         },
-        xaxis: {
-            lines: {
-                show: true,
+        colors: ['#008ffb', '#00e396'],
+        labels: <%= categories4.toString()%>,
+        dataLabels: {
+            enabled: false,
+        },
+        grid: {
+            borderColor: '#55596e',
+            yaxis: {
+                lines: {
+                    show: true,
+                },
+            },
+            xaxis: {
+                lines: {
+                    show: true,
+                },
             },
         },
-    },
-    legend: {
-        labels: {
-            colors: '#000',
-        },
-        show: true,
-        position: 'top',
-    },
-    markers: {
-        size: 6,
-        strokeColors: '#1b2635',
-        strokeWidth: 3,
-    },
-    stroke: {
-        curve: 'smooth',
-    },
-    xaxis: {
-        axisBorder: {
-            color: '#000',
-            show: true,
-        },
-        axisTicks: {
-            color: '#000',
-            show: true,
-        },
-        labels: {
-            offsetY: 5,
-            style: {
+        legend: {
+            labels: {
                 colors: '#000',
             },
+            show: true,
+            position: 'top',
         },
-    },
-    yaxis: [
-        {
-            title: {
-                text: 'Store Orders',
-                style: {
-                    color: '#000',
-                },
+        markers: {
+            size: 6,
+            strokeColors: '#1b2635',
+            strokeWidth: 3,
+        },
+        stroke: {
+            curve: 'smooth',
+        },
+        xaxis: {
+            axisBorder: {
+                color: '#000',
+                show: true,
+            },
+            axisTicks: {
+                color: '#000',
+                show: true,
             },
             labels: {
+                offsetY: 5,
                 style: {
-                    colors: ['#000'],
+                    colors: '#000',
                 },
             },
         },
-        {
-            opposite: true,
-            title: {
-                text: 'Delivery Orders',
-                style: {
-                    color: '#000',
+        yaxis: [
+            {
+                title: {
+                    text: 'Store Orders',
+                    style: {
+                        color: '#000',
+                    },
+                },
+                labels: {
+                    style: {
+                        colors: ['#000'],
+                    },
                 },
             },
-            labels: {
-                style: {
-                    colors: ['#000'],
+            {
+                opposite: true,
+                title: {
+                    text: 'Delivery Orders',
+                    style: {
+                        color: '#000',
+                    },
+                },
+                labels: {
+                    style: {
+                        colors: ['#000'],
+                    },
                 },
             },
+        ],
+        tooltip: {
+            shared: true,
+            intersect: false,
+            theme: 'dark',
         },
-    ],
-    tooltip: {
-        shared: true,
-        intersect: false,
-        theme: 'dark',
-    },
-};
+    };
 
-const areaChart = new ApexCharts(
-    document.querySelector('#area-chart'),
-    areaChartOptions
-);
-areaChart.render();
+    const areaChart = new ApexCharts(
+            document.querySelector('#area-chart'),
+            areaChartOptions
+            );
+    areaChart.render();
 
 </script>
 
