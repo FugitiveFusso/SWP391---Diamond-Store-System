@@ -5,6 +5,7 @@ import java.math.BigInteger;
 
 public class OrderDTO {
 
+    private String orderCode;
     private int orderID;
     private int userID;
     private String userName;
@@ -393,9 +394,19 @@ public class OrderDTO {
         this.deliveryOrderCount = deliveryOrderCount;
     }
 
+    public String getOrderCode() {
+        return orderCode;
+    }
+
+    public void setOrderCode(String orderCode) {
+        this.orderCode = orderCode;
+    }
+
     @Override
     public String toString() {
-        return "OrderDTO{" + "orderID=" + orderID + ", userID=" + userID + ", userName=" + userName + ", address=" + address + ", orderDate=" + orderDate + ", ringID=" + ringID + ", ringName=" + ringName + ", ringImage=" + ringImage + ", voucherID=" + voucherID + ", voucherName=" + voucherName + ", warrantyID=" + warrantyID + ", warrantyName=" + warrantyName + ", warrantyImage=" + warrantyImage + ", warrantyMonth=" + warrantyMonth + ", warrantyDescription=" + warrantyDescription + ", warrantyType=" + warrantyType + ", warrantyStartDate=" + warrantyStartDate + ", warrantyEndDate=" + warrantyEndDate + ", warrantyTerms=" + warrantyTerms + ", certificateID=" + certificateID + ", certificateName=" + certificateName + ", certificateImage=" + certificateImage + ", ringSize=" + ringSize + ", totalPrice=" + totalPrice + ", purchaseMethod=" + purchaseMethod + ", status=" + status + ", delivered=" + delivered + ", numberOfThings=" + numberOfThings + ", image=" + image + ", monthName=" + monthName + ", year=" + year + ", orderCount=" + orderCount + ", monthNumber=" + monthNumber + ", weekNumber=" + weekNumber + ", currentWeek=" + currentWeek + ", currentWeekRevenue=" + currentWeekRevenue + ", previousWeekRevenue=" + previousWeekRevenue + ", percentageChange=" + percentageChange + ", currentMonthRevenue=" + currentMonthRevenue + ", previousMonthRevenue=" + previousMonthRevenue + ", totalRevenue=" + totalRevenue + ", storeOrderCount=" + storeOrderCount + ", deliveryOrderCount=" + deliveryOrderCount + '}';
+        return "OrderDTO{" + "orderCode=" + orderCode + ", orderID=" + orderID + ", userID=" + userID + ", userName=" + userName + ", address=" + address + ", orderDate=" + orderDate + ", ringID=" + ringID + ", ringName=" + ringName + ", ringImage=" + ringImage + ", voucherID=" + voucherID + ", voucherName=" + voucherName + ", warrantyID=" + warrantyID + ", warrantyName=" + warrantyName + ", warrantyImage=" + warrantyImage + ", warrantyMonth=" + warrantyMonth + ", warrantyDescription=" + warrantyDescription + ", warrantyType=" + warrantyType + ", warrantyStartDate=" + warrantyStartDate + ", warrantyEndDate=" + warrantyEndDate + ", warrantyTerms=" + warrantyTerms + ", certificateID=" + certificateID + ", certificateName=" + certificateName + ", certificateImage=" + certificateImage + ", ringSize=" + ringSize + ", totalPrice=" + totalPrice + ", purchaseMethod=" + purchaseMethod + ", status=" + status + ", delivered=" + delivered + ", numberOfThings=" + numberOfThings + ", image=" + image + ", monthName=" + monthName + ", year=" + year + ", orderCount=" + orderCount + ", monthNumber=" + monthNumber + ", weekNumber=" + weekNumber + ", currentWeek=" + currentWeek + ", currentWeekRevenue=" + currentWeekRevenue + ", previousWeekRevenue=" + previousWeekRevenue + ", percentageChange=" + percentageChange + ", currentMonthRevenue=" + currentMonthRevenue + ", previousMonthRevenue=" + previousMonthRevenue + ", totalRevenue=" + totalRevenue + ", storeOrderCount=" + storeOrderCount + ", deliveryOrderCount=" + deliveryOrderCount + '}';
     }
+
+    
 
 }

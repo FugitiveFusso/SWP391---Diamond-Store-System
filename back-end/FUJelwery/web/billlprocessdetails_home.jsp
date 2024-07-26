@@ -101,7 +101,7 @@
                     <div class="row justify-content-between">
                         <div class="col">                            
                             <p class="text-muted">Placed On: <span class="font-weight-bold text-dark">${requestScope.bill.orderDate}</span> </p>
-                            <p class="text-muted">Order ID: <span class="font-weight-bold text-dark">${bill.orderID}</span> </p>
+                            <p class="text-muted">Order Code: <span class="font-weight-bold text-dark">${bill.orderCode}</span> </p>
                         </div>
                         <div class="flex-col my-auto">
                             <h6 class="ml-auto mr-3">

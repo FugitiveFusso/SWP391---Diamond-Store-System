@@ -62,6 +62,10 @@ public class OrderController extends HttpServlet {
             do {
                 codeGenerator = CodeGenerator.generateCodeST(8);
             } while (DAO.isCodeDuplicate(codeGenerator));
+            String codeGenerator1;
+            do {
+                codeGenerator1 = CodeGenerator.generateCodeDO(8);
+            } while (DAO.isCodeDuplicate(codeGenerator1));
             if (keyword == null) {
                 keyword = "";
             }
@@ -172,7 +176,7 @@ public class OrderController extends HttpServlet {
                                 if (orderDAO.checkRingActiveInCart(userID) == null) {
                                     orderDAO.updateScore(userID);
                                     orderDAO.outOfStockRing(userID);
-                                    orderDAO.purchase(codeGenerator, purchaseMethod, userID, purchasedDate);
+                                    orderDAO.purchase(codeGenerator1, purchaseMethod, userID, purchasedDate);
                                     request.getSession().setAttribute("success", "Purchase Successfully!!!");
                                 } else {
                                     request.getSession().setAttribute("failed", "One of the ring has been purchased!!!");
@@ -219,7 +223,7 @@ public class OrderController extends HttpServlet {
                             UserDAO user = new UserDAO();
                             if (orderDAO.checkRingActiveInCart(id) == null) {
                                 UserDTO userDTO = user.load_Normal(id);
-                                transaction.updateOrder(codeGenerator, paymentMethod, purchasedDate, id);
+                                transaction.updateOrder(codeGenerator1, paymentMethod, purchasedDate, id);
                                 request.setAttribute("customer", userDTO);
 
                                 String totalPrice = orderDAO.totalAllProduct(id);

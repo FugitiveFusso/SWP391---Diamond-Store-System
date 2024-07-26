@@ -86,7 +86,7 @@ public class PaymentGateway extends HttpServlet {
                 if (id != null) {
                     UserDAO user = new UserDAO();
                     UserDTO userDTO = user.load_Normal(id);
-                    transaction.updateOrder(paymentMethod, purchasedDate, id);
+//                    transaction.updateOrder(paymentMethod, purchasedDate, id);
                     request.setAttribute("customer", userDTO);
 
                     String totalPrice = orderDAO.totalAllProduct(id);
