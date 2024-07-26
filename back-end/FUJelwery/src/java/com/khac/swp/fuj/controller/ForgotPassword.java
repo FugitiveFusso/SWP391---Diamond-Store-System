@@ -36,7 +36,7 @@ public class ForgotPassword extends HttpServlet {
             // sending otp
             Random rand = new Random();
 //            otpvalue = rand.nextInt(1255650);
-            otpvalue = rand.nextInt(10000000);
+            otpvalue = rand.nextInt(100000);
             String otp = String.format("%06d", otpvalue); 
 
             String to = email;// change accordingly
