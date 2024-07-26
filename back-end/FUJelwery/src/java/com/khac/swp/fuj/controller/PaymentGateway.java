@@ -60,7 +60,7 @@ public class PaymentGateway extends HttpServlet {
             OrderDAO DAO = new OrderDAO();
             String codeGenerator;
             do {
-                codeGenerator = CodeGenerator.generateRandomCode(10);
+                codeGenerator = CodeGenerator.generateCodeST(10);
             } while (DAO.isCodeDuplicate(codeGenerator));
             if (keyword == null) {
                 keyword = "";

@@ -5,7 +5,6 @@
  */
 package com.khac.swp.fuj.controller;
 
-import static com.khac.swp.fuj.controller.CodeGenerator.generateRandomCode;
 import com.khac.swp.fuj.order.OrderDAO;
 import com.khac.swp.fuj.order.OrderDTO;
 import com.khac.swp.fuj.order.Transactions;
@@ -61,7 +60,7 @@ public class OrderController extends HttpServlet {
             OrderDAO DAO = new OrderDAO();
             String codeGenerator;
             do {
-                codeGenerator = CodeGenerator.generateRandomCode(10);
+                codeGenerator = CodeGenerator.generateCodeST(8);
             } while (DAO.isCodeDuplicate(codeGenerator));
             if (keyword == null) {
                 keyword = "";
