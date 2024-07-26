@@ -99,6 +99,19 @@
                         }
                         request.setAttribute("totalNumberOfThings", totalNumberOfThings);
                     %>
+
+                    <% String failed = (String) request.getAttribute("failed");%>
+                    <div class="container">
+                        <% if (failed != null) {%>
+                        <div class="popup open-popup" id="popup">
+                            <img src="images/error.png" style="width: 100">
+                            <h2>Oops!</h2>
+                            <p><%= failed%></p>
+                            <button type="button" onclick="closePopup()">I understood</button>
+                        </div>
+                        <% }%> 
+                    </div>
+                    
                     <div class="col-md-9">
                         <div class="ibox">
                             <div class="ibox-title">

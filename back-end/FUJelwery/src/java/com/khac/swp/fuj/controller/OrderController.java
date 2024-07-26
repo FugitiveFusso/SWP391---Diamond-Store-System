@@ -146,10 +146,14 @@ public class OrderController extends HttpServlet {
 
                 if (userID != null) {
                     try {
-                        orderDAO.updateScore(userID);
-                        orderDAO.outOfStockRing(userID);
-                        orderDAO.purchase(codeGenerator, purchaseMethod, userID, purchasedDate);
-                        request.getSession().setAttribute("success", "Purchase Successfully!!!");
+                        if(orderDAO.checkRingActiveInCart(userID) == null){
+                           orderDAO.updateScore(userID);
+                           orderDAO.outOfStockRing(userID);
+                           orderDAO.purchase(codeGenerator, purchaseMethod, userID, purchasedDate);
+                           request.getSession().setAttribute("success", "Purchase Successfully!!!");
+                        } else{
+                            request.getSession().setAttribute("failed", "One of the ring has been purchased!!!");
+                        }                       
                     } catch (Exception e) {
                         log("Error deleting order: " + e.getMessage());
                         request.getSession().setAttribute("errorMessage", "Error deleting order.");
@@ -170,12 +174,16 @@ public class OrderController extends HttpServlet {
                 String paymentMethod = request.getParameter("purchaseMethod");
                 if (id != null) {
                     UserDAO user = new UserDAO();
+                    if(orderDAO.checkRingActiveInCart(id) == null){
                     UserDTO userDTO = user.load_Normal(id);
                     transaction.updateOrder(paymentMethod, purchasedDate, id);
                     request.setAttribute("customer", userDTO);
 
                     String totalPrice = orderDAO.totalAllProduct(id);
                     request.setAttribute("totalPrice", totalPrice);
+                    } else{
+                        request.getSession().setAttribute("failed", "One of the ring has been purchased!!!");
+                    }
                 }
 
                 request.getRequestDispatcher("/paymentgateway.jsp").forward(request, response);
@@ -203,6 +211,7 @@ public class OrderController extends HttpServlet {
                         orderDAO.updateScore(userID);
                         transaction.purchaseOrder(userID);
                         transaction.insert(transactionID, userID, totalPrice, purchasedDate);
+                        orderDAO.outOfStockRing(userID);
 
                         request.getSession().setAttribute("success", "Purchase Successfully!!!");
                     } catch (Exception e) {

@@ -1228,6 +1228,30 @@ public class OrderDAO {
         return null;
     }
     
+    public Integer checkRingActiveInCart(int userID) {
+
+        String sql = "select ringID from [Ring] r JOIN [OrderDetails] o ON r.ringID = o.ringID where userID = ? and r.status = 'outOfStock' ";
+
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, userID);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                int ringID = rs.getInt("ringID");
+                return ringID;
+                
+            }
+        } catch (SQLException ex) {
+            System.out.println("Query User error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    
     public Integer isInCart(int ringID, int userID) {
         try (
             Connection conn = DBUtils.getConnection();
