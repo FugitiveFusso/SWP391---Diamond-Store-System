@@ -21,7 +21,7 @@
                     <h1>Reset Password</h1>
 
                     <div class="input-box">
-                        <input type="text" name="password" id="myInput" required>
+                        <input type="text" name="password" id="myInput"  minlength="8" required>
                         <span class="placeholder">New Password</span>
                         <span class="eye" onclick="myFunction()">
                             <i id="hide1" class="fa-solid fa-eye"></i>
@@ -29,7 +29,7 @@
                         </span>  
                     </div>
                     <div class="input-box">
-                        <input input type="password" name="confPassword" required>
+                        <input input type="password" name="confPassword"  minlength="8" required>
                         <span class="placeholder">Re-enter Password</span>
 
                     </div>
