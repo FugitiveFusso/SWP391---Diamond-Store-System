@@ -143,26 +143,52 @@ public class OrderController extends HttpServlet {
 
                 String purchaseMethod = request.getParameter("purchaseMethod");
 
-                if (userID != null) {
-                    try {
-                        if(orderDAO.checkRingActiveInCart(userID) == null){
-                           orderDAO.updateScore(userID);
-                           orderDAO.outOfStockRing(userID);
-                           orderDAO.purchase(codeGenerator, purchaseMethod, userID, purchasedDate);
-                           request.getSession().setAttribute("success", "Purchase Successfully!!!");
-                        } else{
-                            request.getSession().setAttribute("failed", "One of the ring has been purchased!!!");
-                        }                       
-                    } catch (Exception e) {
-                        log("Error deleting order: " + e.getMessage());
-                        request.getSession().setAttribute("errorMessage", "Error deleting order.");
+                switch (purchaseMethod) {
+                    case "Received at store": {
+                        if (userID != null) {
+                            try {
+                                if (orderDAO.checkRingActiveInCart(userID) == null) {
+                                    orderDAO.updateScore(userID);
+                                    orderDAO.outOfStockRing(userID);
+                                    orderDAO.purchase(codeGenerator, purchaseMethod, userID, purchasedDate);
+                                    request.getSession().setAttribute("success", "Purchase Successfully!!!");
+                                } else {
+                                    request.getSession().setAttribute("failed", "One of the ring has been purchased!!!");
+                                }
+                            } catch (Exception e) {
+                                log("Error deleting order: " + e.getMessage());
+                                request.getSession().setAttribute("errorMessage", "Error deleting order.");
+                            }
+                        } else {
+                            request.getSession().setAttribute("errorMessage", "Invalid order ID.");
+                        }
+
+                        response.sendRedirect(request.getContextPath() + "/user_homepage.jsp");
+                        break;
                     }
-                } else {
-                    request.getSession().setAttribute("errorMessage", "Invalid order ID.");
+                    case "Door-to-door delivery service": {
+                        if (userID != null) {
+                            try {
+                                if (orderDAO.checkRingActiveInCart(userID) == null) {
+                                    orderDAO.updateScore(userID);
+                                    orderDAO.outOfStockRing(userID);
+                                    orderDAO.purchase(codeGenerator, purchaseMethod, userID, purchasedDate);
+                                    request.getSession().setAttribute("success", "Purchase Successfully!!!");
+                                } else {
+                                    request.getSession().setAttribute("failed", "One of the ring has been purchased!!!");
+                                }
+                            } catch (Exception e) {
+                                log("Error deleting order: " + e.getMessage());
+                                request.getSession().setAttribute("errorMessage", "Error deleting order.");
+                            }
+                        } else {
+                            request.getSession().setAttribute("errorMessage", "Invalid order ID.");
+                        }
+
+                        response.sendRedirect(request.getContextPath() + "/user_homepage.jsp");
+                        break;
+                    }
                 }
-
-                response.sendRedirect(request.getContextPath() + "/user_homepage.jsp");
-
             } else if (action.equals("purchasewithcredit")) {//lists
                 Integer id = null;
                 try {
@@ -171,20 +197,40 @@ public class OrderController extends HttpServlet {
                     log("Parameter id has wrong format.");
                 }
                 String paymentMethod = request.getParameter("purchaseMethod");
-                if (id != null) {
-                    UserDAO user = new UserDAO();
-                    if(orderDAO.checkRingActiveInCart(id) == null){
-                    UserDTO userDTO = user.load_Normal(id);
-                    transaction.updateOrder(paymentMethod, purchasedDate, id);
-                    request.setAttribute("customer", userDTO);
+                switch (paymentMethod) {
+                    case "Received at store": {
+                        if (id != null) {
+                            UserDAO user = new UserDAO();
+                            if (orderDAO.checkRingActiveInCart(id) == null) {
+                                UserDTO userDTO = user.load_Normal(id);
+                                transaction.updateOrder(codeGenerator, paymentMethod, purchasedDate, id);
+                                request.setAttribute("customer", userDTO);
 
-                    String totalPrice = orderDAO.totalAllProduct(id);
-                    request.setAttribute("totalPrice", totalPrice);
-                    } else{
-                        request.getSession().setAttribute("failed", "One of the ring has been purchased!!!");
+                                String totalPrice = orderDAO.totalAllProduct(id);
+                                request.setAttribute("totalPrice", totalPrice);
+                            } else {
+                                request.getSession().setAttribute("failed", "One of the ring has been purchased!!!");
+                            }
+                        }
+                        break;
+                    }
+                    case "Door-to-door delivery service":{
+                        if (id != null) {
+                            UserDAO user = new UserDAO();
+                            if (orderDAO.checkRingActiveInCart(id) == null) {
+                                UserDTO userDTO = user.load_Normal(id);
+                                transaction.updateOrder(codeGenerator, paymentMethod, purchasedDate, id);
+                                request.setAttribute("customer", userDTO);
+
+                                String totalPrice = orderDAO.totalAllProduct(id);
+                                request.setAttribute("totalPrice", totalPrice);
+                            } else {
+                                request.getSession().setAttribute("failed", "One of the ring has been purchased!!!");
+                            }
+                        }
+                        break;
                     }
                 }
-
                 request.getRequestDispatcher("/paymentgateway.jsp").forward(request, response);
             } else if (action.equals("pay")) {
                 Connection conn = null;

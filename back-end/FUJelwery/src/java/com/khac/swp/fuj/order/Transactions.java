@@ -19,16 +19,17 @@ import java.util.List;
  */
 public class Transactions {
 
-    public boolean updateOrder(String paymentMethod, String purchasedDate, int userID) {
-        String sql = "UPDATE [Order] SET orderDate = ?, purchaseMethod = ? WHERE userID = ? AND status = 'pending' ";
+    public boolean updateOrder(String orderCode, String paymentMethod, String purchasedDate, int userID) {
+        String sql = "UPDATE [OrderDetails] SET orderCode = ?, orderDate = ?, purchaseMethod = ? WHERE userID = ? AND status = 'pending' ";
         try {
 
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
 
-            ps.setString(1, purchasedDate);
-            ps.setString(2, paymentMethod);
-            ps.setInt(3, userID);
+            ps.setString(1, orderCode);
+            ps.setString(2, purchasedDate);
+            ps.setString(3, paymentMethod);
+            ps.setInt(4, userID);
 
             ps.executeUpdate();
             conn.close();
@@ -40,7 +41,7 @@ public class Transactions {
     }
 
     public boolean purchaseOrder(int userID) {
-        String sql = "UPDATE [Order] SET status = 'purchased' WHERE userID = ? AND status = 'pending' ";
+        String sql = "UPDATE [OrderDetails] SET status = 'purchased' WHERE userID = ? AND status = 'pending' ";
         try {
 
             Connection conn = DBUtils.getConnection();
