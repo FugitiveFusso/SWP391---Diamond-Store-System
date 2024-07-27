@@ -208,11 +208,10 @@ public class OrderController extends HttpServlet {
                             if (orderDAO.checkRingActiveInCart(id) == null) {
                                 UserDTO userDTO = user.load_Normal(id);
                                 transaction.updateOrder(codeGenerator, paymentMethod, purchasedDate, id);
-                                request.getRequestDispatcher("/paymentgateway.jsp").forward(request, response);
                                 request.setAttribute("customer", userDTO);
-
                                 String totalPrice = orderDAO.totalAllProduct(id);
                                 request.setAttribute("totalPrice", totalPrice);
+                                request.getRequestDispatcher("/paymentgateway.jsp").forward(request, response);
                             } else {
                                 request.getSession().setAttribute("failed", "One of the ring has been purchased!!!");
                                 response.sendRedirect(request.getContextPath() + "/user_homepage.jsp");
@@ -220,17 +219,16 @@ public class OrderController extends HttpServlet {
                         }
                         break;
                     }
-                    case "Door-to-door delivery service":{
+                    case "Door-to-door delivery service": {
                         if (id != null) {
                             UserDAO user = new UserDAO();
                             if (orderDAO.checkRingActiveInCart(id) == null) {
                                 UserDTO userDTO = user.load_Normal(id);
                                 transaction.updateOrder(codeGenerator1, paymentMethod, purchasedDate, id);
-                                request.getRequestDispatcher("/paymentgateway.jsp").forward(request, response);
                                 request.setAttribute("customer", userDTO);
-
                                 String totalPrice = orderDAO.totalAllProduct(id);
                                 request.setAttribute("totalPrice", totalPrice);
+                                request.getRequestDispatcher("/paymentgateway.jsp").forward(request, response);
                             } else {
                                 request.getSession().setAttribute("failed", "One of the ring has been purchased!!!");
                                 response.sendRedirect(request.getContextPath() + "/user_homepage.jsp");
