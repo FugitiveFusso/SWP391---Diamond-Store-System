@@ -172,12 +172,17 @@
                             <c:choose>
                                 <c:when test="${requestScope.ring.status == 'deleted'}">
                                     <p class="card-text">
-                                        <strong>Status:</strong> <span style="color: red;">${requestScope.ring.status}</span>
+                                        <strong>Status:</strong> <span style="color: red;">Deleted</span>
                                     </p>
                                 </c:when>
                                 <c:when test="${requestScope.ring.status == 'active'}">
                                     <p class="card-text">
-                                        <strong>Status:</strong> <span style="color: green;">${requestScope.ring.status}</span>
+                                        <strong>Status:</strong> <span style="color: green;">In Stock</span>
+                                    </p>
+                                </c:when>
+                                <c:when test="${requestScope.ring.status == 'outOfStock'}">
+                                    <p class="card-text">
+                                        <strong>Status:</strong> <span style="color: red;">Out of Stock</span>
                                     </p>
                                 </c:when>
                                 <c:otherwise>

@@ -183,36 +183,47 @@
                             </p>
                             <% }%>                          
                             <p class="card-text"><strong>Price:</strong> ${requestScope.diamond.diamondPrice} VND</p>
-                            <p class="card-text">
-                                <strong>Status:</strong> 
-                                <span style="color: 
-                                      ${requestScope.diamond.status == 'active' ? 'green' : 
-                                        (requestScope.diamond.status == 'deleted' ? 'red' : 'red')};">
-                                          ${requestScope.diamond.status}
-                                      </span>
-                                </p>
+                            <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-                                <div class="btn-group" role="group" aria-label="Voucher Actions">
-                                    <form action="DiamondController" method="post" class="mr-2">
-                                        <input type="hidden" name="action" value="list">
-                                        <button type="submit" class="btn btn-primary">Return</button>
-                                    </form>
-                                    <form action="DiamondController" method="post">
-                                        <input type="hidden" name="id" value="${requestScope.diamond.diamondID}">
-                                        <input type="hidden" name="action" value="edit">
-                                        <button type="submit" class="btn btn-secondary">Edit</button>
-                                    </form>
-                                </div>
+                            <c:choose>
+                                <c:when test="${requestScope.diamond.status == 'deleted'}">
+                                    <p class="card-text">
+                                        <strong>Status:</strong> <span style="color: red;">Deleted</span>
+                                    </p>
+                                </c:when>
+                                <c:when test="${requestScope.diamond.status == 'active'}">
+                                    <p class="card-text">
+                                        <strong>Status:</strong> <span style="color: green;">In Stock</span>
+                                    </p>
+                                </c:when>
+                                <c:otherwise>
+                                    <p class="card-text">
+                                        <strong>Status:</strong> <span style="color: black;">${requestScope.diamond.status}</span>
+                                    </p>
+                                </c:otherwise>
+                            </c:choose>
+
+                            <div class="btn-group" role="group" aria-label="Voucher Actions">
+                                <form action="DiamondController" method="post" class="mr-2">
+                                    <input type="hidden" name="action" value="list">
+                                    <button type="submit" class="btn btn-primary">Return</button>
+                                </form>
+                                <form action="DiamondController" method="post">
+                                    <input type="hidden" name="id" value="${requestScope.diamond.diamondID}">
+                                    <input type="hidden" name="action" value="edit">
+                                    <button type="submit" class="btn btn-secondary">Edit</button>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <script src="js/pagination.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
-                                                            integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
-            crossorigin="anonymous"></script>
-            <script src="js/sidenav.js"></script>
+        <script src="js/pagination.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+                                                        integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+        crossorigin="anonymous"></script>
+        <script src="js/sidenav.js"></script>
 
-        </body>
-    </html>
+    </body>
+</html>
