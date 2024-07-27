@@ -1075,7 +1075,7 @@ public class OrderDAO {
 
     public OrderDTO loadBillDetail(int orderID) {
 
-        String sql = "SELECT o.orderID, o.userID, u.userName, u.address, o.orderDate, o.purchaseMethod, r.ringID, r.ringName, r.ringImage, r.warrantyID, w.warrantyName, w.warrantyMonth, CAST(w.warrantyDescription AS VARCHAR(255)) AS [warrantyDescription], w.warrantyType, w.startDate, w.endDate, CAST(w.termsAndConditions AS VARCHAR(255)) AS [termsAndConditions], w.warrantyImage, c.certificateImage, COALESCE(v.voucherID, 0) AS [voucherID], COALESCE(v.voucherName, 'n/a') AS [voucherName], COALESCE(c.certificateID, 0) AS [certificateID], COALESCE(c.description, 'n/a') AS [certificateName], o.ringSize, FORMAT(SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * ((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0') AS [totalPrice], o.status FROM [OrderDetails] o LEFT JOIN [User] u ON o.userID = u.userID LEFT JOIN [Ring] r ON o.ringID = r.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID LEFT JOIN [Warranty] w ON r.warrantyID = w.warrantyID LEFT JOIN [Certificate] c ON d.certificateID = c.certificateID WHERE o.orderID = ? AND o.status <> 'pending' GROUP BY o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, r.ringImage, r.warrantyID, w.warrantyName, w.warrantyMonth, CAST(w.warrantyDescription AS VARCHAR(255)), w.warrantyType, w.startDate, w.endDate, CAST(w.termsAndConditions AS VARCHAR(255)), w.warrantyImage, c.certificateImage, v.voucherID, v.voucherName, c.certificateID, c.description, o.ringSize, o.status, o.purchaseMethod";
+        String sql = "SELECT u.firstName + ' ' + u.lastName as fullName, o.orderID, o.userID, u.userName, u.address, o.orderDate, o.purchaseMethod, r.ringID, r.ringName, r.ringImage, r.warrantyID, w.warrantyName, w.warrantyMonth, CAST(w.warrantyDescription AS VARCHAR(255)) AS [warrantyDescription], w.warrantyType, w.startDate, w.endDate, CAST(w.termsAndConditions AS VARCHAR(255)) AS [termsAndConditions], w.warrantyImage, c.certificateImage, COALESCE(v.voucherID, 0) AS [voucherID], COALESCE(v.voucherName, 'n/a') AS [voucherName], COALESCE(c.certificateID, 0) AS [certificateID], COALESCE(c.description, 'n/a') AS [certificateName], o.ringSize, FORMAT(SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * ((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0') AS [totalPrice], o.status FROM [OrderDetails] o LEFT JOIN [User] u ON o.userID = u.userID LEFT JOIN [Ring] r ON o.ringID = r.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID LEFT JOIN [Warranty] w ON r.warrantyID = w.warrantyID LEFT JOIN [Certificate] c ON d.certificateID = c.certificateID WHERE o.orderID = ? AND o.status <> 'pending' GROUP BY o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, r.ringImage, r.warrantyID, w.warrantyName, w.warrantyMonth, CAST(w.warrantyDescription AS VARCHAR(255)), w.warrantyType, w.startDate, w.endDate, CAST(w.termsAndConditions AS VARCHAR(255)), w.warrantyImage, c.certificateImage, v.voucherID, v.voucherName, c.certificateID, c.description, o.ringSize, o.status, o.purchaseMethod, u.firstName, u.lastName";
 
         try {
 
@@ -1086,6 +1086,7 @@ public class OrderDAO {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
 
+                String fullName = rs.getString("fullName");
                 int orderID1 = rs.getInt("orderID");
                 int userID1 = rs.getInt("userID");
                 String userName = rs.getString("userName");
@@ -1114,6 +1115,7 @@ public class OrderDAO {
 
                 OrderDTO order = new OrderDTO();
 
+                order.setFullName(fullName);
                 order.setOrderID(orderID1);
                 order.setUserID(userID1);
                 order.setUserName(userName);

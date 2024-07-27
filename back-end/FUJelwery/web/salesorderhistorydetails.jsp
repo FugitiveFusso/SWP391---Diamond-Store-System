@@ -100,7 +100,7 @@
                 <div class="details-column">
                     <h2>Bill Details</h2>
                     <div class="product-details">
-                        <p><a href="Staff_Customer_Controller?action=details&id=${requestScope.salesorder.userID}"><strong>UserID:</strong> ${requestScope.salesorder.userID}</a></p>
+                        <p><a href="Staff_Customer_Controller?action=details&id=${requestScope.salesorder.userID}"><strong>Customer:</strong> ${requestScope.salesorder.fullName}</a></p>
                         <p><a href="RingController?action=details&id=${requestScope.salesorder.ringID}"><strong>Product Name:</strong> ${requestScope.salesorder.ringName}</a></p>
                         <p><strong>Ring Size:</strong> ${requestScope.salesorder.ringSize}</p>
                         <p><strong>Date of Purchase:</strong> ${requestScope.salesorder.orderDate}</p>
