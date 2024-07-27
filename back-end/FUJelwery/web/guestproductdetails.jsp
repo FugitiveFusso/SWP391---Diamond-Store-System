@@ -156,16 +156,19 @@
                     <div class="detail-row">
                         <strong>Adds-on Fee:</strong> <span>${requestScope.product.price} VND</span>
                     </div>
+                    
                     <h2>Product's Warranty</h2>
-                    <div class="">
-                        <h3>${requestScope.product.warrantyName} in ${requestScope.product.warrantyMonth} months</h3>
+                    <div class="detail-row">
+                        <strong>Warranty Name:</strong> <span>${requestScope.product.warrantyName}</span>
                     </div>
-                    <div class="detail-container">
-                        <span>${requestScope.product.warrantyType}</span>
+                    <div class="detail-row">
+                        <strong>Period:</strong> <span>${requestScope.product.warrantyMonth} months</span>
                     </div>
-                    <br>
-                    <div class="detail-container">
-                        <span>${requestScope.product.warrantyDescription}</span>
+                    <div class="detail-row">
+                        <strong>Type:</strong> <span>${requestScope.product.warrantyType}</span>
+                    </div>
+                    <div class="detail-row">
+                        <strong>Description:</strong> <span>${requestScope.product.warrantyDescription}</span>
                     </div>
                 </div>
             </div>
@@ -198,7 +201,7 @@
                 </form>
                 <script>
                     document.addEventListener("DOMContentLoaded", function () {
-                         var statusText = "${requestScope.product.status}";
+                        var statusText = "${requestScope.product.status}";
                         var statusElement = document.getElementById("status");
                         var formElement = document.getElementById("addToCartForm");
 
