@@ -226,172 +226,172 @@
                         </div>
                     </div>
                 </div>
-                <!--
-                                Order for Home Delivery/Store Grouped Column Chart         
-                                <div class="charts-row1">
-                                    <div class="charts-card2 bar-chart">
-                                        <h2 class="chart-title">Orders for Home Delivery/Store Pickup</h2>
-                                        <div id="orders-column-chart"></div>
-                                    </div>
-                
-                                    Number of Orders per Week Line Graph 
-                <%
-                    List<OrderDTO> listOrderC = (List<OrderDTO>) request.getAttribute("listc");
-                    StringBuilder categories = new StringBuilder("[");
-                    StringBuilder data = new StringBuilder("[");
-                    for (Iterator<OrderDTO> iterator = listOrderC.iterator(); iterator.hasNext();) {
-                        OrderDTO listc = iterator.next();
-                        categories.append("'").append(listc.getWeekNumber()).append(" - ").append(listc.getYear()).append("'");
-                        data.append(listc.getOrderCount());
-                        if (iterator.hasNext()) {
-                            categories.append(", ");
-                            data.append(", ");
+
+                <!--                                Order for Home Delivery/Store Grouped Column Chart         -->
+                <div class="charts-row1">
+                    <div class="charts-card2 bar-chart">
+                        <h2 class="chart-title">Orders for Home Delivery/Store Pickup</h2>
+                        <div id="orders-column-chart"></div>
+                    </div>
+
+                    <!--                                    Number of Orders per Week Line Graph -->
+                    <%
+                        List<OrderDTO> listOrderC = (List<OrderDTO>) request.getAttribute("listc");
+                        StringBuilder categories = new StringBuilder("[");
+                        StringBuilder data = new StringBuilder("[");
+                        for (Iterator<OrderDTO> iterator = listOrderC.iterator(); iterator.hasNext();) {
+                            OrderDTO listc = iterator.next();
+                            categories.append("'").append(listc.getWeekNumber()).append(" - ").append(listc.getYear()).append("'");
+                            data.append(listc.getOrderCount());
+                            if (iterator.hasNext()) {
+                                categories.append(", ");
+                                data.append(", ");
+                            }
                         }
-                    }
-                    categories.append("]");
-                    data.append("]");
-                %>
-                <div class="charts-card2 line-chart">
-                    <h2 class="chart-title">Number of Orders per Week</h2>
-                    <div id="orders-weekly-line-chart"></div>
-                </div>
+                        categories.append("]");
+                        data.append("]");
+                    %>
+                    <div class="charts-card2 line-chart">
+                        <h2 class="chart-title">Number of Orders per Week</h2>
+                        <div id="orders-weekly-line-chart"></div>
+                    </div>
 
-                Number of Orders per Month Line Graph 
-                <%
-                    List<OrderDTO> listOrderB = (List<OrderDTO>) request.getAttribute("listb");
-                    StringBuilder categories1 = new StringBuilder("[");
-                    StringBuilder data1 = new StringBuilder("[");
-                    for (Iterator<OrderDTO> iterator = listOrderB.iterator(); iterator.hasNext();) {
-                        OrderDTO listb = iterator.next();
-                        categories1.append("'").append(listb.getMonthName()).append(" - ").append(listb.getYear()).append("'");
-                        data1.append(listb.getOrderCount());
-                        if (iterator.hasNext()) {
-                            categories1.append(", ");
-                            data1.append(", ");
+                    <!--                Number of Orders per Month Line Graph -->
+                    <%
+                        List<OrderDTO> listOrderB = (List<OrderDTO>) request.getAttribute("listb");
+                        StringBuilder categories1 = new StringBuilder("[");
+                        StringBuilder data1 = new StringBuilder("[");
+                        for (Iterator<OrderDTO> iterator = listOrderB.iterator(); iterator.hasNext();) {
+                            OrderDTO listb = iterator.next();
+                            categories1.append("'").append(listb.getMonthName()).append(" - ").append(listb.getYear()).append("'");
+                            data1.append(listb.getOrderCount());
+                            if (iterator.hasNext()) {
+                                categories1.append(", ");
+                                data1.append(", ");
+                            }
                         }
-                    }
-                    categories1.append("]");
-                    data1.append("]");
-                %>
+                        categories1.append("]");
+                        data1.append("]");
+                    %>
 
-                <div class="charts-card2 line-chart">
-                    <h2 class="chart-title">Number of Orders per Month</h2>
-                    <div id="orders-monthly-line-chart"></div>
+                    <div class="charts-card2 line-chart">
+                        <h2 class="chart-title">Number of Orders per Month</h2>
+                        <div id="orders-monthly-line-chart"></div>
+                    </div>
                 </div>
-            </div>
-            Revenue for Week Column Chart     
-            <div class="charts-row">
-                <%
-                    List<OrderDTO> listOrderG = (List<OrderDTO>) request.getAttribute("listg");
-                    StringBuilder categories2 = new StringBuilder("[");
-                    StringBuilder revenueData = new StringBuilder("[");
-                    for (Iterator<OrderDTO> iterator = listOrderG.iterator(); iterator.hasNext();) {
-                        OrderDTO listg = iterator.next();
-                        categories2.append("'").append(listg.getWeekNumber()).append(" - ").append(listg.getYear()).append("'");
-                        revenueData.append(listg.getTotalRevenue());
-                        if (iterator.hasNext()) {
-                            categories2.append(", ");
-                            revenueData.append(", ");
+                <!--            Revenue for Week Column Chart     -->
+                <div class="charts-row">
+                    <%
+                        List<OrderDTO> listOrderG = (List<OrderDTO>) request.getAttribute("listg");
+                        StringBuilder categories2 = new StringBuilder("[");
+                        StringBuilder revenueData = new StringBuilder("[");
+                        for (Iterator<OrderDTO> iterator = listOrderG.iterator(); iterator.hasNext();) {
+                            OrderDTO listg = iterator.next();
+                            categories2.append("'").append(listg.getWeekNumber()).append(" - ").append(listg.getYear()).append("'");
+                            revenueData.append(listg.getTotalRevenue());
+                            if (iterator.hasNext()) {
+                                categories2.append(", ");
+                                revenueData.append(", ");
+                            }
                         }
-                    }
-                    categories2.append("]");
-                    revenueData.append("]");
-                %>
-                <div class="charts-card2 column-chart">
-                    <h2 class="chart-title">Revenue for Week</h2>
-                    <div id="revenue-week-column-chart"></div>
-                    <div class="percentage-change" id="weekly-revenue-change"></div>
-                </div>
+                        categories2.append("]");
+                        revenueData.append("]");
+                    %>
+                    <div class="charts-card2 column-chart">
+                        <h2 class="chart-title">Revenue for Week</h2>
+                        <div id="revenue-week-column-chart"></div>
+                        <div class="percentage-change" id="weekly-revenue-change"></div>
+                    </div>
 
-                Revenue for Month Column Chart 
-                <%
-                    List<OrderDTO> listOrderH = (List<OrderDTO>) request.getAttribute("listh");
-                    StringBuilder categories3 = new StringBuilder("[");
-                    StringBuilder revenueData1 = new StringBuilder("[");
-                    for (Iterator<OrderDTO> iterator = listOrderH.iterator(); iterator.hasNext();) {
-                        OrderDTO listh = iterator.next();
-                        categories3.append("'").append(listh.getMonthName()).append(" - ").append(listh.getYear()).append("'");
-                        revenueData1.append(listh.getTotalRevenue());
-                        if (iterator.hasNext()) {
-                            categories3.append(", ");
-                            revenueData1.append(", ");
+                    <!--                Revenue for Month Column Chart -->
+                    <%
+                        List<OrderDTO> listOrderH = (List<OrderDTO>) request.getAttribute("listh");
+                        StringBuilder categories3 = new StringBuilder("[");
+                        StringBuilder revenueData1 = new StringBuilder("[");
+                        for (Iterator<OrderDTO> iterator = listOrderH.iterator(); iterator.hasNext();) {
+                            OrderDTO listh = iterator.next();
+                            categories3.append("'").append(listh.getMonthName()).append(" - ").append(listh.getYear()).append("'");
+                            revenueData1.append(listh.getTotalRevenue());
+                            if (iterator.hasNext()) {
+                                categories3.append(", ");
+                                revenueData1.append(", ");
+                            }
                         }
-                    }
-                    categories3.append("]");
-                    revenueData1.append("]");
-                %>
-                <div class="charts-card2 column-chart">
-                    <h2 class="chart-title">Revenue for Month</h2>
-                    <div id="revenue-month-column-chart"></div>
-                    <div class="percentage-change" id="monthly-revenue-change"></div>
+                        categories3.append("]");
+                        revenueData1.append("]");
+                    %>
+                    <div class="charts-card2 column-chart">
+                        <h2 class="chart-title">Revenue for Month</h2>
+                        <div id="revenue-month-column-chart"></div>
+                        <div class="percentage-change" id="monthly-revenue-change"></div>
+                    </div>
                 </div>
-            </div>
 
-            Weekly Revenue Table 
-            <div class="charts-row">
-                <div class="x_content" style="display: block;">
-                    <div class="table-container2">
-                <%
-                    List<OrderDTO> listOrderE = (List<OrderDTO>) request.getAttribute("liste");
-                    for (OrderDTO liste : listOrderE) {
-                        pageContext.setAttribute("liste", liste);
-                %>
-                <div class="x_title">
-                    <h2>Weekly Revenue for Week ${liste.currentWeek} - ${liste.year}</h2>
-                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                </div>
-                <div class="collapse-content">
-                    <table>
-                        <tr>
-                            <th>Current Week Revenue</th>
-                            <th>Previous Week Revenue</th>
-                            <th>Percentage Change</th>
-                        </tr>
-                        <tr>                                        
-                            <td>${liste.currentWeekRevenue} VND</td>
-                            <td>${liste.previousWeekRevenue} VND</td>
-                            <td class="${liste.percentageChange > 0 ? 'positive' : 'negative'}">${liste.percentageChange}%</td>
-                        </tr>
-                <%
-                    }
-                %>  
-            </table>
-        </div>
-    </div>
-</div>
+                <!--            Weekly Revenue Table -->
+                <div class="charts-row">
+                    <div class="x_content" style="display: block;">
+                        <div class="table-container2">
+                            <%
+                                List<OrderDTO> listOrderE = (List<OrderDTO>) request.getAttribute("liste");
+                                for (OrderDTO liste : listOrderE) {
+                                    pageContext.setAttribute("liste", liste);
+                            %>
+                            <div class="x_title">
+                                <h2>Weekly Revenue for Week ${liste.currentWeek} - ${liste.year}</h2>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </div>
+                            <div class="collapse-content">
+                                <table>
+                                    <tr>
+                                        <th>Current Week Revenue</th>
+                                        <th>Previous Week Revenue</th>
+                                        <th>Percentage Change</th>
+                                    </tr>
+                                    <tr>                                        
+                                        <td>${liste.currentWeekRevenue} VND</td>
+                                        <td>${liste.previousWeekRevenue} VND</td>
+                                        <td class="${liste.percentageChange > 0 ? 'positive' : 'negative'}">${liste.percentageChange}%</td>
+                                    </tr>
+                                    <%
+                                        }
+                                    %>  
+                                </table>
+                            </div>
+                        </div>
+                    </div>
 
-Monthly Revenue Table 
-<div class="x_content" style="display: block;">
-    <div class="table-container2">
-                <%
-                    List<OrderDTO> listOrderF = (List<OrderDTO>) request.getAttribute("listf");
-                    for (OrderDTO listf : listOrderF) {
-                        pageContext.setAttribute("listf", listf);
-                %>
-                <div class="x_title">
-                    <h2>Monthly Revenue in ${listf.monthName} - ${listf.year}</h2>
-                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    <!--Monthly Revenue Table -->
+                    <div class="x_content" style="display: block;">
+                        <div class="table-container2">
+                            <%
+                                List<OrderDTO> listOrderF = (List<OrderDTO>) request.getAttribute("listf");
+                                for (OrderDTO listf : listOrderF) {
+                                    pageContext.setAttribute("listf", listf);
+                            %>
+                            <div class="x_title">
+                                <h2>Monthly Revenue in ${listf.monthName} - ${listf.year}</h2>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </div>
+                            <div class="collapse-content">
+                                <table>
+                                    <tr>
+                                        <th>Current Month Revenue</th>
+                                        <th>Previous Month Revenue</th>
+                                        <th>Percentage Change</th>
+                                    </tr>
+                                    <tr>
+                                        <td>${listf.currentMonthRevenue} VND</td>
+                                        <td>${listf.previousMonthRevenue} VND</td>
+                                        <td class="${listf.percentageChange > 0 ? 'positive' : 'negative'}">${listf.percentageChange}%</td>
+                                    </tr>
+                                    <%
+                                        }
+                                    %> 
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="collapse-content">
-                    <table>
-                        <tr>
-                            <th>Current Month Revenue</th>
-                            <th>Previous Month Revenue</th>
-                            <th>Percentage Change</th>
-                        </tr>
-                        <tr>
-                            <td>${listf.currentMonthRevenue} VND</td>
-                            <td>${listf.previousMonthRevenue} VND</td>
-                            <td class="${listf.percentageChange > 0 ? 'positive' : 'negative'}">${listf.percentageChange}%</td>
-                        </tr>
-                <%
-                    }
-                %> 
-            </table>
-        </div>
-    </div>
-</div>
-</div>-->
 
                 <!--Top 5 Countries with Most Diamonds Originated Map Chart--> 
                 <div class="merged-charts-container">
@@ -434,8 +434,8 @@ Monthly Revenue Table
                         <div class="collapse-content">
                             <table>
                                 <tr class="flex-row1">
-                                    <th>Order ID</th>
-                                    <th>User ID</th>
+                                    <th>Order Code</th>
+                                    <th>Full Name</th>
                                     <th>Order Date</th>
                                     <th>Ring ID</th>
                                 </tr>
@@ -447,21 +447,22 @@ Monthly Revenue Table
                                 <!-- Add your rows here -->
                                 <tr class="flex-row1">
                                     <td>
-                                        <%-- Check if orderID is non-zero --%>
-                                        <% if (listd.getOrderID() != 0) {%>
-                                        <a href="DashboardController?action=orderdetails&id=<%= listd.getOrderID()%>"><%= listd.getOrderID()%></a>
+                                        <%-- Check if orderCode is non-empty and not "N/A" --%>
+                                        <% if (listd.getOrderCode() != null && !listd.getOrderCode().isEmpty() && !"N/A".equals(listd.getOrderCode())) {%>
+                                        <a href="DashboardController?action=orderdetails&id=<%= listd.getOrderID()%>"><%= listd.getOrderCode()%></a>
                                         <% } else {%>
-                                        <%= listd.getOrderID()%>
+                                        <%= listd.getOrderCode()%>
                                         <% } %>
                                     </td>
                                     <td>
-                                        <%-- Check if userID is non-zero --%>
-                                        <% if (listd.getUserID() != 0) {%>
-                                        <a href="DashboardController?action=userdetails&id=<%= listd.getUserID()%>"><%= listd.getUserID()%></a>
+                                        <%-- Check if fullName is non-empty and not "N/A" --%>
+                                        <% if (listd.getFullName() != null && !listd.getFullName().isEmpty() && !"N/A".equals(listd.getFullName())) {%>
+                                        <a href="DashboardController?action=userdetails&id=<%= listd.getUserID()%>"><%= listd.getFullName()%></a>
                                         <% } else {%>
-                                        <%= listd.getUserID()%>
+                                        <%= listd.getFullName()%>
                                         <% }%>
                                     </td>
+
                                     <td><%= listd.getOrderDate()%></td>
                                     <td>
                                         <%-- Check if ringID is non-zero --%>
@@ -763,7 +764,7 @@ Monthly Revenue Table
     <%
         for (DiamondDTO diamond : diaList) {
             // Outputting data in the format needed for JavaScript
-%>{country: '<%= diamond.getCountry()%>', diamondCount: <%= diamond.getDiamondCount()%>},
+    %>{country: '<%= diamond.getCountry()%>', diamondCount: <%= diamond.getDiamondCount()%>},
     <% }%>
     ];
 

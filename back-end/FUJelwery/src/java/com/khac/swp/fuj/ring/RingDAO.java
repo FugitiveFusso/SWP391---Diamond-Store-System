@@ -984,7 +984,7 @@ public class RingDAO {
                     + "        DATENAME(MONTH, TRY_CONVERT(datetime, o.orderDate, 105)) AS MonthName,\n"
                     + "        ROW_NUMBER() OVER (PARTITION BY YEAR(TRY_CONVERT(datetime, o.orderDate, 105)), MONTH(TRY_CONVERT(datetime, o.orderDate, 105))\n"
                     + "                           ORDER BY COUNT(o.orderID) DESC) AS RowNum\n"
-                    + "    FROM [Order] o\n"
+                    + "    FROM [OrderDetails] o\n"
                     + "    LEFT JOIN [Ring] r ON o.ringID = r.ringID\n"
                     + "    LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID\n"
                     + "    LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID\n"

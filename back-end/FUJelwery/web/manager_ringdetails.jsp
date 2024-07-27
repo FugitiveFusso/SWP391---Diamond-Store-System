@@ -1,3 +1,4 @@
+<%@page import="com.khac.swp.fuj.ring.RingDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -56,7 +57,15 @@
                 border-radius: 10px;
                 cursor: pointer;
             }
+            a {
+                color: black;
+                text-decoration: none;
+            }
 
+            a:hover {
+                color: black;
+                text-decoration: none;
+            }
 
         </style>
 
@@ -126,21 +135,41 @@
                             <p class="card-text"><strong>Color:</strong> ${requestScope.ring.color}</p>
                             <p class="card-text"><strong>Clarity:</strong> ${requestScope.ring.clarity}</p>
                             <p class="card-text"><strong>Cut:</strong> ${requestScope.ring.cut}</p>
-                            <p class="card-text"><strong>WarrantyID:</strong> <a href="DashboardController?action=warrantydetails&id=${requestScope.ring.warrantyID}">${requestScope.ring.warrantyID}</a></p>
+                            <p class="card-text"><strong>Warranty ID:</strong> <a href="DashboardController?action=warrantydetails&id=${requestScope.ring.warrantyID}">${requestScope.ring.warrantyID}</a></p>
 
                             <p class="card-text"><strong>Diamond Price:</strong> ${requestScope.ring.diamondPrice} VND</p>
                             <p class="card-text"><strong>Total Price:</strong> ${requestScope.ring.totalPrice} VND</p>
+                            <%-- Retrieve warranty object from request attribute --%>
+                            <% RingDTO ring = (RingDTO) request.getAttribute("ring"); %>
+
+                            <%-- Check if warranty is not null and has a valid orderID --%>
+                            <% if (ring != null && ring.getOrderID() != 0) { %>
+                            <p class="card-text">
+                                <a href="DashboardController?action=orderdetails&id=${ring.getOrderID()}">
+                                    <strong>Order ID:</strong> ${ring.getOrderID()}
+                                </a>
+                            </p>
+                            <% } else { %>
+                            <p class="card-text">
+                                <strong>No valid Order ID found.</strong>
+                            </p>
+                            <% }%>
                             <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
                             <c:choose>
                                 <c:when test="${requestScope.ring.status == 'deleted'}">
                                     <p class="card-text">
-                                        <strong>Status:</strong> <span style="color: red;">${requestScope.ring.status}</span>
+                                        <strong>Status:</strong> <span style="color: red;">Deleted</span>
                                     </p>
                                 </c:when>
                                 <c:when test="${requestScope.ring.status == 'active'}">
                                     <p class="card-text">
-                                        <strong>Status:</strong> <span style="color: green;">${requestScope.ring.status}</span>
+                                        <strong>Status:</strong> <span style="color: green;">In Stock</span>
+                                    </p>
+                                </c:when>
+                                <c:when test="${requestScope.ring.status == 'outOfStock'}">
+                                    <p class="card-text">
+                                        <strong>Status:</strong> <span style="color: red;">Out of Stock</span>
                                     </p>
                                 </c:when>
                                 <c:otherwise>

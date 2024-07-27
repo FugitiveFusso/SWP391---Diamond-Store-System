@@ -416,36 +416,45 @@ ORDER BY Year, MonthNumber;
 
 --  List of weekly transactions similar to history (list table)
 SELECT 
+    ISNULL(CASE WHEN orderCode IS NULL THEN 'N/A' ELSE orderCode END, 'N/A') AS orderCode,
     ISNULL(CASE WHEN orderID IS NULL THEN '0' ELSE CONVERT(varchar(10), orderID) END, '0') AS orderID,
     ISNULL(CASE WHEN userID IS NULL THEN '0' ELSE CONVERT(varchar(10), userID) END, '0') AS userID,
+    ISNULL(CASE WHEN lastName IS NULL THEN 'N/A' ELSE lastName END, 'N/A') AS lastName,
+    ISNULL(CASE WHEN firstName IS NULL THEN 'N/A' ELSE firstName END, 'N/A') AS firstName,
+    ISNULL(CASE WHEN lastName IS NULL OR firstName IS NULL THEN 'N/A' ELSE lastName + ' ' + firstName END, 'N/A') AS fullName,
     ISNULL(CASE WHEN OrderDate IS NULL THEN 'N/A' ELSE CONVERT(varchar(10), OrderDate, 103) END, 'N/A') AS OrderDate,
     ISNULL(CASE WHEN ringID IS NULL THEN '0' ELSE CONVERT(varchar(10), ringID) END, '0') AS ringID
 FROM (
     SELECT 
-        orderID,
-        userID,
-        CONVERT(date, orderDate, 103) AS OrderDate,
-        ringID
-    FROM [Order]
-    WHERE [status] IN ('delivered', 'received at store')
-        AND DATEDIFF(DAY, CONVERT(date, orderDate, 103), GETDATE()) <= 7
+        od.orderCode,
+        od.orderID,
+        od.userID,
+        CONVERT(date, od.orderDate, 103) AS OrderDate,
+        od.ringID,
+        u.lastName,
+        u.firstName
+    FROM [OrderDetails] od
+    LEFT JOIN [User] u ON od.userID = u.userID
+    WHERE od.[status] IN ('delivered', 'received at store')
+        AND DATEDIFF(DAY, CONVERT(date, od.orderDate, 103), GETDATE()) <= 7
 
     UNION ALL
 
     SELECT 
+        NULL as orderCode,
         NULL AS orderID,
         NULL AS userID,
         NULL AS OrderDate,
-        NULL AS ringID
+        NULL AS ringID,
+        NULL AS lastName,
+        NULL AS firstName
     WHERE NOT EXISTS (
-        SELECT 1 FROM [Order]
+        SELECT 1 FROM [OrderDetails]
         WHERE [status] IN ('delivered', 'received at store')
         AND DATEDIFF(DAY, CONVERT(date, orderDate, 103), GETDATE()) <= 7
     )
 ) AS Orders
 ORDER BY OrderDate;
-
-
 
 -- Revenue for Week and Month
 WITH WeeklyRevenue AS (

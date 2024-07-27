@@ -535,7 +535,7 @@
                 %>    
             </table>
             <br>
-<!--            <h4>Top 5 Sales From Each Month (Latest to Earliest)</h4>
+            <h4>Top 5 Sales From Each Month (Latest to Earliest)</h4>
             <table style="margin: 0 auto;">
                 <tr>
                     <th>Order Year</th>
@@ -812,7 +812,7 @@
                 <%
                     }
                 %>    
-            </table>-->
+            </table>
 
         </div>
 

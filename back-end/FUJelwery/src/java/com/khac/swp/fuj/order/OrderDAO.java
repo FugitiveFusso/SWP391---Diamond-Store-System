@@ -1790,27 +1790,38 @@ public class OrderDAO {
 
             Connection con = DBUtils.getConnection();
             String sql = "SELECT \n"
+                    + "    ISNULL(CASE WHEN orderCode IS NULL THEN 'N/A' ELSE orderCode END, 'N/A') AS orderCode,\n"
                     + "    ISNULL(CASE WHEN orderID IS NULL THEN '0' ELSE CONVERT(varchar(10), orderID) END, '0') AS orderID,\n"
                     + "    ISNULL(CASE WHEN userID IS NULL THEN '0' ELSE CONVERT(varchar(10), userID) END, '0') AS userID,\n"
+                    + "    ISNULL(CASE WHEN lastName IS NULL THEN 'N/A' ELSE lastName END, 'N/A') AS lastName,\n"
+                    + "    ISNULL(CASE WHEN firstName IS NULL THEN 'N/A' ELSE firstName END, 'N/A') AS firstName,\n"
+                    + "    ISNULL(CASE WHEN lastName IS NULL OR firstName IS NULL THEN 'N/A' ELSE lastName + ' ' + firstName END, 'N/A') AS fullName,\n"
                     + "    ISNULL(CASE WHEN OrderDate IS NULL THEN 'N/A' ELSE CONVERT(varchar(10), OrderDate, 103) END, 'N/A') AS OrderDate,\n"
                     + "    ISNULL(CASE WHEN ringID IS NULL THEN '0' ELSE CONVERT(varchar(10), ringID) END, '0') AS ringID\n"
                     + "FROM (\n"
                     + "    SELECT \n"
-                    + "        orderID,\n"
-                    + "        userID,\n"
-                    + "        CONVERT(date, orderDate, 103) AS OrderDate,\n"
-                    + "        ringID\n"
-                    + "    FROM [OrderDetails]\n"
-                    + "    WHERE [status] IN ('delivered', 'received at store')\n"
-                    + "        AND DATEDIFF(DAY, CONVERT(date, orderDate, 103), GETDATE()) <= 7\n"
+                    + "        od.orderCode,\n"
+                    + "        od.orderID,\n"
+                    + "        od.userID,\n"
+                    + "        CONVERT(date, od.orderDate, 103) AS OrderDate,\n"
+                    + "        od.ringID,\n"
+                    + "        u.lastName,\n"
+                    + "        u.firstName\n"
+                    + "    FROM [OrderDetails] od\n"
+                    + "    LEFT JOIN [User] u ON od.userID = u.userID\n"
+                    + "    WHERE od.[status] IN ('delivered', 'received at store')\n"
+                    + "        AND DATEDIFF(DAY, CONVERT(date, od.orderDate, 103), GETDATE()) <= 7\n"
                     + "\n"
                     + "    UNION ALL\n"
                     + "\n"
                     + "    SELECT \n"
+                    + "        NULL as orderCode,\n"
                     + "        NULL AS orderID,\n"
                     + "        NULL AS userID,\n"
                     + "        NULL AS OrderDate,\n"
-                    + "        NULL AS ringID\n"
+                    + "        NULL AS ringID,\n"
+                    + "        NULL AS lastName,\n"
+                    + "        NULL AS firstName\n"
                     + "    WHERE NOT EXISTS (\n"
                     + "        SELECT 1 FROM [OrderDetails]\n"
                     + "        WHERE [status] IN ('delivered', 'received at store')\n"
@@ -1825,7 +1836,8 @@ public class OrderDAO {
             ResultSet rs = ps.executeQuery();
             if (rs != null) {
                 while (rs.next()) {
-
+                    String orderCode = rs.getString("orderCode");
+                    String fullName = rs.getString("fullName");
                     int orderID = rs.getInt("orderID");
                     int userID1 = rs.getInt("userID");
                     String orderDate = rs.getString("orderDate");
@@ -1833,6 +1845,8 @@ public class OrderDAO {
 
                     OrderDTO order = new OrderDTO();
 
+                    order.setOrderCode(orderCode);
+                    order.setFullName(fullName);
                     order.setOrderID(orderID);
                     order.setUserID(userID1);
                     order.setOrderDate(orderDate);
