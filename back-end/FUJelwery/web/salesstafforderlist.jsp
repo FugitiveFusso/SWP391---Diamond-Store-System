@@ -181,19 +181,19 @@
                                 <td>${salesorder.warrantyName}</td>
                                 <td>${salesorder.totalPrice} VND</td>
                                 <td>
-                                    <form action="SalesStaffOrderController" method="POST">
+                                    <form class="salesStaffOrderForm" action="SalesStaffOrderController" method="POST">
                                         <input name="action" value="accept" type="hidden">
                                         <input name="orderID" value="${salesorder.orderID}" type="hidden">
-                                        <button type="submit" class="btn">Accept</button>
+                                        <button type="submit" class="accept-btn">Accept</button>
                                     </form>
                                 </td>
                             </tr>
-
                             <%
                                 }
                             %>    
                         </tbody>
-                    </table>    
+                    </table>
+
                     <div class="pagination">
                         <%
                             Integer currentPageA = (Integer) request.getAttribute("currentPageA");
@@ -284,6 +284,11 @@
                                         <input name="orderID" value="${salesorder.orderID}" type="hidden">
                                         <input name="ringID" value="${salesorder.ringID}" type="hidden">
                                         <button type="submit" class="btn">Customer has received at store</button>
+                                    </form>
+                                    <form class="salesStaffOrderForm" action="SalesStaffOrderController" method="POST">
+                                        <input name="action" value="received" type="hidden">
+                                        <input name="orderID" value="${salesorder.orderID}" type="hidden">
+                                        <button type="submit" class="accept-btn">Accept</button>
                                     </form>
                                 </td>
                             </tr>
