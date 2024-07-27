@@ -16,7 +16,7 @@ INSERT INTO [User] VALUES
 INSERT INTO [Category] VALUES 
 ('0.7 Carat Rings', 'https://www.lugaro.com/wp-content/uploads/2021/02/SGR1298-M_45.jpg', 'active'),
 ('0.36 Carat Rings', 'https://zoom.jewelryimages.net/edge/jthomasjewelers/images/edge/140-02227.jpg', 'active'),
-('Engagement Rings', 'https://cdn.polisheddiamonds.co.nz/wp-content/uploads/2024/02/10170040/blog-post-image-930x620.jpg', 'active'),
+('Engagement Rings', 'https://www.withclarity.com/cdn/shop/articles/SOLITAIRE_ENGAGEMENT_RINGS_345x345@2x.jpg', 'active'),
 ('Wedding Rings', 'https://www.varoujan.com.au/wp-content/uploads/2022/05/sandy-millar-8vaQKYnawHw-unsplash-scaled.jpg', 'active'),
 ('Jewelry', 'https://time.com/shopping/static/cd09eba6652ee627f5e53b645dbd36fa/ca7ff/best-online-jewelry-stores.jpg', 'active'),
 ('Gemstones', 'https://d2al04l58v9bun.cloudfront.net/blog/wp-content/uploads/2022/10/01161406/Gemstones-For-November-Born-1.jpg', 'active'),

@@ -128,7 +128,7 @@ public class RingDAO {
         int total = 0;
         try {
             Connection con = DBUtils.getConnection();
-            String sql = "SELECT COUNT(*) FROM [Ring] WHERE status = 'active'";
+            String sql = "SELECT COUNT(*) FROM [Ring] WHERE status <> 'deleted'";
 
             if (keyword != null && !keyword.isEmpty()) {
                 sql += " AND ringName LIKE ?";
