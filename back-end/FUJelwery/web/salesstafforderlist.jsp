@@ -173,17 +173,22 @@
                             %>
                             <tr>
                                 <td>${salesorder.orderID}</td>
-                                <td><a href="Staff_Customer_Controller?action=details&id=${salesorder.userID}">${salesorder.userName}</td>
-                                <td><a href="RingController?action=details&id=${salesorder.ringID}">${salesorder.ringName}</td>
+                                <td><a href="Staff_Customer_Controller?action=details&id=${salesorder.userID}">${salesorder.userName}</a></td>
+                                <td><a href="RingController?action=details&id=${salesorder.ringID}">${salesorder.ringName}</a></td>
                                 <td>${salesorder.ringSize}</td>
                                 <td>${salesorder.orderDate}</td>
                                 <td>${salesorder.address}</td>
                                 <td>${salesorder.warrantyName}</td>
                                 <td>${salesorder.totalPrice} VND</td>
                                 <td>
-                                    <button type="button" class="accept-btn" data-order-id="${salesorder.orderID}">Accept</button>
+                                    <form action="SalesStaffOrderController" method="POST">
+                                        <input name="action" value="accept" type="hidden">
+                                        <input name="orderID" value="${salesorder.orderID}" type="hidden">
+                                        <button type="submit" class="btn">Accept</button>
+                                    </form>
                                 </td>
                             </tr>
+
                             <%
                                 }
                             %>    
@@ -274,7 +279,12 @@
                                 <td>${salesorder.warrantyName}</td>
                                 <td>${salesorder.totalPrice} VND</td>
                                 <td>
-                                    <button type="button" class="received-btn" data-order-id="${salesorder.orderID}">Customer has received at store</button>
+                                    <form action="SalesStaffOrderController" method="POST">
+                                        <input name="action" value="received" type="hidden">
+                                        <input name="orderID" value="${salesorder.orderID}" type="hidden">
+                                        <input name="ringID" value="${salesorder.ringID}" type="hidden">
+                                        <button type="submit" class="btn">Customer has received at store</button>
+                                    </form>
                                 </td>
                             </tr>
                             <%

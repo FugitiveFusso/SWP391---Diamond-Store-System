@@ -517,27 +517,26 @@ public class OrderDAO {
         List<OrderDTO> list = new ArrayList<OrderDTO>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = "SELECT o.orderID, o.userID, o.orderCode, u.userName, u.address, o.orderDate, r.ringID, r.ringName, "
-                    + "COALESCE(v.voucherID, 0) AS [voucherID], COALESCE(v.voucherName, 'n/a') AS [voucherName], "
-                    + "COALESCE(r.warrantyID, 0) AS [warrantyID], w.warrantyName, COALESCE(w.warrantyName, 'n/a') AS [warrantyName], "
-                    + "o.ringSize, FORMAT(SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * "
-                    + "((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0') AS [totalPrice], o.status "
-                    + "FROM [OrderDetails] o "
-                    + "LEFT JOIN [User] u ON o.userID = u.userID "
-                    + "LEFT JOIN [Ring] r ON o.ringID = r.ringID "
-                    + "LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID "
-                    + "LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID "
-                    + "LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID "
-                    + "LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID "
-                    + "LEFT JOIN [Warranty] w ON r.warrantyID = w.warrantyID "
-                    + "WHERE o.status = 'verified' AND o.purchaseMethod = 'Received at store' ";
+            String sql = "SELECT o.orderID, o.userID, o.orderCode, u.userName, u.address, o.orderDate, r.ringID, r.ringName, \n"
+                    + "COALESCE(v.voucherID, 0) AS [voucherID], COALESCE(v.voucherName, 'n/a') AS [voucherName], \n"
+                    + "COALESCE(r.warrantyID, 0) AS [warrantyID], w.warrantyName, COALESCE(w.warrantyName, 'n/a') AS [warrantyName], o.ringSize,\n"
+                    + "FORMAT(SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * ((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0') AS [totalPrice], o.status \n"
+                    + "FROM [OrderDetails] o \n"
+                    + "LEFT JOIN [User] u ON o.userID = u.userID \n"
+                    + "LEFT JOIN [Ring] r ON o.ringID = r.ringID \n"
+                    + "LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID \n"
+                    + "LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID \n"
+                    + "LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID \n"
+                    + "LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID \n"
+                    + "LEFT JOIN [Warranty] w ON r.warrantyID = w.warrantyID \n"
+                    + "WHERE o.status = 'verified' AND o.purchaseMethod = 'Received at store'";
 
             if (keyword_b != null && !keyword_b.isEmpty()) {
                 sql += "AND (u.userName LIKE ? OR u.address LIKE ? OR o.orderDate LIKE ? OR r.ringName LIKE ?) ";
             }
 
-            sql += "GROUP BY o.orderID, o.userID, o.orderCode u.userName, u.address, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, "
-                    + "v.percentage, r.warrantyID, w.warrantyName, o.ringSize, o.status, o.purchaseMethod, w.warrantyName "
+            sql += "GROUP BY o.orderID, o.userID, o.orderCode, u.userName, u.address, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, "
+                    + "v.percentage, r.warrantyID, w.warrantyName, o.ringSize, o.status, o.purchaseMethod "
                     + "ORDER BY o.orderID ASC "
                     + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
 
@@ -611,7 +610,7 @@ public class OrderDAO {
                     + "LEFT JOIN [User] u ON o.userID = u.userID "
                     + "LEFT JOIN [Ring] r ON o.ringID = r.ringID "
                     + "LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID "
-                    + "LEFT JOIN [Warranty] w ON o.warrantyID = w.warrantyID "
+                    + "LEFT JOIN [Warranty] w ON r.warrantyID = w.warrantyID "
                     + "WHERE o.status = 'verified' AND o.purchaseMethod = 'Received at store' ";
 
             if (keyword_b != null && !keyword_b.isEmpty()) {
@@ -1216,7 +1215,7 @@ public class OrderDAO {
         }
         return null;
     }
-    
+
     public String checkRingActive(int ringID) {
 
         String sql = "select status from [Ring] where ringID = ? ";
@@ -1232,7 +1231,7 @@ public class OrderDAO {
 
                 String status = rs.getString("status");
                 return status;
-                
+
             }
         } catch (SQLException ex) {
             System.out.println("Query User error!" + ex.getMessage());
@@ -1240,7 +1239,7 @@ public class OrderDAO {
         }
         return null;
     }
-    
+
     public Integer checkRingActiveInCart(int userID) {
 
         String sql = "select ringID from [Ring] r JOIN [OrderDetails] o ON r.ringID = o.ringID where userID = ? and r.status = 'outOfStock' ";
@@ -1256,7 +1255,7 @@ public class OrderDAO {
 
                 int ringID = rs.getInt("ringID");
                 return ringID;
-                
+
             }
         } catch (SQLException ex) {
             System.out.println("Query User error!" + ex.getMessage());
@@ -1264,11 +1263,10 @@ public class OrderDAO {
         }
         return null;
     }
-    
+
     public Integer isInCart(int ringID, int userID) {
         try (
-            Connection conn = DBUtils.getConnection();
-                ) {
+                Connection conn = DBUtils.getConnection();) {
             String query = "SELECT orderID FROM [OrderDetails] WHERE ringID = ? AND userID = ?";
             try (PreparedStatement statement = conn.prepareStatement(query)) {
                 statement.setInt(1, ringID);
@@ -1307,8 +1305,8 @@ public class OrderDAO {
         }
         return false;
     }
-    
-    public boolean outOfStockRing(int userID){
+
+    public boolean outOfStockRing(int userID) {
         String sql = "UPDATE [Ring] SET [status] = 'outOfStock' FROM [Ring] r  JOIN [OrderDetails] o  ON o.ringID = r.ringID WHERE o.userID = ? ";
         try {
 
@@ -1325,11 +1323,10 @@ public class OrderDAO {
         }
         return false;
     }
-    
+
     public boolean isCodeDuplicate(String orderCode) {
         try (
-            Connection conn = DBUtils.getConnection();
-                ) {
+                Connection conn = DBUtils.getConnection();) {
             String query = "SELECT COUNT(*) FROM [OrderDetails] WHERE orderCode = ?";
             try (PreparedStatement statement = conn.prepareStatement(query)) {
                 statement.setString(1, orderCode);
@@ -1514,6 +1511,25 @@ public class OrderDAO {
             PreparedStatement ps = conn.prepareStatement(sql);
 
             ps.setInt(1, orderID);
+
+            ps.executeUpdate();
+            conn.close();
+        } catch (SQLException ex) {
+            System.out.println("Adding voucher error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return false;
+    }
+    
+    public boolean updateWarranty(String purchaseDate, int ringID) {
+        String sql = "UPDATE [Warranty] SET startDate = ? FROM [Ring] r JOIN [Warranty] w ON r.warrantyID = w.warrantyID WHERE r.ringID = ? ";
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setString(1, purchaseDate);
+            ps.setInt(2,ringID);
 
             ps.executeUpdate();
             conn.close();

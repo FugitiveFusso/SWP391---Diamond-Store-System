@@ -51,7 +51,7 @@ public class SalesStaffOrderController extends HttpServlet {
             String keyword_a = request.getParameter("keyword_a");
             String keyword_b = request.getParameter("keyword_b");
 
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate localDate = LocalDate.now();
             String purchasedDate = localDate.format(formatter);
             if (keyword_a == null) {
@@ -146,29 +146,12 @@ public class SalesStaffOrderController extends HttpServlet {
                     log("Parameter orderID has wrong format.");
                 }
 
-                Integer warrantyID = null;
-                try {
-                    warrantyID = Integer.parseInt(request.getParameter("warrantyID"));
-                } catch (NumberFormatException ex) {
-                    log("Parameter warrantyID has wrong format.");
-                }
-
-                if (orderID != null && warrantyID != null) {
+                if (orderID != null ) {
                     try {
-                        if (orderDAO.checkWarrantyActive(warrantyID) == 0) {
-                            request.getSession().setAttribute("errorMessage", "Warranty does not exist.");
-
-                        } else {
-                            if (orderDAO.checkWarranty(warrantyID) != 0) {
-                                request.getSession().setAttribute("errorMessage", "Warranty has been assigned.");
-                            } else {
-                                orderDAO.addWarranty(warrantyID, orderID);
                                 orderDAO.acceptOrder(orderID);
                                 request.getSession().setAttribute("success", "Received order Successfully!!!");
-                            }
-                        }
                     } catch (Exception e) {
-                        log("Error processing order with orderID " + orderID + " and warrantyID " + warrantyID + ": " + e.getMessage());
+                        log("Error processing order with orderID " + orderID + ": " + e.getMessage());
                         request.getSession().setAttribute("errorMessage", "Error receiving order.");
                     }
                 } else {
@@ -227,10 +210,17 @@ public class SalesStaffOrderController extends HttpServlet {
                 } catch (NumberFormatException ex) {
                     log("Parameter orderID has wrong format.");
                 }
+                Integer ringID = null;
+                try {
+                    ringID = Integer.parseInt(request.getParameter("ringID"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter ringID has wrong format.");
+                }
 
                 if (orderID != null) {
                     try {
                         orderDAO.receivedOrder(orderID);
+                        orderDAO.updateWarranty(purchasedDate, ringID);
                         request.getSession().setAttribute("success", "Received order Successfully!!!");
                     } catch (Exception e) {
                         log("Error processing order with orderID " + orderID + ": " + e.getMessage());
