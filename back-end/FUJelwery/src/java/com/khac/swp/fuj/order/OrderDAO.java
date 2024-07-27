@@ -462,6 +462,7 @@ public class OrderDAO {
                     order.setRingSize(ringSize);
                     order.setTotalPrice(totalPrice);
                     order.setStatus(status);
+                    order.setWarrantyName(warrantyName);
 
                     list.add(order);
                 }
