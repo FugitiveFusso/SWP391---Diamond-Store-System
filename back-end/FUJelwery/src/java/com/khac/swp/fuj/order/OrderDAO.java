@@ -329,7 +329,7 @@ public class OrderDAO {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                
+
                 String orderCode = rs.getString("orderCode");
                 int orderID = rs.getInt("orderID");
                 int userID1 = rs.getInt("userID");
@@ -394,39 +394,68 @@ public class OrderDAO {
         List<OrderDTO> list = new ArrayList<OrderDTO>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = "SELECT o.orderID, o.userID, o.orderCode, u.userName, u.address, o.orderDate, r.ringID, r.ringName, "
-                    + "COALESCE(v.voucherID, 0) AS [voucherID], COALESCE(v.voucherName, 'n/a') AS [voucherName], "
-                    + "COALESCE(r.warrantyID, 0) AS [warrantyID], w.warrantyName, o.ringSize, "
-                    + "FORMAT(SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * "
-                    + "((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0') AS [totalPrice], o.status "
-                    + "FROM [OrderDetails] o "
-                    + "LEFT JOIN [User] u ON o.userID = u.userID "
-                    + "LEFT JOIN [Ring] r ON o.ringID = r.ringID "
-                    + "LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID "
-                    + "LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID "
-                    + "LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID "
-                    + "LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID "
-                    + "LEFT JOIN [Warranty] w ON r.warrantyID = w.warrantyID "
+            String sql = "SELECT \n"
+                    + "    o.orderID, \n"
+                    + "    o.userID, \n"
+                    + "    o.orderCode, \n"
+                    + "    u.userName, \n"
+                    + "    u.address, \n"
+                    + "    o.orderDate, \n"
+                    + "    r.ringID, \n"
+                    + "    r.ringName, \n"
+                    + "    COALESCE(v.voucherID, 0) AS voucherID, \n"
+                    + "    COALESCE(v.voucherName, 'n/a') AS voucherName, \n"
+                    + "    COALESCE(r.warrantyID, 0) AS warrantyID, \n"
+                    + "    w.warrantyName, \n"
+                    + "    o.ringSize, \n"
+                    + "    FORMAT(SUM(COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * ((100.0 - COALESCE(v.percentage, 0)) / 100), 'N0') AS totalPrice, \n"
+                    + "    o.status\n"
+                    + "FROM [OrderDetails] o\n"
+                    + "LEFT JOIN [User] u ON o.userID = u.userID\n"
+                    + "LEFT JOIN [Ring] r ON o.ringID = r.ringID\n"
+                    + "LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID\n"
+                    + "LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID\n"
+                    + "LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID\n"
+                    + "LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID\n"
+                    + "LEFT JOIN [Warranty] w ON r.warrantyID = w.warrantyID\n"
                     + "WHERE o.status = 'purchased' ";
 
             if (keyword_a != null && !keyword_a.isEmpty()) {
-                sql += "AND (u.userName LIKE ? OR u.address LIKE ? OR o.orderDate LIKE ? OR r.ringName LIKE ?) ";
+                sql += " AND (o.orderCode like ? OR u.userName LIKE ? OR u.address LIKE ? OR o.orderDate LIKE ? OR r.ringName LIKE ?) ";
             }
 
-            sql += "GROUP BY o.orderID, o.userID, o.orderCode, u.userName, u.address, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, v.percentage, r.warrantyID, w.warrantyName, o.ringSize, o.status "
-                    + "ORDER BY o.orderID ASC "
-                    + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+            sql += "GROUP BY \n"
+                    + "    o.orderID, \n"
+                    + "    o.userID, \n"
+                    + "    o.orderCode, \n"
+                    + "    u.userName, \n"
+                    + "    u.address, \n"
+                    + "    o.orderDate, \n"
+                    + "    r.ringID, \n"
+                    + "    r.ringName, \n"
+                    + "    v.voucherID, \n"
+                    + "    v.voucherName, \n"
+                    + "    v.percentage, \n"
+                    + "    r.warrantyID, \n"
+                    + "    w.warrantyName, \n"
+                    + "    o.ringSize, \n"
+                    + "    o.status\n"
+                    + "ORDER BY o.orderID ASC\n"
+                    + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY;";
 
             PreparedStatement ps = con.prepareStatement(sql);
 
             int paramIndex = 1;
             if (keyword_a != null && !keyword_a.isEmpty()) {
-                ps.setString(paramIndex++, "%" + keyword_a + "%");
-                ps.setString(paramIndex++, "%" + keyword_a + "%");
-                ps.setString(paramIndex++, "%" + keyword_a + "%");
-                ps.setString(paramIndex++, "%" + keyword_a + "%");
+                String keywordParam = "%" + keyword_a + "%";
+                ps.setString(paramIndex++, keywordParam);
+                ps.setString(paramIndex++, keywordParam);
+                ps.setString(paramIndex++, keywordParam);
+                ps.setString(paramIndex++, keywordParam);
+                ps.setString(paramIndex++, keywordParam);
             }
 
+            // Set pagination parameters
             ps.setInt(paramIndex++, (page - 1) * pageSize);
             ps.setInt(paramIndex, pageSize);
 
@@ -489,13 +518,14 @@ public class OrderDAO {
                     + "WHERE o.status = 'purchased' ";
 
             if (keyword_a != null && !keyword_a.isEmpty()) {
-                sql += "AND (u.userName LIKE ? OR u.address LIKE ? OR o.orderDate LIKE ? OR r.ringName LIKE ?)";
+                sql += "AND (o.orderCode like ? or u.userName LIKE ? OR u.address LIKE ? OR o.orderDate LIKE ? OR r.ringName LIKE ?)";
             }
 
             PreparedStatement ps = con.prepareStatement(sql);
 
             int paramIndex = 1;
             if (keyword_a != null && !keyword_a.isEmpty()) {
+                ps.setString(paramIndex++, "%" + keyword_a + "%");
                 ps.setString(paramIndex++, "%" + keyword_a + "%");
                 ps.setString(paramIndex++, "%" + keyword_a + "%");
                 ps.setString(paramIndex++, "%" + keyword_a + "%");
@@ -534,7 +564,7 @@ public class OrderDAO {
                     + "WHERE o.status = 'verified' AND o.purchaseMethod = 'Received at store'";
 
             if (keyword_b != null && !keyword_b.isEmpty()) {
-                sql += "AND (u.userName LIKE ? OR u.address LIKE ? OR o.orderDate LIKE ? OR r.ringName LIKE ?) ";
+                sql += "AND (o.orderCode like ? or u.userName LIKE ? OR u.address LIKE ? OR o.orderDate LIKE ? OR r.ringName LIKE ?) ";
             }
 
             sql += "GROUP BY o.orderID, o.userID, o.orderCode, u.userName, u.address, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, "
@@ -546,6 +576,7 @@ public class OrderDAO {
 
             int paramIndex = 1;
             if (keyword_b != null && !keyword_b.isEmpty()) {
+                ps.setString(paramIndex++, "%" + keyword_b + "%");
                 ps.setString(paramIndex++, "%" + keyword_b + "%");
                 ps.setString(paramIndex++, "%" + keyword_b + "%");
                 ps.setString(paramIndex++, "%" + keyword_b + "%");
@@ -616,13 +647,14 @@ public class OrderDAO {
                     + "WHERE o.status = 'verified' AND o.purchaseMethod = 'Received at store' ";
 
             if (keyword_b != null && !keyword_b.isEmpty()) {
-                sql += "AND (u.userName LIKE ? OR u.address LIKE ? OR o.orderDate LIKE ? OR r.ringName LIKE ?)";
+                sql += "AND (o.orderCode like ? or u.userName LIKE ? OR u.address LIKE ? OR o.orderDate LIKE ? OR r.ringName LIKE ?)";
             }
 
             PreparedStatement ps = con.prepareStatement(sql);
 
             int paramIndex = 1;
             if (keyword_b != null && !keyword_b.isEmpty()) {
+                ps.setString(paramIndex++, "%" + keyword_b + "%");
                 ps.setString(paramIndex++, "%" + keyword_b + "%");
                 ps.setString(paramIndex++, "%" + keyword_b + "%");
                 ps.setString(paramIndex++, "%" + keyword_b + "%");
@@ -674,7 +706,7 @@ public class OrderDAO {
                     + "WHERE (o.purchaseMethod = 'Door-to-door delivery service' AND o.status IN ('shipping', 'verified'))";
 
             if (keyword != null && !keyword.isEmpty()) {
-                sql += " AND (u.userName LIKE ? OR r.ringName LIKE ? OR CONVERT(VARCHAR, o.orderDate, 103) LIKE ? OR u.address LIKE ?)";
+                sql += " AND (o.orderCode like ? or u.userName LIKE ? OR r.ringName LIKE ? OR CONVERT(VARCHAR, o.orderDate, 103) LIKE ? OR u.address LIKE ?)";
             }
 
             sql += " GROUP BY o.orderID, o.orderCode, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, v.percentage, r.warrantyID, o.ringSize, o.status, w.warrantyName"
@@ -684,6 +716,7 @@ public class OrderDAO {
 
             int paramIndex = 1;
             if (keyword != null && !keyword.isEmpty()) {
+                ps.setString(paramIndex++, "%" + keyword + "%");
                 ps.setString(paramIndex++, "%" + keyword + "%");
                 ps.setString(paramIndex++, "%" + keyword + "%");
                 ps.setString(paramIndex++, "%" + keyword + "%");
@@ -751,7 +784,7 @@ public class OrderDAO {
                     + "WHERE o.purchaseMethod = 'Door-to-door delivery service' AND o.status IN ('shipping', 'verified')";
 
             if (keyword != null && !keyword.isEmpty()) {
-                sql += " AND (u.userName LIKE ? OR r.ringName LIKE ? OR CONVERT(VARCHAR, o.orderDate, 103) LIKE ? OR u.address LIKE ?)";
+                sql += " AND (o.orderCode like ? or u.userName LIKE ? OR r.ringName LIKE ? OR CONVERT(VARCHAR, o.orderDate, 103) LIKE ? OR u.address LIKE ?)";
             }
 
             PreparedStatement stmt = con.prepareStatement(sql);
@@ -761,6 +794,7 @@ public class OrderDAO {
                 stmt.setString(2, "%" + keyword + "%");
                 stmt.setString(3, "%" + keyword + "%");
                 stmt.setString(4, "%" + keyword + "%");
+                stmt.setString(5, "%" + keyword + "%");
             }
 
             ResultSet rs = stmt.executeQuery();
@@ -799,7 +833,7 @@ public class OrderDAO {
                     + "HAVING o.status = 'delivered'";
 
             if (keyword != null && !keyword.isEmpty()) {
-                sql += " AND (u.userName LIKE ? OR r.ringName LIKE ? OR o.orderDate LIKE ? OR u.address LIKE ?)";
+                sql += " AND (o.orderCode like ? or u.userName LIKE ? OR r.ringName LIKE ? OR o.orderDate LIKE ? OR u.address LIKE ?)";
             }
 
             sql += " ORDER BY o.orderID ASC OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
@@ -808,6 +842,7 @@ public class OrderDAO {
 
             int paramIndex = 1;
             if (keyword != null && !keyword.isEmpty()) {
+                ps.setString(paramIndex++, "%" + keyword + "%");
                 ps.setString(paramIndex++, "%" + keyword + "%");
                 ps.setString(paramIndex++, "%" + keyword + "%");
                 ps.setString(paramIndex++, "%" + keyword + "%");
@@ -875,7 +910,7 @@ public class OrderDAO {
                     + "WHERE o.status = 'delivered'";
 
             if (keyword != null && !keyword.isEmpty()) {
-                sql += " AND (u.userName LIKE ? OR r.ringName LIKE ? OR o.orderDate LIKE ? OR u.address LIKE ?)";
+                sql += " AND (o.orderCode like ? or u.userName LIKE ? OR r.ringName LIKE ? OR o.orderDate LIKE ? OR u.address LIKE ?)";
             }
 
             PreparedStatement stmt = con.prepareStatement(sql);
@@ -885,6 +920,7 @@ public class OrderDAO {
                 stmt.setString(2, "%" + keyword + "%");
                 stmt.setString(3, "%" + keyword + "%");
                 stmt.setString(4, "%" + keyword + "%");
+                stmt.setString(5, "%" + keyword + "%");
             }
 
             ResultSet rs = stmt.executeQuery();
@@ -923,7 +959,7 @@ public class OrderDAO {
                     + "HAVING (o.status = 'received at store' OR o.status = 'shipping' OR o.status = 'delivered')";
 
             if (keyword != null && !keyword.isEmpty()) {
-                sql += " AND (u.userName LIKE ? OR r.ringName LIKE ? OR o.orderDate LIKE ? OR u.address LIKE ?)";
+                sql += " AND (o.orderCode like ? or u.userName LIKE ? OR r.ringName LIKE ? OR o.orderDate LIKE ? OR u.address LIKE ?)";
             }
 
             sql += " ORDER BY o.orderID ASC OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
@@ -932,6 +968,7 @@ public class OrderDAO {
 
             int paramIndex = 1;
             if (keyword != null && !keyword.isEmpty()) {
+                ps.setString(paramIndex++, "%" + keyword + "%");
                 ps.setString(paramIndex++, "%" + keyword + "%");
                 ps.setString(paramIndex++, "%" + keyword + "%");
                 ps.setString(paramIndex++, "%" + keyword + "%");
@@ -999,7 +1036,7 @@ public class OrderDAO {
                     + "WHERE (o.status = 'received at store' OR o.status = 'shipping' OR o.status = 'delivered')";
 
             if (keyword != null && !keyword.isEmpty()) {
-                sql += " AND (u.userName LIKE ? OR r.ringName LIKE ? OR o.orderDate LIKE ? OR u.address LIKE ?)";
+                sql += " AND (o.orderCode like ? or u.userName LIKE ? OR r.ringName LIKE ? OR o.orderDate LIKE ? OR u.address LIKE ?)";
             }
 
             PreparedStatement stmt = con.prepareStatement(sql);
@@ -1009,6 +1046,7 @@ public class OrderDAO {
                 stmt.setString(2, "%" + keyword + "%");
                 stmt.setString(3, "%" + keyword + "%");
                 stmt.setString(4, "%" + keyword + "%");
+                stmt.setString(5, "%" + keyword + "%");
             }
 
             ResultSet rs = stmt.executeQuery();
@@ -1530,7 +1568,7 @@ public class OrderDAO {
         }
         return false;
     }
-    
+
     public boolean updateWarranty(String purchaseDate, int ringID) {
         String sql = "UPDATE [Warranty] SET startDate = ? FROM [Ring] r JOIN [Warranty] w ON r.warrantyID = w.warrantyID WHERE r.ringID = ? ";
         try {
@@ -1539,7 +1577,7 @@ public class OrderDAO {
             PreparedStatement ps = conn.prepareStatement(sql);
 
             ps.setString(1, purchaseDate);
-            ps.setInt(2,ringID);
+            ps.setInt(2, ringID);
 
             ps.executeUpdate();
             conn.close();
