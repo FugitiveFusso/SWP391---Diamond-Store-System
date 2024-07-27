@@ -109,7 +109,7 @@
                     <table id="pagination">
                         <thead>
                             <tr>
-                                <th>Order ID</th>
+                                <th>Order Code</th>
                                 <th>Username</th>
                                 <th>Ring Name</th>
                                 <th>Ring Size</th>
@@ -127,7 +127,7 @@
                                     pageContext.setAttribute("deliveryorder", deliveryorder);
                             %>
                             <tr>
-                                <td>${deliveryorder.orderID}</td>
+                                <td>${deliveryorder.orderCode}</td>
                                 <td><a href="Delivery_Customer_Controller?action=details&id=${deliveryorder.userID}">${deliveryorder.userName}</a></td>
                                 <td>${deliveryorder.ringName}</td>
                                 <td>${deliveryorder.ringSize}</td>
@@ -146,6 +146,7 @@
                                     <form id="form-delivered-${deliveryorder.orderID}" action="DeliveryStaffOrderController" method="POST">
                                         <input name="action" value="delivered" type="hidden">
                                         <input name="orderID" value="${deliveryorder.orderID}" type="hidden">
+                                        <input name="ringID" value="${deliveryorder.ringID}" type="hidden">
                                         <button type="button" class="btn2" onclick="confirmAction('delivered', '${deliveryorder.orderID}', '${deliveryorder.status}')">Delivered</button>
                                     </form>
                                 </td>

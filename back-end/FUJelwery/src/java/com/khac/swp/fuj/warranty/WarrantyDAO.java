@@ -77,6 +77,12 @@ public class WarrantyDAO {
         }
         return list;
     }
+    
+    public static void main(String[] args) {
+        WarrantyDAO dao = new WarrantyDAO();
+        WarrantyDTO a = dao.load(1);
+        System.out.println(a);
+    }
 
     public int getTotalWarranties(String keyword) {
         int total = 0;
@@ -117,7 +123,7 @@ public class WarrantyDAO {
         String sql = "SELECT w.warrantyID, \n"
                 + "w.warrantyName, \n"
                 + "w.warrantyImage, \n"
-                + "w.warrantyMonth, \n"
+                + "w.warrantyMonth, w.startDate, w.endDate, \n"
                 + "w.warrantyDescription, \n"
                 + "w.warrantyType, \n"
                 + "w.termsAndConditions, \n"
@@ -144,6 +150,8 @@ public class WarrantyDAO {
                 String name = rs.getString("warrantyName");
                 String image = rs.getString("warrantyImage");
                 int month = rs.getInt("warrantyMonth");
+                String startDate = rs.getString("startDate");
+                String endDate = rs.getString("endDate");
                 String description = rs.getString("warrantyDescription");
                 String type = rs.getString("warrantyType");
 
@@ -156,6 +164,8 @@ public class WarrantyDAO {
                 warranty.setName(name);
                 warranty.setImage(image);
                 warranty.setMonth(month);
+                warranty.setStartdate(startDate);
+                warranty.setEnddate(endDate);
                 warranty.setDescription(description);
                 warranty.setType(type);
 

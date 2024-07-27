@@ -157,7 +157,7 @@
                                                 <caption>Purchase Records</caption>
                                                 <thead>
                                                     <tr>
-                                                        <th>Order ID</th>
+                                                        <th>Order Code</th>
                                                         <th>Ring Name</th>
                                                         <th>Ring Size</th>
                                                         <th>Date Purchased</th>
@@ -171,7 +171,7 @@
                                                             pageContext.setAttribute("bill", bill);
                                                     %>
                                                     <tr>
-                                                        <td><a href="HistoryController?action=details&id=${bill.orderID}">${bill.orderID}</a></td>
+                                                        <td><a href="HistoryController?action=details&id=${bill.orderID}">${bill.orderCode}</a></td>
                                                         <td><a href="ProductController?action=details&id=${bill.ringID}">${bill.ringName}</a></td>
                                                         <td>${bill.ringSize}</td>
                                                         <td>${bill.orderDate}</td>

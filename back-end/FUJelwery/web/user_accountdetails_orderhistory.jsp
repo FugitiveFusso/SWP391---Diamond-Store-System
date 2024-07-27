@@ -176,7 +176,20 @@
                                                         <td>${bill.ringSize}</td>
                                                         <td>${bill.orderDate}</td>
                                                         <td style="font-weight: bolder">${bill.totalPrice} VND</td>
-                                                        <td>${bill.status}</td>
+
+                                                        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+                                                        <c:choose>
+                                                            <c:when test="${bill.status == 'purchased'}">
+                                                                <td>Purchased</td>
+                                                            </c:when>
+                                                            <c:when test="${bill.status == 'received at store'}">
+                                                                <td>Received at store</td>
+                                                            </c:when>  
+                                                                <c:when test="${bill.status == 'verified'}">
+                                                                <td>Verified</td>
+                                                            </c:when> 
+                                                        </c:choose>
                                                     </tr>
                                                     <% } %>
                                                 </tbody>
@@ -255,7 +268,24 @@
                                                         <td>${bill.ringSize}</td>
                                                         <td>${bill.orderDate}</td>
                                                         <td style="font-weight: bolder">${bill.totalPrice} VND</td>
-                                                        <td>${bill.status}</td>
+                                                        
+                                                        
+                                                        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+                                                        <c:choose>
+                                                            <c:when test="${bill.status == 'purchased'}">
+                                                                <td>Purchased</td>
+                                                            </c:when>
+                                                            <c:when test="${bill.status == 'shipping'}">
+                                                                <td>Shipping</td>
+                                                            </c:when>  
+                                                                <c:when test="${bill.status == 'delivered'}">
+                                                                <td>Delivered</td>
+                                                            </c:when>  
+                                                                <c:when test="${bill.status == 'verified'}">
+                                                                <td>Verified</td>
+                                                            </c:when> 
+                                                        </c:choose>
                                                     </tr>
                                                     <% }%>
                                                 </tbody>

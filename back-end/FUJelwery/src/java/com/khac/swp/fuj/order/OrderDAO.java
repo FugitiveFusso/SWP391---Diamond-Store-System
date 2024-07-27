@@ -310,7 +310,7 @@ public class OrderDAO {
         List<OrderDTO> list = new ArrayList<>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = "SELECT o.orderID, o.userID, u.userName, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, o.ringSize, "
+            String sql = "SELECT o.orderCode, o.orderID, o.userID, u.userName, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, o.ringSize, "
                     + "FORMAT((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * ((100.0 - COALESCE(v.percentage, 0)) / 100), 'N0') AS totalPrice, o.status "
                     + "FROM [OrderDetails] o "
                     + "LEFT JOIN [User] u ON o.userID = u.userID "
@@ -329,6 +329,8 @@ public class OrderDAO {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
+                
+                String orderCode = rs.getString("orderCode");
                 int orderID = rs.getInt("orderID");
                 int userID1 = rs.getInt("userID");
                 String userName = rs.getString("userName");
@@ -353,7 +355,7 @@ public class OrderDAO {
                 order.setRingSize(ringSize);
                 order.setTotalPrice(totalPrice);
                 order.setStatus(status);
-
+                order.setOrderCode(orderCode);
                 list.add(order);
             }
 
@@ -648,6 +650,7 @@ public class OrderDAO {
             String sql = "SELECT "
                     + "o.orderID, "
                     + "o.userID, "
+                    + "o.orderCode, "
                     + "u.userName, "
                     + "u.address, "
                     + "o.orderDate, "
@@ -655,7 +658,7 @@ public class OrderDAO {
                     + "r.ringName, "
                     + "COALESCE(v.voucherID, 0) AS voucherID, "
                     + "COALESCE(v.voucherName,'n/a') AS voucherName, "
-                    + "COALESCE(o.warrantyID, 0) AS warrantyID, "
+                    + "COALESCE(r.warrantyID, 0) AS warrantyID, "
                     + "COALESCE(w.warrantyName, 'n/a') AS warrantyName, "
                     + "o.ringSize, "
                     + "FORMAT(SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * ((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0') AS totalPrice, "
@@ -667,14 +670,14 @@ public class OrderDAO {
                     + "LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID "
                     + "LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID "
                     + "LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID "
-                    + "LEFT JOIN [Warranty] w ON o.warrantyID = w.warrantyID "
+                    + "LEFT JOIN [Warranty] w ON r.warrantyID = w.warrantyID "
                     + "WHERE (o.purchaseMethod = 'Door-to-door delivery service' AND o.status IN ('shipping', 'verified'))";
 
             if (keyword != null && !keyword.isEmpty()) {
                 sql += " AND (u.userName LIKE ? OR r.ringName LIKE ? OR CONVERT(VARCHAR, o.orderDate, 103) LIKE ? OR u.address LIKE ?)";
             }
 
-            sql += " GROUP BY o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, v.percentage, o.warrantyID, o.ringSize, o.status, w.warrantyName"
+            sql += " GROUP BY o.orderID, o.orderCode, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, v.percentage, r.warrantyID, o.ringSize, o.status, w.warrantyName"
                     + " ORDER BY o.orderID ASC OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
 
             PreparedStatement ps = con.prepareStatement(sql);
@@ -694,6 +697,7 @@ public class OrderDAO {
             while (rs.next()) {
                 int orderID = rs.getInt("orderID");
                 int userID = rs.getInt("userID");
+                String orderCode = rs.getString("orderCode");
                 String userName = rs.getString("userName");
                 String address = rs.getString("address");
                 String orderDate = rs.getString("orderDate");
@@ -708,7 +712,7 @@ public class OrderDAO {
                 String status = rs.getString("status");
 
                 OrderDTO order = new OrderDTO();
-
+                order.setOrderCode(orderCode);
                 order.setOrderID(orderID);
                 order.setUserID(userID);
                 order.setUserName(userName);
@@ -743,7 +747,7 @@ public class OrderDAO {
                     + "LEFT JOIN [User] u ON o.userID = u.userID "
                     + "LEFT JOIN [Ring] r ON o.ringID = r.ringID "
                     + "LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID "
-                    + "LEFT JOIN [Warranty] w ON o.warrantyID = w.warrantyID "
+                    + "LEFT JOIN [Warranty] w ON r.warrantyID = w.warrantyID "
                     + "WHERE o.purchaseMethod = 'Door-to-door delivery service' AND o.status IN ('shipping', 'verified')";
 
             if (keyword != null && !keyword.isEmpty()) {
@@ -777,9 +781,9 @@ public class OrderDAO {
         try {
             Connection con = DBUtils.getConnection();
 
-            String sql = "SELECT o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, "
+            String sql = "SELECT o.orderCode, o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, "
                     + "COALESCE(v.voucherID, 0) AS [voucherID], COALESCE(v.voucherName, 'n/a') AS [voucherName], "
-                    + "COALESCE(o.warrantyID, 0) AS [warrantyID], COALESCE(w.warrantyName, 'n/a') AS [warrantyName], "
+                    + "COALESCE(r.warrantyID, 0) AS [warrantyID], COALESCE(w.warrantyName, 'n/a') AS [warrantyName], "
                     + "o.ringSize, FORMAT(SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * "
                     + "((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0') AS [totalPrice], o.status "
                     + "FROM [OrderDetails] o "
@@ -789,9 +793,9 @@ public class OrderDAO {
                     + "LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID "
                     + "LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID "
                     + "LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID "
-                    + "LEFT JOIN [Warranty] w ON o.warrantyID = w.warrantyID "
-                    + "GROUP BY o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, "
-                    + "v.voucherID, v.voucherName, v.percentage, o.warrantyID, o.ringSize, o.status, o.purchaseMethod, w.warrantyName "
+                    + "LEFT JOIN [Warranty] w ON r.warrantyID = w.warrantyID "
+                    + "GROUP BY o.orderCode, o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, "
+                    + "v.voucherID, v.voucherName, v.percentage, r.warrantyID, o.ringSize, o.status, o.purchaseMethod, w.warrantyName "
                     + "HAVING o.status = 'delivered'";
 
             if (keyword != null && !keyword.isEmpty()) {
@@ -815,6 +819,7 @@ public class OrderDAO {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
+                String orderCode = rs.getString("orderCode");
                 int orderID = rs.getInt("orderID");
                 int userID = rs.getInt("userID");
                 String userName = rs.getString("userName");
@@ -831,6 +836,7 @@ public class OrderDAO {
                 String status = rs.getString("status");
 
                 OrderDTO order = new OrderDTO();
+                order.setOrderCode(orderCode);
                 order.setOrderID(orderID);
                 order.setUserID(userID);
                 order.setUserName(userName);
@@ -865,7 +871,7 @@ public class OrderDAO {
                     + "LEFT JOIN [User] u ON o.userID = u.userID "
                     + "LEFT JOIN [Ring] r ON o.ringID = r.ringID "
                     + "LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID "
-                    + "LEFT JOIN [Warranty] w ON o.warrantyID = w.warrantyID "
+                    + "LEFT JOIN [Warranty] w ON r.warrantyID = w.warrantyID "
                     + "WHERE o.status = 'delivered'";
 
             if (keyword != null && !keyword.isEmpty()) {
@@ -899,9 +905,9 @@ public class OrderDAO {
         try {
             Connection con = DBUtils.getConnection();
 
-            String sql = "SELECT o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, "
+            String sql = "SELECT o.orderCode, o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, "
                     + "COALESCE(v.voucherID, 0) AS [voucherID], COALESCE(v.voucherName, 'n/a') AS [voucherName], "
-                    + "COALESCE(o.warrantyID, 0) AS [warrantyID], COALESCE(w.warrantyName, 'n/a') AS [warrantyName], "
+                    + "COALESCE(r.warrantyID, 0) AS [warrantyID], COALESCE(w.warrantyName, 'n/a') AS [warrantyName], "
                     + "o.ringSize, FORMAT(SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * "
                     + "((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0') AS [totalPrice], o.status "
                     + "FROM [OrderDetails] o "
@@ -911,9 +917,9 @@ public class OrderDAO {
                     + "LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID "
                     + "LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID "
                     + "LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID "
-                    + "LEFT JOIN [Warranty] w ON o.warrantyID = w.warrantyID "
-                    + "GROUP BY o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, "
-                    + "v.voucherID, v.voucherName, v.percentage, o.warrantyID, o.ringSize, o.status, o.purchaseMethod, w.warrantyName "
+                    + "LEFT JOIN [Warranty] w ON r.warrantyID = w.warrantyID "
+                    + "GROUP BY o.orderCode, o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, "
+                    + "v.voucherID, v.voucherName, v.percentage, r.warrantyID, o.ringSize, o.status, o.purchaseMethod, w.warrantyName "
                     + "HAVING (o.status = 'received at store' OR o.status = 'shipping' OR o.status = 'delivered')";
 
             if (keyword != null && !keyword.isEmpty()) {
@@ -937,6 +943,7 @@ public class OrderDAO {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
+                String orderCode = rs.getString("orderCode");
                 int orderID = rs.getInt("orderID");
                 int userID = rs.getInt("userID");
                 String userName = rs.getString("userName");
@@ -953,6 +960,7 @@ public class OrderDAO {
                 String status = rs.getString("status");
 
                 OrderDTO order = new OrderDTO();
+                order.setOrderCode(orderCode);
                 order.setOrderID(orderID);
                 order.setUserID(userID);
                 order.setUserName(userName);
@@ -987,7 +995,7 @@ public class OrderDAO {
                     + "LEFT JOIN [User] u ON o.userID = u.userID "
                     + "LEFT JOIN [Ring] r ON o.ringID = r.ringID "
                     + "LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID "
-                    + "LEFT JOIN [Warranty] w ON o.warrantyID = w.warrantyID "
+                    + "LEFT JOIN [Warranty] w ON r.warrantyID = w.warrantyID "
                     + "WHERE (o.status = 'received at store' OR o.status = 'shipping' OR o.status = 'delivered')";
 
             if (keyword != null && !keyword.isEmpty()) {
@@ -1067,7 +1075,7 @@ public class OrderDAO {
 
     public OrderDTO loadBillDetail(int orderID) {
 
-        String sql = "SELECT o.orderID, o.userID, u.userName, u.address, o.orderDate, o.purchaseMethod, r.ringID, r.ringName, r.ringImage, o.warrantyID, w.warrantyName, w.warrantyMonth, CAST(w.warrantyDescription AS VARCHAR(255)) AS [warrantyDescription], w.warrantyType, w.startDate, w.endDate, CAST(w.termsAndConditions AS VARCHAR(255)) AS [termsAndConditions], w.warrantyImage, c.certificateImage, COALESCE(v.voucherID, 0) AS [voucherID], COALESCE(v.voucherName, 'n/a') AS [voucherName], COALESCE(c.certificateID, 0) AS [certificateID], COALESCE(c.description, 'n/a') AS [certificateName], o.ringSize, FORMAT(SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * ((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0') AS [totalPrice], o.status FROM [OrderDetails] o LEFT JOIN [User] u ON o.userID = u.userID LEFT JOIN [Ring] r ON o.ringID = r.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID LEFT JOIN [Warranty] w ON o.warrantyID = w.warrantyID LEFT JOIN [Certificate] c ON d.certificateID = c.certificateID WHERE o.orderID = ? AND o.status <> 'pending' GROUP BY o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, r.ringImage, o.warrantyID, w.warrantyName, w.warrantyMonth, CAST(w.warrantyDescription AS VARCHAR(255)), w.warrantyType, w.startDate, w.endDate, CAST(w.termsAndConditions AS VARCHAR(255)), w.warrantyImage, c.certificateImage, v.voucherID, v.voucherName, c.certificateID, c.description, o.ringSize, o.status, o.purchaseMethod";
+        String sql = "SELECT o.orderID, o.userID, u.userName, u.address, o.orderDate, o.purchaseMethod, r.ringID, r.ringName, r.ringImage, r.warrantyID, w.warrantyName, w.warrantyMonth, CAST(w.warrantyDescription AS VARCHAR(255)) AS [warrantyDescription], w.warrantyType, w.startDate, w.endDate, CAST(w.termsAndConditions AS VARCHAR(255)) AS [termsAndConditions], w.warrantyImage, c.certificateImage, COALESCE(v.voucherID, 0) AS [voucherID], COALESCE(v.voucherName, 'n/a') AS [voucherName], COALESCE(c.certificateID, 0) AS [certificateID], COALESCE(c.description, 'n/a') AS [certificateName], o.ringSize, FORMAT(SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * ((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0') AS [totalPrice], o.status FROM [OrderDetails] o LEFT JOIN [User] u ON o.userID = u.userID LEFT JOIN [Ring] r ON o.ringID = r.ringID LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID LEFT JOIN [Warranty] w ON r.warrantyID = w.warrantyID LEFT JOIN [Certificate] c ON d.certificateID = c.certificateID WHERE o.orderID = ? AND o.status <> 'pending' GROUP BY o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, r.ringImage, r.warrantyID, w.warrantyName, w.warrantyMonth, CAST(w.warrantyDescription AS VARCHAR(255)), w.warrantyType, w.startDate, w.endDate, CAST(w.termsAndConditions AS VARCHAR(255)), w.warrantyImage, c.certificateImage, v.voucherID, v.voucherName, c.certificateID, c.description, o.ringSize, o.status, o.purchaseMethod";
 
         try {
 
@@ -1242,7 +1250,7 @@ public class OrderDAO {
 
     public Integer checkRingActiveInCart(int userID) {
 
-        String sql = "select ringID from [Ring] r JOIN [OrderDetails] o ON r.ringID = o.ringID where userID = ? and r.status = 'outOfStock' ";
+        String sql = "select r.ringID from [Ring] r JOIN [OrderDetails] o ON r.ringID = o.ringID where o.userID = ? and r.status = 'outOfStock' and o.status = 'pending'";
 
         try {
 
@@ -1258,7 +1266,7 @@ public class OrderDAO {
 
             }
         } catch (SQLException ex) {
-            System.out.println("Query User error!" + ex.getMessage());
+            System.out.println("Query Ring error!" + ex.getMessage());
             ex.printStackTrace();
         }
         return null;

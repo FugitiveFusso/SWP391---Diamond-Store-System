@@ -48,7 +48,7 @@ public class DeliveryStaffOrderController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             String action = request.getParameter("action");
             String keyword = request.getParameter("keyword");
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate localDate = LocalDate.now();
             String purchasedDate = localDate.format(formatter);
             if (keyword == null) {
@@ -160,10 +160,17 @@ public class DeliveryStaffOrderController extends HttpServlet {
                 } catch (NumberFormatException ex) {
                     log("Parameter orderID has wrong format.");
                 }
+                Integer ringID = null;
+                try {
+                    ringID = Integer.parseInt(request.getParameter("ringID"));
+                } catch (NumberFormatException ex) {
+                    log("Parameter ringID has wrong format.");
+                }
 
                 if (orderID != null) {
                     try {
                         orderDAO.deliveredOrder(orderID);
+                        orderDAO.updateWarranty(purchasedDate, ringID);
                         request.getSession().setAttribute("success", "Received order Successfully!!!");
                     } catch (Exception e) {
                         log("Error processing order with orderID " + orderID + e.getMessage());
