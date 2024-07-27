@@ -117,6 +117,22 @@
                             <p class="text-muted"> Quantity: 1 Ring</p>
                             <h4 class="mt-3 mb-4 font-weight-bold"> ${requestScope.bill.totalPrice} <span class="small text-muted"> VND </span></h4>
                             <p class="text-muted">Tracking Status: <span class="Today"><strong>${requestScope.bill.status}</strong></span></p>  
+                            <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+                            <c:choose>
+                                <c:when test="${requestScope.bill.status == 'purchased'}">
+                                    <p class="text-muted">Tracking Status: <span class="Today"><strong>Purchased</strong></span></p>  
+                                </c:when>
+                                <c:when test="${requestScope.bill.status == 'shipping'}">
+                                    <p class="text-muted">Tracking Status: <span class="Today"><strong>Shipping</strong></span></p>  
+                                </c:when>  
+                                <c:when test="${requestScope.bill.status == 'delivered'}">
+                                    <p class="text-muted">Tracking Status: <span class="Today"><strong>Delivered</strong></span></p>  
+                                </c:when> 
+                                <c:when test="${requestScope.bill.status == 'verified'}">
+                                    <p class="text-muted">Tracking Status: <span class="Today"><strong>Verified</strong></span></p>  
+                                </c:when> 
+                            </c:choose>
                             <div class="row justify-content-center">
                                 <div class="col-auto btn-container">
                                     <button type="button" class="btn btn-outline-primary">

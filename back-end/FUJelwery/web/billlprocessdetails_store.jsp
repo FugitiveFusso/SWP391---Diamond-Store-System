@@ -112,8 +112,20 @@
                         <div class="media-body">
                             <h5 class="font-weight-bold">${requestScope.bill.ringName}</h5>
                             <p class="text-muted"> Quantity: 1 Ring</p>
-                            <h4 class="mt-3 mb-4 font-weight-bold"> ${requestScope.bill.totalPrice} <span class="small text-muted"> VND </span></h4>
-                            <p class="text-muted">Tracking Status: <span class="Today"><strong>${requestScope.bill.status}</strong></span></p>  
+                            <h4 class="mt-3 mb-4 font-weight-bold"> ${requestScope.bill.totalPrice} <span class="small text-muted"> VND </span></h4>                            
+                            <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+                            <c:choose>
+                                <c:when test="${requestScope.bill.status == 'purchased'}">
+                                    <p class="text-muted">Tracking Status: <span class="Today"><strong>Purchased</strong></span></p>  
+                                </c:when>
+                                <c:when test="${requestScope.bill.status == 'received at store'}">
+                                    <p class="text-muted">Tracking Status: <span class="Today"><strong>Received at store</strong></span></p>  
+                                </c:when>  
+                                <c:when test="${requestScope.bill.status == 'verified'}">
+                                    <p class="text-muted">Tracking Status: <span class="Today"><strong>Verified</strong></span></p>  
+                                </c:when> 
+                            </c:choose>
                             <p class="text-muted" style="font-style: italic">* After the product has been verified, you can go to our store to get the product.</p>  
                             <div class="row justify-content-center">
                                 <div class="col-auto btn-container">
@@ -134,28 +146,7 @@
                 </div>               
             </div>
         </div>
-        <!--        <div class="container mt-4">
-                    <div class="row">
-        
-                        <div class="col-md-6">
-                            <div class="card">
-                                <img src="${requestScope.bill.ringImage}" class="card-img-top" alt="Voucher Image" style="height: 500px; object-fit: cover;">
-                            </div>
-                        </div>
-        
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="card-title" style="font-weight: 700">${requestScope.bill.ringName}</h4>
-                                    <p class="card-text"><strong>Status</strong> ${requestScope.bill.status}</p>
-                                    <p class="card-text"><strong>Date of purchase</strong> ${requestScope.bill.orderDate}</p>
-                                    <p class="card-text"><strong>Voucher:</strong> ${requestScope.bill.voucherName}</p>
-                                    <p class="card-text"><strong>Total Price:</strong> ${requestScope.bill.totalPrice}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>-->
+
         <div class="footer">
             <div class="footer-content">
                 <div class="info">
