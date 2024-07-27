@@ -175,8 +175,12 @@
                 </div>
                 <hr style="margin-bottom: 10px;">
                 <p class="price" style="margin-top: 20px;"><strong style="color: #151542">Total Price:</strong> ${requestScope.product.totalPrice} VND</p>
-                <p id="status">Status: ${requestScope.product.status}</p>
-
+                <!--<p id="status">Status: ${requestScope.product.status}</p>-->
+                <c:choose>
+                    <c:when test="${requestScope.product.status == 'outOfStock'}">
+                        <button id="status" type="button" disabled class="unavailable-btn">Unavailable</button>
+                    </c:when>
+                </c:choose>
                 <form id="addToCartForm" action="#" method="post" class="buttons-form">
                     <select name="ringSize" class="productquantities" required>
                         <option value="" disabled selected>Select ring size</option>
