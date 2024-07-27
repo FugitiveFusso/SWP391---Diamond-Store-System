@@ -1244,7 +1244,7 @@ public class OrderDAO {
 
     public Integer checkRingActiveInCart(int userID) {
 
-        String sql = "select ringID from [Ring] r JOIN [OrderDetails] o ON r.ringID = o.ringID where userID = ? and r.status = 'outOfStock' ";
+        String sql = "select r.ringID from [Ring] r JOIN [OrderDetails] o ON r.ringID = o.ringID where o.userID = ? and r.status = 'outOfStock' and o.status = 'pending'";
 
         try {
 
@@ -1260,7 +1260,7 @@ public class OrderDAO {
 
             }
         } catch (SQLException ex) {
-            System.out.println("Query User error!" + ex.getMessage());
+            System.out.println("Query Ring error!" + ex.getMessage());
             ex.printStackTrace();
         }
         return null;
