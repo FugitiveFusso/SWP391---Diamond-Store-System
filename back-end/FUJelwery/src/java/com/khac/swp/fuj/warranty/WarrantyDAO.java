@@ -77,12 +77,6 @@ public class WarrantyDAO {
         }
         return list;
     }
-    
-    public static void main(String[] args) {
-        WarrantyDAO dao = new WarrantyDAO();
-        WarrantyDTO a = dao.load(1);
-        System.out.println(a);
-    }
 
     public int getTotalWarranties(String keyword) {
         int total = 0;
@@ -120,22 +114,27 @@ public class WarrantyDAO {
 
     public WarrantyDTO load(int warrantyID) {
 
-        String sql = "SELECT w.warrantyID, \n"
-                + "w.warrantyName, \n"
-                + "w.warrantyImage, \n"
-                + "w.warrantyMonth, w.startDate, w.endDate, \n"
-                + "w.warrantyDescription, \n"
-                + "w.warrantyType, \n"
-                + "w.termsAndConditions, \n"
-                + "ISNULL(r.ringID, 0) AS ringID, \n"
-                + "CASE \n"
-                + "    WHEN w.isDeleted = 'deleted' THEN 'Deleted' \n"
-                + "    WHEN r.ringID IS NOT NULL THEN 'Applied' \n"
-                + "    ELSE 'Not Applied' \n"
-                + "END AS [status] \n"
+        String sql = "SELECT \n"
+                + "    w.warrantyID, \n"
+                + "    w.warrantyName, \n"
+                + "    w.warrantyImage, \n"
+                + "    w.warrantyMonth, \n"
+                + "    w.startDate, \n"
+                + "    w.endDate, \n"
+                + "    w.warrantyDescription, \n"
+                + "    w.warrantyType, \n"
+                + "    w.termsAndConditions, \n"
+                + "    ISNULL(r.ringID, 0) AS ringID, \n"
+                + "    CASE \n"
+                + "        WHEN w.isDeleted = 'deleted' THEN 'Deleted' \n"
+                + "        WHEN r.ringID IS NOT NULL THEN 'Applied' \n"
+                + "        ELSE 'Not Applied' \n"
+                + "    END AS [status], \n"
+                + "    od.orderID\n"
                 + "FROM Warranty w \n"
                 + "LEFT JOIN [Ring] r ON w.warrantyID = r.warrantyID \n"
-                + "WHERE w.warrantyID = ?\n";
+                + "LEFT JOIN [OrderDetails] od ON r.ringID = od.ringID \n"
+                + "WHERE w.warrantyID = ?";
 
         try {
 
@@ -146,6 +145,7 @@ public class WarrantyDAO {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
 
+                int orderID = rs.getInt("orderID");
                 int id = rs.getInt("warrantyID");
                 String name = rs.getString("warrantyName");
                 String image = rs.getString("warrantyImage");
@@ -160,6 +160,7 @@ public class WarrantyDAO {
                 String status = rs.getString("status");
 
                 WarrantyDTO warranty = new WarrantyDTO();
+                warranty.setOrderID(orderID);
                 warranty.setId(id);
                 warranty.setName(name);
                 warranty.setImage(image);
@@ -280,7 +281,6 @@ public class WarrantyDAO {
         return null;
     }
 
-    
     public WarrantyDTO loadStatistics() {
 
         String sql = "WITH ActiveWarrantyStats AS (\n"

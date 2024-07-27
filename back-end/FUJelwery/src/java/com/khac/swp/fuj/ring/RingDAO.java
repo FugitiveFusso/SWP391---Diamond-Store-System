@@ -154,21 +154,57 @@ public class RingDAO {
     }
 
     public RingDTO load(int ringID) {
-        String sql = "SELECT r.status, r.warrantyID, r.ringID, r.rpID, r.ringName, r.ringImage, r.diamondID, FORMAT(r.price , 'N0') AS ringPrice, "
-                + "FORMAT(((r.price + rp.rpPrice + dp.price)*1.02) , 'N0') AS totalPrice, r.collectionID, r.categoryID, "
-                + "rp.rName, rp.material, rp.color AS [ringColor], FORMAT(rp.rpPrice , 'N0') AS rpPrice, d.diamondName, "
-                + "d.diamondImage, d.origin, d.certificateID, dp.diamondSize, dp.caratWeight, dp.color AS [diamondColor], "
-                + "dp.clarity, dp.cut, FORMAT(dp.price , 'N0') AS [diamondShapePrice], "
-                + "c.collectionName, cat.categoryName, "
-                + "w.warrantyName, w.warrantyMonth, w.warrantyDescription, w.warrantyType "
-                + "FROM [Ring] r "
-                + "LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID "
-                + "LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID "
-                + "LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID "
-                + "LEFT JOIN [Collection] c ON r.collectionID = c.collectionID "
-                + "LEFT JOIN [Category] cat ON r.categoryID = cat.categoryID "
-                + "LEFT JOIN [Warranty] w ON r.warrantyID = w.warrantyID "
-                + "WHERE r.ringID = ?";
+        String sql = "SELECT \n"
+                + "    r.status, \n"
+                + "    r.warrantyID, \n"
+                + "    r.ringID, \n"
+                + "    r.rpID, \n"
+                + "    r.ringName, \n"
+                + "    r.ringImage, \n"
+                + "    r.diamondID, \n"
+                + "    FORMAT(r.price , 'N0') AS ringPrice, \n"
+                + "    FORMAT(((r.price + rp.rpPrice + dp.price)*1.02) , 'N0') AS totalPrice, \n"
+                + "    r.collectionID, \n"
+                + "    r.categoryID, \n"
+                + "    rp.rName, \n"
+                + "    rp.material, \n"
+                + "    rp.color AS [ringColor], \n"
+                + "    FORMAT(rp.rpPrice , 'N0') AS rpPrice, \n"
+                + "    d.diamondName, \n"
+                + "    d.diamondImage, \n"
+                + "    d.origin, \n"
+                + "    d.certificateID, \n"
+                + "    dp.diamondSize, \n"
+                + "    dp.caratWeight, \n"
+                + "    dp.color AS [diamondColor], \n"
+                + "    dp.clarity, \n"
+                + "    dp.cut, \n"
+                + "    FORMAT(dp.price , 'N0') AS [diamondShapePrice], \n"
+                + "    c.collectionName, \n"
+                + "    cat.categoryName, \n"
+                + "    w.warrantyName, \n"
+                + "    w.warrantyMonth, \n"
+                + "    w.warrantyDescription, \n"
+                + "    w.warrantyType,\n"
+                + "    od.orderID\n"
+                + "FROM \n"
+                + "    [Ring] r \n"
+                + "LEFT JOIN \n"
+                + "    [RingPlacementPrice] rp ON r.rpID = rp.rpID \n"
+                + "LEFT JOIN \n"
+                + "    [Diamond] d ON d.diamondID = r.diamondID \n"
+                + "LEFT JOIN \n"
+                + "    [DiamondPrice] dp ON d.dpID = dp.dpID \n"
+                + "LEFT JOIN \n"
+                + "    [Collection] c ON r.collectionID = c.collectionID \n"
+                + "LEFT JOIN \n"
+                + "    [Category] cat ON r.categoryID = cat.categoryID \n"
+                + "LEFT JOIN \n"
+                + "    [Warranty] w ON r.warrantyID = w.warrantyID \n"
+                + "LEFT JOIN \n"
+                + "    [OrderDetails] od ON r.ringID = od.ringID\n"
+                + "WHERE \n"
+                + "    r.ringID = ?;";
 
         try {
 
@@ -178,7 +214,7 @@ public class RingDAO {
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-
+                int orderID = rs.getInt("orderID");
                 int rpID = rs.getInt("rpID");
                 String ringName = rs.getString("ringName");
                 String ringImage = rs.getString("ringImage");
@@ -214,7 +250,7 @@ public class RingDAO {
 
                 RingDTO ring = new RingDTO();
                 ring.setWarrantyID(warrantyID);
-
+                ring.setOrderID(orderID);
                 ring.setRingID(ringID);
                 ring.setStatus(status);
                 ring.setRpID(rpID);

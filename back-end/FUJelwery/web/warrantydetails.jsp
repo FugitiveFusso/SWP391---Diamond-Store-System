@@ -198,6 +198,19 @@
                                 <strong>No valid Ring ID found.</strong>
                             </p>
                             <% }%>
+
+                            <%-- Check if warranty is not null and has a valid orderID --%>
+                            <% if (warranty != null && warranty.getOrderID()!= 0) { %>
+                            <p class="card-text">
+                                <a href="SalesHistory?action=historydetails&id=${warranty.getOrderID()}">
+                                    <strong>Order ID:</strong> ${warranty.getOrderID()}
+                                </a>
+                            </p>
+                            <% } else { %>
+                            <p class="card-text">
+                                <strong>No valid Order ID found.</strong>
+                            </p>
+                            <% }%>
                             <p class="card-text">
                                 <strong>Status: </strong> 
                                 <span class="${requestScope.warranty.status == 'Applied' ? 'text-success' : 'text-danger'}">

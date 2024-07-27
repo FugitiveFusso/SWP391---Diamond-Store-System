@@ -1,4 +1,5 @@
 
+<%@page import="com.khac.swp.fuj.ring.RingDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -163,10 +164,25 @@
                             <p class="card-text"><strong>Color:</strong> ${requestScope.ring.color}</p>
                             <p class="card-text"><strong>Clarity:</strong> ${requestScope.ring.clarity}</p>
                             <p class="card-text"><strong>Cut:</strong> ${requestScope.ring.cut}</p>
-                            <p class="card-text"><strong>WarrantyID:</strong> <a href="WarrantyController?action=details&id=${requestScope.ring.warrantyID}">${requestScope.ring.warrantyID}</a></p>
+                            <p class="card-text"><strong>Warranty ID:</strong> <a href="WarrantyController?action=details&id=${requestScope.ring.warrantyID}">${requestScope.ring.warrantyID}</a></p>
 
                             <p class="card-text"><strong>Diamond Price:</strong> ${requestScope.ring.diamondPrice} VND</p>
                             <p class="card-text"><strong>Total Price:</strong> ${requestScope.ring.totalPrice} VND</p>
+                            <%-- Retrieve warranty object from request attribute --%>
+                            <% RingDTO ring = (RingDTO) request.getAttribute("ring"); %>
+
+                            <%-- Check if warranty is not null and has a valid orderID --%>
+                            <% if (ring != null && ring.getOrderID()!= 0) { %>
+                            <p class="card-text">
+                                <a href="RingController?action=details&id=${ring.getOrderID()}">
+                                    <strong>Order ID:</strong> ${ring.getOrderID()}
+                                </a>
+                            </p>
+                            <% } else { %>
+                            <p class="card-text">
+                                <strong>No valid Order ID found.</strong>
+                            </p>
+                            <% }%>
                             <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
                             <c:choose>
