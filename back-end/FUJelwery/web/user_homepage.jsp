@@ -23,7 +23,7 @@
                 <img src="images/404-tick.png" alt="Success Icon">
                 <h2>Thank you!</h2>
                 <p><%= success%></p>
-                <button type="button" onclick="closePopup()">OK</button>
+                <button type="button" onclick="closePopup()">Confirm</button>
             </div>           
         </div>
         <%
@@ -38,9 +38,9 @@
         <div class="container">
             <div class="popup open-popup" id="popup">
                 <img src="images/error.png" alt="Failed Icon">
-                <h2>Oops...</h2>
+                <h2>Oops!!!</h2>
                 <p><%= failed%></p>
-                <button type="button" onclick="closePopup()">I understood</button>
+                <button type="button" onclick="closePopup()">Confirm</button>
             </div>           
         </div>
         <%

@@ -69,8 +69,8 @@
                         <a href="user_accountdetails.jsp" class="line">Account</a>
                         <div class="sub-menu-1">
                             <ul>
-                                <li><a href='./userlogin?action=logout'>Logout</a></li> 
                                 <li><a href='HistoryController?action=list&id=${sessionScope.usersession.userid}'>History</a></li>
+                                <li><a href='./userlogin?action=logout'>Logout</a></li>                         
                             </ul>
                         </div>
                     </li>
@@ -116,7 +116,7 @@
                             <h5 class="font-weight-bold">${requestScope.bill.ringName}</h5>
                             <p class="text-muted"> Quantity: 1 Ring</p>
                             <h4 class="mt-3 mb-4 font-weight-bold"> ${requestScope.bill.totalPrice} <span class="small text-muted"> VND </span></h4>
-                            <p class="text-muted">Tracking Status: <span class="Today"><strong>${requestScope.bill.status}</strong></span></p>  
+                            
                             <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
                             <c:choose>
