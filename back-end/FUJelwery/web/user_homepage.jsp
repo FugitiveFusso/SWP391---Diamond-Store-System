@@ -29,6 +29,23 @@
         <%
             }
         %>
+        
+        <%
+            String failed = (String) session.getAttribute("failed");
+            if (failed != null) {
+                session.removeAttribute("failed");
+        %>              
+        <div class="container">
+            <div class="popup open-popup" id="popup">
+                <img src="images/error.png" alt="Failed Icon">
+                <h2>Oops...</h2>
+                <p><%= failed%></p>
+                <button type="button" onclick="closePopup()">I understood</button>
+            </div>           
+        </div>
+        <%
+            }
+        %>
 
 
         <div class="header">
