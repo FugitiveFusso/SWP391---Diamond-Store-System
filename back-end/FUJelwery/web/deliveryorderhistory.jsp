@@ -109,7 +109,7 @@
                     <table id="pagination">
                         <thead>
                             <tr>
-                                <th>Order ID</th>
+                                <th>Order Code</th>
                                 <th>Username</th>
                                 <th>Ring Name</th>
                                 <th>Ring Size</th>
@@ -125,7 +125,7 @@
                                     pageContext.setAttribute("deliveryorder", deliveryorder);
                             %>
                             <tr>
-                                <td><a href="DeliveryHistory?action=historydetails&id=${deliveryorder.orderID}">${deliveryorder.orderID}</td>
+                                <td><a href="DeliveryHistory?action=historydetails&id=${deliveryorder.orderID}">${deliveryorder.orderCode}</td>
                                 <td><a href="Delivery_Customer_Controller?action=details&id=${deliveryorder.userID}">${deliveryorder.userName}</a></td>
                                 <td>${deliveryorder.ringName}</td>
                                 <td>${deliveryorder.ringSize}</td>

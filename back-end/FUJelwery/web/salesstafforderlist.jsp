@@ -150,11 +150,11 @@
                         <input name=keyword_a type=text class="search-input" value="<%=request.getParameter("keyword_a") != null ? request.getParameter("keyword_a") : ""%>">
                         <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
                     </form>
-                    <div class="title">Delivering Order</div>
+                    <div class="title">Processing Order</div>
                     <table id="pagination">
                         <thead>
                             <tr>
-                                <th>Order ID</th>
+                                <th>Order Code</th>
                                 <th>Username</th>
                                 <th>Ring Name</th>
                                 <th>Ring Size</th>
@@ -172,13 +172,13 @@
                                     pageContext.setAttribute("salesorder", salesorder);
                             %>
                             <tr>
-                                <td>${salesorder.orderID}</td>
+                                <td>${salesorder.orderCode}</td>
                                 <td><a href="Staff_Customer_Controller?action=details&id=${salesorder.userID}">${salesorder.userName}</a></td>
                                 <td><a href="RingController?action=details&id=${salesorder.ringID}">${salesorder.ringName}</a></td>
                                 <td>${salesorder.ringSize}</td>
                                 <td>${salesorder.orderDate}</td>
                                 <td>${salesorder.address}</td>
-                                <td>${salesorder.warrantyName}</td>
+                                <td><a href="WarrantyController?action=details&id=${salesorder.warrantyID}">${salesorder.warrantyName}</a></td>
                                 <td>${salesorder.totalPrice} VND</td>
                                 <td>
                                     <form action="SalesStaffOrderController" method="POST">
@@ -252,7 +252,7 @@
                     <table id="pagination1">
                         <thead>
                             <tr>
-                                <th>Order ID</th>
+                                <th>Order Code</th>
                                 <th>Username</th>
                                 <th>Ring Name</th>
                                 <th>Ring Size</th>
@@ -270,13 +270,13 @@
                                     pageContext.setAttribute("salesorder", salesorder);
                             %>
                             <tr>
-                                <td>${salesorder.orderID}</td>
+                                <td>${salesorder.orderCode}</td>
                                 <td><a href="Staff_Customer_Controller?action=details&id=${salesorder.userID}">${salesorder.userName}</td>
-                                <td>${salesorder.ringName}</td>
+                                <td><a href="RingController?action=details&id=${salesorder.ringID}">${salesorder.ringName}</a></td>
                                 <td>${salesorder.ringSize}</td>
                                 <td>${salesorder.orderDate}</td>
                                 <td>${salesorder.address}</td>
-                                <td>${salesorder.warrantyName}</td>
+                                <td><a href="WarrantyController?action=details&id=${salesorder.warrantyID}">${salesorder.warrantyName}</a></td>
                                 <td>${salesorder.totalPrice} VND</td>
                                 <td>
                                     <form action="SalesStaffOrderController" method="POST">
