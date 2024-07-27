@@ -160,7 +160,7 @@
                                 <th>Ring Size</th>
                                 <th>Date of Purchase</th>
                                 <th>Destination</th>
-                                <th>Warranty ID</th>
+                                <th>Warranty Name</th>
                                 <th>Price</th>
                                 <th>Accept</th>                   
                             </tr>
@@ -178,12 +178,10 @@
                                 <td>${salesorder.ringSize}</td>
                                 <td>${salesorder.orderDate}</td>
                                 <td>${salesorder.address}</td>
-                                <td>
-                                    <input type="text" class="search" name="warrantyID" id="warrantyID_${salesorder.orderID}" placeholder="Enter Warranty ID" required>
-                                </td>
+                                <td>${salesorder.warrantyName}</td>
                                 <td>${salesorder.totalPrice} VND</td>
                                 <td>
-                                    <button type="button" class="accept-btn" data-order-id="${salesorder.orderID}" data-warranty-id="warrantyID_${salesorder.orderID}">Accept</button>
+                                    <button type="button" class="accept-btn" data-order-id="${salesorder.orderID}">Accept</button>
                                 </td>
                             </tr>
                             <%

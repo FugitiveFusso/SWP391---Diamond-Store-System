@@ -392,9 +392,9 @@ public class OrderDAO {
         List<OrderDTO> list = new ArrayList<OrderDTO>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = "SELECT o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, "
+            String sql = "SELECT o.orderID, o.userID, o.orderCode, u.userName, u.address, o.orderDate, r.ringID, r.ringName, "
                     + "COALESCE(v.voucherID, 0) AS [voucherID], COALESCE(v.voucherName, 'n/a') AS [voucherName], "
-                    + "COALESCE(o.warrantyID, 0) AS [warrantyID], o.ringSize, "
+                    + "COALESCE(r.warrantyID, 0) AS [warrantyID], w.warrantyName, o.ringSize, "
                     + "FORMAT(SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * "
                     + "((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0') AS [totalPrice], o.status "
                     + "FROM [OrderDetails] o "
@@ -404,13 +404,14 @@ public class OrderDAO {
                     + "LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID "
                     + "LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID "
                     + "LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID "
+                    + "LEFT JOIN [Warranty] w ON r.warrantyID = w.warrantyID "
                     + "WHERE o.status = 'purchased' ";
 
             if (keyword_a != null && !keyword_a.isEmpty()) {
                 sql += "AND (u.userName LIKE ? OR u.address LIKE ? OR o.orderDate LIKE ? OR r.ringName LIKE ?) ";
             }
 
-            sql += "GROUP BY o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, v.percentage, o.warrantyID, o.ringSize, o.status "
+            sql += "GROUP BY o.orderID, o.userID, o.orderCode, u.userName, u.address, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, v.percentage, r.warrantyID, w.warrantyName, o.ringSize, o.status "
                     + "ORDER BY o.orderID ASC "
                     + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
 
@@ -432,6 +433,7 @@ public class OrderDAO {
                 while (rs.next()) {
                     int orderID = rs.getInt("orderID");
                     int userID1 = rs.getInt("userID");
+                    String orderCode = rs.getString("orderCode");
                     String userName = rs.getString("userName");
                     String address = rs.getString("address");
                     String orderDate = rs.getString("orderDate");
@@ -440,6 +442,7 @@ public class OrderDAO {
                     int voucherID = rs.getInt("voucherID");
                     String voucherName = rs.getString("voucherName");
                     int warrantyID = rs.getInt("warrantyID");
+                    String warrantyName = rs.getString("warrantyName");
                     int ringSize = rs.getInt("ringSize");
                     String totalPrice = rs.getString("totalPrice");
                     String status = rs.getString("status");
@@ -447,6 +450,7 @@ public class OrderDAO {
                     OrderDTO order = new OrderDTO();
                     order.setOrderID(orderID);
                     order.setUserID(userID1);
+                    order.setOrderCode(orderCode);
                     order.setUserName(userName);
                     order.setAddress(address);
                     order.setOrderDate(orderDate);
@@ -512,9 +516,9 @@ public class OrderDAO {
         List<OrderDTO> list = new ArrayList<OrderDTO>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = "SELECT o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, "
+            String sql = "SELECT o.orderID, o.userID, o.orderCode, u.userName, u.address, o.orderDate, r.ringID, r.ringName, "
                     + "COALESCE(v.voucherID, 0) AS [voucherID], COALESCE(v.voucherName, 'n/a') AS [voucherName], "
-                    + "COALESCE(o.warrantyID, 0) AS [warrantyID], COALESCE(w.warrantyName, 'n/a') AS [warrantyName], "
+                    + "COALESCE(r.warrantyID, 0) AS [warrantyID], w.warrantyName, COALESCE(w.warrantyName, 'n/a') AS [warrantyName], "
                     + "o.ringSize, FORMAT(SUM((COALESCE(r.price, 0) + COALESCE(rp.rpPrice, 0) + COALESCE(dp.price, 0)) * 1.02 * "
                     + "((100.0 - COALESCE(v.percentage, 0)) / 100)), 'N0') AS [totalPrice], o.status "
                     + "FROM [OrderDetails] o "
@@ -524,15 +528,15 @@ public class OrderDAO {
                     + "LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID "
                     + "LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID "
                     + "LEFT JOIN [Voucher] v ON o.voucherID = v.voucherID "
-                    + "LEFT JOIN [Warranty] w ON o.warrantyID = w.warrantyID "
+                    + "LEFT JOIN [Warranty] w ON r.warrantyID = w.warrantyID "
                     + "WHERE o.status = 'verified' AND o.purchaseMethod = 'Received at store' ";
 
             if (keyword_b != null && !keyword_b.isEmpty()) {
                 sql += "AND (u.userName LIKE ? OR u.address LIKE ? OR o.orderDate LIKE ? OR r.ringName LIKE ?) ";
             }
 
-            sql += "GROUP BY o.orderID, o.userID, u.userName, u.address, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, "
-                    + "v.percentage, o.warrantyID, o.ringSize, o.status, o.purchaseMethod, w.warrantyName "
+            sql += "GROUP BY o.orderID, o.userID, o.orderCode u.userName, u.address, o.orderDate, r.ringID, r.ringName, v.voucherID, v.voucherName, "
+                    + "v.percentage, r.warrantyID, w.warrantyName, o.ringSize, o.status, o.purchaseMethod, w.warrantyName "
                     + "ORDER BY o.orderID ASC "
                     + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
 
@@ -554,6 +558,7 @@ public class OrderDAO {
                 while (rs.next()) {
                     int orderID = rs.getInt("orderID");
                     int userID1 = rs.getInt("userID");
+                    String orderCode = rs.getString("orderCode");
                     String userName = rs.getString("userName");
                     String address = rs.getString("address");
                     String orderDate = rs.getString("orderDate");
@@ -570,6 +575,7 @@ public class OrderDAO {
                     OrderDTO order = new OrderDTO();
                     order.setOrderID(orderID);
                     order.setUserID(userID1);
+                    order.setOrderCode(orderCode);
                     order.setUserName(userName);
                     order.setAddress(address);
                     order.setOrderDate(orderDate);
