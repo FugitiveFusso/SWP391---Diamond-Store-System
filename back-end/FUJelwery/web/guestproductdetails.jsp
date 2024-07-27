@@ -261,7 +261,7 @@
                         <button class="plus-button">+</button>
                     </div>
                     <div class="more-details-content">
-                        Click this link to know about our warranty policy: <a href="guest_static_webpages/warrantyPolicy.jsp">Ring Size Measuring</a>
+                        Click this link to know about our warranty policy: <a href="guest_static_webpages/warrantyPolicy.jsp" style="color: blue;text-decoration: underline;">Ring Size Measuring</a>
                     </div>
                 </div>
                 <div class="more-details">
@@ -271,7 +271,7 @@
                     </div>
                     <div class="more-details-content">
                         Each product from FUJ has it own GIA Certificate <br> <br>
-                        Click this link to know about GIA Certificate: <a href="guest_static_webpages/certificate_certification.jsp">GIA Certificate</a>
+                        Click this link to know about GIA Certificate: <a href="guest_static_webpages/certificate_certification.jsp" style="color: blue;text-decoration: underline;">GIA Certificate</a>
                     </div>
                 </div>
                 <div class="more-details">
@@ -281,7 +281,7 @@
                     </div>
                     <div class="more-details-content">
                         Feel free to contact with us through our hotline: (+ 84) 898876512 <br> <br>
-                        Or you can read by yourself through: <a href="guest_static_webpages/consulation.jsp">Consulation</a>
+                        Or you can read by yourself through: <a href="guest_static_webpages/consulation.jsp" style="color: blue;text-decoration: underline;">Consulation</a>
                     </div>
                 </div>
 

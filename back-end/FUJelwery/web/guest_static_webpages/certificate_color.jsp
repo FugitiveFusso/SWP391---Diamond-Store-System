@@ -101,8 +101,8 @@
             <div class="Main-hero">
                 <div class="hero-details">
                     <h1 style="font-family: Inika;">DIAMOND CERTIFICATE</h1>
-                    <h3>Every loose diamond that we sell is graded by the Gemological Institute of <br>America (GIA),
-                        regarded as the world's foremost authority on diamonds.</h3>
+                    <h4>Every loose diamond that we sell is graded by the Gemological Institute of America (GIA),
+                        regarded as the world's foremost authority on diamonds.</h4>
                     <div class="button">
                         <button id="button1"> <a href="certificate_edu.jsp" id="learn-more">Learn More</a></button>
                     </div>
