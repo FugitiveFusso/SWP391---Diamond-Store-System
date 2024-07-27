@@ -279,16 +279,11 @@
                                 <td><a href="WarrantyController?action=details&id=${salesorder.warrantyID}">${salesorder.warrantyName}</a></td>
                                 <td>${salesorder.totalPrice} VND</td>
                                 <td>
-                                    <form action="SalesStaffOrderController" method="POST">
+                                    <form class="salesStaffOrderForm" action="SalesStaffOrderController" method="POST">
                                         <input name="action" value="received" type="hidden">
                                         <input name="orderID" value="${salesorder.orderID}" type="hidden">
                                         <input name="ringID" value="${salesorder.ringID}" type="hidden">
                                         <button type="submit" class="btn">Customer has received at store</button>
-                                    </form>
-                                    <form class="salesStaffOrderForm" action="SalesStaffOrderController" method="POST">
-                                        <input name="action" value="received" type="hidden">
-                                        <input name="orderID" value="${salesorder.orderID}" type="hidden">
-                                        <button type="submit" class="accept-btn">Accept</button>
                                     </form>
                                 </td>
                             </tr>
