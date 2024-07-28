@@ -144,26 +144,29 @@ public class DiamondDAO {
     public DiamondDTO load(int diamondID) {
 
         String sql = "SELECT \n"
-                + "    COALESCE(r.ringID, 0) AS ringID,  \n"
-                + "    d.diamondID, \n"
-                + "    d.diamondName, \n"
-                + "    d.diamondImage, \n"
-                + "    d.origin, \n"
-                + "    d.dpID, \n"
-                + "    d.certificateID, \n"
-                + "    dp.diamondSize, \n"
-                + "    dp.caratWeight, \n"
-                + "    dp.color, \n"
-                + "    dp.clarity, \n"
-                + "    dp.cut, \n"
-                + "    FORMAT(dp.price, 'N0') AS price, \n"
-                + "    d.isDeleted \n"
-                + "FROM \n"
-                + "    Diamond d \n"
-                + "    LEFT JOIN DiamondPrice dp ON d.dpID = dp.dpID \n"
-                + "    LEFT JOIN Ring r ON d.diamondID = r.diamondID \n"
-                + "WHERE \n"
-                + "    d.diamondID = ?\n";
+                + " COALESCE(r.ringID, 0) AS ringID,  \n"
+                + " d.diamondID, \n"
+                + " d.diamondName, \n"
+                + " d.diamondImage, \n"
+                + " d.origin, \n"
+                + " d.dpID, \n"
+                + " d.certificateID, \n"
+                + " dp.diamondSize, \n"
+                + " dp.caratWeight, \n"
+                + " dp.color, \n"
+                + " dp.clarity, \n"
+                + " dp.cut, \n"
+                + " c.description,\n"
+                + " r.ringName,\n"
+                + " FORMAT(dp.price, 'N0') AS price, \n"
+                + " d.isDeleted \n"
+                + " FROM \n"
+                + " Diamond d \n"
+                + " LEFT JOIN DiamondPrice dp ON d.dpID = dp.dpID \n"
+                + " LEFT JOIN Ring r ON d.diamondID = r.diamondID \n"
+                + " LEFT JOIN Certificate c on d.certificateID = c.certificateID\n"
+                + " WHERE \n"
+                + " d.diamondID = ?";
 
         try {
 
@@ -173,6 +176,8 @@ public class DiamondDAO {
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
+                String ringName = rs.getString("ringName");
+                String certificateName = rs.getString("description");
                 int ringID = rs.getInt("ringID");
                 int diamondid = rs.getInt("diamondID");
                 String diamondName = rs.getString("diamondName");
@@ -190,6 +195,8 @@ public class DiamondDAO {
 
                 DiamondDTO diamond = new DiamondDTO();
                 diamond.setRingID(ringID);
+                diamond.setRingName(ringName);
+                diamond.setCertificateName(certificateName);
                 diamond.setDiamondID(diamondid);
                 diamond.setDiamondName(diamondName);
                 diamond.setDiamondImage(diamondImage);

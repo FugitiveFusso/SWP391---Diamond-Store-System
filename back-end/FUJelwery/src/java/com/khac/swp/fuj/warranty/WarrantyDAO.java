@@ -123,14 +123,14 @@ public class WarrantyDAO {
                 + "    w.endDate, \n"
                 + "    w.warrantyDescription, \n"
                 + "    w.warrantyType, \n"
-                + "    w.termsAndConditions, \n"
+                + "    w.termsAndConditions, r.ringName, \n"
                 + "    ISNULL(r.ringID, 0) AS ringID, \n"
                 + "    CASE \n"
                 + "        WHEN w.isDeleted = 'deleted' THEN 'Deleted' \n"
                 + "        WHEN r.ringID IS NOT NULL THEN 'Applied' \n"
                 + "        ELSE 'Not Applied' \n"
                 + "    END AS [status], \n"
-                + "    od.orderID\n"
+                + "    od.orderID, od.orderCode\n"
                 + "FROM Warranty w \n"
                 + "LEFT JOIN [Ring] r ON w.warrantyID = r.warrantyID \n"
                 + "LEFT JOIN [OrderDetails] od ON r.ringID = od.ringID \n"
@@ -144,7 +144,8 @@ public class WarrantyDAO {
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-
+                String ringName = rs.getString("ringName");
+                String orderCode = rs.getString("orderCode");
                 int orderID = rs.getInt("orderID");
                 int id = rs.getInt("warrantyID");
                 String name = rs.getString("warrantyName");
@@ -160,6 +161,7 @@ public class WarrantyDAO {
                 String status = rs.getString("status");
 
                 WarrantyDTO warranty = new WarrantyDTO();
+                warranty.setRingName(ringName);
                 warranty.setOrderID(orderID);
                 warranty.setId(id);
                 warranty.setName(name);
@@ -169,7 +171,7 @@ public class WarrantyDAO {
                 warranty.setEnddate(endDate);
                 warranty.setDescription(description);
                 warranty.setType(type);
-
+                warranty.setOrderCode(orderCode);
                 warranty.setTermsandconditions(tac);
                 warranty.setRingID(ringID);
                 warranty.setStatus(status);

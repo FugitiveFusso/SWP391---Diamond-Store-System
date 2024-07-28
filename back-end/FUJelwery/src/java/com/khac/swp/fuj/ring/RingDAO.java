@@ -186,7 +186,7 @@ public class RingDAO {
                 + "    w.warrantyMonth, \n"
                 + "    w.warrantyDescription, \n"
                 + "    w.warrantyType,\n"
-                + "    od.orderID\n"
+                + "    od.orderID, od.orderCode\n"
                 + "FROM \n"
                 + "    [Ring] r \n"
                 + "LEFT JOIN \n"
@@ -214,6 +214,7 @@ public class RingDAO {
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
+                String orderCode = rs.getString("orderCode");
                 int orderID = rs.getInt("orderID");
                 int rpID = rs.getInt("rpID");
                 String ringName = rs.getString("ringName");
@@ -249,6 +250,7 @@ public class RingDAO {
                 String warrantyType = rs.getString("warrantyType");
 
                 RingDTO ring = new RingDTO();
+                ring.setOrderCode(orderCode);
                 ring.setWarrantyID(warrantyID);
                 ring.setOrderID(orderID);
                 ring.setRingID(ringID);

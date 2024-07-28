@@ -164,7 +164,7 @@
                             <p class="card-text"><strong>Color:</strong> ${requestScope.ring.color}</p>
                             <p class="card-text"><strong>Clarity:</strong> ${requestScope.ring.clarity}</p>
                             <p class="card-text"><strong>Cut:</strong> ${requestScope.ring.cut}</p>
-                            <p class="card-text"><strong>Warranty ID:</strong> <a href="WarrantyController?action=details&id=${requestScope.ring.warrantyID}">${requestScope.ring.warrantyID}</a></p>
+                            <p class="card-text"><strong>Warranty Name:</strong> <a href="WarrantyController?action=details&id=${requestScope.ring.warrantyID}">${requestScope.ring.warrantyName}</a></p>
 
                             <p class="card-text"><strong>Diamond Price:</strong> ${requestScope.ring.diamondPrice} VND</p>
                             <p class="card-text"><strong>Total Price:</strong> ${requestScope.ring.totalPrice} VND</p>
@@ -172,15 +172,15 @@
                             <% RingDTO ring = (RingDTO) request.getAttribute("ring"); %>
 
                             <%-- Check if warranty is not null and has a valid orderID --%>
-                            <% if (ring != null && ring.getOrderID()!= 0) { %>
+                            <% if (ring != null && ring.getOrderCode() != null) { %>
                             <p class="card-text">
                                 <a href="SalesHistory?action=historydetails&id=${ring.getOrderID()}">
-                                    <strong>Order ID:</strong> ${ring.getOrderID()}
+                                    <strong>Order Code:</strong> ${ring.getOrderCode()}
                                 </a>
                             </p>
                             <% } else { %>
                             <p class="card-text">
-                                <strong>No valid Order ID found.</strong>
+                                <strong>No valid Order Code found.</strong>
                             </p>
                             <% }%>
                             <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>

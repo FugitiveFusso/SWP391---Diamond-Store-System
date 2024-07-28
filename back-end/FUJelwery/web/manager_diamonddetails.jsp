@@ -129,27 +129,27 @@
                             <p class="card-text"><strong>Clarity:</strong> ${requestScope.diamond.clarity}</p>
                             <% DiamondDTO diamond = (DiamondDTO) request.getAttribute("diamond"); %>
 
-                            <% if (diamond != null && diamond.getCertificateID() != 0) { %>
+                            <% if (diamond != null && diamond.getCertificateName()!= null) { %>
                             <p class="card-text">
                                 <a href="DashboardController?action=certificatedetails&id=${diamond.getCertificateID()}">
-                                    <strong>Certificate ID:</strong> ${diamond.getCertificateID()}
+                                    <strong>Certificate Name:</strong> ${diamond.getCertificateName()}
                                 </a>
                             </p>
                             <% } else { %>
                             <p class="card-text">
-                                <strong>No valid Certificate ID found.</strong>
+                                <strong>No valid Certificate found.</strong>
                             </p>
                             <% }%>              
 
-                            <% if (diamond != null && diamond.getRingID() != 0) { %>
+                            <% if (diamond != null && diamond.getRingName()!= null) { %>
                             <p class="card-text">
                                 <a href="DashboardController?action=ringdetails&id=${diamond.getRingID()}">
-                                    <strong>Ring ID:</strong> ${diamond.getRingID()}
+                                    <strong>Ring Name:</strong> ${diamond.getRingName()}
                                 </a>
                             </p>
                             <% } else { %>
                             <p class="card-text">
-                                <strong>No valid Ring ID found.</strong>
+                                <strong>No valid Ring found.</strong>
                             </p>
                             <% }%>                          
                             <p class="card-text"><strong>Price:</strong> ${requestScope.diamond.diamondPrice} VND</p>

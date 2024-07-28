@@ -27,7 +27,25 @@ public class DiamondDTO {
     private int diamondCount;
     private int ringID;
     private String status;
+    private String certificateName;
+    private String ringName;
 
+    public String getCertificateName() {
+        return certificateName;
+    }
+
+    public void setCertificateName(String certificateName) {
+        this.certificateName = certificateName;
+    }
+
+    public String getRingName() {
+        return ringName;
+    }
+
+    public void setRingName(String ringName) {
+        this.ringName = ringName;
+    }
+    
     public int getRingID() {
         return ringID;
     }
@@ -232,7 +250,7 @@ public class DiamondDTO {
 
     @Override
     public String toString() {
-        return "DiamondDTO{" + "diamondID=" + diamondID + ", diamondName=" + diamondName + ", diamondImage=" + diamondImage + ", origin=" + origin + ", dpID=" + dpID + ", certificateID=" + certificateID + ", diamondSize=" + diamondSize + ", caratWeight=" + caratWeight + ", color=" + color + ", clarity=" + clarity + ", cut=" + cut + ", diamondPrice=" + diamondPrice + ", totalDiamonds=" + totalDiamonds + ", activeDiamonds=" + activeDiamonds + ", deletedDiamonds=" + deletedDiamonds + ", diamondsUsedInRing=" + diamondsUsedInRing + ", diamondsNotUsedInRing=" + diamondsNotUsedInRing + ", percentageDiamondsUsed=" + percentageDiamondsUsed + ", percentageDiamondsNotUsed=" + percentageDiamondsNotUsed + ", diamondsNotUsedListByID=" + diamondsNotUsedListByID + ", diamondsUsedListbyID=" + diamondsUsedListbyID + ", country=" + country + ", diamondCount=" + diamondCount + ", ringID=" + ringID + ", status=" + status + '}';
+        return "DiamondDTO{" + "diamondID=" + diamondID + ", diamondName=" + diamondName + ", diamondImage=" + diamondImage + ", origin=" + origin + ", dpID=" + dpID + ", certificateID=" + certificateID + ", diamondSize=" + diamondSize + ", caratWeight=" + caratWeight + ", color=" + color + ", clarity=" + clarity + ", cut=" + cut + ", diamondPrice=" + diamondPrice + ", totalDiamonds=" + totalDiamonds + ", activeDiamonds=" + activeDiamonds + ", deletedDiamonds=" + deletedDiamonds + ", diamondsUsedInRing=" + diamondsUsedInRing + ", diamondsNotUsedInRing=" + diamondsNotUsedInRing + ", percentageDiamondsUsed=" + percentageDiamondsUsed + ", percentageDiamondsNotUsed=" + percentageDiamondsNotUsed + ", diamondsNotUsedListByID=" + diamondsNotUsedListByID + ", diamondsUsedListbyID=" + diamondsUsedListbyID + ", country=" + country + ", diamondCount=" + diamondCount + ", ringID=" + ringID + ", status=" + status + ", certificateName=" + certificateName + ", ringName=" + ringName + '}';
     }
-    
+
 }

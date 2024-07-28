@@ -2,6 +2,7 @@ package com.khac.swp.fuj.certificate;
 
 public class CertificateDTO {
 
+    private String diamondName;
     private int certificateID;
     private String certificateImage;
     private String certificateDescription;
@@ -14,6 +15,14 @@ public class CertificateDTO {
     private int unusedCertificates;
     private double usedPercentage;
     private double unusedPercentage;
+
+    public String getDiamondName() {
+        return diamondName;
+    }
+
+    public void setDiamondName(String diamondName) {
+        this.diamondName = diamondName;
+    }
 
     public int getCertificateID() {
         return certificateID;
@@ -113,7 +122,7 @@ public class CertificateDTO {
 
     @Override
     public String toString() {
-        return "CertificateDTO{" + "certificateID=" + certificateID + ", certificateImage=" + certificateImage + ", certificateDescription=" + certificateDescription + ", diamondID=" + diamondID + ", status=" + status + ", totalCertificates=" + totalCertificates + ", activeCertificates=" + activeCertificates + ", deletedCertificates=" + deletedCertificates + ", usedCertificates=" + usedCertificates + ", unusedCertificates=" + unusedCertificates + ", usedPercentage=" + usedPercentage + ", unusedPercentage=" + unusedPercentage + '}';
+        return "CertificateDTO{" + "diamondName=" + diamondName + ", certificateID=" + certificateID + ", certificateImage=" + certificateImage + ", certificateDescription=" + certificateDescription + ", diamondID=" + diamondID + ", status=" + status + ", totalCertificates=" + totalCertificates + ", activeCertificates=" + activeCertificates + ", deletedCertificates=" + deletedCertificates + ", usedCertificates=" + usedCertificates + ", unusedCertificates=" + unusedCertificates + ", usedPercentage=" + usedPercentage + ", unusedPercentage=" + unusedPercentage + '}';
     }
 
 }

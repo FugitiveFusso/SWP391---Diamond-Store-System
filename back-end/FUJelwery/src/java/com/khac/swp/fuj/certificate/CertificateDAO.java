@@ -96,7 +96,7 @@ public class CertificateDAO {
     public CertificateDTO load(int certificateID) {
 
         String sql = "SELECT \n"
-                + "    c.certificateID, \n"
+                + "    c.certificateID, d.diamondName, \n"
                 + "    c.certificateImage, \n"
                 + "    c.description, \n"
                 + "    ISNULL(d.diamondID, 0) AS diamondID, \n"
@@ -120,7 +120,7 @@ public class CertificateDAO {
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-
+                String diamondName = rs.getString("diamondName");
                 int ID = rs.getInt("certificateID");
                 String certificateImage = rs.getString("certificateImage");
                 String certificateDescription = rs.getString("description");
@@ -128,6 +128,7 @@ public class CertificateDAO {
                 String status = rs.getString("status");
 
                 CertificateDTO certificate = new CertificateDTO();
+                certificate.setDiamondName(diamondName);
                 certificate.setCertificateID(ID);
                 certificate.setCertificateImage(certificateImage);
                 certificate.setCertificateDescription(certificateDescription);

@@ -2,6 +2,7 @@ package com.khac.swp.fuj.warranty;
 
 public class WarrantyDTO {
 
+    public String orderCode;
     public int orderID;
     public int id;
     public String name;
@@ -13,6 +14,7 @@ public class WarrantyDTO {
     public String enddate;
     public String termsandconditions;
     public int ringID;
+    public String ringName;
     public String status;
     public int totalWarranties;
     public int usedActiveWarranties;
@@ -42,11 +44,25 @@ public class WarrantyDTO {
         return orderID;
     }
 
+    public String getOrderCode() {
+        return orderCode;
+    }
+
+    public void setOrderCode(String orderCode) {
+        this.orderCode = orderCode;
+    }
+
     public void setOrderID(int orderID) {
         this.orderID = orderID;
     }
 
-    
+    public String getRingName() {
+        return ringName;
+    }
+
+    public void setRingName(String ringName) {
+        this.ringName = ringName;
+    }
     
     public int getId() {
         return id;
@@ -324,7 +340,8 @@ public class WarrantyDTO {
 
     @Override
     public String toString() {
-        return "WarrantyDTO{" + "orderID=" + orderID + ", id=" + id + ", name=" + name + ", image=" + image + ", month=" + month + ", description=" + description + ", type=" + type + ", startdate=" + startdate + ", enddate=" + enddate + ", termsandconditions=" + termsandconditions + ", ringID=" + ringID + ", status=" + status + ", totalWarranties=" + totalWarranties + ", usedActiveWarranties=" + usedActiveWarranties + ", unusedActiveWarranties=" + unusedActiveWarranties + ", extendedWarranties=" + extendedWarranties + ", manufacturerWarranties=" + manufacturerWarranties + ", limitedWarranties=" + limitedWarranties + ", lifetimeWarranties=" + lifetimeWarranties + ", retailerWarranties=" + retailerWarranties + ", avgWarrantyDurationMonths=" + avgWarrantyDurationMonths + ", activeWarranties=" + activeWarranties + ", deletedWarranties=" + deletedWarranties + ", percentageUsedActive=" + percentageUsedActive + ", percentageUnusedActive=" + percentageUnusedActive + ", earliestStartDate=" + earliestStartDate + ", latestStartDate=" + latestStartDate + ", earliestEndDate=" + earliestEndDate + ", latestEndDate=" + latestEndDate + ", percentageManufacturerWarranties=" + percentageManufacturerWarranties + ", percentageExtendedWarranties=" + percentageExtendedWarranties + ", percentageLimitedWarranties=" + percentageLimitedWarranties + ", percentageLifetimeWarranties=" + percentageLifetimeWarranties + ", percentageRetailerWarranties=" + percentageRetailerWarranties + ", unusedActiveWarrantyIds=" + unusedActiveWarrantyIds + '}';
+        return "WarrantyDTO{" + "orderCode=" + orderCode + ", orderID=" + orderID + ", id=" + id + ", name=" + name + ", image=" + image + ", month=" + month + ", description=" + description + ", type=" + type + ", startdate=" + startdate + ", enddate=" + enddate + ", termsandconditions=" + termsandconditions + ", ringID=" + ringID + ", ringName=" + ringName + ", status=" + status + ", totalWarranties=" + totalWarranties + ", usedActiveWarranties=" + usedActiveWarranties + ", unusedActiveWarranties=" + unusedActiveWarranties + ", extendedWarranties=" + extendedWarranties + ", manufacturerWarranties=" + manufacturerWarranties + ", limitedWarranties=" + limitedWarranties + ", lifetimeWarranties=" + lifetimeWarranties + ", retailerWarranties=" + retailerWarranties + ", avgWarrantyDurationMonths=" + avgWarrantyDurationMonths + ", activeWarranties=" + activeWarranties + ", deletedWarranties=" + deletedWarranties + ", percentageUsedActive=" + percentageUsedActive + ", percentageUnusedActive=" + percentageUnusedActive + ", earliestStartDate=" + earliestStartDate + ", latestStartDate=" + latestStartDate + ", earliestEndDate=" + earliestEndDate + ", latestEndDate=" + latestEndDate + ", percentageManufacturerWarranties=" + percentageManufacturerWarranties + ", percentageExtendedWarranties=" + percentageExtendedWarranties + ", percentageLimitedWarranties=" + percentageLimitedWarranties + ", percentageLifetimeWarranties=" + percentageLifetimeWarranties + ", percentageRetailerWarranties=" + percentageRetailerWarranties + ", unusedActiveWarrantyIds=" + unusedActiveWarrantyIds + '}';
     }
+
 
 }
