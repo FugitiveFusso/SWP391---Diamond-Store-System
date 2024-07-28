@@ -174,7 +174,7 @@
                             <%-- Check if warranty is not null and has a valid orderID --%>
                             <% if (ring != null && ring.getOrderID()!= 0) { %>
                             <p class="card-text">
-                                <a href="RingController?action=details&id=${ring.getOrderID()}">
+                                <a href="SalesHistory?action=historydetails&id=${ring.getOrderID()}">
                                     <strong>Order ID:</strong> ${ring.getOrderID()}
                                 </a>
                             </p>

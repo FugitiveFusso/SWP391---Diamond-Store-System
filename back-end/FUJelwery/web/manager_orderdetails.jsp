@@ -85,36 +85,38 @@
                     <div id="warranty" class="warranty hidden">
                         <img src="${requestScope.salesorder.warrantyImage}" alt="Warranty Image" class="warranty-image" style="width: 60%;">
                         <p><strong>Warranty Name:</strong> ${requestScope.salesorder.warrantyName}</p>
-                        <p><strong>Month in effect:</strong> ${requestScope.salesorder.warrantyMonth}</p>
+                        <p><strong>Months in effect:</strong> ${requestScope.salesorder.warrantyMonth}</p>
                         <p><strong>Description:</strong> ${requestScope.salesorder.warrantyDescription}</p>
                         <p><strong>Warranty Type:</strong> ${requestScope.salesorder.warrantyType}</p>
-                        <p><strong>Start Date:</strong> ${requestScope.salesorder.warrantyStartDate}</p>
-                        <p><strong>End Date:</strong> ${requestScope.salesorder.warrantyEndDate}</p>
+                        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+                        <p class="card-text"><strong>Start Date: </strong> 
+                        <c:choose>
+                            <c:when test="${requestScope.salesorder.warrantyStartDate == null}">
+                                N/A
+                            </c:when>
+                            <c:otherwise>
+                                ${requestScope.salesorder.warrantyStartDate}
+                            </c:otherwise>
+                        </c:choose>
+                        </p>
+
+                        <p class="card-text"><strong>End Date: </strong> 
+                        <c:choose>
+                            <c:when test="${requestScope.salesorder.warrantyEndDate == null}">
+                                N/A
+                            </c:when>
+                            <c:otherwise>
+                                ${requestScope.salesorder.warrantyEndDate}
+                            </c:otherwise>
+                        </c:choose>
+                        </p>  
                         <p><strong>Terms and Conditions:</strong> ${requestScope.salesorder.warrantyTerms}</p>
-                        <!--                                <p><strong>Status:</strong> Active</p>
-                                                        <p><strong>Expiry Date:</strong> 30/06/2025</p>
-                                                        <p><strong>Coverage:</strong> Manufacturing defects, accidental damage</p>-->
+
                     </div>
                     <div id="certificate" class="certificate hidden">
                         <img src="${requestScope.salesorder.certificateImage}" alt="Certificate Image" class="certificate-image" style="width: 60%;">
-                        <p><strong>Name: </strong> ${requestScope.salesorder.certificateName}</p> 
-                        <!--                                <p><strong>Certificate Name:</strong> 0.70 Carat Round Cut Diamond Certificate</p>
-                                                        <p><strong>GIA Report Number:</strong> 2194313787</p>
-                                                        <p><strong>Measurements:</strong> 5.57 - 5.59 x 3.53 mm</p>
-                                                        <p><strong>Grading Results:</strong></p>
-                                                        <ul>
-                                                            <li>Carat Weight: 0.70 carat</li>
-                                                            <li>Color Grade: G</li>
-                                                            <li>Clarity Grade: SI1</li>
-                                                            <li>Cut Grade: Very Good</li>
-                                                        </ul>
-                                                        <p><strong>Additional Grading Information:</strong></p>
-                                                        <ul>
-                                                            <li>Polish: Excellent</li>
-                                                            <li>Symmetry: Very Good</li>
-                                                            <li>Fluorescence: None</li>
-                                                            <li>Clarity Characteristics: Feather</li>
-                                                        </ul>-->
+                        <p><strong>Description: </strong> ${requestScope.salesorder.certificateName}</p> 
                     </div>
                 </div>
             </div>
