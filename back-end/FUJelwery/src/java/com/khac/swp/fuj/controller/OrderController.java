@@ -151,14 +151,29 @@ public class OrderController extends HttpServlet {
                     case "Received at store": {
                         if (userID != null) {
                             try {
-                                if (orderDAO.checkRingActiveInCart(userID) == null) {
-                                    orderDAO.updateScore(userID);
-                                    orderDAO.outOfStockRing(userID);
-                                    orderDAO.purchase(codeGenerator, purchaseMethod, userID, purchasedDate);
-                                    request.getSession().setAttribute("success", "Purchase Successfully!!!");
+                                boolean redirect = false;
+                                String redirectUrl = request.getContextPath() + "/user_homepage.jsp";
+
+                                if (orderDAO.checkTotalPendingOrder(userID) != 0) {
+                                    if (orderDAO.checkRingActiveInCart(userID) == null) {
+                                        orderDAO.updateScore(userID);
+                                        orderDAO.outOfStockRing(userID);
+                                        orderDAO.purchase(codeGenerator, purchaseMethod, userID, purchasedDate);
+                                        request.getSession().setAttribute("success", "Purchase Successfully!!!");
+                                    } else {
+                                        request.getSession().setAttribute("failed", "One of the rings has been purchased!!!");
+                                        redirect = true;
+                                    }
                                 } else {
-                                    request.getSession().setAttribute("failed", "One of the ring has been purchased!!!");
+                                    request.getSession().setAttribute("failed", "There is no Ring in your Cart to purchase!!!");
+                                    redirect = true;
                                 }
+
+                                if (redirect) {
+                                    response.sendRedirect(redirectUrl);
+                                    return; // Ensure no further processing
+                                }
+
                             } catch (Exception e) {
                                 log("Error deleting order: " + e.getMessage());
                                 request.getSession().setAttribute("errorMessage", "Error deleting order.");
@@ -173,14 +188,29 @@ public class OrderController extends HttpServlet {
                     case "Door-to-door delivery service": {
                         if (userID != null) {
                             try {
-                                if (orderDAO.checkRingActiveInCart(userID) == null) {
-                                    orderDAO.updateScore(userID);
-                                    orderDAO.outOfStockRing(userID);
-                                    orderDAO.purchase(codeGenerator1, purchaseMethod, userID, purchasedDate);
-                                    request.getSession().setAttribute("success", "Purchase Successfully!!!");
+                                boolean redirect = false;
+                                String redirectUrl = request.getContextPath() + "/user_homepage.jsp";
+
+                                if (orderDAO.checkTotalPendingOrder(userID) != 0) {
+                                    if (orderDAO.checkRingActiveInCart(userID) == null) {
+                                        orderDAO.updateScore(userID);
+                                        orderDAO.outOfStockRing(userID);
+                                        orderDAO.purchase(codeGenerator1, purchaseMethod, userID, purchasedDate);
+                                        request.getSession().setAttribute("success", "Purchase Successfully!!!");
+                                    } else {
+                                        request.getSession().setAttribute("failed", "One of the rings has been purchased!!!");
+                                        redirect = true;
+                                    }
                                 } else {
-                                    request.getSession().setAttribute("failed", "One of the ring has been purchased!!!");
+                                    request.getSession().setAttribute("failed", "There is no Ring in your Cart to purchase!!!");
+                                    redirect = true;
                                 }
+
+                                if (redirect) {
+                                    response.sendRedirect(redirectUrl);
+                                    return; // Ensure no further processing
+                                }
+
                             } catch (Exception e) {
                                 log("Error deleting order: " + e.getMessage());
                                 request.getSession().setAttribute("errorMessage", "Error deleting order.");
@@ -188,8 +218,8 @@ public class OrderController extends HttpServlet {
                         } else {
                             request.getSession().setAttribute("errorMessage", "Invalid order ID.");
                         }
-
                         response.sendRedirect(request.getContextPath() + "/user_homepage.jsp");
+
                         break;
                     }
                 }
@@ -205,35 +235,85 @@ public class OrderController extends HttpServlet {
                     case "Received at store": {
                         if (id != null) {
                             UserDAO user = new UserDAO();
-                            if (orderDAO.checkRingActiveInCart(id) == null) {
-                                UserDTO userDTO = user.load_Normal(id);
-                                transaction.updateOrder(codeGenerator, paymentMethod, purchasedDate, id);
-                                request.setAttribute("customer", userDTO);
-                                String totalPrice = orderDAO.totalAllProduct(id);
-                                request.setAttribute("totalPrice", totalPrice);
-                                request.getRequestDispatcher("/paymentgateway.jsp").forward(request, response);
-                            } else {
-                                request.getSession().setAttribute("failed", "One of the ring has been purchased!!!");
-                                response.sendRedirect(request.getContextPath() + "/user_homepage.jsp");
+                            boolean redirect = false;
+                            String redirectUrl = request.getContextPath() + "/user_homepage.jsp";
+
+                            try {
+                                if (orderDAO.checkTotalPendingOrder(id) != 0) {
+                                    if (orderDAO.checkRingActiveInCart(id) == null) {
+                                        UserDTO userDTO = user.load_Normal(id);
+                                        transaction.updateOrder(codeGenerator, paymentMethod, purchasedDate, id);
+                                        request.setAttribute("customer", userDTO);
+                                        String totalPrice = orderDAO.totalAllProduct(id);
+                                        request.setAttribute("totalPrice", totalPrice);
+                                        request.getRequestDispatcher("/paymentgateway.jsp").forward(request, response);
+                                        return; // Ensure no further processing
+                                    } else {
+                                        request.getSession().setAttribute("failed", "One of the rings has been purchased!!!");
+                                        redirect = true;
+                                    }
+                                } else {
+                                    request.getSession().setAttribute("failed", "There is no Ring in your Cart to purchase!!!");
+                                    redirect = true;
+                                }
+
+                                if (redirect) {
+                                    response.sendRedirect(redirectUrl);
+                                    return; // Ensure no further processing
+                                }
+
+                            } catch (Exception e) {
+                                log("Error processing order: " + e.getMessage());
+                                request.getSession().setAttribute("errorMessage", "Error processing order.");
+                                response.sendRedirect(redirectUrl);
                             }
+                        } else {
+                            request.getSession().setAttribute("errorMessage", "Invalid order ID.");
+                            response.sendRedirect(request.getContextPath() + "/user_homepage.jsp");
                         }
+
                         break;
                     }
                     case "Door-to-door delivery service": {
                         if (id != null) {
                             UserDAO user = new UserDAO();
-                            if (orderDAO.checkRingActiveInCart(id) == null) {
-                                UserDTO userDTO = user.load_Normal(id);
-                                transaction.updateOrder(codeGenerator1, paymentMethod, purchasedDate, id);
-                                request.setAttribute("customer", userDTO);
-                                String totalPrice = orderDAO.totalAllProduct(id);
-                                request.setAttribute("totalPrice", totalPrice);
-                                request.getRequestDispatcher("/paymentgateway.jsp").forward(request, response);
-                            } else {
-                                request.getSession().setAttribute("failed", "One of the ring has been purchased!!!");
-                                response.sendRedirect(request.getContextPath() + "/user_homepage.jsp");
+                            boolean redirect = false;
+                            String redirectUrl = request.getContextPath() + "/user_homepage.jsp";
+
+                            try {
+                                if (orderDAO.checkTotalPendingOrder(id) != 0) {
+                                    if (orderDAO.checkRingActiveInCart(id) == null) {
+                                        UserDTO userDTO = user.load_Normal(id);
+                                        transaction.updateOrder(codeGenerator1, paymentMethod, purchasedDate, id);
+                                        request.setAttribute("customer", userDTO);
+                                        String totalPrice = orderDAO.totalAllProduct(id);
+                                        request.setAttribute("totalPrice", totalPrice);
+                                        request.getRequestDispatcher("/paymentgateway.jsp").forward(request, response);
+                                        return; // Ensure no further processing after forward
+                                    } else {
+                                        request.getSession().setAttribute("failed", "One of the rings has been purchased!!!");
+                                        redirect = true;
+                                    }
+                                } else {
+                                    request.getSession().setAttribute("failed", "There is no Ring in your Cart to purchase!!!");
+                                    redirect = true;
+                                }
+
+                                if (redirect) {
+                                    response.sendRedirect(redirectUrl);
+                                    return; // Ensure no further processing after redirect
+                                }
+
+                            } catch (Exception e) {
+                                log("Error processing order: " + e.getMessage());
+                                request.getSession().setAttribute("errorMessage", "Error processing order.");
+                                response.sendRedirect(redirectUrl);
                             }
+                        } else {
+                            request.getSession().setAttribute("errorMessage", "Invalid order ID.");
+                            response.sendRedirect(request.getContextPath() + "/user_homepage.jsp");
                         }
+
                         break;
                     }
                 }

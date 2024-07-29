@@ -1240,6 +1240,31 @@ public class OrderDAO {
         return null;
     }
 
+    public int checkTotalPendingOrder(int userID) {
+        String sql = "SELECT COUNT(*) AS TotalOrderDetails\n"
+                + "FROM [OrderDetails]\n"
+                + "WHERE userID = ? AND [status] = 'pending'; ";
+
+        try {
+
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, userID);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                int totalOrderDetails = rs.getInt("TotalOrderDetails");
+                return totalOrderDetails;
+
+            }
+        } catch (SQLException ex) {
+            System.out.println("Query User error!" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return -1;
+    }
+
     public Integer insert(OrderDTO order) {
         String sql = "INSERT INTO [OrderDetails] (orderID, userID, orderDate, ringID, ringSize, status) VALUES (?, ?, ?, ?, ?, ?)";
         try {
