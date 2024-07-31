@@ -17,11 +17,13 @@ public class CertificateDAO {
         List<CertificateDTO> list = new ArrayList<>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = "SELECT c.certificateID, c.certificateImage, c.description "
-                    + "FROM [Certificate] c WHERE c. isDeleted = 'active'";
+            String sql = "SELECT c.certificateID, c.certificateImage, c.description\n"
+                    + " FROM [Certificate] c\n"
+                    + " LEFT JOIN Diamond d ON c.certificateID = d.certificateID\n"
+                    + " WHERE c.isDeleted = 'active'";
 
             if (keyword != null && !keyword.isEmpty()) {
-                sql += " AND description LIKE ?";
+                sql += " AND (c.description LIKE ? or d.diamondName like ?)";
             }
 
             if (sortCol != null && !sortCol.isEmpty()) {
@@ -36,6 +38,7 @@ public class CertificateDAO {
 
             int paramIndex = 1;
             if (keyword != null && !keyword.isEmpty()) {
+                stmt.setString(paramIndex++, "%" + keyword + "%");
                 stmt.setString(paramIndex++, "%" + keyword + "%");
             }
 
@@ -68,16 +71,20 @@ public class CertificateDAO {
         int total = 0;
         try {
             Connection con = DBUtils.getConnection();
-            String sql = "SELECT COUNT(*) FROM [Certificate] WHERE isDeleted = 'active'";
-
+            String sql = "SELECT COUNT(*) "
+                    + " FROM [Certificate] c\n"
+                    + " LEFT JOIN Diamond d ON c.certificateID = d.certificateID\n"
+                    + " WHERE c.isDeleted = 'active'";
             if (keyword != null && !keyword.isEmpty()) {
-                sql += " AND description LIKE ?";
+                sql += " AND (c.description LIKE ? or d.diamondName like ?)";
             }
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
             if (keyword != null && !keyword.isEmpty()) {
                 stmt.setString(1, "%" + keyword + "%");
+                stmt.setString(2, "%" + keyword + "%");
+
             }
 
             ResultSet rs = stmt.executeQuery();
