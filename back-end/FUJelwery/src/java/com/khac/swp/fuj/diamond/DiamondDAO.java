@@ -17,14 +17,16 @@ public class DiamondDAO {
         List<DiamondDTO> list = new ArrayList<>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = "SELECT d.diamondID, d.diamondName, d.diamondImage, d.origin, d.dpID, d.certificateID, "
-                    + "dp.diamondSize, dp.caratWeight, dp.color, dp.clarity, dp.cut, FORMAT(dp.price, 'N0') AS price "
-                    + "FROM Diamond d LEFT JOIN DiamondPrice dp ON d.dpID = dp.dpID "
+            String sql = "SELECT d.diamondID, d.diamondName, d.diamondImage, d.origin, d.dpID, d.certificateID, \n"
+                    + "dp.diamondSize, dp.caratWeight, dp.color, dp.clarity, dp.cut, FORMAT(dp.price, 'N0') AS price \n"
+                    + "FROM Diamond d LEFT JOIN DiamondPrice dp ON d.dpID = dp.dpID \n"
+                    + "LEFT JOIN Ring r ON d.diamondID = r.diamondID\n"
+                    + "LEFT JOIN Certificate c ON d.certificateID = c.certificateID\n"
                     + "WHERE d.isDeleted = 'active' ";
 
             // Append conditions based on keyword
             if (keyword != null && !keyword.isEmpty()) {
-                sql += "AND (d.diamondName LIKE ? OR dp.diamondSize LIKE ? OR dp.caratWeight LIKE ? OR dp.color LIKE ? OR dp.clarity LIKE ? OR dp.price LIKE ?) ";
+                sql += "AND (c.description like ? or r.ringName like ? or d.diamondName LIKE ? OR dp.diamondSize LIKE ? OR dp.caratWeight LIKE ? OR dp.color LIKE ? OR dp.clarity LIKE ? OR dp.price LIKE ?) ";
             }
 
             // Append sorting
@@ -55,6 +57,8 @@ public class DiamondDAO {
                 stmt.setString(paramIndex++, likeParam);
                 stmt.setString(paramIndex++, likeParam);
                 stmt.setString(paramIndex++, likeParam);
+                stmt.setString(paramIndex++, likeParam);
+                stmt.setString(paramIndex++, likeParam);
             }
 
             stmt.setInt(paramIndex++, (page - 1) * pageSize); // Calculate offset
@@ -76,7 +80,7 @@ public class DiamondDAO {
                 diamond.setClarity(rs.getString("clarity"));
                 diamond.setCut(rs.getString("cut"));
                 diamond.setDiamondPrice(rs.getString("price"));
-
+                diamond.setRingName("ringName");
                 list.add(diamond);
             }
 
@@ -93,50 +97,40 @@ public class DiamondDAO {
 
     public int getTotalDiamonds(String keyword) {
         int total = 0;
-        Connection con = null;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-
-        try {
-            con = DBUtils.getConnection();
-            String sql = "SELECT COUNT(*) FROM Diamond d WHERE d.isDeleted = 'active' ";
+        try (Connection con = DBUtils.getConnection()) {
+            String sql = "SELECT COUNT(*) FROM Diamond d "
+                    + "LEFT JOIN DiamondPrice dp ON d.dpID = dp.dpID "
+                    + "LEFT JOIN Ring r ON d.diamondID = r.diamondID "
+                    + "LEFT JOIN Certificate c ON d.certificateID = c.certificateID\n"
+                    + "WHERE d.isDeleted = 'active' ";
 
             // Append conditions based on keyword
             if (keyword != null && !keyword.isEmpty()) {
-                sql += "AND (d.diamondName LIKE ? OR d.origin LIKE ?)";
+                sql += "AND (c.description like ? or r.ringName LIKE ? OR d.diamondName LIKE ? OR dp.diamondSize LIKE ? "
+                        + "OR dp.caratWeight LIKE ? OR dp.color LIKE ? OR dp.clarity LIKE ? OR dp.price LIKE ?)";
             }
 
-            stmt = con.prepareStatement(sql);
+            PreparedStatement stmt = con.prepareStatement(sql);
 
             // Set parameters for keyword search
             if (keyword != null && !keyword.isEmpty()) {
-                stmt.setString(1, "%" + keyword + "%");
-                stmt.setString(2, "%" + keyword + "%");
+                String likeParam = "%" + keyword + "%";
+                for (int i = 1; i <= 8; i++) {
+                    stmt.setString(i, likeParam);
+                }
             }
 
-            rs = stmt.executeQuery();
+            ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 total = rs.getInt(1);
             }
+
+            // Close resources
+            rs.close();
+            stmt.close();
         } catch (SQLException ex) {
             System.out.println("Error in retrieving total diamonds count. Details:" + ex.getMessage());
             ex.printStackTrace();
-        } finally {
-            // Close resources in a finally block to ensure they are always closed
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (stmt != null) {
-                    stmt.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println("Error closing resources. Details:" + ex.getMessage());
-                ex.printStackTrace();
-            }
         }
         return total;
     }

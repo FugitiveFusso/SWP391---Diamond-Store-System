@@ -17,8 +17,8 @@ public class CertificateDAO {
         List<CertificateDTO> list = new ArrayList<>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = "SELECT certificateID, certificateImage, description "
-                    + "FROM [Certificate] WHERE isDeleted = 'active'";
+            String sql = "SELECT c.certificateID, c.certificateImage, c.description "
+                    + "FROM [Certificate] c WHERE c. isDeleted = 'active'";
 
             if (keyword != null && !keyword.isEmpty()) {
                 sql += " AND description LIKE ?";

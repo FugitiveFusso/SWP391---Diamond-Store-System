@@ -14,11 +14,16 @@ public class WarrantyDAO {
         List<WarrantyDTO> list = new ArrayList<>();
         try {
             Connection con = DBUtils.getConnection();
-            String sql = "SELECT warrantyID, warrantyName, warrantyImage, warrantyMonth, warrantyDescription, warrantyType, startDate, endDate, termsAndConditions "
-                    + "FROM Warranty WHERE isDeleted = 'active'";
+            String sql = "SELECT w.warrantyID, w.warrantyName, w.warrantyImage, w.warrantyMonth, \n"
+                    + "       w.warrantyDescription, w.warrantyType, w.startDate, w.endDate, \n"
+                    + "       w.termsAndConditions\n"
+                    + "FROM Warranty w\n"
+                    + "LEFT JOIN Ring r ON w.warrantyID = r.warrantyID\n"
+                    + "LEFT JOIN OrderDetails od ON r.ringID = od.ringID\n"
+                    + "WHERE w.isDeleted = 'active'\n ";
 
             if (keyword != null && !keyword.isEmpty()) {
-                sql += " AND (warrantyName LIKE ? OR warrantyMonth LIKE ? OR startDate LIKE ? OR endDate LIKE ? OR termsAndConditions LIKE ?)";
+                sql += " AND (r.ringName like ? or od.orderCode like ? or w.warrantyName LIKE ? OR w.warrantyMonth LIKE ? OR w.startDate LIKE ? OR w.endDate LIKE ? OR w.termsAndConditions LIKE ?)";
             }
 
             if (sortCol != null && !sortCol.isEmpty()) {
@@ -34,6 +39,8 @@ public class WarrantyDAO {
             int paramIndex = 1;
             if (keyword != null && !keyword.isEmpty()) {
                 String likePattern = "%" + keyword + "%";
+                stmt.setString(paramIndex++, likePattern);
+                stmt.setString(paramIndex++, likePattern);
                 stmt.setString(paramIndex++, likePattern);
                 stmt.setString(paramIndex++, likePattern);
                 stmt.setString(paramIndex++, likePattern);
@@ -82,21 +89,23 @@ public class WarrantyDAO {
         int total = 0;
         try {
             Connection con = DBUtils.getConnection();
-            String sql = "SELECT COUNT(*) FROM Warranty WHERE isDeleted = 'active'";
+            String sql = "SELECT COUNT(*) \n"
+                    + "FROM Warranty w\n"
+                    + "LEFT JOIN Ring r ON w.warrantyID = r.warrantyID\n"
+                    + "LEFT JOIN OrderDetails od ON r.ringID = od.ringID\n"
+                    + "WHERE w.isDeleted = 'active' ";
 
             if (keyword != null && !keyword.isEmpty()) {
-                sql += " AND (warrantyName LIKE ? OR warrantyMonth LIKE ? OR startDate LIKE ? OR endDate LIKE ? OR termsAndConditions LIKE ?)";
+                sql += " AND (r.ringName like ? or od.orderCode like ? or w.warrantyName LIKE ? OR w.warrantyMonth LIKE ? OR w.startDate LIKE ? OR w.endDate LIKE ? OR w.termsAndConditions LIKE ?)";
             }
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
             if (keyword != null && !keyword.isEmpty()) {
-                String likePattern = "%" + keyword + "%";
-                stmt.setString(1, likePattern);
-                stmt.setString(2, likePattern);
-                stmt.setString(3, likePattern);
-                stmt.setString(4, likePattern);
-                stmt.setString(5, likePattern);
+                String likeParam = "%" + keyword + "%";
+                for (int i = 1; i <= 7; i++) {
+                    stmt.setString(i, likeParam);
+                }
             }
 
             ResultSet rs = stmt.executeQuery();

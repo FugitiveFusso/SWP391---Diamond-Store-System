@@ -30,9 +30,11 @@ public class RingDAO {
                     + "LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID "
                     + "LEFT JOIN [Collection] c ON r.collectionID = c.collectionID "
                     + "LEFT JOIN [Category] cat ON r.categoryID = cat.categoryID "
+                    + "LEFT JOIN [OrderDetails] od ON r.ringID = od.ringID "
+                    + "LEFT JOIN [Warranty] w ON r.warrantyID = w.warrantyID "
                     + "WHERE r.status <> 'deleted'";
             if (keyword != null && !keyword.isEmpty()) {
-                sql += " AND r.ringName LIKE ? ";
+                sql += " AND (c.collectionName like ? or cat.categoryName like ? or r.ringName LIKE ? or d.diamondName like ? or od.orderCode like ? or w.warrantyName like ?)";
             }
 
             if (sortCol != null && !sortCol.isEmpty()) {
@@ -47,6 +49,11 @@ public class RingDAO {
 
             int paramIndex = 1;
             if (keyword != null && !keyword.isEmpty()) {
+                stmt.setString(paramIndex++, "%" + keyword + "%");
+                stmt.setString(paramIndex++, "%" + keyword + "%");
+                stmt.setString(paramIndex++, "%" + keyword + "%");
+                stmt.setString(paramIndex++, "%" + keyword + "%");
+                stmt.setString(paramIndex++, "%" + keyword + "%");
                 stmt.setString(paramIndex++, "%" + keyword + "%");
             }
 
@@ -128,16 +135,31 @@ public class RingDAO {
         int total = 0;
         try {
             Connection con = DBUtils.getConnection();
-            String sql = "SELECT COUNT(*) FROM [Ring] WHERE status <> 'deleted'";
+            String sql = "SELECT COUNT(*) "
+                    + "FROM [Ring] r "
+                    + "LEFT JOIN [RingPlacementPrice] rp ON r.rpID = rp.rpID "
+                    + "LEFT JOIN [Diamond] d ON d.diamondID = r.diamondID "
+                    + "LEFT JOIN [DiamondPrice] dp ON d.dpID = dp.dpID "
+                    + "LEFT JOIN [Collection] c ON r.collectionID = c.collectionID "
+                    + "LEFT JOIN [Category] cat ON r.categoryID = cat.categoryID "
+                    + "LEFT JOIN [OrderDetails] od ON r.ringID = od.ringID "
+                    + "LEFT JOIN [Warranty] w ON r.warrantyID = w.warrantyID "
+                    + "WHERE r.status <> 'deleted'";
 
             if (keyword != null && !keyword.isEmpty()) {
-                sql += " AND ringName LIKE ?";
+                sql += " AND (c.collectionName like ? or cat.categoryName like ? or r.ringName LIKE ? OR d.diamondName LIKE ? OR od.orderCode LIKE ? OR w.warrantyName LIKE ?)";
             }
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
             if (keyword != null && !keyword.isEmpty()) {
-                stmt.setString(1, "%" + keyword + "%");
+                String likeParam = "%" + keyword + "%";
+                stmt.setString(1, likeParam);
+                stmt.setString(2, likeParam);
+                stmt.setString(3, likeParam);
+                stmt.setString(4, likeParam);
+                stmt.setString(5, likeParam);
+                stmt.setString(6, likeParam);
             }
 
             ResultSet rs = stmt.executeQuery();
@@ -145,6 +167,9 @@ public class RingDAO {
                 total = rs.getInt(1);
             }
 
+            // Close resources
+            rs.close();
+            stmt.close();
             con.close();
         } catch (SQLException ex) {
             System.out.println("Error in servlet. Details:" + ex.getMessage());
