@@ -195,7 +195,7 @@
                         deliveryOrderData.append("]");
                     %>
                     <div class="charts-card1 area-chart">
-                        <h2 class="chart-title">Store and Delivery Statistic</h2>
+                        <h2 class="chart-title">Store and Delivery Statistics</h2>
                         <div id="area-chart"></div>
                     </div>
 
@@ -437,7 +437,7 @@
                                     <th>Order Code</th>
                                     <th>Full Name</th>
                                     <th>Order Date</th>
-                                    <th>Ring ID</th>
+                                    <th>Ring Name</th>
                                 </tr>
                                 <%
                                     List<OrderDTO> listOrderD = (List<OrderDTO>) request.getAttribute("listd");
