@@ -70,11 +70,13 @@
 
                     </div>
                 </div>
+                    
+                <!--Title of Dashboard-->    
                 <div class="main-title">
                     <h2>DASHBOARD</h2>
                 </div>
 
-
+                <!--The 4 cards on top--> 
                 <div class="main-cards">
                     <div class="card">
                         <%
@@ -131,6 +133,7 @@
 
                 </div>
 
+                <!--Store and Delivery Statistic Area Chart--> 
                 <div class="charts">  
                     <%
                         List<OrderDTO> listOrderI = (List<OrderDTO>) request.getAttribute("listi");
@@ -157,6 +160,7 @@
                         <div id="area-chart"></div>
                     </div>
 
+                    <!--Certificate and Warranty Pie Chart--> 
                     <div class="pie-chart">
                         <%
                             List<CertificateDTO> certListB = (List<CertificateDTO>) request.getAttribute("certlist");
@@ -184,12 +188,14 @@
                     </div>
                 </div>
 
+                <!--Order for Home Delivery/Store Grouped Column Chart-->         
                 <div class="charts-row1">
                     <div class="charts-card2 bar-chart">
                         <h2 class="chart-title">Orders for Home Delivery/Store Pickup</h2>
                         <div id="orders-column-chart"></div>
                     </div>
 
+                    <!--Number of Orders per Week Line Graph--> 
                     <%
                         List<OrderDTO> listOrderC = (List<OrderDTO>) request.getAttribute("listc");
                         StringBuilder categories = new StringBuilder("[");
@@ -211,6 +217,7 @@
                         <div id="orders-weekly-line-chart"></div>
                     </div>
 
+                    <!--Number of Orders per Month Line Graph--> 
                     <%
                         List<OrderDTO> listOrderB = (List<OrderDTO>) request.getAttribute("listb");
                         StringBuilder categories1 = new StringBuilder("[");
@@ -233,7 +240,8 @@
                         <div id="orders-monthly-line-chart"></div>
                     </div>
                 </div>
-
+                    
+                <!--Revenue for Week Column Chart-->     
                 <div class="charts-row">
                     <%
                         List<OrderDTO> listOrderG = (List<OrderDTO>) request.getAttribute("listg");
@@ -257,6 +265,7 @@
                         <div class="percentage-change" id="weekly-revenue-change"></div>
                     </div>
 
+                    <!--Revenue for Month Column Chart--> 
                     <%
                         List<OrderDTO> listOrderH = (List<OrderDTO>) request.getAttribute("listh");
                         StringBuilder categories3 = new StringBuilder("[");
@@ -280,6 +289,7 @@
                     </div>
                 </div>
 
+                <!--Weekly Revenue Table--> 
                 <div class="charts-row">
                     <div class="x_content" style="display: block;">
                         <div class="table-container2">
@@ -312,6 +322,7 @@
                         </div>
                     </div>
 
+                    <!--Monthly Revenue Table--> 
                     <div class="x_content" style="display: block;">
                         <div class="table-container2">
                             <%
@@ -344,7 +355,7 @@
                     </div>
                 </div>
 
-
+                <!--Top 5 Countries with Most Diamonds Originated Map Chart--> 
                 <div class="merged-charts-container">
                     <%
                         StringBuilder jsDataArray = new StringBuilder("[");
@@ -368,12 +379,15 @@
                         <h2 class="chart-title">Top 5 Countries with Most Diamonds Originated</h2>
                         <div id="map-chart"></div>
                     </div>
+                    
+                    <!--Diamond Originate from Top 5 Countries Bar Chart--> 
                     <div class="chart-card" id="bar-chart-container">
                         <h2 class="chart-title">Diamond Originate from Top 5 Countries</h2>
                         <div id="bar-chart"></div>
                     </div>
                 </div>
 
+                <!--Purchased History Table--> 
                 <div class="purchased-history-container">
                     <div class="table-container1">
                         <div class="x_title">
@@ -409,6 +423,7 @@
                     </div>
                 </div>
 
+                <!--Top 5 Categories Table--> 
                 <div class="charts-row">
                     <div class="x_content" style="display: block;">
                         <div class="table-container">
@@ -455,6 +470,7 @@
                         </div>
                     </div>
 
+                    <!--Top 5 Collections Table--> 
                     <div class="x_content" style="display: block;">
                         <div class="table-container">                            
                             <div class="x_title">
@@ -496,6 +512,7 @@
                         </div>
                     </div>
 
+                    <!--All Warranty Types Table--> 
                     <div class="x_content" style="display: block;">
                         <div class="table-container">
                             <div class="x_title">
@@ -539,7 +556,7 @@
                     </div>
                 </div>
 
-                <!-- New Tables Section -->
+                <!--Top 5 Rings with Highest Price Table--> 
                 <div class="charts-row">
                     <div class="x_content" style="display: block;">
                         <div class="table-container">
@@ -576,6 +593,7 @@
                         </div>
                     </div>
 
+                    <!--Top 5 Rings with Lowest Price Table--> 
                     <div class="x_content" style="display: block;">
                         <div class="table-container">
                             <div class="x_title">
@@ -609,6 +627,7 @@
                         </div>
                     </div>
 
+                    <!--Top 5 Ring Sales From Each Month Table--> 
                     <div class="x_content" style="display: block;">
                         <div class="table-container">
                             <div class="x_title">
@@ -644,8 +663,8 @@
                         </div>
                     </div>
                 </div>
-                <!-- End New Tables Section -->
-
+               
+                <!--Top 5 Ring Placements Table--> 
                 <div class="charts-row">
                     <div class="x_content" style="display: block;">
                         <div class="table-container">
@@ -676,6 +695,7 @@
                         </div>
                     </div>
 
+                    <!--Top 5 Ring Placement By Color Table--> 
                     <div class="x_content" style="display: block;">
                         <div class="table-container">                            
                             <div class="x_title">
@@ -705,6 +725,7 @@
                         </div>
                     </div>
 
+                    <!--Top 3 Most Used Vouchers Table--> 
                     <div class="x_content" style="display: block;">
                         <div class="table-container">
                             <div class="x_title">
@@ -745,7 +766,7 @@
                     </div>
                 </div>
 
-
+                <!--FUJ Staffs Cards--> 
                 <div class="charts-card" style="margin-top: 20px;">
                     <h2 class="chart-title">FUJ Staffs</h2>
                     <div class="staff-container">
@@ -910,6 +931,8 @@
             }]
     });
 </script>
+
+<!--Diamond Originate from Top 5 Countries Bar Chart-->
 <script>
     // Assuming you have retrieved diaList from your JSP file
     var diaList = [
@@ -1358,7 +1381,7 @@
         integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
 crossorigin="anonymous"></script>
 
-
+<!--Navbar-->
 <script>
     $(document).ready(function () {
         $('.menu-btn').click(function () {

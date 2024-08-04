@@ -1,19 +1,4 @@
-
-// ---------- CHARTS ----------
-
-
-// Bar Chart
-
-
-// AREA CHART
-
-
-// DEGREE USAGE PIE CHART
-
-
-// DIAMOND USAGE PIE CHART
-
-
+//Dropdown for Tables
 document.querySelectorAll('.collapse-link').forEach(link => {
     link.addEventListener('click', function () {
         const collapseContent = this.closest('.x_title').nextElementSibling;
@@ -24,78 +9,8 @@ document.querySelectorAll('.collapse-link').forEach(link => {
     });
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-    // Sample data for charts (replace with actual data)
-    const ordersData = {
-        categories: ['Home Delivery', 'Store Pickup'],
-        series: [{
-                data: [120, 80]
-            }]
-    };
 
-    // Initialize ApexCharts for each chart
-    const ordersBarChartOptions = {
-        chart: {
-            type: 'bar',
-            height: 350
-        },
-        plotOptions: {
-            bar: {
-                horizontal: false,
-                columnWidth: '55%',
-                endingShape: 'rounded'
-            },
-        },
-        dataLabels: {
-            enabled: true,
-            style: {
-                colors: ['#ffffff'] // White color for data labels
-            }
-        },
-        stroke: {
-            show: true,
-            width: 2,
-            colors: ['transparent']
-        },
-        xaxis: {
-            categories: ordersData.categories,
-            labels: {
-                style: {
-                    colors: ['#ffffff'], // White color for x-axis labels
-                }
-            }
-        },
-        yaxis: {
-            title: {
-                text: 'Orders',
-                style: {
-                    color: '#ffffff' // White color for y-axis title
-                }
-            },
-            labels: {
-                style: {
-                    colors: ['#ffffff'], // White color for y-axis labels
-                }
-            }
-        },
-        fill: {
-            opacity: 1
-        },
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val
-                }
-            }
-        }
-    };
-
-    // Render ApexCharts
-    const ordersBarChart = new ApexCharts(document.querySelector("#orders-bar-chart"), ordersBarChartOptions);
-    ordersBarChart.render();
-
-});
-
+//Orders for Home Delivery/Store Pickup Column Chart
 document.addEventListener("DOMContentLoaded", function () {
     // Assume 'ordersDataFromJSP' is populated with OrderDTO data from JSP
     const ordersData = {
