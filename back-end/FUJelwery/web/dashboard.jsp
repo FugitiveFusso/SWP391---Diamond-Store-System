@@ -465,12 +465,12 @@
 
                                     <td><%= listd.getOrderDate()%></td>
                                     <td>
-                                        <%-- Check if ringID is non-zero --%>
-                                        <% if (listd.getRingID() != 0) {%>
-                                        <a href="DashboardController?action=ringdetails&id=<%= listd.getRingID()%>"><%= listd.getRingID()%></a>
+                                        <%-- Check if fullName is non-empty and not "N/A" --%>
+                                        <% if (listd.getRingName() != null && !listd.getRingName().isEmpty() && !"N/A".equals(listd.getRingName())) {%>
+                                        <a href="DashboardController?action=ringdetails&id=<%= listd.getRingID()%>"><%= listd.getRingName()%></a>
                                         <% } else {%>
-                                        <%= listd.getRingID()%>
-                                        <% } %>
+                                        <%= listd.getRingName()%>
+                                        <% }%>
                                     </td>
                                 </tr>
                                 <%
