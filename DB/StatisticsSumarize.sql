@@ -416,45 +416,44 @@ ORDER BY Year, MonthNumber;
 
 --  List of weekly transactions similar to history (list table)
 SELECT 
-    ISNULL(CASE WHEN orderCode IS NULL THEN 'N/A' ELSE orderCode END, 'N/A') AS orderCode,
-    ISNULL(CASE WHEN orderID IS NULL THEN '0' ELSE CONVERT(varchar(10), orderID) END, '0') AS orderID,
-    ISNULL(CASE WHEN userID IS NULL THEN '0' ELSE CONVERT(varchar(10), userID) END, '0') AS userID,
-    ISNULL(CASE WHEN lastName IS NULL THEN 'N/A' ELSE lastName END, 'N/A') AS lastName,
-    ISNULL(CASE WHEN firstName IS NULL THEN 'N/A' ELSE firstName END, 'N/A') AS firstName,
-    ISNULL(CASE WHEN lastName IS NULL OR firstName IS NULL THEN 'N/A' ELSE lastName + ' ' + firstName END, 'N/A') AS fullName,
-    ISNULL(CASE WHEN OrderDate IS NULL THEN 'N/A' ELSE CONVERT(varchar(10), OrderDate, 103) END, 'N/A') AS OrderDate,
-    ISNULL(CASE WHEN ringID IS NULL THEN '0' ELSE CONVERT(varchar(10), ringID) END, '0') AS ringID
+    ISNULL(CASE WHEN od.orderCode IS NULL THEN 'N/A' ELSE od.orderCode END, 'N/A') AS orderCode,
+    ISNULL(CASE WHEN od.orderID IS NULL THEN '0' ELSE CONVERT(varchar(10), od.orderID) END, '0') AS orderID,
+    ISNULL(CASE WHEN od.userID IS NULL THEN '0' ELSE CONVERT(varchar(10), od.userID) END, '0') AS userID,
+    ISNULL(CASE WHEN u.lastName IS NULL THEN 'N/A' ELSE u.lastName END, 'N/A') AS lastName,
+    ISNULL(CASE WHEN u.firstName IS NULL THEN 'N/A' ELSE u.firstName END, 'N/A') AS firstName,
+    ISNULL(CASE WHEN u.lastName IS NULL OR u.firstName IS NULL THEN 'N/A' ELSE u.lastName + ' ' + u.firstName END, 'N/A') AS fullName,
+    ISNULL(CASE WHEN od.orderDate IS NULL THEN 'N/A' ELSE CONVERT(varchar(10), od.orderDate, 103) END, 'N/A') AS OrderDate,
+    ISNULL(CASE WHEN od.ringID IS NULL THEN '0' ELSE CONVERT(varchar(10), od.ringID) END, '0') AS ringID,
+    ISNULL(r.ringName, 'N/A') AS ringName
 FROM (
     SELECT 
         od.orderCode,
         od.orderID,
         od.userID,
-        CONVERT(date, od.orderDate, 103) AS OrderDate,
-        od.ringID,
-        u.lastName,
-        u.firstName
+        CONVERT(date, od.orderDate, 103) AS orderDate,
+        od.ringID
     FROM [OrderDetails] od
-    LEFT JOIN [User] u ON od.userID = u.userID
     WHERE od.[status] IN ('delivered', 'received at store')
         AND DATEDIFF(DAY, CONVERT(date, od.orderDate, 103), GETDATE()) <= 7
 
     UNION ALL
 
     SELECT 
-        NULL as orderCode,
+        NULL AS orderCode,
         NULL AS orderID,
         NULL AS userID,
-        NULL AS OrderDate,
-        NULL AS ringID,
-        NULL AS lastName,
-        NULL AS firstName
+        NULL AS orderDate,
+        NULL AS ringID
     WHERE NOT EXISTS (
         SELECT 1 FROM [OrderDetails]
         WHERE [status] IN ('delivered', 'received at store')
         AND DATEDIFF(DAY, CONVERT(date, orderDate, 103), GETDATE()) <= 7
     )
-) AS Orders
-ORDER BY OrderDate;
+) AS od
+LEFT JOIN [User] u ON od.userID = u.userID
+LEFT JOIN [Ring] r ON od.ringID = r.ringID
+ORDER BY od.orderDate;
+
 
 -- Revenue for Week and Month
 WITH WeeklyRevenue AS (
